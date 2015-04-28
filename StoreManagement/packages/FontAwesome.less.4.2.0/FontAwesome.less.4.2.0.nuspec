@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>FontAwesome.less</id>
+    <version>4.2.0</version>
+    <title />
+    <authors>Dave Gandy</authors>
+    <owners>Dave Gandy</owners>
+    <projectUrl>https://github.com/FortAwesome/Font-Awesome</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The iconic font designed for use with Twitter Bootstrap.</description>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>Twitter Bootstrap WebFont Icon</tags>
+  </metadata>
+</package>

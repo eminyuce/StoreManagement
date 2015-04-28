@@ -16,8 +16,16 @@ namespace StoreManagement.Admin.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
-
+    [Table("webpages_Roles")]
+    public class Role
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+    }
     [Table("UserProfile")]
     public class UserProfile
     {

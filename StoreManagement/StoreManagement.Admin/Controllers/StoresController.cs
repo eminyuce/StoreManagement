@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using StoreManagement.Admin.Models;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
+using WebMatrix.WebData;
 
 namespace StoreManagement.Admin.Controllers
 {
@@ -19,8 +22,8 @@ namespace StoreManagement.Admin.Controllers
         private ISettingRepository settingRepository;
         private IStoreUserRepository storeUserRepository;
 
-        public StoresController(IStoreContext dbContext, 
-            IStoreRepository storeRepository, 
+        public StoresController(IStoreContext dbContext,
+            IStoreRepository storeRepository,
             ISettingRepository settingRepository,
             IStoreUserRepository storeUserRepository)
             : base(dbContext)
@@ -115,13 +118,52 @@ namespace StoreManagement.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult SaveStoreUsers(int id, LoginModel userName, String roleName)
+        {
+            int storeId = id;
+            //if (ModelState.IsValid)
+            {
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(userName.UserName, userName.Password);
+                    Roles.AddUserToRole(userName.UserName, roleName);
+                    int userId = 0;
+                    using (UsersContext db = new UsersContext())
+                    {
+                        UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
+                        userId = user.UserId;
+                    }
+
+                    var su = new StoreUser();
+                    su.StoreId = storeId;
+                    su.UserId = userId;
+                    storeUserRepository.Add(su);
+                    storeUserRepository.Save();
+
+                    return RedirectToAction("Users", new { id = storeId });
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", "Exception:"+e.Message);
+                }
+            }
+            return RedirectToAction("Users", new { id = storeId });
+        }
+
         // GET: /Stores/Details/5
         public ActionResult Users(int id)
         {
             var store = this.storeRepository.GetSingle(id);
             ViewBag.Store = store;
-            var storeUsers = storeUserRepository.FindBy(r => r.StoreId == id);
-            return View();
+            var storeUserIds = storeUserRepository.FindBy(r => r.StoreId == id).Select(r => r.UserId).ToArray();
+
+            using (UsersContext db = new UsersContext())
+            {
+                var storeUsers = (from u in db.UserProfiles where storeUserIds.Contains(u.UserId) select u).ToArray();
+                ViewBag.Roles = db.Roles.ToList();
+                return View(storeUsers.ToList());
+            }
+
         }
         // GET: /Stores/Details/5
         public ActionResult Settings(int id)

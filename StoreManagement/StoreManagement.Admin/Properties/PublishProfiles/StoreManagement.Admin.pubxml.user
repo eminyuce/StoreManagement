@@ -139,16 +139,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:25:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>04/28/2015 12:49:00</publishTime>
+      <publishTime>04/28/2015 15:11:32</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>04/28/2015 12:21:06</publishTime>
+      <publishTime>04/28/2015 13:38:43</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>04/28/2015 11:19:11</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>04/28/2015 12:21:07</publishTime>
+      <publishTime>04/28/2015 13:38:44</publishTime>
     </File>
     <File Include="bin/System.Spatial.dll">
       <publishTime>04/27/2015 20:25:15</publishTime>
@@ -517,10 +517,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2015 12:30:51</publishTime>
     </File>
     <File Include="Views/Stores/Settings.cshtml">
-      <publishTime>04/28/2015 12:19:38</publishTime>
+      <publishTime>04/28/2015 12:51:15</publishTime>
     </File>
     <File Include="Views/Stores/Users.cshtml">
-      <publishTime>04/28/2015 11:41:09</publishTime>
+      <publishTime>04/28/2015 15:09:49</publishTime>
     </File>
     <File Include="Views/Stores/_CreateOrEdit.cshtml">
       <publishTime>04/28/2015 11:17:09</publishTime>

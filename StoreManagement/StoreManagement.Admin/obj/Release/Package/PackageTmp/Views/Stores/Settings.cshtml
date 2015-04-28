@@ -107,7 +107,8 @@
         
         $('.jeditableSettingValue').editable(urlSave, {
                  type: 'text',
-                onblur: 'submit',/*cancel: 'Cancel',*/
+                 onblur: 'submit',
+                 cancel: 'Cancel',
                 submit: 'OK',
                 indicator: 'Saving...',
                 callback: function(value, settings) {

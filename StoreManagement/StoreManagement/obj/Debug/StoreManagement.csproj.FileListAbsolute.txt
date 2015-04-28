@@ -11,7 +11,6 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\b
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Data.Edm.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Data.OData.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Web.WebPages.OAuth.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Newtonsoft.Json.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Data.dll
@@ -87,3 +86,11 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\b
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.csprojResolveAssemblyReference.cache
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Ninject.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Ninject.Web.Common.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Ninject.Web.Mvc.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\WebActivatorEx.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Ninject.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Ninject.Web.Common.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Ninject.Web.Mvc.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Web.Helpers.dll

@@ -2,3 +2,7 @@ C:\Users\emin\Projects\StoreManagement\StoreManagement.Helpers\bin\Debug\StoreMa
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Helpers\bin\Debug\StoreManagement.Helpers.pdb
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Helpers\obj\Debug\StoreManagement.Helpers.dll
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Helpers\obj\Debug\StoreManagement.Helpers.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\bin\Debug\StoreManagement.Helpers.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\bin\Debug\StoreManagement.Helpers.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\obj\Debug\StoreManagement.Helpers.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\obj\Debug\StoreManagement.Helpers.pdb

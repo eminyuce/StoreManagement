@@ -12,11 +12,16 @@ namespace StoreManagement.Service.DbContext
     public class StoreContext : EntitiesContext, IStoreContext
     {
 
-       public StoreContext(String nameOrConnectionString) : base(nameOrConnectionString) { }
+        public StoreContext(String nameOrConnectionString) : base(nameOrConnectionString) { }
 
-       public IDbSet<Product> Products { get; set; }
-    
-
+        public IDbSet<ContentFile> ContentFiles { get; set; }
+        public IDbSet<Content> Contents { get; set; }
+        public IDbSet<Store> Stores { get; set; }
+        public IDbSet<Setting> Settings { get; set; }
+        public IDbSet<Category> Categories { get; set; }
+        public IDbSet<Navigation> Navigations { get; set; }
+        public IDbSet<FileManager> FileManagers { get; set; }
+        public IDbSet<StoreUser> StoreUsers { get; set; }
 
     }
 }

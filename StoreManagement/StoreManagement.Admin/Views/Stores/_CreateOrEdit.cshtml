@@ -1,0 +1,28 @@
+@model StoreManagement.Data.Entities.Store
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Domain)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Domain)
+    @Html.ValidationMessageFor(model => model.Domain)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Layout)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Layout)
+    @Html.ValidationMessageFor(model => model.Layout)
+</div>
+

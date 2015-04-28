@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
+using StoreManagement.Admin.Constants;
 
 namespace StoreManagement.Admin.Models
 {
     public class UsersContext : DbContext
     {
-        public UsersContext()
-            : base("DefaultConnection")
+        public UsersContext() : base(AppConstants.ConnectionStringName)
         {
         }
 

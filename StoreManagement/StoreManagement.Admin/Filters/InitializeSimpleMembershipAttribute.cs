@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
+using StoreManagement.Admin.Constants;
 using WebMatrix.WebData;
 using StoreManagement.Admin.Models;
 
@@ -38,7 +39,7 @@ namespace StoreManagement.Admin.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "UserProfile", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

@@ -14,6 +14,9 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\b
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Web.WebPages.OAuth.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Newtonsoft.Json.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Data.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Helpers.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Service.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\System.Spatial.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\System.Web.Helpers.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\System.Web.Http.OData.dll
@@ -26,6 +29,11 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\b
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\WebGrease.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\WebMatrix.Data.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\WebMatrix.WebData.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.EntityFramework.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Data.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Helpers.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Service.pdb
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\EntityFramework.xml
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Newtonsoft.Json.xml
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\System.Web.Helpers.xml
@@ -47,6 +55,8 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\b
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Data.Edm.xml
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\Microsoft.Data.OData.xml
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\System.Spatial.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.EntityFramework.xml
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\de\Microsoft.Data.Edm.resources.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\es\Microsoft.Data.Edm.resources.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\fr\Microsoft.Data.Edm.resources.dll
@@ -77,13 +87,3 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\b
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.csprojResolveAssemblyReference.cache
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.pdb
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Data.dll
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Helpers.dll
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Service.dll
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.dll
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.EntityFramework.dll
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Data.pdb
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Helpers.pdb
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\StoreManagement.Service.pdb
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.xml
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\GenericRepository.EntityFramework.xml

@@ -1,0 +1,16 @@
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\StoreManagement.Service.dll.config
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\StoreManagement.Service.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\StoreManagement.Service.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\EntityFramework.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\GenericRepository.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\GenericRepository.EntityFramework.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\StoreManagement.Data.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\StoreManagement.Helpers.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\StoreManagement.Data.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\StoreManagement.Helpers.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\EntityFramework.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\GenericRepository.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\GenericRepository.EntityFramework.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\obj\Release\StoreManagement.Service.csprojResolveAssemblyReference.cache
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\obj\Release\StoreManagement.Service.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\obj\Release\StoreManagement.Service.pdb

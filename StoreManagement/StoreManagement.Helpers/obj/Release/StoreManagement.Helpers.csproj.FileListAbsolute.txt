@@ -1,0 +1,4 @@
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\bin\Release\StoreManagement.Helpers.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\bin\Release\StoreManagement.Helpers.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\obj\Release\StoreManagement.Helpers.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Helpers\obj\Release\StoreManagement.Helpers.pdb

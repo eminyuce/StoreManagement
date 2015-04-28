@@ -1,0 +1,26 @@
+@model StoreManagement.Data.Entities.Store
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Store</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">Domain</div>
+    <div class="display-field">@Model.Domain</div>
+
+    <div class="display-label">Layout</div>
+    <div class="display-field">@Model.Layout</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

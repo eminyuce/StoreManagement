@@ -10,6 +10,9 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface IContentRepository : IEntityRepository<Content, int>
     {
-
+        List<Content> GetContentByType(int storeId, String typeName);
+        Content GetContentByUrl(int storeId, String url);
+        List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId);
+        List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
     }
 }

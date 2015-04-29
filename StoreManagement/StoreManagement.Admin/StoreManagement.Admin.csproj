@@ -217,6 +217,7 @@
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -350,6 +351,11 @@
     <Content Include="Views\Stores\_CreateOrEdit.cshtml" />
     <Content Include="Views\Stores\Users.cshtml" />
     <Content Include="Views\Stores\Settings.cshtml" />
+    <Content Include="Views\Content\Index.cshtml" />
+    <Content Include="Views\Content\Details.cshtml" />
+    <Content Include="Views\Content\Create.cshtml" />
+    <Content Include="Views\Content\Edit.cshtml" />
+    <Content Include="Views\Content\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

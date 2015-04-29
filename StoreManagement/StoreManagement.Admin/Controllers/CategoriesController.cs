@@ -16,7 +16,14 @@ namespace StoreManagement.Admin.Controllers
         {
             this.categoryRepository = categoryRepository;
         }
+        public ActionResult Index(int storeId = 1, String categoryType = "family")
+        {
+            ViewBag.StoreId = storeId;
+            ViewBag.CategoryType = categoryType;
 
+            return View();
+        }
+        
         public ActionResult CreateCategoryTree(int storeId=1, String categoryType="family")
         {
             var tree = this.categoryRepository.GetCategoriesByStoreId(storeId, categoryType);

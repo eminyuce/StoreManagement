@@ -51,6 +51,7 @@ namespace StoreManagement.Admin.Controllers
         {
             var content = new Content();
             content.StoreId = 1;
+            content.Type = "product";
             return View(content);
         }
 

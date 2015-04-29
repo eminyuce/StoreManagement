@@ -371,6 +371,7 @@
     <Content Include="Views\Categories\CreateCategoryTree.cshtml" />
     <Content Include="Views\Categories\Test.cshtml" />
     <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

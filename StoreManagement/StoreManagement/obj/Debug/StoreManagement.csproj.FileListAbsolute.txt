@@ -1,0 +1,1 @@
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\bin\DotNetOpenAuth.OpenId.RelyingParty.xml

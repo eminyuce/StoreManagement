@@ -12,6 +12,8 @@ namespace StoreManagement.Data.Entities
         public int Id { get; set; }
         public int StoreId { get; set; }
         public int ParentId { get; set; }
+        public int Ordering { get; set; }
+        public string CategoryType { get; set; }
         public string Name { get; set; }
     }
 }

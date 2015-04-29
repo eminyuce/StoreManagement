@@ -15,6 +15,33 @@
     
         
         <script src="~/Scripts/jquery.jeditable.js"></script>
+        <script src="~/Scripts/jstree/jstree.js"></script>
+        <link href="~/Content/jstree/style.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery.datetimepicker.js"></script>
+        <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+        
+
+        <script>
+   
+
+    $(document).ready(function () {
+        $('input[datatype-datetime="dt"]').datetimepicker({
+            format: 'm/d/Y h:i A',
+            timepicker: true,
+            closeOnDateSelect: true,
+            formatTime: 'g:i A'
+        });
+        $('input[datatype-datetime="d"]').datetimepicker({
+            format: 'm/d/Y',
+            timepicker: false,
+            closeOnDateSelect: true
+        });
+    });
+ 
+</script>
+
+        
+
     </head>
     <body>
         <header>

@@ -14,3 +14,5 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.S
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\obj\Release\StoreManagement.Service.csprojResolveAssemblyReference.cache
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\obj\Release\StoreManagement.Service.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\obj\Release\StoreManagement.Service.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\NLog.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Service\bin\Release\NLog.xml

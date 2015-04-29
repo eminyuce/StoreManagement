@@ -51,7 +51,7 @@ namespace StoreManagement.Service.Repositories
         
         public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
-            String key = String.Format("{0}-{1}-{2}", storeId, typeName, categoryId);
+            String key = String.Format("Content-{0}-{1}-{2}", storeId, typeName, categoryId);
             List<Content> items = null;
             contentCache.TryGet(key, out items);
 

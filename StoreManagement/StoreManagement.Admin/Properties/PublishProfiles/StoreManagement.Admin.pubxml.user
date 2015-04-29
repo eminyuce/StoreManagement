@@ -139,16 +139,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:25:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>04/28/2015 15:11:32</publishTime>
+      <publishTime>04/29/2015 13:42:01</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>04/28/2015 13:38:43</publishTime>
+      <publishTime>04/29/2015 13:41:58</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
-      <publishTime>04/28/2015 11:19:11</publishTime>
+      <publishTime>04/29/2015 13:41:58</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>04/28/2015 13:38:44</publishTime>
+      <publishTime>04/29/2015 13:41:59</publishTime>
     </File>
     <File Include="bin/System.Spatial.dll">
       <publishTime>04/27/2015 20:25:15</publishTime>
@@ -224,6 +224,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/bootstrap.min.css">
       <publishTime>04/28/2015 09:51:27</publishTime>
+    </File>
+    <File Include="Content/jquery.datetimepicker.css">
+      <publishTime>04/29/2015 13:41:08</publishTime>
+    </File>
+    <File Include="Content/jstree/32px.png">
+      <publishTime>04/29/2015 12:13:53</publishTime>
+    </File>
+    <File Include="Content/jstree/40px.png">
+      <publishTime>04/29/2015 12:13:53</publishTime>
+    </File>
+    <File Include="Content/jstree/style.css">
+      <publishTime>04/29/2015 12:13:53</publishTime>
+    </File>
+    <File Include="Content/jstree/style.min.css">
+      <publishTime>04/29/2015 12:13:53</publishTime>
+    </File>
+    <File Include="Content/jstree/throbber.gif">
+      <publishTime>04/29/2015 12:13:53</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>04/27/2015 20:26:25</publishTime>
@@ -417,6 +435,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery-ui-1.11.4.min.js">
       <publishTime>04/28/2015 09:51:54</publishTime>
     </File>
+    <File Include="Scripts/jquery.datetimepicker.js">
+      <publishTime>04/29/2015 13:29:27</publishTime>
+    </File>
     <File Include="Scripts/jquery.jeditable.js">
       <publishTime>04/28/2015 12:34:41</publishTime>
     </File>
@@ -438,6 +459,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
       <publishTime>04/27/2015 20:26:39</publishTime>
     </File>
+    <File Include="Scripts/jstree/jstree.js">
+      <publishTime>04/29/2015 12:14:32</publishTime>
+    </File>
+    <File Include="Scripts/jstree/jstree.min.js">
+      <publishTime>04/29/2015 12:14:32</publishTime>
+    </File>
     <File Include="Scripts/knockout-2.2.0.debug.js">
       <publishTime>04/27/2015 20:26:47</publishTime>
     </File>
@@ -452,6 +479,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/reports.js">
       <publishTime>04/28/2015 12:34:51</publishTime>
+    </File>
+    <File Include="Scripts/TextFile1.txt">
+      <publishTime>04/29/2015 13:29:27</publishTime>
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>04/28/2015 09:51:59</publishTime>
@@ -483,6 +513,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/_SetPasswordPartial.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
+    <File Include="Views/Categories/CreateCategoryTree.cshtml">
+      <publishTime>04/29/2015 13:22:00</publishTime>
+    </File>
+    <File Include="Views/Categories/Test.cshtml">
+      <publishTime>04/29/2015 12:50:47</publishTime>
+    </File>
+    <File Include="Views/FileManager/Index.cshtml">
+      <publishTime>04/29/2015 12:46:02</publishTime>
+    </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
@@ -492,11 +531,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/Index.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
+    <File Include="Views/Products/Create.cshtml">
+      <publishTime>04/29/2015 13:40:46</publishTime>
+    </File>
+    <File Include="Views/Products/Delete.cshtml">
+      <publishTime>04/28/2015 16:32:12</publishTime>
+    </File>
+    <File Include="Views/Products/Details.cshtml">
+      <publishTime>04/28/2015 16:32:08</publishTime>
+    </File>
+    <File Include="Views/Products/Edit.cshtml">
+      <publishTime>04/28/2015 16:32:10</publishTime>
+    </File>
+    <File Include="Views/Products/Index.cshtml">
+      <publishTime>04/28/2015 16:44:47</publishTime>
+    </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/28/2015 12:44:35</publishTime>
+      <publishTime>04/29/2015 13:41:25</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
@@ -514,7 +568,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2015 11:17:56</publishTime>
     </File>
     <File Include="Views/Stores/Index.cshtml">
-      <publishTime>04/28/2015 12:30:51</publishTime>
+      <publishTime>04/28/2015 15:32:24</publishTime>
     </File>
     <File Include="Views/Stores/Settings.cshtml">
       <publishTime>04/28/2015 12:51:15</publishTime>
@@ -532,7 +586,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/28/2015 11:19:16</publishTime>
+      <publishTime>04/29/2015 13:42:02</publishTime>
     </File>
   </ItemGroup>
 </Project>

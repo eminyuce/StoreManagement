@@ -1,45 +1,172 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+ 
+
+@{
+    ViewBag.Title = "Bootstrap version demo";
+
+    Layout = "~/Views/Shared/_LayoutFileUpload.cshtml";
+    
+    
+    
+    
+    
+    
+    
+    
+
+
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+
+
+  
+
+
+
+
+
+<!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+@*
+
+IN ORDER TO USE MVC ACTIONS AS HANDLERS OF AJAX CALLS, USE THE FORM DECLARATION BELOW. (THE ONE COMMENTED OUT)
+IT IS NOT ADVISED SINCE WHEN USING MVC CONTROLLER TO HANDLE REQUESTS ONE CAN'T CONTROL THE maxMessageLength OF THE POST REQUEST
+THIS CASTS THE FUNCTIONALITY OF UPLOADING LARGE FILES USELESS, UNLESS YOU SUCRIFICE THE SECURITY AND ALLOW LARGE 
+POST MESSAGE SIZES SITE-WIDE.
+
+IT IS BETTER TO USE HTTP HANDLER TO PROCESS UPLOAD REQUESTS UNTIL MVC FRAMEWORK PROVIDES WAYS TO SET maxMessageLength ON
+PER ACTION BASIS 
+
+*@
+ <h1>jQuery-File-Upload MVC Demo</h1>
+<form id="fileupload" action="@Url.Action("UploadFiles")" method="POST" enctype="multipart/form-data">
+
+@*<form id="fileupload" action="/Upload/UploadHandler.ashx" method="POST" enctype="multipart/form-data">*@
+    
+  @*  <form id="fileupload" action="@Url.Action("UploadFiles")" method="POST" enctype="multipart/form-data">*@
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row fileupload-buttonbar">
+        <div class="span7">
+            <!-- The fileinput-button span is used to style the file input field as button -->
+            <span class="btn btn-success fileinput-button">
+                <i class="icon-plus icon-white"></i>
+                <span>Add files...</span>
+                <input type="file" name="files[]" multiple>
+            </span>
+            <button type="submit" class="btn btn-primary start">
+                <i class="icon-upload icon-white"></i>
+                <span>Start upload</span>
+            </button>
+            <button type="reset" class="btn btn-warning cancel">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>Cancel upload</span>
+            </button>
+            <button type="button" class="btn btn-danger delete">
+                <i class="icon-trash icon-white"></i>
+                <span>Delete</span>
+            </button>
+            <input type="checkbox" class="toggle">
         </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+        <div class="span5">
+            <!-- The global progress bar -->
+            <div class="progress progress-success progress-striped active fade">
+                <div class="bar" style="width:0%;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- The loading indicator is shown during image processing -->
+    <div class="fileupload-loading"></div>
+    <br>
+    <!-- The table listing the files available for upload/download -->
+    <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+</form>
+    
+    <!-- modal-gallery is the modal dialog used for the image gallery -->
+    <div id="modal-gallery" class="modal modal-gallery hide fade">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3 class="modal-title"></h3>
+        </div>
+        <div class="modal-body"><div class="modal-image"></div></div>
+        <div class="modal-footer">
+            <a class="btn btn-primary modal-next">
+                <span>Next</span>
+                <i class="icon-arrow-right icon-white"></i>
+            </a>
+            <a class="btn btn-info modal-prev">
+                <i class="icon-arrow-left icon-white"></i>
+                <span>Previous</span>
+            </a>
+            <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
+                <i class="icon-play icon-white"></i>
+                <span>Slideshow</span>
+            </a>
+            <a class="btn modal-download" target="_blank">
+                <i class="icon-download"></i>
+                <span>Download</span>
+            </a>
+        </div>
+    </div>
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td class="preview"><span class="fade"></span></td>
+        <td class="name"><span>{%=file.name%}</span></td>
+        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+        {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else if (o.files.valid && !i) { %}
+            <td>
+                <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td class="start">{% if (!o.options.autoUpload) { %}
+                <button class="btn btn-primary">
+                    <i class="icon-upload icon-white"></i>
+                    <span>{%=locale.fileupload.start%}</span>
+                </button>
+            {% } %}</td>
+        {% } else { %}
+            <td colspan="2"></td>
+        {% } %}
+        <td class="cancel">{% if (!i) { %}
+            <button class="btn btn-warning">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>{%=locale.fileupload.cancel%}</span>
+            </button>
+        {% } %}</td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+        {% } %}
+        <td class="delete">
+            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+                <i class="icon-trash icon-white"></i>
+                <span>{%=locale.fileupload.destroy%}</span>
+            </button>
+            <input type="checkbox" name="delete" value="1">
+        </td>
+    </tr>
+{% } %}
+</script>
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>

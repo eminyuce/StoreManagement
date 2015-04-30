@@ -14,8 +14,11 @@
 
     <fieldset>
         <legend>Content</legend>
-        @Html.TextBoxFor(model => model.StoreId)
-        @Html.TextBoxFor(model => model.CategoryId)
+        @Html.HiddenFor(model => model.StoreId)
+        @Html.HiddenFor(model => model.CategoryId)
+        @Html.HiddenFor(model => model.Type)
+        
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
@@ -32,13 +35,7 @@
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Type)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Type)
-            @Html.ValidationMessageFor(model => model.Type)
-        </div>
+      
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ImagePath)

@@ -218,8 +218,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\FileManagerController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -229,6 +229,10 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Upload\FilesStatus.cs" />
+    <Compile Include="Upload\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -284,6 +288,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Icon.png" />
+    <Content Include="Scripts\bootstrap-image-gallery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="NLog.config">
@@ -294,6 +299,20 @@
     </None>
     <None Include="Properties\PublishProfiles\StoreManagement.Admin.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\FileUpload\canvas-to-blob.min.js" />
+    <Content Include="Scripts\FileUpload\jquery.fileupload-ip.js" />
+    <Content Include="Scripts\FileUpload\jquery.fileupload-ui.css" />
+    <Content Include="Scripts\FileUpload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\FileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\FileUpload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\FileUpload\load-image.min.js" />
+    <Content Include="Scripts\FileUpload\locale.js" />
+    <Content Include="Scripts\FileUpload\main.js" />
+    <Content Include="Scripts\FileUpload\tmpl.min.js" />
+    <Content Include="Scripts\img\generalFile.png" />
+    <Content Include="Scripts\img\glyphicons-halflings-white.png" />
+    <Content Include="Scripts\img\loading.gif" />
+    <Content Include="Scripts\img\progressbar.gif" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -370,11 +389,14 @@
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Categories\CreateCategoryTree.cshtml" />
     <Content Include="Views\Categories\Test.cshtml" />
-    <Content Include="Views\FileManager\Index.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Upload\UploadHandler.ashx" />
+    <Content Include="Views\Shared\_LayoutFileUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

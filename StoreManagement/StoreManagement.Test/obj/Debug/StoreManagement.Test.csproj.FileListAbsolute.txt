@@ -16,4 +16,3 @@ C:\Users\emin\Projects\StoreManagement\StoreManagement.Test\bin\Debug\GenericRep
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Test\bin\Debug\EntityFramework.xml
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Test\obj\Debug\StoreManagement.Test.dll
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Test\obj\Debug\StoreManagement.Test.pdb
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\obj\Debug\StoreManagement.Test.csprojResolveAssemblyReference.cache

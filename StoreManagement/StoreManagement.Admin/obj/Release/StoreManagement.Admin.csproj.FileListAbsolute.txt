@@ -98,3 +98,5 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.A
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Release\StoreManagement.Admin.csprojResolveAssemblyReference.cache
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Release\StoreManagement.Admin.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Release\StoreManagement.Admin.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\ClientDependency.Core.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\ClientDependency.Core.Mvc.dll

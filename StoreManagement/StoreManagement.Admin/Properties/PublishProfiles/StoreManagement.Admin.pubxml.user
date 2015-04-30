@@ -12,6 +12,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>04/27/2015 20:25:20</publishTime>
     </File>
+    <File Include="bin/ClientDependency.Core.dll">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="bin/ClientDependency.Core.Mvc.dll">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>04/27/2015 20:25:16</publishTime>
     </File>
@@ -139,16 +145,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:25:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>04/29/2015 13:42:01</publishTime>
+      <publishTime>04/30/2015 14:45:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>04/29/2015 13:41:58</publishTime>
+      <publishTime>04/30/2015 14:32:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
-      <publishTime>04/29/2015 13:41:58</publishTime>
+      <publishTime>04/30/2015 14:32:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>04/29/2015 13:41:59</publishTime>
+      <publishTime>04/30/2015 14:32:16</publishTime>
     </File>
     <File Include="bin/System.Spatial.dll">
       <publishTime>04/27/2015 20:25:15</publishTime>
@@ -414,11 +420,56 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="packages.config">
       <publishTime>04/28/2015 09:58:18</publishTime>
     </File>
+    <File Include="Scripts/bootstrap-image-gallery.min.js">
+      <publishTime>04/30/2015 13:31:37</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/28/2015 09:51:26</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>04/28/2015 09:51:26</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/canvas-to-blob.min.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/jquery.fileupload-ip.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/jquery.fileupload-ui.css">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/jquery.fileupload-ui.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/jquery.fileupload.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/jquery.iframe-transport.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/load-image.min.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/locale.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/main.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/FileUpload/tmpl.min.js">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/img/generalFile.png">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/img/glyphicons-halflings-white.png">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/img/loading.gif">
+      <publishTime>05/09/2012 10:29:38</publishTime>
+    </File>
+    <File Include="Scripts/img/progressbar.gif">
+      <publishTime>05/09/2012 10:29:38</publishTime>
     </File>
     <File Include="Scripts/jquery-2.1.3.js">
       <publishTime>04/28/2015 09:51:40</publishTime>
@@ -486,6 +537,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/_references.js">
       <publishTime>04/28/2015 09:51:59</publishTime>
     </File>
+    <File Include="Upload/UploadHandler.ashx">
+      <publishTime>04/30/2015 13:36:32</publishTime>
+    </File>
     <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
@@ -516,11 +570,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Categories/CreateCategoryTree.cshtml">
       <publishTime>04/29/2015 13:22:00</publishTime>
     </File>
+    <File Include="Views/Categories/Index.cshtml">
+      <publishTime>04/29/2015 16:11:24</publishTime>
+    </File>
     <File Include="Views/Categories/Test.cshtml">
       <publishTime>04/29/2015 12:50:47</publishTime>
     </File>
     <File Include="Views/FileManager/Index.cshtml">
       <publishTime>04/29/2015 12:46:02</publishTime>
+    </File>
+    <File Include="Views/FileUpload/Index.cshtml">
+      <publishTime>04/30/2015 15:01:24</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
@@ -532,7 +592,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
     <File Include="Views/Products/Create.cshtml">
-      <publishTime>04/29/2015 13:40:46</publishTime>
+      <publishTime>04/29/2015 14:24:15</publishTime>
     </File>
     <File Include="Views/Products/Delete.cshtml">
       <publishTime>04/28/2015 16:32:12</publishTime>
@@ -551,6 +611,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>04/29/2015 13:41:25</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutFileUpload.cshtml">
+      <publishTime>04/30/2015 14:38:27</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
@@ -586,7 +649,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/29/2015 13:42:02</publishTime>
+      <publishTime>04/30/2015 14:32:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -10,6 +10,9 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface IContentFileRepository : IEntityRepository<ContentFile, int>
     {
+        List<ContentFile> GetContentByContentId(int contentId);
+        List<ContentFile> GetContentByFileManagerId(int fileManagerId);
+
     }
 
 }

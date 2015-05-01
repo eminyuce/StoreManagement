@@ -18,6 +18,14 @@ namespace StoreManagement.Service.Repositories
         {
             this.dbContext = dbContext;
         }
+        public List<ContentFile> GetContentByContentId(int contentId)
+        {
+            return this.FindBy(r => r.ContentId == contentId).ToList();
+        }
+        public List<ContentFile> GetContentByFileManagerId(int fileManagerId)
+        {
+            return this.FindBy(r => r.FileManagerId == fileManagerId).ToList();
+        }
     }
 
 

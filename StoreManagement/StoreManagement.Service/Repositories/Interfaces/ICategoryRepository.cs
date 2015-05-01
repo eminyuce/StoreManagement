@@ -10,7 +10,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
         List<Category> GetCategoriesByStoreId(int storeId, String type);
         List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type);
         List<Category> CreateCategoriesTree(int storeId, String type);
-
+         
 
     }
 

@@ -22,6 +22,7 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<Navigation> Navigations { get; set; }
         public IDbSet<FileManager> FileManagers { get; set; }
         public IDbSet<StoreUser> StoreUsers { get; set; }
-
+        public IDbSet<UserProfile> UserProfiles { get; set; }
+        public IDbSet<Role> Roles { get; set; }
     }
 }

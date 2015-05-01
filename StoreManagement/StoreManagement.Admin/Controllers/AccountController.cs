@@ -7,18 +7,26 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using StoreManagement.Data.Entities;
+using StoreManagement.Service.DbContext;
 using WebMatrix.WebData;
 using StoreManagement.Admin.Filters;
-using StoreManagement.Admin.Models;
 
 namespace StoreManagement.Admin.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
+
+
         //
         // GET: /Account/Login
+
+        public AccountController(IStoreContext dbContext) : base(dbContext)
+        {
+
+        }
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -263,15 +271,15 @@ namespace StoreManagement.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                //using (UsersContext db = new UsersContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    UserProfile user = dbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
-                        db.SaveChanges();
+                        dbContext.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        dbContext.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                         OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);

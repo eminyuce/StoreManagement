@@ -19,5 +19,8 @@ namespace StoreManagement.Service.DbContext
         IDbSet<Navigation> Navigations { get; set; }
         IDbSet<FileManager> FileManagers { get; set; }
         IDbSet<StoreUser> StoreUsers { get; set; }
+        IDbSet<UserProfile> UserProfiles { get; set; }
+        IDbSet<Role> Roles { get; set; }
+
     }
 }

@@ -128,9 +128,9 @@ namespace StoreManagement.Admin.Controllers
                     WebSecurity.CreateUserAndAccount(userName.UserName, userName.Password);
                     Roles.AddUserToRole(userName.UserName, roleName);
                     int userId = 0;
-                    using (UsersContext db = new UsersContext())
+                   // using (UsersContext db = new UsersContext())
                     {
-                        UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
+                        UserProfile user = dbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
                         userId = user.UserId;
                     }
 
@@ -157,10 +157,10 @@ namespace StoreManagement.Admin.Controllers
             ViewBag.Store = store;
             var storeUserIds = storeUserRepository.FindBy(r => r.StoreId == id).Select(r => r.UserId).ToArray();
 
-            using (UsersContext db = new UsersContext())
+            //using (StoreContext db = new StoreContext())
             {
-                var storeUsers = (from u in db.UserProfiles where storeUserIds.Contains(u.UserId) select u).ToArray();
-                ViewBag.Roles = db.Roles.ToList();
+                var storeUsers = (from u in dbContext.UserProfiles where storeUserIds.Contains(u.UserId) select u).ToArray();
+                ViewBag.Roles = dbContext.Roles.ToList();
                 return View(storeUsers.ToList());
             }
 

@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AdminProjectUsersModel.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\ContentFile.cs" />

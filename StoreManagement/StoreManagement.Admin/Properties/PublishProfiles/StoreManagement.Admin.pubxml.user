@@ -109,13 +109,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2015 09:50:11</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>04/27/2015 10:48:23</publishTime>
+      <publishTime>05/01/2015 10:25:13</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
       <publishTime>04/28/2015 09:50:12</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>04/27/2015 20:25:01</publishTime>
+      <publishTime>05/01/2015 10:25:17</publishTime>
     </File>
     <File Include="bin/Ninject.dll">
       <publishTime>04/28/2015 09:45:10</publishTime>
@@ -145,16 +145,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:25:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>04/30/2015 14:45:36</publishTime>
+      <publishTime>05/01/2015 11:55:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>04/30/2015 14:32:15</publishTime>
+      <publishTime>05/01/2015 11:49:19</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
-      <publishTime>04/30/2015 14:32:15</publishTime>
+      <publishTime>04/30/2015 16:53:29</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>04/30/2015 14:32:16</publishTime>
+      <publishTime>05/01/2015 11:50:03</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>05/01/2015 10:25:13</publishTime>
     </File>
     <File Include="bin/System.Spatial.dll">
       <publishTime>04/27/2015 20:25:15</publishTime>
@@ -162,8 +165,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>04/27/2015 10:48:22</publishTime>
     </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>05/01/2015 10:25:14</publishTime>
+    </File>
     <File Include="bin/System.Web.Http.OData.dll">
       <publishTime>04/27/2015 20:25:19</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>05/01/2015 10:25:14</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
       <publishTime>04/27/2015 10:48:22</publishTime>
@@ -418,7 +427,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2015 09:52:38</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/28/2015 09:58:18</publishTime>
+      <publishTime>05/01/2015 10:25:21</publishTime>
     </File>
     <File Include="Scripts/bootstrap-image-gallery.min.js">
       <publishTime>04/30/2015 13:31:37</publishTime>
@@ -541,31 +550,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2015 13:36:32</publishTime>
     </File>
     <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 11:53:40</publishTime>
     </File>
     <File Include="Views/Account/ExternalLoginFailure.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 11:52:59</publishTime>
     </File>
     <File Include="Views/Account/Manage.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 11:53:30</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 11:53:10</publishTime>
     </File>
     <File Include="Views/Account/_ChangePasswordPartial.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 11:54:02</publishTime>
     </File>
     <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
     <File Include="Views/Account/_RemoveExternalLoginsPartial.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 11:53:53</publishTime>
     </File>
     <File Include="Views/Account/_SetPasswordPartial.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 11:53:47</publishTime>
     </File>
     <File Include="Views/Categories/CreateCategoryTree.cshtml">
       <publishTime>04/29/2015 13:22:00</publishTime>
@@ -577,7 +586,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2015 12:50:47</publishTime>
     </File>
     <File Include="Views/FileManager/Index.cshtml">
-      <publishTime>04/29/2015 12:46:02</publishTime>
+      <publishTime>04/30/2015 15:43:11</publishTime>
     </File>
     <File Include="Views/FileUpload/Index.cshtml">
       <publishTime>04/30/2015 15:01:24</publishTime>
@@ -607,10 +616,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2015 16:44:47</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>04/27/2015 20:26:25</publishTime>
+      <publishTime>05/01/2015 10:20:14</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/29/2015 13:41:25</publishTime>
+      <publishTime>04/30/2015 16:21:23</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutFileUpload.cshtml">
       <publishTime>04/30/2015 14:38:27</publishTime>
@@ -649,7 +658,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2015 20:26:25</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/30/2015 14:32:19</publishTime>
+      <publishTime>05/01/2015 11:55:38</publishTime>
     </File>
   </ItemGroup>
 </Project>

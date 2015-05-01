@@ -11,6 +11,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using StoreManagement.Admin.Constants;
 using StoreManagement.Admin.Models;
+using StoreManagement.Service.DbContext;
 using WebMatrix.WebData;
 
 namespace StoreManagement.Admin
@@ -30,7 +31,7 @@ namespace StoreManagement.Admin
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
+           LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
         }
 
         private static SimpleMembershipInitializer _initializer;
@@ -42,20 +43,25 @@ namespace StoreManagement.Admin
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<StoreContext>(null);
+               
+
 
                 try
                 {
-                    using (var context = new UsersContext())
-                    {
-                        if (!context.Database.Exists())
-                        {
-                            // Create the SimpleMembership database without Entity Framework migration schema
-                            ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
-                        }
-                    }
+                    //using (var context = new UsersContext())
+                    //{
+                    //    if (!context.Database.Exists())
+                    //    {
+                    //        // Create the SimpleMembership database without Entity Framework migration schema
+                    //   //     ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
+                    //    }
+                    //}
 
-                    WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "UserProfile", "UserId", "UserName", autoCreateTables: true);
+               //     WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "System.Data.SqlClient", "UserProfile", "UserId", "UserName", false);
+
+                   WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "UserProfile", "UserId", "UserName", autoCreateTables: false);
+                   
                 }
                 catch (Exception ex)
                 {

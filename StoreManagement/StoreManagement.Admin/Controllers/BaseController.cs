@@ -14,5 +14,7 @@ namespace StoreManagement.Admin.Controllers
         {
             this.dbContext = dbContext;
         }
+
+         
     }
 }

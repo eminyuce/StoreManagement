@@ -10,3 +10,14 @@ C:\Users\emin\Projects\StoreManagement\StoreManagement.Data\bin\Debug\GenericRep
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Data\obj\Debug\StoreManagement.Data.dll
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Data\obj\Debug\StoreManagement.Data.pdb
 C:\Users\emin\Projects\StoreManagement\StoreManagement.Data\obj\Debug\StoreManagement.Data.csprojResolveAssemblyReference.cache
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\StoreManagement.Data.dll.config
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\StoreManagement.Data.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\StoreManagement.Data.pdb
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\EntityFramework.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\GenericRepository.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\GenericRepository.EntityFramework.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\EntityFramework.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\GenericRepository.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\bin\Debug\GenericRepository.EntityFramework.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\obj\Debug\StoreManagement.Data.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\obj\Debug\StoreManagement.Data.pdb

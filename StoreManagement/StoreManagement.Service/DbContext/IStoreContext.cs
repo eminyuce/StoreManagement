@@ -21,6 +21,6 @@ namespace StoreManagement.Service.DbContext
         IDbSet<StoreUser> StoreUsers { get; set; }
         IDbSet<UserProfile> UserProfiles { get; set; }
         IDbSet<Role> Roles { get; set; }
-
+        IDbSet<Company> Companies { get; set; }
     }
 }

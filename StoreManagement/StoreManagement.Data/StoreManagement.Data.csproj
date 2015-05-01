@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Entities\AdminProjectUsersModel.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\ContentFile.cs" />
     <Compile Include="Entities\FileManager.cs" />
@@ -59,12 +60,16 @@
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\StoreUser.cs" />
+    <Compile Include="Paging\IDto.cs" />
+    <Compile Include="Paging\IPaginatedDto.cs" />
+    <Compile Include="Paging\PaginatedDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

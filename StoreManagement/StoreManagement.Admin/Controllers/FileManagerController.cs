@@ -28,7 +28,10 @@ namespace StoreManagement.Admin.Controllers
         {
             get { return Path.Combine(Server.MapPath("~/Files")); }
         }
-
+        public ActionResult DisplayImages()
+        {
+            return View(fileManagerRepository.GetFilesByStoreId(1));
+        }
         public ActionResult Index()
         {
             return View();

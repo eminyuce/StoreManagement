@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <_PublishTargetUrl>ftp://erayweb.net/demo</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>04/27/2015 20:25:20</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>04/30/2015 16:47:26</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>04/30/2015 16:47:25</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/27/2015 20:25:16</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/27/2015 20:25:18</publishTime>
+    </File>
+    <File Include="bin/de/System.Spatial.resources.dll">
+      <publishTime>04/27/2015 20:25:15</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.AspNet.dll">
+      <publishTime>04/27/2015 20:25:12</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>04/27/2015 20:25:12</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>04/27/2015 20:25:13</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>04/27/2015 20:25:13</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.dll">
+      <publishTime>04/27/2015 20:25:14</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>04/27/2015 20:25:15</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>04/27/2015 10:48:21</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/27/2015 20:25:16</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/27/2015 20:25:18</publishTime>
+    </File>
+    <File Include="bin/es/System.Spatial.resources.dll">
+      <publishTime>04/27/2015 20:25:15</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/27/2015 20:25:16</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/27/2015 20:25:18</publishTime>
+    </File>
+    <File Include="bin/fr/System.Spatial.resources.dll">
+      <publishTime>04/27/2015 20:25:15</publishTime>
+    </File>
+    <File Include="bin/GenericRepository.dll">
+      <publishTime>04/27/2015 10:48:21</publishTime>
+    </File>
+    <File Include="bin/GenericRepository.EntityFramework.dll">
+      <publishTime>04/27/2015 10:48:21</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/27/2015 20:25:16</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/27/2015 20:25:18</publishTime>
+    </File>
+    <File Include="bin/it/System.Spatial.resources.dll">
+      <publishTime>04/27/2015 20:25:15</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/27/2015 20:25:16</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/27/2015 20:25:18</publishTime>
+    </File>
+    <File Include="bin/ja/System.Spatial.resources.dll">
+      <publishTime>04/27/2015 20:25:15</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.Edm.dll">
+      <publishTime>04/27/2015 20:25:16</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.OData.dll">
+      <publishTime>04/27/2015 20:25:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Helpers.dll">
+      <publishTime>04/28/2015 09:50:11</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/27/2015 10:48:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
+      <publishTime>04/28/2015 09:50:12</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>04/27/2015 20:25:01</publishTime>
+    </File>
+    <File Include="bin/Ninject.dll">
+      <publishTime>04/28/2015 09:45:10</publishTime>
+    </File>
+    <File Include="bin/Ninject.Web.Common.dll">
+      <publishTime>04/28/2015 09:53:31</publishTime>
+    </File>
+    <File Include="bin/Ninject.Web.Mvc.dll">
+      <publishTime>04/28/2015 09:53:32</publishTime>
+    </File>
+    <File Include="bin/NLog.config">
+      <publishTime>04/28/2015 09:52:38</publishTime>
+    </File>
+    <File Include="bin/NLog.dll">
+      <publishTime>04/27/2015 11:43:30</publishTime>
+    </File>
+    <File Include="bin/NLog.Web.dll">
+      <publishTime>04/27/2015 11:44:01</publishTime>
+    </File>
+    <File Include="bin/StoreManagement.Admin.dll">
+      <publishTime>04/30/2015 16:46:14</publishTime>
+    </File>
+    <File Include="bin/StoreManagement.Data.dll">
+      <publishTime>04/30/2015 16:40:29</publishTime>
+    </File>
+    <File Include="bin/StoreManagement.Helpers.dll">
+      <publishTime>04/30/2015 16:40:25</publishTime>
+    </File>
+    <File Include="bin/StoreManagement.Service.dll">
+      <publishTime>04/30/2015 16:46:12</publishTime>
+    </File>
+    <File Include="bin/System.Spatial.dll">
+      <publishTime>04/27/2015 20:25:15</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>04/27/2015 10:48:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.OData.dll">
+      <publishTime>04/27/2015 20:25:19</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>04/27/2015 10:48:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>04/27/2015 20:25:09</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>04/27/2015 10:48:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>04/27/2015 10:48:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>04/27/2015 10:48:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>04/27/2015 10:48:22</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>04/28/2015 09:53:31</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>04/27/2015 20:25:20</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.Data.dll">
+      <publishTime>04/27/2015 17:01:13</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.WebData.dll">
+      <publishTime>04/27/2015 17:01:13</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>04/27/2015 20:26:25</publishTime>
+    </File>
+    <File Include="Icon.png">
+      <publishTime>04/28/2015 09:51:26</publishTime>
+    </File>
+    <File Include="NLog.config">
+      <publishTime>04/28/2015 09:52:38</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>04/28/2015 09:58:18</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>04/30/2015 16:47:19</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/30/2015 16:40:40</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

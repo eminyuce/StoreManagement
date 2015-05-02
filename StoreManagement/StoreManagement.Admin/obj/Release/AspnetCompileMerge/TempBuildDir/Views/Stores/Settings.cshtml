@@ -1,0 +1,125 @@
+﻿@using StoreManagement.Data.Entities
+@model List<Setting>
+@{
+    ViewBag.Title = "Settings";
+    Store s = ViewBag.Store;
+    Setting setting = new Setting();
+    setting.StoreId = s.Id;
+ 
+}
+@Html.ActionLink("Back to Stores", "Index", null, new { @class = "btn btn-default" })
+
+
+<h2>@s.Name Settings</h2>
+@using (Html.BeginForm("SaveOrUpdateSetting", "Stores", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add Settings</legend>
+        @Html.HiddenFor(r => setting.StoreId)
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => setting.SettingKey, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => setting.SettingKey, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => setting.SettingKey)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => setting.SettingValue, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => setting.SettingValue, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => setting.SettingValue)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => setting.State, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.CheckBoxFor(model => setting.State, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => setting.State)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => setting.Lang, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => setting.Lang, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => setting.Lang)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<table class='table table-hover table-bordered table-striped'>
+    <tr>
+
+        <th>SettingKey  
+        </th>
+
+        <th>SettingValue  
+        </th>
+
+        <th>State  
+        </th>
+
+        <th>Lang  
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SettingKey)
+            </td>
+
+            <td>
+                <span class="jeditableSettingValue" id="@(String.Format("{0}", item.Id))">@item.SettingValue</span>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Lang)
+            </td>
+
+
+        </tr>
+    }
+</table>
+
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            console.log("jquery is working");
+        });
+        var urlSave = '@Url.Action("SaveSettingValue", "Ajax")';
+        
+        $('.jeditableSettingValue').editable(urlSave, {
+                 type: 'text',
+                 onblur: 'submit',
+                 cancel: 'Cancel',
+                submit: 'OK',
+                indicator: 'Saving...',
+                callback: function(value, settings) {
+                    
+                }, data: function (value, settings) {
+                    var decoded = $('<div/>').html(value).text();
+                    return decoded;
+                }
+            });
+
+        
+    </script>
+
+}

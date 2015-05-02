@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="yucetest" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Yuce\\Documents\\GitHub\\StoreManagement\\StoreManagement\\StoreManagement\.Admin\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Yuce\\Documents\\GitHub\\StoreManagement\\StoreManagement\\StoreManagement\.Admin\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Stores-Web.config Connection String" description="" value="Data Source=devsqlserver;Initial Catalog=TestEY_2;Integrated Security=True" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Yuce\\Documents\\GitHub\\StoreManagement\\StoreManagement\\StoreManagement\.Admin\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Stores']/@connectionString" />
+  </parameter>
+</parameters>

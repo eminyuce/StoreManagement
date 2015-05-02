@@ -1,0 +1,110 @@
+﻿@model StoreManagement.Data.Entities.Content
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Content</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StoreId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoreId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImagePath)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImagePath)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MainPage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MainPage)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.State)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImageState)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImageState)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ordering)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ordering)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Lang)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Lang)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Url)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Url)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

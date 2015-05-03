@@ -342,10 +342,6 @@
       <Project>{553854d8-a688-4a50-ab74-4ccf3b1afe9a}</Project>
       <Name>StoreManagement.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StoreManagement.Helpers\StoreManagement.Helpers.csproj">
-      <Project>{1a6e734e-f813-4de9-bef9-c78cb0897338}</Project>
-      <Name>StoreManagement.Helpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StoreManagement.Service\StoreManagement.Service.csproj">
       <Project>{257ad197-b5e1-4c9c-b9be-5b559828c57c}</Project>
       <Name>StoreManagement.Service</Name>

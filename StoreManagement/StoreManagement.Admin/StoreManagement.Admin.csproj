@@ -303,8 +303,10 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\ftp faqulte.pubxml" />
     <None Include="Properties\PublishProfiles\FTP_StoreManagement.Admin.pubxml" />
     <None Include="Properties\PublishProfiles\StoreManagement.Admin.pubxml" />
+    <None Include="Properties\PublishProfiles\YuceMachine.pubxml" />
     <None Include="Properties\PublishProfiles\yucetest.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\FileUpload\canvas-to-blob.min.js" />
@@ -405,6 +407,13 @@
     <Content Include="Views\FileManager\DisplayImages.cshtml" />
     <Content Include="Views\Companies\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Company.cshtml" />
+    <Content Include="Views\Companies\CompaniesSearch.cshtml" />
+    <Content Include="Views\Shared\Pager.cshtml" />
+    <Content Include="Views\Shared\pFilter.cshtml" />
+    <Content Include="Views\Shared\pFiltersGroups.cshtml" />
+    <Content Include="Views\Shared\pPager.cshtml" />
+    <Content Include="Views\Shared\pSearchForm.cshtml" />
+    <Content Include="Views\Companies\Company.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -417,10 +426,6 @@
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">
       <Project>{553854d8-a688-4a50-ab74-4ccf3b1afe9a}</Project>
       <Name>StoreManagement.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StoreManagement.Helpers\StoreManagement.Helpers.csproj">
-      <Project>{1a6e734e-f813-4de9-bef9-c78cb0897338}</Project>
-      <Name>StoreManagement.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoreManagement.Service\StoreManagement.Service.csproj">
       <Project>{257ad197-b5e1-4c9c-b9be-5b559828c57c}</Project>

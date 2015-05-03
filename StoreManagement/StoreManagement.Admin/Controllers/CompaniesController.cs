@@ -8,6 +8,8 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
+using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data;
 
 namespace StoreManagement.Admin.Controllers
 {
@@ -20,13 +22,27 @@ namespace StoreManagement.Admin.Controllers
         {
             this.companyRepository = companyRepository;
         }
-
+        public ActionResult Company(int id = 1)
+        {
+            var c = this.companyRepository.GetSingle(id);
+            return View(c);
+        }
         public ActionResult Index(int pageIndex=1, int pageSize=20)
         {
             List<Company> countries = companyRepository.Paginate(pageIndex, pageSize);
             ViewBag.PageIndex = pageIndex;
             return View(countries);
         }
-       
+        public ActionResult CompaniesSearch(String search="", String page="1", String filters="")
+        {
+            int iPage = page.ToInt(); if (iPage == 0) iPage = 1;
+            int top = ProjectAppSettings.RecordPerPage;
+            int skip = (iPage - 1) * top;
+            
+            var fltrs = FilterHelper.ParseFiltersFromString(filters);
+            var searchResult = companyRepository.GetCompanySearchResult(search, fltrs, top, skip);
+
+            return View(searchResult);
+        }
 	}
 }

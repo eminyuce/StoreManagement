@@ -1,0 +1,26 @@
+﻿@model IEnumerable<StoreManagement.Data.HelpersModel.FilterGroup>
+
+@{
+
+    int groupCounter = 400; 
+}
+@foreach (var group in Model)
+{
+    groupCounter++;
+    int groupHash = group.GetHashCode();
+    
+    <div id="fs_@groupHash" class="fieldset">
+		    <table class="fieldset_header">
+	    <tbody><tr>
+		    <td class="caption">@group.FieldNameFull</td>
+		    <td class="line">&nbsp;</td>
+		    <td class="arrow"></td>
+	    </tr>
+	    </tbody></table>
+		   @Html.Partial("pFilter",group.FiltersHidden) 
+	    <div class="body">
+	        <div>
+            </div>
+	    </div>
+    </div>    
+}

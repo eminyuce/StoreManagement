@@ -1,7 +1,7 @@
 ﻿using GenericRepository.EntityFramework;
+using StoreManagement.Data;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
-using StoreManagement.Helpers;
-using StoreManagement.Helpers.CacheHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using System;

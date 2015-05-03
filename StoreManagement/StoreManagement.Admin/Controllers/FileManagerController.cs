@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
-using StoreManagement.Helpers.GeneralHelper;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Admin.Controllers
 {

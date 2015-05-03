@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
-using StoreManagement.Helpers;
-using StoreManagement.Helpers.CacheHelper;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
+using StoreManagement.Data;
 
 namespace StoreManagement.Service.Repositories
 {

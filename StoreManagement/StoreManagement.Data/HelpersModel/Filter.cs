@@ -5,6 +5,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.HelpersModel
 {
@@ -14,9 +15,9 @@ namespace StoreManagement.Data.HelpersModel
         public String ValueFirst { get; set; }
         public String ValueLast { get; set; }
         public int Cnt { get; set; }
+        public int Ord { get; set; }
 
         private string _text = "";
-     
         public string Text
         {
             get
@@ -30,15 +31,9 @@ namespace StoreManagement.Data.HelpersModel
                     }
                     else
                     {
-                        if (!GeneralHelper.IsNumeric(ValueLast))
-                        {
-
-                            return (!string.IsNullOrEmpty(ValueLast) ? ValueLast + ", " : "") + ValueFirst;
-                        }
-                        else
-                        {
+                        
                             return ValueFirst + " - " + ValueLast;
-                        }
+                       
 
                     }
                 }
@@ -55,31 +50,6 @@ namespace StoreManagement.Data.HelpersModel
         {
 
         }
-
-        public Filter(string fieldName, string valueFirst, string valueLast)
-        {
-            // TODO: Complete member initialization
-            this.FieldName = fieldName;
-            this.ValueFirst = valueFirst;
-            this.ValueLast = valueLast;
-        }
-
-        private ItemType _ownerType ;
-        public ItemType OwnerType { get { return _ownerType; } set { _ownerType = value; } }
-
-
-        public double DoubleValueFirst
-        {
-            get { return ValueFirst.ToDouble(); }
-            set { ValueFirst = value.ToString(); }
-        }
-        public double DoubleValueLast
-        {
-            get { return ValueLast.ToDouble(); }
-            set { ValueLast = value.ToString(); }
-        }
-
-
         public string Url
         {
             get
@@ -106,99 +76,19 @@ namespace StoreManagement.Data.HelpersModel
             }
         }
 
-        public string LinkExclude(HttpRequestBase httpRequestBase, ViewContext viewContext, ItemType ownerType)
+        public Filter(string fieldName, string valueFirst, string valueLast)
         {
-            //RequestContext
-            string sFilters = (string)viewContext.RouteData.Values["filters"];
-            var filters = FilterHelper.ParseFiltersFromString(sFilters);
-
-
-            var rv = new RouteValueDictionary();
-
-
-            if (filters != null)
-            {
-                int index = filters.FindIndex(i => i.FieldName.ToLower() == FieldName.ToLower());
-                if (index >= 0)
-                {
-                    filters.RemoveAt(index);
-                }
-
-                string urlFilters = string.Join("/",
-                                        filters.OrderBy(i => i.FieldName).Select(
-                                            i => (i.FieldName.ToLower() == FieldName.ToLower()) ? Url : i.Url));
-
-                rv.Add("filters", urlFilters);
-            }
-
-
-
-
-            foreach (var key in httpRequestBase.QueryString.AllKeys)
-            {
-                if (key.ToLower() != "page")
-                {
-                    if (!rv.ContainsKey(key))
-                    {
-                        rv.Add(key, httpRequestBase.QueryString[key]);
-                    }
-                }
-            }
-
-
-            var urlHelper = new UrlHelper(httpRequestBase.RequestContext);
-            //  return urlHelper.Action("BoatsSearch", "Directory", rv);
-            return urlHelper.Action(ownerType.SearchAction, ownerType.Controller, rv);
-
-
+            // TODO: Complete member initialization
+            this.FieldName = fieldName;
+            this.ValueFirst = valueFirst;
+            this.ValueLast = valueLast;
         }
 
-        public string Link(HttpRequestBase httpRequestBase, ViewContext viewContext)
-        {
-
-            string sFilters = (string)viewContext.RouteData.Values["filters"];
-            var filters = FilterHelper.ParseFiltersFromString(sFilters);
-
-            string urlFilters;
-
-            if (filters != null && filters.Count() > 0)
-            {
-                if (!filters.Any(i => i.FieldName.ToLower() == FieldName.ToLower()))
-                {
-                    filters.Add(this);
-                }
-
-                urlFilters = string.Join("/",
-                                         filters.OrderBy(i => i.FieldName).Select(
-                                             i => (i.FieldName.ToLower() == FieldName.ToLower()) ? Url : i.Url));
-            }
-            else
-            {
-                urlFilters = Url;
-            }
+        private ItemType _ownerType ;
+        public ItemType OwnerType { get { return _ownerType; } set { _ownerType = value; } }
 
 
-
-            var rv = new RouteValueDictionary();
-            rv.Add("filters", urlFilters);
-
-            foreach (var key in httpRequestBase.QueryString.AllKeys)
-            {
-                if (key.ToLower() != "page")
-                {
-                    if (!rv.ContainsKey(key))
-                    {
-                        rv.Add(key, httpRequestBase.QueryString[key]);
-                    }
-                }
-            }
-
-
-
-            var urlHelper = new UrlHelper(httpRequestBase.RequestContext);
-            return urlHelper.Action(OwnerType.SearchAction, OwnerType.Controller, rv);
-        }
-
+       
 
 
     }

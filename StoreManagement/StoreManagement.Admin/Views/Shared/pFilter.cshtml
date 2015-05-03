@@ -1,0 +1,16 @@
+﻿ 
+@model List<StoreManagement.Data.HelpersModel.Filter>
+
+@{
+    foreach (var filter in Model)
+    {
+        <div>
+            
+           <a href="@StoreManagement.Data.GeneralHelper.FilterHelper.Link(filter,Request,ViewContext)">@filter.Text</a> (@filter.Cnt)
+        </div>
+  
+    }
+    
+    
+    
+}

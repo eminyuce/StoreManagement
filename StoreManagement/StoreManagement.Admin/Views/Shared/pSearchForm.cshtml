@@ -1,0 +1,14 @@
+﻿
+@{
+
+    string action = ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToString();
+    string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString();
+    string search = @Request.QueryString["search"];
+}
+
+@using (Html.BeginForm(action, controller, FormMethod.Get))
+{
+
+    <input type="text" name="search" value="@search" /> <input type="submit" value="Search"/>
+    
+}

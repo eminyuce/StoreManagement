@@ -51,11 +51,11 @@ namespace StoreManagement.Data.HelpersModel
         {
             get
             {
-                if (_filters.Count > Settings.MaxItemsCountInFilter)
+                if (_filters.Count > ProjectAppSettings.MaxItemsCountInFilter)
                 {
                     return
                         _filters.OrderByDescending(i => i.Cnt)
-                                .Take(Settings.MaxItemsCountInFilter)
+                                .Take(ProjectAppSettings.MaxItemsCountInFilter)
                                 .OrderBy(i => i.Text)
                                 .ToList();
                 }

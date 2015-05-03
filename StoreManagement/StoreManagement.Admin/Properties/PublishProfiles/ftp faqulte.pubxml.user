@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <_PublishTargetUrl>ftp://faqulte.com/httpdocs</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>05/02/2015 14:01:19</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.AspNet.dll">
+      <publishTime>05/02/2015 14:01:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>05/02/2015 14:01:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>05/02/2015 14:01:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>05/02/2015 14:01:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.dll">
+      <publishTime>05/02/2015 14:01:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>05/02/2015 14:01:18</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>05/02/2015 14:01:18</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>05/02/2015 14:01:17</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>05/02/2015 14:01:17</publishTime>
+    </File>
+    <File Include="Icon.png">
+      <publishTime>05/02/2015 14:01:17</publishTime>
+    </File>
+    <File Include="NLog.config">
+      <publishTime>05/02/2015 14:01:17</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>05/02/2015 14:01:17</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/03/2015 09:05:08</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

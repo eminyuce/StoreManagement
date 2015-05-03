@@ -1,0 +1,49 @@
+﻿@using StoreManagement.Data.Entities
+@model List<StoreManagement.Data.Entities.Category>
+@{
+    Layout = null;
+}
+ <div id="tree">
+    <ul id="treeview">
+    @CategoryTree(Model, 0)
+    </ul>
+</div>
+ 
+
+@helper CategoryTree(IEnumerable<Category> nodes, int? parentId)
+{
+    
+    if (nodes.Any(n => n.ParentId == parentId)) 
+    { 
+    <ul>
+        @foreach (var node in nodes.Where(n => n.ParentId == parentId)) 
+        {
+            <li>
+               <span data-category="@node.Id">@node.Name</span>
+                @CategoryTree(nodes, node.Id)
+            </li>
+        }
+    </ul>
+    }
+}
+
+ 
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+
+            //$("#treeview").jstree({
+            //    checkbox: {
+            //        real_checkboxes: true,
+            //        real_checkboxes_names: function (n) { return [("check_" + (n[0].id ||      Math.ceil(Math.random() * 10000))), n[0].id] }
+            //    },
+            //    plugins: ["html_data", "types", "themes", "ui", "checkbox"]
+            //});
+            $("#treeview").jstree();
+          
+        });
+    //]]>
+</script>
+    
+ 

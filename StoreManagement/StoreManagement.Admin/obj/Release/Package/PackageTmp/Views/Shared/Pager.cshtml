@@ -1,0 +1,70 @@
+﻿ 
+@model StoreManagement.Data.HelpersModel.RecordsStats
+
+
+@{
+    
+    if (Model.PageLast > 1)
+    {
+    @: <ul class="paging">
+int pagesAround = 5;
+
+int intervalStart = 1;
+int intervalEnd = Model.PageLast;
+
+if (Model.PageLast > pagesAround * 2 + 1)
+{
+    if (Model.PageCurrent - pagesAround > 1)
+    {
+        intervalStart = Model.PageCurrent - pagesAround;
+    }
+
+    if (Model.PageCurrent + pagesAround < Model.PageLast)
+    {
+        intervalEnd = Model.PageCurrent + pagesAround + (Model.PageCurrent < pagesAround ? pagesAround - Model.PageCurrent : 0);
+    }
+
+}
+
+if (intervalStart > 1)
+{
+            @: <li>
+            <a href="@StoreManagement.Data.GeneralHelper.FilterHelper.PageLink(this.Request, this.ViewContext, 1, @Model.OwnerType)">1</a>
+    if (intervalStart > 2)
+    {
+                <span>...</span>
+    }
+            @: </li>
+        }
+
+
+for (int i = intervalStart; i <= intervalEnd; i++)
+{
+    if (i == Model.PageCurrent)
+    {
+                <li class="active" title="Current page"><b>@i</b></li>
+    }
+    else
+    {
+             <li title="Page @i"></li><a href="@StoreManagement.Data.GeneralHelper.FilterHelper.PageLink(this.Request, this.ViewContext, @i, @Model.OwnerType)">@i</a>
+    }
+
+}
+
+
+if (intervalEnd < Model.PageLast)
+{
+            @: <li>
+            if (intervalEnd < Model.PageLast - 1)
+            {
+                <span>...</span>
+            }
+            <a href="@StoreManagement.Data.GeneralHelper.FilterHelper.PageLink(this.Request, this.ViewContext, @Model.PageLast, @Model.OwnerType)">@Model.PageLast</a>
+            @: </li>
+        }
+
+        @: </ul>
+            }//end if
+}
+
+

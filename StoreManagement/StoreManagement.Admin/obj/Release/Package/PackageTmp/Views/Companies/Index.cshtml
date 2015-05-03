@@ -1,0 +1,16 @@
+﻿@model IEnumerable<StoreManagement.Data.Entities.Company>
+
+@{
+    ViewBag.Title = "Index";
+    int pageIndex = ViewBag.PageIndex;
+}
+
+<h2>Index</h2>
+@Html.ActionLink("Next", "Index", new { pageIndex = pageIndex + 1 }, new { @class = "btn btn-default" })
+@Html.ActionLink("Previous", "Index", new { pageIndex = pageIndex - 1 }, new { @class = "btn btn-default" })
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(r => item)
+}
+
+

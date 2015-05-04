@@ -16,12 +16,17 @@ namespace StoreManagement.Admin.Controllers
         private IStoreContext dbContext;
         private IStoreRepository storeRepository;
         private ISettingRepository settingRepository;
-        public AjaxController(IStoreContext dbContext, IStoreRepository storeRepository, ISettingRepository settingRepository)
+        private ICategoryRepository categoryRepository;
+        public AjaxController(IStoreContext dbContext, 
+            IStoreRepository storeRepository,
+            ISettingRepository settingRepository,
+            ICategoryRepository categoryRepository)
             : base(dbContext)
         {
             this.dbContext = dbContext;
             this.storeRepository = storeRepository;
             this.settingRepository = settingRepository;
+            this.categoryRepository = categoryRepository;
         }
 
 
@@ -34,5 +39,37 @@ namespace StoreManagement.Admin.Controllers
             return Content(value);
         }
 
+        public ActionResult GetHiearchicalNodesInfo()
+        {
+            var tree = this.categoryRepository.CreateCategoriesTree(1, "family");
+
+            return Json(tree, JsonRequestBehavior.AllowGet);
+        }
+        //public ActionResult SaveHiearchy(string childId, string parentId)
+        //{
+        //  // JsTreeDAO.SaveNodeRelationship(childId, parentId);
+
+        //    return null; //you may return any success flag etc
+        //}
+        //public ActionResult RenameNode(string nodeId, string nodeNewTitle)
+        //{
+        //   // JsTreeDAO.RenameNode(nodeId, nodeNewTitle);
+
+        //    return null; //you may return any success flag etc
+        //}
+
+        //public JsonResult CreateFolder(string folderName, string parentId)
+        //{
+        //   // int newNodeId = JsTreeDAO.AddSubNode(parentId, folderName);
+
+        //    return Json(new { nodeId = newNodeId });//id of newly created node is required for rename callback.
+        //}
+
+        //public ActionResult DeleteSubNode(string folderId)
+        //{
+        //   // JsTreeDAO.DeleteSubNode(folderId);
+
+        //    return null; //you may return any success flag etc
+        //}
     }
 }

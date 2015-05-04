@@ -13,6 +13,7 @@ using StoreManagement.Data;
 
 namespace StoreManagement.Admin.Controllers
 {
+    //[Authorize]
     public class CompaniesController : BaseController
     {
         //
@@ -22,9 +23,10 @@ namespace StoreManagement.Admin.Controllers
         {
             this.companyRepository = companyRepository;
         }
-        public ActionResult Company(int id = 1)
+        public ActionResult Company(String id = "1")
         {
-            var c = this.companyRepository.GetSingle(id);
+            int companyid = id.Split("-".ToCharArray()).Last().ToInt();
+            var c = this.companyRepository.GetSingle(companyid);
             return View(c);
         }
         public ActionResult Index(int pageIndex=1, int pageSize=20)
@@ -43,6 +45,24 @@ namespace StoreManagement.Admin.Controllers
             var searchResult = companyRepository.GetCompanySearchResult(search, fltrs, top, skip);
 
             return View(searchResult);
+        }
+        public ActionResult SaveOrUpdate(int id = 1)
+        {
+            int companyid = id;
+            var c = this.companyRepository.GetSingle(companyid);
+            return View(c);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveOrUpdate(Company company)
+        {
+            if (ModelState.IsValid)
+            {
+                companyRepository.Edit(company);
+                companyRepository.Save();
+                return RedirectToAction("CompaniesSearch");
+            }
+            return View(company);
         }
 	}
 }

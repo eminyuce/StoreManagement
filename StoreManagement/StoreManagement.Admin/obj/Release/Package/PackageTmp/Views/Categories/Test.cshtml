@@ -1,2 +1,133 @@
 ﻿
-@Html.Action("CreateCategoryTree","Categories")
+<span id="empgraph">
+    
+
+</span>
+
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("11212");
+
+             
+            $("#empgraph").tree({
+                data: {
+                    type: "json",
+                    url: "/Ajax/GetHiearchicalNodesInfo",
+                    async: true
+                },
+                ui: { theme_name: "classic" },
+                rules: {
+                    metadata: "mdata",
+                    use_inline: true,
+                    clickable: ["all"],
+                    deletable: ["all"],
+                    renameable: ["all"],
+                    creatable: ["all"],
+                    draggable: ["all"],
+                    // dragrules: ["child * child", "child inside root", "tree-drop inside root"],
+                    createat: ["top"],
+                    drag_button: "left",
+                    droppable: ["tree-drop"]
+                },
+
+                callback: {
+
+                    onmove: function (NODE, REF_NODE, TYPE, TREE_OBJ, RB) {
+                        var parent_id = 0;
+
+                        if (TYPE === "inside") {
+                            parent_id = $(REF_NODE).attr('id');
+                        }
+                        saveHiearchy(NODE.id, parent_id);
+                    },
+                    onrename: function (NODE, LANG, TREE_OBJ, RB) {
+                        renameNode(NODE.id, $(NODE.innerHTML).filter("a")[0].innerText);
+                    },
+                    oncreate: function (NODE, REF_NODE, TYPE, TREE_OBJ, RB) {
+                        var parent_id = 0;
+
+                        if (TYPE === "inside") {
+                            parent_id = $(REF_NODE).attr('id');
+                        }
+                        createNode(NODE, parent_id);
+                    },
+                    ondelete: function (NODE, TREE_OBJ, RB) {
+                        deleteSubNode(NODE.id);
+                    }
+                }
+            });
+            
+
+        });
+        function saveHiearchy(node_id, parent_id) {
+            var actionUrl = "/Ajax/SaveHiearchy?childId=" + node_id + "&parentId=" + parent_id;
+            $.ajax(
+                {
+                    type: "POST",
+                    url: actionUrl,
+                    data: null,
+                    dataType: "json",
+                    success: function (data) {
+                    },
+                    error: function (req, status, error) {
+                    }
+                });
+        }
+        function createNode(NODE, parentId) {
+            var folderName = $(NODE.innerHTML).filter("a")[0].innerText;
+            var actionUrl = "/Ajax/CreateFolder?folderName=" + folderName + "&parentId=" + parentId;
+            $.ajax(
+                {
+                    type: "POST",
+                    url: actionUrl,
+                    data: null,
+                    dataType: "json",
+                    success: function (data) {
+                        createdNodeId = data.nodeId;
+                    },
+                    error: function (req, status, error) {
+                    }
+                });
+        }
+        function renameNode(nodeId, nodeNewTitle) {
+            if ($.trim(nodeId) == "")
+                nodeId = createdNodeId;
+
+            var actionUrl = "/Ajax/RenameNode?nodeId=" + nodeId + "&nodeNewTitle=" + nodeNewTitle;
+            $.ajax(
+                {
+                    type: "POST",
+                    url: actionUrl,
+                    data: null,
+                    dataType: "json",
+                    success: function (data) {
+                    },
+                    error: function (req, status, error) {
+                    }
+                });
+        }
+        function deleteSubNode(nodeId) {
+            var actionUrl = "/Ajax/DeleteSubNode?folderId=" + nodeId;
+            $.ajax(
+            {
+                type: "POST",
+                url: actionUrl,
+                data: null,
+                dataType: "json",
+                success: function (data) {
+                },
+                error: function (req, status, error) {
+                }
+            });
+        }
+    </script>
+
+
+}
+
+
+ 

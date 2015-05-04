@@ -14,6 +14,12 @@ namespace StoreManagement.Admin
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
+            routes.MapRoute(
+                name: "robots",
+                url: "robots.txt",
+                        defaults: new { controller = "Robots", action = "RobotsText" }
+             );
+
            // routes.MapRoute(
            //name: "CompanySearch",
            //url: "Company/list/{*filters}",

@@ -20,7 +20,13 @@ namespace StoreManagement.Test
         {
             dbContext = new StoreContext(ConnectionString);
         }
+  [TestMethod]
+        public void TestMethod553()
+        {
+            CategoryRepository categoryRepository = new CategoryRepository(dbContext);
+            var tree = categoryRepository.CreateCategoriesTree(1, "family");
 
+        }
         [TestMethod]
         public void TestMethod2()
         {

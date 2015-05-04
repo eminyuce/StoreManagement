@@ -98,12 +98,16 @@
     <Compile Include="Entities\StoreUser.cs" />
     <Compile Include="GeneralHelper\FilterHelper.cs" />
     <Compile Include="GeneralHelper\GeneralHelper.cs" />
+    <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
     <Compile Include="HelpersModel\Filter.cs" />
     <Compile Include="HelpersModel\FilterGroup.cs" />
     <Compile Include="HelpersModel\ItemType.cs" />
     <Compile Include="HelpersModel\RecordsStats.cs" />
+    <Compile Include="JsTree\Attributes.cs" />
+    <Compile Include="JsTree\Data.cs" />
+    <Compile Include="JsTree\JsTreeNode.cs" />
     <Compile Include="Paging\IDto.cs" />
     <Compile Include="Paging\IPaginatedDto.cs" />
     <Compile Include="Paging\PaginatedDto.cs" />

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using StoreManagement.Admin.App_Start;
 using StoreManagement.Admin.Controllers;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -29,6 +30,16 @@ namespace StoreManagement.Test
                 Console.WriteLine(s.StoreId);
             }
 
+        }
+
+        [TestMethod]
+        public void TestMethod3()
+        {
+            String mm = "%25c3%2587ek_cumhur%25c4%25b0yet%25c4%25b0";
+            String mm1 = "OTOMOTİV";
+            String pp = mm1.UrlEncode();
+            Console.WriteLine(GeneralHelper.UrlDencode(mm,false));
+            Console.WriteLine(mm.UrlDecode());
         }
 
         [TestMethod]

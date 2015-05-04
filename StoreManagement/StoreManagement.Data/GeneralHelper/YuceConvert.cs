@@ -202,7 +202,7 @@ namespace StoreManagement.Data.GeneralHelper
             string ret = String.Empty;
             if (arg != null)
             {
-                ret = arg.ToString();
+                ret = arg.ToString().Trim();
             }
             return ret;
         }
@@ -481,9 +481,9 @@ namespace StoreManagement.Data.GeneralHelper
         {
             if (string.IsNullOrEmpty(text))
                 return "";
-            return UrlEncodeCustom(text);
-            //return HttpUtility.UrlPathEncode(text.Replace(" ", "_")).ToLower();
-
+            //return UrlEncodeCustom(text);
+         //   return HttpUtility.UrlEncode(text.Replace(" ", "_")).ToLower();
+            return UrlDencode(text, true);
             //char c;
             //((int) c).ToString("X");
 
@@ -492,8 +492,10 @@ namespace StoreManagement.Data.GeneralHelper
         public static string UrlDecode(this string text)
         {
             //return HttpUtility.UrlDecode(text);
-            return UrlDecodeCustom(text);
-            // return HttpUtility.UrlPathEncode(text).Replace("_", " ");
+            //return UrlDecodeCustom(text);
+            // return HttpUtility.UrlDecode(text).Replace("_", " ").ToLower();
+
+            return UrlDencode(text, false);
         }
 
 
@@ -520,7 +522,27 @@ namespace StoreManagement.Data.GeneralHelper
 
             return ret.ToString().Replace(" ", "_");
         }
+        public static string UrlDencode(this string adres, bool encode)
+        {
+            string[] karakter = { "<", ">", "#", "%", "{", "}", "|", @"\", "^", "~", "[", "]", "`", ";", "/", "?", ":", "@", "=", "&", "$" };
+            string[] donustur = { "%3C", "%3E", "%23", "%25", "%7B", "%7D", "%7C", "%5C", "%5E", "%7E", "%5B", "%5D", "%60", "%3B", "%2F", "%3F", "%3A", "%40", "%3D", "%26", "%24" };
 
+            if (encode)
+            {
+                for (int i = 0; i < karakter.Length; i++)
+                {
+                    adres = adres.Replace(karakter[i], donustur[i]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < donustur.Length; i++)
+                {
+                    adres = adres.Replace(donustur[i], karakter[i]);
+                }
+            }
+            return adres;
+        }
 
         private static string UrlDecodeCustom(string text)
         {

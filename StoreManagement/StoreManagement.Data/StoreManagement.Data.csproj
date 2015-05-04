@@ -97,6 +97,7 @@
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\StoreUser.cs" />
     <Compile Include="GeneralHelper\FilterHelper.cs" />
+    <Compile Include="GeneralHelper\GeneralHelper.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
     <Compile Include="HelpersModel\Filter.cs" />

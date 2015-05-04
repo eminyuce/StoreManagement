@@ -150,9 +150,9 @@ namespace StoreManagement.Data.GeneralHelper
 
 
 
-        
 
-        public string LinkExclude(Filter f,HttpRequestBase httpRequestBase, ViewContext viewContext, ItemType ownerType)
+
+        public static string LinkExclude(Filter f, HttpRequestBase httpRequestBase, ViewContext viewContext, ItemType ownerType)
         {
             //RequestContext
             string sFilters = (string)viewContext.RouteData.Values["filters"];

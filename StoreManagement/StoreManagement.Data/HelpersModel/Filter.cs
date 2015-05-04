@@ -12,8 +12,11 @@ namespace StoreManagement.Data.HelpersModel
     public class Filter
     {
         public String FieldName { get; set; }
-        public String ValueFirst { get; set; }
+        private string _valueFirst = "";
+        public String ValueFirst { get { return _valueFirst; } set { _valueFirst = value; } }
+
         public String ValueLast { get; set; }
+
         public int Cnt { get; set; }
         public int Ord { get; set; }
 
@@ -24,18 +27,24 @@ namespace StoreManagement.Data.HelpersModel
             {
                 if (string.IsNullOrEmpty(_text))
                 {
-
-                    if (ValueFirst == ValueLast)
+                    if (!String.IsNullOrEmpty(ValueLast))
                     {
-                        return ValueFirst;
+                        if (ValueFirst == ValueLast)
+                        {
+                            return ValueFirst;
+                        }
+                        else
+                        {
+
+                            return ValueFirst + " - " + ValueLast;
+                        }
                     }
                     else
                     {
-                        
-                            return ValueFirst + " - " + ValueLast;
-                       
-
+                        return ValueFirst;
                     }
+
+
                 }
                 else
                 {

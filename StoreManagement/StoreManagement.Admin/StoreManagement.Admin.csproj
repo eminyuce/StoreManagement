@@ -414,6 +414,7 @@
     <Content Include="Views\Shared\pPager.cshtml" />
     <Content Include="Views\Shared\pSearchForm.cshtml" />
     <Content Include="Views\Companies\Company.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\RecordsStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

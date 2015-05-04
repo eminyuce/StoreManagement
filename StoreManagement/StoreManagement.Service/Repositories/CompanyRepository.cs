@@ -61,7 +61,7 @@ namespace StoreManagement.Service.Repositories
                 {
                     DataRow dr = dtFilters.NewRow();
                     dr["FieldName"] = filter.FieldName;
-                    dr["ValueFirst"] = filter.ValueFirst;
+                    dr["ValueFirst"] = filter.ValueFirst.UrlDecode();
                     dr["ValueLast"] = filter.ValueLast;
 
                     dtFilters.Rows.Add(dr);
@@ -74,7 +74,7 @@ namespace StoreManagement.Service.Repositories
                 cmd.CommandText = "dbo.SearchCompanies";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("filter", SqlDbType.Structured).Value = dtFilters;
-                cmd.Parameters.Add("search", SqlDbType.NVarChar).Value = search;
+                cmd.Parameters.Add("search", SqlDbType.NVarChar).Value = search.ToStr();
                 cmd.Parameters.Add("top", SqlDbType.Int).Value = take;
                 cmd.Parameters.Add("skip ", SqlDbType.Int).Value = skip;
 

@@ -417,6 +417,7 @@
     <Content Include="Views\Companies\Company.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RecordsStats.cshtml" />
     <Content Include="Views\Companies\SaveOrUpdate.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

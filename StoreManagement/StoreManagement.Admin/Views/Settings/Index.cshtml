@@ -2,10 +2,15 @@
 
 @{
     ViewBag.Title = "Index";
+    var types = (List<string>) ViewBag.Types;
 }
 
-<h2>Index</h2>
-
+<h2>Sitenin genel ayarlari.. Butun ayarlari GIRIN lutfen.. </h2>
+@foreach (var t in types)
+{
+    @Html.ActionLink(t.ToString(),"Index","Settings", new {type=t}, new { @class="btn btn-default" }) @: |
+}
+<br/>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -13,16 +18,10 @@
     <tr>
         <th></th>
         <th>
-            StoreId
-        </th>
-        <th>
             SettingKey
         </th>
         <th>
             SettingValue
-        </th>
-        <th>
-            State
         </th>
         <th>
             Type
@@ -37,16 +36,10 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
         <td>
-			@item.StoreId
-        </td>
-        <td>
 			@item.SettingKey
         </td>
         <td>
 			@item.SettingValue
-        </td>
-        <td>
-			@item.State
         </td>
         <td>
 			@item.Type

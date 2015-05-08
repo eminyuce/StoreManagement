@@ -24,9 +24,25 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Settings/
 
-        public ViewResult Index()
+        public ViewResult Index(String type="")
         {
-            return View(settingRepository.GetAll());
+            List<Setting> items = null;
+            if (!String.IsNullOrEmpty(type))
+            {
+                items = settingRepository.GetStoreSettingsByType(1, type);
+            }
+            else
+            {
+                items = settingRepository.GetAll().ToList();
+            }
+            var types = from p in settingRepository.GetAll()
+                        where !String.IsNullOrEmpty(p.Type) 
+                        group p by p.Type into g
+                        select new { Type = g.Key };
+
+            ViewBag.Types = types.Select(r => r.Type).ToList();
+
+            return View(items);
         }
 
         //
@@ -43,7 +59,10 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            Setting setting=new Setting();
+            setting.StoreId = 1;
+            setting.State = true;
+            return View(setting);
         }
 
         //

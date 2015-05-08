@@ -9,6 +9,7 @@ using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Repositories.Interfaces;
 using WebMatrix.WebData;
 using StoreManagement.Admin.Filters;
 
@@ -19,11 +20,7 @@ namespace StoreManagement.Admin.Controllers
     public class AccountController : BaseController
     {
 
-
-        //
-        // GET: /Account/Login
-
-        public AccountController(IStoreContext dbContext) : base(dbContext)
+        public AccountController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
         {
 
         }

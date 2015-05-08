@@ -12,10 +12,14 @@ namespace StoreManagement.Admin.Controllers
     {
 
         private ICategoryRepository categoryRepository;
-        public CategoriesController(IStoreContext dbContext, ICategoryRepository categoryRepository) : base(dbContext)
+
+        public CategoriesController(IStoreContext dbContext, 
+            ISettingRepository settingRepository, 
+            ICategoryRepository categoryRepository) : base(dbContext, settingRepository)
         {
             this.categoryRepository = categoryRepository;
         }
+
         public ActionResult Index(int storeId = 1, String categoryType = "family")
         {
             ViewBag.StoreId = storeId;

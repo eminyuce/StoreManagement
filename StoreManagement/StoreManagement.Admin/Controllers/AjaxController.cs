@@ -12,23 +12,18 @@ namespace StoreManagement.Admin.Controllers
     {
         //
         // GET: /Ajax/
-
-        private IStoreContext dbContext;
+      
         private IStoreRepository storeRepository;
-        private ISettingRepository settingRepository;
         private ICategoryRepository categoryRepository;
         public AjaxController(IStoreContext dbContext, 
-            IStoreRepository storeRepository,
             ISettingRepository settingRepository,
+            IStoreRepository storeRepository,
             ICategoryRepository categoryRepository)
-            : base(dbContext)
+            : base(dbContext, settingRepository)
         {
-            this.dbContext = dbContext;
             this.storeRepository = storeRepository;
-            this.settingRepository = settingRepository;
             this.categoryRepository = categoryRepository;
         }
-
 
         public ActionResult SaveSettingValue(int id = 0, string value = "")
         {

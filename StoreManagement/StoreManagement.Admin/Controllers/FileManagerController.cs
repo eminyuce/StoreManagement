@@ -18,8 +18,9 @@ namespace StoreManagement.Admin.Controllers
 
 
         private IFileManagerRepository fileManagerRepository;
-        public FileManagerController(IStoreContext dbContext, IFileManagerRepository fileManagerRepository)
-            : base(dbContext)
+
+
+        public FileManagerController(IStoreContext dbContext, ISettingRepository settingRepository, IFileManagerRepository fileManagerRepository) : base(dbContext, settingRepository)
         {
             this.fileManagerRepository = fileManagerRepository;
         }

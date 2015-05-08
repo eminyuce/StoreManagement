@@ -13,13 +13,12 @@ namespace StoreManagement.Admin.Controllers
     public class SettingsController : BaseController
     {
 
-        private ISettingRepository settingRepository;
         //
         // GET: /Setting/
         public SettingsController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext)
+            : base(dbContext, settingRepository)
         {
-            this.settingRepository = settingRepository;
+
         }
 
         //

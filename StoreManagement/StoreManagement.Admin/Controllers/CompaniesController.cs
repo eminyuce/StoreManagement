@@ -19,10 +19,15 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Companies/
         private ICompanyRepository companyRepository;
-        public CompaniesController(IStoreContext dbContext, ICompanyRepository companyRepository) : base(dbContext)
+
+        public CompaniesController(IStoreContext dbContext, 
+            ISettingRepository settingRepository,
+            ICompanyRepository companyRepository)
+            : base(dbContext, settingRepository)
         {
             this.companyRepository = companyRepository;
         }
+
         public ActionResult Company(String id = "1")
         {
             int companyid = id.Split("-".ToCharArray()).Last().ToInt();

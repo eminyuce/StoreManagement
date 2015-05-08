@@ -26,7 +26,7 @@ namespace StoreManagement.Admin.Controllers
             IStoreRepository storeRepository,
             ISettingRepository settingRepository,
             IStoreUserRepository storeUserRepository)
-            : base(dbContext)
+            : base(dbContext, settingRepository)
         {
             this.dbContext = dbContext;
             this.storeRepository = storeRepository;

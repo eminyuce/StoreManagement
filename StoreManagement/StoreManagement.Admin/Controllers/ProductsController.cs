@@ -14,17 +14,11 @@ namespace StoreManagement.Admin.Controllers
     //[Authorize]
     public class ProductsController : BaseController
     {
-
-        private IStoreContext dbContext;
         private IContentRepository contentRepository;
-
-        public ProductsController(IStoreContext dbContext,
-            IContentRepository contentRepository)
-            : base(dbContext)
+        public ProductsController(IStoreContext dbContext, ISettingRepository settingRepository, IContentRepository contentRepository) : base(dbContext, settingRepository)
         {
             this.contentRepository = contentRepository;
         }
-
 
         public ActionResult Index()
         {

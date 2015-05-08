@@ -1,0 +1,32 @@
+@model StoreManagement.Data.Entities.Setting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Setting</legend>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+
+    <div class="display-label">SettingKey</div>
+    <div class="display-field">@Model.SettingKey</div>
+
+    <div class="display-label">SettingValue</div>
+    <div class="display-field">@Model.SettingValue</div>
+
+    <div class="display-label">State</div>
+    <div class="display-field">@Model.State</div>
+
+    <div class="display-label">Lang</div>
+    <div class="display-field">@Model.Lang</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

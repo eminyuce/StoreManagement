@@ -1,0 +1,35 @@
+@model StoreManagement.Data.Entities.Setting
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Setting</legend>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+
+    <div class="display-label">SettingKey</div>
+    <div class="display-field">@Model.SettingKey</div>
+
+    <div class="display-label">SettingValue</div>
+    <div class="display-field">@Model.SettingValue</div>
+
+    <div class="display-label">State</div>
+    <div class="display-field">@Model.State</div>
+
+    <div class="display-label">Lang</div>
+    <div class="display-field">@Model.Lang</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

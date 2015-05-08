@@ -11,7 +11,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface ISettingRepository : IEntityRepository<Setting>
     {
         List<Setting> GetStoreSettings(int storeid);
-
+        String GetStoreSetting(int storeId);
 
     }
 

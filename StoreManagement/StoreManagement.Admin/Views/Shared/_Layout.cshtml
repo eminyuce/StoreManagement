@@ -1,86 +1,95 @@
-﻿<!DOCTYPE html>
+﻿@using StoreManagement.Admin.Extensions
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-                @Styles.Render("~/Content/bootstrap")
-       @Scripts.Render("~/bundles/modernizr")
-        
-     @Scripts.Render("~/bundles/jquery")
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
-    
-        
-        <script src="~/Scripts/jquery.jeditable.js"></script>
-        <script src="~/Scripts/jstree/jstree.js"></script>
-        <link href="~/Content/jstree/style.css" rel="stylesheet" />
-        <script src="~/Scripts/jquery.datetimepicker.js"></script>
-        <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
-        
 
-        <script>
-   
 
-    $(document).ready(function () {
-        $('input[datatype-datetime="dt"]').datetimepicker({
-            format: 'm/d/Y h:i A',
-            timepicker: true,
-            closeOnDateSelect: true,
-            formatTime: 'g:i A'
+    <script src="~/Scripts/jquery.jeditable.js"></script>
+    <script src="~/Scripts/jstree/jstree.js"></script>
+    <link href="~/Content/jstree/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/storesStyleChanger.js"></script>
+
+
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('input[datatype-datetime="dt"]').datetimepicker({
+                format: 'm/d/Y h:i A',
+                timepicker: true,
+                closeOnDateSelect: true,
+                formatTime: 'g:i A'
+            });
+            $('input[datatype-datetime="d"]').datetimepicker({
+                format: 'm/d/Y',
+                timepicker: false,
+                closeOnDateSelect: true
+            });
+
+
+
+
         });
-        $('input[datatype-datetime="d"]').datetimepicker({
-            format: 'm/d/Y',
-            timepicker: false,
-            closeOnDateSelect: true
-        });
-    });
- 
-</script>
 
-        
+    </script>
 
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                            <li>@Html.ActionLink("FileManager", "Index", "FileManager")</li>
-                            <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                            <li>@Html.ActionLink("Stores", "Index", "Stores")</li>
-                        </ul>
-                    </nav>
-                </div>
+
+
+</head>
+<body back_ground_color_code>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
             </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul navigation_background_text_color id="menu">
+                        <li navigation_text_size>@Html.ActionLink("Categories", "Index", "Categories", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("FileManager", "Index", "FileManager", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("Products", "Index", "Products", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("Stores", "Index", "Stores", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("Settings", "Index", "Settings", null, new {navigation_text_color="navigation_text_color"})</li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
+    @Html.Action("StoreSettings","Settings", new { storeId = 1})
+    @Html.SettingsLabel("EMIN YUCE")
 
-        
-
-        @RenderSection("scripts", required: false)
-    </body>
+    @RenderSection("scripts", required: false)
+</body>
 </html>

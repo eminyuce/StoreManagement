@@ -19,6 +19,10 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
+        public static string SettingSpan(string key, string value)
+        {
+            return String.Format("<span id='{0}'>{1}</span>", key, value);
+        }
         public static string UrlDencode(string adres, bool encode)
         {
             string[] karakter = { "<", ">", "#", "%", "{", "}", "|", @"\", "^", "~", "[", "]", "`", ";", "/", "?", ":", "@", "=", "&", "$" };

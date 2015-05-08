@@ -1,0 +1,8 @@
+﻿@model List<StoreManagement.Data.Entities.Setting>
+@{
+    Layout = null;
+}
+@foreach (var s in Model)
+{
+    <input type="hidden" id="@s.SettingKey" value="@s.SettingValue"></input>
+}

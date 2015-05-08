@@ -226,10 +226,12 @@
     <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Extensions\LabelExtensions.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -345,6 +347,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\reports.js" />
+    <Content Include="Scripts\storesStyleChanger.js" />
     <Content Include="Scripts\TextFile1.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -418,6 +421,13 @@
     <Content Include="Views\Shared\DisplayTemplates\RecordsStats.cshtml" />
     <Content Include="Views\Companies\SaveOrUpdate.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
+    <Content Include="Views\Settings\Create.cshtml" />
+    <Content Include="Views\Settings\Delete.cshtml" />
+    <Content Include="Views\Settings\Details.cshtml" />
+    <Content Include="Views\Settings\Edit.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Settings\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Settings\StoreSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,6 +14,6 @@ namespace StoreManagement.Data.Entities
         public string SettingKey { get; set; }
         public string SettingValue { get; set; }
         public Boolean State { get; set; }
-        public string Lang { get; set; }
+        public string Type { get; set; }
     }
 }

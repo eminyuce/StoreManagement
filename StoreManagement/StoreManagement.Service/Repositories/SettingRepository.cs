@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using StoreManagement.Data;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
@@ -13,6 +15,9 @@ namespace StoreManagement.Service.Repositories
 {
     public class SettingRepository : EntityRepository<Setting, int>, ISettingRepository
     {
+        static TypedObjectCache<List<Setting>> SettingStoreCache
+            = new TypedObjectCache<List<Setting>>("categoryCache");
+
         private IStoreContext dbContext;
         public SettingRepository(IStoreContext dbContext) : base(dbContext)
         {
@@ -25,23 +30,26 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public string GetStoreSetting(int storeId)
+        public List<Setting> GetStoreSettingsFromCache(int storeid)
         {
-            String result = "";
-
-            var settings = GetStoreSettings(storeId);
-            var builder = new StringBuilder();
-            foreach (var s in settings)
+            String key = String.Format("Content-{0}", storeid);
+            List<Setting> items = null;
+            SettingStoreCache.TryGet(key, out items);
+            if (items == null)
             {
-                builder.Append(GeneralHelper.SettingSpan(s.SettingKey, s.SettingValue));
+                items = GetStoreSettings(storeid);
+                SettingStoreCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
             }
-            result = builder.ToString();
-
-
-            return result;
-
+            return items;
         }
-       
+
+        public List<Setting> GetStoreSettingsByType(int storeid, string type)
+        {
+            return
+                GetStoreSettingsFromCache(storeid)
+                    .Where(r => r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase))
+                    .ToList();
+        }
     }
 
 

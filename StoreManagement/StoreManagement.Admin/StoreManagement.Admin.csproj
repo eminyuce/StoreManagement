@@ -224,6 +224,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\FileManagerController.cs" />
+    <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -428,6 +429,14 @@
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Settings\_CreateOrEdit.cshtml" />
     <Content Include="Views\Settings\StoreSettings.cshtml" />
+    <Content Include="Views\Navigations\Create.cshtml" />
+    <Content Include="Views\Navigations\Delete.cshtml" />
+    <Content Include="Views\Navigations\Details.cshtml" />
+    <Content Include="Views\Navigations\Edit.cshtml" />
+    <Content Include="Views\Navigations\Index.cshtml" />
+    <Content Include="Views\Navigations\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Shared\Themes\_Layout1.cshtml" />
+    <Content Include="Views\Shared\Themes\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

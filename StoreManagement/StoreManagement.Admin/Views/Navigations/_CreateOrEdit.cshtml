@@ -1,0 +1,148 @@
+@model StoreManagement.Data.Entities.Navigation
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.StoreId)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StoreId)
+    @Html.ValidationMessageFor(model => model.StoreId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ParentId)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ParentId)
+    @Html.ValidationMessageFor(model => model.ParentId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Static)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Static)
+    @Html.ValidationMessageFor(model => model.Static)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Title)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Title)
+    @Html.ValidationMessageFor(model => model.Title)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ImagePath)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ImagePath)
+    @Html.ValidationMessageFor(model => model.ImagePath)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Ordering)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Ordering)
+    @Html.ValidationMessageFor(model => model.Ordering)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ImageState)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ImageState)
+    @Html.ValidationMessageFor(model => model.ImageState)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Lang)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Lang)
+    @Html.ValidationMessageFor(model => model.Lang)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Link)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Link)
+    @Html.ValidationMessageFor(model => model.Link)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.LinkState)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.LinkState)
+    @Html.ValidationMessageFor(model => model.LinkState)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CreatedDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CreatedDate)
+    @Html.ValidationMessageFor(model => model.CreatedDate)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.PageMetaKeys)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PageMetaKeys)
+    @Html.ValidationMessageFor(model => model.PageMetaKeys)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.IsController)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.IsController)
+    @Html.ValidationMessageFor(model => model.IsController)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.IsAction)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.IsAction)
+    @Html.ValidationMessageFor(model => model.IsAction)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.IsMainMenu)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.IsMainMenu)
+    @Html.ValidationMessageFor(model => model.IsMainMenu)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.State)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.State)
+    @Html.ValidationMessageFor(model => model.State)
+</div>
+

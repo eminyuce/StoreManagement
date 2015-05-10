@@ -10,6 +10,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface INavigationRepository : IEntityRepository<Navigation, int>
     {
-
+        List<Navigation> GetStoreNavigation(int storeId);
     }
 }

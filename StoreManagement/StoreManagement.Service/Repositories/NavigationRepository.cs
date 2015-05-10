@@ -18,6 +18,12 @@ namespace StoreManagement.Service.Repositories
         {
             this.dbContext = dbContext;
         }
+        public List<Navigation> GetStoreNavigation(int storeId)
+        {
+            return this.FindBy(r => r.StoreId == storeId).ToList();
+        }
+
+
     }
 
 

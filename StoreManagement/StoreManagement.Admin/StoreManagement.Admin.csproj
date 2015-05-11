@@ -447,6 +447,7 @@
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Companies\GetCompanies.cshtml" />
+    <Content Include="Views\Shared\_MyCustomGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,15 +1,49 @@
-﻿@model IEnumerable<StoreManagement.Data.Entities.FileManager>
+﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@model IEnumerable<StoreManagement.Data.Entities.FileManager>
 
 @{
     ViewBag.Title = "View1";
 }
 
-<h2>View1</h2>
-
+<h2>Images</h2>
  
+ 
+@Html.Grid(Model).Named("imagesGrid").Columns(columns =>
+    {
+        columns.Add(o => o.Id, false);
+        columns.Add(c => c.ContentType).Titled("Username").Filterable(true).Sanitized(false)
+   .Encoded(false).RenderValueAs(o => Html.ActionLink(o.ContentType, "Edit", "Admin", new { Id = o.Id }, null).ToHtmlString());
+       
+        
+        columns.Add(o => o.CreatedDate)
+                        .Titled("Date")
+                        .Sortable(true)
+                        .SortInitialDirection(GridSortDirection.Descending);
 
-@foreach (var item in Model) 
+
+        columns.Add(c => c.FileName).Titled("Username").Filterable(true).Sanitized(false)
+.Encoded(false).RenderValueAs(d => Html.Raw(string.Format("<text><img style='width:100%; max-width: 150px' src=\"/Files/{0}\" alt=\"Image\"/></text>", d.FileName)).ToHtmlString());
+       
+        
+ 
+        
+        
+ 
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+
+
+
+@section scripts
 {
-  @Html.DisplayFor(modelItem => item)         
+    <script>
+        $(function () {
+            pageGrids.imagesGrid.onRowSelect(function (e) {
+                console.log(e.row);
+            });
+        });
+    </script>
+
+
+
 }
- 

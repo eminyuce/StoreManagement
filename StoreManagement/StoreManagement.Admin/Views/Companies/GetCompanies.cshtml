@@ -1,0 +1,41 @@
+﻿@model IEnumerable<StoreManagement.Data.Entities.Company>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "GetCompanies";
+}
+
+
+@Html.Grid(Model).Named("ordersGrid").Columns(columns =>
+    {
+        /* Adding not mapped column, that renders body, using inline Razor html helper */
+        columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(d =>
+                    @<b>
+                    @Html.ActionLink("Edit", "Index", new { id = d.Id })
+                </b>);
+        columns.Add(o => o.Id, false);
+        columns.Add(foo => foo.Client).Titled("Custom column title").SetWidth(110);
+        columns.Add(foo => foo.Country).Filterable(true).Sortable(true);
+        columns.Add(foo => foo.Sector).Filterable(true).Sortable(true);
+        columns.Add(foo => foo.Web).Filterable(true).Sortable(true);
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+
+
+
+@section scripts
+{
+    <script>
+        $(function () {
+            pageGrids.ordersGrid.onRowSelect(function (e) {
+                console.log(e.row.Id);
+            });
+        });
+    </script>
+
+
+
+}

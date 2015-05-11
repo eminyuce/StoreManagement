@@ -47,6 +47,9 @@
       <HintPath>..\packages\GenericRepository.EntityFramework.0.3.1-pre01\lib\net40\GenericRepository.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GridMvc">
+      <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
@@ -249,6 +252,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\jstree\32px.png" />
     <Content Include="Content\jstree\40px.png" />
@@ -323,6 +327,9 @@
     <Content Include="Scripts\FileUpload\locale.js" />
     <Content Include="Scripts\FileUpload\main.js" />
     <Content Include="Scripts\FileUpload\tmpl.min.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\img\generalFile.png" />
     <Content Include="Scripts\img\glyphicons-halflings-white.png" />
     <Content Include="Scripts\img\loading.gif" />
@@ -437,6 +444,9 @@
     <Content Include="Views\Navigations\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\Themes\_Layout1.cshtml" />
     <Content Include="Views\Shared\Themes\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Companies\GetCompanies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

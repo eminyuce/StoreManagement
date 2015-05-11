@@ -69,5 +69,10 @@ namespace StoreManagement.Admin.Controllers
             }
             return View(company);
         }
+
+        public ActionResult GetCompanies()
+        {
+            return View(companyRepository.GetAll().ToList());
+        }
 	}
 }

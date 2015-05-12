@@ -1,0 +1,18 @@
+﻿@model  List<StoreManagement.Data.Entities.Navigation> 
+@{
+    Layout = null;
+    var menus = Model;
+}
+@foreach (var m in menus)
+{
+    if (m.Static)
+    {
+         <li>@m.Link</li>
+    }
+    else
+    {    
+        <li>@Html.ActionLink(m.Name, m.Name, m.Name)</li>
+    }
+}
+
+                      

@@ -20,6 +20,15 @@ namespace StoreManagement.Test
         {
             dbContext = new StoreContext(ConnectionString);
         }
+        [TestMethod]
+        public void DomainName()
+        {
+            var storeRep = new StoreRepository(dbContext);
+            var store = storeRep.GetStoreByDomain("login.maritimejobs.mobi");
+
+            Assert.IsNotNull(store);
+
+        }
   [TestMethod]
         public void TestMethod553()
         {

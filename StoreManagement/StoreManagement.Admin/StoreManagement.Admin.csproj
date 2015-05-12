@@ -404,7 +404,9 @@
     <Content Include="Views\Stores\_CreateOrEdit.cshtml" />
     <Content Include="Views\Stores\Users.cshtml" />
     <Content Include="Views\Stores\Settings.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Index.cshtml">
+      <BrowseToURL>~/Views/Products/Index.cshtml</BrowseToURL>
+    </Content>
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />

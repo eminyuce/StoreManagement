@@ -9,6 +9,11 @@ namespace StoreManagement.Data.Entities
         public string Name { get; set; }
         public string Domain { get; set; }
         public string Layout { get; set; }
+
+        public override string ToString()
+        {
+            return Id + " " + Name;
+        }
          
     }
 

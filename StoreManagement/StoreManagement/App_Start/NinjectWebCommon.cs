@@ -1,3 +1,8 @@
+using StoreManagement.Constants;
+using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Repositories;
+using StoreManagement.Service.Repositories.Interfaces;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StoreManagement.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StoreManagement.App_Start.NinjectWebCommon), "Stop")]
 
@@ -61,6 +66,18 @@ namespace StoreManagement.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+
+            kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+            kernel.Bind<IContentRepository>().To<ContentRepository>();
+            kernel.Bind<IStoreRepository>().To<StoreRepository>();
+            kernel.Bind<ISettingRepository>().To<SettingRepository>();
+            kernel.Bind<IFileManagerRepository>().To<FileManagerRepository>();
+            kernel.Bind<INavigationRepository>().To<NavigationRepository>();
+            kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
+            kernel.Bind<IContentFileRepository>().To<ContentFileRepository>();
+            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
+            kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
+
         }        
     }
 }

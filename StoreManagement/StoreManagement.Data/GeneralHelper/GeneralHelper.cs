@@ -19,6 +19,25 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
+        public static string GetDomainPart(string url)
+        {
+            if (String.IsNullOrEmpty(url))
+            {
+                return "";
+            }
+
+            var doubleSlashesIndex = url.IndexOf("://");
+            var start = doubleSlashesIndex != -1 ? doubleSlashesIndex + "://".Length : 0;
+            var end = url.IndexOf("/", start);
+            if (end == -1)
+                end = url.Length;
+
+            string trimmed = url.Substring(start, end - start);
+            if (trimmed.StartsWith("www."))
+                trimmed = trimmed.Substring("www.".Length);
+            return trimmed;
+
+        }
         public static string SettingSpan(string key, string value)
         {
             return String.Format("<span id='{0}'>{1}</span>", key, value);

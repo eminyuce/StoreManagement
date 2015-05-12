@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using NLog;
+using Ninject;
+using StoreManagement.Data;
+using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Models;
+using StoreManagement.Service.Repositories;
+using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement
 {
@@ -14,6 +23,7 @@ namespace StoreManagement
 
     public class MvcApplication : System.Web.HttpApplication
     {
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -23,6 +33,9 @@ namespace StoreManagement
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
         }
+    
+
     }
 }

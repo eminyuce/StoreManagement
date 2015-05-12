@@ -39,6 +39,9 @@
     <Reference Include="GenericRepository.EntityFramework">
       <HintPath>..\packages\GenericRepository.EntityFramework.0.3.1-pre01\lib\net40\GenericRepository.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="GridMvc">
+      <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -101,6 +104,7 @@
     <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
+    <Compile Include="Grid\CompanyGrid.cs" />
     <Compile Include="HelpersModel\Filter.cs" />
     <Compile Include="HelpersModel\FilterGroup.cs" />
     <Compile Include="HelpersModel\ItemType.cs" />

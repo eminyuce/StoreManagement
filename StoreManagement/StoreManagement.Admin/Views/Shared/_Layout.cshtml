@@ -13,7 +13,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
-
+        @Scripts.Render("~/bundles/jqueryval")
 
     <script src="~/Scripts/jquery.jeditable.js"></script>
     <script src="~/Scripts/jstree/jstree.js"></script>
@@ -64,6 +64,7 @@
                 </section>
                 <nav>
                     <ul navigation_background_text_color id="menu">
+                        <li navigation_text_size>@Html.ActionLink("Navigations", "Index", "Navigations", null, new {navigation_text_color="navigation_text_color"})</li>
                         <li navigation_text_size>@Html.ActionLink("Categories", "Index", "Categories", null, new {navigation_text_color="navigation_text_color"})</li>
                         <li navigation_text_size>@Html.ActionLink("FileManager", "Index", "FileManager", null, new {navigation_text_color="navigation_text_color"})</li>
                         <li navigation_text_size>@Html.ActionLink("Products", "Index", "Products", null, new {navigation_text_color="navigation_text_color"})</li>
@@ -90,7 +91,7 @@
     </footer>
 
     @Html.Action("StoreSettings","Settings", new { storeId = 1})
-    @Html.SettingsLabel("EMIN YUCE")
+@*    @Html.SettingsLabel("EMIN YUCE")*@
 
     @RenderSection("scripts", required: false)
 </body>

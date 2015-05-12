@@ -1,0 +1,10 @@
+﻿@model IEnumerable<StoreManagement.Data.Entities.Store>
+@{
+    String actionName = ViewBag.ActionName;
+    String controllerName = ViewBag.ControllerName;
+}
+ @Html.ActionLink("All", actionName, controllerName, new { storeId = 0 }, new { @class = "btn btn-default" })   |
+@foreach (var t in Model)
+{
+    @Html.ActionLink(t.Name, actionName, controllerName, new { storeId = t.Id }, new { @class = "btn btn-default" }) @: |
+}

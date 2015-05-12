@@ -1,0 +1,12 @@
+﻿@model List<StoreManagement.Data.Entities.Store>
+@{
+    int storeId = (int) ViewBag.StoreId;
+    var storesListItems = Model.ToList().Select(c => new SelectListItem
+    {
+        Text = c.Name,
+        Value = c.Id.ToString(),
+        Selected = c.Id == storeId  ? true : false
+    }).ToList();
+    
+}
+  @Html.DropDownList("StoreId", storesListItems) 

@@ -5,67 +5,70 @@
 }
 
 <h2>Details</h2>
-
-<fieldset>
-    <legend>Navigation</legend>
-
-    <div class="display-label">StoreId</div>
-    <div class="display-field">@Model.StoreId</div>
-
-    <div class="display-label">ParentId</div>
-    <div class="display-field">@Model.ParentId</div>
-
-    <div class="display-label">Static</div>
-    <div class="display-field">@Model.Static</div>
-
-    <div class="display-label">Name</div>
-    <div class="display-field">@Model.Name</div>
-
-    <div class="display-label">Title</div>
-    <div class="display-field">@Model.Title</div>
-
-    <div class="display-label">Description</div>
-    <div class="display-field">@Model.Description</div>
-
-    <div class="display-label">ImagePath</div>
-    <div class="display-field">@Model.ImagePath</div>
-
-    <div class="display-label">Ordering</div>
-    <div class="display-field">@Model.Ordering</div>
-
-    <div class="display-label">ImageState</div>
-    <div class="display-field">@Model.ImageState</div>
-
-    <div class="display-label">Lang</div>
-    <div class="display-field">@Model.Lang</div>
-
-    <div class="display-label">Link</div>
-    <div class="display-field">@Model.Link</div>
-
-    <div class="display-label">LinkState</div>
-    <div class="display-field">@Model.LinkState</div>
-
-    <div class="display-label">CreatedDate</div>
-    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
-
-    <div class="display-label">PageMetaKeys</div>
-    <div class="display-field">@Model.PageMetaKeys</div>
-
-    <div class="display-label">IsController</div>
-    <div class="display-field">@Model.IsController</div>
-
-    <div class="display-label">IsAction</div>
-    <div class="display-field">@Model.IsAction</div>
-
-    <div class="display-label">IsMainMenu</div>
-    <div class="display-field">@Model.IsMainMenu</div>
-
-    <div class="display-label">State</div>
-    <div class="display-field">@Model.State</div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
-
+ 
+@{ 
+    @Html.HiddenFor(model => model.Id)  
+    @Html.HiddenFor(model => model.StoreId)  
+    @Html.HiddenFor(model => model.ParentId)  
+    if (!String.IsNullOrEmpty(Model.Name))
+    { 
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+    }
+    if (!String.IsNullOrEmpty(Model.ActionName))
+    { 
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ActionName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActionName)
+    </div>
+    }
+    if (!String.IsNullOrEmpty(Model.ControllerName))
+    { 
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ControllerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ControllerName)
+    </div>
+    } 
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Static)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Static)
+    </div>
+    @Html.HiddenFor(model => model.Ordering)  
+    if (!String.IsNullOrEmpty(Model.Link))
+    { 
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Link)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Link)
+    </div>
+    } 
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.LinkState)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LinkState)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CreatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.State)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+}

@@ -1,148 +1,85 @@
+@using StoreManagement.Data.Entities
 @model StoreManagement.Data.Entities.Navigation
 
 @* This partial view defines form fields that will appear when creating and editing entities *@
+@{
+    int storeId = Model != null ? Model.StoreId : 0;
+}
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.ParentId)
+@Html.HiddenFor(model => model.CreatedDate)
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.StoreId)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.StoreId)
-    @Html.ValidationMessageFor(model => model.StoreId)
-</div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.ParentId)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.ParentId)
-    @Html.ValidationMessageFor(model => model.ParentId)
+<div class="editor-field controls">
+    @Html.Action("StoresDropDown", "Stores", new { storeId })
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Static)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Static)
-    @Html.ValidationMessageFor(model => model.Static)
-</div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Name)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Name)
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.Name, new { @class = "input-xlarge" })
     @Html.ValidationMessageFor(model => model.Name)
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Title)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.ActionName, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Title)
-    @Html.ValidationMessageFor(model => model.Title)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Description)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Description)
-    @Html.ValidationMessageFor(model => model.Description)
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.ActionName, new { @class = "input-xlarge" })
+    @Html.ValidationMessageFor(model => model.ActionName)
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.ImagePath)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.ControllerName, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.ImagePath)
-    @Html.ValidationMessageFor(model => model.ImagePath)
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.ControllerName, new { @class = "input-xlarge" })
+    @Html.ValidationMessageFor(model => model.ControllerName)
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Ordering)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.Static, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Ordering)
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.Static, new { @class = "input-xlarge" })
+    @Html.ValidationMessageFor(model => model.Static)
+</div>
+
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.Ordering, new { @class = "control-label" })
+</div>
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.Ordering, new { @class = "input-xlarge" })
     @Html.ValidationMessageFor(model => model.Ordering)
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.ImageState)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.Link, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.ImageState)
-    @Html.ValidationMessageFor(model => model.ImageState)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Lang)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Lang)
-    @Html.ValidationMessageFor(model => model.Lang)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Link)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Link)
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.Link, new { @class = "input-xlarge" })
     @Html.ValidationMessageFor(model => model.Link)
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.LinkState)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.LinkState, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.LinkState)
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.LinkState, new { @class = "input-xlarge" })
     @Html.ValidationMessageFor(model => model.LinkState)
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.CreatedDate)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.CreatedDate)
-    @Html.ValidationMessageFor(model => model.CreatedDate)
-</div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.PageMetaKeys)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.PageMetaKeys)
-    @Html.ValidationMessageFor(model => model.PageMetaKeys)
-</div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.IsController)
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.State, new { @class = "control-label" })
 </div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.IsController)
-    @Html.ValidationMessageFor(model => model.IsController)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.IsAction)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.IsAction)
-    @Html.ValidationMessageFor(model => model.IsAction)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.IsMainMenu)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.IsMainMenu)
-    @Html.ValidationMessageFor(model => model.IsMainMenu)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.State)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.State)
+<div class="editor-field controls">
+    @Html.EditorFor(model => model.State, new { @class = "input-xlarge" })
     @Html.ValidationMessageFor(model => model.State)
 </div>
-

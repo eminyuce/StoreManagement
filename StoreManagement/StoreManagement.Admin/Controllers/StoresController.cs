@@ -33,9 +33,19 @@ namespace StoreManagement.Admin.Controllers
             this.settingRepository = settingRepository;
             this.storeUserRepository = storeUserRepository;
         }
-        //
-        // GET: /Stores/
+        public PartialViewResult StoresFilter(String actionName = "", String controllerName = "")
+        {
+            ViewBag.ActionName = actionName;
+            ViewBag.ControllerName = controllerName;
+            return PartialView("_StoresFilter", storeRepository.GetAll().ToList());
+        }
 
+
+        public PartialViewResult StoresDropDown(int storeId = 0)
+        {
+            ViewBag.StoreId = storeId;
+            return PartialView("_StoresDropDown", storeRepository.GetAll().ToList());
+        }
         public ViewResult Index()
         {
             return View(storeRepository.GetAll().ToList());
@@ -128,7 +138,7 @@ namespace StoreManagement.Admin.Controllers
                     WebSecurity.CreateUserAndAccount(userName.UserName, userName.Password);
                     Roles.AddUserToRole(userName.UserName, roleName);
                     int userId = 0;
-                   // using (UsersContext db = new UsersContext())
+                    // using (UsersContext db = new UsersContext())
                     {
                         UserProfile user = dbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
                         userId = user.UserId;
@@ -144,7 +154,7 @@ namespace StoreManagement.Admin.Controllers
                 }
                 catch (MembershipCreateUserException e)
                 {
-                    ModelState.AddModelError("", "Exception:"+e.Message);
+                    ModelState.AddModelError("", "Exception:" + e.Message);
                 }
             }
             return RedirectToAction("Users", new { id = storeId });

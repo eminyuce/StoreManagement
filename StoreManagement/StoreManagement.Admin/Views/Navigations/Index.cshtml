@@ -1,7 +1,10 @@
-@model IEnumerable<StoreManagement.Data.Entities.Navigation>
+@using GridMvc.Html
+@using StoreManagement.Data.Entities
+@model List<StoreManagement.Data.Entities.Navigation>
 
 @{
     ViewBag.Title = "Index";
+   
 }
 
 <h2>Index</h2>
@@ -9,125 +12,35 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-hover table-bordered table-striped">
-    <tr>
-        <th></th>
-      
-        <th>
-            ParentId
-        </th>
-        <th>
-            Static
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Title
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            ImagePath
-        </th>
-        <th>
-            Ordering
-        </th>
-        <th>
-            ImageState
-        </th>
-        <th>
-            Lang
-        </th>
-        <th>
-            Link
-        </th>
-        <th>
-            LinkState
-        </th>
-        <th>
-            CreatedDate
-        </th>
-        <th>
-            PageMetaKeys
-        </th>
-        <th>
-            IsController
-        </th>
-        <th>
-            IsAction
-        </th>
-        <th>
-            IsMainMenu
-        </th>
-        <th>
-            State
-        </th>
-    </tr>
+<div>
+    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Navigations" })
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-        
-        <td>
-			@item.ParentId
-        </td>
-        <td>
-			@item.Static
-        </td>
-        <td>
-			@item.Name
-        </td>
-        <td>
-			@item.Title
-        </td>
-        <td>
-			@item.Description
-        </td>
-        <td>
-			@item.ImagePath
-        </td>
-        <td>
-			@item.Ordering
-        </td>
-        <td>
-			@item.ImageState
-        </td>
-        <td>
-			@item.Lang
-        </td>
-        <td>
-			@item.Link
-        </td>
-        <td>
-			@item.LinkState
-        </td>
-        <td>
-			@String.Format("{0:g}", item.CreatedDate)
-        </td>
-        <td>
-			@item.PageMetaKeys
-        </td>
-        <td>
-			@item.IsController
-        </td>
-        <td>
-			@item.IsAction
-        </td>
-        <td>
-			@item.IsMainMenu
-        </td>
-        <td>
-			@item.State
-        </td>
-    </tr>
-}
+@Html.Grid(Model).Named("navigationGrid").Columns(columns =>
+    {
+        /* Adding not mapped column, that renders body, using inline Razor html helper */
+        columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(d =>
+                    @<b>
+                        @Html.ActionLink("Edit", "Edit", new { id = d.Id })
+                    </b>);
+        columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(d =>
+                       @<b>
+                        @Html.ActionLink("Delete", "Delete", new { id = d.Id })
+                    </b>);
+        columns.Add(o => o.Id, false);
+        columns.Add(foo => foo.Name).Titled("Custom column title").SetWidth(110);
+        columns.Add(foo => foo.ActionName).Filterable(true).Sortable(true);
+        columns.Add(foo => foo.ControllerName).Filterable(true).Sortable(true);
+        columns.Add(foo => foo.State).Filterable(true).Sortable(true);
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
 
-</table>
 
 

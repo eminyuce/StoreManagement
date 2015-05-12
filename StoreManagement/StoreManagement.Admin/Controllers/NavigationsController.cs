@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ninject;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data.Entities;
@@ -12,6 +13,10 @@ namespace StoreManagement.Admin.Controllers
     public class NavigationsController : BaseController
     {
         private INavigationRepository navigationRepository;
+
+        [Inject]
+        public IStoreRepository StoreRepository { get; set; }
+
 
         public NavigationsController(IStoreContext dbContext,
        ISettingRepository settingRepository,
@@ -24,9 +29,21 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Navigations/
 
-        public ViewResult Index()
+        public ViewResult Index(int storeId=0)
         {
-            return View(navigationRepository.GetStoreNavigation(1));
+            ViewBag.Stores = StoreRepository.GetAll();
+
+            List<Navigation> navigationList = new List<Navigation>();
+            if (storeId == 0)
+            {
+                navigationList = navigationRepository.GetAll().ToList();
+            }
+            else
+            {
+                navigationList = navigationRepository.GetStoreNavigation(storeId);
+            }
+
+            return View(navigationList);
         }
 
         //
@@ -44,8 +61,9 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult Create()
         {
             var item = new Navigation();
-            item.StoreId = 1;
-            return View();
+            item.ParentId = 0;
+            item.CreatedDate = DateTime.Now;
+            return View(item);
         }
 
         //
@@ -54,7 +72,7 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Navigation navigation)
         {
-            if (ModelState.IsValid)
+           // if (ModelState.IsValid)
             {
                 navigationRepository.Add(navigation);
                 navigationRepository.Save();

@@ -233,6 +233,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\default2.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -289,6 +290,12 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Images\bg01.jpg" />
+    <Content Include="Images\header-photo.jpg" />
+    <Content Include="Images\image.jpg" />
+    <Content Include="Images\img01.jpg" />
+    <Content Include="Images\img02.jpg" />
+    <Content Include="Images\img03.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -356,6 +363,7 @@
     <Content Include="Views\Home\MainMenu.cshtml" />
     <Content Include="Views\Home\Footer.cshtml" />
     <Content Include="Views\Shared\Layouts\_Layout.cshtml" />
+    <Content Include="Views\Shared\Layouts\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using GenericRepository;
 
 namespace StoreManagement.Data.Entities
@@ -15,6 +16,7 @@ namespace StoreManagement.Data.Entities
         public int StoreId { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
+        [AllowHtml]
         public string Description { get; set; }
         public string Type { get; set; }
         public string ImagePath { get; set; }

@@ -31,7 +31,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ViewResult Index(int storeId=0)
         {
-            ViewBag.Stores = StoreRepository.GetAll();
+     
 
             List<Navigation> navigationList = new List<Navigation>();
             if (storeId == 0)

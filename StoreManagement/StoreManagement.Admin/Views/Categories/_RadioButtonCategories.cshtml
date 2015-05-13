@@ -1,0 +1,10 @@
+﻿@model List<StoreManagement.Data.Entities.Category>
+@{
+    int categoryId = (int)ViewBag.CategoryId;
+}
+@foreach (var dept in Model)
+{
+    @Html.RadioButton("CategoryId", dept.Id,categoryId == dept.Id)  <span>
+                                                                  @dept.Name  &nbsp;
+                                                              </span>
+}

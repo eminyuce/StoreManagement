@@ -1,105 +1,44 @@
-﻿@model IEnumerable<StoreManagement.Data.Entities.Content>
+﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@model IEnumerable<StoreManagement.Data.Entities.Content>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+<div>
+    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Products" })
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-hover table-bordered table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MainPage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ordering)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Lang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th></th>
-    </tr>
+@Html.Grid(Model).Named("contentGrid").Columns(columns =>
+    {
+        columns.Add(o => o.Id, true);
+             columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(d =>
+                    @<b>
+                        @Html.ActionLink("Edit",  "Edit", "Products", new { id = d.Id }, new{@class="btn btn-primary"})
+                    </b>);
+    
+ 
+        
+        
+        columns.Add(c => c.Name)
+            .Titled("Title")
+            .Filterable(true)
+            .Sanitized(false)
+            .Encoded(false)
+            .RenderValueAs(o => Html.ActionLink(o.Name, "Details", "Products", new { Id = o.Id }, null).ToHtmlString());
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MainPage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ordering)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Url)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+            
+        columns.Add(o => o.CreatedDate)
+                        .Titled("Date")
+                        .Sortable(true)
+                        .SortInitialDirection(GridSortDirection.Descending);
+ 
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
 
-</table>
+

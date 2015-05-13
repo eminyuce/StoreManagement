@@ -20,9 +20,18 @@ namespace StoreManagement.Admin.Controllers
             this.contentRepository = contentRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int storeId=0)
         {
-            return View(contentRepository.GetAll().ToList());
+            List<Content> resultList = new List<Content>();
+            if (storeId == 0)
+            {
+                resultList = contentRepository.GetAll().ToList();
+            }
+            else
+            {
+                resultList = contentRepository.GetContentByType(storeId,"content");
+            }
+            return View(resultList);
         }
 
         //

@@ -37,6 +37,14 @@ namespace StoreManagement.Admin.Controllers
         {
             return View();
         }
+
+        public PartialViewResult CategoriesRadioButton(int categoryId=0)
+        {
+            ViewBag.CategoryId = categoryId;
+            return PartialView("_RadioButtonCategories", categoryRepository.GetAll().ToList());
+        }
+
+
         
     }
 }

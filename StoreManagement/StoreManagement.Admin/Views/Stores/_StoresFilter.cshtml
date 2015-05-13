@@ -3,6 +3,9 @@
     String actionName = ViewBag.ActionName;
     String controllerName = ViewBag.ControllerName;
 }
+<b>
+    Store Filters   :
+</b>
  @Html.ActionLink("All", actionName, controllerName, new { storeId = 0 }, new { @class = "btn btn-default" })   |
 @foreach (var t in Model)
 {

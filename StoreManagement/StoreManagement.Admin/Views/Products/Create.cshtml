@@ -2,19 +2,31 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "../Shared/_Layout.cshtml";
+    int storeId = Model != null ? Model.StoreId : 0;
 }
 
 <h2>Create</h2>
 
-@Html.Action("CreateCategoryTree","Categories")
-34535
-@using (Html.BeginForm()) {
+@Html.Action("CreateCategoryTree", "Categories")
+ 
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Content</legend>
-        @Html.HiddenFor(model => model.StoreId)
+           
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+</div>
+<div class="editor-field controls">
+    @Html.Action("StoresDropDown", "Stores", new { storeId })
+</div>
+
+        
+
         @Html.HiddenFor(model => model.CategoryId)
         @Html.HiddenFor(model => model.Type)
         
@@ -92,7 +104,7 @@
             
             
             
-<input class="form-control" type="text" name="CreatedDate" datatype-datetime="d" value="@(Model.CreatedDate > new DateTime(1,1,2) ? Model.CreatedDate.ToString("MM/dd/yyyy hh:mm tt") : "")" />
+<input class="form-control" type="text" name="CreatedDate" datatype-datetime="d" value="@(Model.CreatedDate > new DateTime(1, 1, 2) ? Model.CreatedDate.ToString("MM/dd/yyyy hh:mm tt") : "")" />
 
 
 
@@ -117,12 +129,12 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+            console.log("jquery is workingg");
             $("#treeview").bind("select_node.jstree", function (event, data) {
                 var m = $("#" + data.selected[0]).find("[data-category]");
                 var selectedCategoryId = m.first().attr("data-category");

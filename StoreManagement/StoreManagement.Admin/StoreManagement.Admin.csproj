@@ -463,6 +463,7 @@
     <Content Include="Views\Stores\_StoresDropDown.cshtml" />
     <Content Include="Views\Stores\_StoresFilter.cshtml" />
     <Content Include="Views\Categories\_RadioButtonCategories.cshtml" />
+    <Content Include="Views\Test\TestJquery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

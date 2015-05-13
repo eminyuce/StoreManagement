@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ninject;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -12,6 +13,9 @@ namespace StoreManagement.Admin.Controllers
     {
         //
         // GET: /Ajax/
+
+        [Inject]
+        public IFileManagerRepository FileManagerRepository { get; set; }
       
         private IStoreRepository storeRepository;
         private ICategoryRepository categoryRepository;
@@ -24,7 +28,7 @@ namespace StoreManagement.Admin.Controllers
             this.storeRepository = storeRepository;
             this.categoryRepository = categoryRepository;
         }
-
+       
         public ActionResult SaveSettingValue(int id = 0, string value = "")
         {
             var s = settingRepository.GetSingle(id);
@@ -34,6 +38,11 @@ namespace StoreManagement.Admin.Controllers
             return Content(value);
         }
 
+        public ActionResult GetImages(int storeId)
+        {
+            var images = FileManagerRepository.GetFilesByStoreId(storeId);
+            return Json(images, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetHiearchicalNodesInfo()
         {
             var tree = this.categoryRepository.CreateCategoriesTree(1, "family");

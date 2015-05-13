@@ -12,7 +12,13 @@ namespace StoreManagement.Admin.Controllers
 {
     public class TestController : Controller
     {
-        //
+
+        public ActionResult TestJquery()
+        {
+            return View();
+        }
+            
+            //
         // GET: /Test/
         public ActionResult Index()
         {

@@ -37,7 +37,10 @@ namespace StoreManagement.Admin.Controllers
         {
             return View();
         }
-
+        public PartialViewResult ImageGallery()
+        {
+            return PartialView("_ImageGallery");
+        }
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
         [HttpGet]
         public void Delete(string id)

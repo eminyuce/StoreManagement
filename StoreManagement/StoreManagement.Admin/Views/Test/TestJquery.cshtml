@@ -1,71 +1,7 @@
 ﻿@{
     ViewBag.Title = "TestJquery";
 }
-
-<h2>TestJquery</h2>
-
-
-<p class="breadcrumb"><a href="/">Matt Ryall</a> &raquo; <a href="/demo/">Demo</a> &raquo; <a href="/demo/filter/">Filter demo</a></p>
-
-<h1>Filter demo</h1>
-
-<p>
-    Filter images:
-    <input id="filter" name="filter" size="40" />
-    <span class="count">showing <span id="filter-count">50</span>
-        of 50 images</span>
-</p>
-
-<div id="flickr-photos" class="filtered">
-    <span class="loading">
-        <img src="/image/loading.gif">
-        Loading images...
-    </span>
+<div id="contentImages">
+    
 </div>
-
-
-
-@section scripts {
-
-    <script type="text/javascript">
-
-        jQuery(function ($) {
-          
-            var linkUrl = "/Files/{id}/";
-            $.getJSON("/Ajax/GetImages?storeId=1", function (data) {
-                var photos = data;
-                var list = $("<ul></ul");
-                $.each(photos, function (i, photo) {
-                  
-                    var img = $("<img/>").attr("src", '/Files/' + photo.FileName)
-                        .attr("title", photo.FileName).attr("alt", "A photo on Flickr");
-                    var href = linkUrl.replace("{id}", photo.Id);
-                    var link = $("<a></a>").attr("href", href).append(img);
-                    var caption = $("<a/>").attr("href", href)
-                        .text(photo.FileName).addClass("caption");
-                    var div = $("<div/>").append(link).append(caption);
-                    $(list).append($("<li/>").append(div));
-                });
-                $("#flickr-photos .loading").remove();
-                $("#flickr-photos").append(list);
-            })
-
-            $("#filter").keyup(function () {
-                var filter = $(this).val(), count = 0;
-                $(".filtered:first li").each(function () {
-                    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-                        $(this).addClass("hidden");
-                    } else {
-                        $(this).removeClass("hidden");
-                        count++;
-                    }
-                });
-                $("#filter-count").text(count);
-            });
-        });
-
-
-
-    </script>
-
-}
+ @Html.Action("ImageGallery","FileManager")

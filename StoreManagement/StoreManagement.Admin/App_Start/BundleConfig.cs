@@ -26,32 +26,25 @@ namespace StoreManagement.Admin
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
-                        "~/Content/themes/base/jquery.ui.core.css",
-                        "~/Content/themes/base/jquery.ui.resizable.css",
-                        "~/Content/themes/base/jquery.ui.selectable.css",
-                        "~/Content/themes/base/jquery.ui.accordion.css",
-                        "~/Content/themes/base/jquery.ui.autocomplete.css",
-                        "~/Content/themes/base/jquery.ui.button.css",
-                        "~/Content/themes/base/jquery.ui.dialog.css",
-                        "~/Content/themes/base/jquery.ui.slider.css",
-                        "~/Content/themes/base/jquery.ui.tabs.css",
-                        "~/Content/themes/base/jquery.ui.datepicker.css",
-                        "~/Content/themes/base/jquery.ui.progressbar.css",
-                        "~/Content/themes/base/jquery.ui.theme.css"));
+                        "~/Content/themes/base/core.css",
+                        "~/Content/themes/base/resizable.css",
+                        "~/Content/themes/base/selectable.css",
+                        "~/Content/themes/base/accordion.css",
+                        "~/Content/themes/base/autocomplete.css",
+                        "~/Content/themes/base/button.css",
+                        "~/Content/themes/base/dialog.css",
+                        "~/Content/themes/base/slider.css",
+                        "~/Content/themes/base/tabs.css",
+                        "~/Content/themes/base/datepicker.css",
+                        "~/Content/themes/base/progressbar.css",
+                        "~/Content/themes/base/theme.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                     "~/Scripts/bootstrap.js"));
-
-            //bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-            //                     "~/Content/bootstrap.min.css",
-            //                     "~/Content/bootstrap-theme.min.css"));
-
+            
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-    "~/Content/bootstrap.css",
-    "~/Content/bootstrap-theme.css"));
-
-
-
+                                        "~/Content/bootstrap.css",
+                                        "~/Content/bootstrap-theme.css"));
 
         }
     }

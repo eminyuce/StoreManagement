@@ -7,15 +7,15 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     
-    @*Styles.Render("~/Content/css")*@
+    
 
-    @Styles.Render("~/Content/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
- 
+    @Styles.Render("/Content/css","/Content/themes/base/css")  
+        @Styles.Render("~/Content/bootstrap") 
 
     <script src="~/Scripts/jquery.jeditable.js"></script>
     <script src="~/Scripts/jstree/jstree.js"></script>
@@ -32,7 +32,7 @@
     <link href="~/Content/jHtmlArea/jHtmlArea.css" rel="stylesheet" />
    @* <link href="~/Content/jHtmlArea/jHtmlArea.ColorPickerMenu.css" rel="stylesheet" />
     <link href="~/Content/jHtmlArea/jHtmlArea.Editor.css" rel="stylesheet" />*@
-
+    <script src="~/Scripts/imageGallery.js"></script>
     <script>
 
 

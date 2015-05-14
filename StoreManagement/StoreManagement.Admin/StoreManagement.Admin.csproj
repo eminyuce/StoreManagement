@@ -336,6 +336,7 @@
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
     <Content Include="Scripts\gridmvc.min.js" />
+    <Content Include="Scripts\imageGallery.js" />
     <Content Include="Scripts\img\generalFile.png" />
     <Content Include="Scripts\img\glyphicons-halflings-white.png" />
     <Content Include="Scripts\img\loading.gif" />
@@ -464,6 +465,7 @@
     <Content Include="Views\Stores\_StoresFilter.cshtml" />
     <Content Include="Views\Categories\_RadioButtonCategories.cshtml" />
     <Content Include="Views\Test\TestJquery.cshtml" />
+    <Content Include="Views\FileManager\_ImageGallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

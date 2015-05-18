@@ -1,0 +1,29 @@
+@model StoreManagement.Data.Entities.PageDesign
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>PageDesign</legend>
+
+    <div class="display-label">Type</div>
+    <div class="display-field">@Model.Type</div>
+
+    <div class="display-label">PageRazorTemplate</div>
+    <div class="display-field">@Model.PageRazorTemplate</div>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

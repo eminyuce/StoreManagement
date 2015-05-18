@@ -231,6 +231,7 @@
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\NavigationsController.cs" />
+    <Compile Include="Controllers\PageDesignsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -472,6 +473,12 @@
     <Content Include="Views\Test\DetailRazorPage.cshtml" />
     <Content Include="Views\Products\Details2.cshtml" />
     <Content Include="Views\Test\DetailRazorPage2.cshtml" />
+    <Content Include="Views\PageDesigns\Create.cshtml" />
+    <Content Include="Views\PageDesigns\Delete.cshtml" />
+    <Content Include="Views\PageDesigns\Details.cshtml" />
+    <Content Include="Views\PageDesigns\Edit.cshtml" />
+    <Content Include="Views\PageDesigns\Index.cshtml" />
+    <Content Include="Views\PageDesigns\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

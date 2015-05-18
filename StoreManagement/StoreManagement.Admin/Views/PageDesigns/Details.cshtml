@@ -1,0 +1,26 @@
+@model StoreManagement.Data.Entities.PageDesign
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>PageDesign</legend>
+
+    <div class="display-label">Type</div>
+    <div class="display-field">@Model.Type</div>
+
+    <div class="display-label">PageRazorTemplate</div>
+    <div class="display-field">@Model.PageRazorTemplate</div>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

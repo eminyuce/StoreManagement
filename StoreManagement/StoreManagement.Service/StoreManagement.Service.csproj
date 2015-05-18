@@ -70,10 +70,12 @@
     <Compile Include="Repositories\ContentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFileManagerRepository.cs" />
     <Compile Include="Repositories\Interfaces\INavigationRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPageDesignRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreUserRepository.cs" />
     <Compile Include="Repositories\NavigationRepository.cs" />
+    <Compile Include="Repositories\PageDesignRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\StoreRepository.cs" />
     <Compile Include="Repositories\StoreUserRepository.cs" />

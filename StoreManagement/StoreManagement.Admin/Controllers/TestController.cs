@@ -22,6 +22,9 @@ namespace StoreManagement.Admin.Controllers
     {
         [Inject]
         public IContentRepository ProductRepository { set; get; }
+
+        [Inject]
+        public IPageDesignRepository PageDesignRepository { set; get; }
          //
         // GET: /Setting/
         public TestController(IStoreContext dbContext, ISettingRepository settingRepository)

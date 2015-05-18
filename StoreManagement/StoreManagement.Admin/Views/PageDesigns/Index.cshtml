@@ -5,6 +5,9 @@
 }
 
 <h2>Index</h2>
+<div>
+    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "PageDesigns" })
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")

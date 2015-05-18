@@ -24,9 +24,18 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /PageDesigns/
 
-        public ViewResult Index()
+        public ViewResult Index(int storeId=0)
         {
-            return View(PageDesignRepository.GetPageDesignByStoreId(1));
+            List<PageDesign> resultList = new List<PageDesign>();
+            if (storeId == 0)
+            {
+                resultList = PageDesignRepository.GetAll().ToList();
+            }
+            else
+            {
+                resultList = PageDesignRepository.GetPageDesignByStoreId(storeId);
+            }
+            return View(resultList);
         }
 
         //

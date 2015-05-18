@@ -87,6 +87,9 @@
       <HintPath>..\packages\NLog.Web.1.0.8.0\lib\net35\NLog.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.7.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -466,6 +469,8 @@
     <Content Include="Views\Categories\_RadioButtonCategories.cshtml" />
     <Content Include="Views\Test\TestJquery.cshtml" />
     <Content Include="Views\FileManager\_ImageGallery.cshtml" />
+    <Content Include="Views\Test\DetailRazorPage.cshtml" />
+    <Content Include="Views\Products\Details2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

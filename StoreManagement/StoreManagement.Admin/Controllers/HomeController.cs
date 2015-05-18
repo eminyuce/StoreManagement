@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc;
+using StoreManagement.Data.Entities;
+using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Repositories.Interfaces;
+using StoreManagement.Data.GeneralHelper;
+
 
 namespace StoreManagement.Admin.Controllers
 {

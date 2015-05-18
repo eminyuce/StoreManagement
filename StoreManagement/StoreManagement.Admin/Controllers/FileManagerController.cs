@@ -42,8 +42,25 @@ namespace StoreManagement.Admin.Controllers
             return PartialView("_ImageGallery");
         }
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
+
+        [HttpPost]
+        public ActionResult DeleteAll(List<String> values)
+        {
+            foreach (var id in values)
+            {
+                DeleteFile(id);
+            }
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
-        public void Delete(string id)
+        public ActionResult Delete(string id)
+        {
+            DeleteFile(id);
+            return RedirectToAction("DisplayImages");
+        }
+
+        private void DeleteFile(string id)
         {
             var f = fileManagerRepository.GetSingle(id.ToInt());
             var filename = f.FileName;
@@ -52,16 +69,14 @@ namespace StoreManagement.Admin.Controllers
             if (System.IO.File.Exists(filePath))
             {
                 System.IO.File.Delete(filePath);
-                fileManagerRepository.Delete(f);
-                fileManagerRepository.Save();
             }
-
-
+            fileManagerRepository.Delete(f);
+            fileManagerRepository.Save();
         }
 
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
         [HttpGet]
-        public void Download(string id)
+        public ActionResult Download(string id)
         {
             var f = fileManagerRepository.GetSingle(id.ToInt());
             var filename = f.FileName;
@@ -80,7 +95,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 context.Response.StatusCode = 404;   
             }
- 
+            return RedirectToAction("Index");
         }
 
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS

@@ -7,13 +7,40 @@
 }
 
 <h2>Images</h2>
- 
- 
+
+<span id="DeleteAll">
+    Delete All
+</span>
+ <span id="SelectAll">
+    Select All
+</span>
 @Html.Grid(Model).Named("imagesGrid").Columns(columns =>
     {
+        
+        columns.Add().Encoded(false).
+            Sanitized(false).
+            SetWidth(10).
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='imagesGrid' type='checkbox'>",o.Id));
+        
         columns.Add(o => o.Id, false);
-        columns.Add(c => c.ContentType).Titled("Username").Filterable(true).Sanitized(false)
-   .Encoded(false).RenderValueAs(o => Html.ActionLink(o.ContentType, "Edit", "Admin", new { Id = o.Id }, null).ToHtmlString());
+         columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(d =>
+                    @<b>
+                        @Html.ActionLink("Edit", "Edit", new { id = d.Id })
+                    </b>);
+         columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(d =>
+                        @<b>
+                        @Html.ActionLink("Delete", "Delete", new { id = d.Id })
+                    </b>);
+
+        columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
        
         
         columns.Add(o => o.CreatedDate)
@@ -30,7 +57,7 @@
         
         
  
-    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+    }).SetRowCssClasses(item => (item.Id % 2 == 0 ? "warning" : string.Empty)).SetRowCssClasses(item => String.Format("MyGrid-Row-{0}",item.Id)).WithPaging(15).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 
 
@@ -41,6 +68,48 @@
             pageGrids.imagesGrid.onRowSelect(function (e) {
                 console.log(e.row);
             });
+            $("#SelectAll").click(function () {
+                console.log("SelectAll is clicked.");
+                var i = 0;
+                $("input[name=imagesGrid]").each(function () {
+                    var m = $(this).attr('checked','checked');
+                });
+            });
+            
+            $("#DeleteAll").click(function () {
+                console.log("DeleteAll is clicked.");
+                var stringArray = new Array();
+                var i = 0;
+                $("input[name=imagesGrid]").each(function () {
+                    var m = $(this).is(':checked');
+                    if (m) {
+                        stringArray[i++] = $(this).attr("gridkey-id");
+                    }
+                });
+                var postData = { values: stringArray };
+                deleteAll(postData);
+
+            });
+            function deleteAll(postData) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/FileManager/DeleteAll",
+                    data: postData,
+                    success: function (data) {
+                    
+                        data.forEach(function (entry) {
+                            console.log(entry);
+                            var pp = $('[gridkey-id=' + entry + ']');
+                            pp.parent().parent().remove();  
+                            console.log(pp);
+                        });
+                    },
+                    dataType: "json",
+                    traditional: true
+                });
+            }
+            
         });
     </script>
 

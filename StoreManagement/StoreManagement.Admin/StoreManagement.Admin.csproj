@@ -471,6 +471,7 @@
     <Content Include="Views\FileManager\_ImageGallery.cshtml" />
     <Content Include="Views\Test\DetailRazorPage.cshtml" />
     <Content Include="Views\Products\Details2.cshtml" />
+    <Content Include="Views\Test\DetailRazorPage2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

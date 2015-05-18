@@ -36,15 +36,20 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult DetailRazorPage()
         {
-            var pr = ProductRepository.GetSingle(1);
             var template = System.IO.File.ReadAllText(Server.MapPath("~/Views/Products/Details2.cshtml"));
-            String body = Razor.Parse(template, pr);
-            ViewBag.BodyHtml = body;
-
-
+            ViewBag.Template = template;
             return View();
         }
-             
+        [HttpPost, ValidateInput(false)]
+        public ActionResult DetailRazorPage(String template)
+        {
+            var pr = ProductRepository.GetSingle(1);
+           // var template = System.IO.File.ReadAllText(Server.MapPath("~/Views/Products/Details2.cshtml"));
+            String body = Razor.Parse(template, pr);
+ 
+
+            return View("DetailRazorPage2", "_Layout",body);
+        }   
             //
         // GET: /Test/
         public ActionResult Index()

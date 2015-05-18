@@ -1,9 +1,18 @@
 ﻿ 
 @{
     ViewBag.Title = "DetailRazorPage";
-    String body = (String)ViewBag.BodyHtml;
+    String template = (String)ViewBag.Template;
 }
 
 <h2>DetailRazorPage</h2>
+ @using (Html.BeginForm()) {
+ 
+    <textarea name="template">
+        @ViewBag.Template
+    </textarea> 
+      
+<p>
+<input type="submit" value="Create" />
+</p>
 
-@Html.Raw(body)
+ }

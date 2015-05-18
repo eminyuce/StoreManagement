@@ -12,7 +12,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
     {
         List<ContentFile> GetContentByContentId(int contentId);
         List<ContentFile> GetContentByFileManagerId(int fileManagerId);
-
+        void DeleteContentFileByContentId(int contentId);
     }
 
 }

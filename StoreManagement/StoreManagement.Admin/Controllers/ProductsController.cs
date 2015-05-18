@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ninject;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -14,6 +15,10 @@ namespace StoreManagement.Admin.Controllers
     //[Authorize]
     public class ProductsController : BaseController
     {
+
+        [Inject]
+        public IContentFileRepository ContentFileRepository { set; get; } 
+        
         private IContentRepository contentRepository;
         public ProductsController(IStoreContext dbContext, ISettingRepository settingRepository, IContentRepository contentRepository) : base(dbContext, settingRepository)
         {
@@ -50,11 +55,18 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Content/Create
 
-        public ActionResult Create()
+        public ActionResult SaveOrEdit(int id=0)
         {
             var content = new Content();
-            content.StoreId = 1;
-            content.Type = "product";
+            if (id == 0)
+            {
+                content.StoreId = 1;
+                content.Type = "product";
+            }
+            else
+            {
+               content = contentRepository.GetSingle(id);
+            }
             return View(content);
         }
 
@@ -63,44 +75,37 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Content content)
+        public ActionResult SaveOrEdit(Content content, int [] selectedFileId = null)
         {
             if (ModelState.IsValid)
             {
-                contentRepository.Add(content);
-                contentRepository.Save();
+                if (content.Id == 0)
+                {
+                    contentRepository.Add(content);
+                    contentRepository.Save();
+                }
+                else
+                {
+                    contentRepository.Edit(content);
+                    contentRepository.Save();
+                }
+
+                if (selectedFileId != null)
+                {
+                    ContentFileRepository.DeleteContentFileByContentId(content.Id);
+                    foreach (var i in selectedFileId)
+                    {
+                        var m = new ContentFile();
+                        m.ContentId = content.Id;
+                        m.FileManagerId = i;
+                        ContentFileRepository.Add(m);
+                    }
+                    ContentFileRepository.Save();
+                }
+
                 return RedirectToAction("Index");
             }
 
-            return View(content);
-        }
-
-        //
-        // GET: /Content/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            Content content = contentRepository.GetSingle(id);
-            if (content == null)
-            {
-                return HttpNotFound();
-            }
-            return View(content);
-        }
-
-        //
-        // POST: /Content/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Content content)
-        {
-            if (ModelState.IsValid)
-            {
-                contentRepository.Edit(content);
-                contentRepository.Save();
-                return RedirectToAction("Index");
-            }
             return View(content);
         }
 

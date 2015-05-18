@@ -1,37 +1,35 @@
 ﻿@model StoreManagement.Data.Entities.Content
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
+    Layout = "../Shared/_Layout.cshtml";
     int storeId = Model != null ? Model.StoreId : 0;
-    int categoryId = Model != null ? Model.CategoryId : 0;
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@Html.Action("CreateCategoryTree", "Categories")
+
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Content</legend>
 
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.Action("StoresDropDown", "Stores", new { storeId })
+        </div>
+
+
         @Html.HiddenFor(model => model.Id)
-
-      
-<div class="editor-label control-group">
-    @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
-</div>
-<div class="editor-field controls">
-    @Html.Action("StoresDropDown", "Stores", new { storeId })
-</div>
-
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CategoryId)
-        </div>
-        <div class="editor-field">
-           @Html.Action("CategoriesRadioButton", "Categories", new { categoryId })
-        </div>
+        @Html.HiddenFor(model => model.CategoryId)
+        @Html.HiddenFor(model => model.Type)
+        @Html.HiddenFor(model => model.Url)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -45,29 +43,15 @@
             @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
- 
-            
-            
+           
             <textarea id="Description"   style="width: 100%; height: 800px;">@Model.Description</textarea>
 
-            
-
-            @Html.ValidationMessageFor(model => model.Description)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Type)
-        </div>
+
+ 
         <div class="editor-field">
-            @Html.EditorFor(model => model.Type)
-            @Html.ValidationMessageFor(model => model.Type)
-        </div>
-
-        <div class="editor-label">
-            @Html.HiddenFor(model => model.ImagePath)
-        </div>
-        <div class="editor-field">
-            <div id="contentImages"></div>
+                        <div id="contentImages"></div>
             @Html.Action("ImageGallery","FileManager")
         </div>
 
@@ -87,13 +71,7 @@
             @Html.ValidationMessageFor(model => model.State)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ImageState)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ImageState)
-            @Html.ValidationMessageFor(model => model.ImageState)
-        </div>
+    
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Ordering)
@@ -103,35 +81,25 @@
             @Html.ValidationMessageFor(model => model.Ordering)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Lang)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Lang)
-            @Html.ValidationMessageFor(model => model.Lang)
-        </div>
+      
 
-        <div class="editor-label">
+@*        <div class="editor-label">
             @Html.LabelFor(model => model.CreatedDate)
         </div>
         <div class="editor-field">
-            
-<input class="form-control" type="text" name="CreatedDate" datatype-datetime="d" value="@(Model.CreatedDate > new DateTime(1,1,2) ? Model.CreatedDate.ToString("MM/dd/yyyy hh:mm tt") : "")" />
 
 
+
+            <input class="form-control" type="text" name="CreatedDate" datatype-datetime="d" value="@(Model.CreatedDate > new DateTime(1, 1, 2) ? Model.CreatedDate.ToString("MM/dd/yyyy hh:mm tt") : "")" />
+
+
+
+            @Html.ValidationMessageFor(model => model.CreatedDate)
+        </div>*@
  
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Url)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Url)
-            @Html.ValidationMessageFor(model => model.Url)
-        </div>
-     
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Create" />
         </p>
     </fieldset>
 }
@@ -140,15 +108,23 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    
     <script type="text/javascript">
         $(document).ready(function () {
+            console.log("jquery is workingg");
+            $("#treeview").bind("select_node.jstree", function (event, data) {
+                var m = $("#" + data.selected[0]).find("[data-category]");
+                var selectedCategoryId = m.first().attr("data-category");
+                console.log(selectedCategoryId);
+                $("#CategoryId").val(selectedCategoryId);
+
+            });
+         
             console.log("jquery is working");
             $("#Description").htmlarea();
-            
+
             //$("#Description").htmlarea({
             //    // Override/Specify the Toolbar buttons to show
             //    toolbar: [
@@ -185,9 +161,9 @@
             //        //alert("jHtmlArea has loaded!");
             //        //this.showHTMLView(); // show the HTML view once the editor has finished loading
             //    } 
-                
+
             //});
-            
+
 
         });
     </script>

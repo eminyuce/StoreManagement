@@ -26,6 +26,14 @@ namespace StoreManagement.Service.Repositories
         {
             return this.FindBy(r => r.FileManagerId == fileManagerId).ToList();
         }
+
+        public void DeleteContentFileByContentId(int contentId)
+        {
+            foreach (var c in this.GetContentByContentId(contentId))
+            {
+                this.Delete(c);
+            }
+        }
     }
 
 

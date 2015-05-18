@@ -51,8 +51,8 @@ function createImage(fileName, photoId, eventLink) {
 
 function LoadImages() {
     $("#flickr-photos").empty();
-
-    $.getJSON("/Ajax/GetImages?storeId=1", function (data) {
+    var storeId = $("#StoreId").val();
+    $.getJSON("/Ajax/GetImages?storeId=" + storeId, function (data) {
         var photos = data;
         $("#image-count").text(photos.length);
         $("#filter-count").text(photos.length);
@@ -102,6 +102,7 @@ function handleRemoveImage(e) {
     var imageId = $(caller).attr('data-image-remove-link');
     var fileName = $(caller).attr('data-image-file-name');
     $("#SelectedImageGallery").find('[data-file-image=' + imageId + ']').remove();
+    $("#SelectedImageGallery").find('[data-selected-file=' + imageId + ']').remove();
     var addLink = $("<div/>")
         .attr("data-image-add-link", imageId)
         .attr("data-image-file-name", fileName)
@@ -128,7 +129,15 @@ function handleAddImage(e) {
         .attr("data-image-file-name", fileName)
         .text("Remove").addClass("addLink");
     var div = createImage(fileName, imageId, removeLink);
+    var file = $('<input>').attr({
+        type: 'hidden',
+        id: 'fileId_' + imageId,
+        value:imageId,
+        name: 'selectedFileId',
+        data_selected_file : imageId
+    });
     $("#SelectedImageGallery").append(div);
+    $("#SelectedImageGallery").append(file);
     $("#flickr-photos").find('[data-file-image=' + imageId + ']').remove();
     bindRemoveImage();
 

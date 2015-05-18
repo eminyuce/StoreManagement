@@ -10,7 +10,7 @@
 <div>
     @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Products" })
 </div>
-
+         @Html.ActionLink("Create",  "SaveOrEdit", "Products", new { id =  0}, new{@class="btn btn-primary"})
 @Html.Grid(Model).Named("contentGrid").Columns(columns =>
     {
         columns.Add(o => o.Id, true);
@@ -20,7 +20,7 @@
                 .SetWidth(30)
                 .RenderValueAs(d =>
                     @<b>
-                        @Html.ActionLink("Edit",  "Edit", "Products", new { id = d.Id }, new{@class="btn btn-primary"})
+                        @Html.ActionLink("Edit",  "SaveOrEdit", "Products", new { id = d.Id }, new{@class="btn btn-primary"})
                     </b>);
     
  

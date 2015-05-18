@@ -19,12 +19,9 @@ namespace StoreManagement.Data.Entities
         [AllowHtml]
         public string Description { get; set; }
         public string Type { get; set; }
-        public string ImagePath { get; set; }
         public Boolean MainPage { get; set; }
         public Boolean State { get; set; }
-        public Boolean ImageState { get; set; }
         public int Ordering { get; set; }
-        public string Lang { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Url { get; set; }
 

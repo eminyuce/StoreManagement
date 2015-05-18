@@ -1,6 +1,16 @@
 @model StoreManagement.Data.Entities.PageDesign
 
 @* This partial view defines form fields that will appear when creating and editing entities *@
+@{
+    int storeId = Model != null ? Model.StoreId : 0;
+}
+
+<div class="editor-label control-group">
+    @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+</div>
+<div class="editor-field controls">
+    @Html.Action("StoresDropDown", "Stores", new { storeId })
+</div>
 
 <div class="editor-label">
     @Html.LabelFor(model => model.Type)
@@ -18,11 +28,4 @@
     @Html.ValidationMessageFor(model => model.PageRazorTemplate)
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.StoreId)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.StoreId)
-    @Html.ValidationMessageFor(model => model.StoreId)
-</div>
-
+ 

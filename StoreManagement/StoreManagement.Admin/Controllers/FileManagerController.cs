@@ -29,9 +29,9 @@ namespace StoreManagement.Admin.Controllers
         {
             get { return Path.Combine(Server.MapPath("~/Files")); }
         }
-        public ActionResult DisplayImages()
+        public ActionResult DisplayImages(int storeId=1)
         {
-            return View(fileManagerRepository.GetFilesByStoreId(1));
+            return View(fileManagerRepository.GetFilesByStoreId(storeId));
         }
         public ActionResult Index()
         {
@@ -133,9 +133,9 @@ namespace StoreManagement.Admin.Controllers
             return Json(r);
         }
 
-        private FileManager SaveFiles(HttpPostedFileBase file)
+        private FileManager SaveFiles(HttpPostedFileBase file, int storeId=1)
         {
-            var fileManager = ConvertToFileManager(file);
+            var fileManager = ConvertToFileManager(file, storeId);
             fileManagerRepository.Add(fileManager);
             fileManagerRepository.Save();
 
@@ -194,7 +194,7 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
-        private static FileManager ConvertToFileManager(HttpPostedFileBase file)
+        private static FileManager ConvertToFileManager(HttpPostedFileBase file, int storeId=1)
         {
             var fileManager = new FileManager();
             fileManager.ContentType = file.ContentType;
@@ -202,7 +202,7 @@ namespace StoreManagement.Admin.Controllers
             fileManager.CreatedDate = DateTime.Now;
             fileManager.FileName = file.FileName;
             fileManager.State = true;
-            fileManager.StoreId = 1;
+            fileManager.StoreId = storeId;
             fileManager.Ordering = 1;
             fileManager.Description = "";
             fileManager.Guid = Guid.NewGuid().ToStr();

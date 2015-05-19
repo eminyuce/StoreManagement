@@ -1,0 +1,108 @@
+@model  StoreManagement.Data.Entities.Navigation
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "../Shared/_Layout.cshtml";
+    int storeId = Model != null ? Model.StoreId : 0;
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Navigation</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ParentId)
+        @Html.HiddenFor(model => model.CreatedDate)
+
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.Action("StoresDropDown", "Stores", new { storeId })
+        </div>
+
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.Name, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.ActionName, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.ActionName, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.ActionName)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.ControllerName, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.ControllerName, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.ControllerName)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.Static, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.Static, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Static)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.Ordering, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.Ordering, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Ordering)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.Link, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.Link, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Link)
+        </div>
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.LinkState, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.LinkState, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.LinkState)
+        </div>
+
+
+
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.State, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.EditorFor(model => model.State, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

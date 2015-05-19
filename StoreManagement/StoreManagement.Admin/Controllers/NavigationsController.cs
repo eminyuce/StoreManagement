@@ -31,8 +31,6 @@ namespace StoreManagement.Admin.Controllers
 
         public ViewResult Index(int storeId=0)
         {
-     
-
             List<Navigation> navigationList = new List<Navigation>();
             if (storeId == 0)
             {
@@ -58,11 +56,18 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Navigations/Create
 
-        public ActionResult Create()
+        public ActionResult SaveOrEdit(int id=0)
         {
             var item = new Navigation();
-            item.ParentId = 0;
-            item.CreatedDate = DateTime.Now;
+            if (id == 0)
+            {
+                item.ParentId = 0;
+                item.CreatedDate = DateTime.Now;
+            }
+            else
+            {
+                item = navigationRepository.GetSingle(id);
+            }
             return View(item);
         }
 
@@ -70,42 +75,30 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Navigations/Create
 
         [HttpPost]
-        public ActionResult Create(Navigation navigation)
+        public ActionResult SaveOrEdit(Navigation navigation)
         {
            // if (ModelState.IsValid)
             {
-                navigationRepository.Add(navigation);
-                navigationRepository.Save();
+
+                if (navigation.Id == 0)
+                {
+                    navigationRepository.Add(navigation);
+                    navigationRepository.Save();
+                }
+                else
+                {
+                    navigationRepository.Edit(navigation);
+                    navigationRepository.Save();
+                }
+
                 return RedirectToAction("Index");
             }
 
             return View(navigation);
         }
+ 
 
-        //
-        // GET: /Navigations/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            Navigation navigation = navigationRepository.GetSingle(id);
-            return View(navigation);
-        }
-
-        //
-        // POST: /Navigations/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(Navigation navigation)
-        {
-            if (ModelState.IsValid)
-            {
-                navigationRepository.Edit(navigation);
-                navigationRepository.Save();
-                return RedirectToAction("Index");
-            }
-            return View(navigation);
-        }
-
+       
         //
         // GET: /Navigations/Delete/5
 

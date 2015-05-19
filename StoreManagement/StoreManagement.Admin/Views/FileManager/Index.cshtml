@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_LayoutFileUpload.cshtml";
 
 }
-
+<div>
+         @Html.Action("StoresDropDown", "Stores", new { storeId=0 })
+    </div>
 @Html.ActionLink("Display Images","DisplayImages","FileManager")
   
 

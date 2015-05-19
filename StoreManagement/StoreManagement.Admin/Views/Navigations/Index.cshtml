@@ -10,7 +10,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "SaveOrEdit")
 </p>
 <div>
     @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Navigations" })
@@ -25,7 +25,7 @@
                 .SetWidth(30)
                 .RenderValueAs(d =>
                     @<b>
-                        @Html.ActionLink("Edit", "Edit", new { id = d.Id })
+                        @Html.ActionLink("Edit", "SaveOrEdit", new { id = d.Id })
                     </b>);
         columns.Add()
                    .Encoded(false)

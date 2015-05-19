@@ -103,6 +103,12 @@ function handleRemoveImage(e) {
     var fileName = $(caller).attr('data-image-file-name');
     $("#SelectedImageGallery").find('[data-file-image=' + imageId + ']').remove();
     $("#SelectedImageGallery").find('[data-selected-file=' + imageId + ']').remove();
+    
+    $("#existingContentImages").find('[data-file-image=' + imageId + ']').remove();
+    $("#existingContentImages").find('[data-selected-file=' + imageId + ']').remove();
+    $("#existingContentImages").find('[data_selected_file=' + imageId + ']').remove();
+    
+
     var addLink = $("<div/>")
         .attr("data-image-add-link", imageId)
         .attr("data-image-file-name", fileName)

@@ -110,7 +110,7 @@
             console.log("jquery is working");
             $("#Description").htmlarea();
             GetFiles($("#Id").val());
-        
+  
 
             //$("#Description").htmlarea({
             //    // Override/Specify the Toolbar buttons to show
@@ -186,7 +186,7 @@
                         
                         $("#existingContentImages").append(div);
                         $("#existingContentImages").append(fileHiddenLink);
-                        
+                        bindRemoveImage();
                     });
                 },
                 error: function (request, status, error) {

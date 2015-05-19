@@ -16,11 +16,11 @@ namespace StoreManagement.Service.Repositories
         public ContentFileRepository(IStoreContext dbContext)
             : base(dbContext)
         {
-            this.dbContext = dbContext;
+            this.dbContext =  dbContext;
         }
         public List<ContentFile> GetContentByContentId(int contentId)
         {
-            return this.FindBy(r => r.ContentId == contentId).ToList();
+            return this.GetAllIncluding(r => r.FileManager).Where(r => r.ContentId == contentId).ToList();
         }
         public List<ContentFile> GetContentByFileManagerId(int fileManagerId)
         {

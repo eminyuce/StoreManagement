@@ -51,7 +51,8 @@
 
  
         <div class="editor-field">
-                        <div id="contentImages"></div>
+            <div id="contentImages"></div>
+                  <div id="existingContentImages"></div>
             @Html.Action("ImageGallery","FileManager")
         </div>
 
@@ -80,23 +81,7 @@
             @Html.EditorFor(model => model.Ordering)
             @Html.ValidationMessageFor(model => model.Ordering)
         </div>
-
-      
-
-@*        <div class="editor-label">
-            @Html.LabelFor(model => model.CreatedDate)
-        </div>
-        <div class="editor-field">
-
-
-
-            <input class="form-control" type="text" name="CreatedDate" datatype-datetime="d" value="@(Model.CreatedDate > new DateTime(1, 1, 2) ? Model.CreatedDate.ToString("MM/dd/yyyy hh:mm tt") : "")" />
-
-
-
-            @Html.ValidationMessageFor(model => model.CreatedDate)
-        </div>*@
- 
+  
 
         <p>
             <input type="submit" value="Create" />
@@ -124,6 +109,8 @@
          
             console.log("jquery is working");
             $("#Description").htmlarea();
+            GetFiles($("#Id").val());
+        
 
             //$("#Description").htmlarea({
             //    // Override/Specify the Toolbar buttons to show
@@ -166,6 +153,51 @@
 
 
         });
+        
+        function GetFiles(id) {
+
+            var jsonRequest = JSON.stringify({ "contentId": id });
+            console.log(jsonRequest);
+            
+            jQuery.ajax({
+                url: "/Ajax/GetFiles",
+                type: 'POST',
+                data: jsonRequest,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var files = data;
+                    $.each(files, function (i, file) {
+                        var imageId = file.FileManagerId;
+                        var fileName = file.FileManager.FileName;
+                        
+                        var removeLink = $("<div/>")
+                                .attr("data-image-remove-link", imageId)
+                                .attr("data-image-file-name", fileName)
+                                .text("Remove").addClass("addLink");
+                        var div = createImage(fileName, imageId, removeLink);
+                        var fileHiddenLink = $('<input>').attr({
+                            type: 'hidden',
+                            id: 'fileId_' + imageId,
+                            value: imageId,
+                            name: 'selectedFileId',
+                            data_selected_file: imageId
+                        });
+                        
+                        $("#existingContentImages").append(div);
+                        $("#existingContentImages").append(fileHiddenLink);
+                        
+                    });
+                },
+                error: function (request, status, error) {
+                    console.error('Error ' + status + ' ' + request.responseText);
+                },
+                beforeSend: function () {
+
+                }
+            });
+
+        }
     </script>
 
 }

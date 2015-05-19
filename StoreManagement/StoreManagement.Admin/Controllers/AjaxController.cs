@@ -16,6 +16,9 @@ namespace StoreManagement.Admin.Controllers
 
         [Inject]
         public IFileManagerRepository FileManagerRepository { get; set; }
+
+        [Inject]
+        public IContentFileRepository ContentFileRepository { set; get; } 
       
         private IStoreRepository storeRepository;
         private ICategoryRepository categoryRepository;
@@ -49,6 +52,12 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(tree, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetFiles(int contentId)
+        {
+            var files = ContentFileRepository.GetContentByContentId(contentId);
+            return Json(files, JsonRequestBehavior.AllowGet);
+        }
+
         //public ActionResult SaveHiearchy(string childId, string parentId)
         //{
         //  // JsTreeDAO.SaveNodeRelationship(childId, parentId);

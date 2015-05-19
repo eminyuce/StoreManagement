@@ -12,5 +12,13 @@ namespace StoreManagement.Data.Entities
         public int Id { get; set; }
         public int ContentId { get; set; }
         public int FileManagerId { get; set; }
+
+        //public virtual ICollection<FileManager> FileManagers { get; set; }
+        //public virtual ICollection<Content> Contents { get; set; }
+
+        public FileManager FileManager { get; set; }
+        public Content Content { get; set; }
+
+
     }
 }

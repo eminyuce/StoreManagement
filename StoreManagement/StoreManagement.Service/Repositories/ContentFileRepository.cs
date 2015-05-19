@@ -34,6 +34,19 @@ namespace StoreManagement.Service.Repositories
                 this.Delete(c);
             }
         }
+        public void SaveContentFiles(int[] selectedFileId, int contentId)
+        {
+            DeleteContentFileByContentId(contentId);
+            var uniqueFileIds = selectedFileId.Distinct();
+            foreach (var i in uniqueFileIds)
+            {
+                var m = new ContentFile();
+                m.ContentId = contentId;
+                m.FileManagerId = i;
+                Add(m);
+            }
+            Save();
+        }
     }
 
 

@@ -82,25 +82,16 @@ namespace StoreManagement.Admin.Controllers
                 if (content.Id == 0)
                 {
                     contentRepository.Add(content);
-                    contentRepository.Save();
                 }
                 else
                 {
                     contentRepository.Edit(content);
-                    contentRepository.Save();
                 }
-
+                contentRepository.Save();
                 if (selectedFileId != null)
                 {
-                    ContentFileRepository.DeleteContentFileByContentId(content.Id);
-                    foreach (var i in selectedFileId)
-                    {
-                        var m = new ContentFile();
-                        m.ContentId = content.Id;
-                        m.FileManagerId = i;
-                        ContentFileRepository.Add(m);
-                    }
-                    ContentFileRepository.Save();
+                    int contentId = content.Id;
+                    ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
                 }
 
                 return RedirectToAction("Index");
@@ -108,6 +99,8 @@ namespace StoreManagement.Admin.Controllers
 
             return View(content);
         }
+
+      
 
         //
         // GET: /Content/Delete/5

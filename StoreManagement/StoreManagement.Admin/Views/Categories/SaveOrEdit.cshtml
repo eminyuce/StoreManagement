@@ -74,9 +74,9 @@
     <script>
         $(document).ready(function() {
 
-            loadParentCategories($("#StoreId").val());
-
-            $("#StoreId").change(function() {
+            loadParentCategories($("#StoreDropDownId").val());
+            
+            $('select#StoreDropDownId').change(function (event) {
                 var storeId = $(this).val();
                 loadParentCategories(storeId);
             });
@@ -84,11 +84,16 @@
             function loadParentCategories(storeId) {
                 var url = "/Ajax/GetRootCategories?storeId=" + storeId;
                 console.log(url);
-                $.post(url, function(data) {
-                    $('select#ParentIdDropDown').empty();
+                $.post(url, function (data) {
+                    
+
+                    $('select#ParentIdDropDown').empty(); //remove all child nodes
+
                     $.each(data, function (i, slaveValue) {
                         $('select#ParentIdDropDown').append($('<option></option>').val(slaveValue.Value).html(slaveValue.Text));
                     });
+                    $('select#ParentIdDropDown').trigger("chosen:updated");
+                    $("#ParentId").val($('select#ParentIdDropDown').val());
                     $('select#ParentIdDropDown').chosen({}).change(function (event) {
                         $("#ParentId").val($(this).val());
                     });

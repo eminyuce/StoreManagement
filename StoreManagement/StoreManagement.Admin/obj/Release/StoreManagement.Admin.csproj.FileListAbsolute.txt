@@ -102,3 +102,4 @@ C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.A
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Release\StoreManagement.Admin.dll
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\NLog.xml

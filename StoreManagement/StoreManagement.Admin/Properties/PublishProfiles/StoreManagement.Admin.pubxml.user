@@ -151,16 +151,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2015 17:54:18</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>05/20/2015 10:06:06</publishTime>
+      <publishTime>05/20/2015 16:25:44</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>05/20/2015 10:06:02</publishTime>
+      <publishTime>05/20/2015 16:25:40</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>05/20/2015 10:06:04</publishTime>
+      <publishTime>05/20/2015 16:25:42</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>05/17/2015 17:54:10</publishTime>
@@ -246,6 +246,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap.min.css">
       <publishTime>05/17/2015 17:53:42</publishTime>
     </File>
+    <File Include="Content/chosen-sprite.png">
+      <publishTime>05/20/2015 15:54:02</publishTime>
+    </File>
+    <File Include="Content/chosen.css">
+      <publishTime>05/20/2015 15:47:15</publishTime>
+    </File>
+    <File Include="Content/chosen.png">
+      <publishTime>05/20/2015 15:53:44</publishTime>
+    </File>
     <File Include="Content/Gridmvc.css">
       <publishTime>05/17/2015 17:53:42</publishTime>
     </File>
@@ -284,6 +293,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/jstree/throbber.gif">
       <publishTime>05/17/2015 17:53:42</publishTime>
+    </File>
+    <File Include="Content/oss-credit.png">
+      <publishTime>05/20/2015 15:53:44</publishTime>
+    </File>
+    <File Include="Content/prism.css">
+      <publishTime>05/20/2015 15:53:44</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>05/17/2015 17:53:42</publishTime>
@@ -465,6 +480,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>05/17/2015 17:53:42</publishTime>
     </File>
+    <File Include="Scripts/chosen.jquery.min.js">
+      <publishTime>05/20/2015 15:51:39</publishTime>
+    </File>
+    <File Include="Scripts/chosen.proto.min.js">
+      <publishTime>05/20/2015 15:46:55</publishTime>
+    </File>
     <File Include="Scripts/FileUpload/canvas-to-blob.min.js">
       <publishTime>05/17/2015 17:53:42</publishTime>
     </File>
@@ -588,6 +609,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/npm.js">
       <publishTime>05/17/2015 17:53:43</publishTime>
     </File>
+    <File Include="Scripts/prism.js">
+      <publishTime>05/20/2015 15:52:11</publishTime>
+    </File>
     <File Include="Scripts/reports.js">
       <publishTime>05/19/2015 13:34:54</publishTime>
     </File>
@@ -643,7 +667,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/20/2015 10:03:33</publishTime>
     </File>
     <File Include="Views/Categories/SaveOrEdit.cshtml">
-      <publishTime>05/20/2015 10:01:54</publishTime>
+      <publishTime>05/20/2015 16:02:59</publishTime>
     </File>
     <File Include="Views/Categories/Test.cshtml">
       <publishTime>05/17/2015 17:53:43</publishTime>
@@ -814,7 +838,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2015 17:53:43</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/17/2015 17:53:43</publishTime>
+      <publishTime>05/20/2015 16:20:05</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutFileUpload.cshtml">
       <publishTime>05/17/2015 17:53:43</publishTime>
@@ -850,7 +874,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2015 17:53:43</publishTime>
     </File>
     <File Include="Views/Stores/_StoresDropDown.cshtml">
-      <publishTime>05/17/2015 17:53:43</publishTime>
+      <publishTime>05/20/2015 16:25:33</publishTime>
     </File>
     <File Include="Views/Stores/_StoresFilter.cshtml">
       <publishTime>05/17/2015 17:53:43</publishTime>
@@ -874,7 +898,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2015 17:53:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/20/2015 10:06:09</publishTime>
+      <publishTime>05/20/2015 16:25:47</publishTime>
     </File>
   </ItemGroup>
 </Project>

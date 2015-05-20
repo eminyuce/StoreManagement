@@ -69,4 +69,3 @@ C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.T
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\System.Web.WebPages.Deployment.xml
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\obj\Release\StoreManagement.Test.dll
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\obj\Release\StoreManagement.Test.pdb
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\DotNetOpenAuth.AspNet.xml

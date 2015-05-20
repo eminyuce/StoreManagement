@@ -25,7 +25,8 @@
             @Html.LabelFor(model => model.ParentId)
         </div>
         <div class="editor-field">
-            <select id="ParentId">
+            <input type="hidden" id="ParentId" name="ParentId"/>
+            <select id="ParentIdDropDown" class="chosen-select" style="width:350px;">
                 
             </select>
             
@@ -79,19 +80,25 @@
                 var storeId = $(this).val();
                 loadParentCategories(storeId);
             });
-
+            
             function loadParentCategories(storeId) {
                 var url = "/Ajax/GetRootCategories?storeId=" + storeId;
                 console.log(url);
                 $.post(url, function(data) {
-                    $('select#ParentId').empty();
+                    $('select#ParentIdDropDown').empty();
                     $.each(data, function (i, slaveValue) {
-                        $('select#ParentId').append($('<option></option>').val(slaveValue.Value).html(slaveValue.Text));
+                        $('select#ParentIdDropDown').append($('<option></option>').val(slaveValue.Value).html(slaveValue.Text));
+                    });
+                    $('select#ParentIdDropDown').chosen({}).change(function (event) {
+                        $("#ParentId").val($(this).val());
                     });
                 });
 
             }
         });
+        
+      
+
 
     </script>
 

@@ -34,7 +34,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                resultList = categoryRepository.GetCategoriesByStoreId(storeId, "content");
+                resultList = categoryRepository.GetCategoriesByStoreId(storeId);
             }
 
             if (!String.IsNullOrEmpty(search))

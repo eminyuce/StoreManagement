@@ -29,7 +29,7 @@ namespace StoreManagement.Service.Repositories
         {
             this.dbContext = dbContext;
         }
-
+       
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
             //return this.GetAllIncluding(IncludeProperties()).Where(r => r.StoreId == storeId && r.Contents.Any()).OrderByDescending(r => r.Id).Take(10).ToList();
@@ -93,6 +93,7 @@ namespace StoreManagement.Service.Repositories
             CreateTreeView(tree, items);
             return tree;
         }
+ 
 
         private void CreateTreeView(List<JsTreeNode> tree, List<Category> items)
         {

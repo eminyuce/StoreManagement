@@ -24,15 +24,15 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return CarriageRegex.Replace(text, string.Empty).Trim();
         }
- 
 
+      
 
         public static string ToYesNoString(this bool value)
         {
             return value ? "Yes" : "No";
         }
 
-
+     
     
         public static string ToCssClass(this string str)
         {

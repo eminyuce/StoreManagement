@@ -226,6 +226,14 @@ namespace StoreManagement.Data.GeneralHelper
 
             return cleaned;
         }
+        public static String GetDescription(string bodyHtml, int length)
+        {
+            var stripedText = GeneralHelper.RemoveHtmlTags(bodyHtml);
+            stripedText = stripedText.HtmlDecode();
+            stripedText = stripedText.TruncateAtSentence(length);
+
+            return stripedText;
+        }
         public static string ParseDescription(string description)
         {
             if (String.IsNullOrEmpty(description))
@@ -245,7 +253,7 @@ namespace StoreManagement.Data.GeneralHelper
 
             return description.Trim();
         }
-
+        
         public static byte[] GetImageFromUrl(string url, Dictionary<String, String> dictionary)
         {
             System.Net.HttpWebRequest request = null;

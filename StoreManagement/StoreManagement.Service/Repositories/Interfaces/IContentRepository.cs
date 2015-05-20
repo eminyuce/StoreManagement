@@ -14,5 +14,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
         Content GetContentByUrl(int storeId, String url);
         List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId);
         List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
+        List<Content> GetContentsCategoryId(int storeId, int categoryId, bool ? isActive);
     }
 }

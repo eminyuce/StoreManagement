@@ -1,0 +1,13 @@
+﻿@model StoreManagement.Data.RequestModel.CategoryViewModel
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<h2>@Model.Category.Name</h2>
+
+@foreach (var s in Model.Contents)
+{
+    @Html.DisplayFor(r => s)
+}    
+ 

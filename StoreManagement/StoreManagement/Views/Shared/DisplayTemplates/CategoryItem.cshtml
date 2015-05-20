@@ -1,7 +1,8 @@
-﻿@model StoreManagement.Data.Entities.Category
+﻿@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.Category
 <div>
     <b>
-        @Html.ActionLink(Model.Name,"Index","Categories",new { id=Model.Id}, new {@class="btn btn-default"})
+        @Html.ActionLink(Model.Name,"Category","Categories",new { id=String.Format("{0}-{1}",GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) }, new {@class="btn btn-default"})
     </b>
         @foreach (var c in Model.Contents.OrderByDescending(r => r.Id).Take(10))
         {

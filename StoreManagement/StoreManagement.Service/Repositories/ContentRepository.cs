@@ -32,7 +32,7 @@ namespace StoreManagement.Service.Repositories
                     .ToList();
         }
 
-        public  Content GetContentByUrl(int storeId, string url)
+        public Content GetContentByUrl(int storeId, string url)
         {
             return
                 this.FindBy(
@@ -43,12 +43,12 @@ namespace StoreManagement.Service.Repositories
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {
             return this.FindBy(
-                     r => r.StoreId == storeId && 
+                     r => r.StoreId == storeId &&
                          r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) &&
-                         r.CategoryId == categoryId) 
+                         r.CategoryId == categoryId)
                      .ToList();
         }
-        
+
         public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
             String key = String.Format("Content-{0}-{1}-{2}", storeId, typeName, categoryId);
@@ -58,10 +58,25 @@ namespace StoreManagement.Service.Repositories
             if (items == null)
             {
                 items = GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
-                contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration",10)));
+                contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
             }
 
             return items;
         }
+
+        public List<Content> GetContentsCategoryId(int storeId, int categoryId, bool? isActive)
+        {
+            var returnList =
+                this.GetAllIncluding(r => r.ContentFiles.Select(r1 => r1.FileManager))
+                    .Where(r2 => r2.StoreId == storeId && r2.CategoryId == categoryId);
+
+            if (isActive.HasValue)
+            {
+                returnList = returnList.Where(r => r.State == isActive);
+            }
+        
+            return returnList.OrderByDescending(r => r.Id).ToList();
+        }
+
     }
 }

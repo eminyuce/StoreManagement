@@ -1,0 +1,32 @@
+@model StoreManagement.Data.Entities.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Category</legend>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+
+    <div class="display-label">ParentId</div>
+    <div class="display-field">@Model.ParentId</div>
+
+    <div class="display-label">Ordering</div>
+    <div class="display-field">@Model.Ordering</div>
+
+    <div class="display-label">CategoryType</div>
+    <div class="display-field">@Model.CategoryType</div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

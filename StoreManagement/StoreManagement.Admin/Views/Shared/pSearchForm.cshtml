@@ -5,11 +5,22 @@
     string action = ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToStr();
     string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
     string search = @Request.QueryString["search"].ToStr();
+    string storeId = @Request.QueryString["storeId"].ToStr();
 }
 
 @using (Html.BeginForm(action, controller, FormMethod.Get))
 {
+     <input type="hidden" name="storeId"  value="@storeId" />
+     <div class="row">
+        <div class="col-md-8 col-xs-7">
+            <div class="form-group">    
+                <input type="text" class="form-control" placeholder="Search" name="search"  value="@search" />
+            </div>
+        </div>
 
-    <input type="text" name="search" value="@search" /> <input type="submit" value="Search"/>
+        <div class="col-md-4 col-xs-5">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>   
+        </div>
+    </div>
     
 }

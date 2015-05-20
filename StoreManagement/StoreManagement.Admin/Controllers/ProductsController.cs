@@ -25,7 +25,7 @@ namespace StoreManagement.Admin.Controllers
             this.contentRepository = contentRepository;
         }
 
-        public ActionResult Index(int storeId=0)
+        public ActionResult Index(int storeId=0, String search="")
         {
             List<Content> resultList = new List<Content>();
             if (storeId == 0)
@@ -35,6 +35,12 @@ namespace StoreManagement.Admin.Controllers
             else
             {
                 resultList = contentRepository.GetContentByType(storeId,"content");
+            }
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                resultList =
+                    resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             }
             return View(resultList);
         }

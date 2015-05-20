@@ -1,38 +1,49 @@
-﻿@{
-    int storeId = ViewBag.StoreId;
-    String categoryType = ViewBag.CategoryType;
-}
-@Html.Action("CreateCategoryTree", "Categories", new { storeId = storeId, categoryType = categoryType })
+@using GridMvc.Html
+@using GridMvc.Sorting
+@model IEnumerable<StoreManagement.Data.Entities.Category>
 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
 
  
-<input type="button" id="add" value="add" />
+<div>
+    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Categories" })
+</div>
+@Html.ActionLink("Create", "SaveOrEdit", "Categories", new { id = 0 }, new { @class = "btn btn-primary" })
+
+@Html.Partial("pSearchForm")
+
+@Html.Grid(Model).Named("categoriesGrid").Columns(columns =>
+    {
+        columns.Add(o => o.Id, true);
+        columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(30)
+           .RenderValueAs(d =>
+               @<b>
+                        @Html.ActionLink("Edit", "SaveOrEdit", "Categories", new { id = d.Id }, new { @class = "btn btn-primary" })
+                    </b>);
 
 
 
 
-@section scripts
-{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            console.log("11212");
-            
-              
-         
-                $("#add").click(function () {
-
-                    var parent = $("#j1_2_anchor");
-                $("#treeview").jstree("create_node",
-                     parent,
-                    "inside",
-                    { "data": "child2" },
-                             function() {
-                                  alert("added");
-                             },
-                    true);
-            });
-        });
-    </script>
+        columns.Add(c => c.Name)
+            .Titled("Title")
+            .Filterable(true)
+            .Sanitized(false)
+            .Encoded(false)
+            .RenderValueAs(o => Html.ActionLink(o.Name, "Details", "Categories", new { Id = o.Id }, null).ToHtmlString());
 
 
-}
+        columns.Add(o => o.Ordering)
+                        .Titled("Date")
+                        .Sortable(true)
+                        .SortInitialDirection(GridSortDirection.Descending);
+
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+
+

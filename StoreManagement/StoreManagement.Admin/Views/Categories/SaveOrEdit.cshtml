@@ -13,7 +13,7 @@
     <fieldset>
         <legend>Category</legend>
         @Html.HiddenFor(model => model.Id)
-           <div class="editor-label control-group">
+        <div class="editor-label control-group">
             @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
         </div>
         <div class="editor-field controls">
@@ -25,8 +25,11 @@
             @Html.LabelFor(model => model.ParentId)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ParentId)
-            @Html.ValidationMessageFor(model => model.ParentId)
+            <select id="ParentId">
+                
+            </select>
+            
+
         </div>
 
         <div class="editor-label">
@@ -65,3 +68,32 @@
 </div>
 
 
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+
+            loadParentCategories($("#StoreId").val());
+
+            $("#StoreId").change(function() {
+                var storeId = $(this).val();
+                loadParentCategories(storeId);
+            });
+
+            function loadParentCategories(storeId) {
+                var url = "/Ajax/GetRootCategories?storeId=" + storeId;
+                console.log(url);
+                $.post(url, function(data) {
+                    $('select#ParentId').empty();
+                    $.each(data, function (i, slaveValue) {
+                        $('select#ParentId').append($('<option></option>').val(slaveValue.Value).html(slaveValue.Text));
+                    });
+                });
+
+            }
+        });
+
+    </script>
+
+
+    }

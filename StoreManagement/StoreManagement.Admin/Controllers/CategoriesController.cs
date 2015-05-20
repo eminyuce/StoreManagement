@@ -101,7 +101,7 @@ namespace StoreManagement.Admin.Controllers
             Category category = categoryRepository.GetSingle(id);
             return View(category);
         }
-
+       
         //
         // POST: /Categories/Delete/5
 
@@ -113,6 +113,8 @@ namespace StoreManagement.Admin.Controllers
             categoryRepository.Save();
             return RedirectToAction("Index");
         }
+
+       
 
         public ActionResult TestPage(int storeId = 1, String categoryType = "family")
         {

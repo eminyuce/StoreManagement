@@ -18,20 +18,27 @@ namespace StoreManagement.Admin.Controllers
         public IFileManagerRepository FileManagerRepository { get; set; }
 
         [Inject]
-        public IContentFileRepository ContentFileRepository { set; get; } 
-      
+        public IContentFileRepository ContentFileRepository { set; get; }
+
+        [Inject]
+        public ICategoryRepository CategoryRepository { set; get; }
+
+
         private IStoreRepository storeRepository;
-        private ICategoryRepository categoryRepository;
+
         public AjaxController(IStoreContext dbContext, 
             ISettingRepository settingRepository,
-            IStoreRepository storeRepository,
-            ICategoryRepository categoryRepository)
+            IStoreRepository storeRepository)
             : base(dbContext, settingRepository)
         {
             this.storeRepository = storeRepository;
-            this.categoryRepository = categoryRepository;
         }
-       
+        public ActionResult GetRootCategories(int storeId = 0)
+        {
+            var cat = CategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList();
+            var returnJson = from c in cat select new { Text = c.Name, Value = c.Id };
+            return Json(returnJson, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult SaveSettingValue(int id = 0, string value = "")
         {
             var s = settingRepository.GetSingle(id);
@@ -48,7 +55,7 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult GetHiearchicalNodesInfo()
         {
-            var tree = this.categoryRepository.CreateCategoriesTree(1, "family");
+            var tree = this.CategoryRepository.CreateCategoriesTree(1, "family");
 
             return Json(tree, JsonRequestBehavior.AllowGet);
         }

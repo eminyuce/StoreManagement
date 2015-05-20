@@ -7,7 +7,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Category : IEntity
+    public class Category : IEntity 
     {
         public int Id { get; set; }
         public int StoreId { get; set; }

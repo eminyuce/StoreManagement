@@ -15,5 +15,7 @@ namespace StoreManagement.Data.Entities
         public int Ordering { get; set; }
         public string CategoryType { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<Content> Contents { get; set; }
     }
 }

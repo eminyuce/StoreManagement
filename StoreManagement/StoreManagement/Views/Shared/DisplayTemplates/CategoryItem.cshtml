@@ -1,0 +1,10 @@
+﻿@model StoreManagement.Data.Entities.Category
+<div>
+    <b>
+        @Html.ActionLink(Model.Name,"Index","Categories",new { id=Model.Id}, new {@class="btn btn-default"})
+    </b>
+        @foreach (var c in Model.Contents.OrderByDescending(r => r.Id).Take(10))
+        {
+           @Html.DisplayFor(modelItem => c, "ContentItem")
+        }  
+</div>

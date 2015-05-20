@@ -25,5 +25,7 @@ namespace StoreManagement.Data.Entities
         public DateTime CreatedDate { get; set; }
         public string Url { get; set; }
 
+        public virtual ICollection<ContentFile> ContentFiles { get; set; }
+
     }
 }

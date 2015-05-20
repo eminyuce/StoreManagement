@@ -1,0 +1,12 @@
+﻿@model StoreManagement.Data.Entities.Content
+<div>
+    <b style="color:red"> 
+            @Html.ActionLink(Model.Name,"Index","Products",new { id=Model.Id},null)
+    </b>
+        @foreach (var c in Model.ContentFiles.OrderByDescending(r => r.Id).Take(5))
+        {
+            <div>
+                <img src="@c.FileManager.FileName" alt="Smiley face" height="42" width="42">
+            </div>
+        }  
+</div>

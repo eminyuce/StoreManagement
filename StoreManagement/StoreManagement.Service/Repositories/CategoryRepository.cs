@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
@@ -26,6 +28,41 @@ namespace StoreManagement.Service.Repositories
             : base(dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public List<Category> GetCategoriesByStoreId(int storeId)
+        {
+            //return this.GetAllIncluding(IncludeProperties()).Where(r => r.StoreId == storeId && r.Contents.Any()).OrderByDescending(r => r.Id).Take(10).ToList();
+            //IQueryable<Category> mmm = (from z in dbContext.Categories
+            //                            join f in dbContext.Contents on z.Id equals f.CategoryId
+            //                            join t in dbContext.ContentFiles on f.Id equals t.ContentId
+            //                            join y in dbContext.FileManagers on t.FileManagerId equals y.Id
+            //                            where z.StoreId == storeId && z.Contents.Any()
+            //                            select z).
+            //     Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
+            //    .Distinct()
+            //    .OrderByDescending(r => r.Ordering)
+            //    .Take(10);
+
+            //return mmm.ToList();
+
+            return dbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
+                .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
+                .OrderByDescending(r => r.Ordering).Take(10).ToList();
+        }
+        //public IQueryable<T> Include<T>(params Expression<Func<T, object>>[] paths) where T : class
+        //{
+        //    IQueryable<T> query = dbContext.Set<T>();
+        //    foreach (var path in paths)
+        //        query = query.Include(path);
+        //    return query;
+        //}
+        private static Expression<Func<Category, object>> IncludeProperties()
+        {
+            var param = Expression.Parameter(typeof(Category));
+            Expression<Func<Category, object>> exp = r => r.Contents.Select(m => m.ContentFiles.Select(p => p.FileManager));
+
+            return exp;
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId, String type)

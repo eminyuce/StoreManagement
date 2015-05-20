@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NLog;
+using Ninject;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -13,6 +15,11 @@ namespace StoreManagement.Controllers
     public class HomeController : BaseController
     {
         private INavigationRepository _navigationRepository;
+
+        [Inject]
+        public ICategoryRepository CategoryRepository { get; set; }
+         
+
         public HomeController(IStoreContext dbContext, 
             ISettingRepository settingRepository,
             IStoreRepository storeRepository,
@@ -25,7 +32,10 @@ namespace StoreManagement.Controllers
         public ActionResult Index()
         {
             ViewBag.Store = store;
-            return View();
+            var shp =new StoreHomePage();
+            shp.Store = store;
+            shp.Categories = CategoryRepository.GetCategoriesByStoreId(store.Id);
+            return View(shp);
         }
         public ActionResult About()
         {

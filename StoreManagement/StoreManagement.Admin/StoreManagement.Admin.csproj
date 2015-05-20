@@ -423,12 +423,11 @@
       <BrowseToURL>~/Views/Products/Index.cshtml</BrowseToURL>
     </Content>
     <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\SaveOrEdit.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Categories\CreateCategoryTree.cshtml" />
     <Content Include="Views\Categories\Test.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\TestPage.cshtml" />
     <Content Include="Views\FileManager\Index.cshtml" />
     <Content Include="Upload\UploadHandler.ashx" />
     <Content Include="Views\Shared\_LayoutFileUpload.cshtml" />
@@ -453,12 +452,10 @@
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Settings\_CreateOrEdit.cshtml" />
     <Content Include="Views\Settings\StoreSettings.cshtml" />
-    <Content Include="Views\Navigations\Create.cshtml" />
+    <Content Include="Views\Navigations\SaveOrEdit.cshtml" />
     <Content Include="Views\Navigations\Delete.cshtml" />
     <Content Include="Views\Navigations\Details.cshtml" />
-    <Content Include="Views\Navigations\Edit.cshtml" />
     <Content Include="Views\Navigations\Index.cshtml" />
-    <Content Include="Views\Navigations\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\Themes\_Layout1.cshtml" />
     <Content Include="Views\Shared\Themes\_Layout2.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
@@ -479,11 +476,14 @@
     <Content Include="Views\PageDesigns\Edit.cshtml" />
     <Content Include="Views\PageDesigns\Index.cshtml" />
     <Content Include="Views\PageDesigns\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Categories\SaveOrEdit.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
-    <Folder Include="Views\Robots\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

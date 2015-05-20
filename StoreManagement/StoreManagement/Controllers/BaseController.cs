@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using NLog;
+using Ninject;
 using StoreManagement.Data.Entities;
 using StoreManagement.Models;
 using StoreManagement.Service.DbContext;
@@ -15,6 +16,17 @@ namespace StoreManagement.Controllers
     public abstract class BaseController : Controller
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        [Inject]
+        public ICategoryRepository CategoryRepository { set; get; }
+
+        [Inject]
+        public IContentRepository ContentRepository { set; get; }
+
+        [Inject]
+        public INavigationRepository NavigationRepository { set; get; }
+
+
         protected Store store { set; get; }
         protected IStoreContext dbContext;
         protected ISettingRepository settingRepository;

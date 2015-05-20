@@ -14,11 +14,8 @@ namespace StoreManagement.Controllers
 {
     public class HomeController : BaseController
     {
-        private INavigationRepository _navigationRepository;
-
-        [Inject]
-        public ICategoryRepository CategoryRepository { get; set; }
-         
+        
+       
 
         public HomeController(IStoreContext dbContext, 
             ISettingRepository settingRepository,
@@ -26,7 +23,7 @@ namespace StoreManagement.Controllers
             INavigationRepository navigationRepository)
             : base(dbContext, settingRepository, storeRepository)
         {
-            _navigationRepository = navigationRepository;
+ 
         }
 
         public ActionResult Index()
@@ -51,7 +48,7 @@ namespace StoreManagement.Controllers
         }
         public ActionResult MainMenu()
         {
-            var mainMenu = _navigationRepository.GetStoreNavigation(store.Id);
+            var mainMenu = NavigationRepository.GetStoreNavigation(store.Id);
             return View(mainMenu);
         }
         public ActionResult Footer()

@@ -118,7 +118,10 @@
     <Compile Include="Paging\PaginatedDto.cs" />
     <Compile Include="ProjectAppSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestModel\CategoryViewModel.cs" />
     <Compile Include="RequestModel\CompanySearchResult.cs" />
+    <Compile Include="RequestModel\ContentDetailViewModel.cs" />
+    <Compile Include="RequestModel\StoreHomePage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

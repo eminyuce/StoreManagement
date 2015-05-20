@@ -14,12 +14,7 @@ namespace StoreManagement.Controllers
     public class CategoriesController : BaseController
     {
 
-        [Inject]
-        public ICategoryRepository CategoryRepository { set; get; }
-
-        [Inject]
-        public IContentRepository ContentRepository { set; get; }
-
+    
         //
         // GET: /Categories/
         public CategoriesController(IStoreContext dbContext, 

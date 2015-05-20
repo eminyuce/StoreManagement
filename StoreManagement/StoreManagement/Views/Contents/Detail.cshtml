@@ -1,0 +1,17 @@
+﻿@model StoreManagement.Data.RequestModel.ContentDetailViewModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>@Model.Content.Name</h2>
+<p>
+    @Model.Content.Description
+</p>
+
+@foreach (var file in Model.Content.ContentFiles)
+{
+    <div>
+           @file.FileManager.FileName 
+    </div>
+}

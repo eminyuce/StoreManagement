@@ -132,5 +132,12 @@ namespace StoreManagement.Admin.Controllers
             return View(settingRepository.GetStoreSettings(storeId));
         }
 
+
+        public ActionResult TestSetting(int storeId=1)
+        {
+            ViewBag.StoreId = storeId;
+            var settings = settingRepository.GetStoreSettings(storeId).Where(r=>r.Type.Equals("Style1",StringComparison.InvariantCultureIgnoreCase)).ToList();
+            return View(settings);
+        }
 	}
 }

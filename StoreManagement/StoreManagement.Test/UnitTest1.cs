@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json.Linq;
 using StoreManagement.Admin.App_Start;
 using StoreManagement.Admin.Controllers;
 using StoreManagement.Data.GeneralHelper;
@@ -20,6 +22,23 @@ namespace StoreManagement.Test
         {
             dbContext = new StoreContext(ConnectionString);
         }
+
+        [TestMethod]
+        public void ParseJson()
+        {
+            String json = File.ReadAllText(@"C:\nLogs\logs\sssss.txt");
+            JObject results = JObject.Parse(json);
+ 
+            foreach (var result in results["styleArray"])
+            {
+                string id = (string) result["Id"];
+                string style = (string)result["Style"];
+
+                Console.WriteLine(id);
+            }
+
+        }
+
         [TestMethod]
         public void DomainName()
         {

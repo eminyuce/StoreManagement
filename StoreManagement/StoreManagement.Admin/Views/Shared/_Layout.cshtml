@@ -37,6 +37,14 @@
    @* <link href="~/Content/jHtmlArea/jHtmlArea.ColorPickerMenu.css" rel="stylesheet" />
     <link href="~/Content/jHtmlArea/jHtmlArea.Editor.css" rel="stylesheet" />*@
     <script src="~/Scripts/imageGallery.js"></script>
+    
+    <script src="~/Scripts/jquery.ui.fontSelector.min.js"></script>
+    <link href="~/Content/jquery.ui.fontSelector.css" rel="stylesheet" />
+
+    <link href="~/Content/colpick.css" rel="stylesheet" />
+    <script src="~/Scripts/colpick.js"></script>
+ 
+
     <script>
 
 
@@ -58,12 +66,27 @@
                 });
             });
 
-
-
+            
+            $('input[datatype-color="c"]').colpick({
+                onChange: function (hsb, hex, rgb, el, bySetColor) {
+                    $(el).css('border-color', '#' + hex);
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if (!bySetColor) {
+                        $(el).val(hex);
+                    }
+                    var storeId = $(el).attr("data-setting");
+                    var m = $('input[data-store-style=' + storeId + ']').val();
+                    var id = $(el).attr("data-color-component-id");
+                    $('[data-field-id=' + id + ']').css('color', '#' + hex);
+                    
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor(this.value);
+            });
         });
 
     </script>
-
+    
 
 
 </head>
@@ -105,7 +128,7 @@
         </div>
     </footer>
 
-    @Html.Action("StoreSettings","Settings", new { storeId = 1})
+
 @*    @Html.SettingsLabel("EMIN YUCE")*@
 
     @RenderSection("scripts", required: false)

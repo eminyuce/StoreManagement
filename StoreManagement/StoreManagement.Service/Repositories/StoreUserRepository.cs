@@ -18,6 +18,8 @@ namespace StoreManagement.Service.Repositories
         {
             this.dbContext = dbContext;
         }
+
+
     }
 
 

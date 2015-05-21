@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json.Linq;
 using Ninject;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -33,6 +35,22 @@ namespace StoreManagement.Admin.Controllers
         {
             this.storeRepository = storeRepository;
         }
+
+        public ActionResult SaveStyles(int storeId = 0, String styleArray="")
+        {
+            JObject results = JObject.Parse(styleArray);
+            foreach (var result in results["styleArray"])
+            {
+                string id = (string)result["Id"];
+                string style = (string)result["Style"];
+                var s = this.settingRepository.GetSingle(id.ToInt());
+                s.SettingValue = style;
+                settingRepository.Edit(s);
+            }
+            settingRepository.Save();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetRootCategories(int storeId = 0)
         {
             var cat = CategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList();

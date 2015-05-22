@@ -43,8 +43,18 @@ namespace StoreManagement.Controllers
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
-            // this.store = storeRepository.GetStore(requestContext.HttpContext.Request);
-            this.store = storeRepository.GetSingle(1);
+            try
+            {
+                this.store = storeRepository.GetStore(requestContext.HttpContext.Request);
+            }
+            catch (Exception ex)
+            {
+
+                this.store = storeRepository.GetSingle(1);
+            }
+           
+            
+           
         }
 
     }

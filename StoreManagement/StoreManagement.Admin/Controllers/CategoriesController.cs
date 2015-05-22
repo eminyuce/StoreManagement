@@ -9,6 +9,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Admin.Controllers
 {
+    [Authorize]
     public class CategoriesController : BaseController
     {
 

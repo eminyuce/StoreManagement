@@ -23,7 +23,7 @@ namespace StoreManagement.Controllers
             //IDictionary<string, IDictionary<string, string>> css = new Dictionary<string, IDictionary<string, string>>();
 
             var settingStyle = this.settingRepository.GetStoreSettings(store.Id)
-                .Where(r => r.Type.Equals("Style1", StringComparison.InvariantCultureIgnoreCase)).ToList();
+                .Where(r => r.Type.ToLower().Contains("Style".ToLower())).ToList();
 
             /* Populate css object from the database */
 

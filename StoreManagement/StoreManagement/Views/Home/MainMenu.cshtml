@@ -1,4 +1,4 @@
-﻿@model  List<StoreManagement.Data.Entities.Navigation> 
+﻿@model  List<StoreManagement.Data.Entities.Navigation>
 @{
     Layout = null;
     var menus = Model;
@@ -7,12 +7,11 @@
 {
     if (m.Static)
     {
-         <li>@m.Link</li>
+    <li>@m.Link</li>
     }
     else
     {    
-        <li>@Html.ActionLink(m.Name, m.ActionName, m.ControllerName)</li>
+    <li>@Html.ActionLink(m.Name, m.ActionName, m.ControllerName,null,new{@class="storenavigation"})</li>
     }
 }
 
-                      

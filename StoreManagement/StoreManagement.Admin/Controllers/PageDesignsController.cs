@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Admin.Controllers
 {
+    [Authorize]
     public class PageDesignsController : BaseController
     {
         [Inject]

@@ -2,7 +2,9 @@
 @model StoreManagement.Data.Entities.Content
 
 <div>
-    <h4>@Html.ActionLink(Model.Name, "Detail", "Contents", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) }, new { @class = "link" }) </h4>
+    <h4>@Html.ActionLink(Model.Name, "Detail", "Contents",
+    new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) },
+    new { @class = "link linkStyle" }) </h4>
     <hr />
     <dl class="dl-horizontal">
         <dd>

@@ -12,7 +12,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Admin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ProductsController : BaseController
     {
 

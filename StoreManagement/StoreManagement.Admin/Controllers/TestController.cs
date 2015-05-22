@@ -18,6 +18,7 @@ using Ninject;
 
 namespace StoreManagement.Admin.Controllers
 {
+    [Authorize]
     public class TestController : BaseController
     {
         [Inject]

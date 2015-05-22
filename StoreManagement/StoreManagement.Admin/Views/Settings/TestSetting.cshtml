@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "TestSetting";
     int storeId = ViewBag.StoreId;
+    
+
 }
 
 <h2>TestSetting</h2>
@@ -9,57 +11,75 @@
 <input type="hidden" value="@storeId" id="storeId"/>
 @foreach (var s in Model)
 {
-    <div class="editor-label">
-        <span name="styledText" data-field-id="@s.Id" style="@s.SettingValue" >@s.Name</span>
-    </div>
-    <div class="editor-field">
-        Color: 
-        <input type="text" datatype-color="c" @s.SettingKey data-setting="@ViewBag.StoreId"  data-color-component-id="@s.Id"  type="text" > </input>
-    </div>
-    <div class="editor-field">
-        Font: 
-        <select   datatype-font-family="c"      @s.SettingKey data-setting="@ViewBag.StoreId" data-font-component-id="@s.Id"  id="fonts">
-            <option value="Comic Sans MS">Comic Sans MS</option>
-            <option value="Arial">Arial</option>
-            <option value="Times New Roman">Times New Roman</option>
-        </select>
-        <select  datatype-font-size="c" data-font-component-id="@s.Id"   id="font-size">
-            @for (int i = 8; i < 50; i++)
-            {
-                <option value="@i">@i px</option>
-            }
-        </select>
-    </div>
-    <div>
-        Bold:<input name="textStyle" data-font-component-id="@s.Id"  type="checkbox" value="bold" />
-        Italic:<input name="textStyle" data-font-component-id="@s.Id"  type="checkbox" value="italic" />
-        Underline:<input name="textStyle" data-font-component-id="@s.Id"  type="checkbox" value="underline" />
-    </div>
+    var styleComponent = s.Type.Split("&".ToCharArray()).First();
+    var styleTypes = styleComponent.Split("-".ToCharArray()).Last().ToLower().Split(";".ToCharArray());
+
+    if (styleTypes.Any())
+    {
+        <div class="editor-label">
+            <span name="styledText" data-field-id="@s.Id" style="@s.SettingValue" >@s.Name</span>
+        </div>
+    }
+
+    if (styleTypes.Any(r => r.Equals("color")))
+    {
+        <div class="editor-field">
+            Color: 
+            <input type="text" placeholder="Pick a color" datatype-color="c" @s.SettingKey data-setting="@ViewBag.StoreId"  data-color-component-id="@s.Id"  type="text" > </input>
+        </div>
+        <div class="editor-field">
+         Mouse Hover  Color: 
+                <input type="text" placeholder="Pick a color" datatype-color-mousehover="c" @s.SettingKey data-setting="@ViewBag.StoreId"  data-color-component-id="@s.Id"  type="text" > </input>
+        </div>
+    }
+
+    if (styleTypes.Any(r => r.Equals("font")))
+    {
+        <div class="editor-field">
+            Font: 
+            <select   datatype-font-family="c"      @s.SettingKey data-setting="@ViewBag.StoreId" data-font-component-id="@s.Id"  id="fonts">
+                <option value="Comic Sans MS">Comic Sans MS</option>
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+            </select>
+            <select  datatype-font-size="c" style="width: 90px;" data-font-component-id="@s.Id"   id="font-size">
+                @for (int i = 5; i < 100; i++)
+                {
+                    <option value="@i">@i px</option>
+                }
+            </select>
+        </div>
+        <div>
+            Bold:<input name="textStyle" data-font-component-id="@s.Id"  type="checkbox" value="bold" />
+            Italic:<input name="textStyle" data-font-component-id="@s.Id"  type="checkbox" value="italic" />
+            Underline:<input name="textStyle" data-font-component-id="@s.Id"  type="checkbox" value="underline" />
+        </div>
+    }
 
 }
-<button type="submit" id="saveStyles"  class="btn btn-primary btn-block">Save</button>
+<button type="submit" id="saveStyles" class="btn btn-primary btn-block">Save</button>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        
+
         $("#saveStyles").click(function () {
             saveAllStyle();
         });
         function saveAllStyle() {
             var styleArray = new Array();
             var i = 0;
-            $('[data-field-id]').each(function() {
+            $('[data-field-id]').each(function () {
                 console.log($(this).attr("style"));
                 styleArray.push({
                     "Id": $(this).attr("data-field-id"),
-                    "Style":  $(this).attr("style")
+                    "Style": $(this).attr("style")
                 });
             });
             var storeId = $("#storeId").val();
-            styleArray = JSON.stringify({  "styleArray": styleArray });
+            styleArray = JSON.stringify({ "styleArray": styleArray });
             var jsonRequest = JSON.stringify({ "storeId": storeId, "styleArray": styleArray });
             console.log(styleArray);
-            
+
             jQuery.ajax({
                 url: "/Ajax/SaveStyles",
                 type: 'POST',
@@ -67,7 +87,7 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                     
+
                 },
                 error: function (request, status, error) {
                     console.error('Error ' + status + ' ' + request.responseText);
@@ -79,7 +99,7 @@
 
 
         }
-         
+
 
         $('[datatype-font-size]').change(function () {
             var id = $(this).attr("data-font-component-id");

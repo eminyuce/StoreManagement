@@ -12,9 +12,9 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Admin.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
-
 
         public HomeController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
         {
@@ -41,5 +41,6 @@ namespace StoreManagement.Admin.Controllers
 
             return View();
         }
+
     }
 }

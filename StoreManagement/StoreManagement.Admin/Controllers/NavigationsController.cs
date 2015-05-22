@@ -10,6 +10,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Admin.Controllers
 {
+    [Authorize]
     public class NavigationsController : BaseController
     {
         private INavigationRepository navigationRepository;

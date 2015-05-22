@@ -13,6 +13,7 @@ using WebMatrix.WebData;
 
 namespace StoreManagement.Admin.Controllers
 {
+    [Authorize]
     public class StoresController : BaseController
     {
         //

@@ -12,6 +12,8 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Admin.Controllers
 {
+
+    [Authorize]
     public class FileManagerController : BaseController
     {
         private const String ControllerName = "FileManager";

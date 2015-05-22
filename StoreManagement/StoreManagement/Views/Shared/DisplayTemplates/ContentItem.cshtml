@@ -2,7 +2,10 @@
 @model StoreManagement.Data.Entities.Content
 <div>
     <b style="color:red"> 
-            @Html.ActionLink(Model.Name,"Index","Content",new { id= String.Format("{0}-{1}",GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) },null)
+            @Html.ActionLink(Model.Name,"Detail","Contents",
+            new { id= String.Format("{0}-{1}",
+                GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) },
+                new {@class="linkStyle"})
     </b>
         @foreach (var c in Model.ContentFiles.OrderByDescending(r => r.Id).Take(5))
         {

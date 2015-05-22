@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <title>@ViewBag.Title</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     
@@ -65,10 +65,36 @@
                     $("#StoreId").val($(this).val());
                 });
             });
-
+            $('[datatype-font-family="c"]').chosen({});
+            $('[datatype-font-size="c"]').chosen({});
             
+            $('input[datatype-color-mousehover="c"]').colpick({
+                onChange: function (hsb, hex, rgb, el, bySetColor)
+                {
+                    
+                    $(el).hover(function () {
+                        $(this).css("color", '#' + hex);
+                    });
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if (!bySetColor) {
+                        $(el).val(hex);
+                    }
+                    var storeId = $(el).attr("data-setting");
+                    var m = $('input[data-store-style=' + storeId + ']').val();
+                    var id = $(el).attr("data-color-component-id");
+                    $('[data-field-id=' + id + ']').hover(function () {
+                        $(this).css("color", '#' + hex);
+                    });
+                    
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor(this.value);
+            });
+            
+
             $('input[datatype-color="c"]').colpick({
-                onChange: function (hsb, hex, rgb, el, bySetColor) {
+                onChange: function (hsb, hex, rgb, el, bySetColor)
+                {
                     $(el).css('border-color', '#' + hex);
                     // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
                     if (!bySetColor) {
@@ -83,6 +109,9 @@
             }).keyup(function () {
                 $(this).colpickSetColor(this.value);
             });
+            
+
+
         });
 
     </script>

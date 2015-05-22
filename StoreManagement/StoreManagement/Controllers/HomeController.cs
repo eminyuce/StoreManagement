@@ -19,8 +19,7 @@ namespace StoreManagement.Controllers
 
         public HomeController(IStoreContext dbContext, 
             ISettingRepository settingRepository,
-            IStoreRepository storeRepository,
-            INavigationRepository navigationRepository)
+            IStoreRepository storeRepository)
             : base(dbContext, settingRepository, storeRepository)
         {
  

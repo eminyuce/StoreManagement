@@ -50,7 +50,7 @@ namespace StoreManagement.Admin.Controllers
             foreach (OrderingItem item in values)
             {
                 var content = ContentRepository.GetSingle(item.Id);
-                if (item.Ordering > 0 && !String.IsNullOrEmpty(checkbox))
+                if (String.IsNullOrEmpty(checkbox))
                 {
                     content.Ordering = item.Ordering;
                 }

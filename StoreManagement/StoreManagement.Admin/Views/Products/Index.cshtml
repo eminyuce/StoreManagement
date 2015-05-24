@@ -1,9 +1,11 @@
 ﻿@using GridMvc.Html
 @using GridMvc.Sorting
+@using StoreManagement.Data.GeneralHelper;
 @model IEnumerable<StoreManagement.Data.Entities.Content>
 
 @{
     ViewBag.Title = "Index";
+    var pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
 }
 
 <h2>Index</h2>
@@ -169,7 +171,7 @@
               .SortInitialDirection(GridSortDirection.Descending);
 
 
-    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(25, 1000, "GridPageSize").Sortable().Filterable().WithMultipleFilters().Selectable(false)
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 
 </div>

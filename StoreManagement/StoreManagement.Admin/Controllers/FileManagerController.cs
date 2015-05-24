@@ -18,13 +18,10 @@ namespace StoreManagement.Admin.Controllers
     {
         private const String ControllerName = "FileManager";
 
-
-        private IFileManagerRepository fileManagerRepository;
-
-
-        public FileManagerController(IStoreContext dbContext, ISettingRepository settingRepository, IFileManagerRepository fileManagerRepository) : base(dbContext, settingRepository)
+        public FileManagerController(IStoreContext dbContext,
+            ISettingRepository settingRepository) : base(dbContext, settingRepository)
         {
-            this.fileManagerRepository = fileManagerRepository;
+           
         }
 
         private string StorageRoot
@@ -33,7 +30,7 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult DisplayImages(int storeId=1)
         {
-            return View(fileManagerRepository.GetFilesByStoreId(storeId));
+            return View(FileManagerRepository.GetFilesByStoreId(storeId));
         }
         public ActionResult Index()
         {
@@ -64,7 +61,7 @@ namespace StoreManagement.Admin.Controllers
 
         private void DeleteFile(string id)
         {
-            var f = fileManagerRepository.GetSingle(id.ToInt());
+            var f = FileManagerRepository.GetSingle(id.ToInt());
             var filename = f.FileName;
             var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
 
@@ -72,15 +69,15 @@ namespace StoreManagement.Admin.Controllers
             {
                 System.IO.File.Delete(filePath);
             }
-            fileManagerRepository.Delete(f);
-            fileManagerRepository.Save();
+            FileManagerRepository.Delete(f);
+            FileManagerRepository.Save();
         }
 
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
         [HttpGet]
         public ActionResult Download(string id)
         {
-            var f = fileManagerRepository.GetSingle(id.ToInt());
+            var f = FileManagerRepository.GetSingle(id.ToInt());
             var filename = f.FileName;
             var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
 
@@ -138,8 +135,8 @@ namespace StoreManagement.Admin.Controllers
         private FileManager SaveFiles(HttpPostedFileBase file, int storeId=1)
         {
             var fileManager = ConvertToFileManager(file, storeId);
-            fileManagerRepository.Add(fileManager);
-            fileManagerRepository.Save();
+            FileManagerRepository.Add(fileManager);
+            FileManagerRepository.Save();
 
             return fileManager;
         }

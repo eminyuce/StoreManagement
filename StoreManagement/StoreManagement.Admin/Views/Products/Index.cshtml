@@ -7,6 +7,14 @@
 }
 
 <h2>Index</h2>
+
+
+<span class="btn btn-link btn-xs" id="DeleteAll">
+    Delete All
+</span>
+ <span class="btn btn-link btn-xs" id="SelectAll">
+    Select All
+</span>
 <div>
     @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Products" })
 </div>
@@ -16,6 +24,15 @@
 
 @Html.Grid(Model).Named("contentGrid").Columns(columns =>
     {
+
+
+        columns.Add().Encoded(false).
+            Sanitized(false).
+            SetWidth(10).
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
+        
+        
+        
         columns.Add(o => o.Id, true);
              columns.Add()
                 .Encoded(false)

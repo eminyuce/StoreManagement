@@ -15,14 +15,10 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
-
-        [Inject]
-        public IContentFileRepository ContentFileRepository { set; get; } 
-        
-        private IContentRepository contentRepository;
-        public ProductsController(IStoreContext dbContext, ISettingRepository settingRepository, IContentRepository contentRepository) : base(dbContext, settingRepository)
+ 
+        public ProductsController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
         {
-            this.contentRepository = contentRepository;
+             
         }
 
         public ActionResult Index(int storeId=0, String search="")
@@ -30,11 +26,11 @@ namespace StoreManagement.Admin.Controllers
             List<Content> resultList = new List<Content>();
             if (storeId == 0)
             {
-                resultList = contentRepository.GetAll().ToList();
+                resultList = ContentRepository.GetAll().ToList();
             }
             else
             {
-                resultList = contentRepository.GetContentByType(storeId,"content");
+                resultList = ContentRepository.GetContentByType(storeId, "content");
             }
 
             if (!String.IsNullOrEmpty(search))
@@ -50,7 +46,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Content content = contentRepository.GetSingle(id);
+            Content content = ContentRepository.GetSingle(id);
             if (content == null)
             {
                 return HttpNotFound();
@@ -71,7 +67,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-               content = contentRepository.GetSingle(id);
+                content = ContentRepository.GetSingle(id);
             }
             return View(content);
         }
@@ -87,13 +83,13 @@ namespace StoreManagement.Admin.Controllers
             {
                 if (content.Id == 0)
                 {
-                    contentRepository.Add(content);
+                    ContentRepository.Add(content);
                 }
                 else
                 {
-                    contentRepository.Edit(content);
+                    ContentRepository.Edit(content);
                 }
-                contentRepository.Save();
+                ContentRepository.Save();
                 if (selectedFileId != null)
                 {
                     int contentId = content.Id;
@@ -113,7 +109,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Content content = contentRepository.GetSingle(id);
+            Content content = ContentRepository.GetSingle(id);
             if (content == null)
             {
                 return HttpNotFound();
@@ -128,9 +124,9 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Content content = contentRepository.GetSingle(id);
-            contentRepository.Delete(content);
-            contentRepository.Save();
+            Content content = ContentRepository.GetSingle(id);
+            ContentRepository.Delete(content);
+            ContentRepository.Save();
             return RedirectToAction("Index");
         }
 

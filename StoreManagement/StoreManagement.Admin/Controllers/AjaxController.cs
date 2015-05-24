@@ -16,24 +16,27 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Ajax/
 
-        [Inject]
-        public IFileManagerRepository FileManagerRepository { get; set; }
-
-        [Inject]
-        public IContentFileRepository ContentFileRepository { set; get; }
-
-        [Inject]
-        public ICategoryRepository CategoryRepository { set; get; }
-
-
-        private IStoreRepository storeRepository;
-
+       
         public AjaxController(IStoreContext dbContext, 
             ISettingRepository settingRepository,
             IStoreRepository storeRepository)
             : base(dbContext, settingRepository)
         {
-            this.storeRepository = storeRepository;
+      
+        }
+
+        [HttpPost]
+        public ActionResult DeleteContentItem(List<String> values)
+        {
+            foreach (String id in values)
+            {
+                var contentId = id.ToInt();
+                var content = ContentRepository.GetSingle(contentId);
+                ContentRepository.Delete(content);
+            }
+            ContentRepository.Save();
+
+            return Json(values, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult SaveStyles(int storeId = 0, String styleArray="")

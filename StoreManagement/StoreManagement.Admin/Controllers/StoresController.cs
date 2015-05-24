@@ -16,23 +16,12 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class StoresController : BaseController
     {
-        //
-        // GET: /Admin/
-        private IStoreContext dbContext;
-        private IStoreRepository storeRepository;
-        private ISettingRepository settingRepository;
-        private IStoreUserRepository storeUserRepository;
-
+       
         public StoresController(IStoreContext dbContext,
-            IStoreRepository storeRepository,
-            ISettingRepository settingRepository,
-            IStoreUserRepository storeUserRepository)
+            ISettingRepository settingRepository)
             : base(dbContext, settingRepository)
         {
-            this.dbContext = dbContext;
-            this.storeRepository = storeRepository;
-            this.settingRepository = settingRepository;
-            this.storeUserRepository = storeUserRepository;
+            
         }
         public PartialViewResult StoresFilter(String actionName = "", String controllerName = "")
         {
@@ -148,8 +137,8 @@ namespace StoreManagement.Admin.Controllers
                     var su = new StoreUser();
                     su.StoreId = storeId;
                     su.UserId = userId;
-                    storeUserRepository.Add(su);
-                    storeUserRepository.Save();
+                    StoreUserRepository.Add(su);
+                    StoreUserRepository.Save();
 
                     return RedirectToAction("Users", new { id = storeId });
                 }
@@ -166,7 +155,7 @@ namespace StoreManagement.Admin.Controllers
         {
             var store = this.storeRepository.GetSingle(id);
             ViewBag.Store = store;
-            var storeUserIds = storeUserRepository.FindBy(r => r.StoreId == id).Select(r => r.UserId).ToArray();
+            var storeUserIds = StoreUserRepository.FindBy(r => r.StoreId == id).Select(r => r.UserId).ToArray();
 
             //using (StoreContext db = new StoreContext())
             {

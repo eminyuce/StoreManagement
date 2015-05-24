@@ -65,7 +65,14 @@ namespace StoreManagement.Test
             }
 
         }
+        [TestMethod]
+        public void TestMethod4()
+        {
+            ContentRepository rep = new ContentRepository(dbContext);
+            var c = rep.GetSingle(1);
 
+            Assert.IsNotNull(c);
+        }
         [TestMethod]
         public void TestMethod3()
         {

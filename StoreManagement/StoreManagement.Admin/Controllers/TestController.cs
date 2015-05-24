@@ -21,11 +21,6 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class TestController : BaseController
     {
-        [Inject]
-        public IContentRepository ProductRepository { set; get; }
-
-        [Inject]
-        public IPageDesignRepository PageDesignRepository { set; get; }
          //
         // GET: /Setting/
         public TestController(IStoreContext dbContext, ISettingRepository settingRepository)
@@ -47,7 +42,7 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult DetailRazorPage(String template)
         {
-            var pr = ProductRepository.GetSingle(1);
+            var pr = ContentRepository.GetSingle(1);
            // var template = System.IO.File.ReadAllText(Server.MapPath("~/Views/Products/Details2.cshtml"));
             String body = Razor.Parse(template, pr);
  

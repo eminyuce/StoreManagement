@@ -13,8 +13,7 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class PageDesignsController : BaseController
     {
-        [Inject]
-        public IPageDesignRepository PageDesignRepository { set; get; }
+        
          //
         // GET: /Setting/
           public PageDesignsController(IStoreContext dbContext, ISettingRepository settingRepository)

@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 
+
+
 namespace StoreManagement.Data.Entities
 {
     public class AdminProjectUsersModel

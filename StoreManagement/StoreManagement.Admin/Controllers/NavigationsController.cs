@@ -13,18 +13,14 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class NavigationsController : BaseController
     {
-        private INavigationRepository navigationRepository;
-
-        [Inject]
-        public IStoreRepository StoreRepository { get; set; }
+      
 
 
         public NavigationsController(IStoreContext dbContext,
-       ISettingRepository settingRepository,
-       INavigationRepository navigationRepository)
+       ISettingRepository settingRepository)
             : base(dbContext, settingRepository)
         {
-            this.navigationRepository = navigationRepository;
+   
         }
 
         //

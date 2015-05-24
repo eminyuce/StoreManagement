@@ -12,15 +12,13 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class CategoriesController : BaseController
     {
-
-        private ICategoryRepository categoryRepository;
+ 
 
         public CategoriesController(IStoreContext dbContext,
-            ISettingRepository settingRepository,
-            ICategoryRepository categoryRepository)
+            ISettingRepository settingRepository )
             : base(dbContext, settingRepository)
         {
-            this.categoryRepository = categoryRepository;
+            
         }
 
         //
@@ -31,11 +29,11 @@ namespace StoreManagement.Admin.Controllers
             List<Category> resultList = new List<Category>();
             if (storeId == 0)
             {
-                resultList = categoryRepository.GetAll().ToList();
+                resultList = CategoryRepository.GetAll().ToList();
             }
             else
             {
-                resultList = categoryRepository.GetCategoriesByStoreId(storeId);
+                resultList = CategoryRepository.GetCategoriesByStoreId(storeId);
             }
 
             if (!String.IsNullOrEmpty(search))
@@ -49,7 +47,7 @@ namespace StoreManagement.Admin.Controllers
         // GET: /Categories/Details/5
         public ViewResult Details(int id)
         {
-            Category category = categoryRepository.GetSingle(id);
+            Category category = CategoryRepository.GetSingle(id);
             return View(category);
         }
         //
@@ -64,7 +62,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                category = categoryRepository.GetSingle(id);
+                category = CategoryRepository.GetSingle(id);
             }
 
 
@@ -81,13 +79,13 @@ namespace StoreManagement.Admin.Controllers
             {
                 if (category.Id == 0)
                 {
-                    categoryRepository.Add(category);
+                    CategoryRepository.Add(category);
                 }
                 else
                 {
-                    categoryRepository.Edit(category);
+                    CategoryRepository.Edit(category);
                 }
-                categoryRepository.Save();
+                CategoryRepository.Save();
 
                 return RedirectToAction("Index");
             }
@@ -99,7 +97,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
-            Category category = categoryRepository.GetSingle(id);
+            Category category = CategoryRepository.GetSingle(id);
             return View(category);
         }
        
@@ -109,9 +107,9 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = categoryRepository.GetSingle(id);
-            categoryRepository.Delete(category);
-            categoryRepository.Save();
+            Category category = CategoryRepository.GetSingle(id);
+            CategoryRepository.Delete(category);
+            CategoryRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -127,7 +125,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult CreateCategoryTree(int storeId = 1, String categoryType = "family")
         {
-            var tree = this.categoryRepository.GetCategoriesByStoreId(storeId, categoryType);
+            var tree = this.CategoryRepository.GetCategoriesByStoreId(storeId, categoryType);
             return View(tree);
         }
         public ActionResult Test()
@@ -138,7 +136,7 @@ namespace StoreManagement.Admin.Controllers
         public PartialViewResult CategoriesRadioButton(int categoryId = 0)
         {
             ViewBag.CategoryId = categoryId;
-            return PartialView("_RadioButtonCategories", categoryRepository.GetAll().ToList());
+            return PartialView("_RadioButtonCategories", CategoryRepository.GetAll().ToList());
         }
 
 

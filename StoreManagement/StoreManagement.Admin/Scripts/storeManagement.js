@@ -1,4 +1,16 @@
-﻿$(document).ready(function () {
+﻿function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
+$(document).ready(function () {
+    var originalURL = window.location.href;
+    var q = getQueryStringParameter(originalURL, "GridPageSize");
+    if (!isEmpty(q)) {
+        $("#GridListItemSize").val(q);
+    }
+
+
+
     $("#DeselectAll").click(function () {
         console.log("DeselectAll is clicked.");
         var i = 0;
@@ -143,6 +155,26 @@
         return windowUrl + '?' + finalQs;
         //6- prepare final url
        // window.location = windowUrl + '?' + finalQs;
+    }
+    function getQueryStringParameter(originalURL, param) {
+   
+        if (originalURL.split('?').length > 1) {
+            var qs = originalURL.split('?')[1];
+            //3- get list of query strings
+            var qsArray = qs.split('&');
+            var flag = false;
+            //4- try to find query string key
+            for (var i = 0; i < qsArray.length; i++) {
+                if (qsArray[i].split('=').length > 0) {
+                    if (param == qsArray[i].split('=')[0]) {
+                        //exists key
+                        return qsArray[i].split('=')[1];
+                    }
+                }
+            }
+
+        }
+        return "";
     }
 });
 

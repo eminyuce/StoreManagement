@@ -5,7 +5,8 @@
 
 @{
     ViewBag.Title = "Index";
-    var pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
+    int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
+    pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
 }
 
 <h2>Index</h2>
@@ -84,7 +85,7 @@
             <span class="col-md-3">
                 <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
                     <option   class="text-info"  value="25">25</option>
-                    <option class="text-info" value="50">50</option>
+                    <option selected="selected" class="text-info" value="50">50</option>
                     <option class="text-info" value="100">100</option>
                     <option class="text-info" value="250">250</option>
                     <option class="text-info" value="500">500</option>

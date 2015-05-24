@@ -132,7 +132,7 @@
         columns.Add(o => o.Ordering).Encoded(false).
                     Sanitized(false).
                     SetWidth(10).
-                    RenderValueAs(o => String.Format("<input gridkey-id='{0}' value='{1}'  class='orderTextInput input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
+                    RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
 
         columns.Add(o => o.State)
          .Titled("State")

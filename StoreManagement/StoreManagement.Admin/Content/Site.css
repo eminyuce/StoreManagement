@@ -754,3 +754,13 @@ tr.pager td {
             margin: 0;
         }
 }
+input.GridOrderingTextbox {
+  max-width: 30px;
+  width: 30px;
+  margin-left: 5px;
+  margin-top: 2px;
+  text-align: center;
+  line-height: 20px;
+  max-height: 20px;
+  /* height: 20px; */
+}

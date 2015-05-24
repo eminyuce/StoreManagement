@@ -16,7 +16,12 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Ajax/
 
-       
+        public class OrderingItem
+        {
+            public int Id { get; set; }
+            public int Ordering { get; set; }
+
+        }
         public AjaxController(IStoreContext dbContext, 
             ISettingRepository settingRepository,
             IStoreRepository storeRepository)
@@ -39,6 +44,17 @@ namespace StoreManagement.Admin.Controllers
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ChangeContentGridOrdering(List<OrderingItem> values)
+        {
+            foreach (OrderingItem item in values)
+            {
+                var content = ContentRepository.GetSingle(item.Id);
+                content.Ordering = item.Ordering;
+                ContentRepository.Edit(content);
+            }
+            ContentRepository.Save();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult SaveStyles(int storeId = 0, String styleArray="")
         {
             JObject results = JObject.Parse(styleArray);
@@ -112,5 +128,7 @@ namespace StoreManagement.Admin.Controllers
 
         //    return null; //you may return any success flag etc
         //}
+       
     }
+    
 }

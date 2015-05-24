@@ -111,6 +111,39 @@
             ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
         }
     }
+    $("#GridListItemSize").change(function (e) {
+        var originalURL = window.location.href;
+        if (originalURL.split('?').length > 1) {
+            window.location.href = updateUrlParameter(originalURL, 'GridPageSize', $('#GridListItemSize option:selected').val())
+        } else {
+            window.location.href = window.location.href + "?GridPageSize=" + $('#GridListItemSize option:selected').val();
+        }
+    });
+    function updateUrlParameter(originalURL, param, value)
+    {
+        console.log(value);
+        var windowUrl = originalURL.split('?')[0];
+        var qs = originalURL.split('?')[1];
+        //3- get list of query strings
+        var qsArray = qs.split('&');
+        var flag = false;
+        //4- try to find query string key
+        for (var i = 0; i < qsArray.length; i++) {
+            if (qsArray[i].split('=').length > 0) {
+                if (param == qsArray[i].split('=')[0]) {
+                    //exists key
+                    qsArray[i] = param + '=' + value;
+                    flag = true;
+                    break;
+                }  
+            }
+        }
+         
+        var finalQs = qsArray.join('&');
+        return windowUrl + '?' + finalQs;
+        //6- prepare final url
+       // window.location = windowUrl + '?' + finalQs;
+    }
 });
 
 function ajaxMethodCall(postData,ajaxUrl, successFunction) {

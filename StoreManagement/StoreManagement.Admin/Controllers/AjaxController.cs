@@ -20,6 +20,7 @@ namespace StoreManagement.Admin.Controllers
         {
             public int Id { get; set; }
             public int Ordering { get; set; }
+            public bool State { get; set; }
 
         }
         public AjaxController(IStoreContext dbContext, 
@@ -44,16 +45,33 @@ namespace StoreManagement.Admin.Controllers
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ChangeContentGridOrdering(List<OrderingItem> values)
+        public ActionResult ChangeContentGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
             foreach (OrderingItem item in values)
             {
                 var content = ContentRepository.GetSingle(item.Id);
-                content.Ordering = item.Ordering;
+                if (item.Ordering > 0 && !String.IsNullOrEmpty(checkbox))
+                {
+                    content.Ordering = item.Ordering;
+                }
+                else if (checkbox.Equals("imagestate", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    content.ImageState = item.State;
+                }
+                else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    content.State = item.State;
+                }
+                else if (checkbox.Equals("mainpage", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    content.MainPage = item.State;
+                }
+                
+
                 ContentRepository.Edit(content);
             }
             ContentRepository.Save();
-            return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveStyles(int storeId = 0, String styleArray="")
         {

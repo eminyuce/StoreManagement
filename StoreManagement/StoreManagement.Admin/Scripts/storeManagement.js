@@ -68,11 +68,49 @@
         console.log(postData);
         var tableName = $("[data-gridname]").attr("data-gridname");
         if (tableName == "imagesGrid") {
-            ajaxMethodCall(postData, "/Ajax/ChangeImagesGridOrdering", changeOrderingSucessSuccess);
+            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeOrderingSuccess);
         } else if (tableName == "contentGrid") {
-            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrdering", changeOrderingSucessSuccess);
+            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeOrderingSuccess);
         }
     });
+
+    function GetSelectedStateValues(checkboxName,state) {
+        var itemArray = new Array();
+        var i = 0;
+        $('input[name=' + checkboxName + ']').each(function () {
+            var id = $(this).attr("gridkey-id");
+            var m = $('input[name="checkboxGrid"]').filter('[gridkey-id="' + id + '"]').is(':checked');
+            if (m) {
+            var item = new OrderingItem();
+            item.Id = id;
+            item.Ordering = 0;
+            item.State = state;
+            itemArray[i++] = item;
+            }
+        });
+      
+        return itemArray;
+    }
+    $("#SetStateOffAll").click(function () {
+        console.log("SetStateOffAll is clicked.");
+        changeState(false);
+    });
+    $("#SetStateOnAll").click(function () {
+        console.log("SetStateOnAll is clicked.");
+        changeState(true);
+    });
+    function changeState(state) {
+        var ppp = $("#ItemStateSelection").val();
+        var selectedValues = GetSelectedStateValues("checkbox" + ppp, state);
+        var postData = JSON.stringify({ "values": selectedValues, "checkbox": ppp });
+        console.log(postData);
+        var tableName = $("[data-gridname]").attr("data-gridname");
+        if (tableName == "imagesGrid") {
+            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
+        } else if (tableName == "contentGrid") {
+            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
+        }
+    }
 });
 
 function ajaxMethodCall(postData,ajaxUrl, successFunction) {
@@ -96,7 +134,14 @@ function deleteItemsSuccess(data) {
         console.log(pp);
     });
 }
-
-function changeOrderingSucessSuccess(data) {
+function changeStateSuccess(data) {
+    //var parsedPostData = jQuery.parseJSON(data);
+    console.log(data);
+    data.values.forEach(function (entry) {
+        console.log(entry.Id);
+        $('input[name=checkbox' + data.checkbox + ']').filter('[gridkey-id="' + entry.Id + '"]').prop('checked', entry.State);
+    });
+}
+function changeOrderingSuccess(data) {
     console.log(data);
 }

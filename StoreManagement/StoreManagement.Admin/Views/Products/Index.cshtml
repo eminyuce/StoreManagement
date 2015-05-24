@@ -45,9 +45,9 @@
             </span>
             <span class="col-md-2">
                 <select name="ItemStateSelection" id="ItemStateSelection">
-                    <option value="state">Durum</option>
-                    <option value="image">Resim Yayında</option>
-                    <option value="main">Ana Sayfa</option>
+                    <option value="State">Durum</option>
+                    <option value="ImageState">Resim Yayında</option>
+                    <option value="MainPage">Ana Sayfa</option>
                 </select>
             </span><span class="col-md-2">
                 <span class="btn btn-link btn-xs" id="SetStateOnAll">Set Selected State True All</span>
@@ -137,20 +137,31 @@
         columns.Add(o => o.State)
          .Titled("State")
          .Sortable(true)
-         .SortInitialDirection(GridSortDirection.Descending);
+         .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                    Sanitized(false)
+         .RenderValueAs(o => String.Format("<input disabled='disabled' gridkey-id='{0}'  name='checkboxState' {1} type='checkbox'>", 
+             o.Id,(o.State ? "checked" : "")));
+
+        columns.Add(o => o.ImageState)
+              .Titled("ImageState")
+              .Sortable(true)
+              .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                         Sanitized(false)
+              .RenderValueAs(o => String.Format("<input disabled='disabled' gridkey-id='{0}'  name='checkboxImageState' {1} type='checkbox'>",
+                  o.Id, (o.ImageState ? "checked" : "")));
+
 
 
         columns.Add(o => o.MainPage)
-   .Titled("MainPage")
-   .Sortable(true)
-   .SortInitialDirection(GridSortDirection.Descending);
-
-        columns.Add(o => o.ImageState)
-        .Titled("ImageState")
-        .Sortable(true)
-        .SortInitialDirection(GridSortDirection.Descending);
+         .Titled("MainPage")
+         .Sortable(true)
+         .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                    Sanitized(false)
+         .RenderValueAs(o => String.Format("<input disabled='disabled' gridkey-id='{0}'  name='checkboxMainPage' {1} type='checkbox'>",
+             o.Id, (o.MainPage ? "checked" : "")));
 
 
+     
         columns.Add(o => o.CreatedDate)
               .Titled("Date")
               .Sortable(true).

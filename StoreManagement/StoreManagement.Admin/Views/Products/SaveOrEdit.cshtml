@@ -6,100 +6,123 @@
     int storeId = Model != null ? Model.StoreId : 0;
 }
 
-<h2>Create</h2>
 
-@Html.Action("CreateCategoryTree", "Categories")
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+@Html.Partial("_LeftMenu")
 
-    <fieldset>
-        <legend>Content</legend>
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Products</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>Create New Products</h2>
 
-        <div class="editor-label control-group">
-            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+                @Html.Action("CreateCategoryTree", "Categories")
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend>Content</legend>
+
+                        <div class="editor-label control-group">
+                            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                        </div>
+
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.CategoryId)
+                        @Html.HiddenFor(model => model.Type)
+                        @Html.HiddenFor(model => model.Url)
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Description)
+                        </div>
+                        <div class="editor-field">
+
+                            <textarea id="Description" style="width: 100%; height: 800px;">@Model.Description</textarea>
+
+                        </div>
+
+
+
+                        <div class="editor-field">
+                            <div id="contentImages"></div>
+                            <div id="existingContentImages"></div>
+                            @Html.Action("ImageGallery", "FileManager")
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.MainPage)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.MainPage)
+                            @Html.ValidationMessageFor(model => model.MainPage)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.State)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.State)
+                            @Html.ValidationMessageFor(model => model.State)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ImageState)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ImageState)
+                            @Html.ValidationMessageFor(model => model.ImageState)
+                        </div>
+
+
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Ordering)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Ordering)
+                            @Html.ValidationMessageFor(model => model.Ordering)
+                        </div>
+
+
+                        <p>
+                            <input type="submit" value="Create" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
         </div>
-        <div class="editor-field controls">
-            @Html.Action("StoresDropDown", "Stores", new { storeId })
-        </div>
+    </div>
 
 
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.CategoryId)
-        @Html.HiddenFor(model => model.Type)
-        @Html.HiddenFor(model => model.Url)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-           
-            <textarea id="Description"   style="width: 100%; height: 800px;">@Model.Description</textarea>
-
-        </div>
-
-
- 
-        <div class="editor-field">
-            <div id="contentImages"></div>
-                  <div id="existingContentImages"></div>
-            @Html.Action("ImageGallery","FileManager")
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MainPage)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MainPage)
-            @Html.ValidationMessageFor(model => model.MainPage)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.State)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.State)
-            @Html.ValidationMessageFor(model => model.State)
-        </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ImageState)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ImageState)
-            @Html.ValidationMessageFor(model => model.ImageState)
-        </div>
-
-    
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ordering)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ordering)
-            @Html.ValidationMessageFor(model => model.Ordering)
-        </div>
-  
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+
+
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -114,11 +137,11 @@
                 $("#CategoryId").val(selectedCategoryId);
 
             });
-         
+
             console.log("jquery is working");
             $("#Description").htmlarea();
             GetFiles($("#Id").val());
-  
+
 
             //$("#Description").htmlarea({
             //    // Override/Specify the Toolbar buttons to show
@@ -161,12 +184,12 @@
 
 
         });
-        
+
         function GetFiles(id) {
 
             var jsonRequest = JSON.stringify({ "contentId": id });
             console.log(jsonRequest);
-            
+
             jQuery.ajax({
                 url: "/Ajax/GetFiles",
                 type: 'POST',
@@ -178,7 +201,7 @@
                     $.each(files, function (i, file) {
                         var imageId = file.FileManagerId;
                         var fileName = file.FileManager.FileName;
-                        
+
                         var removeLink = $("<div/>")
                                 .attr("data-image-remove-link", imageId)
                                 .attr("data-image-file-name", fileName)
@@ -191,7 +214,7 @@
                             name: 'selectedFileId',
                             data_selected_file: imageId
                         });
-                        
+
                         $("#existingContentImages").append(div);
                         $("#existingContentImages").append(fileHiddenLink);
                         bindRemoveImage();

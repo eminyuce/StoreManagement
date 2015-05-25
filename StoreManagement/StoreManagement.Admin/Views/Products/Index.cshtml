@@ -9,99 +9,107 @@
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
 }
 
-<h2>Index</h2>
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title"> <h4>Products Management</h4></div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+               
+
+                <div>
+                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Products" })
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">100 Continue</h3>
+                    </div>
+                    <div class="panel-body">The client should continue with its request.</div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <span class="col-md-3">
+                                @Html.ActionLink("Create", "SaveOrEdit", "Products", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
+                            </span>
+                            <span class="col-md-9">
+                                @Html.Partial("pSearchForm")
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">
+                                <span class="btn btn-link btn-xs" id="SelectAll">Select All
+                                </span>
+                            </span>
+                            <span class="col-md-1">
+                                <span class="btn btn-link btn-xs" id="DeselectAll">Deselect All
+                                </span>
+                            </span>
+                            <span class="col-md-2">
+                                <span class="btn btn-link btn-xs" id="DeleteAll">Delete Selected 
+                                </span>
+                            </span>
+                            <span class="col-md-2">
+                                <select name="ItemStateSelection" id="ItemStateSelection">
+                                    <option value="State">Durum</option>
+                                    <option value="ImageState">Resim Yayında</option>
+                                    <option value="MainPage">Ana Sayfa</option>
+                                </select>
+                            </span><span class="col-md-2">
+                                <span class="btn btn-link btn-xs" id="SetStateOnAll">Set Selected State True All</span>
+
+                            </span><span class="col-md-2">
+                                <span class="btn btn-link btn-xs" id="SetStateOffAll">Set Selected State False All</span>
+
+                            </span>
+                            <span class="col-md-2">
+                                <span class="btn btn-link btn-xs" id="OrderingAll">Ordering All
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
 
 
-<div>
-    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Products" })
-</div>
-
-<div class="panel panel-info">
-    <div class="panel-heading">
-        <h3 class="panel-title">100 Continue</h3>
-    </div>
-    <div class="panel-body">The client should continue with its request.</div>
-</div>
-
-<div class="panel panel-info">
-    <div class="panel-body">
-        <div  class="row">
-            <span class="col-md-3">
-                @Html.ActionLink("Create", "SaveOrEdit", "Products", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
-            </span>
-            <span class="col-md-9">
-                @Html.Partial("pSearchForm")
-            </span>
-        </div>
-        <div class="row">
-            <span class="col-md-1">
-                <span class="btn btn-link btn-xs" id="SelectAll">Select All
-                </span>
-            </span>
-            <span class="col-md-1">
-                <span class="btn btn-link btn-xs" id="DeselectAll">Deselect All
-                </span>
-            </span>
-            <span class="col-md-2">
-                <span class="btn btn-link btn-xs" id="DeleteAll">Delete Selected 
-                </span>
-            </span>
-            <span class="col-md-2">
-                <select name="ItemStateSelection" id="ItemStateSelection">
-                    <option value="State">Durum</option>
-                    <option value="ImageState">Resim Yayında</option>
-                    <option value="MainPage">Ana Sayfa</option>
-                </select>
-            </span><span class="col-md-2">
-                <span class="btn btn-link btn-xs" id="SetStateOnAll">Set Selected State True All</span>
-
-            </span><span class="col-md-2">
-                <span class="btn btn-link btn-xs" id="SetStateOffAll">Set Selected State False All</span>
-
-            </span>
-            <span class="col-md-2">
-                <span class="btn btn-link btn-xs" id="OrderingAll">Ordering All
-                </span>
-            </span>
-        </div>
-
-    </div>
-
-</div>
 
 
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <span class="col-md-6">
+                                <span class="label "><span class="badge text-danger text-large">@Model.Count() </span>
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <div class="row">
-            <span class="col-md-6">
-              <span class="label "> <span class="badge text-danger text-large"> @Model.Count() </span> 
-                  
-                 
-                   Records exists  
-                         </span>
+                                    Records exists  
+                                </span>
 
-              </span> 
-                   <span class="col-md-3">
-                      
-                     <p class=" text-right">    Grid Paging Number</p>
-                         </span>
-            <span class="col-md-3">
-                <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
-                    <option   class="text-info"  value="25">25</option>
-                    <option selected="selected" class="text-info" value="50">50</option>
-                    <option class="text-info" value="100">100</option>
-                    <option class="text-info" value="250">250</option>
-                    <option class="text-info" value="500">500</option>
-                    <option class="text-info" value="1000">1000</option>
-                </select>
-            </span>
-        </div>
+                            </span>
+                            <span class="col-md-3">
+                                <p class=" text-right">Grid Paging Number</p>
+                            </span>
+                            <span class="col-md-3">
+                                <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
+                                    <option class="text-info" value="25">25</option>
+                                    <option selected="selected" class="text-info" value="50">50</option>
+                                    <option class="text-info" value="100">100</option>
+                                    <option class="text-info" value="250">250</option>
+                                    <option class="text-info" value="500">500</option>
+                                    <option class="text-info" value="1000">1000</option>
+                                </select>
+                            </span>
+                        </div>
 
 
-    </div>
-    @Html.Grid(Model).Named("contentGrid").Columns(columns =>
+                    </div>
+                    @Html.Grid(Model).Named("contentGrid").Columns(columns =>
     {
 
 
@@ -122,10 +130,26 @@
            .SetWidth(30)
            .RenderValueAs(d =>
                @<b>
-                   @Html.ActionLink(" ", "SaveOrEdit", "Products", new { id = d.Id }, new { @class = "btn btn-info btn-sm     glyphicon glyphicon-edit" })
+                   @Html.ActionLink(" ", "SaveOrEdit", "Products", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                </b>);
 
-
+columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(30)
+           .RenderValueAs(d =>
+               @<b>
+                   @Html.ActionLink(" ", "Details", "Products", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
+               </b>);
+                        
+                        columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(30)
+           .RenderValueAs(d =>
+               @<b>
+                   @Html.ActionLink(" ", "Delete", "Products", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+               </b>);
 
 
         columns.Add(c => c.Name)
@@ -147,8 +171,8 @@
          .Sortable(true)
          .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
                     Sanitized(false)
-         .RenderValueAs(o => String.Format("<input disabled='disabled' gridkey-id='{0}'  name='checkboxState' {1} type='checkbox'>", 
-             o.Id,(o.State ? "checked" : "")));
+         .RenderValueAs(o => String.Format("<input disabled='disabled' gridkey-id='{0}'  name='checkboxState' {1} type='checkbox'>",
+             o.Id, (o.State ? "checked" : "")));
 
         columns.Add(o => o.ImageState)
               .Titled("ImageState")
@@ -169,7 +193,7 @@
              o.Id, (o.MainPage ? "checked" : "")));
 
 
-     
+
         columns.Add(o => o.CreatedDate)
               .Titled("Date")
               .Sortable(true).
@@ -177,7 +201,28 @@
               .SortInitialDirection(GridSortDirection.Descending);
 
 
+              
+              columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(30)
+           .RenderValueAs(d =>
+               @<b>
+                
+                   <a class="btn btn-info btn-sm glyphicon  glyphicon-camera" href="#" data-file-id="@d.Id"> </a>
+               </b>);
     }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 
+                </div>
+
+
+
+            </div>
+        </div>
+    </div> 
+
+
+
 </div>
+

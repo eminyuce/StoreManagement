@@ -89,7 +89,7 @@ $(document).ready(function () {
     function GetSelectedStateValues(checkboxName,state) {
         var itemArray = new Array();
         var i = 0;
-        $('input[name=' + checkboxName + ']').each(function () {
+        $('span[name=' + checkboxName + ']').each(function () {
             var id = $(this).attr("gridkey-id");
             var m = $('input[name="checkboxGrid"]').filter('[gridkey-id="' + id + '"]').is(':checked');
             if (m) {
@@ -113,7 +113,7 @@ $(document).ready(function () {
     });
     function changeState(state) {
         var ppp = $("#ItemStateSelection").val();
-        var selectedValues = GetSelectedStateValues("checkbox" + ppp, state);
+        var selectedValues = GetSelectedStateValues("span" + ppp, state);
         var postData = JSON.stringify({ "values": selectedValues, "checkbox": ppp });
         console.log(postData);
         var tableName = $("[data-gridname]").attr("data-gridname");
@@ -204,7 +204,13 @@ function changeStateSuccess(data) {
     console.log(data);
     data.values.forEach(function (entry) {
         console.log(entry.Id);
-        $('input[name=checkbox' + data.checkbox + ']').filter('[gridkey-id="' + entry.Id + '"]').prop('checked', entry.State);
+        if (entry.State) {
+            $('span[name=span' + data.checkbox + ']').find('[gridkey-state-id="' + entry.Id + '"]').attr('src', "/Images/OK.ico");
+        } else {
+            $('span[name=span' + data.checkbox + ']').find('[gridkey-state-id="' + entry.Id + '"]').attr('src', "/Images/Close.ico");
+        }
+       
+
     });
 }
 function changeOrderingSuccess(data) {

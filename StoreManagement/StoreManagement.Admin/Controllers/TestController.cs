@@ -15,6 +15,7 @@ using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data.GeneralHelper;
 using Ninject;
+using System.Web.Script.Serialization;
 
 namespace StoreManagement.Admin.Controllers
 {
@@ -85,5 +86,6 @@ namespace StoreManagement.Admin.Controllers
                 return true;
             }
         }
-	}
+
+    }
 }

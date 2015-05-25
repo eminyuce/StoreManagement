@@ -1,0 +1,166 @@
+﻿@using StoreManagement.Admin.Extensions
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    
+    
+     @Styles.Render("~/Content/Theme")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("/Content/css","/Content/themes/base/css")  
+        @Styles.Render("~/Content/bootstrap") 
+
+    <script src="~/Scripts/jquery.jeditable.js"></script>
+    <script src="~/Scripts/jstree/jstree.js"></script>
+    <link href="~/Content/jstree/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/storesStyleChanger.js"></script>
+    <script src="~/Scripts/chosen.proto.min.js"></script>
+    <link href="~/Content/chosen.css" rel="stylesheet" />
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script src="~/Scripts/prism.js"></script>
+    <link href="~/Content/prism.css" rel="stylesheet" />
+
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"> </script>
+    <script src="~/Scripts/jHtmlArea-0.8.min.js"></script>
+    <script src="~/Scripts/jHtmlArea.ColorPickerMenu-0.8.min.js"></script>
+    <link href="~/Content/jHtmlArea/jHtmlArea.css" rel="stylesheet" />
+   @* <link href="~/Content/jHtmlArea/jHtmlArea.ColorPickerMenu.css" rel="stylesheet" />
+    <link href="~/Content/jHtmlArea/jHtmlArea.Editor.css" rel="stylesheet" />*@
+    <script src="~/Scripts/imageGallery.js"></script>
+    
+    <script src="~/Scripts/jquery.ui.fontSelector.min.js"></script>
+    <link href="~/Content/jquery.ui.fontSelector.css" rel="stylesheet" />
+
+    <link href="~/Content/colpick.css" rel="stylesheet" />
+    <script src="~/Scripts/colpick.js"></script>
+    <script src="~/Scripts/storeManagement.js"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('input[datatype-datetime="dt"]').datetimepicker({
+                format: 'm/d/Y h:i A',
+                timepicker: true,
+                closeOnDateSelect: true,
+                formatTime: 'g:i A'
+            });
+            $('input[datatype-datetime="d"]').datetimepicker({
+                format: 'm/d/Y',
+                timepicker: false,
+                closeOnDateSelect: true
+            });
+            $(document).ready(function () {
+                $('select#StoreDropDownId').chosen({}).change(function (event) {
+                    $("#StoreId").val($(this).val());
+                });
+            });
+            $('[datatype-font-family="c"]').chosen({});
+            $('[datatype-font-size="c"]').chosen({});
+            
+            $('input[datatype-color-mousehover="c"]').colpick({
+                onChange: function (hsb, hex, rgb, el, bySetColor)
+                {
+                    
+                    $(el).hover(function () {
+                        $(this).css("color", '#' + hex);
+                    });
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if (!bySetColor) {
+                        $(el).val(hex);
+                    }
+                    var storeId = $(el).attr("data-setting");
+                    var m = $('input[data-store-style=' + storeId + ']').val();
+                    var id = $(el).attr("data-color-component-id");
+                    $('[data-field-id=' + id + ']').hover(function () {
+                        $(this).css("color", '#' + hex);
+                    });
+                    
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor(this.value);
+            });
+            
+
+            $('input[datatype-color="c"]').colpick({
+                onChange: function (hsb, hex, rgb, el, bySetColor)
+                {
+                    $(el).css('border-color', '#' + hex);
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if (!bySetColor) {
+                        $(el).val(hex);
+                    }
+                    var storeId = $(el).attr("data-setting");
+                    var m = $('input[data-store-style=' + storeId + ']').val();
+                    var id = $(el).attr("data-color-component-id");
+                    $('[data-field-id=' + id + ']').css('color', '#' + hex);
+                    
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor(this.value);
+            });
+            
+
+
+        });
+
+    </script>
+    
+
+
+</head>
+<body back_ground_color_code>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul navigation_background_text_color id="menu">
+                        <li navigation_text_size>@Html.ActionLink("Navigations", "Index", "Navigations", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("Categories", "Index", "Categories", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("FileManager", "Index", "FileManager", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("Products", "Index", "Products", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("Stores", "Index", "Stores", null, new {navigation_text_color="navigation_text_color"})</li>
+                        <li navigation_text_size>@Html.ActionLink("Settings", "Index", "Settings", null, new {navigation_text_color="navigation_text_color"})</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>
+
+
+@*    @Html.SettingsLabel("EMIN YUCE")*@
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

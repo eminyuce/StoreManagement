@@ -1,45 +1,103 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "About";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+@Html.Partial("_LeftMenu")
+
+
+<!-- content -->
+<div class="col-md-10">
+    <div class="row">
+        <div class="bootstrap-admin-content-title">
+            <h1>
+                ASP.NET MVC/Bootstrap 3 -  Admin site template
+                <a href="https://github.com/jrocket/MVC-Bootstrap-3-Admin-Template/" class="action btn">
+                    Go to GitHub &raquo;
+                </a>
+            </h1>
         </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+    </div>
+    <div class="row bootstrap-admin-no-edges-padding">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="text-muted bootstrap-admin-box-title">Details</div>
+                </div>
+                <div class="bootstrap-admin-panel-content">
+                    <ul>
+                        <li>An admin theme built with <a href="http://getbootstrap.com" target="_blank">Bootstrap 3.x.</a></li>
+                        <li>Free for personal and commercial use</li>
+                        <li>Inspired by and based on <a href="https://github.com/meritoo/Bootstrap-3-Admin-Theme" target="_blank">Bootstrap-3-Admin-Theme by meritoo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="text-muted bootstrap-admin-box-title">Source</div>
+                </div>
+                <div class="bootstrap-admin-panel-content">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/jrocket/MVC-Bootstrap-3-Admin-Template" target="_blank">Github Repository</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jrocket/MVC-Bootstrap-3-Admin-Template/archive/master.zip">Download (.zip package)</a>
+                        </li>
+                        <li>
+                            License: MIT (see below)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row bootstrap-admin-no-edges-padding">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="text-muted bootstrap-admin-box-title">License</div>
+                </div>
+                <div class="bootstrap-admin-panel-content">
+                    <p>The MIT License (MIT)</p>
+                    <p>Copyright © 2013 - <a href="https://github.com/jrocket">jrocket</a></p>
+                    <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+                    <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+                    <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row bootstrap-admin-no-edges-padding">
+        <div class="col-md-6">
+            <div class="bs-docs-home">
+                <div class="bs-masthead">
+                    <a href="http://getbootstrap.com" target="_blank">
+                        <h1>Bootstrap</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6  text-center">
+            <div class="bs-docs-home">
+                <div class="bs-masthead">
+                    <h1>
+                        <a href="https://plus.google.com/104619535782935711923" target="_blank">
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+                            <img src="/img/jrocket.png" alt="Johnny Rocket">
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+                        </a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-urls bootstrap-admin-no-edges-padding">
+        <div class="col-md-6">
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap 3.x</a>
+        </div>
+        <div class="col-md-6">
+            <a href="https://plus.google.com/104619535782935711923" target="_blank">Johnny Rocket</a>
+        </div>
+    </div>
+</div>

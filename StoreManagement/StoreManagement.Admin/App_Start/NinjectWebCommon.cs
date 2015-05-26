@@ -62,9 +62,8 @@ namespace StoreManagement.Admin.App_Start
             }
         }
         private const string clientId = "660481316212-ivbld0hjqll1k1u67l1l9g67cvd88gtc.apps.googleusercontent.com";
-        private const string clientSecret = "30job5lDA-fzZNP2M7b0EQuA";
-        private const string folderName = "MyStore";
-        private const string applicationName = "MyStoreApplicationName";
+        private const string serviceAccountPkCs12FilePath = @"C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\Content\Google Drive File Upload-1cecdf432860.p12";
+        private const string serviceAccountEmail = "660481316212-aietulh54ei2eqsi1gdvl0g7s12ohf70@developer.gserviceaccount.com";
         private const string folder = "MyStoreFolder";
         /// <summary>
         /// Load your modules or register your services here!
@@ -85,17 +84,16 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();
-            m.WithConstructorArgument("folder", folder);
-            m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("ClientId",clientId));
-            m.WithConstructorArgument("clientSecret", ProjectAppSettings.GetWebConfigString("ClientSecret", clientSecret));
+            m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("ClientId", clientId));
+            m.WithConstructorArgument("userEmail", "eminyuce@gmail.com");
+            m.WithConstructorArgument("serviceAccountEmail", serviceAccountEmail);
+            m.WithConstructorArgument("serviceAccountPkCs12FilePath", serviceAccountPkCs12FilePath);
+            m.WithConstructorArgument("folderName", folder);
 
-            //m.WithConstructorArgument("clientId", clientId);
-            //m.WithConstructorArgument("clientSecret", clientSecret);
-            m.WithConstructorArgument("applicationName", applicationName);
-            m.WithConstructorArgument("folderName", folderName);
-            
 
-            
+
+
+
 
         }
     }

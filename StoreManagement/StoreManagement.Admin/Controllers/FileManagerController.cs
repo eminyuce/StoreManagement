@@ -9,6 +9,8 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data.GeneralHelper;
+using GoogleDriveUploader;
+using Ninject;
 
 namespace StoreManagement.Admin.Controllers
 {
@@ -17,11 +19,15 @@ namespace StoreManagement.Admin.Controllers
     public class FileManagerController : BaseController
     {
         private const String ControllerName = "FileManager";
+      
+
+        [Inject]
+        public IUploadHelper UploadHelper { set; get; }
 
         public FileManagerController(IStoreContext dbContext,
             ISettingRepository settingRepository) : base(dbContext, settingRepository)
         {
-           
+            
         }
 
         private string StorageRoot
@@ -89,6 +95,7 @@ namespace StoreManagement.Admin.Controllers
                 context.Response.ContentType = "application/octet-stream";
                 context.Response.ClearContent();
                 context.Response.WriteFile(filePath);
+                
             }
             else
             {
@@ -118,10 +125,7 @@ namespace StoreManagement.Admin.Controllers
                 {
                     UploadPartialFile(headers["X-File-Name"], Request, statuses);
                 }
-
- 
-
-
+                 
 
                 JsonResult result = Json(statuses);
                 result.ContentType = "text/plain";
@@ -219,6 +223,17 @@ namespace StoreManagement.Admin.Controllers
                 var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
 
                 file.SaveAs(fullPath);
+
+                try
+                {
+                    var fileByte = GeneralHelper.ReadFully(file.InputStream);
+                    var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
+                    String id = googleFile.Id;
+                }
+                catch (Exception ewx)
+                {
+                    Logger.Error("Exception is occured.",ewx);
+                }
 
                 var fileManager = SaveFiles(file);
 

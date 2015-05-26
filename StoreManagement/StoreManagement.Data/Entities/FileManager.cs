@@ -19,5 +19,6 @@ namespace StoreManagement.Data.Entities
         public int Ordering { get; set; }
         public DateTime CreatedDate { get; set; }
         public int ContentLength { get; set; }
+        public string GoogleImageId { get; set; }
     }
 }

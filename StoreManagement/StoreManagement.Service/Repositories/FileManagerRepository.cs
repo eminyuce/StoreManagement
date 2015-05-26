@@ -23,6 +23,13 @@ namespace StoreManagement.Service.Repositories
         {
             return FindBy(r => r.StoreId == storeId).ToList();
         }
+
+        public FileManager GetFilesByGoogleImageId(string googleImageId)
+        {
+            return
+                FindBy(r => r.GoogleImageId.Equals(googleImageId, StringComparison.InvariantCultureIgnoreCase))
+                    .FirstOrDefault();
+        }
     }
 
 

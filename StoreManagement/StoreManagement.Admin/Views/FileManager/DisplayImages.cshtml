@@ -29,7 +29,7 @@
                .SetWidth(30)
                .RenderValueAs(d =>
                    @<b>
-                        @Html.ActionLink("Edit", "Edit", new { id = d.Id })
+                        @Html.ActionLink("Edit", "Edit", new { id = d.GoogleImageId })
                     </b>);
         columns.Add()
                    .Encoded(false)
@@ -37,7 +37,7 @@
                    .SetWidth(30)
                    .RenderValueAs(d =>
                        @<b>
-                            @Html.ActionLink("Delete", "Delete", new { id = d.Id })
+                            @Html.ActionLink("Delete", "Delete", new { id = d.GoogleImageId })
                         </b>);
 
         columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
@@ -50,7 +50,8 @@
 
 
         columns.Add(c => c.FileName).Titled("Username").Filterable(true).Sanitized(false)
-            .Encoded(false).RenderValueAs(d => Html.Raw(string.Format("<text><img style='width:100%; max-width: 150px' src=\"/Files/{0}\" alt=\"Image\"/></text>", d.FileName)).ToHtmlString());
+            .Encoded(false).RenderValueAs(d => Html.Raw(string.Format("<text><img style='width:100%; max-width: 150px' src=\"{0}\" alt=\"Image\"/></text>",
+                String.Format("https://docs.google.com/uc?id={0}", d.GoogleImageId))).ToHtmlString());
 
 
 
@@ -64,9 +65,9 @@
 {
     <script>
         $(function () {
-            pageGrids.imagesGrid.onRowSelect(function (e) {
-                console.log(e.row);
-            });
+            //pageGrids.imagesGrid.onRowSelect(function (e) {
+            //    console.log(e.row);
+            //});
 
 
         });

@@ -67,14 +67,24 @@ namespace StoreManagement.Admin.Controllers
 
         private void DeleteFile(string id)
         {
-            var f = FileManagerRepository.GetSingle(id.ToInt());
+            var f = FileManagerRepository.GetFilesByGoogleImageId(id);
             var filename = f.FileName;
             var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
 
-            if (System.IO.File.Exists(filePath))
+            //if (System.IO.File.Exists(filePath))
+            //{
+            //    System.IO.File.Delete(filePath);
+            //}
+
+            try
             {
-                System.IO.File.Delete(filePath);
+               this.UploadHelper.deleteFile(id);
             }
+            catch (Exception ewx)
+            {
+                Logger.Error("Exception is occured.", ewx);
+            }
+
             FileManagerRepository.Delete(f);
             FileManagerRepository.Save();
         }
@@ -83,24 +93,24 @@ namespace StoreManagement.Admin.Controllers
         [HttpGet]
         public ActionResult Download(string id)
         {
-            var f = FileManagerRepository.GetSingle(id.ToInt());
-            var filename = f.FileName;
-            var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
+            var f = FileManagerRepository.GetFilesByGoogleImageId(id);
+            //var filename = f.FileName;
+            //var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
 
-            var context = HttpContext;
+            //var context = HttpContext;
 
-            if (System.IO.File.Exists(filePath))
-            {
-                context.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-                context.Response.ContentType = "application/octet-stream";
-                context.Response.ClearContent();
-                context.Response.WriteFile(filePath);
+            //if (System.IO.File.Exists(filePath))
+            //{
+            //    context.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+            //    context.Response.ContentType = "application/octet-stream";
+            //    context.Response.ClearContent();
+            //    context.Response.WriteFile(filePath);
                 
-            }
-            else
-            {
-                context.Response.StatusCode = 404;   
-            }
+            //}
+            //else
+            //{
+            //    context.Response.StatusCode = 404;   
+            //}
             return RedirectToAction("Index");
         }
 
@@ -139,6 +149,17 @@ namespace StoreManagement.Admin.Controllers
         private FileManager SaveFiles(HttpPostedFileBase file, int storeId=1)
         {
             var fileManager = ConvertToFileManager(file, storeId);
+            try
+            {
+                var fileByte = GeneralHelper.ReadFully(file.InputStream);
+                var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
+                fileManager.GoogleImageId = googleFile.Id;
+            }
+            catch (Exception ewx)
+            {
+                Logger.Error("this.UploadHelper.InsertFile Exception is occured."+ewx.StackTrace, ewx);
+            }
+
             FileManagerRepository.Add(fileManager);
             FileManagerRepository.Save();
 
@@ -156,39 +177,39 @@ namespace StoreManagement.Admin.Controllers
         {
             if (request.Files.Count != 1) throw new HttpRequestValidationException("Attempt to upload chunked file containing more than one fragment per request");
             var file = request.Files[0];
-            var inputStream = file.InputStream;
 
             var fileManager = SaveFiles(file);
 
 
 
-            var fullName = Path.Combine(StorageRoot, Path.GetFileName(fileName));
+            //var fullName = Path.Combine(StorageRoot, Path.GetFileName(fileName));
 
-            using (var fs = new FileStream(fullName, FileMode.Append, FileAccess.Write))
-            {
-                var buffer = new byte[1024];
+            //using (var fs = new FileStream(fullName, FileMode.Append, FileAccess.Write))
+            //{
+            //    var buffer = new byte[1024];
 
-                var l = inputStream.Read(buffer, 0, 1024);
-                while (l > 0)
-                {
-                    fs.Write(buffer, 0, l);
-                    l = inputStream.Read(buffer, 0, 1024);
-                }
-                fs.Flush();
-                fs.Close();
-            }
+            //    var l = inputStream.Read(buffer, 0, 1024);
+            //    while (l > 0)
+            //    {
+            //        fs.Write(buffer, 0, l);
+            //        l = inputStream.Read(buffer, 0, 1024);
+            //    }
+            //    fs.Flush();
+            //    fs.Close();
+            //}
 
 
 
-      
+ 
             statuses.Add(new ViewDataUploadFilesResult()
             {
                 name = fileName,
                 size = file.ContentLength,
                 type = file.ContentType,
-                url = String.Format("/{0}/Download/",ControllerName) + fileManager.Id,
-                delete_url = String.Format("/{0}/Delete/", ControllerName) + fileManager.Id,
-                thumbnail_url = @"data:image/png;base64," + EncodeFile(fullName),
+                url = String.Format("/{0}/Download/",ControllerName) + fileManager.GoogleImageId,
+                delete_url = String.Format("/{0}/Delete/", ControllerName) + fileManager.GoogleImageId,
+                //thumbnail_url = @"data:image/png;base64," + EncodeFile(fullName),
+                thumbnail_url = String.Format("https://docs.google.com/uc?id={0}", fileManager.GoogleImageId),
                 delete_type = "GET",
             });
 
@@ -220,31 +241,23 @@ namespace StoreManagement.Admin.Controllers
             {
                 var file = request.Files[i];
 
-                var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
+               // var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
 
-                file.SaveAs(fullPath);
-
-                try
-                {
-                    var fileByte = GeneralHelper.ReadFully(file.InputStream);
-                    var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
-                    String id = googleFile.Id;
-                }
-                catch (Exception ewx)
-                {
-                    Logger.Error("Exception is occured.",ewx);
-                }
-
+               // file.SaveAs(fullPath);
                 var fileManager = SaveFiles(file);
+                
+
+       
 
                 statuses.Add(new ViewDataUploadFilesResult()
                 {
                     name = file.FileName,
                     size = file.ContentLength,
                     type = file.ContentType,
-                    url = String.Format("/{0}/Download/", ControllerName) + fileManager.Id,
-                    delete_url = String.Format("/{0}/Delete/", ControllerName) + fileManager.Id,
-                    thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath),
+                    url = String.Format("/{0}/Download/", ControllerName) + fileManager.GoogleImageId,
+                    delete_url = String.Format("/{0}/Delete/", ControllerName) + fileManager.GoogleImageId,
+                   // thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath),
+                    thumbnail_url = String.Format("https://docs.google.com/uc?id={0}", fileManager.GoogleImageId),
                     delete_type = "GET",
                 });
             }

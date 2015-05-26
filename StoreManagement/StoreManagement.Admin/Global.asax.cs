@@ -9,6 +9,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using GoogleDriveUploader;
+using Ninject;
 using StoreManagement.Admin.Constants;
 using StoreManagement.Admin.Models;
 using StoreManagement.Service.DbContext;
@@ -21,6 +23,11 @@ namespace StoreManagement.Admin
 
     public class MvcApplication : System.Web.HttpApplication
     {
+
+
+      //  [Inject]
+//        public IUploadHelper UploadHelper { set; get; }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -31,7 +38,12 @@ namespace StoreManagement.Admin
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-           LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
+            LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
+
+
+
+           // var UploadHelper = (IUploadHelper)DependencyResolver.Current.GetService(typeof(IUploadHelper));
+           // UploadHelper.ConnectToGoogleDriveServiceAsyn();
         }
 
         private static SimpleMembershipInitializer _initializer;
@@ -44,7 +56,7 @@ namespace StoreManagement.Admin
             public SimpleMembershipInitializer()
             {
                 Database.SetInitializer<StoreContext>(null);
-               
+
 
 
                 try
@@ -58,10 +70,10 @@ namespace StoreManagement.Admin
                     //    }
                     //}
 
-               //     WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "System.Data.SqlClient", "UserProfile", "UserId", "UserName", false);
+                    //     WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "System.Data.SqlClient", "UserProfile", "UserId", "UserName", false);
 
-                   WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "UserProfile", "UserId", "UserName", autoCreateTables: false);
-                   
+                    WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "UserProfile", "UserId", "UserName", autoCreateTables: false);
+
                 }
                 catch (Exception ex)
                 {

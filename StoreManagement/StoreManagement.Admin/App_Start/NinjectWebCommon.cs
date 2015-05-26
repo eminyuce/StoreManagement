@@ -1,4 +1,5 @@
 using StoreManagement.Admin.Constants;
+using StoreManagement.Data;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -83,12 +84,18 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
+            m.InSingletonScope();
             m.WithConstructorArgument("folder", folder);
-            m.WithConstructorArgument("clientId", clientId);
-            m.WithConstructorArgument("clientSecret", clientSecret);
+            m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("ClientId",clientId));
+            m.WithConstructorArgument("clientSecret", ProjectAppSettings.GetWebConfigString("ClientSecret", clientSecret));
+
+            //m.WithConstructorArgument("clientId", clientId);
+            //m.WithConstructorArgument("clientSecret", clientSecret);
             m.WithConstructorArgument("applicationName", applicationName);
             m.WithConstructorArgument("folderName", folderName);
+            
 
+            
 
         }
     }

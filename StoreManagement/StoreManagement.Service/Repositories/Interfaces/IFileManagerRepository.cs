@@ -11,6 +11,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface IFileManagerRepository : IEntityRepository<FileManager, int>
     {
         List<FileManager> GetFilesByStoreId(int storeId);
+        FileManager GetFilesByGoogleImageId(String googleImageId);
     }
 
 }

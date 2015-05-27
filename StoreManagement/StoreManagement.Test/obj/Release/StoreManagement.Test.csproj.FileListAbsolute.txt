@@ -69,3 +69,16 @@ C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.T
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\System.Web.WebPages.Deployment.xml
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\obj\Release\StoreManagement.Test.dll
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\obj\Release\StoreManagement.Test.pdb
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\GoogleDriveUploader.dll
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Drive.v2.dll
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\RazorEngine.dll
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\GridMvc.dll
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.dll
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Core.dll
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Drive.v2.pdb
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Drive.v2.xml
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\RazorEngine.xml
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.pdb
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.xml
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Core.pdb
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Core.xml

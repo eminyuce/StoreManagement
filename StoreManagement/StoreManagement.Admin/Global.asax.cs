@@ -11,7 +11,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using GoogleDriveUploader;
 using Ninject;
-using StoreManagement.Admin.Constants;
 using StoreManagement.Admin.Models;
 using StoreManagement.Service.DbContext;
 using WebMatrix.WebData;
@@ -72,7 +71,7 @@ namespace StoreManagement.Admin
 
                     //     WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "System.Data.SqlClient", "UserProfile", "UserId", "UserName", false);
 
-                    WebSecurity.InitializeDatabaseConnection(AppConstants.ConnectionStringName, "UserProfile", "UserId", "UserName", autoCreateTables: false);
+                    WebSecurity.InitializeDatabaseConnection("Stores", "UserProfile", "UserId", "UserName", autoCreateTables: false);
 
                 }
                 catch (Exception ex)

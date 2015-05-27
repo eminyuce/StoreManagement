@@ -1,4 +1,3 @@
-using StoreManagement.Admin.Constants;
 using StoreManagement.Data;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
@@ -71,7 +70,7 @@ namespace StoreManagement.Admin.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+            kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", "Stores");
             kernel.Bind<IContentRepository>().To<ContentRepository>();
             kernel.Bind<IStoreRepository>().To<StoreRepository>();
             kernel.Bind<ISettingRepository>().To<SettingRepository>();

@@ -82,3 +82,4 @@ C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.T
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.xml
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Core.pdb
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\bin\Release\Google.Apis.Core.xml
+C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Test\obj\Release\StoreManagement.Test.csprojResolveAssemblyReference.cache

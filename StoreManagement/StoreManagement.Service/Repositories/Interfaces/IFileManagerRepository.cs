@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IFileManagerRepository : IEntityRepository<FileManager, int>
+    public interface IFileManagerRepository : IEntityRepository<FileManager, int>, IFileManagerService
     {
-        List<FileManager> GetFilesByStoreId(int storeId);
-        FileManager GetFilesByGoogleImageId(String googleImageId);
+
     }
 
 }

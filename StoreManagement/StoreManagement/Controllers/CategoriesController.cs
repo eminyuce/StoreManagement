@@ -14,16 +14,6 @@ namespace StoreManagement.Controllers
     public class CategoriesController : BaseController
     {
 
-    
-        //
-        // GET: /Categories/
-        public CategoriesController(IStoreContext dbContext, 
-            ISettingRepository settingRepository, 
-            IStoreRepository storeRepository) : base(dbContext, settingRepository, storeRepository)
-        {
-
-        }
-
         public ActionResult Index()
         {
             return View();
@@ -33,9 +23,9 @@ namespace StoreManagement.Controllers
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
 
-            returnModel.Store = store;
-            returnModel.Category = CategoryRepository.GetSingle(categoryId);
-            returnModel.Contents =  ContentRepository.GetContentsCategoryId(store.Id, categoryId, true);
+            returnModel.Store = Store;
+            returnModel.Category = CategoryService.GetSingle(categoryId);
+            returnModel.Contents = ContentService.GetContentsCategoryId(Store.Id, categoryId, true);
 
 
             return View(returnModel);

@@ -1,4 +1,3 @@
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\NLog.xml
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\Microsoft.Data.Edm.xml
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\NLog.config
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\StoreManagement.Admin.dll

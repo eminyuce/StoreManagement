@@ -46,8 +46,15 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\StoreManagement.Test\bin\Release\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -104,6 +111,7 @@
     <Compile Include="GeneralHelper\GeneralHelper.cs" />
     <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
+    <Compile Include="GeneralHelper\RequestHelper.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
     <Compile Include="Grid\CompanyGrid.cs" />
     <Compile Include="HelpersModel\Filter.cs" />

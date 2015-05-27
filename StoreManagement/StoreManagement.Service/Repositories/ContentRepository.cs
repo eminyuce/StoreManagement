@@ -77,6 +77,9 @@ namespace StoreManagement.Service.Repositories
         
             return returnList.OrderByDescending(r => r.Id).ToList();
         }
-
+        public Content GetContentWithFiles(int id)
+        {
+            return  this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace StoreManagement.API.Controllers
         // GET api/Navigations
         public IEnumerable<Navigation> GetNavigations(int storeId)
         {
-            return this.NavigationRepository.GetStoreNavigation(storeId);
+            return this.NavigationRepository.GetStoreNavigations(storeId);
         }
 
         // GET api/Navigations/5

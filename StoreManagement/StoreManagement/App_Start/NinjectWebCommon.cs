@@ -1,7 +1,10 @@
+using System.Web.Mvc;
 using StoreManagement.Constants;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
+using StoreManagement.Service.Services;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StoreManagement.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StoreManagement.App_Start.NinjectWebCommon), "Stop")]
@@ -16,20 +19,20 @@ namespace StoreManagement.App_Start
     using Ninject;
     using Ninject.Web.Common;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -37,7 +40,7 @@ namespace StoreManagement.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -66,19 +69,21 @@ namespace StoreManagement.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-
             kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
-            kernel.Bind<IContentRepository>().To<ContentRepository>();
-            kernel.Bind<IStoreRepository>().To<StoreRepository>();
-            kernel.Bind<ISettingRepository>().To<SettingRepository>();
-            kernel.Bind<IFileManagerRepository>().To<FileManagerRepository>();
-            kernel.Bind<INavigationRepository>().To<NavigationRepository>();
-            kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
-            kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>();
-            kernel.Bind<IContentFileRepository>().To<ContentFileRepository>();
-            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
-            kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
+            kernel.Bind<IContentService>().To<ContentRepository>();
+            kernel.Bind<IStoreService>().To<StoreRepository>();
+            kernel.Bind<ISettingService>().To<SettingRepository>();
+            kernel.Bind<IFileManagerService>().To<FileManagerRepository>();
+            kernel.Bind<ICategoryService>().To<CategoryRepository>();
+            kernel.Bind<IPageDesignService>().To<PageDesignRepository>();
+            kernel.Bind<IContentFileService>().To<ContentFileRepository>();
+            kernel.Bind<IStoreUserService>().To<StoreUserRepository>();
+            kernel.Bind<ICompanyService>().To<CompanyRepository>();
+            kernel.Bind<INavigationService>().To<NavigationRepository>();
 
-        }        
+            // kernel.Bind<INavigationService>().To<NavigationService>().WithConstructorArgument("webServiceAddress", "yuce.marinelink.org");
+
+
+        }
     }
 }

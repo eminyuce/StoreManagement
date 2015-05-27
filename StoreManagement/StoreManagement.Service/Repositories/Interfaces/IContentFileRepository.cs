@@ -5,15 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IContentFileRepository : IEntityRepository<ContentFile, int>
+    public interface IContentFileRepository : IEntityRepository<ContentFile, int>, IContentFileService
     {
-        List<ContentFile> GetContentByContentId(int contentId);
-        List<ContentFile> GetContentByFileManagerId(int fileManagerId);
-        void DeleteContentFileByContentId(int contentId);
-        void SaveContentFiles(int[] selectedFileId, int contentId);
+
    
     }
 

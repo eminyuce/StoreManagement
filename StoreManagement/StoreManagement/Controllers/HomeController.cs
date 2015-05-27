@@ -8,29 +8,19 @@ using Ninject;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class HomeController : BaseController
     {
-        
-       
-
-        public HomeController(IStoreContext dbContext, 
-            ISettingRepository settingRepository,
-            IStoreRepository storeRepository)
-            : base(dbContext, settingRepository, storeRepository)
-        {
- 
-        }
-
         public ActionResult Index()
         {
-            ViewBag.Store = store;
+            ViewBag.Store = Store;
             var shp =new StoreHomePage();
-            shp.Store = store;
-            shp.Categories = CategoryRepository.GetCategoriesByStoreId(store.Id);
+            shp.Store = Store;
+            shp.Categories = CategoryService.GetCategoriesByStoreId(Store.Id);
             return View(shp);
         }
         public ActionResult About()
@@ -47,7 +37,7 @@ namespace StoreManagement.Controllers
         }
         public ActionResult MainMenu()
         {
-            var mainMenu = NavigationRepository.GetStoreNavigation(store.Id);
+            var mainMenu = NavigationService.GetStoreNavigations(Store.Id);
             return View(mainMenu);
         }
         public ActionResult Footer()

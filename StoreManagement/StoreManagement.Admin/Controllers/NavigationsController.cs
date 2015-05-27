@@ -35,7 +35,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                navigationList = navigationRepository.GetStoreNavigation(storeId);
+                navigationList = navigationRepository.GetStoreNavigations(storeId);
             }
 
             return View(navigationList);

@@ -9,6 +9,7 @@ using Ninject;
 using StoreManagement.Data.Entities;
 using StoreManagement.Models;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Controllers
@@ -18,39 +19,47 @@ namespace StoreManagement.Controllers
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         [Inject]
-        public ICategoryRepository CategoryRepository { set; get; }
+        public IFileManagerService FileManagerService { get; set; }
 
         [Inject]
-        public IContentRepository ContentRepository { set; get; }
+        public IContentFileService ContentFileService { set; get; }
 
         [Inject]
-        public INavigationRepository NavigationRepository { set; get; }
+        public IContentService ContentService { set; get; }
 
+        [Inject]
+        public ICategoryService CategoryService { set; get; }
 
-        protected Store store { set; get; }
-        protected IStoreContext dbContext;
-        protected ISettingRepository settingRepository;
-        protected IStoreRepository storeRepository;
-        public BaseController(IStoreContext dbContext, 
-            ISettingRepository settingRepository,
-            IStoreRepository storeRepository)
-        {
-            this.dbContext = dbContext;
-            this.settingRepository = settingRepository;
-            this.storeRepository = storeRepository;
-        }
+        [Inject]
+        public IStoreService StoreService { set; get; }
+
+        [Inject]
+        public INavigationService NavigationService { set; get; }
+
+        [Inject]
+        public IPageDesignService PageDesignService { set; get; }
+
+        [Inject]
+        public IStoreUserService StoreUserService { set; get; }
+
+        [Inject]
+        public ISettingService SettingService { set; get; }
+
+        protected Store Store { set; get; }
+
+        
 
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
             try
             {
-                this.store = storeRepository.GetStore(requestContext.HttpContext.Request);
+                this.Store = StoreService.GetStore(requestContext.HttpContext.Request);
             }
             catch (Exception ex)
             {
 
-                this.store = storeRepository.GetSingle(1);
+                this.Store = StoreService.GetSingle(1);
             }
            
             

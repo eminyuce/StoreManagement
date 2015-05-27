@@ -15,13 +15,7 @@ namespace StoreManagement.Controllers
     {
 
 
-        //
-        // GET: /Contents/
-        public ContentsController(IStoreContext dbContext, ISettingRepository settingRepository, IStoreRepository storeRepository) : base(dbContext, settingRepository, storeRepository)
-        {
-
-        }
-
+   
         public ActionResult Index()
         {
             return View();
@@ -30,8 +24,9 @@ namespace StoreManagement.Controllers
         {
             int contentId = id.Split("-".ToCharArray()).Last().ToInt();
             var contentDetail = new ContentDetailViewModel();
-            contentDetail.Content = ContentRepository.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager))
-                                 .FirstOrDefault(r1 => r1.Id == contentId);
+            contentDetail.Content = ContentService.GetContentWithFiles(contentId);
+
+
             return View(contentDetail);
         }
 	}

@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ISettingRepository : IEntityRepository<Setting>
+    public interface ISettingRepository : IEntityRepository<Setting>, ISettingService
     {
-        List<Setting> GetStoreSettings(int storeid);
-        List<Setting> GetStoreSettingsFromCache(int storeid);
-        List<Setting> GetStoreSettingsByType(int storeid, string type);
+      
     }
 
 

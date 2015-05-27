@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
+using StoreManagement.Service.Interfaces;
 
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IPageDesignRepository : IEntityRepository<PageDesign, int>
+    public interface IPageDesignRepository : IEntityRepository<PageDesign, int>, IPageDesignService
     {
-          List<PageDesign> GetPageDesignByStoreId(int storeId);
+
     }
 }

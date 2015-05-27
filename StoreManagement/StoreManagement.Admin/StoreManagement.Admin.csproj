@@ -64,7 +64,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GoogleDriveUploader">
-      <HintPath>..\..\..\..\..\..\..\AspNETDLL\GoogleDriveUploader.dll</HintPath>
+      <HintPath>..\..\..\GoogleDriveUploader\GoogleDriveUploader\obj\Release\GoogleDriveUploader.dll</HintPath>
     </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>

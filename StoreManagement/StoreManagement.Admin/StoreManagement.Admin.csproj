@@ -521,6 +521,10 @@
     <Content Include="Content\Theme\vendors\chosen.jquery.min.js" />
     <Content Include="Content\Theme\vendors\chosen.min.css" />
     <Content Include="Content\Theme\vendors\ckeditor\adapters\jquery.js" />
+    <Content Include="Content\Theme\vendors\ckeditor\build-config.js" />
+    <Content Include="Content\Theme\vendors\ckeditor\ckeditor.js" />
+    <Content Include="Content\Theme\vendors\ckeditor\config.js" />
+    <Content Include="Content\Theme\vendors\ckeditor\contents.css" />
     <Content Include="Content\Theme\vendors\ckeditor\lang\af.js" />
     <Content Include="Content\Theme\vendors\ckeditor\lang\ar.js" />
     <Content Include="Content\Theme\vendors\ckeditor\lang\bg.js" />
@@ -771,6 +775,30 @@
     <Content Include="Content\Theme\vendors\ckeditor\plugins\wsc\dialogs\wsc.css" />
     <Content Include="Content\Theme\vendors\ckeditor\plugins\wsc\dialogs\wsc.js" />
     <Content Include="Content\Theme\vendors\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\dialog.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\dialog_opera.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\editor.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\icons.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\close.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="Content\Theme\vendors\ckeditor\styles.js" />
     <Content Include="Content\Theme\vendors\datatables\css\demo_page.css" />
     <Content Include="Content\Theme\vendors\datatables\css\demo_table.css" />
     <Content Include="Content\Theme\vendors\datatables\css\demo_table_jui.css" />
@@ -1577,6 +1605,10 @@
     <Content Include="Content\Theme\vendors\jGrowl\LICENSE" />
     <Content Include="Content\Theme\vendors\jGrowl\README.md" />
     <Content Include="Content\Theme\vendors\sparkline\jquery.sparkline.min.js.gz" />
+    <Content Include="Content\Theme\vendors\ckeditor\skins\moono\readme.md" />
+    <Content Include="Content\Theme\vendors\ckeditor\CHANGES.md" />
+    <Content Include="Content\Theme\vendors\ckeditor\LICENSE.md" />
+    <Content Include="Content\Theme\vendors\ckeditor\README.md" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

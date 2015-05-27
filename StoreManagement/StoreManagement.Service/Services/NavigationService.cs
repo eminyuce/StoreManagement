@@ -12,12 +12,11 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Services
 {
-    public class NavigationService : INavigationService 
+    public class NavigationService : BaseService, INavigationService 
     {
-        private string WebServiceAddress { get; set; }
-        public NavigationService(String webServiceAddress)
+        public NavigationService(string webServiceAddress) : base(webServiceAddress)
         {
-            WebServiceAddress = webServiceAddress;
+
         }
 
         public String IsConnectionOk(String webServiceAddress)

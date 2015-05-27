@@ -81,7 +81,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
          <script src="~/Scripts/storeManagement.js"></script>
         <script src="~/Scripts/imageGallery.js"></script>
 
@@ -97,5 +97,7 @@
         ga('send', 'pageview');
 
     </script>
+    
+        @RenderSection("scripts", required: false)
 </body>
 </html>

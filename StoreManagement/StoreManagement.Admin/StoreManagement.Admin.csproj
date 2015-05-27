@@ -439,6 +439,7 @@
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\chosen.proto.min.js" />
+    <Content Include="Scripts\colpick.js" />
     <Content Include="Scripts\FileUpload\canvas-to-blob.min.js" />
     <Content Include="Scripts\FileUpload\jquery.fileupload-ip.js" />
     <Content Include="Scripts\FileUpload\jquery.fileupload-ui.css" />
@@ -469,6 +470,7 @@
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.datetimepicker.js" />
     <Content Include="Scripts\jquery.jeditable.js" />
+    <Content Include="Scripts\jquery.ui.fontSelector.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -483,8 +485,11 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\reports.js" />
+    <Content Include="Scripts\storeManagement.js" />
     <Content Include="Scripts\storesStyleChanger.js" />
     <Content Include="Scripts\TextFile1.txt" />
+    <Content Include="Scripts\twitter-bootstrap-hover-dropdown.js" />
+    <Content Include="Scripts\twitter-bootstrap-hover-dropdown.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -601,6 +606,9 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Buttons\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutOld.cshtml" />
+    <Content Include="Views\Shared\_Landing.cshtml" />
+    <Content Include="Views\Shared\_LeftMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

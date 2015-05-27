@@ -1,7 +1,8 @@
 ﻿
 var linkUrl = "/Files/{id}/";
-jQuery(function ($) {
-
+$(document).ready(function () {
+    console.log("image gallery script is working");
+    
     $("#ImageDialog").click(function () {
         $("#dialog-message").dialog({
             modal: true,

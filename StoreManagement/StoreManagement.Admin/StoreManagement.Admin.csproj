@@ -47,25 +47,6 @@
       <HintPath>..\packages\GenericRepository.EntityFramework.0.3.1-pre01\lib\net40\GenericRepository.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Apis, Version=1.9.0.26011, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.9.0\lib\net40\Google.Apis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.9.0.26010, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.9.0\lib\portable-net40+sl50+win+wpa81+wp80\Google.Apis.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Drive.v2, Version=1.9.0.155, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Drive.v2.1.9.0.1550\lib\portable-net40+sl50+win+wpa81+wp80\Google.Apis.Drive.v2.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.9.0.26013, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.9.0\lib\net40\Google.Apis.PlatformServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="GoogleDriveUploader">
-      <HintPath>..\..\..\GoogleDriveUploader\GoogleDriveUploader\obj\Release\GoogleDriveUploader.dll</HintPath>
-    </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
     </Reference>
@@ -1641,6 +1622,7 @@
     <Content Include="Content\Theme\vendors\ckeditor\CHANGES.md" />
     <Content Include="Content\Theme\vendors\ckeditor\LICENSE.md" />
     <Content Include="Content\Theme\vendors\ckeditor\README.md" />
+    <Content Include="Content\Google Drive File Upload-d022ab1f4c22.p12" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1832,6 +1814,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\GoogleDriveUploader\GoogleDriveUploader\GoogleDriveUploader.csproj">
+      <Project>{b652ae97-342e-4309-82cd-860614f5746f}</Project>
+      <Name>GoogleDriveUploader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">
       <Project>{553854d8-a688-4a50-ab74-4ccf3b1afe9a}</Project>
       <Name>StoreManagement.Data</Name>

@@ -17,8 +17,14 @@ namespace StoreManagement.Data.Entities
         public string Description { get; set; }
         public Boolean State { get; set; }
         public int Ordering { get; set; }
-        public DateTime CreatedDate { get; set; }
         public int ContentLength { get; set; }
         public string GoogleImageId { get; set; }
+        public string Title { get; set; }
+        public string OriginalFilename { get; set; }
+        public string ThumbnailLink { get; set; }
+        public string IconLink { get; set; }
+        public string WebContentLink { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

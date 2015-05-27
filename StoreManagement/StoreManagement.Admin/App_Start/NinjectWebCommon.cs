@@ -61,7 +61,7 @@ namespace StoreManagement.Admin.App_Start
             }
         }
         private const string clientId = "660481316212-aietulh54ei2eqsi1gdvl0g7s12ohf70.apps.googleusercontent.com";
-        private const string serviceAccountPkCs12FilePath = @"C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\Content\Google Drive File Upload-02b3796ab723.p12";
+        private const string serviceAccountPkCs12FilePath = @"C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\Content\Google Drive File Upload-d022ab1f4c22.p12";
         private const string serviceAccountEmail = "660481316212-aietulh54ei2eqsi1gdvl0g7s12ohf70@developer.gserviceaccount.com";
         private const string folder = "MyStoreFolder";
         /// <summary>

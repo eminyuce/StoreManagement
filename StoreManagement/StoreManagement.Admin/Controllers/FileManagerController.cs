@@ -153,7 +153,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 var fileByte = GeneralHelper.ReadFully(file.InputStream);
                 var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
-                fileManager.GoogleImageId = googleFile.Id;
+                ConvertToFileManager(fileManager, googleFile);
             }
             catch (Exception ewx)
             {
@@ -164,6 +164,18 @@ namespace StoreManagement.Admin.Controllers
             FileManagerRepository.Save();
 
             return fileManager;
+        }
+
+        private static void ConvertToFileManager(FileManager fileManager, GoogleDriveFile googleFile)
+        {
+            fileManager.GoogleImageId = googleFile.Id;
+            fileManager.ThumbnailLink = googleFile.ThumbnailLink;
+            fileManager.ModifiedDate = googleFile.ModifiedDate;
+            fileManager.OriginalFilename = googleFile.OriginalFilename;
+            fileManager.Title = googleFile.Title;
+            fileManager.IconLink = googleFile.IconLink;
+            fileManager.CreatedDate = googleFile.CreatedDate;
+            fileManager.WebContentLink = googleFile.WebContentLink;
         }
 
         private string EncodeFile(string fileName)

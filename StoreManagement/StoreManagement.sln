@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Admin", "St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.API", "StoreManagement.API\StoreManagement.API.csproj", "{364C6068-B8EF-4054-AA25-3BCF3A70B400}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleDriveUploader", "..\..\GoogleDriveUploader\GoogleDriveUploader\GoogleDriveUploader.csproj", "{B652AE97-342E-4309-82CD-860614F5746F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,10 +43,6 @@ Global
 		{364C6068-B8EF-4054-AA25-3BCF3A70B400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364C6068-B8EF-4054-AA25-3BCF3A70B400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364C6068-B8EF-4054-AA25-3BCF3A70B400}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

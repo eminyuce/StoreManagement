@@ -22,7 +22,7 @@ namespace StoreManagement.Data.Entities
         public string Title { get; set; }
         public string OriginalFilename { get; set; }
         public string ThumbnailLink { get; set; }
-        public string IconLink { get; set; }
+        public string WebViewLink { get; set; }
         public string WebContentLink { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }

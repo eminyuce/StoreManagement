@@ -47,6 +47,9 @@
       <HintPath>..\packages\GenericRepository.EntityFramework.0.3.1-pre01\lib\net40\GenericRepository.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GoogleDriveUploader">
+      <HintPath>..\..\..\..\..\..\..\ProjectsEY\NetDLLFiles\GoogleDriveUploader.dll</HintPath>
+    </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
     </Reference>
@@ -1814,10 +1817,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GoogleDriveUploader\GoogleDriveUploader\GoogleDriveUploader.csproj">
-      <Project>{b652ae97-342e-4309-82cd-860614f5746f}</Project>
-      <Name>GoogleDriveUploader</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">
       <Project>{553854d8-a688-4a50-ab74-4ccf3b1afe9a}</Project>
       <Name>StoreManagement.Data</Name>

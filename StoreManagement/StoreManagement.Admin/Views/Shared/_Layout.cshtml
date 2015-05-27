@@ -6,8 +6,9 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/Theme")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/Site.css" rel="stylesheet" 
-
+    @Styles.Render("/Content/css","/Content/themes/base/css")  
+           @Styles.Render("~/Content/bootstrap") 
+    <link href="~/Content/Site.css" rel="stylesheet" />
 
        
 

@@ -54,9 +54,7 @@
                             @Html.LabelFor(model => model.Description)
                         </div>
                         <div class="editor-field">
-
-                            <textarea id="Description" style="width: 100%; height: 800px;">@Model.Description</textarea>
-
+                            @Html.TextAreaFor(model => model.Description)
                         </div>
 
 
@@ -126,6 +124,9 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/bundles/vendors")
+
+    <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -141,7 +142,14 @@
             console.log("jquery is working");
  
             GetFiles($("#Id").val());
-
+            $('textarea#Description').ckeditor({
+                height: '150px',
+                toolbar: [
+                    { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+                    ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
+                    { name: 'basicstyles', items: ['Bold', 'Italic'] }
+                ]
+            });
 
             //$("#Description").htmlarea({
             //    // Override/Specify the Toolbar buttons to show

@@ -122,5 +122,3 @@ C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.A
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Release\StoreManagement.Admin.csprojResolveAssemblyReference.cache
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Release\StoreManagement.Admin.dll
 C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Release\StoreManagement.Admin.pdb
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\System.Web.Optimization.dll
-C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\Google.Apis.Core.xml

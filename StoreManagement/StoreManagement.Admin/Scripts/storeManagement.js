@@ -125,10 +125,16 @@ $(document).ready(function () {
     }
     $("#GridListItemSize").change(function (e) {
         var originalURL = window.location.href;
-        if (originalURL.split('?').length > 1) {
+        var q = getQueryStringParameter(originalURL, "GridPageSize");
+        if (!isEmpty(q)) {
             window.location.href = updateUrlParameter(originalURL, 'GridPageSize', $('#GridListItemSize option:selected').val())
         } else {
-            window.location.href = window.location.href + "?GridPageSize=" + $('#GridListItemSize option:selected').val();
+            if (hasQueryStringParameter(originalURL)) {
+                window.location.href = window.location.href + "&GridPageSize=" + $('#GridListItemSize option:selected').val();
+            } else {
+                window.location.href = window.location.href + "?GridPageSize=" + $('#GridListItemSize option:selected').val();
+            }
+            
         }
     });
     function updateUrlParameter(originalURL, param, value)
@@ -145,8 +151,6 @@ $(document).ready(function () {
                 if (param == qsArray[i].split('=')[0]) {
                     //exists key
                     qsArray[i] = param + '=' + value;
-                    flag = true;
-                    break;
                 }  
             }
         }
@@ -155,6 +159,16 @@ $(document).ready(function () {
         return windowUrl + '?' + finalQs;
         //6- prepare final url
        // window.location = windowUrl + '?' + finalQs;
+    }
+    function hasQueryStringParameter(originalURL) {
+
+        if (originalURL.split('?').length > 1) {
+            var qs = originalURL.split('?')[1];
+            var qsArray = qs.split('&');
+            return qsArray.length > 0;
+        } else {
+            return false;
+        }
     }
     function getQueryStringParameter(originalURL, param) {
    

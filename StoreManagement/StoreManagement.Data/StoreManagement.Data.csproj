@@ -112,6 +112,7 @@
     <Compile Include="GeneralHelper\GeneralHelper.cs" />
     <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
+    <Compile Include="GeneralHelper\PartialViewToString.cs" />
     <Compile Include="GeneralHelper\RequestHelper.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
     <Compile Include="Grid\CompanyGrid.cs" />

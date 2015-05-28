@@ -23,12 +23,12 @@ namespace StoreManagement.Admin.Controllers
             public bool State { get; set; }
 
         }
-        public AjaxController(IStoreContext dbContext, 
+        public AjaxController(IStoreContext dbContext,
             ISettingRepository settingRepository,
             IStoreRepository storeRepository)
             : base(dbContext, settingRepository)
         {
-      
+
         }
 
         [HttpPost]
@@ -66,14 +66,14 @@ namespace StoreManagement.Admin.Controllers
                 {
                     content.MainPage = item.State;
                 }
-                
+
 
                 ContentRepository.Edit(content);
             }
             ContentRepository.Save();
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SaveStyles(int storeId = 0, String styleArray="")
+        public ActionResult SaveStyles(int storeId = 0, String styleArray = "")
         {
             JObject results = JObject.Parse(styleArray);
             foreach (var result in results["styleArray"])
@@ -119,7 +119,18 @@ namespace StoreManagement.Admin.Controllers
             var files = ContentFileRepository.GetContentByContentId(contentId);
             return Json(files, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetCategoriesTree(int storeId = 0, String categoryType = "")
+        {
+            var tree = this.CategoryRepository.GetCategoriesByStoreId(storeId, categoryType);
+            var pts = new PartialViewToString();
 
+            var html = pts.RenderPartialToString(
+                        ControllerContext,
+                        "pCreateCategoryTree",
+                        new ViewDataDictionary(tree), null);
+
+            return Json(html, JsonRequestBehavior.AllowGet);
+        }
         //public ActionResult SaveHiearchy(string childId, string parentId)
         //{
         //  // JsTreeDAO.SaveNodeRelationship(childId, parentId);
@@ -146,7 +157,9 @@ namespace StoreManagement.Admin.Controllers
 
         //    return null; //you may return any success flag etc
         //}
-       
+
+
+
     }
-    
+
 }

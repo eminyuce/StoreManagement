@@ -173,7 +173,7 @@ namespace StoreManagement.Admin.Controllers
             fileManager.ModifiedDate = googleFile.ModifiedDate;
             fileManager.OriginalFilename = googleFile.OriginalFilename;
             fileManager.Title = googleFile.Title;
-            fileManager.WebViewLink = googleFile.WebViewLink;
+            fileManager.IconLink = googleFile.IconLink;
             fileManager.CreatedDate = googleFile.CreatedDate;
             fileManager.WebContentLink = googleFile.WebContentLink;
         }

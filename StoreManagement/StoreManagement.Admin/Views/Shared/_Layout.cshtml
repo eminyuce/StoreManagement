@@ -6,15 +6,17 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/Theme")
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("/Content/css","/Content/themes/base/css")  
-           @Styles.Render("~/Content/bootstrap") 
+    @Styles.Render("/Content/css", "/Content/themes/base/css")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/Vendors")
     <link href="~/Content/Site.css" rel="stylesheet" />
+        <link href="~/Content/chosen.css" rel="stylesheet" />
 
-       
+
 
 </head>
 <body class="bootstrap-admin-with-small-navbar">
-   
+
     <!-- main / large navbar -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -62,12 +64,14 @@
                             @Html.Partial("_LoginPartial")
                         </ul>
                     </div>
-                </div><!-- /.navbar-collapse -->
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-        </div><!-- /.container -->
+        </div>
+        <!-- /.container -->
     </nav>
     <div class="container">
-           @RenderSection("featured", required: false)
+        @RenderSection("featured", required: false)
         <div class="row">
             @RenderBody()
         </div>
@@ -82,9 +86,16 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/vendors")
 
-         <script src="~/Scripts/storeManagement.js"></script>
-        <script src="~/Scripts/imageGallery.js"></script>
+
+    <script src="~/Scripts/storeManagement.js"></script>
+    <script src="~/Scripts/imageGallery.js"></script>
+    <script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/colpick.css" rel="stylesheet" />
+    <script src="~/Scripts/colpick.js"></script>
 
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -98,7 +109,77 @@
         ga('send', 'pageview');
 
     </script>
-    
-        @RenderSection("scripts", required: false)
+
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('input[datatype-datetime="dt"]').datetimepicker({
+                format: 'm/d/Y h:i A',
+                timepicker: true,
+                closeOnDateSelect: true,
+                formatTime: 'g:i A'
+            });
+            $('input[datatype-datetime="d"]').datetimepicker({
+                format: 'm/d/Y',
+                timepicker: false,
+                closeOnDateSelect: true
+            });
+            $('select#StoreDropDownId').chosen({});
+            $('select#StoreDropDownId').chosen({}).change(function (event) {
+                $("#StoreId").val($(this).val());
+            });
+
+            $('[datatype-font-family="c"]').chosen({});
+            $('[datatype-font-size="c"]').chosen({});
+
+            $('input[datatype-color-mousehover="c"]').colpick({
+                onChange: function (hsb, hex, rgb, el, bySetColor) {
+
+                    $(el).hover(function () {
+                        $(this).css("color", '#' + hex);
+                    });
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if (!bySetColor) {
+                        $(el).val(hex);
+                    }
+                    var storeId = $(el).attr("data-setting");
+                    var m = $('input[data-store-style=' + storeId + ']').val();
+                    var id = $(el).attr("data-color-component-id");
+                    $('[data-field-id=' + id + ']').hover(function () {
+                        $(this).css("color", '#' + hex);
+                    });
+
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor(this.value);
+            });
+
+
+            $('input[datatype-color="c"]').colpick({
+                onChange: function (hsb, hex, rgb, el, bySetColor) {
+                    $(el).css('border-color', '#' + hex);
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if (!bySetColor) {
+                        $(el).val(hex);
+                    }
+                    var storeId = $(el).attr("data-setting");
+                    var m = $('input[data-store-style=' + storeId + ']').val();
+                    var id = $(el).attr("data-color-component-id");
+                    $('[data-field-id=' + id + ']').css('color', '#' + hex);
+
+                }
+            }).keyup(function () {
+                $(this).colpickSetColor(this.value);
+            });
+
+
+
+        });
+
+    </script>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

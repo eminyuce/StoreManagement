@@ -20,10 +20,9 @@
             <div class="bootstrap-admin-panel-content">
                 <h2>Create New Products</h2>
                 <input type="hidden" value="@categoryType" id="categoryType"/>
-                
+
 
                 <div id="categoryTree">
-                    
                 </div>
 
                 @using (Html.BeginForm())
@@ -43,9 +42,21 @@
 
 
                         @Html.HiddenFor(model => model.Id)
-                        @Html.HiddenFor(model => model.CategoryId)
+
                         @Html.HiddenFor(model => model.Type)
                         @Html.HiddenFor(model => model.Url)
+                        
+                        
+                         <div class="editor-label">
+                             <b>
+                                 Selected Category
+                             </b>   
+                        </div>
+                        <div class="editor-field">
+                            @Html.HiddenFor(model => model.CategoryId)
+                            <span class="label label-success" id="SelectedCategory"></span>
+                        </div>
+                        
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)
@@ -134,18 +145,18 @@
     <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             console.log("jquery is workingg");
-            $("#treeview").bind("select_node.jstree", function (event, data) {
+            $("#treeview").bind("select_node.jstree", function(event, data) {
                 var m = $("#" + data.selected[0]).find("[data-category]");
                 var selectedCategoryId = m.first().attr("data-category");
                 console.log(selectedCategoryId);
                 $("#CategoryId").val(selectedCategoryId);
 
             });
-            
-            $('select#StoreDropDownId').chosen({}).change(function (event) {
-                    GetCategoryTree($(this).val(), $("#categoryType").val());
+
+            $('select#StoreDropDownId').chosen({}).change(function(event) {
+                GetCategoryTree($(this).val(), $("#categoryType").val());
             });
 
             console.log("jquery is working");
@@ -161,31 +172,48 @@
             });
 
 
-
         });
-        function GetCategoryTree(id,categoryType) {
+
+        function GetCategoryTree(id, categoryType) {
 
             var jsonRequest = JSON.stringify({ "storeId": id, "categoryType": categoryType });
             console.log(jsonRequest);
- 
+
             jQuery.ajax({
-            url: "/Ajax/GetCategoriesTree",
+                url: "/Ajax/GetCategoriesTree",
                 type: 'POST',
                 data: jsonRequest,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                success: function (data) {
+                success: function(data) {
                     $("#categoryTree").html(data);
+                    bindcategoryTree();
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     console.error('Error ' + status + ' ' + request.responseText);
                 },
-                beforeSend: function () {
+                beforeSend: function() {
 
                 }
             });
 
         }
+
+        function bindcategoryTree() {
+            $('[data-category]').each(function () {
+                $(this).off("click");
+                $(this).on("click", handleCategoryTree);
+            });
+        }
+
+        function handleCategoryTree(e) {
+            var caller = e.target;
+            var categoryId = $(caller).attr('data-category');
+            var category = $(caller).text();
+            $("#SelectedCategory").text(category);
+            $("#CategoryId").val(categoryId);
+        }
+
         function GetFiles(id) {
 
             var jsonRequest = JSON.stringify({ "contentId": id });
@@ -197,19 +225,19 @@
                 data: jsonRequest,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                success: function (data) {
+                success: function(data) {
                     var files = data;
-                    $.each(files, function (i, file) {
+                    $.each(files, function(i, file) {
                         var imageId = file.FileManagerId;
                         var fileName = file.FileManager.FileName;
                         var thumbnailLink = file.FileManager.ThumbnailLink;
 
 
                         var removeLink = $("<div/>")
-                                .attr("data-image-remove-link", imageId)
-                                .attr("data-image-file-name", fileName)
-                                .attr("data-image-file-thumnailLink", thumbnailLink)
-                                .text("Remove").addClass("addLink");
+                            .attr("data-image-remove-link", imageId)
+                            .attr("data-image-file-name", fileName)
+                            .attr("data-image-file-thumnailLink", thumbnailLink)
+                            .text("Remove").addClass("addLink");
                         var div = createImage(thumbnailLink, fileName, imageId, removeLink);
                         var fileHiddenLink = $('<input>').attr({
                             type: 'hidden',
@@ -224,10 +252,10 @@
                         bindRemoveImage();
                     });
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     console.error('Error ' + status + ' ' + request.responseText);
                 },
-                beforeSend: function () {
+                beforeSend: function() {
 
                 }
             });

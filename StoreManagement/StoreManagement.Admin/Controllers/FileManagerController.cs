@@ -192,26 +192,6 @@ namespace StoreManagement.Admin.Controllers
 
             var fileManager = SaveFiles(file);
 
-
-
-            //var fullName = Path.Combine(StorageRoot, Path.GetFileName(fileName));
-
-            //using (var fs = new FileStream(fullName, FileMode.Append, FileAccess.Write))
-            //{
-            //    var buffer = new byte[1024];
-
-            //    var l = inputStream.Read(buffer, 0, 1024);
-            //    while (l > 0)
-            //    {
-            //        fs.Write(buffer, 0, l);
-            //        l = inputStream.Read(buffer, 0, 1024);
-            //    }
-            //    fs.Flush();
-            //    fs.Close();
-            //}
-
-
-
  
             statuses.Add(new ViewDataUploadFilesResult()
             {

@@ -4,180 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/Theme")
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("/Content/css", "/Content/themes/base/css")
-    @Styles.Render("~/Content/bootstrap")
-    @Styles.Render("~/Content/Vendors")
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/chosen.css" rel="stylesheet" />
-    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
-    <link href="~/Content/colpick.css" rel="stylesheet" />
-    <link href="~/Content/jstree/style.css" rel="stylesheet" />
-
-
+    @Html.Partial("pLayoutStyle")
 
 </head>
 <body class="bootstrap-admin-with-small-navbar">
-
-    <!-- main / large navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">Admin Panel</a>
-                </div>
-                <div class="collapse navbar-collapse main-navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-hover="dropdown">Dropdown <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li role="presentation" class="dropdown-header">Dropdown header</li>
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="presentation" class="divider"></li>
-                                <li role="presentation" class="dropdown-header">Dropdown header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="collapse navbar-collapse bootstrap-admin-navbar-sm">
-                        <ul class="nav navbar-nav navbar-right ">
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li>
-                                <a href="#">Reminders <i class="glyphicon glyphicon-bell"></i></a>
-                            </li>
-                            <li>
-                                <a href="#">Settings <i class="glyphicon glyphicon-cog"></i></a>
-                            </li>
-                            <li>
-                                <a href="#">Go to frontend <i class="glyphicon glyphicon-share-alt"></i></a>
-                            </li>
-                            @Html.Partial("_LoginPartial")
-                        </ul>
-                    </div>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-        </div>
-        <!-- /.container -->
-    </nav>
+    @Html.Partial("pLayoutBody")
     <div class="container">
         @RenderSection("featured", required: false)
         <div class="row">
             @RenderBody()
         </div>
         <div class="row">
-            <hr>
-            <footer role="contentinfo">
-                <p>&copy;  @DateTime.Now.Year -  <a href="https://github.com/jrocket" target="_blank">jrocket</a></p>
-            </footer>
+            @Html.Partial("pLayoutFooter")
         </div>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/vendors")
-
-
-    <script src="~/Scripts/storeManagement.js"></script>
-    <script src="~/Scripts/imageGallery.js"></script>
-    <script src="~/Scripts/jquery.datetimepicker.js"></script>
-
-    <script src="~/Scripts/colpick.js"></script>
-
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-45396411-1', 'azurewebsites.net');
-        ga('send', 'pageview');
-
-
-
-        $(document).ready(function () {
-            $('input[datatype-datetime="dt"]').datetimepicker({
-                format: 'm/d/Y h:i A',
-                timepicker: true,
-                closeOnDateSelect: true,
-                formatTime: 'g:i A'
-            });
-            $('input[datatype-datetime="d"]').datetimepicker({
-                format: 'm/d/Y',
-                timepicker: false,
-                closeOnDateSelect: true
-            });
-            $('select#StoreDropDownId').chosen({});
-            $('select#StoreDropDownId').chosen({}).change(function (event) {
-                $("#StoreId").val($(this).val());
-            });
-
-            $('[datatype-font-family="c"]').chosen({});
-            $('[datatype-font-size="c"]').chosen({});
-
-            $('input[datatype-color-mousehover="c"]').colpick({
-                onChange: function (hsb, hex, rgb, el, bySetColor) {
-
-                    $(el).hover(function () {
-                        $(this).css("color", '#' + hex);
-                    });
-                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-                    if (!bySetColor) {
-                        $(el).val(hex);
-                    }
-                    var storeId = $(el).attr("data-setting");
-                    var m = $('input[data-store-style=' + storeId + ']').val();
-                    var id = $(el).attr("data-color-component-id");
-                    $('[data-field-id=' + id + ']').hover(function () {
-                        $(this).css("color", '#' + hex);
-                    });
-
-                }
-            }).keyup(function () {
-                $(this).colpickSetColor(this.value);
-            });
-
-
-            $('input[datatype-color="c"]').colpick({
-                onChange: function (hsb, hex, rgb, el, bySetColor) {
-                    $(el).css('border-color', '#' + hex);
-                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-                    if (!bySetColor) {
-                        $(el).val(hex);
-                    }
-                    var storeId = $(el).attr("data-setting");
-                    var m = $('input[data-store-style=' + storeId + ']').val();
-                    var id = $(el).attr("data-color-component-id");
-                    $('[data-field-id=' + id + ']').css('color', '#' + hex);
-
-                }
-            }).keyup(function () {
-                $(this).colpickSetColor(this.value);
-            });
-
-
-
-        });
-
-    </script>
-
-    @RenderSection("scripts", required: false)
 </body>
+@Html.Partial("pLayoutScript")
+@RenderSection("scripts", required: false)
 </html>

@@ -4,21 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
     @Html.Partial("pLayoutStyle")
-    @Html.Partial("pLayoutFileUploadContent")
+    @Html.Partial("pLayoutFileUploadScript")
 
 </head>
-<body class="bootstrap-admin-with-small-navbar">
-    @Html.Partial("pLayoutBody")
-    <div class="container">
-        @RenderSection("featured", required: false)
-        <div class="row">
-            @RenderBody()
+    <body class="bootstrap-admin-with-small-navbar">
+        @Html.Partial("pLayoutBody")
+        <div class="container">
+            @RenderSection("featured", required: false)
+            <div class="row">
+                @RenderBody()
+            </div>
+            <div class="row">
+                @Html.Partial("pLayoutFooter")
+            </div>
         </div>
-        <div class="row">
-            @Html.Partial("pLayoutFooter")
-        </div>
-    </div>
-</body>
-@RenderSection("scripts", required: false)
+    </body>
+    @Html.Partial("pLayoutScript")
+   @RenderSection("scripts", required: false)
 </html>

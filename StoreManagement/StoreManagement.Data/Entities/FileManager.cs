@@ -11,10 +11,7 @@ namespace StoreManagement.Data.Entities
     {
         public int Id { get; set; }
         public int StoreId { get; set; }
-        public string Guid { get; set; }
-        public string FileName { get; set; }
         public string ContentType { get; set; }
-        public string Description { get; set; }
         public Boolean State { get; set; }
         public int Ordering { get; set; }
         public int ContentLength { get; set; }
@@ -24,7 +21,7 @@ namespace StoreManagement.Data.Entities
         public string ThumbnailLink { get; set; }
         public string IconLink { get; set; }
         public string WebContentLink { get; set; }
-        public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

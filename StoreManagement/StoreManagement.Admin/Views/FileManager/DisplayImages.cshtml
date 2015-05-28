@@ -27,7 +27,7 @@
                 </span>
 
 
-                @Html.Grid(Model).Named("imagesGrid").Columns(columns =>
+   @Html.Grid(Model).Named("imagesGrid").Columns(columns =>
     {
 
         columns.Add().Encoded(false).
@@ -35,14 +35,15 @@
             SetWidth(10).
             RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.GoogleImageId));
 
-        columns.Add(o => o.Id, false);
+        columns.Add(o => o.Id, true);
+    
         columns.Add()
                .Encoded(false)
                .Sanitized(false)
                .SetWidth(30)
                .RenderValueAs(d =>
                    @<b>
-                       @Html.ActionLink("Edit", "Edit", new { id = d.GoogleImageId })
+                       @Html.ActionLink(" ", "Edit", new { id = d.GoogleImageId }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                    </b>);
         columns.Add()
                    .Encoded(false)
@@ -50,19 +51,18 @@
                    .SetWidth(30)
                    .RenderValueAs(d =>
                        @<b>
-                           @Html.ActionLink("Delete", "Delete", new { id = d.GoogleImageId })
+                           @Html.ActionLink(" ", "Delete", new { id = d.GoogleImageId }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
                        </b>);
-
+       
+        columns.Add(c => c.Title).Titled("Name").Filterable(true);
         columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
-
-
-        columns.Add(o => o.CreatedDate)
+        columns.Add(o => o.ModifiedDate)
                         .Titled("Date")
                         .Sortable(true)
                         .SortInitialDirection(GridSortDirection.Descending);
 
 
-        columns.Add(c => c.FileName).Titled("Username").Filterable(true).Sanitized(false)
+        columns.Add(c => c.ThumbnailLink).Titled("Thumbnail Foto").Filterable(true).Sanitized(false)
             .Encoded(false).RenderValueAs(d => Html.Raw(string.Format("<text><img style='width:100%; max-width: 150px' src=\"{0}\" alt=\"Image\"/></text>",
                 d.ThumbnailLink)).ToHtmlString());
 

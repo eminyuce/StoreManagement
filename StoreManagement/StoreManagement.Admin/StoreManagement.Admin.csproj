@@ -1854,7 +1854,7 @@
     <Content Include="Views\Shared\_LeftMenu.cshtml" />
     <Content Include="Views\Shared\pLayoutStyle.cshtml" />
     <Content Include="Views\Shared\pLayoutScript.cshtml" />
-    <Content Include="Views\Shared\pLayoutFileUploadContent.cshtml" />
+    <Content Include="Views\Shared\pLayoutFileUploadScript.cshtml" />
     <Content Include="Views\Shared\pLayoutBody.cshtml" />
     <Content Include="Views\Shared\pLayoutFooter.cshtml" />
   </ItemGroup>

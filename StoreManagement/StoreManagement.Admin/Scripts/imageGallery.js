@@ -62,7 +62,7 @@ function LoadImages() {
         var list = $("<ul></ul");
         $.each(photos, function (i, photo) {
             var thumnailLink = photo.ThumbnailLink;
-            var fileName = photo.FileName;
+            var fileName = photo.Title;
             var photoId = photo.Id;
             var addLink = $("<div/>")
                 .attr("data-image-add-link", photoId)

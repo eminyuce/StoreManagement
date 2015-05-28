@@ -208,12 +208,15 @@
                     $.each(files, function (i, file) {
                         var imageId = file.FileManagerId;
                         var fileName = file.FileManager.FileName;
+                        var thumbnailLink = file.FileManager.ThumbnailLink;
+                        
 
                         var removeLink = $("<div/>")
                                 .attr("data-image-remove-link", imageId)
                                 .attr("data-image-file-name", fileName)
+                                .attr("data-image-file-thumnailLink", thumbnailLink)
                                 .text("Remove").addClass("addLink");
-                        var div = createImage(fileName, imageId, removeLink);
+                        var div = createImage(thumbnailLink, fileName, imageId, removeLink);
                         var fileHiddenLink = $('<input>').attr({
                             type: 'hidden',
                             id: 'fileId_' + imageId,

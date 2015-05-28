@@ -21,6 +21,11 @@ namespace StoreManagement.Service.Services
             throw new NotImplementedException();
         }
 
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Category> GetCategoriesByStoreId(int storeId, string type)
         {
             throw new NotImplementedException();

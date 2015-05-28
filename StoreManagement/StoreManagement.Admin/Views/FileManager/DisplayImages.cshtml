@@ -6,6 +6,19 @@
     ViewBag.Title = "View1";
 }
 
+
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+
 <h2>Images</h2>
 
 <span class="btn btn-link btn-xs" id="DeleteAll">Delete All
@@ -61,6 +74,21 @@
     }).SetRowCssClasses(item => (item.Id % 2 == 0 ? "warning" : string.Empty)).SetRowCssClasses(item => String.Format("MyGrid-Row-{0}", item.Id)).WithPaging(15).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
  
+ 
+                 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
 @section scripts
 {
     <script>

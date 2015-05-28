@@ -11,7 +11,8 @@
     @Styles.Render("~/Content/Vendors")
     <link href="~/Content/Site.css" rel="stylesheet" />
         <link href="~/Content/chosen.css" rel="stylesheet" />
-
+        <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/colpick.css" rel="stylesheet" />
 
 
 </head>
@@ -93,8 +94,7 @@
     <script src="~/Scripts/storeManagement.js"></script>
     <script src="~/Scripts/imageGallery.js"></script>
     <script src="~/Scripts/jquery.datetimepicker.js"></script>
-    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
-    <link href="~/Content/colpick.css" rel="stylesheet" />
+
     <script src="~/Scripts/colpick.js"></script>
 
     <script>
@@ -108,11 +108,7 @@
         ga('create', 'UA-45396411-1', 'azurewebsites.net');
         ga('send', 'pageview');
 
-    </script>
-
-
-    <script>
-
+   
 
         $(document).ready(function () {
             $('input[datatype-datetime="dt"]').datetimepicker({

@@ -4,13 +4,23 @@
     Layout = "~/Views/Shared/_LayoutFileUpload.cshtml";
 
 }
-<div>
+
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+                <div>
          @Html.Action("StoresDropDown", "Stores", new { storeId=0 })
     </div>
 @Html.ActionLink("Display Images","DisplayImages","FileManager")
   
-
-
 
 
 
@@ -159,4 +169,19 @@ PER ACTION BASIS
     </tr>
 {% } %}
 </script>
+
+
+ 
+                 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
 

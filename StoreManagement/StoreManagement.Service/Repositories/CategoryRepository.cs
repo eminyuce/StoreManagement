@@ -32,6 +32,13 @@ namespace StoreManagement.Service.Repositories
        
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
+            return this.FindBy(r => r.StoreId == storeId).ToList();
+
+        }
+
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
+        {
+
             //return this.GetAllIncluding(IncludeProperties()).Where(r => r.StoreId == storeId && r.Contents.Any()).OrderByDescending(r => r.Id).Take(10).ToList();
             //IQueryable<Category> mmm = (from z in dbContext.Categories
             //                            join f in dbContext.Contents on z.Id equals f.CategoryId
@@ -45,11 +52,11 @@ namespace StoreManagement.Service.Repositories
             //    .Take(10);
 
             //return mmm.ToList();
-
             return dbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
                 .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
                 .OrderByDescending(r => r.Ordering).Take(10).ToList();
         }
+
         //public IQueryable<T> Include<T>(params Expression<Func<T, object>>[] paths) where T : class
         //{
         //    IQueryable<T> query = dbContext.Set<T>();

@@ -7,6 +7,18 @@
     int storeId = Model != null ? Model.StoreId : 0;
 }
 
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+
 <h2>Create</h2>
 
 @using (Html.BeginForm())
@@ -104,5 +116,21 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+ 
+                 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
 
 

@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "../Shared/_Layout.cshtml";
     int storeId = Model != null ? Model.StoreId : 0;
+    String categoryType = "product";
 }
 
 
@@ -18,8 +19,11 @@
             </div>
             <div class="bootstrap-admin-panel-content">
                 <h2>Create New Products</h2>
+                <input type="hidden" value="@categoryType" id="categoryType"/>
 
-                @Html.Action("CreateCategoryTree", "Categories")
+
+                <div id="categoryTree">
+                </div>
 
                 @using (Html.BeginForm())
                 {
@@ -38,9 +42,21 @@
 
 
                         @Html.HiddenFor(model => model.Id)
-                        @Html.HiddenFor(model => model.CategoryId)
+
                         @Html.HiddenFor(model => model.Type)
                         @Html.HiddenFor(model => model.Url)
+                        
+                        
+                         <div class="editor-label">
+                             <b>
+                                 Selected Category
+                             </b>   
+                        </div>
+                        <div class="editor-field">
+                            @Html.HiddenFor(model => model.CategoryId)
+                            <span class="label label-success" id="SelectedCategory"></span>
+                        </div>
+                        
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)
@@ -123,15 +139,15 @@
 
 
 @section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-  @Scripts.Render("~/bundles/vendors")
+
+    <script src="~/Scripts/jstree/jstree.js"></script>
 
     <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             console.log("jquery is workingg");
-            $("#treeview").bind("select_node.jstree", function (event, data) {
+            $("#treeview").bind("select_node.jstree", function(event, data) {
                 var m = $("#" + data.selected[0]).find("[data-category]");
                 var selectedCategoryId = m.first().attr("data-category");
                 console.log(selectedCategoryId);
@@ -139,8 +155,12 @@
 
             });
 
+            $('select#StoreDropDownId').chosen({}).change(function(event) {
+                GetCategoryTree($(this).val(), $("#categoryType").val());
+            });
+
             console.log("jquery is working");
- 
+
             GetFiles($("#Id").val());
             $('textarea#Description').ckeditor({
                 height: '150px',
@@ -151,47 +171,48 @@
                 ]
             });
 
-            //$("#Description").htmlarea({
-            //    // Override/Specify the Toolbar buttons to show
-            //    toolbar: [
-            //        ["bold", "italic", "underline", "|", "forecolor"],
-            //        ["p", "h1", "h2", "h3", "h4", "h5", "h6"],
-            //        ["link", "unlink", "|", "image"],
-            //        [{
-            //            // This is how to add a completely custom Toolbar Button
-            //            css: "custom_disk_button",
-            //            text: "Save",
-            //            action: function (btn) {
-            //                // 'this' = jHtmlArea object
-            //                // 'btn' = jQuery object that represents the <A> "anchor" tag for the Toolbar Button
-            //                console.log('SAVE!\n\n' + this.toHtmlString());
-            //            }
-            //        }]
-            //    ],
-
-            //    // Override any of the toolbarText values - these are the Alt Text / Tooltips shown
-            //    // when the user hovers the mouse over the Toolbar Buttons
-            //    // Here are a couple translated to German, thanks to Google Translate.
-            //    toolbarText: $.extend({}, jHtmlArea.defaultOptions.toolbarText, {
-            //        //"bold": "fett",
-            //        //"italic": "kursiv",
-            //        "underline": "unterstreichen"
-            //    }),
-
-            //    // Specify a specific CSS file to use for the Editor
-            //    //css: "/Content/jHtmlArea/jHtmlArea.Editor.css",
-
-            //    // Do something once the editor has finished loading
-            //    loaded: function () {
-            //        //// 'this' is equal to the jHtmlArea object
-            //        //alert("jHtmlArea has loaded!");
-            //        //this.showHTMLView(); // show the HTML view once the editor has finished loading
-            //    } 
-
-            //});
-
 
         });
+
+        function GetCategoryTree(id, categoryType) {
+
+            var jsonRequest = JSON.stringify({ "storeId": id, "categoryType": categoryType });
+            console.log(jsonRequest);
+
+            jQuery.ajax({
+                url: "/Ajax/GetCategoriesTree",
+                type: 'POST',
+                data: jsonRequest,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+                    $("#categoryTree").html(data);
+                    bindcategoryTree();
+                },
+                error: function(request, status, error) {
+                    console.error('Error ' + status + ' ' + request.responseText);
+                },
+                beforeSend: function() {
+
+                }
+            });
+
+        }
+
+        function bindcategoryTree() {
+            $('[data-category]').each(function () {
+                $(this).off("click");
+                $(this).on("click", handleCategoryTree);
+            });
+        }
+
+        function handleCategoryTree(e) {
+            var caller = e.target;
+            var categoryId = $(caller).attr('data-category');
+            var category = $(caller).text();
+            $("#SelectedCategory").text(category);
+            $("#CategoryId").val(categoryId);
+        }
 
         function GetFiles(id) {
 
@@ -204,17 +225,20 @@
                 data: jsonRequest,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                success: function (data) {
+                success: function(data) {
                     var files = data;
-                    $.each(files, function (i, file) {
+                    $.each(files, function(i, file) {
                         var imageId = file.FileManagerId;
                         var fileName = file.FileManager.FileName;
+                        var thumbnailLink = file.FileManager.ThumbnailLink;
+
 
                         var removeLink = $("<div/>")
-                                .attr("data-image-remove-link", imageId)
-                                .attr("data-image-file-name", fileName)
-                                .text("Remove").addClass("addLink");
-                        var div = createImage(fileName, imageId, removeLink);
+                            .attr("data-image-remove-link", imageId)
+                            .attr("data-image-file-name", fileName)
+                            .attr("data-image-file-thumnailLink", thumbnailLink)
+                            .text("Remove").addClass("addLink");
+                        var div = createImage(thumbnailLink, fileName, imageId, removeLink);
                         var fileHiddenLink = $('<input>').attr({
                             type: 'hidden',
                             id: 'fileId_' + imageId,
@@ -228,10 +252,10 @@
                         bindRemoveImage();
                     });
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     console.error('Error ' + status + ' ' + request.responseText);
                 },
-                beforeSend: function () {
+                beforeSend: function() {
 
                 }
             });

@@ -68,7 +68,7 @@ namespace StoreManagement.Admin.Controllers
         private void DeleteFile(string id)
         {
             var f = FileManagerRepository.GetFilesByGoogleImageId(id);
-            var filename = f.FileName;
+            var filename = f.Title;
             var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
 
             //if (System.IO.File.Exists(filePath))
@@ -192,26 +192,6 @@ namespace StoreManagement.Admin.Controllers
 
             var fileManager = SaveFiles(file);
 
-
-
-            //var fullName = Path.Combine(StorageRoot, Path.GetFileName(fileName));
-
-            //using (var fs = new FileStream(fullName, FileMode.Append, FileAccess.Write))
-            //{
-            //    var buffer = new byte[1024];
-
-            //    var l = inputStream.Read(buffer, 0, 1024);
-            //    while (l > 0)
-            //    {
-            //        fs.Write(buffer, 0, l);
-            //        l = inputStream.Read(buffer, 0, 1024);
-            //    }
-            //    fs.Flush();
-            //    fs.Close();
-            //}
-
-
-
  
             statuses.Add(new ViewDataUploadFilesResult()
             {
@@ -236,12 +216,10 @@ namespace StoreManagement.Admin.Controllers
             fileManager.ContentType = file.ContentType;
             fileManager.ContentLength = file.ContentLength;
             fileManager.CreatedDate = DateTime.Now;
-            fileManager.FileName = file.FileName;
+            fileManager.Title = file.FileName;
             fileManager.State = true;
             fileManager.StoreId = storeId;
             fileManager.Ordering = 1;
-            fileManager.Description = "";
-            fileManager.Guid = Guid.NewGuid().ToStr();
             return fileManager;
         }
 

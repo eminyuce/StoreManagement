@@ -123,11 +123,7 @@ namespace StoreManagement.Admin.Controllers
             return View();
         }
 
-        public ActionResult CreateCategoryTree(int storeId = 1, String categoryType = "family")
-        {
-            var tree = this.CategoryRepository.GetCategoriesByStoreId(storeId, categoryType);
-            return View(tree);
-        }
+         
         public ActionResult Test()
         {
             return View();

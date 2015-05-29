@@ -7,6 +7,18 @@
    
 }
 
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+
 <h2>Index</h2>
 
 <p>
@@ -41,6 +53,21 @@
         columns.Add(foo => foo.ControllerName).Filterable(true).Sortable(true);
         columns.Add(foo => foo.State).Filterable(true).Sortable(true);
     }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+
+
+
+
+ 
+                 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
 
 
 

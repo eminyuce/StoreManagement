@@ -4,7 +4,19 @@
     Layout = "~/Views/Shared/_LayoutFileUpload.cshtml";
 
 }
-<div>
+
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+                <div>
          @Html.Action("StoresDropDown", "Stores", new { storeId=0 })
     </div>
 @Html.ActionLink("Display Images","DisplayImages","FileManager")
@@ -12,13 +24,38 @@
 
 
 
-
-
 <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
 <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+@section scripts
+{
+    
+  <link href="/Content/Site.css?cdv=1" type="text/css" rel="stylesheet"/>
+    
+       <script src="~/Scripts/bootstrap-image-gallery.min.js"></script>
+        <script src="/Scripts/bootstrap.js"></script>    
+                <link href="/Content/bootstrap.css" rel="stylesheet"/>
+            <link href="/Content/bootstrap-theme.css" rel="stylesheet"/>
+    
+    
+    <link href="/Scripts/FileUpload/jquery.fileupload-ui.css?cdv=1" type="text/css" rel="stylesheet"/>
+
+ 
+    <script src="/Scripts/FileUpload/load-image.min.js?cdv=1" type="text/javascript"></script>
+
+    <script src="/Scripts/FileUpload/canvas-to-blob.min.js?cdv=1" type="text/javascript"></script>
+   <script src="/Scripts/FileUpload/tmpl.min.js?cdv=1" type="text/javascript"></script>
 
 
-@*
+    <script src="/Scripts/FileUpload/jquery.fileupload.js?cdv=1" type="text/javascript"></script>
+    <script src="/Scripts/FileUpload/jquery.iframe-transport.js?cdv=1" type="text/javascript"></script>
+    <script src="/Scripts/FileUpload/jquery.fileupload-ip.js?cdv=1" type="text/javascript"></script>
+    <script src="/Scripts/FileUpload/jquery.fileupload-ui.js?cdv=1" type="text/javascript"></script>
+    <script src="/Scripts/FileUpload/locale.js?cdv=1" type="text/javascript"></script>
+    <script src="/Scripts/FileUpload/main.js?cdv=1" type="text/javascript"></script>
+
+}
+
+                @*
 
 IN ORDER TO USE MVC ACTIONS AS HANDLERS OF AJAX CALLS, USE THE FORM DECLARATION BELOW. (THE ONE COMMENTED OUT)
 IT IS NOT ADVISED SINCE WHEN USING MVC CONTROLLER TO HANDLE REQUESTS ONE CAN'T CONTROL THE maxMessageLength OF THE POST REQUEST
@@ -159,4 +196,19 @@ PER ACTION BASIS
     </tr>
 {% } %}
 </script>
+
+
+ 
+                 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
 

@@ -6,52 +6,65 @@
     ViewBag.Title = "View1";
 }
 
-<h2>Images</h2>
 
-<span class="btn btn-link btn-xs" id="DeleteAll">Delete All
-</span>
-<span class="btn btn-link btn-xs" id="SelectAll">Select All
-</span>
- 
 
-    @Html.Grid(Model).Named("imagesGrid").Columns(columns =>
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+
+                <h2>Images</h2>
+
+                <span class="btn btn-link btn-xs" id="DeleteAll">Delete All
+                </span>
+                <span class="btn btn-link btn-xs" id="SelectAll">Select All
+                </span>
+
+
+   @Html.Grid(Model).Named("imagesGrid").Columns(columns =>
     {
 
         columns.Add().Encoded(false).
             Sanitized(false).
             SetWidth(10).
-            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.GoogleImageId));
 
-        columns.Add(o => o.Id, false);
+        columns.Add(o => o.Id, true);
+    
         columns.Add()
                .Encoded(false)
                .Sanitized(false)
                .SetWidth(30)
                .RenderValueAs(d =>
                    @<b>
-                        @Html.ActionLink("Edit", "Edit", new { id = d.GoogleImageId })
-                    </b>);
+                       @Html.ActionLink(" ", "Edit", new { id = d.GoogleImageId }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                   </b>);
         columns.Add()
                    .Encoded(false)
                    .Sanitized(false)
                    .SetWidth(30)
                    .RenderValueAs(d =>
                        @<b>
-                            @Html.ActionLink("Delete", "Delete", new { id = d.GoogleImageId })
-                        </b>);
-
+                           @Html.ActionLink(" ", "Delete", new { id = d.GoogleImageId }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+                       </b>);
+       
+        columns.Add(c => c.Title).Titled("Name").Filterable(true);
         columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
-
-
-        columns.Add(o => o.CreatedDate)
+        columns.Add(o => o.ModifiedDate)
                         .Titled("Date")
                         .Sortable(true)
                         .SortInitialDirection(GridSortDirection.Descending);
 
 
-        columns.Add(c => c.FileName).Titled("Username").Filterable(true).Sanitized(false)
+        columns.Add(c => c.ThumbnailLink).Titled("Thumbnail Foto").Filterable(true).Sanitized(false)
             .Encoded(false).RenderValueAs(d => Html.Raw(string.Format("<text><img style='width:100%; max-width: 150px' src=\"{0}\" alt=\"Image\"/></text>",
-                String.Format("https://docs.google.com/uc?id={0}", d.GoogleImageId))).ToHtmlString());
+                d.ThumbnailLink)).ToHtmlString());
 
 
 
@@ -60,7 +73,22 @@
 
     }).SetRowCssClasses(item => (item.Id % 2 == 0 ? "warning" : string.Empty)).SetRowCssClasses(item => String.Format("MyGrid-Row-{0}", item.Id)).WithPaging(15).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
- 
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
 @section scripts
 {
     <script>

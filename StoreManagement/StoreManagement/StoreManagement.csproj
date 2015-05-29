@@ -260,6 +260,7 @@
     <Content Include="Content\shop-cart\assets\font-awesome\css\font-awesome-ie7.min.css" />
     <Content Include="Content\shop-cart\assets\font-awesome\css\font-awesome.css" />
     <Content Include="Content\shop-cart\assets\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\shop-cart\assets\font-awesome\font\fontawesome-webfont.svg" />
     <Content Include="Content\shop-cart\assets\ico\favicon.ico" />
     <Content Include="Content\shop-cart\assets\img\1.png" />
     <Content Include="Content\shop-cart\assets\img\2.png" />
@@ -392,7 +393,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\shop-cart\assets\font-awesome\font\fontawesome-webfont.eot" />
-    <Content Include="Content\shop-cart\assets\font-awesome\font\fontawesome-webfont.svg" />
     <Content Include="Content\shop-cart\assets\font-awesome\font\fontawesome-webfont.ttf" />
     <Content Include="Content\shop-cart\assets\font-awesome\font\fontawesome-webfont.woff" />
     <Content Include="Content\shop-cart\assets\font-awesome\font\FontAwesome.otf" />

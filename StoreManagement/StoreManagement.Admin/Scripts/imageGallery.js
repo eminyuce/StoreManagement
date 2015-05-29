@@ -1,5 +1,5 @@
 ﻿
-var linkUrl = "/Files/{id}/";
+var linkUrl = "{id}";
 $(document).ready(function () {
     console.log("image gallery script is working");
     
@@ -39,8 +39,8 @@ $(document).ready(function () {
 
 });
 
-function createImage(fileName, photoId, eventLink) {
-    var img = $("<img/>").attr("src", '/Files/' + fileName)
+function createImage(thumnailLink, fileName, photoId, eventLink) {
+    var img = $("<img/>").attr("src",   thumnailLink)
         .attr("title", fileName)
         .attr("id", photoId)
         .attr("style", "width:100%;max-width:70px;");
@@ -61,13 +61,15 @@ function LoadImages() {
 
         var list = $("<ul></ul");
         $.each(photos, function (i, photo) {
-            var fileName = photo.FileName;
+            var thumnailLink = photo.ThumbnailLink;
+            var fileName = photo.Title;
             var photoId = photo.Id;
             var addLink = $("<div/>")
                 .attr("data-image-add-link", photoId)
                 .attr("data-image-file-name", fileName)
+                .attr("data-image-file-thumnailLink", thumnailLink)
                 .text("Add").addClass("addLink");
-            var div = createImage(fileName, photoId, addLink);
+            var div = createImage(thumnailLink,fileName, photoId, addLink);
             $(list).append($("<div/>").append(div));
 
         });
@@ -102,6 +104,7 @@ function handleRemoveImage(e) {
     var caller = e.target;
     var imageId = $(caller).attr('data-image-remove-link');
     var fileName = $(caller).attr('data-image-file-name');
+    var thumnailLink = $(caller).attr('data-image-file-thumnailLink');
     $("#SelectedImageGallery").find('[data-file-image=' + imageId + ']').remove();
     $("#SelectedImageGallery").find('[data-selected-file=' + imageId + ']').remove();
     
@@ -114,7 +117,7 @@ function handleRemoveImage(e) {
         .attr("data-image-add-link", imageId)
         .attr("data-image-file-name", fileName)
         .text("Add").addClass("addLink");
-    var div = createImage(fileName, imageId, addLink);
+    var div = createImage(thumnailLink,fileName, imageId, addLink);
     $("#flickr-photos").append(div);
     bindAddImage();
 }
@@ -130,12 +133,14 @@ function handleAddImage(e) {
     var caller = e.target;
     var imageId = $(caller).attr('data-image-add-link');
     var fileName = $(caller).attr('data-image-file-name');
+    var thumnailLink = $(caller).attr('data-image-file-thumnailLink');
+    
     $(caller).addClass("addedImage");
     var removeLink = $("<div/>")
         .attr("data-image-remove-link", imageId)
         .attr("data-image-file-name", fileName)
         .text("Remove").addClass("addLink");
-    var div = createImage(fileName, imageId, removeLink);
+    var div = createImage(thumnailLink,fileName, imageId, removeLink);
     var file = $('<input>').attr({
         type: 'hidden',
         id: 'fileId_' + imageId,

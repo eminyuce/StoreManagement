@@ -208,13 +208,9 @@ function deleteItemsSuccess(data) {
 
     data.forEach(function (entry) {
         console.log(entry);
-        if (!isEmpty(entry)) {
-            var pp = $('[gridkey-id=' + entry + ']');
-            pp.parent().parent().remove();
-            console.log(pp);
-        }
-     
-        
+        var pp = $('[gridkey-id=' + entry + ']');
+        pp.parent().parent().remove();
+        console.log(pp);
     });
 }
 function changeStateSuccess(data) {

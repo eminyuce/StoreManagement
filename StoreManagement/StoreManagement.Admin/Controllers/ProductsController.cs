@@ -15,7 +15,10 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
- 
+
+        private const String ContentType = "product";
+
+
         public ProductsController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
         {
              
@@ -30,7 +33,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                resultList = ContentRepository.GetContentByType(storeId, "content");
+                resultList = ContentRepository.GetContentByType(storeId, ContentType);
             }
 
             if (!String.IsNullOrEmpty(search))
@@ -63,7 +66,7 @@ namespace StoreManagement.Admin.Controllers
             if (id == 0)
             {
                 content.StoreId = 1;
-                content.Type = "product";
+                content.Type = ContentType;
             }
             else
             {

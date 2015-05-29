@@ -1,4 +1,5 @@
 using StoreManagement.Data;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -65,6 +66,8 @@ namespace StoreManagement.Admin.App_Start
         private const string serviceAccountPkCs12FilePath = @"~\Content\Google Drive File Upload-d022ab1f4c22.p12";
         private const string serviceAccountEmail = "660481316212-aietulh54ei2eqsi1gdvl0g7s12ohf70@developer.gserviceaccount.com";
         private const string folder = "MyStoreFolder";
+        private const string password = "notasecret";
+
         /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
@@ -87,9 +90,9 @@ namespace StoreManagement.Admin.App_Start
             m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("ClientId", clientId));
             m.WithConstructorArgument("userEmail", "eminyuce@gmail.com");
             m.WithConstructorArgument("serviceAccountEmail", serviceAccountEmail);
-            m.WithConstructorArgument("serviceAccountPkCs12FilePath", HostingEnvironment.MapPath(serviceAccountPkCs12FilePath));
+            m.WithConstructorArgument("certificate", GeneralHelper.CreateCert(HostingEnvironment.MapPath(serviceAccountPkCs12FilePath), password));
             m.WithConstructorArgument("folderName", folder);
-
+            m.WithConstructorArgument("password", password);
 
 
 

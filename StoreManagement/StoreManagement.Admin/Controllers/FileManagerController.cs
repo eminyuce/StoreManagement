@@ -61,32 +61,35 @@ namespace StoreManagement.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(string id)
         {
-            DeleteFile(id);
+            if (!String.IsNullOrEmpty(id))
+            {
+                DeleteFile(id);
+            }
+  
             return RedirectToAction("DisplayImages");
+
         }
 
         private void DeleteFile(string id)
         {
-            var f = FileManagerRepository.GetFilesByGoogleImageId(id);
-            var filename = f.Title;
-            var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
-
-            //if (System.IO.File.Exists(filePath))
-            //{
-            //    System.IO.File.Delete(filePath);
-            //}
+            if (String.IsNullOrEmpty(id))
+            {
+                return;
+            }
 
             try
             {
                this.UploadHelper.deleteFile(id);
+
+               var f = FileManagerRepository.GetFilesByGoogleImageId(id);
+               FileManagerRepository.Delete(f);
+               FileManagerRepository.Save();
             }
             catch (Exception ewx)
             {
                 Logger.Error("Exception is occured.", ewx);
             }
-
-            FileManagerRepository.Delete(f);
-            FileManagerRepository.Save();
+      
         }
 
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
@@ -158,6 +161,7 @@ namespace StoreManagement.Admin.Controllers
             catch (Exception ewx)
             {
                 Logger.Error("this.UploadHelper.InsertFile Exception is occured."+ewx.StackTrace, ewx);
+            
             }
 
             FileManagerRepository.Add(fileManager);

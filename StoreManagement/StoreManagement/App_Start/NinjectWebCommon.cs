@@ -80,7 +80,7 @@ namespace StoreManagement.App_Start
             kernel.Bind<IStoreUserService>().To<StoreUserRepository>();
             kernel.Bind<ICompanyService>().To<CompanyRepository>();
             kernel.Bind<INavigationService>().To<NavigationRepository>();
-
+            kernel.Bind<IStoreCarouselService>().To<StoreCarouselRepository>();
             // kernel.Bind<INavigationService>().To<NavigationService>().WithConstructorArgument("webServiceAddress", "yuce.marinelink.org");
 
 

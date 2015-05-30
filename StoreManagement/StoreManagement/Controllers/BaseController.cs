@@ -11,6 +11,7 @@ using StoreManagement.Models;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
+using StoreManagement.Data;
 
 namespace StoreManagement.Controllers
 {
@@ -44,25 +45,27 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public ISettingService SettingService { set; get; }
-
+        
+        [Inject]
+        public IStoreCarouselService StoreCarouselService { set; get; }
+        
+        
         protected Store Store { set; get; }
 
-        
+
 
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
-            try
+            var siteStatus = ProjectAppSettings.GetWebConfigBool("IsDevelopmentStatus", true);
+            if (siteStatus)
+            {
+                this.Store = StoreService.GetStoreByDomain("WeddingAtlantis.com");
+            }
+            else
             {
                 this.Store = StoreService.GetStore(requestContext.HttpContext.Request);
             }
-            catch (Exception ex)
-            {
-                this.Store = StoreService.GetSingle(1);
-            }
-           
-            
-           
         }
 
     }

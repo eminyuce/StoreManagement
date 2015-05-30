@@ -1,5 +1,6 @@
 using System;
 using GenericRepository;
+using System.Collections.Generic;
 
 namespace StoreManagement.Data.Entities
 {
@@ -9,6 +10,9 @@ namespace StoreManagement.Data.Entities
         public string Name { get; set; }
         public string Domain { get; set; }
         public string Layout { get; set; }
+
+
+       // public virtual ICollection<FileManager> StoreCarousels { get; set; }
 
         public override string ToString()
         {

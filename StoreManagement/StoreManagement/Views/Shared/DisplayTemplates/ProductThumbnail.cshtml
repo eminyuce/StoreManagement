@@ -6,15 +6,15 @@
 }
 
 <div class="thumbnail">
-    <a href="@String.Format("/Products/Product/{0}",String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))" class="overlay"></a>
-    <a class="zoomTool" href="@String.Format("/Products/Product/{0}",String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))"
+    <a href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))" class="overlay"></a>
+    <a class="zoomTool" href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))"
          title="add to cart"><span class="icon-search"></span>QUICK VIEW</a>
-    <a href="@String.Format("/Products/Product/{0}",String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))">
+    <a href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))">
         @if (image != null)
         {
-            <img src="@String.Format("https://docs.google.com/uc?id={0}",image.Id)" style="width: 120px; height: 120px;" alt="">
+            <img src="@Url.Action("Index", "Images", new { id = image.FileManager.GoogleImageId, size = "", contentType = image.FileManager.ContentType })" style="width: 120px; height: 120px;" alt="">
         }
-        </a>
+    </a>
 
 
     <div class="caption cntr">

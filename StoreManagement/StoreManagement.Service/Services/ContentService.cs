@@ -35,7 +35,7 @@ namespace StoreManagement.Service.Services
             throw new NotImplementedException();
         }
 
-        public List<Content> GetContentsCategoryId(int storeId, int categoryId, bool? isActive)
+        public List<Content> GetContentsCategoryId(int storeId, int categoryId, String typeName, bool? isActive)
         {
             throw new NotImplementedException();
         }

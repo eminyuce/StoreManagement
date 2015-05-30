@@ -4,14 +4,13 @@
 @{
     ViewBag.Title = "Home Page";
 }
-@*
 <h1>
-    Model.Store.Name
+    @Model.Store.Name
 </h1>
 
-*@
+
 <div class="row">
-    <div id="sidebar" class="span3">
+    <div id="sidebar" class="col-md-3">
         <div class="well well-small">
             <ul class="nav nav-list">
 
@@ -20,29 +19,15 @@
                     {        
                     <li>
                         <span class="icon-chevron-right">
-                            @Html.ActionLink(item.Name, "Category", "Categories", new { id= String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                            @Html.ActionLink(item.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
                         </span>
                     </li>
                     }
                 }
-
-
-                @*                <li><a href="products.html"><span class="icon-chevron-right"></span>Fashion</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Watches</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Fine Jewelry</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Fashion Jewelry</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Engagement & Wedding</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Men's Jewelry</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Vintage & Antique</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Loose Diamonds </a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>Loose Beads</a></li>
-                <li><a href="products.html"><span class="icon-chevron-right"></span>See All Jewelry & Watches</a></li>
-                <li style="border: 0">&nbsp;</li>
-                <li><a class="totalInCart" href="cart.html"><strong>Total Amount  <span class="badge badge-warning pull-right" style="line-height: 18px;">$448.42</span></strong></a></li>*@
             </ul>
         </div>
 
-        
+
         <div class="well well-small">
             <a href="#">
                 <img src="../../Content/shop-cart/../../Content/shop-cart/assets/img/paypal.jpg" alt="payment method paypal"></a>
@@ -86,42 +71,10 @@
         </ul>
 
     </div>
-    <div class="span9">
+    <div class="col-md-9">
         <div class="well np">
-            <div id="myCarousel" class="carousel slide homCar">
-                <div class="carousel-inner">
-                    <div class="item">
-                        <img style="width: 100%" src="../../Content/shop-cart/../../Content/shop-cart/assets/img/bootstrap_free-ecommerce.png" alt="bootstrap ecommerce templates">
-                        <div class="carousel-caption">
-                            <h4>Bootstrap shopping cart</h4>
-                            <p><span>Very clean simple to use</span></p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img style="width: 100%" src="../../Content/shop-cart/../../Content/shop-cart/assets/img/carousel1.png" alt="bootstrap ecommerce templates">
-                        <div class="carousel-caption">
-                            <h4>Bootstrap Ecommerce template</h4>
-                            <p><span>Highly Google seo friendly</span></p>
-                        </div>
-                    </div>
-                    <div class="item active">
-                        <img style="width: 100%" src="../../Content/shop-cart/../../Content/shop-cart/assets/img/carousel3.png" alt="bootstrap ecommerce templates">
-                        <div class="carousel-caption">
-                            <h4>Twitter Bootstrap cart</h4>
-                            <p><span>Very easy to integrate and expand.</span></p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img style="width: 100%" src="../../Content/shop-cart/../../Content/shop-cart/assets/img/bootstrap-templates.png" alt="bootstrap templates">
-                        <div class="carousel-caption">
-                            <h4>Bootstrap templates integration</h4>
-                            <p><span>Compitable to many more opensource cart</span></p>
-                        </div>
-                    </div>
-                </div>
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-            </div>
+            Testtttttttttttttt
+        @Html.Partial("pStoreCarouselImages", Model.CarouselImages)
         </div>
         <!--
 New Products

@@ -7,59 +7,142 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/bootstrap")
+      @Styles.Render("~/Content/bootstrap")
     
-    <script src="~/Scripts/docs.min.js"></script>
-     <link href="@Url.RouteUrl(new { controller=  "Css", action = "GetTheme" })" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <link href="~/Content/shop-cart/assets/css/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/shop-cart/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <a href="~/Content/shop-cart/assets/ico/favicon.ico">~/Content/shop-cart/assets/ico/favicon.ico</a>
+
+   @* <link href="@Url.RouteUrl(new { controller = "Css", action = "GetTheme" })" rel="stylesheet" type="text/css" />*@
 
 
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-                <nav>
-                    <ul id="menu">
-                        @Html.Action("MainMenu", "Home")
-                    </ul>
-                </nav>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="topNav">
+            <div class="container">
+                <div class="alignR">
+                    <div class="pull-left socialNw">
+                        <a href="#"><span class="icon-twitter"></span></a>
+                        <a href="#"><span class="icon-facebook"></span></a>
+                        <a href="#"><span class="icon-youtube"></span></a>
+                        <a href="#"><span class="icon-tumblr"></span></a>
+                    </div>
+                    <a class="active" href="index.html"><span class="icon-home"></span>Home</a>
+                    <a href="#"><span class="icon-user"></span>My Account</a>
+                    <a href="register.html"><span class="icon-edit"></span>Free Register </a>
+                    <a href="contact.html"><span class="icon-envelope"></span>Contact us</a>
+                    <a href="cart.html"><span class="icon-shopping-cart"></span>2 Item(s) - <span class="badge badge-warning">$448.42</span></a>
+                </div>
             </div>
         </div>
-    </header>
-    <div id="body">
-    @*    @RenderSection("featured", required: false)*@
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
     </div>
-    <footer>
-        <div id="footer-content" class="container">
-            <div id="fbox1">
-                @Html.Action("RecentUpdates", "Home")
+    <div class="container">
+        <div id="gototop"></div>
+        <header id="header">
+            <div class="row">
+                <div class="span4">
+                    <h1> 
+                        <a class="logo" href="index.html"><span>Twitter Bootstrap ecommerce template</span>
+                            <img src="../../Content/shop-cart/assets/img/logo-bootstrap-shoping-cart.png" alt="bootstrap sexy shop">
+                        </a>
+                    </h1>
+                </div>
+                <div class="span4">
+                    <div class="offerNoteWrapper">
+                        <h1 class="dotmark">
+                            <i class="icon-cut"></i>
+                            Twitter Bootstrap shopping cart HTML template is available  
+                        </h1>
+                    </div>
+                </div>
+                <div class="span4 alignR">
+                    <p>
+                        <br>
+                        <strong>Support (24/7) :  0800 1234 678 </strong>
+                        <br>
+                        <br>
+                    </p>
+                    <span class="btn btn-mini">[ 2 ] <span class="icon-shopping-cart"></span></span>
+                    <span class="btn btn-warning btn-mini">$</span>
+                    <span class="btn btn-mini">&pound;</span>
+                    <span class="btn btn-mini">&euro;</span>
+                </div>
             </div>
-            <div id="fbox2">
-                @Html.Action("About", "Home")
-            </div>
-            <div id="fbox3">
-                @Html.Action("Contact", "Home")
+        </header>
+
+        <!--
+Navigation Bar Section 
+-->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                          @Html.Action("MainMenu","Home")
+                        </ul>
+                        <form action="#" class="navbar-search pull-left">
+                            <input type="text" placeholder="Search" class="search-query span2">
+                        </form>
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="icon-lock"></span>Login <b class="caret"></b></a>
+                                <div class="dropdown-menu">
+                                    <form class="form-horizontal loginFrm">
+                                        <div class="control-group">
+                                            <input type="text" class="span2" id="inputEmail" placeholder="Email">
+                                        </div>
+                                        <div class="control-group">
+                                            <input type="password" class="span2" id="inputPassword" placeholder="Password">
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="checkbox">
+                                                <input type="checkbox">
+                                                Remember me
+                                            </label>
+                                            <button type="submit" class="shopBtn btn-block">Sign in</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="footer">
+
+
+        @RenderBody()
+
+
+        <footer class="footer">
             @Html.Action("Footer", "Home")
-        </div>
-    </footer>
+        </footer>
+
+
+    </div>
+
+
+ 
 
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/bootstrap")
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -32,7 +32,7 @@ namespace StoreManagement.Service.Repositories
 
         public Store GetStoreByDomain(string domainName)
         {
-            IQueryable<Store> s = this.FindBy(r => r.Domain.Equals(domainName, StringComparison.InvariantCultureIgnoreCase));
+            IQueryable<Store> s =  this.FindBy(r => r.Domain.Equals(domainName, StringComparison.InvariantCultureIgnoreCase));
             return s.FirstOrDefault();
         }
         public Store GetStore(HttpRequestBase request)

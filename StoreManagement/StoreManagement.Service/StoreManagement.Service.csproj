@@ -70,6 +70,7 @@
     <Compile Include="Interfaces\INavigationService.cs" />
     <Compile Include="Interfaces\IPageDesignService.cs" />
     <Compile Include="Interfaces\ISettingService.cs" />
+    <Compile Include="Interfaces\IStoreCarouselService.cs" />
     <Compile Include="Interfaces\IStoreService.cs" />
     <Compile Include="Interfaces\IStoreUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,11 +87,13 @@
     <Compile Include="Repositories\Interfaces\INavigationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPageDesignRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IStoreCarouselRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreUserRepository.cs" />
     <Compile Include="Repositories\NavigationRepository.cs" />
     <Compile Include="Repositories\PageDesignRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
+    <Compile Include="Repositories\StoreCarouselRepository.cs" />
     <Compile Include="Repositories\StoreRepository.cs" />
     <Compile Include="Repositories\StoreUserRepository.cs" />
     <Compile Include="Services\BaseService.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Services\FileManagerService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PageDesignService.cs" />
+    <Compile Include="Services\StoreCarouselService.cs" />
     <Compile Include="Services\StoreService.cs" />
     <Compile Include="Services\StoreUserService.cs" />
   </ItemGroup>

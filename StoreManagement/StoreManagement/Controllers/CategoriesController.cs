@@ -18,18 +18,18 @@ namespace StoreManagement.Controllers
         {
             return View();
         }
-        public ActionResult Category(String id, int page=1)
+        public ActionResult Category(String id, int page = 1)
         {
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "product");
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetSingle(categoryId);
-            returnModel.Contents = ContentService.GetContentsCategoryId(Store.Id, categoryId, true);
+            returnModel.Contents = ContentService.GetContentsCategoryId(Store.Id, categoryId, "product", true);
 
 
             return View(returnModel);
 
         }
-	}
+    }
 }

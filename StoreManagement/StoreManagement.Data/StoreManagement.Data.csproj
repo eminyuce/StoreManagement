@@ -107,6 +107,7 @@
     <Compile Include="Entities\PageDesign.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Store.cs" />
+    <Compile Include="Entities\StoreCarousel.cs" />
     <Compile Include="Entities\StoreUser.cs" />
     <Compile Include="GeneralHelper\FilterHelper.cs" />
     <Compile Include="GeneralHelper\GeneralHelper.cs" />

@@ -11,6 +11,6 @@ namespace StoreManagement.Data.RequestModel
     {
         public Store Store { get; set; }  
         public List<Category> Categories  { get; set; }
-        
+        public List<StoreCarousel> CarouselImages { get; set; }
     }
 }

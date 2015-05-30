@@ -64,11 +64,12 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public List<Content> GetContentsCategoryId(int storeId, int categoryId, bool? isActive)
+        public List<Content> GetContentsCategoryId(int storeId, int categoryId, String typeName, bool? isActive)
         {
             var returnList =
                 this.GetAllIncluding(r => r.ContentFiles.Select(r1 => r1.FileManager))
-                    .Where(r2 => r2.StoreId == storeId && r2.CategoryId == categoryId);
+                    .Where(r2 => r2.StoreId == storeId &&
+                         r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) && r2.CategoryId == categoryId);
 
             if (isActive.HasValue)
             {

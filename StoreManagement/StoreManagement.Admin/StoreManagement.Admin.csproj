@@ -72,7 +72,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GoogleDriveUploader">
-      <HintPath>..\..\..\..\..\..\..\ProjectsEY\NetDLLFiles\GoogleDriveUploader.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\AspNETDLL\GoogleDriveUploader.dll</HintPath>
     </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
@@ -1676,6 +1676,7 @@
     </None>
     <None Include="Properties\PublishProfiles\ftp faqulte.pubxml" />
     <None Include="Properties\PublishProfiles\FTP_StoreManagement.Admin.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalYuce.pubxml" />
     <None Include="Properties\PublishProfiles\StoreManagement.Admin.pubxml" />
     <None Include="Properties\PublishProfiles\YuceMachine.pubxml" />
     <None Include="Properties\PublishProfiles\yucetest.pubxml" />

@@ -20,7 +20,9 @@ namespace StoreManagement.Controllers
             ViewBag.Store = Store;
             var shp =new StoreHomePage();
             shp.Store = Store;
+            shp.CarouselImages = StoreCarouselService.GetStoreCarousels(Store.Id);
             shp.Categories = CategoryService.GetCategoriesByStoreId(Store.Id);
+           
             return View(shp);
         }
         public ActionResult About()

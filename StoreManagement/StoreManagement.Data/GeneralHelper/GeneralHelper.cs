@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -19,6 +20,18 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
+
+        public static X509Certificate2 CreateCert(String serviceAccountPkCs12FilePath, String password)
+        {
+            X509Certificate2 cert = new X509Certificate2(serviceAccountPkCs12FilePath, password, X509KeyStorageFlags.Exportable);
+            return cert;
+        }
+        public static byte[] ExportCertFile(String serviceAccountPkCs12FilePath, String password)
+        {
+            X509Certificate2 cert = new X509Certificate2(serviceAccountPkCs12FilePath, password, X509KeyStorageFlags.Exportable);
+            byte[] bytes = cert.Export(X509ContentType.Pkcs12);
+            return bytes;
+        }
         public static string GetDomainPart(string url)
         {
             if (String.IsNullOrEmpty(url))

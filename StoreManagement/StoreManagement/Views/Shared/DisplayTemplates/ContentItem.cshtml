@@ -10,7 +10,7 @@
         @foreach (var c in Model.ContentFiles.OrderByDescending(r => r.Id).Take(5))
         {
             <div>
-                <img src="@c.FileManager.FileName" alt="Smiley face" height="42" width="42">
+                <img src="@c.FileManager.Title" alt="Smiley face" height="42" width="42">
             </div>
         }  
 </div>

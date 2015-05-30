@@ -489,6 +489,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Images\" />
     <Folder Include="Views\Navigations\" />
   </ItemGroup>
   <ItemGroup>

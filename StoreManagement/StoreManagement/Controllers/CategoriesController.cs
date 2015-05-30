@@ -22,7 +22,7 @@ namespace StoreManagement.Controllers
         {
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id);
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetSingle(categoryId);
             returnModel.Contents = ContentService.GetContentsCategoryId(Store.Id, categoryId, true);

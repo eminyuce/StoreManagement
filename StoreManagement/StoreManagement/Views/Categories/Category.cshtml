@@ -1,13 +1,65 @@
 ﻿@model StoreManagement.Data.RequestModel.CategoryViewModel
-
+@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
 @{
     ViewBag.Title = "Category";
 }
 
-<h2>@Model.Category.Name</h2>
 
-@foreach (var s in Model.Contents)
-{
-    @Html.DisplayFor(r => s)
-}    
  
+
+<div class="row">
+    <div   class="col-md-3">
+        <div class="well well-small">
+            <ul class="nav nav-list">
+                @{
+                    foreach (var item in Model.Categories)
+                    {        
+                    <li>
+                        <span class="icon-chevron-right">
+                            @Html.ActionLink(item.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                        </span>
+                    </li>
+                    }
+                }
+                
+
+            </ul>
+        </div>
+
+
+        <div class="well well-small">
+            <a href="#">
+                <img src="assets/img/paypal.jpg" alt="payment method paypal"></a>
+        </div>
+
+        <a class="shopBtn btn-block" href="#">Upcoming products
+            <br>
+            <small>Click to view</small></a>
+        <br>
+        <br>
+         
+
+    </div>
+    <div class="col-md-9">
+        <!-- 
+New Products
+-->
+        <div class="well well-small">
+            <h3><strong>@Model.Category.Name</strong> Products </h3>
+            <div class="row">
+                @{
+                    
+                    foreach (var item in Model.Contents.Take(12))
+                    {
+                        <div class="col-md-3">
+                            @Html.DisplayFor(model => item, "ProductThumbnail")
+                        </div>
+                    }
+                
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

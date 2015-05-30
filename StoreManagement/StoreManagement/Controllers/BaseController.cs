@@ -58,7 +58,6 @@ namespace StoreManagement.Controllers
             }
             catch (Exception ex)
             {
-
                 this.Store = StoreService.GetSingle(1);
             }
            

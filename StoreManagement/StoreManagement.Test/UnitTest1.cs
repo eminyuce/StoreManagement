@@ -2,8 +2,6 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using StoreManagement.Admin.App_Start;
-using StoreManagement.Admin.Controllers;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;

@@ -36,7 +36,9 @@ namespace StoreManagement.API.Controllers
 
         [Inject]
         public IStoreUserRepository StoreUserRepository { set; get; }
-
+        
+        [Inject]
+        public ISettingRepository SettingRepository { set; get; }
 
     }
 }

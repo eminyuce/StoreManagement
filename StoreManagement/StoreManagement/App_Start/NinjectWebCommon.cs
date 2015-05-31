@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using StoreManagement.Constants;
+using StoreManagement.Data;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -69,18 +70,45 @@ namespace StoreManagement.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
-            kernel.Bind<IContentService>().To<ContentRepository>();
-            kernel.Bind<IStoreService>().To<StoreRepository>();
-            kernel.Bind<ISettingService>().To<SettingRepository>();
-            kernel.Bind<IFileManagerService>().To<FileManagerRepository>();
-            kernel.Bind<ICategoryService>().To<CategoryRepository>();
-            kernel.Bind<IPageDesignService>().To<PageDesignRepository>();
-            kernel.Bind<IContentFileService>().To<ContentFileRepository>();
-            kernel.Bind<IStoreUserService>().To<StoreUserRepository>();
-            kernel.Bind<ICompanyService>().To<CompanyRepository>();
-            kernel.Bind<INavigationService>().To<NavigationRepository>();
-            kernel.Bind<IStoreCarouselService>().To<StoreCarouselRepository>();
+
+            var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", true);
+            if (isAPIService)
+            {
+                kernel.Bind<IContentService>().To<ContentService>();
+                kernel.Bind<IStoreService>().To<StoreService>();
+                kernel.Bind<ISettingService>().To<SettingService>();
+                kernel.Bind<IFileManagerService>().To<FileManagerService>();
+                kernel.Bind<ICategoryService>().To<CategoryService>();
+                kernel.Bind<IPageDesignService>().To<PageDesignService>();
+                kernel.Bind<IContentFileService>().To<ContentFileService>();
+                kernel.Bind<IStoreUserService>().To<StoreUserService>();
+                kernel.Bind<ICompanyService>().To<CompanyService>();
+                kernel.Bind<INavigationService>().To<NavigationService>();
+                kernel.Bind<IStoreCarouselService>().To<StoreCarouselService>();
+
+
+            }
+            else
+            {
+
+                kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+                kernel.Bind<IContentService>().To<ContentRepository>();
+                kernel.Bind<IStoreService>().To<StoreRepository>();
+                kernel.Bind<ISettingService>().To<SettingRepository>();
+                kernel.Bind<IFileManagerService>().To<FileManagerRepository>();
+                kernel.Bind<ICategoryService>().To<CategoryRepository>();
+                kernel.Bind<IPageDesignService>().To<PageDesignRepository>();
+                kernel.Bind<IContentFileService>().To<ContentFileRepository>();
+                kernel.Bind<IStoreUserService>().To<StoreUserRepository>();
+                kernel.Bind<ICompanyService>().To<CompanyRepository>();
+                kernel.Bind<INavigationService>().To<NavigationRepository>();
+                kernel.Bind<IStoreCarouselService>().To<StoreCarouselRepository>();
+
+
+            }
+            
+
+
             // kernel.Bind<INavigationService>().To<NavigationService>().WithConstructorArgument("webServiceAddress", "yuce.marinelink.org");
 
 

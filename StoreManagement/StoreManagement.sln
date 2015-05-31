@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Service", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Data", "StoreManagement.Data\StoreManagement.Data.csproj", "{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement", "StoreManagement\StoreManagement.csproj", "{5CF16371-171A-4C36-810F-C1D491D79362}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Admin", "StoreManagement.Admin\StoreManagement.Admin.csproj", "{896A64B7-2704-489B-B542-D74269F9E0B3}"
 EndProject
 Global
@@ -23,10 +21,6 @@ Global
 		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CF16371-171A-4C36-810F-C1D491D79362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CF16371-171A-4C36-810F-C1D491D79362}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CF16371-171A-4C36-810F-C1D491D79362}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CF16371-171A-4C36-810F-C1D491D79362}.Release|Any CPU.Build.0 = Release|Any CPU
 		{896A64B7-2704-489B-B542-D74269F9E0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{896A64B7-2704-489B-B542-D74269F9E0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{896A64B7-2704-489B-B542-D74269F9E0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -21,6 +21,17 @@ namespace StoreManagement.Test
         {
             //dbContext = new StoreContext(ConnectionString);
         }
+        [TestMethod]
+        public void TestApiCall2()
+        {
+            var s = new CategoryService("yuce.marinelink.org");
+            var m = s.GetCategoriesByStoreId(1);
+            foreach (var q in m)
+            {
+                Console.WriteLine(q.Id);
+            }
+        }
+
 
         [TestMethod]
         public void TestApiCall()

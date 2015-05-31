@@ -170,6 +170,20 @@ namespace StoreManagement.Data.GeneralHelper
         {
             return JsonConvert.SerializeObject(arg);
         }
+        public static List<T> GetUrlResult<T>(string url)
+        {
+            var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
+            if (!String.IsNullOrEmpty(responseContent))
+            {
+                String jsonString = responseContent;
+                var categories = JsonConvert.DeserializeObject<List<T>>(jsonString);
+                return categories;
+            }
+            else
+            {
+                return new List<T>();
+            }
+        }
     }
 
 

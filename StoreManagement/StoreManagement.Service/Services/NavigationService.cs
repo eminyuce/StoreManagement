@@ -39,18 +39,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/Navigations/GetNavigations?storeId={1}", WebServiceAddress, storeId);
-
-                var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
-                if (!String.IsNullOrEmpty(responseContent))
-                {
-                    String jsonString = responseContent;
-                    var categories = JsonConvert.DeserializeObject<List<Navigation>>(jsonString);
-                    return categories;
-                }
-                else
-                {
-                    return new List<Navigation>();
-                }
+                return RequestHelper.GetUrlResult<Navigation>(url);
             }
             catch (Exception)
             {

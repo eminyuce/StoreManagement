@@ -9,10 +9,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class ContentsController : BaseApiController
+    public class ContentsController : BaseApiController, IContentService
     {
         // GET api/Contents
         public IEnumerable<Content> GetContents(int storeId, String typeName)
@@ -65,7 +66,7 @@ namespace StoreManagement.API.Controllers
             if (ModelState.IsValid)
             {
                 this.ContentRepository.Add(content);
-                        this.ContentRepository.Save();
+                this.ContentRepository.Save();
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, content);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = content.Id }));
@@ -90,7 +91,7 @@ namespace StoreManagement.API.Controllers
 
             try
             {
-                        this.ContentRepository.Save();
+                this.ContentRepository.Save();
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -100,6 +101,40 @@ namespace StoreManagement.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, content);
         }
 
-       
+
+        public Content GetContentsContentId(int contentId)
+        {
+            return this.ContentRepository.GetContentsContentId(contentId);
+        }
+
+        public List<Content> GetContentByType(int storeId, string typeName)
+        {
+            return this.ContentRepository.GetContentByType(storeId, typeName);
+        }
+
+        public Content GetContentByUrl(int storeId, string url)
+        {
+            return this.ContentRepository.GetContentByUrl(storeId, url);
+        }
+
+        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
+        {
+            return this.ContentRepository.GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
+        }
+
+        public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
+        {
+            return this.ContentRepository.GetContentByTypeAndCategoryIdFromCache(storeId, typeName, categoryId);
+        }
+
+        public List<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive)
+        {
+            return this.ContentRepository.GetContentsCategoryId(storeId, categoryId, typeName, isActive);
+        }
+
+        public Content GetContentWithFiles(int id)
+        {
+            return this.ContentRepository.GetContentWithFiles(id);
+        }
     }
 }

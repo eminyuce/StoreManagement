@@ -9,10 +9,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class NavigationsController : BaseApiController
+    public class NavigationsController : BaseApiController, INavigationService
     {
 
         // GET api/Navigations
@@ -101,5 +102,9 @@ namespace StoreManagement.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, navigation);
         }
 
+        public List<Navigation> GetStoreNavigations(int storeId)
+        {
+            return this.NavigationRepository.GetStoreNavigations(storeId);
+        }
     }
 }

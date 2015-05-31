@@ -21,10 +21,11 @@ namespace StoreManagement.Service.Services
             throw new NotImplementedException();
         }
 
-        public Store GetStore(HttpRequestBase request)
+        public Store GetStore(string domain)
         {
             throw new NotImplementedException();
         }
+
 
         public Store GetSingle(int id)
         {

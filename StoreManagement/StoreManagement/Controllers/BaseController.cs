@@ -12,6 +12,7 @@ using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Controllers
 {
@@ -64,7 +65,11 @@ namespace StoreManagement.Controllers
             }
             else
             {
-                this.Store = StoreService.GetStore(requestContext.HttpContext.Request);
+                var request = requestContext.HttpContext.Request;
+                String domainName = "FUELTECHNOLOGYAGE.COM";
+                domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host + (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
+                domainName = GeneralHelper.GetDomainPart(domainName);
+                this.Store = StoreService.GetStore(domainName);
             }
         }
 

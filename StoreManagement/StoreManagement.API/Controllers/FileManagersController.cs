@@ -9,10 +9,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class FileManagersController : BaseApiController
+    public class FileManagersController : BaseApiController, IFileManagerService
     {
 
         // GET api/FileManagers
@@ -100,6 +101,15 @@ namespace StoreManagement.API.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, filemanager);
         }
- 
+
+        public List<FileManager> GetFilesByStoreId(int storeId)
+        {
+            return FileManagerRepository.GetFilesByStoreId(storeId);
+        }
+
+        public FileManager GetFilesByGoogleImageId(string googleImageId)
+        {
+            return FileManagerRepository.GetFilesByGoogleImageId(googleImageId);
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace StoreManagement.Service.Interfaces
     public interface IStoreService
     {
         Store GetStoreByDomain(string domainName);
-        Store GetStore(HttpRequestBase request);
+        Store GetStore(String domain);
         Store GetSingle(int id);
 
 

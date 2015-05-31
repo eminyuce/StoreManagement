@@ -35,11 +35,9 @@ namespace StoreManagement.Service.Repositories
             IQueryable<Store> s =  this.FindBy(r => r.Domain.Equals(domainName, StringComparison.InvariantCultureIgnoreCase));
             return s.FirstOrDefault();
         }
-        public Store GetStore(HttpRequestBase request)
+        public Store GetStore(String domainName)
         {
-            String domainName = "FUELTECHNOLOGYAGE.COM";
-            domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host + (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
-            domainName = GeneralHelper.GetDomainPart(domainName);
+          
             String key = String.Format("GetStore-{0}", domainName);
             Store site = null;
             StoreCache.TryGet(key, out site);

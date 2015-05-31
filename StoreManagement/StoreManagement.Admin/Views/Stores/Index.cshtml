@@ -1,8 +1,16 @@
+﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@using StoreManagement.Data.GeneralHelper
 @model List<StoreManagement.Data.Entities.Store>
 
 @{
     ViewBag.Title = "Index";
+    int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
+    pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
 }
+
+
+
 
 @Html.Partial("_LeftMenu")
 
@@ -10,49 +18,148 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+                <div class="text-muted bootstrap-admin-box-title">
+                    <h4>Stores Management</h4>
+                </div>
             </div>
             <div class="bootstrap-admin-panel-content">
-                <h4>Store Management</h4>
-                <p>
-                    @Html.ActionLink("Create New", "Create")
-                </p>
-                <table class="table table-hover table-bordered table-striped">
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th>Name
-                        </th>
-                        <th>Domain
-                        </th>
-                        <th>Layout
-                        </th>
-                    </tr>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) |
-               @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default" })
-                            </td>
-                            <td>
-                                @Html.ActionLink("Users", "Users", new { id = item.Id }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Settings", "TestSetting", "Settings", new { id = item.Id }, new { @class = "btn btn-info" })
-                            </td>
-                            <td>
-                                @item.Name
-                            </td>
-                            <td>
-                                @item.Domain
-                            </td>
-                            <td>
-                                @item.Layout
-                            </td>
-                        </tr>
-                    }
 
-                </table>
+                <div>
+                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Products" })
+                </div>
+
+              
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <span class="col-md-3">
+                                @Html.ActionLink("Create", "SaveOrEdit", "Products", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
+                            </span>
+                            <span class="col-md-9">
+                                @Html.Partial("pSearchForm")
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <span class="col-md-6">
+                                <span class="label "><span class="badge text-danger text-large">@Model.Count() </span>
+
+
+                                    Records exists  
+                                </span>
+
+                            </span>
+                            <span class="col-md-3">
+                                <p class=" text-right">Grid Paging Number</p>
+                            </span>
+                            <span class="col-md-3">
+                                <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
+                                    <option class="text-info" value="25">25</option>
+                                    <option selected="selected" class="text-info" value="50">50</option>
+                                    <option class="text-info" value="100">100</option>
+                                    <option class="text-info" value="250">250</option>
+                                    <option class="text-info" value="500">500</option>
+                                    <option class="text-info" value="1000">1000</option>
+                                </select>
+                            </span>
+                        </div>
+
+
+                    </div>
+                    @Html.Grid(Model).Named("storesGrid").Columns(columns =>
+    {
+
+
+        columns.Add().Encoded(false).
+            Sanitized(false).
+            SetWidth(10).
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
+
+
+
+
+
+        columns.Add(o => o.Id, true);
+
+        columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(30)
+           .RenderValueAs(d =>
+               @<b>
+                   @Html.ActionLink(" ", "SaveOrEdit", "Stores", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+               </b>);
+
+        columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(d =>
+                       @<b>
+                   @Html.ActionLink(" ", "Details", "Stores", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
+               </b>);
+
+        columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(30)
+.RenderValueAs(d =>
+@<b>
+                   @Html.ActionLink(" ", "Delete", "Stores", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+               </b>);
+                        
+                            columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(d =>
+                       @<b>
+                   @Html.ActionLink("Settings", "Settings", "Stores", new { id = d.Id }, new { @class = "btn btn-default" })
+               </b>);
+                        
+                            columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(d =>
+                       @<b>
+                   @Html.ActionLink("Users", "Users", "Stores", new { id = d.Id }, new { @class = "btn btn-default" })
+               </b>);
+
+
+        columns.Add(c => c.Name)
+            .Titled("Title")
+            .Filterable(true)
+            .Sanitized(false)
+            .Encoded(false)
+            .RenderValueAs(o => Html.ActionLink(o.Name, "Details", "Stores", new { Id = o.Id }, null).ToHtmlString());
+
+
+
+        columns.Add(o => o.Domain);
+
+        columns.Add(o => o.CreatedDate)
+              .Titled("Date")
+              .Sortable(true).
+              RenderValueAs(o => String.Format("{0}", o.CreatedDate.ToShortDateString()))
+              .SortInitialDirection(GridSortDirection.Descending);
+
+ 
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
+
+
+                </div>
+
+
 
             </div>
         </div>
@@ -61,3 +168,5 @@
 
 
 </div>
+
+

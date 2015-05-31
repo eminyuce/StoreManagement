@@ -10,17 +10,29 @@
 
 @using (Html.BeginForm(action, controller, FormMethod.Get))
 {
-     <input type="hidden" name="storeId"  value="@storeId" />
-     <div class="row">
-        <div class="col-md-8 col-xs-7">
-            <div class="form-group">    
-                <input type="text" class="form-control" placeholder="Search" name="search"  value="@search" />
+    <input type="hidden" name="storeId"  value="@storeId" />
+    <div class="row">
+        <div class="col-md-7 col-xs-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="search" value="@search"/>
             </div>
         </div>
+        @if (!String.IsNullOrEmpty(search))
+        {
+            <div class="col-md-3 col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </div>
+            <div class="col-md-2 col-xs-2">
+                @Html.ActionLink("Clear", action, controller, new { search = "" }, new { @class = "btn btn-danger btn-block" })
+            </div>
+        }
+        else
+        {
+            <div class="col-md-5 col-xs-6">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </div>
+        }
 
-        <div class="col-md-4 col-xs-5">
-            <button type="submit" class="btn btn-primary btn-block">Search</button>   
-        </div>
     </div>
     
 }

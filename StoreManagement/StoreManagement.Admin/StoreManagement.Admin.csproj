@@ -282,6 +282,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\ButtonsController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -1776,9 +1777,7 @@
     <Content Include="Views\Stores\Delete.cshtml" />
     <Content Include="Views\Stores\Details.cshtml" />
     <Content Include="Views\Stores\Index.cshtml" />
-    <Content Include="Views\Stores\Create.cshtml" />
-    <Content Include="Views\Stores\Edit.cshtml" />
-    <Content Include="Views\Stores\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Stores\SaveOrEdit.cshtml" />
     <Content Include="Views\Stores\Users.cshtml" />
     <Content Include="Views\Stores\Settings.cshtml" />
     <Content Include="Views\Products\Index.cshtml">
@@ -1858,6 +1857,11 @@
     <Content Include="Views\Shared\pLayoutFileUploadScript.cshtml" />
     <Content Include="Views\Shared\pLayoutBody.cshtml" />
     <Content Include="Views\Shared\pLayoutFooter.cshtml" />
+    <Content Include="Views\Blogs\SaveOrEdit.cshtml" />
+    <Content Include="Views\Blogs\Index.cshtml" />
+    <Content Include="Views\Blogs\Details2.cshtml" />
+    <Content Include="Views\Blogs\Details.cshtml" />
+    <Content Include="Views\Blogs\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

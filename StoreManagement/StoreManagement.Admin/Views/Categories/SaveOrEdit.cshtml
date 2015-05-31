@@ -70,6 +70,15 @@
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
 
         <p>
             <input type="submit" value="Create" />

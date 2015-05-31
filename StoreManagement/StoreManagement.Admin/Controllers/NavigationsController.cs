@@ -26,19 +26,24 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Navigations/
 
-        public ViewResult Index(int storeId=0)
+        public ViewResult Index(int storeId=0, String search="")
         {
-            List<Navigation> navigationList = new List<Navigation>();
+            List<Navigation> resultList = new List<Navigation>();
             if (storeId == 0)
             {
-                navigationList = navigationRepository.GetAll().ToList();
+                resultList = navigationRepository.GetAll().ToList();
             }
             else
             {
-                navigationList = navigationRepository.GetStoreNavigations(storeId);
+                resultList = navigationRepository.GetStoreNavigations(storeId);
             }
-
-            return View(navigationList);
+            if (!String.IsNullOrEmpty(search))
+            {
+                resultList =
+                    resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
+            ViewBag.Search = search;
+            return View(resultList);
         }
 
         //

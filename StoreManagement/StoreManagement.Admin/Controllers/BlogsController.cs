@@ -12,11 +12,11 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Admin.Controllers
 {
-    [Authorize]
-    public class ProductsController : BaseController
-    {
-        private const String ContentType = "product";
-        public ProductsController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
+    public class BlogsController : BaseController
+   {
+        private const String ContentType = "blog";
+        public BlogsController(IStoreContext dbContext, ISettingRepository settingRepository)
+            : base(dbContext, settingRepository)
         {
              
         }

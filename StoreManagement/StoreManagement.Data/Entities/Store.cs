@@ -10,7 +10,7 @@ namespace StoreManagement.Data.Entities
         public string Name { get; set; }
         public string Domain { get; set; }
         public string Layout { get; set; }
-
+        public DateTime CreatedDate { get; set; }
 
        // public virtual ICollection<FileManager> StoreCarousels { get; set; }
 

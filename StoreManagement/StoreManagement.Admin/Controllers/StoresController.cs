@@ -47,49 +47,39 @@ namespace StoreManagement.Admin.Controllers
             return View(storeRepository.GetSingle(id));
         }
 
-        //
-        // GET: /Stores/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Stores/Create
-
-        [HttpPost]
-        public ActionResult Create(Store store)
-        {
-            if (ModelState.IsValid)
-            {
-                storeRepository.Add(store);
-                storeRepository.Save();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View();
-            }
-        }
+ 
+ 
 
         //
         // GET: /Stores/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult SaveOrEdit(int id=0)
         {
-            return View(storeRepository.GetSingle(id));
+            var store = new Store();
+            if (id != 0)
+            {
+                store = storeRepository.GetSingle(id);
+            }
+            return View(store);
         }
 
         //
         // POST: /Stores/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Store store)
+        public ActionResult SaveOrEdit(Store store)
         {
             if (ModelState.IsValid)
             {
-                storeRepository.Edit(store);
+                if (store.Id == 0)
+                {
+                    storeRepository.Add(store);
+                }
+                else
+                {
+                    storeRepository.Edit(store);  
+                }
+
                 storeRepository.Save();
                 return RedirectToAction("Index");
             }

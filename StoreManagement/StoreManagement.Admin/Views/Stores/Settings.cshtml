@@ -42,13 +42,7 @@
             @Html.ValidationMessageFor(model => setting.State)
         </div>
 
-        <div class="editor-label control-group">
-            @Html.LabelFor(model => setting.Lang, new { @class = "control-label" })
-        </div>
-        <div class="editor-field controls">
-            @Html.EditorFor(model => setting.Lang, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => setting.Lang)
-        </div>
+         
         <p>
             <input type="submit" value="Create" />
         </p>
@@ -67,8 +61,7 @@
         <th>State  
         </th>
 
-        <th>Lang  
-        </th>
+     
 
     </tr>
     @foreach (var item in Model)
@@ -86,9 +79,7 @@
                 @Html.DisplayFor(modelItem => item.State)
             </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Lang)
-            </td>
+      
 
 
         </tr>

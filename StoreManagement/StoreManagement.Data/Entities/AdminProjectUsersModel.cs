@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -26,6 +27,10 @@ namespace StoreManagement.Data.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 
     public class RegisterExternalLoginModel
@@ -69,6 +74,17 @@ namespace StoreManagement.Data.Entities
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+        public DateTime CreatedDate { get { return DateTime.Now; } }
+
     }
 
     public class RegisterModel
@@ -87,6 +103,17 @@ namespace StoreManagement.Data.Entities
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+        public DateTime CreatedDate { get { return DateTime.Now; } }
+
     }
 
     public class ExternalLogin

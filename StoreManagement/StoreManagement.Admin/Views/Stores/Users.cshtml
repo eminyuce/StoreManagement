@@ -1,68 +1,193 @@
-﻿@using StoreManagement.Data.Entities
+﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
 @model List<StoreManagement.Data.Entities.UserProfile>
 @{
     ViewBag.Title = "Users";
     Store s = ViewBag.Store;
-    
+
     var userName = new LoginModel();
     var roles = (List<Role>)ViewBag.Roles;
+    int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
+    pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
 }
 
 <h2>Users of @s.Name</h2>
 
-@using (Html.BeginForm("SaveStoreUsers", "Stores", FormMethod.Get))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Create User</legend>
-        
-        <input type="hidden" name="id" value="@s.Id"/>
 
-        <div class="editor-label control-group">
-            @Html.LabelFor(model => userName.UserName, new { @class = "control-label" })
-        </div>
-        <div class="editor-field controls">
-            @Html.EditorFor(model => userName.UserName, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => userName.UserName)
-        </div>
-        <div class="editor-label control-group">
-            @Html.LabelFor(model => userName.Password, new { @class = "control-label" })
-        </div>
-        <div class="editor-field controls">
-            @Html.EditorFor(model => userName.Password, new { @class = "input-xlarge" })
-        </div>
 
-        @foreach (var r in roles)
-        {
-            <div>
-                @Html.RadioButton("roleName", r.RoleName) @r.RoleName
+@Html.Partial("_LeftMenu")
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
             </div>
-        }
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
+            <div class="bootstrap-admin-panel-content">
+                <h4>Store Management</h4>
 
 
-<table class='table table-hover table-bordered table-striped'>
-    <tr>
-        <th>UserName  
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
+                @using (Html.BeginForm("SaveStoreUsers", "Stores", FormMethod.Get))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Create User</legend>
+
+                        <input type="hidden" name="id" value="@s.Id"/>
+
+                        <div class="editor-label control-group">
+                            @Html.LabelFor(model => userName.UserName, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.EditorFor(model => userName.UserName, new { @class = "input-xlarge" })
+                            @Html.ValidationMessageFor(model => userName.UserName)
+                        </div>
+                        <div class="editor-label control-group">
+                            @Html.LabelFor(model => userName.Password, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.EditorFor(model => userName.Password, new { @class = "input-xlarge" })
+                        </div>
+                        <div class="editor-label control-group">
+                            @Html.LabelFor(model => userName.FirstName, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.EditorFor(model => userName.FirstName, new { @class = "input-xlarge" })
+                            @Html.ValidationMessageFor(model => userName.FirstName)
+                        </div>
+                        <div class="editor-label control-group">
+                            @Html.LabelFor(model => userName.LastName, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.EditorFor(model => userName.LastName, new { @class = "input-xlarge" })
+                            @Html.ValidationMessageFor(model => userName.LastName)
+                        </div>
+                        <div class="editor-label control-group">
+                            @Html.LabelFor(model => userName.PhoneNumber, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.EditorFor(model => userName.PhoneNumber, new { @class = "input-xlarge" })
+                            @Html.ValidationMessageFor(model => userName.PhoneNumber)
+                        </div>
+
+                        @foreach (var r in roles)
+                        {
+                            <div>
+                                @Html.RadioButton("roleName", r.RoleName) @r.RoleName
+                            </div>
+                        }
+
+                        <p>
+                            <input type="submit" value="Create" />
+                        </p>
+                    </fieldset>
+                }
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <span class="col-md-6">
+                                <span class="label "><span class="badge text-danger text-large">@Model.Count() </span>
+                                    Records exists  
+                                </span>
+
+                            </span>
+                            <span class="col-md-3">
+                                <p class=" text-right">Grid Paging Number</p>
+                            </span>
+                            <span class="col-md-3">
+                                <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
+                                    <option class="text-info" value="25">25</option>
+                                    <option selected="selected" class="text-info" value="50">50</option>
+                                    <option class="text-info" value="100">100</option>
+                                    <option class="text-info" value="250">250</option>
+                                    <option class="text-info" value="500">500</option>
+                                    <option class="text-info" value="1000">1000</option>
+                                </select>
+                            </span>
+                        </div>
+
+
+                    </div>
+
+                    @Html.Grid(Model).Named("userGrid").Columns(columns =>
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.ActionLink("DeleteUser", "DeleteUserProfile", new { id = item.UserId })
-            </td>
 
-        </tr>
-    }
-</table>
+
+        columns.Add().Encoded(false).
+            Sanitized(false).
+            SetWidth(10).
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.UserId));
+
+
+
+
+
+        columns.Add(o => o.UserId, true);
+
+        columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(30)
+           .RenderValueAs(d =>
+               @<b>
+                   @Html.ActionLink(" ", "SaveOrEdit", "Products", new { id = d.UserId }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+               </b>);
+
+
+        columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(30)
+.RenderValueAs(d =>
+@<b>
+    @Html.ActionLink(" ", "Delete", "Products", new { id = d.UserId }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+</b>);
+
+
+        columns.Add(c => c.UserName)
+            .Titled("UserName");
+
+        columns.Add(c => c.FirstName)
+                    .Titled("UserName");
+
+
+        columns.Add(c => c.LastName)
+                    .Titled("UserName");
+
+
+        columns.Add(c => c.PhoneNumber)
+                    .Titled("UserName");
+
+
+        columns.Add(o => o.CreatedDate)
+              .Titled("Date")
+              .Sortable(true).
+              RenderValueAs(o => String.Format("{0}", o.CreatedDate.ToShortDateString()))
+              .SortInitialDirection(GridSortDirection.Descending);
+
+
+        columns.Add()
+     .Encoded(false)
+     .Sanitized(false)
+     .SetWidth(30)
+     .RenderValueAs(d =>
+         @<b>
+
+             <a class="btn btn-info btn-sm glyphicon  glyphicon-camera" href="#" data-file-id="@d.UserId"></a>
+         </b>);
+    }).SetRowCssClasses(item => item.UserId % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

@@ -96,4 +96,3 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\b
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.csprojResolveAssemblyReference.cache
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.pdb
-C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement\obj\Debug\StoreManagement.csprojResolveAssemblyReference.cache

@@ -6,6 +6,7 @@ using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,12 @@ namespace StoreManagement.Service.Repositories
             : base(dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public Content GetContentsContentId(int contentId)
+        {
+            return this.GetSingleIncluding(contentId, r => r.ContentFiles.Select(r1 => r1.FileManager));
+            //return dbContext.Contents.Include(r => r.ContentFiles.Select(t => t.FileManager)).FirstOrDefault(x => x.Id == contentId);
         }
 
         public List<Content> GetContentByType(int storeId, string typeName)
@@ -42,7 +49,7 @@ namespace StoreManagement.Service.Repositories
 
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {
-            return this.FindBy(
+            return this.GetAllIncluding(r1 => r1.ContentFiles.Select(r2 => r2.FileManager)).Where(
                      r => r.StoreId == storeId &&
                          r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) &&
                          r.CategoryId == categoryId)
@@ -75,12 +82,12 @@ namespace StoreManagement.Service.Repositories
             {
                 returnList = returnList.Where(r => r.State == isActive);
             }
-        
+
             return returnList.OrderByDescending(r => r.Id).ToList();
         }
         public Content GetContentWithFiles(int id)
         {
-            return  this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
+            return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
     }
 }

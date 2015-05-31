@@ -6,10 +6,10 @@
 }
 
 
- 
+
 
 <div class="row">
-    <div   class="col-md-3">
+    <div class="col-md-3">
         <div class="well well-small">
             <ul class="nav nav-list">
                 @{
@@ -22,7 +22,7 @@
                     </li>
                     }
                 }
-                
+
 
             </ul>
         </div>
@@ -38,8 +38,6 @@
             <small>Click to view</small></a>
         <br>
         <br>
-         
-
     </div>
     <div class="col-md-9">
         <!-- 
@@ -50,11 +48,11 @@ New Products
             <div class="row">
                 @{
                     
-                    foreach (var item in Model.Contents.Take(12))
+                    foreach (var item in Model.Contents.OrderBy(r => r.Id).Take(12))
                     {
-                        <div class="col-md-3">
-                            @Html.DisplayFor(model => item, "ProductThumbnail")
-                        </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(model => item, "ProductThumbnail")
+                    </div>
                     }
                 
                 }

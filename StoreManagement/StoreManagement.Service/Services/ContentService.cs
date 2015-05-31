@@ -15,6 +15,11 @@ namespace StoreManagement.Service.Services
 
         }
 
+        public Content GetContentsContentId(int contentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Content> GetContentByType(int storeId, string typeName)
         {
             throw new NotImplementedException();

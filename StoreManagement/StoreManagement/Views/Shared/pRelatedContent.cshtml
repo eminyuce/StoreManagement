@@ -1,0 +1,45 @@
+﻿@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.Content 
+@{
+    var image = Model.ContentFiles.FirstOrDefault();
+    var desc = GeneralHelper.GetDescription(Model.Description, 200);
+}
+
+
+<div class="row-fluid">
+    <div class="col-md-2">
+        @if (image != null)
+        {
+            <img src="@Url.Action("Index", "Images", new {id = image.FileManager.GoogleImageId, size = "", contentType = image.FileManager.ContentType})" style="width: 100px; height: 100px;" alt="">
+
+        }
+        
+    </div>
+    <div class="col-md-6">
+        <h5>@Model.Name </h5>
+        <p>
+            @desc
+        </p>
+    </div>
+    <div class="col-md-4 alignR">
+        <form class="form-horizontal qtyFrm">
+            <h3>$140.00</h3>
+            <label class="checkbox">
+                <input type="checkbox">
+                Adds product to compair
+            </label>
+            <br>
+            <div class="btn-group">
+                <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span>Add to cart</a>
+
+
+                @Html.ActionLink("View", "Product", "Products",
+              new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) },
+              new { @class = "btn link" })
+
+            </div>
+        </form>
+    </div>
+</div>
+<hr class="soft" />
+

@@ -9,6 +9,8 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IContentService
     {
+
+        Content GetContentsContentId(int contentId);
         List<Content> GetContentByType(int storeId, String typeName);
         Content GetContentByUrl(int storeId, String url);
         List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId);

@@ -7,8 +7,7 @@
 
 <div class="thumbnail">
     <a href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))" class="overlay"></a>
-    <a class="zoomTool" href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))"
-         title="add to cart"><span class="icon-search"></span>QUICK VIEW</a>
+  
     <a href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))">
         @if (image != null)
         {
@@ -16,11 +15,20 @@
         }
     </a>
 
-
+     
     <div class="caption cntr">
-        <p>@Model.Name</p>
-        <p><strong>@Model.Name</strong></p>
-        <h4><a class="shopBtn" href="#" title="add to cart">Add to cart </a></h4>
+        <p><strong>
+            @Model.Name
+        </strong></p>
+        <h4>
+            <a  
+
+               href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))"
+               title="add to cart"> QUICK VIEW</a>
+
+
+            <a class="shopBtn" href="#" title="add to cart">Add to cart </a>
+        </h4>
         <div class="actionList">
             <a class="pull-left" href="#">Add to Wish List </a>
             <a class="pull-left" href="#">Add to Compare </a>

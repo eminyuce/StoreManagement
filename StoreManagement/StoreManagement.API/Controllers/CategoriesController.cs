@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using StoreManagement.Data.JsTree;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class CategoriesController : BaseApiController
+    public class CategoriesController : BaseApiController, ICategoryService
     {
         // GET api/Default1
         public IEnumerable<Category> GetCategories(int storeId)
@@ -96,6 +98,36 @@ namespace StoreManagement.API.Controllers
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, category);
+        }
+
+        public List<Category> GetCategoriesByStoreId(int storeId)
+        {
+            return CategoryRepository.GetCategoriesByStoreId(storeId);
+        }
+
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
+        {
+            return CategoryRepository.GetCategoriesByStoreIdWithContent(storeId);
+        }
+
+        public List<Category> GetCategoriesByStoreId(int storeId, string type)
+        {
+            return CategoryRepository.GetCategoriesByStoreId(storeId, type);
+        }
+
+        public List<Category> GetCategoriesByStoreIdFromCache(int storeId, string type)
+        {
+            return CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, type);
+        }
+
+        public List<JsTreeNode> CreateCategoriesTree(int storeId, string type)
+        {
+            return CategoryRepository.CreateCategoriesTree(storeId, type);
+        }
+
+        public Category GetSingle(int id)
+        {
+            return CategoryRepository.GetSingle(id);
         }
     }
 }

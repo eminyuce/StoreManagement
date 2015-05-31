@@ -39,9 +39,9 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/Navigations/GetNavigations?storeId={1}", WebServiceAddress, storeId);
-                return RequestHelper.GetUrlResult<Navigation>(url);
+                return RequestHelper.GetUrlResults<Navigation>(url);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 WebServiceAddress = string.Empty;
                 return new List<Navigation>();

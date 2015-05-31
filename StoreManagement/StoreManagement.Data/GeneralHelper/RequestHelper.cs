@@ -170,19 +170,31 @@ namespace StoreManagement.Data.GeneralHelper
         {
             return JsonConvert.SerializeObject(arg);
         }
-        public static List<T> GetUrlResult<T>(string url)
+        public static List<T> GetUrlResults<T>(string url)
         {
             var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))
             {
                 String jsonString = responseContent;
-                var categories = JsonConvert.DeserializeObject<List<T>>(jsonString);
-                return categories;
+                var result = JsonConvert.DeserializeObject<List<T>>(jsonString);
+                return result;
             }
             else
             {
                 return new List<T>();
             }
+        }
+        public static T GetUrlResult<T>(string url) where T : new()
+        {
+            var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
+            if (!String.IsNullOrEmpty(responseContent))
+            {
+                String jsonString = responseContent;
+                var result = JsonConvert.DeserializeObject<T>(jsonString);
+                return result;
+            }
+
+            return new T();
         }
     }
 

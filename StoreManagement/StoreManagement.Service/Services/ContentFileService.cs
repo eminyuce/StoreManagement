@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
 {
     public class ContentFileService : BaseService, IContentFileService
     {
+        private const String ApiControllerName = "ContentFiles";
         public ContentFileService(string webServiceAddress) : base(webServiceAddress)
         {
 
@@ -17,12 +19,30 @@ namespace StoreManagement.Service.Services
 
         public List<ContentFile> GetContentByContentId(int contentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetContentByContentId?contentId={2}", WebServiceAddress, ApiControllerName, contentId);
+                return RequestHelper.GetUrlResults<ContentFile>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<ContentFile>();
+            }
         }
 
         public List<ContentFile> GetContentByFileManagerId(int fileManagerId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetContentByFileManagerId?fileManagerId={2}", WebServiceAddress, ApiControllerName, fileManagerId);
+                return RequestHelper.GetUrlResults<ContentFile>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<ContentFile>();
+            }
         }
 
         public void DeleteContentFileByContentId(int contentId)

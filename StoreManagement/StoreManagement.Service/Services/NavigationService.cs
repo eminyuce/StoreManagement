@@ -12,9 +12,11 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Services
 {
-    public class NavigationService : BaseService, INavigationService 
+    public class NavigationService : BaseService, INavigationService
     {
-        public NavigationService(string webServiceAddress) : base(webServiceAddress)
+        private const String ApiControllerName = "Navigations";
+        public NavigationService(string webServiceAddress)
+            : base(webServiceAddress)
         {
 
         }
@@ -28,9 +30,9 @@ namespace StoreManagement.Service.Services
                 var response = RequestHelper.MakeJsonRequest(url);
                 return response;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                WebServiceAddress = string.Empty;
+                Logger.ErrorException("Error:" + ex.Message, ex);
                 return String.Empty;
             }
         }
@@ -38,12 +40,12 @@ namespace StoreManagement.Service.Services
         {
             try
             {
-                string url = string.Format("http://{0}/api/Navigations/GetNavigations?storeId={1}", WebServiceAddress, storeId);
+                string url = string.Format("http://{0}/api/{1}/GetNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
                 return RequestHelper.GetUrlResults<Navigation>(url);
             }
             catch (Exception ex)
             {
-                WebServiceAddress = string.Empty;
+                Logger.ErrorException("Error:" + ex.Message, ex);
                 return new List<Navigation>();
             }
         }

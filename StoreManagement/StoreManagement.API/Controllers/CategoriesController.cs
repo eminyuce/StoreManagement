@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using StoreManagement.Data.JsTree;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
@@ -120,10 +119,6 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, type);
         }
 
-        public List<JsTreeNode> CreateCategoriesTree(int storeId, string type)
-        {
-            return CategoryRepository.CreateCategoriesTree(storeId, type);
-        }
 
         public Category GetSingle(int id)
         {

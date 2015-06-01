@@ -24,17 +24,17 @@ namespace StoreManagement.API.Controllers
 
         public Store GetStoreByDomain(string domainName)
         {
-            throw new NotImplementedException();
+            return this.StoreRepository.GetStoreByDomain(domainName);
         }
 
         public Store GetStore(string domain)
         {
-            throw new NotImplementedException();
+            return this.StoreRepository.GetStore(domain);
         }
 
         public Store GetSingle(int id)
         {
-            throw new NotImplementedException();
+            return this.StoreRepository.GetSingle(id);
         }
     }
 }

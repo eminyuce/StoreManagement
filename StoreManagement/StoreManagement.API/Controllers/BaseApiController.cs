@@ -40,5 +40,8 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public ISettingRepository SettingRepository { set; get; }
 
+        [Inject]
+        public IStoreCarouselRepository StoreCarouselRepository { set; get; }
+
     }
 }

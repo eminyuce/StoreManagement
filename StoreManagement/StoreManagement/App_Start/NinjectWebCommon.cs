@@ -71,21 +71,32 @@ namespace StoreManagement.App_Start
         private static void RegisterServices(IKernel kernel)
         {
 
-            var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", true);
+            var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", false);
             if (isAPIService)
             {
-                kernel.Bind<IContentService>().To<ContentService>();
-                kernel.Bind<IStoreService>().To<StoreService>();
-                kernel.Bind<ISettingService>().To<SettingService>();
-                kernel.Bind<IFileManagerService>().To<FileManagerService>();
-                kernel.Bind<ICategoryService>().To<CategoryService>();
-                kernel.Bind<IPageDesignService>().To<PageDesignService>();
-                kernel.Bind<IContentFileService>().To<ContentFileService>();
-                kernel.Bind<IStoreUserService>().To<StoreUserService>();
-                kernel.Bind<ICompanyService>().To<CompanyService>();
-                kernel.Bind<INavigationService>().To<NavigationService>();
-                kernel.Bind<IStoreCarouselService>().To<StoreCarouselService>();
-
+                var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "yuce.marinelink.org");
+                var service1 = kernel.Bind<IContentService>().To<ContentService>();
+                service1.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service2 = kernel.Bind<IStoreService>().To<StoreService>();
+                service2.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service3 = kernel.Bind<ISettingService>().To<SettingService>();
+                service3.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service4 = kernel.Bind<IFileManagerService>().To<FileManagerService>();
+                service4.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service5 = kernel.Bind<ICategoryService>().To<CategoryService>();
+                service5.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service6 = kernel.Bind<IPageDesignService>().To<PageDesignService>();
+                service6.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service7 = kernel.Bind<IContentFileService>().To<ContentFileService>();
+                service7.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service8 = kernel.Bind<IStoreUserService>().To<StoreUserService>();
+                service8.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service9 = kernel.Bind<ICompanyService>().To<CompanyService>();
+                service9.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service10 = kernel.Bind<INavigationService>().To<NavigationService>();
+                service10.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service11 = kernel.Bind<IStoreCarouselService>().To<StoreCarouselService>();
+                service11.WithConstructorArgument("webServiceAddress", webServiceAddress);
 
             }
             else

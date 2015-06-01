@@ -7,6 +7,7 @@ using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
 using Newtonsoft.Json.Linq;
+using StoreManagement.Service.Services;
 
 namespace StoreManagement.Test
 {
@@ -18,7 +19,29 @@ namespace StoreManagement.Test
         [TestInitialize]
         public void MyTestInitialize()
         {
-            dbContext = new StoreContext(ConnectionString);
+            //dbContext = new StoreContext(ConnectionString);
+        }
+        [TestMethod]
+        public void TestApiCall2()
+        {
+            var s = new CategoryService("yuce.marinelink.org");
+            var m = s.GetCategoriesByStoreId(1);
+            foreach (var q in m)
+            {
+                Console.WriteLine(q.Id);
+            }
+        }
+
+
+        [TestMethod]
+        public void TestApiCall()
+        {
+            var s = new NavigationService("yuce.marinelink.org");
+            var m = s.GetStoreNavigations(1);
+            foreach (var q in m)
+            {
+                Console.WriteLine(q.Id);
+            }
         }
 
         [TestMethod]

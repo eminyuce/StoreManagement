@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.JsTree;
 using StoreManagement.Service.Interfaces;
 
@@ -18,7 +19,16 @@ namespace StoreManagement.Service.Services
 
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/Categories/GetCategoriesByStoreId?storeId={1}", WebServiceAddress, storeId);
+                return RequestHelper.GetUrlResults<Category>(url);
+            }
+            catch (Exception ex)
+            {
+                WebServiceAddress = string.Empty;
+                return new List<Category>();
+            }
         }
 
         public List<Category> GetCategoriesByStoreIdWithContent(int storeId)

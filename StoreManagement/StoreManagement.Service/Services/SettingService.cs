@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.Services;
 
 namespace StoreManagement.Service.Services
 {
-    public class StoreService : BaseService, IStoreService
+    public class SettingService : BaseService, ISettingService
     {
-        public StoreService(string webServiceAddress) : base(webServiceAddress)
+        public SettingService(string webServiceAddress) : base(webServiceAddress)
         {
-
         }
 
-        public Store GetStoreByDomain(string domainName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Store GetStore(string domain)
+        public List<Setting> GetStoreSettings(int storeid)
         {
             throw new NotImplementedException();
         }
 
+        public List<Setting> GetStoreSettingsFromCache(int storeid)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Store GetSingle(int id)
+        public List<Setting> GetStoreSettingsByType(int storeid, string type)
         {
             throw new NotImplementedException();
         }

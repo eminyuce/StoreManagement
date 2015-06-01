@@ -10,10 +10,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using StoreManagement.Service.Interfaces;
 
-namespace MvcAdminTemplate.Controllers
+namespace StoreManagement.API.Controllers
 {
-    public class PageDesignsController : BaseApiController
+    public class PageDesignsController : BaseApiController, IPageDesignService
     {
         // GET api/PageDesigns
         public IEnumerable<PageDesign> GetPageDesigns(int storeId)
@@ -100,6 +101,10 @@ namespace MvcAdminTemplate.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, pagedesign);
         }
-        
+
+        public List<PageDesign> GetPageDesignByStoreId(int storeId)
+        {
+            return PageDesignRepository.GetPageDesignByStoreId(storeId);
+        }
     }
 }

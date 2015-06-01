@@ -80,6 +80,7 @@ namespace StoreManagement.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                content.Description = GetCleanHtml(content.Description);
                 if (content.Id == 0)
                 {
                     ContentRepository.Add(content);

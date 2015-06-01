@@ -117,12 +117,7 @@ namespace StoreManagement.App_Start
 
 
             }
-            
-
-
-            // kernel.Bind<INavigationService>().To<NavigationService>().WithConstructorArgument("webServiceAddress", "yuce.marinelink.org");
-
-
+          
         }
     }
 }

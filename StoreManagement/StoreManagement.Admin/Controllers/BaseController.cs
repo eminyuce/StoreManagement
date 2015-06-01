@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NLog;
 using Ninject;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -46,7 +47,20 @@ namespace StoreManagement.Admin.Controllers
             this.dbContext = dbContext;
             this.settingRepository = settingRepository;
         }
+        protected string GetCleanHtml(String source)
+        {
+            if (String.IsNullOrEmpty(source))
+                return String.Empty;
 
+            source = HttpUtility.HtmlDecode(source);
+
+            string path = HttpContext.Server.MapPath("~/tags.config");
+            var myFile = new System.IO.StreamReader(path);
+            string myTags = myFile.ReadToEnd();
+            var returnHtml = HtmlCleanHelper.SanitizeHtmlSoft(myTags, source);
+            returnHtml = GeneralHelper.NofollowExternalLinks(returnHtml);
+            return returnHtml;
+        }
 
        
     }

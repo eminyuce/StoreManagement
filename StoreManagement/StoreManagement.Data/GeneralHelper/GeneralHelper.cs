@@ -15,12 +15,47 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using HtmlAgilityPack;
 
 namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
+        public static string NofollowExternalLinks(string html, string externalClassName = "external")
+        {
+            var doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            var aHrefTags = doc.DocumentNode.SelectNodes(@"//a[@href]");
+            if (aHrefTags != null)
+            {
+                foreach (var link in aHrefTags)
+                {
+                    var att = link.Attributes["href"];
+                    if (att == null) continue;
+                    var href = att.Value;
+                    if (href.StartsWith("javascript", StringComparison.InvariantCultureIgnoreCase) ||
+                        href.StartsWith("#", StringComparison.InvariantCultureIgnoreCase)) continue;
 
+                    var urlNext = new Uri(href, UriKind.RelativeOrAbsolute);
+
+                    // Make it absolute if it's relative
+                    if (urlNext.IsAbsoluteUri)
+                    {
+                        // Absolute so it's external
+                        link.Attributes.Append("rel", "nofollow");
+                        link.Attributes.Append("class", externalClassName);
+                    }
+
+
+                }
+                return doc.DocumentNode.WriteTo();
+
+            }
+            else
+            {
+                return html;
+            }
+        }
         public static X509Certificate2 CreateCert(String serviceAccountPkCs12FilePath, String password)
         {
             X509Certificate2 cert = new X509Certificate2(serviceAccountPkCs12FilePath, password, X509KeyStorageFlags.Exportable);

@@ -492,6 +492,7 @@
     <Content Include="Views\Shared\DisplayTemplates\ProductThumbnail.cshtml" />
     <Content Include="Views\Products\Product.cshtml" />
     <Content Include="Views\Shared\pRelatedContent.cshtml" />
+    <Content Include="tags.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

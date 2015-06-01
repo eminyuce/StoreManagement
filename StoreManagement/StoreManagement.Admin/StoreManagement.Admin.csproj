@@ -1872,6 +1872,7 @@
     <Content Include="Views\Blogs\Details.cshtml" />
     <Content Include="Views\Blogs\Delete.cshtml" />
     <Content Include="Views\Dashboard\Index2.cshtml" />
+    <Content Include="tags.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

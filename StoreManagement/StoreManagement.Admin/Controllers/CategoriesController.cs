@@ -79,13 +79,13 @@ namespace StoreManagement.Admin.Controllers
             {
                 if (category.Id == 0)
                 {
-                    category.CreatedDate = DateTime.Now;
                     CategoryRepository.Add(category);
                 }
                 else
                 {
                     CategoryRepository.Edit(category);
                 }
+                category.CreatedDate = DateTime.Now;
                 CategoryRepository.Save();
 
                 return RedirectToAction("Index");

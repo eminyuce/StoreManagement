@@ -71,7 +71,7 @@ namespace StoreManagement.App_Start
         private static void RegisterServices(IKernel kernel)
         {
 
-            var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", false);
+            var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", true);
             if (isAPIService)
             {
                 var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "yuce.marinelink.org");

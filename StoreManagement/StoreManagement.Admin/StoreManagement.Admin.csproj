@@ -72,7 +72,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GoogleDriveUploader">
-      <HintPath>..\..\..\..\..\..\..\AspNETDLL\GoogleDriveUploader.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\ProjectsEY\NetDLLFiles\GoogleDriveUploader.dll</HintPath>
     </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
@@ -297,6 +297,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

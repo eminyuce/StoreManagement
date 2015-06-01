@@ -238,6 +238,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

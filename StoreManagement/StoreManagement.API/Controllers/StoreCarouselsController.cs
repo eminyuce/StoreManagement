@@ -9,38 +9,37 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class StoreCarouselsController : BaseApiController, IStoreCarouselService
+    public class StoreCarouselsController : BaseApiController<StoreCarousel>, IStoreCarouselService
     {
-        // GET api/storecarousels
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/storecarousels/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/storecarousels
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/storecarousels/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/storecarousels/5
-        public void Delete(int id)
-        {
-        }
-
+         
         public List<StoreCarousel> GetStoreCarousels(int storeId)
         {
             return this.StoreCarouselRepository.GetStoreCarousels(storeId);
+        }
+
+        public override IEnumerable<StoreCarousel> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override StoreCarousel Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HttpResponseMessage Post(StoreCarousel value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HttpResponseMessage Put(int id, StoreCarousel value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HttpResponseMessage Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,7 +13,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class FileManagersController : BaseApiController, IFileManagerService
+    public class FileManagersController : BaseApiController<FileManager>, IFileManagerService
     {
 
         // GET api/FileManagers
@@ -23,7 +23,12 @@ namespace StoreManagement.API.Controllers
         }
 
         // GET api/FileManagers/5
-        public FileManager GetFileManager(int id)
+        public override IEnumerable<FileManager> GetAll()
+        {
+            return this.FileManagerRepository.GetAll();
+        }
+
+        public override FileManager Get(int id)
         {
             FileManager filemanager = this.FileManagerRepository.GetSingle(id);
             if (filemanager == null)
@@ -35,7 +40,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // PUT api/FileManagers/5
-        public HttpResponseMessage PutFileManager(int id, FileManager filemanager)
+        public override HttpResponseMessage Put(int id, FileManager filemanager)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +67,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // POST api/FileManagers
-        public HttpResponseMessage PostFileManager(FileManager filemanager)
+        public override HttpResponseMessage Post(FileManager filemanager)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +85,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // DELETE api/FileManagers/5
-        public HttpResponseMessage DeleteFileManager(int id)
+        public override HttpResponseMessage Delete(int id)
         {
             FileManager filemanager = this.FileManagerRepository.GetSingle(id);
             if (filemanager == null)

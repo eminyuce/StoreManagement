@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface IStoreUserService : IService
+    public interface IService
     {
+
     }
 }

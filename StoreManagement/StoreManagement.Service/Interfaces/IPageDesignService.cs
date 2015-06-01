@@ -7,7 +7,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface IPageDesignService
+    public interface IPageDesignService : IService
     {
         List<PageDesign> GetPageDesignByStoreId(int storeId);
     }

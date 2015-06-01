@@ -14,7 +14,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class StoresController : BaseApiController, IStoreService
+    public class StoresController : BaseApiController<Store>, IStoreService
     {
         // GET api/Stores
         public Store GetStores(String domainName)
@@ -35,6 +35,31 @@ namespace StoreManagement.API.Controllers
         public Store GetSingle(int id)
         {
             return this.StoreRepository.GetSingle(id);
+        }
+
+        public override IEnumerable<Store> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Store Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HttpResponseMessage Post(Store value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HttpResponseMessage Put(int id, Store value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HttpResponseMessage Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

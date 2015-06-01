@@ -7,7 +7,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface INavigationService
+    public interface INavigationService : IService
     {
         List<Navigation> GetStoreNavigations(int storeId);
     }

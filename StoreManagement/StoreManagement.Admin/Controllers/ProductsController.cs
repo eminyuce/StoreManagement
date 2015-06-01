@@ -88,6 +88,7 @@ namespace StoreManagement.Admin.Controllers
                 {
                     ContentRepository.Edit(content);
                 }
+                content.CreatedDate = DateTime.Now;
                 ContentRepository.Save();
                 if (selectedFileId != null)
                 {

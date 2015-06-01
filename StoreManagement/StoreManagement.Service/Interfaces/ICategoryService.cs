@@ -4,7 +4,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface ICategoryService 
+    public interface ICategoryService : IService
     {
         List<Category> GetCategoriesByStoreId(int storeId);
         List<Category> GetCategoriesByStoreIdWithContent(int storeId);

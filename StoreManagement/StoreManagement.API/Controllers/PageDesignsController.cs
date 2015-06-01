@@ -14,7 +14,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class PageDesignsController : BaseApiController, IPageDesignService
+    public class PageDesignsController : BaseApiController<PageDesign>, IPageDesignService
     {
         // GET api/PageDesigns
         public IEnumerable<PageDesign> GetPageDesigns(int storeId)
@@ -23,7 +23,12 @@ namespace StoreManagement.API.Controllers
         }
 
         // GET api/PageDesigns/5
-        public PageDesign GetPageDesign(int id)
+        public override IEnumerable<PageDesign> GetAll()
+        {
+            return this.PageDesignRepository.GetAll();
+        }
+
+        public override PageDesign Get(int id)
         {
             PageDesign pagedesign = this.PageDesignRepository.GetSingle(id);
             if (pagedesign == null)
@@ -35,7 +40,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // PUT api/PageDesigns/5
-        public HttpResponseMessage PutPageDesign(int id, PageDesign pagedesign)
+        public override HttpResponseMessage Put(int id, PageDesign pagedesign)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +67,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // POST api/PageDesigns
-        public HttpResponseMessage PostPageDesign(PageDesign pagedesign)
+        public override HttpResponseMessage Post(PageDesign pagedesign)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +85,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // DELETE api/PageDesigns/5
-        public HttpResponseMessage DeletePageDesign(int id)
+        public override HttpResponseMessage Delete(int id)
         {
             PageDesign pagedesign = this.PageDesignRepository.GetSingle(id);
             if (pagedesign == null)

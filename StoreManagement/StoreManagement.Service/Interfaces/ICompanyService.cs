@@ -8,7 +8,7 @@ using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface ICompanyService
+    public interface ICompanyService : IService
     {
         CompanySearchResult GetCompanySearchResult(string search, List<Filter> filters, int take, int skip);
     }

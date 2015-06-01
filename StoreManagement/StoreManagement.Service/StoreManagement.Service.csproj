@@ -69,6 +69,7 @@
     <Compile Include="Interfaces\IFileManagerService.cs" />
     <Compile Include="Interfaces\INavigationService.cs" />
     <Compile Include="Interfaces\IPageDesignService.cs" />
+    <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\ISettingService.cs" />
     <Compile Include="Interfaces\IStoreCarouselService.cs" />
     <Compile Include="Interfaces\IStoreService.cs" />

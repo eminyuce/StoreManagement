@@ -30,16 +30,19 @@ namespace StoreManagement.Admin.Controllers
             
         }
 
-        private string StorageRoot
-        {
-            get { return Path.Combine(Server.MapPath("~/Files")); }
-        }
-        public ActionResult DisplayImages(int storeId=1)
-        {
-            return View(FileManagerRepository.GetFilesByStoreId(storeId));
-        }
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult DisplayImages(int storeId = 1)
+        {
+            ViewBag.StoreId = storeId;
+            return View(FileManagerRepository.GetFilesByStoreId(storeId));
+        }
+        public ActionResult UploadImages(int storeId=1)
+        {
+            Session["storeId"] = storeId;
+            ViewBag.StoreId = storeId;
             return View();
         }
         public PartialViewResult ImageGallery()
@@ -122,6 +125,7 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult UploadFiles()
         {
+        
             var r = new List<ViewDataUploadFilesResult>();
 
             foreach (string file in Request.Files)
@@ -150,24 +154,31 @@ namespace StoreManagement.Admin.Controllers
             return Json(r);
         }
 
-        private FileManager SaveFiles(HttpPostedFileBase file, int storeId=1)
+        private   FileManager  SaveFiles(HttpPostedFileBase file, int storeId = 1)
         {
-            var fileManager = ConvertToFileManager(file, storeId);
-            try
-            {
-                var fileByte = GeneralHelper.ReadFully(file.InputStream);
-                var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
-                ConvertToFileManager(fileManager, googleFile);
-            }
-            catch (Exception ewx)
-            {
-                Logger.Error("this.UploadHelper.InsertFile Exception is occured."+ewx.StackTrace, ewx);
-            }
 
-            FileManagerRepository.Add(fileManager);
-            FileManagerRepository.Save();
+            var t =  Task.Factory.StartNew(() =>
+                {
+                    var fileManager = ConvertToFileManager(file, storeId);
+                    try
+                    {
+                        var fileByte = GeneralHelper.ReadFully(file.InputStream);
+                        var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
+                        ConvertToFileManager(fileManager, googleFile);
+                    }
+                    catch (Exception ewx)
+                    {
+                        Logger.Error("this.UploadHelper.InsertFile Exception is occured." + ewx.StackTrace, ewx);
+                    }
 
-            return fileManager;
+                    FileManagerRepository.Add(fileManager);
+                    FileManagerRepository.Save();
+
+                    return fileManager;
+
+                });
+            t.Wait(); 
+            return   t.Result;
         }
 
         private static void ConvertToFileManager(FileManager fileManager, GoogleDriveFile googleFile)
@@ -193,10 +204,10 @@ namespace StoreManagement.Admin.Controllers
         {
             if (request.Files.Count != 1) throw new HttpRequestValidationException("Attempt to upload chunked file containing more than one fragment per request");
             var file = request.Files[0];
+            int storeId = Session["storeId"].ToString().ToInt();
+            var fileManager = SaveFiles(file, storeId); 
 
-            var fileManager = SaveFiles(file);
-
- 
+  
             statuses.Add(new ViewDataUploadFilesResult()
             {
                 name = fileName,
@@ -238,7 +249,8 @@ namespace StoreManagement.Admin.Controllers
                // var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
 
                // file.SaveAs(fullPath);
-                var fileManager = SaveFiles(file);
+                int storeId = Session["storeId"].ToString().ToInt();
+                var fileManager = SaveFiles(file, storeId);
                 
 
        

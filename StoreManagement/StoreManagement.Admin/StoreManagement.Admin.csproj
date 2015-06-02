@@ -71,9 +71,6 @@
       <HintPath>..\packages\Google.Apis.1.9.0\lib\net40\Google.Apis.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoogleDriveUploader">
-      <HintPath>..\..\..\..\..\..\..\ProjectsEY\NetDLLFiles\GoogleDriveUploader.dll</HintPath>
-    </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
     </Reference>
@@ -1680,7 +1677,7 @@
     <Content Include="Content\Theme\vendors\ckeditor\CHANGES.md" />
     <Content Include="Content\Theme\vendors\ckeditor\LICENSE.md" />
     <Content Include="Content\Theme\vendors\ckeditor\README.md" />
-    <Content Include="Content\Google Drive File Upload-d022ab1f4c22.p12" />
+    <Content Include="Content\Google Drive File Upload-2db8e7cde3bb.p12" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1798,7 +1795,7 @@
     <Content Include="Views\Shared\pCreateCategoryTree.cshtml" />
     <Content Include="Views\Categories\Test.cshtml" />
     <Content Include="Views\Categories\TestPage.cshtml" />
-    <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Views\FileManager\UploadImages.cshtml" />
     <Content Include="Upload\UploadHandler.ashx" />
     <Content Include="Views\Shared\_LayoutFileUpload.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
@@ -1873,6 +1870,7 @@
     <Content Include="Views\Blogs\Delete.cshtml" />
     <Content Include="Views\Dashboard\Index2.cshtml" />
     <Content Include="tags.config" />
+    <Content Include="Views\FileManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1883,6 +1881,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\GoogleDriveUploader\GoogleDriveUploader\GoogleDriveUploader.csproj">
+      <Project>{b652ae97-342e-4309-82cd-860614f5746f}</Project>
+      <Name>GoogleDriveUploader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">
       <Project>{553854d8-a688-4a50-ab74-4ccf3b1afe9a}</Project>
       <Name>StoreManagement.Data</Name>

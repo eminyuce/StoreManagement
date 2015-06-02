@@ -154,7 +154,7 @@
                 $("#CategoryId").val(selectedCategoryId);
 
             });
-
+            GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
             $('select#StoreDropDownId').chosen({}).change(function(event) {
                 GetCategoryTree($(this).val(), $("#categoryType").val());
             });
@@ -188,6 +188,10 @@
                 success: function(data) {
                     $("#categoryTree").html(data);
                     bindcategoryTree();
+                    var categoryId = $("#CategoryId").val();
+                    var selectedCategory =  $('[data-category=' + categoryId + ']').text();
+                    console.log(selectedCategory);
+                    $("#SelectedCategory").text(selectedCategory);
                 },
                 error: function(request, status, error) {
                     console.error('Error ' + status + ' ' + request.responseText);

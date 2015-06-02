@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "View1";
+    var storeId = ViewBag.StoreId;
 }
 
 
@@ -18,9 +19,19 @@
             </div>
             <div class="bootstrap-admin-panel-content">
 
-
+                             
                 <h2>Images</h2>
-
+                      <div class="row">
+                    <div class="col-md-5">
+                        @using (Html.BeginForm("UploadImages", "FileManager", FormMethod.Get))
+                        {
+                            <input type="hidden" value="@storeId" name="storeId"/>
+                            <p>
+                                <input type="submit" value="Upload Images" class = "btn btn-primary btn-block" />
+                            </p>
+                        }
+                    </div>
+                </div>
                 <span class="btn btn-link btn-xs" id="DeleteAll">Delete All
                 </span>
                 <span class="btn btn-link btn-xs" id="SelectAll">Select All

@@ -26,6 +26,7 @@
     <fieldset>
         <legend>Category</legend>
         @Html.HiddenFor(model => model.Id)
+               @Html.HiddenFor(model => model.CategoryType)
         <div class="editor-label control-group">
             @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
         </div>
@@ -54,14 +55,7 @@
             @Html.ValidationMessageFor(model => model.Ordering)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CategoryType)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CategoryType)
-            @Html.ValidationMessageFor(model => model.CategoryType)
-        </div>
-
+       
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>

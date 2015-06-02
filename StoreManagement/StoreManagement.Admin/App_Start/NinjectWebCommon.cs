@@ -63,7 +63,7 @@ namespace StoreManagement.Admin.App_Start
             }
         }
         private const string clientId = "660481316212-aietulh54ei2eqsi1gdvl0g7s12ohf70.apps.googleusercontent.com";
-        private const string serviceAccountPkCs12FilePath = @"~\Content\Google Drive File Upload-d022ab1f4c22.p12";
+        private const string serviceAccountPkCs12FilePath = @"~\Content\Google Drive File Upload-2db8e7cde3bb.p12";
         private const string serviceAccountEmail = "660481316212-aietulh54ei2eqsi1gdvl0g7s12ohf70@developer.gserviceaccount.com";
         private const string folder = "MyStoreFolder";
         private const String password = "notasecret";
@@ -88,11 +88,11 @@ namespace StoreManagement.Admin.App_Start
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();
             m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("ClientId", clientId));
-            m.WithConstructorArgument("userEmail", userEmail);
-            m.WithConstructorArgument("serviceAccountEmail", serviceAccountEmail);
+            m.WithConstructorArgument("userEmail", ProjectAppSettings.GetWebConfigString("UserEmail",userEmail));
+            m.WithConstructorArgument("serviceAccountEmail",  ProjectAppSettings.GetWebConfigString("ServiceAccountEmail",serviceAccountEmail));
             m.WithConstructorArgument("certificate", GeneralHelper.CreateCert(HostingEnvironment.MapPath(serviceAccountPkCs12FilePath), password));
-            m.WithConstructorArgument("folderName", folder);
-            m.WithConstructorArgument("password", password);
+            m.WithConstructorArgument("folderName", ProjectAppSettings.GetWebConfigString("GoogleDriveFolder",folder));
+            m.WithConstructorArgument("password",  ProjectAppSettings.GetWebConfigString("password",password));
 
 
 

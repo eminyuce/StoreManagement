@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "Bootstrap version demo";
+
+    Layout = "~/Views/Shared/_LayoutFileUpload.cshtml";
+    var storeId = ViewBag.StoreId;
+}
+
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+       
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+
+            <div class="bootstrap-admin-panel-content">
+
+                <div class="row">
+                    <div class="col-md-5">
+                         @using (Html.BeginForm("DisplayImages", "FileManager", FormMethod.Get))
+                        {
+                            <input type="hidden" id="@storeId" name="storeId"/>
+                            <p>
+                                <input type="submit" value="Display Images" class = "btn btn-primary btn-block" />
+                            </p>
+                        }
+                    </div>
+                   
+                </div>
+
+
+                @*
+
+                <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+                <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+                @section scripts
+{
+            
+                    <link href="/Content/Site.css?cdv=1" type="text/css" rel="stylesheet" />
+
+                    <script src="~/Scripts/bootstrap-image-gallery.min.js"></script>
+                    <script src="/Scripts/bootstrap.js"></script>
+                    <link href="/Content/bootstrap.css" rel="stylesheet" />
+                    <link href="/Content/bootstrap-theme.css" rel="stylesheet" />
+
+
+                    <link href="/Scripts/FileUpload/jquery.fileupload-ui.css?cdv=1" type="text/css" rel="stylesheet" />
+
+
+                    <script src="/Scripts/FileUpload/load-image.min.js?cdv=1" type="text/javascript"></script>
+
+                    <script src="/Scripts/FileUpload/canvas-to-blob.min.js?cdv=1" type="text/javascript"></script>
+                    <script src="/Scripts/FileUpload/tmpl.min.js?cdv=1" type="text/javascript"></script>
+
+
+                    <script src="/Scripts/FileUpload/jquery.fileupload.js?cdv=1" type="text/javascript"></script>
+                    <script src="/Scripts/FileUpload/jquery.iframe-transport.js?cdv=1" type="text/javascript"></script>
+                    <script src="/Scripts/FileUpload/jquery.fileupload-ip.js?cdv=1" type="text/javascript"></script>
+                    <script src="/Scripts/FileUpload/jquery.fileupload-ui.js?cdv=1" type="text/javascript"></script>
+                    <script src="/Scripts/FileUpload/locale.js?cdv=1" type="text/javascript"></script>
+                    <script src="/Scripts/FileUpload/main.js?cdv=1" type="text/javascript"></script>
+
+                }
+
+        
+
+IN ORDER TO USE MVC ACTIONS AS HANDLERS OF AJAX CALLS, USE THE FORM DECLARATION BELOW. (THE ONE COMMENTED OUT)
+IT IS NOT ADVISED SINCE WHEN USING MVC CONTROLLER TO HANDLE REQUESTS ONE CAN'T CONTROL THE maxMessageLength OF THE POST REQUEST
+THIS CASTS THE FUNCTIONALITY OF UPLOADING LARGE FILES USELESS, UNLESS YOU SUCRIFICE THE SECURITY AND ALLOW LARGE 
+POST MESSAGE SIZES SITE-WIDE.
+
+IT IS BETTER TO USE HTTP HANDLER TO PROCESS UPLOAD REQUESTS UNTIL MVC FRAMEWORK PROVIDES WAYS TO SET maxMessageLength ON
+PER ACTION BASIS 
+
+*@
+                <h2>Images Upload</h2>
+                <form id="fileupload" action="@Url.Action("UploadFiles")" method="POST" enctype="multipart/form-data">
+
+                    @*<form id="fileupload" action="/Upload/UploadHandler.ashx" method="POST" enctype="multipart/form-data">*@
+
+                    @*  <form id="fileupload" action="@Url.Action("UploadFiles")" method="POST" enctype="multipart/form-data">*@
+                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                    <div class="row fileupload-buttonbar">
+                        <div class="span7">
+                            <!-- The fileinput-button span is used to style the file input field as button -->
+                            <span class="btn btn-success fileinput-button">
+                                <i class="glyphicon glyphicon-plus-sign"></i>
+                                <span>Add files...</span>
+                                <input type="file" name="files[]" multiple>
+                            </span>
+                            <button type="submit" class="btn btn-primary start">
+                                <i class="glyphicon glyphicon-upload"></i>
+                                <span>Start upload</span>
+                            </button>
+                            <button type="reset" class="btn btn-warning cancel">
+                                <i class="glyphicon glyphicon-remove-circle"></i>
+                                <span>Cancel upload</span>
+                            </button>
+                            <button type="button" class="btn btn-danger delete">
+                                <i class="glyphicon glyphicon-trash"></i>
+                                <span>Delete</span>
+                            </button>
+                            <input type="checkbox" class="toggle">
+                        </div>
+                        <div class="span5">
+                            <!-- The global progress bar -->
+                            <div class="progress progress-success progress-striped active fade">
+                                <div class="bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- The loading indicator is shown during image processing -->
+                    <div class="fileupload-loading"></div>
+                    <br>
+                    <!-- The table listing the files available for upload/download -->
+                    <table class="table table-striped">
+                        <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+                    </table>
+                </form>
+
+                <!-- modal-gallery is the modal dialog used for the image gallery -->
+                <div id="modal-gallery" class="modal modal-gallery hide fade">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">&times;</a>
+                        <h3 class="modal-title"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-image"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary modal-next">
+                            <span>Next</span>
+                            <i class="glyphicon glyphicon-arrow-right"></i>
+                        </a>
+                        <a class="btn btn-info modal-prev">
+                            <i class="glyphicon glyphicon-arrow-left"></i>
+                            <span>Previous</span>
+                        </a>
+                        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
+                            <i class="glyphicon glyphicon-play"></i>
+                            <span>Slideshow</span>
+                        </a>
+                        <a class="btn modal-download" target="_blank">
+                            <i class="glyphicon glyphicon-download-alt"></i>
+                            <span>Download</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- The template to display files available for upload -->
+                <script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td class="preview"><span class="fade"></span></td>
+        <td class="name"><span>{%=file.name%}</span></td>
+        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+        {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else if (o.files.valid && !i) { %}
+            <td>
+                <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td class="start">{% if (!o.options.autoUpload) { %}
+                <button class="btn btn-primary">
+                    <i class="icon-upload icon-white"></i>
+                    <span>{%=locale.fileupload.start%}</span>
+                </button>
+            {% } %}</td>
+        {% } else { %}
+            <td colspan="2"></td>
+        {% } %}
+        <td class="cancel">{% if (!i) { %}
+            <button class="btn btn-warning">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>{%=locale.fileupload.cancel%}</span>
+            </button>
+        {% } %}</td>
+    </tr>
+{% } %}
+                </script>
+                <!-- The template to display files available for download -->
+                <script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+        {% } %}
+        <td class="delete">
+            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+                <i class="icon-trash icon-white"></i>
+                <span>{%=locale.fileupload.destroy%}</span>
+            </button>
+            <input type="checkbox" name="delete" value="1">
+        </td>
+    </tr>
+{% } %}
+                </script>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+

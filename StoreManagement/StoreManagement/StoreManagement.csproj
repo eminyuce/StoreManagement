@@ -424,6 +424,7 @@
     <None Include="Properties\PublishProfiles\llogin.seatechnologyjobs.pubxml" />
     <None Include="Properties\PublishProfiles\login.maritimejobs.mobi.pubxml" />
     <None Include="Properties\PublishProfiles\yuce.marinelink.org.pubxml" />
+    <None Include="Properties\PublishProfiles\yucetest.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />

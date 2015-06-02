@@ -114,14 +114,22 @@ $(document).ready(function () {
     function changeState(state) {
         var ppp = $("#ItemStateSelection").val();
         var selectedValues = GetSelectedStateValues("span" + ppp, state);
-        var postData = JSON.stringify({ "values": selectedValues, "checkbox": ppp });
-        console.log(postData);
-        var tableName = $("[data-gridname]").attr("data-gridname");
-        if (tableName == "imagesGrid") {
-            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
-        } else if (tableName == "contentGrid") {
-            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
+        if (selectedValues.length > 0) {
+            var postData = JSON.stringify({ "values": selectedValues, "checkbox": ppp });
+                    console.log(postData);
+                    var tableName = $("[data-gridname]").attr("data-gridname");
+                    if (tableName == "imagesGrid") {
+                        ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
+                    } else if (tableName == "contentGrid") {
+                        ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
+                    }
+
+                    displayMessage("hide", "");
+            
+        } else {
+            displayMessage("error", "Checkboxes on the grid does not selected");
         }
+        
     }
     $("#GridListItemSize").change(function (e) {
         var originalURL = window.location.href;
@@ -137,6 +145,21 @@ $(document).ready(function () {
             
         }
     });
+    function displayMessage(messageType, message) {
+        var messagePanel = $("#ErrorMessagePanel");
+        var errorMessage = $("#ErrorMessage");
+        messagePanel.show();
+        if (messageType == "info") {
+            messagePanel.attr("class", "alert alert-info");
+            errorMessage.text(message);
+        } else if(messageType == "error") {
+            messagePanel.attr("class", "alert alert-danger");
+            errorMessage.text(message);
+        }else if (messageType == "hide") {
+            messagePanel.hide();
+        }
+    }
+
     function updateUrlParameter(originalURL, param, value)
     {
         console.log(value);

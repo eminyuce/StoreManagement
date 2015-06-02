@@ -103,6 +103,11 @@ namespace StoreManagement.Admin.Controllers
             return Content(value);
         }
 
+        public ActionResult GetContentImages(int contentId)
+        {
+            var images = ContentFileRepository.GetContentByContentId(contentId).Select(r => r.FileManager);
+            return Json(images, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetImages(int storeId)
         {
             var images = FileManagerRepository.GetFilesByStoreId(storeId);

@@ -39,6 +39,88 @@ $(document).ready(function () {
 
 });
 
+function RetrieveContentImages() {
+    $('[data-file-id]').each(function () {
+        $(this).off("click");
+        $(this).on("click", handleRetrieveContentImages);
+    });
+}
+
+function handleRetrieveContentImages(e) {
+    e.preventDefault();
+    var caller = e.target;
+    var contentId = $(caller).attr('data-file-id');
+    var list = $("<ul></ul");
+    $("#ImagesPanel").empty();
+    var jsonRequest = JSON.stringify({ "contentId": contentId });
+    jQuery.ajax({
+        url: "/Ajax/GetContentImages",
+        type: 'POST',
+        data: jsonRequest,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            var photos = data;
+            $.each(photos, function (i, photo) {
+                console.log(photo);
+                var img = $("<img/>").attr("src", '/Images/ThumbnailWithGoogleId?googleId=' + photo.GoogleImageId + '')
+                                    .attr("title", photo.FileName).attr("id", photo.Id);
+                var div = $("<li/>").attr("class", "col-md-4").attr("data-file-image", photo.Id).append(img);
+                $(list).append($("<div/>").append(div));
+            });
+            $("#ImagesPanel").append(list);
+            createImageDialog();
+        },
+        error: function (request, status, error) {
+            console.error('Error ' + status + ' ' + request.responseText);
+        },
+        beforeSend: function () {
+
+        }
+    });
+}
+function createImageDialog() {
+    
+    var win = $(window);
+    var dialog = $("#dialog");
+    var top = (win.height() - dialog.height()) / 2;
+    var left = (win.width() - dialog.width()) / 2;
+    
+
+    $("#ImagesPanel").dialog({
+        modal: true,
+        height: 500,
+        width: 800,
+        draggable: true,
+        //position: ['center', 'middle'],
+        position: "absolute",
+        top: top,
+        left: left,
+        show: {
+            effect: "fade",
+            duration: 750
+        },
+        hide: {
+            effect: "fade",
+            duration: 500
+        },
+        buttons: {
+            Ok: function () {
+                $(this).dialog("close");
+            },
+            Close: function () {
+                $("#ImagesPanel").empty();
+                $(this).dialog("close");
+            }
+        },
+        open: function (event, ui) {
+            setTimeout(function () {
+                LoadImages();
+            }, 2);
+        }
+    });
+}
+
 function createImage(thumnailLink, fileName, photoId, eventLink) {
     var img = $("<img/>").attr("src",   thumnailLink)
         .attr("title", fileName)
@@ -53,14 +135,14 @@ function createImage(thumnailLink, fileName, photoId, eventLink) {
 function LoadImages() {
     $("#flickr-photos").empty();
     var storeId = $("#StoreId").val();
-    $.getJSON("/Ajax/GetImages?storeId=" + storeId, function (data) {
+    $.getJSON("/Ajax/GetImages?storeId=" + storeId, function(data) {
         var photos = data;
         $("#image-count").text(photos.length);
         $("#filter-count").text(photos.length);
 
 
         var list = $("<ul></ul");
-        $.each(photos, function (i, photo) {
+        $.each(photos, function(i, photo) {
             var thumnailLink = photo.ThumbnailLink;
             var fileName = photo.Title;
             var photoId = photo.Id;
@@ -69,14 +151,16 @@ function LoadImages() {
                 .attr("data-image-file-name", fileName)
                 .attr("data-image-file-thumnailLink", thumnailLink)
                 .text("Add").addClass("addLink");
-            var div = createImage(thumnailLink,fileName, photoId, addLink);
+            var div = createImage(thumnailLink, fileName, photoId, addLink);
             $(list).append($("<div/>").append(div));
 
         });
+        
+
         $("#flickr-photos .loading").remove();
         $("#flickr-photos").append(list);
         bindAddImage();
-    })
+    });
 
     $("#filter").keyup(function () {
         var filter = $(this).val(), count = 0;

@@ -107,6 +107,11 @@ namespace StoreManagement.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, filemanager);
         }
 
+        public List<FileManager> GetFilesByStoreIdFromCache(int storeId)
+        {
+            return FileManagerRepository.GetFilesByStoreIdFromCache(storeId);
+        }
+
         public List<FileManager> GetFilesByStoreId(int storeId)
         {
             return FileManagerRepository.GetFilesByStoreId(storeId);

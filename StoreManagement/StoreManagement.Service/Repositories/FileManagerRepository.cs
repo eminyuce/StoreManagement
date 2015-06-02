@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using StoreManagement.Data;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -12,11 +14,29 @@ namespace StoreManagement.Service.Repositories
 {
     public class FileManagerRepository : EntityRepository<FileManager, int>, IFileManagerRepository
     {
+
+        static TypedObjectCache<List<FileManager>> CategoryCache
+      = new TypedObjectCache<List<FileManager>>("StoreFileManager");
+
+
         private IStoreContext dbContext;
         public FileManagerRepository(IStoreContext dbContext)
             : base(dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public List<FileManager> GetFilesByStoreIdFromCache(int storeId)
+        {
+            String key = String.Format("StoreFileManager-{0}", storeId);
+            List<FileManager> items = null;
+            CategoryCache.TryGet(key, out items);
+            if (items == null)
+            {
+                items = GetFilesByStoreId(storeId);
+                CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+            }
+            return items;
         }
 
         public List<FileManager> GetFilesByStoreId(int storeId)

@@ -17,6 +17,20 @@ namespace StoreManagement.Service.Services
 
         }
 
+        public List<FileManager> GetFilesByStoreIdFromCache(int storeId)
+        {
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetFilesByStoreIdFromCache?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                return RequestHelper.GetUrlResults<FileManager>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<FileManager>();
+            }
+        }
+
         public List<FileManager> GetFilesByStoreId(int storeId)
         {
             try

@@ -65,12 +65,25 @@ namespace StoreManagement.Admin.Controllers
 
 
         }
-        public void GetPhotoThumbnail(int id, int width = 60, int height = 60)
+
+        public void ThumbnailWithGoogleId(String googleId, int width = 60, int height = 60)
+        {
+            String url = "";
+            var dic = new Dictionary<String, String>();
+            url = String.Format("https://docs.google.com/uc?id={0}", googleId);
+            byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
+
+            new WebImage(imageData)
+                    .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
+                    .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                    .Write();
+        }
+
+        public void Thumbnail(int id, int storeId, int width = 60, int height = 60)
         {
             var dic = new Dictionary<String, String>();
             // Loading photos’ info from database for specific image...
-            var file = FileManagerRepository.GetSingle(id);
-            //String id = "http://www.hdwallpapers.in/walls/green_sea_view-wide.jpg";
+            var file = FileManagerRepository.GetFilesByStoreIdFromCache(storeId).FirstOrDefault(r => r.Id == id);
             String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);
             byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
 

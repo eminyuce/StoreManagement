@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface IStoreCarouselService
+    public interface IStoreCarouselService : IService
     {
         List<StoreCarousel> GetStoreCarousels(int storeId); 
     }

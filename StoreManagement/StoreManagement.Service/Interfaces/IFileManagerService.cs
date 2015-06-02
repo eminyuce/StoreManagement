@@ -7,7 +7,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface IFileManagerService
+    public interface IFileManagerService : IService
     {
 
         List<FileManager> GetFilesByStoreId(int storeId);

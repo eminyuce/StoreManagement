@@ -69,6 +69,7 @@
     <Compile Include="Interfaces\IFileManagerService.cs" />
     <Compile Include="Interfaces\INavigationService.cs" />
     <Compile Include="Interfaces\IPageDesignService.cs" />
+    <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\ISettingService.cs" />
     <Compile Include="Interfaces\IStoreCarouselService.cs" />
     <Compile Include="Interfaces\IStoreService.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Services\FileManagerService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PageDesignService.cs" />
+    <Compile Include="Services\SettingService.cs" />
     <Compile Include="Services\StoreCarouselService.cs" />
     <Compile Include="Services\StoreService.cs" />
     <Compile Include="Services\StoreUserService.cs" />

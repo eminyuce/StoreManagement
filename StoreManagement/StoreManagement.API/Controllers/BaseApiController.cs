@@ -10,7 +10,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public abstract class BaseApiController : ApiController
+    public abstract class BaseApiController<T> : ApiController where T : class
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         [Inject]
@@ -39,6 +39,23 @@ namespace StoreManagement.API.Controllers
         
         [Inject]
         public ISettingRepository SettingRepository { set; get; }
+
+        [Inject]
+        public IStoreCarouselRepository StoreCarouselRepository { set; get; }
+
+
+
+        // GET api/<controller>
+        public abstract IEnumerable<T> GetAll();
+        // GET api/<controller>/5
+        public abstract T Get(int id);
+        // POST api/<controller>
+        public abstract HttpResponseMessage Post([FromBody] T value);
+        // PUT api/<controller>
+        public abstract HttpResponseMessage Put(int id, [FromBody] T value);
+        // DELETE api/<controller>/5
+        public abstract HttpResponseMessage Delete(int id);
+
 
     }
 }

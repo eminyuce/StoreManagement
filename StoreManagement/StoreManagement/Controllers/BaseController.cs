@@ -61,7 +61,7 @@ namespace StoreManagement.Controllers
             var siteStatus = ProjectAppSettings.GetWebConfigBool("IsDevelopmentStatus", true);
             if (siteStatus)
             {
-                this.Store = StoreService.GetStoreByDomain("WeddingAtlantis.com");
+                this.Store = StoreService.GetStoreByDomain("login.seatechnologyjobs.com");
             }
             else
             {
@@ -71,7 +71,13 @@ namespace StoreManagement.Controllers
                 domainName = GeneralHelper.GetDomainPart(domainName);
                 this.Store = StoreService.GetStore(domainName);
             }
+
+            if (Store == null)
+            {
+                throw new Exception("Store cannot be NULL");
+            }
         }
+     
 
     }
 }

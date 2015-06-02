@@ -13,7 +13,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class NavigationsController : BaseApiController, INavigationService
+    public class NavigationsController : BaseApiController<Navigation>, INavigationService
     {
 
         // GET api/Navigations
@@ -23,7 +23,12 @@ namespace StoreManagement.API.Controllers
         }
 
         // GET api/Navigations/5
-        public Navigation GetNavigation(int id)
+        public override IEnumerable<Navigation> GetAll()
+        {
+            return this.NavigationRepository.GetAll();
+        }
+
+        public override Navigation Get(int id)
         {
             Navigation navigation = this.NavigationRepository.GetSingle(id);
             if (navigation == null)
@@ -35,7 +40,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // PUT api/Navigations/5
-        public HttpResponseMessage PutNavigation(int id, Navigation navigation)
+        public override HttpResponseMessage Put(int id, Navigation navigation)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +67,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // POST api/Navigations
-        public HttpResponseMessage PostNavigation(Navigation navigation)
+        public override HttpResponseMessage Post(Navigation navigation)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +85,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // DELETE api/Navigations/5
-        public HttpResponseMessage DeleteNavigation(int id)
+        public override HttpResponseMessage Delete(int id)
         {
             Navigation navigation = this.NavigationRepository.GetSingle(id);
             if (navigation == null)

@@ -6,12 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using StoreManagement.Data.JsTree;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class CategoriesController : BaseApiController, ICategoryService
+    public class CategoriesController : BaseApiController<Category>, ICategoryService
     {
         // GET api/Default1
         public IEnumerable<Category> GetCategories(int storeId)
@@ -20,7 +19,12 @@ namespace StoreManagement.API.Controllers
         }
 
         // GET api/Default1/5
-        public Category GetCategory(int id)
+        public override IEnumerable<Category> GetAll()
+        {
+            return this.CategoryRepository.GetAll();
+        }
+
+        public override Category Get(int id)
         {
             Category category = this.CategoryRepository.GetSingle(id);
             if (category == null)
@@ -32,7 +36,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // PUT api/Default1/5
-        public HttpResponseMessage PutCategory(int id, Category category)
+        public override HttpResponseMessage Put(int id, Category category)
         {
             if (!ModelState.IsValid)
             {
@@ -59,7 +63,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // POST api/Default1
-        public HttpResponseMessage PostCategory(Category category)
+        public override HttpResponseMessage Post(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +82,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // DELETE api/Default1/5
-        public HttpResponseMessage DeleteCategory(int id)
+        public override HttpResponseMessage Delete(int id)
         {
             Category category = this.CategoryRepository.GetSingle(id);
             if (category == null)
@@ -120,14 +124,12 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, type);
         }
 
-        public List<JsTreeNode> CreateCategoriesTree(int storeId, string type)
-        {
-            return CategoryRepository.CreateCategoriesTree(storeId, type);
-        }
 
         public Category GetSingle(int id)
         {
             return CategoryRepository.GetSingle(id);
         }
+
+     
     }
 }

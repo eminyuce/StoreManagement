@@ -7,7 +7,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface IContentService
+    public interface IContentService : IService
     {
 
         Content GetContentsContentId(int contentId);

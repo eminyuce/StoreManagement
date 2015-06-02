@@ -67,18 +67,22 @@ namespace StoreManagement.Admin.Controllers
 
         private void DeleteFile(string id)
         {
-            var f = FileManagerRepository.GetFilesByGoogleImageId(id);
+            var f =new FileManager();
+            if (id.ToInt() > 0)
+            {
+                f = FileManagerRepository.GetSingle(id.ToInt());
+            }
+            else
+            {
+                f = FileManagerRepository.GetFilesByGoogleImageId(id);
+            }
+
+
             var filename = f.Title;
-            var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
-
-            //if (System.IO.File.Exists(filePath))
-            //{
-            //    System.IO.File.Delete(filePath);
-            //}
-
+           
             try
             {
-               this.UploadHelper.deleteFile(id);
+               this.UploadHelper.deleteFile(f.GoogleImageId);
             }
             catch (Exception ewx)
             {

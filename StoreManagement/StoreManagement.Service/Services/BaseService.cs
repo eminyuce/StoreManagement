@@ -15,5 +15,6 @@ namespace StoreManagement.Service.Services
         {
             WebServiceAddress = webServiceAddress;
         }
+
     }
 }

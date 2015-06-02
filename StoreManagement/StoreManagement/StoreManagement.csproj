@@ -238,6 +238,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -489,6 +490,8 @@
     <Content Include="Views\Shared\pStoreCarousel.cshtml" />
     <Content Include="Views\Shared\pStoreCarouselImages.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ProductThumbnail.cshtml" />
+    <Content Include="Views\Products\Product.cshtml" />
+    <Content Include="Views\Shared\pRelatedContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

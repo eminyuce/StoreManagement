@@ -13,7 +13,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class ContentsController : BaseApiController, IContentService
+    public class ContentsController : BaseApiController<Content>, IContentService
     {
         // GET api/Contents
         public IEnumerable<Content> GetContents(int storeId, String typeName)
@@ -22,7 +22,12 @@ namespace StoreManagement.API.Controllers
         }
 
         // GET api/Contents/5
-        public Content GetContent(int id)
+        public override IEnumerable<Content> GetAll()
+        {
+            return this.ContentRepository.GetAll();
+        }
+
+        public override Content Get(int id)
         {
             Content content = this.ContentRepository.GetSingle(id);
             if (content == null)
@@ -34,7 +39,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // PUT api/Contents/5
-        public HttpResponseMessage PutContent(int id, Content content)
+        public override HttpResponseMessage Put(int id, Content content)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +66,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // POST api/Contents
-        public HttpResponseMessage PostContent(Content content)
+        public override HttpResponseMessage Post(Content content)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +84,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // DELETE api/Contents/5
-        public HttpResponseMessage DeleteContent(int id)
+        public override HttpResponseMessage Delete(int id)
         {
             Content content = this.ContentRepository.GetSingle(id);
             if (content == null)

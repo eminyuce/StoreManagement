@@ -67,6 +67,7 @@ namespace StoreManagement.Admin.App_Start
         private const string serviceAccountEmail = "660481316212-aietulh54ei2eqsi1gdvl0g7s12ohf70@developer.gserviceaccount.com";
         private const string folder = "MyStoreFolder";
         private const String password = "notasecret";
+        private const String userEmail = "eminyuce@gmail.com";
         /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
@@ -87,7 +88,7 @@ namespace StoreManagement.Admin.App_Start
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();
             m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("ClientId", clientId));
-            m.WithConstructorArgument("userEmail", "eminyuce@gmail.com");
+            m.WithConstructorArgument("userEmail", userEmail);
             m.WithConstructorArgument("serviceAccountEmail", serviceAccountEmail);
             m.WithConstructorArgument("certificate", GeneralHelper.CreateCert(HostingEnvironment.MapPath(serviceAccountPkCs12FilePath), password));
             m.WithConstructorArgument("folderName", folder);

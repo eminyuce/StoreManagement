@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Data.JsTree;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
 {
     public class CategoryService : BaseService, ICategoryService
     {
-        public CategoryService(string webServiceAddress) : base(webServiceAddress)
+        private const String ApiControllerName = "Categories";
+        public CategoryService(string webServiceAddress)
+            : base(webServiceAddress)
         {
 
         }
@@ -21,39 +22,71 @@ namespace StoreManagement.Service.Services
         {
             try
             {
-                string url = string.Format("http://{0}/api/Categories/GetCategoriesByStoreId?storeId={1}", WebServiceAddress, storeId);
+                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
                 return RequestHelper.GetUrlResults<Category>(url);
             }
             catch (Exception ex)
             {
-                WebServiceAddress = string.Empty;
+                Logger.ErrorException("Error:" + ex.Message, ex);
                 return new List<Category>();
             }
         }
 
         public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                return RequestHelper.GetUrlResults<Category>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<Category>();
+            }
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId, string type)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                return RequestHelper.GetUrlResults<Category>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<Category>();
+            }
         }
 
         public List<Category> GetCategoriesByStoreIdFromCache(int storeId, string type)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                return RequestHelper.GetUrlResults<Category>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<Category>();
+            }
         }
-
-        public List<JsTreeNode> CreateCategoriesTree(int storeId, string type)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public Category GetSingle(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetSingle?id={2}", WebServiceAddress, ApiControllerName, id);
+                return RequestHelper.GetUrlResult<Category>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new Category();
+            }
         }
     }
 }

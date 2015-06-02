@@ -72,7 +72,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GoogleDriveUploader">
-      <HintPath>..\..\..\..\..\..\..\AspNETDLL\GoogleDriveUploader.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\ProjectsEY\NetDLLFiles\GoogleDriveUploader.dll</HintPath>
     </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
@@ -297,6 +297,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1515,6 +1516,14 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Icon.png" />
+    <Content Include="Images\Dashboard\01.png" />
+    <Content Include="Images\Dashboard\02.png" />
+    <Content Include="Images\Dashboard\03.png" />
+    <Content Include="Images\Dashboard\04.png" />
+    <Content Include="Images\Dashboard\05.png" />
+    <Content Include="Images\Dashboard\06.png" />
+    <Content Include="Images\Dashboard\07.png" />
+    <Content Include="Images\Dashboard\08.png" />
     <Content Include="Scripts\bootstrap-image-gallery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1862,6 +1871,8 @@
     <Content Include="Views\Blogs\Details2.cshtml" />
     <Content Include="Views\Blogs\Details.cshtml" />
     <Content Include="Views\Blogs\Delete.cshtml" />
+    <Content Include="Views\Dashboard\Index2.cshtml" />
+    <Content Include="tags.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

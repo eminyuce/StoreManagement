@@ -110,7 +110,7 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult GetHiearchicalNodesInfo()
         {
-            var tree = this.CategoryRepository.CreateCategoriesTree(1, "family");
+            var tree = this.CategoryRepository.GetCategoriesByStoreId(1, "family");
 
             return Json(tree, JsonRequestBehavior.AllowGet);
         }

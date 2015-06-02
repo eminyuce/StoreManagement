@@ -8,7 +8,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface IStoreService
+    public interface IStoreService : IService
     {
         Store GetStoreByDomain(string domainName);
         Store GetStore(String domain);

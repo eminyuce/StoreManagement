@@ -4,48 +4,72 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Store</legend>
+@Html.Partial("_LeftMenu")
 
-        @Html.HiddenFor(model => model.Id)
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Create New Stores</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Store</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Domain)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Domain)
+                            @Html.ValidationMessageFor(model => model.Domain)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Layout)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Layout)
+                            @Html.ValidationMessageFor(model => model.Layout)
+                        </div>
+
+
+
+                        <p>
+                            <input type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Domain)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Domain)
-            @Html.ValidationMessageFor(model => model.Domain)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Layout)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Layout)
-            @Html.ValidationMessageFor(model => model.Layout)
-        </div>
+    </div>
 
 
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+
+
+

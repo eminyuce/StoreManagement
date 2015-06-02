@@ -7,7 +7,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Service.Interfaces
 {
-    public interface ISettingService
+    public interface ISettingService : IService
     {
         List<Setting> GetStoreSettings(int storeid);
         List<Setting> GetStoreSettingsFromCache(int storeid);

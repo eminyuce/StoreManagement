@@ -114,9 +114,7 @@ function createImageDialog() {
             }
         },
         open: function (event, ui) {
-            setTimeout(function () {
-                LoadImages();
-            }, 2);
+            
         }
     });
 }

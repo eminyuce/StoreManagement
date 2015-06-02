@@ -12,6 +12,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Admin.Controllers
 {
+    [Authorize]
     public class BlogsController : BaseController
    {
         private const String ContentType = "blog";

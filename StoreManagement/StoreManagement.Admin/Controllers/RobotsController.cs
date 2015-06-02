@@ -8,7 +8,7 @@ using StoreManagement.Data;
 
 namespace StoreManagement.Admin.Controllers
 {
-    [Authorize]
+
     public class RobotsController : Controller
     {
         public FileContentResult RobotsText()

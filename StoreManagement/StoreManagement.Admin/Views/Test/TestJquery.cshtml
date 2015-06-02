@@ -2,6 +2,8 @@
     ViewBag.Title = "TestJquery";
 }
 <div id="contentImages">
-    
 </div>
- @Html.Action("ImageGallery","FileManager")
+
+<img src ='@Url.Action("GetPhotoThumbnail", "Images", new { id = 286 })'/>
+<img src ='@Url.Action("WatermarkedImage", "Images", new { id = 288 })'/>
+

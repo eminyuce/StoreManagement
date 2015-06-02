@@ -85,6 +85,8 @@ namespace StoreManagement.Data.Entities
         public string PhoneNumber { get; set; }
         public DateTime CreatedDate { get { return DateTime.Now; } }
 
+
+        public string Captcha { get; set; }
     }
 
     public class RegisterModel

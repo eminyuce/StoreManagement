@@ -151,6 +151,31 @@ namespace StoreManagement.Admin.Controllers
         }
 
 
+        //controller function to generate image
+        //returns image file (through url.action in img src attribute)
+        public ActionResult GetCaptcha(string prefix, bool noisy = true)
+        {
+            var rand = new Random((int)DateTime.Now.Ticks);
+            //generate new question 
+            int a = rand.Next(10, 99);
+            int b = rand.Next(0, 9);
+            var captcha = string.Format("{0} + {1} = ?", a, b);
 
+            //store answer 
+            Session["Captcha" + prefix] = a + b;
+
+            //image stream 
+            FileContentResult img = null;
+
+            try
+            {
+                img = this.File(CaptchaHelper.GenerateCaptchaImg(captcha, true), "image/Jpeg");
+            }
+            catch (Exception e)
+            {
+            }
+
+            return img;
+        }
     }
 }

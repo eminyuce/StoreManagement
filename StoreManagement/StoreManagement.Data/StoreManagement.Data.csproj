@@ -65,6 +65,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
@@ -114,6 +115,7 @@
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\StoreCarousel.cs" />
     <Compile Include="Entities\StoreUser.cs" />
+    <Compile Include="GeneralHelper\CaptchaHelper.cs" />
     <Compile Include="GeneralHelper\FeedResult.cs" />
     <Compile Include="GeneralHelper\FilterHelper.cs" />
     <Compile Include="GeneralHelper\GeneralHelper.cs" />

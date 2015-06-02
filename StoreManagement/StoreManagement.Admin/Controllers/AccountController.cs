@@ -40,14 +40,26 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+             //validate the captcha through the session variable stored from GetCaptcha
+            if (Session["CaptchaStoreLogin"] == null || Session["CaptchaStoreLogin"].ToString() != model.Captcha)
             {
-                return RedirectToLocal(returnUrl);
+                ModelState.AddModelError("Captcha", "Wrong sum, please try again.");
+                return View(model);
             }
+            else
+            {
 
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
+                model.RememberMe = true;
+                if (ModelState.IsValid &&
+                    WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                {
+                    return RedirectToLocal(returnUrl);
+                }
+
+                // If we got this far, something failed, redisplay form
+                ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                return View(model);
+            }
         }
 
         //

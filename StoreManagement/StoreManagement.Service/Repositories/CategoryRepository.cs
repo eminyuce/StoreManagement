@@ -6,8 +6,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.CacheHelper;
+using StoreManagement.Data.HelpersModel;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data;
@@ -20,16 +22,21 @@ namespace StoreManagement.Service.Repositories
         static TypedObjectCache<List<Category>> CategoryCache
             = new TypedObjectCache<List<Category>>("categoryCache");
 
+        static TypedObjectCache<PagedList<Category>> PagingCategoryCache
+         = new TypedObjectCache<PagedList<Category>>("PagingCategoryCache");
 
-        public CategoryRepository(IStoreContext dbContext) : base(dbContext)
+
+        public CategoryRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
-            return this.FindBy(r => r.StoreId == storeId).ToList();
-
+            // return this.StoreDbContext.Categories.Where(r => r.StoreId == storeId).ToList();
+            var categories = from entry in this.FindBy(r => r.StoreId == storeId) select entry;
+            return categories.ToList();
         }
 
         public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
@@ -76,70 +83,42 @@ namespace StoreManagement.Service.Repositories
 
         public List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type)
         {
-            String key = String.Format("Content-{0}-{1}", storeId, type);
+            String key = String.Format("GetCategoriesByStoreIdFromCache-{0}-{1}", storeId, type);
             List<Category> items = null;
             CategoryCache.TryGet(key, out items);
 
-            if (items == null)
+            if (items == null && IsCacheActive)
             {
                 items = GetCategoriesByStoreId(storeId, type);
-                CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
             }
 
             return items;
         }
 
-        //public List<JsTreeNode> CreateCategoriesTree(int storeId, String type)
-        //{
-        //    var items = this.GetCategoriesByStoreIdFromCache(storeId, type);
-        //    List<JsTreeNode> tree = new List<JsTreeNode>();
-        //    CreateTreeView(tree, items);
-        //    return tree;
-        //}
- 
+        public IPagedList<Category> GetCategoryWithContents(int categoryId, int page = 1)
+        {
+            String key = String.Format("GetCategoryWithContents-{0}-{1}", categoryId, page);
+            PagedList<Category> items = null;
+            PagingCategoryCache.TryGet(key, out items);
 
-        //private void CreateTreeView(List<JsTreeNode> tree, List<Category> items)
-        //{
-        //    var roots = from s in items where s.ParentId == 0 orderby s.Ordering select s;
+            if (items == null && !IsCacheActive)
+            {
+                IQueryable<Category> cats = StoreDbContext.Categories.Where(r => r.Id == categoryId && r.Contents.Any())
+                                                          .Include(
+                                                              r =>
+                                                              r.Contents.Select(
+                                                                  r1 => r1.ContentFiles.Select(m => m.FileManager)))
+                                                          .OrderByDescending(r => r.Ordering);
 
-        //    foreach (Category a in roots)
-        //    {
-        //        JsTreeNode node = new JsTreeNode();
-        //        node.attributes = new Attributes();
-        //        node.attributes.id = "rootnod" + a.Id;
-        //        node.attributes.rel = "root" + a.Id;
-        //        node.data = new StoreManagement.Data.JsTree.Data();
-        //        node.data.title = a.Name;
-        //        node.state = "open";
-        //        node.attributes.mdata = "{draggable : false,max_children : 1, max_depth :1}";
-        //        tree.Add(node);
-        //        CreateChildTree(node, items, a);
-        //    }
+                items = new PagedList<Category>(cats, page, cats.Count());
+       
+                PagingCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
+            }
 
-        //}
-        //private void CreateChildTree(JsTreeNode parentTreeNode, List<Category> items, Category parentNode)
-        //{
-        //    var childs = from s in items where s.ParentId == parentNode.Id orderby s.Ordering select s;
-        //    if (childs.Any())
-        //    {
-        //        parentTreeNode.children = new List<JsTreeNode>();
-        //        foreach (Category a in childs)
-        //        {
-        //            JsTreeNode node = new JsTreeNode();
-        //            node.attributes = new Attributes();
-        //            node.attributes.id = "rootnod" + a.Id;
-        //            node.attributes.rel = "root" + a.Id;
-        //            node.data = new StoreManagement.Data.JsTree.Data();
-        //            node.data.title = a.Name;
-        //            node.state = "open";
-        //            node.attributes.mdata = "{draggable : true,max_children : 1,max_depth : 1 }";
-        //            parentTreeNode.children.Add(node);
-        //            CreateChildTree(node, items, a);
-        //        }
+            return items;
+        }
 
-        //    }
 
-        //}
-   
     }
 }

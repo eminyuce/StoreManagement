@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvcPaging;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.HelpersModel;
 
 namespace StoreManagement.Service.Interfaces
 {
@@ -15,7 +17,8 @@ namespace StoreManagement.Service.Interfaces
         Content GetContentByUrl(int storeId, String url);
         List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId);
         List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
-        List<Content> GetContentsCategoryId(int storeId, int categoryId, String typeName, bool? isActive);
+        IPagedList<Content> GetContentsCategoryId(int storeId, int categoryId, String typeName, bool? isActive, int page, int pageSize);
         Content GetContentWithFiles(int id);
+ 
     }
 }

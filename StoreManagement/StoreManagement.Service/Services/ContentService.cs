@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.HelpersModel;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
@@ -12,7 +14,8 @@ namespace StoreManagement.Service.Services
     public class ContentService : BaseService, IContentService
     {
         private const String ApiControllerName = "Contents";
-        public ContentService(string webServiceAddress) : base(webServiceAddress)
+        public ContentService(string webServiceAddress)
+            : base(webServiceAddress)
         {
 
         }
@@ -66,10 +69,10 @@ namespace StoreManagement.Service.Services
                 string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryId?" +
                                            "storeId={2}" +
                                            "&typeName={3}&categoryId={4}",
-                                           WebServiceAddress, 
+                                           WebServiceAddress,
                                            ApiControllerName,
-                                           storeId, 
-                                           typeName, 
+                                           storeId,
+                                           typeName,
                                            categoryId);
 
                 return RequestHelper.GetUrlResults<Content>(url);
@@ -98,20 +101,20 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public List<Content> GetContentsCategoryId(int storeId, int categoryId, String typeName, bool? isActive)
+        public IPagedList<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetContentsCategoryId?storeId={2}" +
                                            "&categoryId={3}" +
                                            "&typeName={4}" +
-                                           "&isActive={5}", WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive);
-                return RequestHelper.GetUrlResults<Content>(url);
+                                           "&isActive={5}&page={6}&pageSize={7}", WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive, page, pageSize);
+                return RequestHelper.GetUrlPagedResults<Content>(url);
             }
             catch (Exception ex)
             {
                 Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Content>();
+                return null;
             }
         }
 

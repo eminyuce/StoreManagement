@@ -1,4 +1,5 @@
 ﻿@model StoreManagement.Data.RequestModel.CategoryViewModel
+@using MvcPaging
 @using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
 @{
@@ -46,16 +47,33 @@ New Products
         <div class="well well-small">
             <h3><strong>@Model.Category.Name</strong> Products </h3>
             <div class="row">
-                @{
-                    
-                    foreach (var item in Model.Contents.OrderBy(r => r.Id).Take(12))
+
+                @if (Model.Contents.Any())
+                {
+                    foreach (var product in Model.Contents)
                     {
-                    <div class="col-md-3">
-                        @Html.DisplayFor(model => item, "ProductThumbnail")
-                    </div>
+	                    <div class="col-md-3">
+                                 @Html.DisplayFor(model => product, "ProductThumbnail")
+                         </div>
                     }
-                
+
+
+                    <div class="pager">
+                        @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount).Options(o => o
+   
+
+            .SetFirstPageText("First")
+            .SetLastPageText("Last")
+            .SetPreviousPageText("Prev")
+            .SetNextPageText("Next"))
+                        
+
+  
+
+
+                    </div>
                 }
+
             </div>
 
         </div>

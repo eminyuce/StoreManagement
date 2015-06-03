@@ -5,9 +5,11 @@ using System.Net;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
+using MvcPaging;
 using NLog;
 using Newtonsoft.Json;
 using RestSharp;
+using StoreManagement.Data.HelpersModel;
 
 namespace StoreManagement.Data.GeneralHelper
 {
@@ -170,6 +172,20 @@ namespace StoreManagement.Data.GeneralHelper
         {
             return JsonConvert.SerializeObject(arg);
         }
+        public static PagedList<T> GetUrlPagedResults<T>(string url)
+        {
+            var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
+            if (!String.IsNullOrEmpty(responseContent))
+            {
+                String jsonString = responseContent;
+                var result = JsonConvert.DeserializeObject<PagedList<T>>(jsonString);
+                return result;
+            }
+            else
+            {
+                throw new Exception("Url:" + url + "  is not working");
+            }
+        }
         public static List<T> GetUrlResults<T>(string url)
         {
             var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
@@ -181,7 +197,7 @@ namespace StoreManagement.Data.GeneralHelper
             }
             else
             {
-                return new List<T>();
+                throw new Exception("Url:" + url + "  is not working");
             }
         }
         public static T GetUrlResult<T>(string url) where T : new()
@@ -194,7 +210,7 @@ namespace StoreManagement.Data.GeneralHelper
                 return result;
             }
 
-            return new T();
+            throw new Exception("Url:" + url + "  is not working");
         }
     }
 

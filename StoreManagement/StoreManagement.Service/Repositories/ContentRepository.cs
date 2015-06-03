@@ -1,8 +1,10 @@
 ﻿using GenericRepository.EntityFramework;
+using MvcPaging;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.HelpersModel;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using System;
@@ -18,9 +20,10 @@ namespace StoreManagement.Service.Repositories
     {
 
         static TypedObjectCache<List<Content>> contentCache = new TypedObjectCache<List<Content>>("GetContentByTypeAndCategoryIdFromCache");
+        static TypedObjectCache<IPagedList<Content>> ContentCacheStorePagedList = new TypedObjectCache<IPagedList<Content>>("StorePagedListContent");
 
-
-        public ContentRepository(IStoreContext dbContext) : base(dbContext)
+        public ContentRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
         }
@@ -71,12 +74,11 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public List<Content> GetContentsCategoryId(int storeId, int categoryId, String typeName, bool? isActive)
+        public IPagedList<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-
-            String key = String.Format("GetContentsCategoryId-{0}-{1}-{2}-{3}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "");
-            List<Content> items = null;
-            contentCache.TryGet(key, out items);
+            String key = String.Format("GetContentsCategoryId-{0}-{1}-{2}-{3}-{4}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "", page);
+            IPagedList<Content> items = null;
+            ContentCacheStorePagedList.TryGet(key, out items);
 
             if (items == null)
             {
@@ -90,12 +92,16 @@ namespace StoreManagement.Service.Repositories
                     returnList = returnList.Where(r => r.State == isActive);
                 }
 
-                items = returnList.OrderByDescending(r => r.Id).ToList();
-                contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                var cat = returnList.OrderByDescending(r => r.Id).ToList();
+              //  items = new PagedList<Content>(cat, page, cat.Count());
+                items = cat.ToPagedList(page, pageSize);
+                ContentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
             }
 
             return items;
         }
+
+
         public Content GetContentWithFiles(int id)
         {
             return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);

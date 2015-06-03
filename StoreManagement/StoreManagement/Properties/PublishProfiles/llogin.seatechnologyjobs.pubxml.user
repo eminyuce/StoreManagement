@@ -114,6 +114,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
       <publishTime>06/02/2015 04:04:26</publishTime>
     </File>
+    <File Include="bin/MvcPaging.dll">
+      <publishTime>06/03/2015 17:05:43</publishTime>
+    </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>06/02/2015 04:07:01</publishTime>
     </File>
@@ -145,13 +148,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2015 09:17:20</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/02/2015 05:30:46</publishTime>
+      <publishTime>06/03/2015 17:34:20</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>06/02/2015 06:02:53</publishTime>
+      <publishTime>06/03/2015 17:34:24</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/02/2015 05:30:49</publishTime>
+      <publishTime>06/03/2015 17:34:21</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -847,7 +850,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
     <File Include="Views/Categories/Category.cshtml">
-      <publishTime>06/02/2015 04:04:19</publishTime>
+      <publishTime>06/03/2015 17:30:08</publishTime>
     </File>
     <File Include="Views/Contents/Detail.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
@@ -862,10 +865,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/02/2015 04:04:19</publishTime>
+      <publishTime>06/03/2015 13:55:34</publishTime>
     </File>
     <File Include="Views/Home/MainMenu.cshtml">
-      <publishTime>06/02/2015 04:04:19</publishTime>
+      <publishTime>06/03/2015 12:12:11</publishTime>
     </File>
     <File Include="Views/Home/RecentUpdates.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
@@ -873,8 +876,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/Test.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
+    <File Include="Views/Products/Index.cshtml">
+      <publishTime>06/03/2015 12:02:22</publishTime>
+    </File>
     <File Include="Views/Products/Product.cshtml">
-      <publishTime>06/02/2015 04:04:19</publishTime>
+      <publishTime>06/03/2015 12:01:33</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/CategoryItem.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
@@ -907,7 +913,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/02/2015 04:04:19</publishTime>
+      <publishTime>06/03/2015 13:59:17</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
@@ -919,7 +925,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/02/2015 06:02:57</publishTime>
+      <publishTime>06/03/2015 13:53:15</publishTime>
     </File>
   </ItemGroup>
 </Project>

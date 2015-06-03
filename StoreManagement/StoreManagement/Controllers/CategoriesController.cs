@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcPaging;
 using Ninject;
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
@@ -25,7 +27,7 @@ namespace StoreManagement.Controllers
             returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "product");
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetSingle(categoryId);
-            returnModel.Contents = ContentService.GetContentsCategoryId(Store.Id, categoryId, "product", true);
+            returnModel.Contents = (PagedList<Content>) ContentService.GetContentsCategoryId(Store.Id, categoryId, "product", true,page, 25);
 
 
             return View(returnModel);

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.HelpersModel;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
@@ -73,7 +75,7 @@ namespace StoreManagement.Service.Services
                 return new List<Category>();
             }
         }
- 
+
 
         public Category GetSingle(int id)
         {
@@ -86,6 +88,20 @@ namespace StoreManagement.Service.Services
             {
                 Logger.ErrorException("Error:" + ex.Message, ex);
                 return new Category();
+            }
+        }
+
+        public IPagedList<Category> GetCategoryWithContents(int categoryId, int page)
+        {
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}", WebServiceAddress, ApiControllerName, categoryId, page);
+                return RequestHelper.GetUrlPagedResults<Category>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return null;
             }
         }
     }

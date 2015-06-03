@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvcPaging;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.HelpersModel;
 
 namespace StoreManagement.Data.RequestModel
 {
@@ -12,6 +14,6 @@ namespace StoreManagement.Data.RequestModel
         public Store Store { get; set; }
         public Category Category { get; set; }
         public List<Category> Categories { get; set; }
-        public List<Content> Contents { get; set; }
+        public PagedList<Content> Contents { get; set; }
     }
 }

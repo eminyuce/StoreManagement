@@ -16,8 +16,8 @@ namespace StoreManagement.Data.Entities
         //public virtual ICollection<FileManager> FileManagers { get; set; }
         //public virtual ICollection<Content> Contents { get; set; }
 
-        public FileManager FileManager { get; set; }
-        public Content Content { get; set; }
+        public virtual FileManager FileManager { get; set; }
+     //   public virtual Content Content { get; set; }
 
 
     }

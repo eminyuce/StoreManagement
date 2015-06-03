@@ -44,13 +44,7 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public IStoreCarouselRepository StoreCarouselRepository { set; get; }
 
-        bool IsCacheActive
-        {
-            get
-            {
-                return ProjectAppSettings.GetWebConfigBool("IsCacheActive", false);
-            }
-        }
+        
 
         // GET api/<controller>
         public abstract IEnumerable<T> GetAll();

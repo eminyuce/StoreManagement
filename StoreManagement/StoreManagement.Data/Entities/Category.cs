@@ -9,6 +9,7 @@ namespace StoreManagement.Data.Entities
 {
     public class Category : IEntity 
     {
+       
         public int Id { get; set; }
         public int StoreId { get; set; }
         public int ParentId { get; set; }
@@ -19,5 +20,10 @@ namespace StoreManagement.Data.Entities
         public bool State { get; set; }
 
         public virtual ICollection<Content> Contents { get; set; }
+
+
+      
+
+         
     }
 }

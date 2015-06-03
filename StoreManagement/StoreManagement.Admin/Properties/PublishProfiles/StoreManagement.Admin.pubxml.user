@@ -153,6 +153,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
       <publishTime>06/02/2015 04:04:26</publishTime>
     </File>
+    <File Include="bin/MvcPaging.dll">
+      <publishTime>06/03/2015 15:48:25</publishTime>
+    </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>06/02/2015 04:07:01</publishTime>
     </File>
@@ -190,16 +193,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:35</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/03/2015 13:00:39</publishTime>
+      <publishTime>06/03/2015 16:02:17</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/03/2015 12:10:57</publishTime>
+      <publishTime>06/03/2015 14:42:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/03/2015 13:00:13</publishTime>
+      <publishTime>06/03/2015 14:42:47</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/02/2015 04:04:29</publishTime>
@@ -4921,7 +4924,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:10</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/02/2015 09:14:49</publishTime>
+      <publishTime>06/03/2015 14:45:07</publishTime>
     </File>
   </ItemGroup>
 </Project>

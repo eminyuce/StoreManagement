@@ -2,6 +2,8 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using MvcPaging;
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
@@ -60,13 +62,38 @@ namespace StoreManagement.Test
 
         }
         [TestMethod]
+        public void TestGetContentsCategoryId()
+        {
+            ContentRepository rep = new ContentRepository(dbContext);
+            IPagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1,25);
+            foreach (var content in m)
+            {
+                Console.WriteLine(content);
+            }
+
+
+
+        }
+            
+        [TestMethod]
+        public void TestContentService()
+        {
+            ContentService rep = new ContentService("yuce.marinelink.org");
+            IPagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1,25);
+            foreach (var content in m)
+            {
+                Console.WriteLine(content);
+            }
+
+
+
+        }
+        [TestMethod]
         public void TestGetCategoriesByStoreIds()
         {
             CategoryRepository rep = new CategoryRepository(dbContext);
-            foreach (var s in rep.GetCategoriesByStoreId(2))
-            {
-                Console.WriteLine(s.StoreId);
-            }
+            var m = rep.GetCategoryWithContents(1, 1);
+
 
         }
         [TestMethod]

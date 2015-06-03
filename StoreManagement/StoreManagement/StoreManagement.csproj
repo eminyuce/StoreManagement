@@ -225,19 +225,24 @@
     <Compile Include="Controllers\BaseController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ContentsController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\CssController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -493,12 +498,18 @@
     <Content Include="Views\Shared\DisplayTemplates\ProductThumbnail.cshtml" />
     <Content Include="Views\Products\Product.cshtml" />
     <Content Include="Views\Shared\pRelatedContent.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Blogs\" />
+    <Folder Include="Views\Contact\" />
+    <Folder Include="Views\Events\" />
     <Folder Include="Views\Images\" />
     <Folder Include="Views\Navigations\" />
+    <Folder Include="Views\News\" />
+    <Folder Include="Views\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

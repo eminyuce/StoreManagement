@@ -111,5 +111,10 @@ namespace StoreManagement.API.Controllers
         {
             return this.NavigationRepository.GetStoreNavigations(storeId);
         }
+
+        public List<Navigation> GetStoreActiveNavigations(int storeId)
+        {
+            return this.NavigationRepository.GetStoreActiveNavigations(storeId);
+        }
     }
 }

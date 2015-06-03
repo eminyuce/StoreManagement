@@ -12,18 +12,15 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class FileManagerRepository : EntityRepository<FileManager, int>, IFileManagerRepository
+    public class FileManagerRepository : BaseRepository<FileManager, int>, IFileManagerRepository
     {
 
         static TypedObjectCache<List<FileManager>> CategoryCache
       = new TypedObjectCache<List<FileManager>>("StoreFileManager");
 
 
-        private IStoreContext dbContext;
-        public FileManagerRepository(IStoreContext dbContext)
-            : base(dbContext)
+        public FileManagerRepository(IStoreContext dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
         }
 
         public List<FileManager> GetFilesByStoreIdFromCache(int storeId)

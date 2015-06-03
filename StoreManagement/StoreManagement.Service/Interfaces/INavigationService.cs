@@ -10,5 +10,6 @@ namespace StoreManagement.Service.Interfaces
     public interface INavigationService : IService
     {
         List<Navigation> GetStoreNavigations(int storeId);
+        List<Navigation> GetStoreActiveNavigations(int storeId);
     }
 }

@@ -10,16 +10,12 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class StoreUserRepository : EntityRepository<StoreUser, int>, IStoreUserRepository
+    public class StoreUserRepository : BaseRepository<StoreUser, int>, IStoreUserRepository
     {
-        private IStoreContext dbContext;
-        public StoreUserRepository(IStoreContext dbContext)
-            : base(dbContext)
+        public StoreUserRepository(IStoreContext dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
+
         }
-
-
     }
 
 

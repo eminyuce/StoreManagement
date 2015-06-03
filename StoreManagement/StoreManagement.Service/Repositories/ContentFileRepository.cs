@@ -10,14 +10,13 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class ContentFileRepository : EntityRepository<ContentFile, int>, IContentFileRepository
+    public class ContentFileRepository : BaseRepository<ContentFile, int>, IContentFileRepository
     {
-        private IStoreContext dbContext;
-        public ContentFileRepository(IStoreContext dbContext)
-            : base(dbContext)
+        public ContentFileRepository(IStoreContext dbContext) : base(dbContext)
         {
-            this.dbContext =  dbContext;
+
         }
+
         public List<ContentFile> GetContentByContentId(int contentId)
         {
             return this.GetAllIncluding(r => r.FileManager).Where(r => r.ContentId == contentId).ToList();

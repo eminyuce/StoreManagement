@@ -14,21 +14,18 @@ using StoreManagement.Data;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class CategoryRepository : EntityRepository<Category, int>, ICategoryRepository
+    public class CategoryRepository : BaseRepository<Category, int>, ICategoryRepository
     {
 
         static TypedObjectCache<List<Category>> CategoryCache
             = new TypedObjectCache<List<Category>>("categoryCache");
 
 
-
-        private IStoreContext dbContext;
-        public CategoryRepository(IStoreContext dbContext)
-            : base(dbContext)
+        public CategoryRepository(IStoreContext dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
+
         }
-       
+
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
             return this.FindBy(r => r.StoreId == storeId).ToList();
@@ -51,7 +48,7 @@ namespace StoreManagement.Service.Repositories
             //    .Take(10);
 
             //return mmm.ToList();
-            return dbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
+            return StoreDbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
                 .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
                 .OrderByDescending(r => r.Ordering).Take(10).ToList();
         }
@@ -143,5 +140,6 @@ namespace StoreManagement.Service.Repositories
         //    }
 
         //}
+   
     }
 }

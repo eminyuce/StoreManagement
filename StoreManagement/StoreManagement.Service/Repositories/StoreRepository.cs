@@ -15,20 +15,25 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class StoreRepository : EntityRepository<Store, int>, IStoreRepository
+    public class StoreRepository : BaseRepository<Store, int>, IStoreRepository
     {
-        private IStoreContext dbContext;
+  
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static string defaultlayout = "~/Views/Shared/Layouts/{0}.cshtml";
-
-        static TypedObjectCache<Store> StoreCache = new TypedObjectCache<Store>("StoreCache");
 
 
         public StoreRepository(IStoreContext dbContext)
             : base(dbContext)
         {
-            this.dbContext = dbContext;
+
         }
+
+
+
+        static TypedObjectCache<Store> StoreCache = new TypedObjectCache<Store>("StoreCache");
+
+
+        
 
         public Store GetStoreByDomain(string domainName)
         {

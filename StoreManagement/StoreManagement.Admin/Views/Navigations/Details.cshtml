@@ -32,15 +32,7 @@
         @Html.DisplayFor(model => model.Name)
     </div>
     }
-    if (!String.IsNullOrEmpty(Model.ActionName))
-    { 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.ActionName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ActionName)
-    </div>
-    }
+    
     if (!String.IsNullOrEmpty(Model.ControllerName))
     { 
     <div class="display-label">

@@ -19,13 +19,13 @@ namespace StoreManagement.Test
         [TestInitialize]
         public void MyTestInitialize()
         {
-            //dbContext = new StoreContext(ConnectionString);
+            dbContext = new StoreContext(ConnectionString);
         }
         [TestMethod]
         public void TestApiCall2()
         {
             var s = new CategoryService("yuce.marinelink.org");
-            var m = s.GetCategoriesByStoreId(1);
+            var m = s.GetCategoriesByStoreId(2);
             foreach (var q in m)
             {
                 Console.WriteLine(q.Id);
@@ -59,7 +59,16 @@ namespace StoreManagement.Test
             }
 
         }
+        [TestMethod]
+        public void TestGetCategoriesByStoreIds()
+        {
+            CategoryRepository rep = new CategoryRepository(dbContext);
+            foreach (var s in rep.GetCategoriesByStoreId(2))
+            {
+                Console.WriteLine(s.StoreId);
+            }
 
+        }
         [TestMethod]
         public void DomainName()
         {
@@ -67,6 +76,16 @@ namespace StoreManagement.Test
             var store = storeRep.GetStoreByDomain("login.maritimejobs.mobi");
 
             Assert.IsNotNull(store);
+
+        }
+        [TestMethod]
+        public void TestNavigationRepositorys()
+        {
+            NavigationRepository rep = new NavigationRepository(dbContext);
+            foreach (var s in rep.GetAll())
+            {
+                Console.WriteLine(s.StoreId);
+            }
 
         }
         [TestMethod]

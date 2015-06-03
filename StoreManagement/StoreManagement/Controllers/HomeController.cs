@@ -39,7 +39,7 @@ namespace StoreManagement.Controllers
         }
         public ActionResult MainMenu()
         {
-            var mainMenu = NavigationService.GetStoreNavigations(Store.Id);
+            var mainMenu = NavigationService.GetStoreActiveNavigations(Store.Id);
             return View(mainMenu);
         }
         public ActionResult Footer()

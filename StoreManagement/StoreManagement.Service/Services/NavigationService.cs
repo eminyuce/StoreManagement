@@ -49,5 +49,19 @@ namespace StoreManagement.Service.Services
                 return new List<Navigation>();
             }
         }
+
+        public List<Navigation> GetStoreActiveNavigations(int storeId)
+        {
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                return RequestHelper.GetUrlResults<Navigation>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<Navigation>();
+            }
+        }
     }
 }

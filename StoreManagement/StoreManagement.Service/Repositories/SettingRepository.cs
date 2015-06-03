@@ -13,19 +13,20 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class SettingRepository : EntityRepository<Setting, int>, ISettingRepository
+    public class SettingRepository : BaseRepository<Setting, int>, ISettingRepository
     {
         static TypedObjectCache<List<Setting>> SettingStoreCache
             = new TypedObjectCache<List<Setting>>("categoryCache");
 
-        private IStoreContext dbContext;
+
         public SettingRepository(IStoreContext dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
+
         }
+
         public List<Setting> GetStoreSettings(int storeid)
         {
-            var items =  dbContext.Settings.Where(r => r.StoreId == storeid).ToList();
+            var items = StoreDbContext.Settings.Where(r => r.StoreId == storeid).ToList();
 
             return items;
         }

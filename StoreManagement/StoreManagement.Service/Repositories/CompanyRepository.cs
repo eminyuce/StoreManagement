@@ -19,13 +19,12 @@ using System.Reflection;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class CompanyRepository : EntityRepository<Company, int>, ICompanyRepository
+    public class CompanyRepository : BaseRepository<Company, int>, ICompanyRepository
     {
-        private StoreContext dbContext;
-        public CompanyRepository(IStoreContext dbContext)
-            : base(dbContext)
+        private StoreContext storeContext;
+        public CompanyRepository(IStoreContext dbContext) : base(dbContext)
         {
-            this.dbContext = (StoreContext)dbContext;
+            storeContext = (StoreContext)dbContext;
         }
 
         public static ItemType Company
@@ -69,7 +68,7 @@ namespace StoreManagement.Service.Repositories
             }
 
             // Create a SQL command to execute the sproc 
-            using (SqlCommand cmd = (SqlCommand)dbContext.Database.Connection.CreateCommand())
+            using (SqlCommand cmd = (SqlCommand)storeContext.Database.Connection.CreateCommand())
             {
                 cmd.CommandText = "dbo.SearchCompanies";
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -82,7 +81,7 @@ namespace StoreManagement.Service.Repositories
                 try
                 {
 
-                    dbContext.Database.Connection.Open();
+                    storeContext.Database.Connection.Open();
                     var reader = cmd.ExecuteReader();
                     List<Company> companyList = MapToListHelper.DataReaderMapToList<Company>(reader);
                     result.Companies = companyList;
@@ -100,7 +99,7 @@ namespace StoreManagement.Service.Repositories
                 }
                 finally
                 {
-                    dbContext.Database.Connection.Close();
+                    storeContext.Database.Connection.Close();
                 }
             }
            

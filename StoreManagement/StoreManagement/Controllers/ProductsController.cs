@@ -12,11 +12,18 @@ namespace StoreManagement.Controllers
 {
     public class ProductsController : BaseController
     {
+
+        public ActionResult Index()
+        {
+            var returnModel = new ProductsViewModel();
+
+            return View(returnModel);
+        }
         //
         // GET: /Products/
         public ActionResult Product(String id)
         {
-            var returnModel = new ProductViewModel();
+            var returnModel = new ProductDetailViewModel();
             int productId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Content = ContentService.GetContentsContentId(productId);
             returnModel.Store = Store;

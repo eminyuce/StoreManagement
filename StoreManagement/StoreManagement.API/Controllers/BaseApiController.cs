@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Ninject;
 using NLog;
+using StoreManagement.Data;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.API.Controllers
@@ -43,7 +44,13 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public IStoreCarouselRepository StoreCarouselRepository { set; get; }
 
-
+        bool IsCacheActive
+        {
+            get
+            {
+                return ProjectAppSettings.GetWebConfigBool("IsCacheActive", false);
+            }
+        }
 
         // GET api/<controller>
         public abstract IEnumerable<T> GetAll();

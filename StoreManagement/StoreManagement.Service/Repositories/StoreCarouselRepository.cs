@@ -12,17 +12,15 @@ using StoreManagement.Data.CacheHelper;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class StoreCarouselRepository : EntityRepository<StoreCarousel, int>, IStoreCarouselRepository
+    public class StoreCarouselRepository : BaseRepository<StoreCarousel, int>, IStoreCarouselRepository
     {
 
         static TypedObjectCache<List<StoreCarousel>> StoreCarousels
         = new TypedObjectCache<List<StoreCarousel>>("StoreCarouselsCache");
 
 
-        private IStoreContext dbContext;
         public StoreCarouselRepository(IStoreContext dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
         }
 
         public List<StoreCarousel> GetStoreCarousels(int storeId)

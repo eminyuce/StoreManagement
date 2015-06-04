@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.HelpersModel;
+using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Service.Interfaces
 {
@@ -13,7 +13,7 @@ namespace StoreManagement.Service.Interfaces
         List<Category> GetCategoriesByStoreId(int storeId, String type);
         List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type);
         Category GetSingle(int id);
-        IPagedList<Category> GetCategoryWithContents(int categoryId, int page);
+        StorePagedList<Category> GetCategoryWithContents(int categoryId, int page);
     }
 
 }

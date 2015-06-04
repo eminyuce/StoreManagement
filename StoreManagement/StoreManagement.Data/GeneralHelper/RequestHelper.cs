@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using MvcPaging;
 using NLog;
-using Newtonsoft.Json;
 using RestSharp;
+using ServiceStack.Text;
 using StoreManagement.Data.HelpersModel;
+using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Data.GeneralHelper
 {
@@ -170,15 +171,23 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static string ConvertObjectToJason<T>(T arg)
         {
-            return JsonConvert.SerializeObject(arg);
+           // return JsonConvert.SerializeObject(arg);
+
+            var jsonSer = new JsonSerializer<T>();
+            var result = jsonSer.SerializeToString(arg);
+            return result;
+
+
         }
-        public static PagedList<T> GetUrlPagedResults<T>(string url)
+        public static StorePagedList<T> GetUrlPagedResults<T>(string url)
         {
             var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))
             {
                 String jsonString = responseContent;
-                var result = JsonConvert.DeserializeObject<PagedList<T>>(jsonString);
+                //var result = JsonConvert.DeserializeObject<StorePagedList<T>>(jsonString);
+                var jsonSer = new JsonSerializer<StorePagedList<T>>();
+                var result = jsonSer.DeserializeFromString(jsonString);
                 return result;
             }
             else
@@ -192,7 +201,8 @@ namespace StoreManagement.Data.GeneralHelper
             if (!String.IsNullOrEmpty(responseContent))
             {
                 String jsonString = responseContent;
-                var result = JsonConvert.DeserializeObject<List<T>>(jsonString);
+                var jsonSer = new JsonSerializer<List<T>>();
+                var result = jsonSer.DeserializeFromString(jsonString);
                 return result;
             }
             else
@@ -206,7 +216,8 @@ namespace StoreManagement.Data.GeneralHelper
             if (!String.IsNullOrEmpty(responseContent))
             {
                 String jsonString = responseContent;
-                var result = JsonConvert.DeserializeObject<T>(jsonString);
+                var jsonSer = new JsonSerializer<T>();
+                var result = jsonSer.DeserializeFromString(jsonString);
                 return result;
             }
 

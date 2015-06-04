@@ -1,5 +1,4 @@
-﻿using MvcPaging;
-using StoreManagement.Data.Entities;
+﻿using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -8,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using StoreManagement.Data.HelpersModel;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
@@ -132,7 +132,7 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetSingle(id);
         }
 
-        public IPagedList<Category> GetCategoryWithContents(int categoryId, int page)
+        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page)
         {
             return CategoryRepository.GetCategoryWithContents(categoryId, page);
         }

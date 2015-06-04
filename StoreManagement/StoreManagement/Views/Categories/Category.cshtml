@@ -57,21 +57,16 @@ New Products
                          </div>
                     }
 
-
-                    <div class="pager">
-                        @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount).Options(o => o
-   
-
-            .SetFirstPageText("First")
-            .SetLastPageText("Last")
-            .SetPreviousPageText("Prev")
-            .SetNextPageText("Next"))
-                        
+                    @Model.Contents.TotalItemCount
+                  
+                       <div class="pager">
+    @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount)
+</div>
 
   
 
 
-                    </div>
+                     
                 }
 
             </div>

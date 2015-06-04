@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
@@ -91,7 +91,7 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public IPagedList<Category> GetCategoryWithContents(int categoryId, int page)
+        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page)
         {
             try
             {

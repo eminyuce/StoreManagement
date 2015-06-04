@@ -1,5 +1,4 @@
-﻿using MvcPaging;
-using StoreManagement.Data.Entities;
+﻿using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,6 +10,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using StoreManagement.Data.HelpersModel;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
@@ -134,9 +134,11 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentByTypeAndCategoryIdFromCache(storeId, typeName, categoryId);
         }
 
-        public IPagedList<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public StorePagedList<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            return this.ContentRepository.GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize);
+            var items =  this.ContentRepository.GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize);
+
+            return items;
         }
 
         public Content GetContentWithFiles(int id)

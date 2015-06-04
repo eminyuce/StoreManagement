@@ -6,10 +6,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
-using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.HelpersModel;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data;
@@ -22,8 +22,8 @@ namespace StoreManagement.Service.Repositories
         static TypedObjectCache<List<Category>> CategoryCache
             = new TypedObjectCache<List<Category>>("categoryCache");
 
-        static TypedObjectCache<PagedList<Category>> PagingCategoryCache
-         = new TypedObjectCache<PagedList<Category>>("PagingCategoryCache");
+        static TypedObjectCache<StorePagedList<Category>> PagingCategoryCache
+         = new TypedObjectCache<StorePagedList<Category>>("PagingCategoryCache");
 
 
         public CategoryRepository(IStoreContext dbContext)
@@ -96,10 +96,10 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public IPagedList<Category> GetCategoryWithContents(int categoryId, int page = 1)
+        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page = 1)
         {
             String key = String.Format("GetCategoryWithContents-{0}-{1}", categoryId, page);
-            PagedList<Category> items = null;
+            StorePagedList<Category> items = null;
             PagingCategoryCache.TryGet(key, out items);
 
             if (items == null && !IsCacheActive)
@@ -111,8 +111,10 @@ namespace StoreManagement.Service.Repositories
                                                                   r1 => r1.ContentFiles.Select(m => m.FileManager)))
                                                           .OrderByDescending(r => r.Ordering);
 
-                items = new PagedList<Category>(cats, page, cats.Count());
-       
+                var c = cats.ToList();
+                items = new StorePagedList<Category>(c, page, c.Count());
+                //items = new PagedList<Category>(cats, page, cats.Count());
+
                 PagingCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
             }
 

@@ -12,6 +12,12 @@ namespace StoreManagement.Data.Entities
 {
     public class Content : IEntity 
     {
+
+        public Content()
+        {
+            
+        }
+
         public int Id { get; set; }
         public int StoreId { get; set; }
         public int CategoryId { get; set; }

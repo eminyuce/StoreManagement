@@ -2,9 +2,10 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using MvcPaging;
+using Newtonsoft.Json;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -45,7 +46,13 @@ namespace StoreManagement.Test
                 Console.WriteLine(q.Id);
             }
         }
-
+        [TestMethod]
+        public void TestJsonText()
+        {
+            String json = File.ReadAllText(@"C:\Users\Yuce\Desktop\Providers\testJsonText.txt");
+            var result = JsonConvert.DeserializeObject<StorePagedList<Content>>(json);
+            Console.WriteLine(result.items.Count);
+        }
         [TestMethod]
         public void ParseJson()
         {
@@ -65,11 +72,13 @@ namespace StoreManagement.Test
         public void TestGetContentsCategoryId()
         {
             ContentRepository rep = new ContentRepository(dbContext);
-            IPagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1,25);
-            foreach (var content in m)
-            {
-                Console.WriteLine(content);
-            }
+            StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
+           // var p = m.PageCount2;
+            
+            //foreach (var content in m)
+            //{
+            //    Console.WriteLine(content);
+            //}
 
 
 
@@ -79,11 +88,12 @@ namespace StoreManagement.Test
         public void TestContentService()
         {
             ContentService rep = new ContentService("yuce.marinelink.org");
-            IPagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1,25);
-            foreach (var content in m)
-            {
-                Console.WriteLine(content);
-            }
+            StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
+            //var p = m.PageCount2;
+            //foreach (var content in m)
+            //{
+            //    Console.WriteLine(content);
+            //}
 
 
 

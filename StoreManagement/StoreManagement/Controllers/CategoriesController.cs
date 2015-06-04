@@ -20,14 +20,15 @@ namespace StoreManagement.Controllers
         {
             return View();
         }
-        public ActionResult Category(String id, int page = 1)
+        public ActionResult Category(String id, int page = 7)
         {
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "product");
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetSingle(categoryId);
-            returnModel.Contents = (PagedList<Content>) ContentService.GetContentsCategoryId(Store.Id, categoryId, "product", true,page, 25);
+            var m = ContentService.GetContentsCategoryId(Store.Id, categoryId, "product", true, page, 25);
+            returnModel.Contents = new PagedList<Content>(m.items, m.page, m.pageSize, m.totalItemCount);
 
 
             return View(returnModel);

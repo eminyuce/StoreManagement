@@ -628,3 +628,12 @@ hr.soften {
     font-size: 12px;
     text-transform: lowercase;
 }
+.pager a {
+  border: 1px solid #aaa;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.pager span, .pager a {
+  margin: 4px 3px;
+}

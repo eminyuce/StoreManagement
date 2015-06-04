@@ -24,7 +24,7 @@ namespace StoreManagement.Data.GeneralHelper
             get { return _cacheSecond; }
             set { _cacheSecond = value; }
         }
-        public static String GetJsonFromCacheOrWebservice(string url)
+        public  String GetJsonFromCacheOrWebservice(string url)
         {
 
             String returnJson = String.Empty;
@@ -44,7 +44,7 @@ namespace StoreManagement.Data.GeneralHelper
             return returnJson;
         }
 
-        public static string MakeJsonRequest(string url)
+        public  string MakeJsonRequest(string url)
         {
             string returnJson = String.Empty;
             var client = new RestClient(url);
@@ -73,7 +73,7 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return returnJson;
         }
-        private static string CacheResponseOutput(string key, String responseContent)
+        private  string CacheResponseOutput(string key, String responseContent)
         {
             var ret = (String)MemoryCache.Default.Get(key);
             if (String.IsNullOrEmpty(ret))
@@ -91,7 +91,7 @@ namespace StoreManagement.Data.GeneralHelper
             return ret;
         }
 
-        private static void ContentCacheUpdateCallback(CacheEntryUpdateArguments arguments)
+        private  void ContentCacheUpdateCallback(CacheEntryUpdateArguments arguments)
         {
             if (arguments.RemovedReason == CacheEntryRemovedReason.Expired)
             {
@@ -101,7 +101,7 @@ namespace StoreManagement.Data.GeneralHelper
                 {
                     String url = expiredCacheItem.Key;
                     Logger.Info(String.Format("Return From ContentCacheUpdateCallback {0}", url));
-                    var ret = RequestHelper.GetJsonFromCacheOrWebservice(url);
+                    var ret = GetJsonFromCacheOrWebservice(url);
 
                     expiredCacheItem.Value = ret;
 
@@ -125,7 +125,7 @@ namespace StoreManagement.Data.GeneralHelper
 
         }
 
-        public static IRestResponse PostBasicAuthenication(string baseUrl, string resourceUrl, string userName, string password, string json)
+        public  IRestResponse PostBasicAuthenication(string baseUrl, string resourceUrl, string userName, string password, string json)
         {
             var client = new RestClient(baseUrl);
             client.Authenticator = new HttpBasicAuthenticator(userName, password);
@@ -136,7 +136,7 @@ namespace StoreManagement.Data.GeneralHelper
         }
 
 
-        public static String GetPostJsonFromCacheOrWebservice(string baseUrl, string apiAddress, string json)
+        public  String GetPostJsonFromCacheOrWebservice(string baseUrl, string apiAddress, string json)
         {
             String url = String.Format("Post:{0}/{1}", baseUrl, apiAddress);
             String returnJson = String.Empty;
@@ -160,7 +160,7 @@ namespace StoreManagement.Data.GeneralHelper
 
             return returnJson;
         }
-        public static IRestResponse MakeJsonPost(string baseUrl, string resourceUrl, string json)
+        public  IRestResponse MakeJsonPost(string baseUrl, string resourceUrl, string json)
         {
             var client = new RestClient(baseUrl);
             var request = new RestRequest(resourceUrl, Method.POST);
@@ -169,7 +169,7 @@ namespace StoreManagement.Data.GeneralHelper
             return client.Execute(request);
         }
 
-        public static string ConvertObjectToJason<T>(T arg)
+        public  string ConvertObjectToJason<T>(T arg)
         {
            // return JsonConvert.SerializeObject(arg);
 
@@ -179,9 +179,9 @@ namespace StoreManagement.Data.GeneralHelper
 
 
         }
-        public static StorePagedList<T> GetUrlPagedResults<T>(string url)
+        public StorePagedList<T>  GetUrlPagedResults<T>(string url) where T : new()
         {
-            var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
+            var responseContent = GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))
             {
                 String jsonString = responseContent;
@@ -195,9 +195,9 @@ namespace StoreManagement.Data.GeneralHelper
                 throw new Exception("Url:" + url + "  is not working");
             }
         }
-        public static List<T> GetUrlResults<T>(string url)
+        public  List<T> GetUrlResults<T>(string url)
         {
-            var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
+            var responseContent = GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))
             {
                 String jsonString = responseContent;
@@ -210,9 +210,9 @@ namespace StoreManagement.Data.GeneralHelper
                 throw new Exception("Url:" + url + "  is not working");
             }
         }
-        public static T GetUrlResult<T>(string url) where T : new()
+        public  T GetUrlResult<T>(string url) where T : new()
         {
-            var responseContent = RequestHelper.GetJsonFromCacheOrWebservice(url);
+            var responseContent = GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))
             {
                 String jsonString = responseContent;

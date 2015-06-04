@@ -93,7 +93,7 @@ namespace StoreManagement.Service.Repositories
                 }
 
                 var cat = returnList.OrderByDescending(r => r.Id).ToList();
-                items = new StorePagedList<Content>(cat, page, pageSize, cat.Count());
+                items = new StorePagedList<Content>(cat.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, cat.Count());
                 //  items = new PagedList<Content>(cat, page, cat.Count());
                 //  items = (PagedList<Content>) cat.ToPagedList(page, pageSize);
                 ContentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));

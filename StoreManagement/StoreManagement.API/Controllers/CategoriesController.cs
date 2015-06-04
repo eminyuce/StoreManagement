@@ -132,9 +132,9 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetSingle(id);
         }
 
-        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page)
+        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize)
         {
-            return CategoryRepository.GetCategoryWithContents(categoryId, page);
+            return CategoryRepository.GetCategoryWithContents(categoryId, page, pageSize);
         }
     }
 }

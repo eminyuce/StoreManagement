@@ -50,7 +50,8 @@ namespace StoreManagement.Test
         public void TestJsonText()
         {
             String json = File.ReadAllText(@"C:\Users\Yuce\Desktop\Providers\testJsonText.txt");
-            var result = JsonConvert.DeserializeObject<StorePagedList<Content>>(json);
+            RequestHelper r = new RequestHelper();
+            var result = r.GetUrlPagedResults<Content>("http://yuce.marinelink.org/api/Contents/GetContentsCategoryId?storeId=2&categoryId=1&typeName=product&isActive=True&page=4&pageSize=25");
             Console.WriteLine(result.items.Count);
         }
         [TestMethod]

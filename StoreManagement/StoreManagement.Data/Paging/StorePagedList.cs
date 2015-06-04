@@ -12,7 +12,7 @@ namespace StoreManagement.Data.Paging
     /// </summary>
     /// <typeparam name="T"></typeparam>
     // [Serializable]
-    public class StorePagedList<T>  
+    public class StorePagedList<T> where T : new()
     {
 
         public StorePagedList()
@@ -28,13 +28,13 @@ namespace StoreManagement.Data.Paging
         /// <param name="pageSize">(optional) The size of the page</param>
         public StorePagedList(List<T> list, int page = 0, int pageSize = 0, int totalItemCount = 0)
         {
-            items = list;
             this.page = page;
             this.pageSize = pageSize;
             this.totalItemCount = totalItemCount;
+            this.items = list;
         }
 
-        private List<T> _list   { set; get; }
+        private List<T> _list { set; get; }
 
         /// <summary>
         /// The paginated result
@@ -44,7 +44,8 @@ namespace StoreManagement.Data.Paging
             get
             {
                 if (_list == null) return null;
-                return _list.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                return _list;
+                //   return _list.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }
             set { _list = value; }
         }

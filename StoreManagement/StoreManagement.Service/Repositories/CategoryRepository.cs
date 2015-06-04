@@ -96,7 +96,7 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page = 1)
+        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page = 1, int pageSize=25)
         {
             String key = String.Format("GetCategoryWithContents-{0}-{1}", categoryId, page);
             StorePagedList<Category> items = null;
@@ -112,7 +112,7 @@ namespace StoreManagement.Service.Repositories
                                                           .OrderByDescending(r => r.Ordering);
 
                 var c = cats.ToList();
-                items = new StorePagedList<Category>(c, page, c.Count());
+                items = new StorePagedList<Category>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
                 //items = new PagedList<Category>(cats, page, cats.Count());
 
                 PagingCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));

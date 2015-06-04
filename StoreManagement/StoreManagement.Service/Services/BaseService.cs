@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Service.Services
 {
@@ -11,10 +12,19 @@ namespace StoreManagement.Service.Services
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected string WebServiceAddress { get; set; }
-        protected BaseService(String webServiceAddress)
+
+
+        protected RequestHelper RequestHelper;
+        public BaseService()
+        {
+            RequestHelper = new RequestHelper();
+        }
+
+        protected BaseService(String webServiceAddress):this()
         {
             WebServiceAddress = webServiceAddress;
         }
 
+       
     }
 }

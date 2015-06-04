@@ -91,11 +91,11 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page)
+        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize = 25)
         {
             try
             {
-                string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}", WebServiceAddress, ApiControllerName, categoryId, page);
+                string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
                 return RequestHelper.GetUrlPagedResults<Category>(url);
             }
             catch (Exception ex)

@@ -239,6 +239,7 @@
     <Compile Include="Controllers\CssController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>
@@ -246,6 +247,7 @@
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -502,17 +504,24 @@
     <Content Include="Views\Products\Product.cshtml" />
     <Content Include="Views\Shared\pRelatedContent.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Pages\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Blogs\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
+    <Content Include="Views\Photos\Index.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\MethodNotAllowed.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Blogs\" />
-    <Folder Include="Views\Contact\" />
-    <Folder Include="Views\Events\" />
-    <Folder Include="Views\Images\" />
     <Folder Include="Views\Navigations\" />
-    <Folder Include="Views\News\" />
-    <Folder Include="Views\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

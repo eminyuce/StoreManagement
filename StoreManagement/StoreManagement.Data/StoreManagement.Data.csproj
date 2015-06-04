@@ -130,6 +130,7 @@
     <Compile Include="GeneralHelper\SimpleAES.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
     <Compile Include="Grid\CompanyGrid.cs" />
+    <Compile Include="HelpersModel\ErrorModel.cs" />
     <Compile Include="HelpersModel\Filter.cs" />
     <Compile Include="HelpersModel\FilterGroup.cs" />
     <Compile Include="HelpersModel\ItemType.cs" />

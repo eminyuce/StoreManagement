@@ -60,8 +60,17 @@ New Products
                     @Model.Contents.TotalItemCount
                   
                        <div class="pager">
-    @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount)
-</div>
+ 
+                           
+                           @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount).Options(o => o
+			.DisplayTemplate("BootstrapPagination")
+			.MaxNrOfPages(7)
+			.AlwaysAddFirstPageNumber()
+			.SetPreviousPageText("←")
+			.SetNextPageText("→"))
+                           
+
+                       </div>
 
   
 

@@ -156,7 +156,10 @@ namespace StoreManagement.Admin.Controllers
             m.Value = "Contact";
             m.Text = "Contact";
             moduls.Add(m);
-
+            m = new SelectListItem();
+            m.Value = "Photos";
+            m.Text = "Photo Gallery";
+            moduls.Add(m);
             var sList = new SelectList(moduls, "Value", "Text");
 
 

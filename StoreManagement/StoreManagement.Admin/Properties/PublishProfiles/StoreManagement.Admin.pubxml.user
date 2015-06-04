@@ -154,7 +154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:26</publishTime>
     </File>
     <File Include="bin/MvcPaging.dll">
-      <publishTime>06/03/2015 17:05:43</publishTime>
+      <publishTime>06/03/2015 22:45:44</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>06/02/2015 04:07:01</publishTime>
@@ -192,17 +192,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/ru/System.Spatial.resources.dll">
       <publishTime>06/02/2015 04:04:35</publishTime>
     </File>
+    <File Include="bin/ServiceStack.Text.dll">
+      <publishTime>06/04/2015 09:45:43</publishTime>
+    </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/03/2015 21:57:36</publishTime>
+      <publishTime>06/04/2015 15:18:08</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/03/2015 17:34:20</publishTime>
+      <publishTime>06/04/2015 12:59:05</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/03/2015 14:42:47</publishTime>
+      <publishTime>06/04/2015 12:59:06</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/02/2015 04:04:29</publishTime>
@@ -4720,7 +4723,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2015 17:53:43</publishTime>
     </File>
     <File Include="Views/Navigations/Index.cshtml">
-      <publishTime>06/02/2015 04:04:09</publishTime>
+      <publishTime>06/04/2015 14:02:12</publishTime>
     </File>
     <File Include="Views/Navigations/SaveOrEdit.cshtml">
       <publishTime>06/03/2015 11:54:33</publishTime>
@@ -4762,7 +4765,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/18/2015 10:55:00</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>06/02/2015 16:04:58</publishTime>
+      <publishTime>06/04/2015 14:44:38</publishTime>
     </File>
     <File Include="Views/Products/SaveOrEdit.cshtml">
       <publishTime>06/02/2015 04:53:57</publishTime>
@@ -4924,7 +4927,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:10</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/03/2015 14:45:07</publishTime>
+      <publishTime>06/04/2015 14:03:58</publishTime>
     </File>
   </ItemGroup>
 </Project>

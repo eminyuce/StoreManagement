@@ -7,6 +7,7 @@
     ViewBag.Title = "Index";
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
+    var controllerName = "Products";
 }
 
 
@@ -24,7 +25,7 @@
 
 
                 <div>
-                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Products" })
+                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = controllerName })
                 </div>
 
 
@@ -32,7 +33,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <span class="col-md-3">
-                                @Html.ActionLink("Create", "SaveOrEdit", "Products", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
+                                @Html.ActionLink("Create", "SaveOrEdit", controllerName, new { id = 0 }, new { @class = "btn btn-primary btn-block" })
                             </span>
                             <span class="col-md-9">
                                 @Html.Partial("pSearchForm")

@@ -172,7 +172,13 @@
             .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  name='spanState'><img gridkey-state-id='{0}'  src='/Images/{1}.ico'/></span>",
                   o.Id, (o.State ? "OK" : "Close"), o.State));
 
-       
+        columns.Add(o => o.LinkState)
+                  .Titled("LinkState")
+                  .Sortable(true)
+              .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+             Sanitized(false)
+                .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  name='spanState'><img gridkey-linkstate-id='{0}'  src='/Images/{1}.ico'/></span>",
+                 o.Id, (o.State ? "OK" : "Close"), o.LinkState));
 
         columns.Add(o => o.CreatedDate)
               .Titled("Date")

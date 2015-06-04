@@ -9,9 +9,8 @@ namespace StoreManagement.Controllers
 {
     public class ImagesController : BaseController
     {
-
-
-        public ActionResult Index(String id = "", string size = "", string contentType = "")
+ 
+        public ActionResult FetchImage(String id = "", string size = "", string contentType = "")
         {
             var dic = new Dictionary<String, String>();
             String url = "";

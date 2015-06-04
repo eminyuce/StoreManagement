@@ -20,7 +20,7 @@ namespace StoreManagement.Controllers
         {
             return View();
         }
-        public ActionResult Category(String id, int page = 7)
+        public ActionResult Category(String id, int page = 1)
         {
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();

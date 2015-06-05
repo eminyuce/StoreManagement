@@ -30,7 +30,6 @@ namespace StoreManagement.Data.Entities
         public Boolean State { get; set; }
         public int Ordering { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string Url { get; set; }
 
         public virtual ICollection<ContentFile> ContentFiles { get; set; }
 

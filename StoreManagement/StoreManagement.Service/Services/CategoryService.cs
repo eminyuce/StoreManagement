@@ -25,7 +25,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<Category>(url);
+                return HttpRequestHelper.GetUrlResults<Category>(url);
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<Category>(url);
+                return HttpRequestHelper.GetUrlResults<Category>(url);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<Category>(url);
+                return HttpRequestHelper.GetUrlResults<Category>(url);
             }
             catch (Exception ex)
             {
@@ -67,7 +67,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<Category>(url);
+                return HttpRequestHelper.GetUrlResults<Category>(url);
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetSingle?id={2}", WebServiceAddress, ApiControllerName, id);
-                return RequestHelper.GetUrlResult<Category>(url);
+                return HttpRequestHelper.GetUrlResult<Category>(url);
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
-                return RequestHelper.GetUrlPagedResults<Category>(url);
+                return HttpRequestHelper.GetUrlPagedResults<Category>(url);
             }
             catch (Exception ex)
             {

@@ -22,7 +22,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetContentByContentId?contentId={2}", WebServiceAddress, ApiControllerName, contentId);
-                return RequestHelper.GetUrlResults<ContentFile>(url);
+                return HttpRequestHelper.GetUrlResults<ContentFile>(url);
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetContentByFileManagerId?fileManagerId={2}", WebServiceAddress, ApiControllerName, fileManagerId);
-                return RequestHelper.GetUrlResults<ContentFile>(url);
+                return HttpRequestHelper.GetUrlResults<ContentFile>(url);
             }
             catch (Exception ex)
             {

@@ -34,6 +34,13 @@ namespace StoreManagement.Service.Repositories
             //return dbContext.Contents.Include(r => r.ContentFiles.Select(t => t.FileManager)).FirstOrDefault(x => x.Id == contentId);
         }
 
+        public List<Content> GetContentByType(string typeName)
+        {
+            return
+             this.FindBy( r=> r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase))
+                 .ToList();
+        }
+
         public List<Content> GetContentByType(int storeId, string typeName)
         {
             return
@@ -42,14 +49,7 @@ namespace StoreManagement.Service.Repositories
                     .ToList();
         }
 
-        public Content GetContentByUrl(int storeId, string url)
-        {
-            return
-                this.FindBy(
-                    r => r.StoreId == storeId && r.Url.Equals(url, StringComparison.InvariantCultureIgnoreCase))
-                    .FirstOrDefault();
-        }
-
+     
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {
             return this.GetAllIncluding(r1 => r1.ContentFiles.Select(r2 => r2.FileManager)).Where(

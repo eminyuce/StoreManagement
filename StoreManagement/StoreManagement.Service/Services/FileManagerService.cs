@@ -22,7 +22,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetFilesByStoreIdFromCache?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<FileManager>(url);
+                return HttpRequestHelper.GetUrlResults<FileManager>(url);
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetFilesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<FileManager>(url);
+                return HttpRequestHelper.GetUrlResults<FileManager>(url);
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetFilesByGoogleImageId?storeId={2}", WebServiceAddress, ApiControllerName, googleImageId);
-                return RequestHelper.GetUrlResult<FileManager>(url);
+                return HttpRequestHelper.GetUrlResult<FileManager>(url);
             }
             catch (Exception ex)
             {

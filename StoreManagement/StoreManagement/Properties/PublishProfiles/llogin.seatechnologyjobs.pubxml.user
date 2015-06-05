@@ -151,13 +151,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/04/2015 09:45:43</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/04/2015 12:59:05</publishTime>
+      <publishTime>06/05/2015 09:45:01</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>06/04/2015 13:04:32</publishTime>
+      <publishTime>06/05/2015 09:45:03</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/04/2015 12:59:06</publishTime>
+      <publishTime>06/05/2015 09:45:02</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -852,11 +852,38 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/_SetPasswordPartial.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
+    <File Include="Views/Blogs/Index.cshtml">
+      <publishTime>06/04/2015 14:17:43</publishTime>
+    </File>
     <File Include="Views/Categories/Category.cshtml">
-      <publishTime>06/04/2015 11:53:49</publishTime>
+      <publishTime>06/04/2015 15:12:41</publishTime>
+    </File>
+    <File Include="Views/Contact/Index.cshtml">
+      <publishTime>06/04/2015 14:16:37</publishTime>
     </File>
     <File Include="Views/Contents/Detail.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
+    </File>
+    <File Include="Views/Error/BadRequest.cshtml">
+      <publishTime>06/04/2015 15:42:09</publishTime>
+    </File>
+    <File Include="Views/Error/Forbidden.cshtml">
+      <publishTime>06/04/2015 15:41:58</publishTime>
+    </File>
+    <File Include="Views/Error/InternalServerError.cshtml">
+      <publishTime>06/04/2015 15:42:17</publishTime>
+    </File>
+    <File Include="Views/Error/MethodNotAllowed.cshtml">
+      <publishTime>06/04/2015 15:42:22</publishTime>
+    </File>
+    <File Include="Views/Error/NotFound.cshtml">
+      <publishTime>06/04/2015 15:42:30</publishTime>
+    </File>
+    <File Include="Views/Error/Unauthorized.cshtml">
+      <publishTime>06/04/2015 15:42:37</publishTime>
+    </File>
+    <File Include="Views/Events/Index.cshtml">
+      <publishTime>06/04/2015 14:17:26</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
@@ -879,11 +906,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/Test.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
+    <File Include="Views/Images/Index.cshtml">
+      <publishTime>06/04/2015 14:25:14</publishTime>
+    </File>
+    <File Include="Views/News/Index.cshtml">
+      <publishTime>06/04/2015 16:57:43</publishTime>
+    </File>
+    <File Include="Views/Pages/Index.cshtml">
+      <publishTime>06/04/2015 14:03:19</publishTime>
+    </File>
+    <File Include="Views/Photos/Index.cshtml">
+      <publishTime>06/04/2015 15:17:05</publishTime>
+    </File>
     <File Include="Views/Products/Index.cshtml">
       <publishTime>06/03/2015 12:02:22</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
       <publishTime>06/03/2015 12:01:33</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/BootstrapPagination.cshtml">
+      <publishTime>06/04/2015 15:10:26</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/CategoryItem.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
@@ -894,8 +936,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/DisplayTemplates/ContentItem.cshtml">
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
+    <File Include="Views/Shared/DisplayTemplates/NewsContentItem.cshtml">
+      <publishTime>06/04/2015 16:56:27</publishTime>
+    </File>
     <File Include="Views/Shared/DisplayTemplates/ProductThumbnail.cshtml">
-      <publishTime>06/02/2015 04:04:19</publishTime>
+      <publishTime>06/04/2015 14:26:17</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>06/02/2015 05:59:53</publishTime>
@@ -928,7 +973,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/02/2015 04:04:19</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/04/2015 11:21:02</publishTime>
+      <publishTime>06/05/2015 09:45:07</publishTime>
     </File>
   </ItemGroup>
 </Project>

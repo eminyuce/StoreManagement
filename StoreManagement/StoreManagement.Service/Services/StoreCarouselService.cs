@@ -23,7 +23,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetStoreCarousels?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<StoreCarousel>(url);
+                return HttpRequestHelper.GetUrlResults<StoreCarousel>(url);
             }
             catch (Exception ex)
             {

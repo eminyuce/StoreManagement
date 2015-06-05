@@ -1,0 +1,100 @@
+﻿@model StoreManagement.Data.Entities.Content
+ 
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Content</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StoreId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoreId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MainPage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MainPage)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.State)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ordering)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ordering)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+
+   
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+                 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+

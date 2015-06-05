@@ -21,7 +21,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetPageDesignByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<PageDesign>(url);
+                return HttpRequestHelper.GetUrlResults<PageDesign>(url);
             }
             catch (Exception ex)
             {

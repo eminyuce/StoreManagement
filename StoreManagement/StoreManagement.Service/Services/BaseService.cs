@@ -14,10 +14,10 @@ namespace StoreManagement.Service.Services
         protected string WebServiceAddress { get; set; }
 
 
-        protected RequestHelper RequestHelper;
-        public BaseService()
+        protected RequestHelper HttpRequestHelper;
+        protected BaseService()
         {
-            RequestHelper = new RequestHelper();
+            HttpRequestHelper = new RequestHelper();
         }
 
         protected BaseService(String webServiceAddress):this()

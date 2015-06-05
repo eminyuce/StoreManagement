@@ -1514,6 +1514,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Icon.png" />
+    <Content Include="Images\Close.ico" />
     <Content Include="Images\Dashboard\01.png" />
     <Content Include="Images\Dashboard\02.png" />
     <Content Include="Images\Dashboard\03.png" />
@@ -1522,6 +1523,8 @@
     <Content Include="Images\Dashboard\06.png" />
     <Content Include="Images\Dashboard\07.png" />
     <Content Include="Images\Dashboard\08.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\OK.ico" />
     <Content Include="Scripts\bootstrap-image-gallery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1737,6 +1740,7 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\reports.js" />
+    <Content Include="Scripts\storeContent.js" />
     <Content Include="Scripts\storeManagement.js" />
     <Content Include="Scripts\storesStyleChanger.js" />
     <Content Include="Scripts\TextFile1.txt" />
@@ -1872,6 +1876,10 @@
     <Content Include="Views\Dashboard\Index2.cshtml" />
     <Content Include="tags.config" />
     <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Views\Shared\Content\pContentsIndex.cshtml" />
+    <Content Include="Views\Shared\Content\pContentSaveOrEdit.cshtml" />
+    <Content Include="Views\Shared\Content\pContentDetail.cshtml" />
+    <Content Include="Views\Shared\Content\pContentDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

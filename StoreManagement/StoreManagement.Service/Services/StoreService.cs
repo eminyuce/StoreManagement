@@ -23,7 +23,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetStoreByDomain?domainName={2}", WebServiceAddress, ApiControllerName, domainName);
-                return RequestHelper.GetUrlResult<Store>(url);
+                return HttpRequestHelper.GetUrlResult<Store>(url);
             }
             catch (Exception ex)
             {
@@ -38,7 +38,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetStore?domain={2}", WebServiceAddress, ApiControllerName, domain);
-                return RequestHelper.GetUrlResult<Store>(url);
+                return HttpRequestHelper.GetUrlResult<Store>(url);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetSingle?id={2}", WebServiceAddress, ApiControllerName, id);
-                return RequestHelper.GetUrlResult<Store>(url);
+                return HttpRequestHelper.GetUrlResult<Store>(url);
             }
             catch (Exception ex)
             {

@@ -114,15 +114,17 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentsContentId(contentId);
         }
 
+        public List<Content> GetContentByType(string typeName)
+        {
+            return this.ContentRepository.GetContentByType(typeName);
+        }
+
         public List<Content> GetContentByType(int storeId, string typeName)
         {
             return this.ContentRepository.GetContentByType(storeId, typeName);
         }
 
-        public Content GetContentByUrl(int storeId, string url)
-        {
-            return this.ContentRepository.GetContentByUrl(storeId, url);
-        }
+         
 
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {

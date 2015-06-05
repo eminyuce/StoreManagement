@@ -23,7 +23,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
-                return RequestHelper.GetUrlResults<Setting>(url);
+                return HttpRequestHelper.GetUrlResults<Setting>(url);
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetStoreSettingsFromCache?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
-                return RequestHelper.GetUrlResults<Setting>(url);
+                return HttpRequestHelper.GetUrlResults<Setting>(url);
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}&type={3}", WebServiceAddress, ApiControllerName, storeid, type);
-                return RequestHelper.GetUrlResults<Setting>(url);
+                return HttpRequestHelper.GetUrlResults<Setting>(url);
             }
             catch (Exception ex)
             {

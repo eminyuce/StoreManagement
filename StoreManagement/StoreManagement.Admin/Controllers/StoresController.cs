@@ -71,9 +71,9 @@ namespace StoreManagement.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                store.CreatedDate = DateTime.Now;
                 if (store.Id == 0)
                 {
-                    store.CreatedDate = DateTime.Now;
                     storeRepository.Add(store);
                 }
                 else

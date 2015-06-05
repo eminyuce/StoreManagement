@@ -26,7 +26,7 @@ namespace StoreManagement.Admin.Controllers
             List<Content> resultList = new List<Content>();
             if (storeId == 0)
             {
-                resultList = ContentRepository.GetAll().ToList();
+                resultList = ContentRepository.GetContentByType(ContentType);
             }
             else
             {

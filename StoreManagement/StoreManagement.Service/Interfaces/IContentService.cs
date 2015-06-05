@@ -13,8 +13,8 @@ namespace StoreManagement.Service.Interfaces
     {
 
         Content GetContentsContentId(int contentId);
+        List<Content> GetContentByType(String typeName);
         List<Content> GetContentByType(int storeId, String typeName);
-        Content GetContentByUrl(int storeId, String url);
         List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId);
         List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
         StorePagedList<Content> GetContentsCategoryId(int storeId, int categoryId, String typeName, bool? isActive, int page, int pageSize);

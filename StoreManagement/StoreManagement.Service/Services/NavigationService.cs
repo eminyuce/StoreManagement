@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using StoreManagement.Data;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
@@ -27,7 +28,7 @@ namespace StoreManagement.Service.Services
             int cacheSecond = 0;
             try
             {
-                var response = RequestHelper.MakeJsonRequest(url);
+                var response = HttpRequestHelper.MakeJsonRequest(url);
                 return response;
             }
             catch (Exception ex)
@@ -41,7 +42,7 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<Navigation>(url);
+                return HttpRequestHelper.GetUrlResults<Navigation>(url);
             }
             catch (Exception ex)
             {
@@ -55,7 +56,8 @@ namespace StoreManagement.Service.Services
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return RequestHelper.GetUrlResults<Navigation>(url);
+                HttpRequestHelper.CacheMinute = ProjectAppSettings.GetWebConfigInt("RequestHelperCacheLongMinute", 600);
+                return HttpRequestHelper.GetUrlResults<Navigation>(url);
             }
             catch (Exception ex)
             {

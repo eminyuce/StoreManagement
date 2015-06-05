@@ -14,6 +14,8 @@ namespace StoreManagement.Data.Entities
 
        // public virtual ICollection<FileManager> StoreCarousels { get; set; }
 
+        public virtual ICollection<Setting> Settings { get; set; }
+
         public override string ToString()
         {
             return Id + " " + Name;

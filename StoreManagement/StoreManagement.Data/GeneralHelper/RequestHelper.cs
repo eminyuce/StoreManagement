@@ -18,11 +18,11 @@ namespace StoreManagement.Data.GeneralHelper
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static CacheEntryUpdateCallback _callbackU = null;
-        private static int _cacheSecond = 600;
-        public static int CacheSecond
+        private int _cacheMinute = 10;
+        public int CacheMinute
         {
-            get { return _cacheSecond; }
-            set { _cacheSecond = value; }
+            get { return _cacheMinute; }
+            set { _cacheMinute = value; }
         }
         public  String GetJsonFromCacheOrWebservice(string url)
         {
@@ -63,7 +63,7 @@ namespace StoreManagement.Data.GeneralHelper
                     String cacheValue = cacheControl.Value.ToStr();
                     if (cacheValue.StartsWith("public"))
                     {
-                        CacheSecond = cacheValue.Substring(cacheValue.IndexOf("=") + 1).ToInt();
+                        CacheMinute = cacheValue.Substring(cacheValue.IndexOf("=") + 1).ToInt();
                     }
                 }
             }
@@ -85,7 +85,7 @@ namespace StoreManagement.Data.GeneralHelper
                 policy.Priority = CacheItemPriority.Default;
                 _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
                 policy.UpdateCallback = _callbackU;
-                policy.AbsoluteExpiration = DateTime.Now.AddSeconds(CacheSecond);
+                policy.AbsoluteExpiration = DateTime.Now.AddMinutes(CacheMinute);
                 MemoryCache.Default.Set(key, ret, policy);
             }
             return ret;
@@ -112,7 +112,7 @@ namespace StoreManagement.Data.GeneralHelper
 
                     _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
                     policy.UpdateCallback = _callbackU;
-                    policy.AbsoluteExpiration = DateTime.Now.AddSeconds(CacheSecond);
+                    policy.AbsoluteExpiration = DateTime.Now.AddSeconds(CacheMinute);
 
 
                     arguments.UpdatedCacheItemPolicy = policy;

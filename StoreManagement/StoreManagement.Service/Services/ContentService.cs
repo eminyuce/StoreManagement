@@ -115,7 +115,7 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public StorePagedList<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
             try
             {

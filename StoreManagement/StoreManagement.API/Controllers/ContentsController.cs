@@ -136,9 +136,14 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentByTypeAndCategoryIdFromCache(storeId, typeName, categoryId);
         }
 
-        public StorePagedList<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public StorePagedList<Content> GetContentsCategoryId(int storeId, int ?  categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            var items =  this.ContentRepository.GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize);
+            var items =  this.ContentRepository.GetContentsCategoryId(storeId,
+                categoryId,
+                typeName, 
+                isActive, 
+                page, 
+                pageSize);
 
             return items;
         }

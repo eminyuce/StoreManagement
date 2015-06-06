@@ -75,8 +75,8 @@ namespace StoreManagement.Test
             ContentRepository rep = new ContentRepository(dbContext);
           //  StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
             var blogs = rep.GetContentByType("blog");
-            var news = rep.GetContentByType("news");
-            var products = rep.GetContentByType("news");
+            var m = rep.GetContentsCategoryId(2, null, "blog", true, 1, 24);
+
             // var p = m.PageCount2;
 
             //foreach (var content in m)

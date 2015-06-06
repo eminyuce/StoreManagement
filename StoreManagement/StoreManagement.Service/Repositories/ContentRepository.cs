@@ -74,7 +74,7 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public StorePagedList<Content> GetContentsCategoryId(int storeId, int categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
             String key = String.Format("GetContentsCategoryId-{0}-{1}-{2}-{3}-{4}-{5}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "", page, pageSize);
             StorePagedList<Content> items = null;
@@ -85,8 +85,11 @@ namespace StoreManagement.Service.Repositories
                 var returnList =
                         this.GetAllIncluding(r => r.ContentFiles.Select(r1 => r1.FileManager))
                             .Where(r2 => r2.StoreId == storeId &&
-                                 r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) && r2.CategoryId == categoryId);
-
+                                 r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
+                if (categoryId.HasValue)
+                {
+                    returnList = returnList.Where(r => r.CategoryId == categoryId.Value);
+                }
                 if (isActive.HasValue)
                 {
                     returnList = returnList.Where(r => r.State == isActive);

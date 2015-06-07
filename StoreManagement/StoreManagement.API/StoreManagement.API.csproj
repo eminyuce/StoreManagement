@@ -52,6 +52,9 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvcPaging">
+      <HintPath>..\..\..\..\..\..\..\AspNETDLL\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -127,7 +130,6 @@
     <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\PageDesignsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Controllers\StoreCarouselsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

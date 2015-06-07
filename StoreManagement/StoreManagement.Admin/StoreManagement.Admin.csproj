@@ -71,6 +71,9 @@
       <HintPath>..\packages\Google.Apis.1.9.0\lib\net40\Google.Apis.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GoogleDriveUploader">
+      <HintPath>..\..\..\..\..\..\..\AspNETDLL\GoogleDriveUploader.dll</HintPath>
+    </Reference>
     <Reference Include="GridMvc">
       <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
     </Reference>
@@ -102,6 +105,9 @@
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.30506.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcPaging">
+      <HintPath>..\..\..\..\..\..\..\AspNETDLL\MvcPaging.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -323,6 +329,7 @@
     <Content Include="Content\chosen.css" />
     <Content Include="Content\chosen.png" />
     <Content Include="Content\colpick.css" />
+    <Content Include="Content\displayImages.jpg" />
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\jHtmlArea\jHtmlArea.ColorPickerMenu.css" />
     <Content Include="Content\jHtmlArea\jHtmlArea.css" />
@@ -1504,6 +1511,7 @@
     <Content Include="Content\Theme\vendors\uniform\www\multiple-themes.html" />
     <Content Include="Content\Theme\vendors\uniform\www\stylesheets\multiple-themes.css" />
     <Content Include="Content\Theme\vendors\uniform\www\stylesheets\site.css" />
+    <Content Include="Content\uploadImages.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1514,7 +1522,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Icon.png" />
-    <Content Include="Images\Close.ico" />
     <Content Include="Images\Dashboard\01.png" />
     <Content Include="Images\Dashboard\02.png" />
     <Content Include="Images\Dashboard\03.png" />
@@ -1524,7 +1531,6 @@
     <Content Include="Images\Dashboard\07.png" />
     <Content Include="Images\Dashboard\08.png" />
     <Content Include="Images\loading.gif" />
-    <Content Include="Images\OK.ico" />
     <Content Include="Scripts\bootstrap-image-gallery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1890,10 +1896,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GoogleDriveUploader\GoogleDriveUploader\GoogleDriveUploader.csproj">
-      <Project>{b652ae97-342e-4309-82cd-860614f5746f}</Project>
-      <Name>GoogleDriveUploader</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">
       <Project>{553854d8-a688-4a50-ab74-4ccf3b1afe9a}</Project>
       <Name>StoreManagement.Data</Name>

@@ -25,7 +25,7 @@ namespace StoreManagement.Service.Repositories
 
         public List<Navigation> GetStoreNavigations(int storeId)
         {
-            return this.FindBy(r => r.StoreId == storeId).ToList();
+            return this.FindBy(r => r.StoreId == storeId).OrderBy(r=>r.Ordering).ToList();
         }
 
         public List<Navigation> GetStoreActiveNavigations(int storeId)
@@ -36,7 +36,7 @@ namespace StoreManagement.Service.Repositories
 
             if (items == null)
             {
-                items = GetStoreNavigations(storeId).Where(r => r.State).OrderBy(r => r.Ordering).ToList();
+                items = GetStoreNavigations(storeId).Where(r => r.State).ToList();
                 NavigationsCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("MainMenuNavigation_CacheAbsoluteExpiration", 10)));
             }
 

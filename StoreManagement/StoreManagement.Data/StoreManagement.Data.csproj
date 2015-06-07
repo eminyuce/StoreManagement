@@ -51,7 +51,7 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="MvcPaging">
-      <HintPath>..\..\..\..\..\..\..\ProjectsEY\NetDLLFiles\MvcPaging.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\AspNETDLL\MvcPaging.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
@@ -116,7 +116,6 @@
     <Compile Include="Entities\PageDesign.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Store.cs" />
-    <Compile Include="Entities\StoreCarousel.cs" />
     <Compile Include="Entities\StoreUser.cs" />
     <Compile Include="GeneralHelper\CaptchaHelper.cs" />
     <Compile Include="GeneralHelper\FeedResult.cs" />

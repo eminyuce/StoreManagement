@@ -23,5 +23,7 @@ namespace StoreManagement.Data.Entities
         public string WebContentLink { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public DateTime? CreatedDate { get; set; }
+        public bool IsCarousel { get; set; }
+       
     }
 }

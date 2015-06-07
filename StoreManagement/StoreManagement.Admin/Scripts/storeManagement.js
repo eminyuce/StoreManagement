@@ -3,18 +3,28 @@
 }
 
 $(document).ready(function () {
+    bindCarouselImage();
     var originalURL = window.location.href;
     var q = getQueryStringParameter(originalURL, "GridPageSize");
     if (!isEmpty(q)) {
         $("#GridListItemSize").val(q);
     }
 
-
+    $("input[type='checkbox'][name='checkboxGrid']").click(function() {
+        console.log("1212");
+        var m = $(this).is(':checked');
+        if (m) {
+            $(this).parent().parent().addClass('gridChecked');
+        } else {
+            $(this).parent().parent().removeClass('gridChecked');
+        }
+    });
 
     $("#DeselectAll").click(function () {
         console.log("DeselectAll is clicked.");
         var i = 0;
         $("input[name=checkboxGrid]").each(function () {
+            $(this).parent().parent().removeClass('gridChecked');
             var m = $(this).prop('checked', false);
         });
     });
@@ -22,6 +32,7 @@ $(document).ready(function () {
         console.log("SelectAll is clicked.");
         var i = 0;
         $("input[name=checkboxGrid]").each(function () {
+            $(this).parent().parent().addClass('gridChecked');
             var m = $(this).prop('checked', true);
         });
     });
@@ -79,11 +90,7 @@ $(document).ready(function () {
         var postData = GetSelectedOrderingValues();
         console.log(postData);
         var tableName = $("[data-gridname]").attr("data-gridname");
-        if (tableName == "imagesGrid") {
-            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeOrderingSuccess);
-        } else if (tableName == "contentGrid") {
-            ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeOrderingSuccess);
-        }
+        ajaxMethodCall(postData, "/Ajax/Change" + tableName + "OrderingOrState", changeOrderingSuccess);
     });
 
     function GetSelectedStateValues(checkboxName,state) {
@@ -118,12 +125,7 @@ $(document).ready(function () {
             var postData = JSON.stringify({ "values": selectedValues, "checkbox": ppp });
                     console.log(postData);
                     var tableName = $("[data-gridname]").attr("data-gridname");
-                    if (tableName == "imagesGrid") {
-                        ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
-                    } else if (tableName == "contentGrid") {
-                        ajaxMethodCall(postData, "/Ajax/ChangeContentGridOrderingOrState", changeStateSuccess);
-                    }
-
+                    ajaxMethodCall(postData, "/Ajax/Change"+tableName+"OrderingOrState", changeStateSuccess);
                     displayMessage("hide", "");
             
         } else {
@@ -230,21 +232,18 @@ function ajaxMethodCall(postData,ajaxUrl, successFunction) {
 function deleteItemsSuccess(data) {
 
     data.forEach(function (entry) {
-        console.log(entry);
         var pp = $('[gridkey-id=' + entry + ']');
         pp.parent().parent().remove();
-        console.log(pp);
     });
 }
 function changeStateSuccess(data) {
     //var parsedPostData = jQuery.parseJSON(data);
     console.log(data);
     data.values.forEach(function (entry) {
-        console.log(entry.Id);
         if (entry.State) {
-            $('span[name=span' + data.checkbox + ']').find('[gridkey-state-id="' + entry.Id + '"]').attr('src', "/Images/OK.ico");
+            $('span[name=span' + data.checkbox + ']').filter('[gridkey-id="' + entry.Id + '"]').attr('style', 'color:green;  font-size:2em;').attr('class', 'glyphicon  glyphicon-ok-circle');
         } else {
-            $('span[name=span' + data.checkbox + ']').find('[gridkey-state-id="' + entry.Id + '"]').attr('src', "/Images/Close.ico");
+            $('span[name=span' + data.checkbox + ']').filter('[gridkey-id="' + entry.Id + '"]').attr('style', 'color:red;  font-size:2em;').attr('class', 'glyphicon  glyphicon-remove-circle');
         }
        
 
@@ -252,4 +251,40 @@ function changeStateSuccess(data) {
 }
 function changeOrderingSuccess(data) {
     console.log(data);
+}
+
+function bindCarouselImage() {
+    $('[data-carusel-file-id]').each(function () {
+        $(this).off("click");
+        $(this).on("click", handleCarouselImage);
+    });
+}
+
+function handleCarouselImage(e) {
+    var caller = e.target;
+    var fileId = $(caller).attr('data-carusel-file-id');
+    var isCarousel = $(caller).attr('data-carusel-file-isCarousel');
+    if (isCarousel === "true") {
+        isCarousel = "false";
+    } else if (isCarousel === "false") {
+        isCarousel = "true";
+    }
+
+    var postData = JSON.stringify({ "fileId": fileId, "isCarousel": isCarousel });
+    ajaxMethodCall(postData, "/Ajax/ChangeIsCarouselState", changeCarouselStateSuccess);
+
+}
+function changeCarouselStateSuccess(data) {
+    console.log(data);
+    var mmm = $('a[data-carusel-file-id=' + data.fileId + ']');
+    mmm.attr('data-carusel-file-isCarousel', data.isCarousel);
+    mmm.removeClass("btn-success");
+    mmm.removeClass("btn-danger");
+    if (data.isCarousel) {
+        mmm.addClass("btn-success");
+    } else if (!data.isCarousel) {
+        mmm.addClass("btn-danger");
+    }
+   
+
 }

@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Index";
+ 
 }
 
 <h2>Index</h2>
@@ -23,26 +24,104 @@
                 <div class="row">
                     @Html.Action("StoresDropDown", "Stores")
                 </div>
-                <div class="row">
-                    <div class="col-md-5">
-                         @using (Html.BeginForm("DisplayImages", "FileManager", FormMethod.Get))
-                        {
-                            <input type="hidden" id="tempStoreId" name="storeId"/>
-                            <p>
-                                <input type="submit" value="Display Images" class = "btn btn-primary btn-block" />
-                            </p>
-                        }
-                    </div>
-                    <div class="col-md-5">
+                <div class="row" style=" margin: 2px;">
+                    <div class="col-md-6">
                         @using (Html.BeginForm("UploadImages", "FileManager", FormMethod.Get))
                         {
+
                             <input type="hidden" id="tempStoreId2" name="storeId"/>
-                            <p>
-                                <input type="submit" value="Upload Images" class = "btn btn-primary btn-block" />
-                            </p>
+                            <div class="row" style="border: blue 1px solid; margin: 2px;">
+                                <div class="col-md-12">
+                                    <a href="/FileManager/UploadImages">
+                                        <img alt="Upload Images" class="center-block" src="../../Content/uploadImages.jpg" alt=""/>
+                                    </a>
+                                </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <input type="submit" value="Upload Images" class="btn btn-primary btn-block"/>
+                                    </p>
+                                </div>
+                            </div>
+
+
+
                         }
                     </div>
+                    <div class="col-md-6">
+                        @using (Html.BeginForm("DisplayImages", "FileManager", FormMethod.Get))
+                        {
+                            <input type="hidden" id="tempStoreId" name="storeId"/>
+
+
+                            <div class="row" style="border: blue 1px solid; margin: 2px;">
+                                <div class="col-md-12">
+                                    <a href="/FileManager/DisplayImages">
+                                        <img alt="Display Images" class="center-block" src="../../Content/displayImages.jpg" alt=""/>
+                                    </a>
+                                </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <input type="submit" value="Display Images" class="btn btn-primary btn-block"/>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        }
+                    </div>
+
+
                 </div>
+                <div class="row" style="margin: 2px;">
+
+
+                  
+                     <div class="col-md-6">
+                        @using (Html.BeginForm("UploadImages", "FileManager", FormMethod.Get))
+                        {
+                            
+                            <input type="hidden" id="tempStoreId2" name="storeId" />
+                            <div class="row"  style="border: brown 1px solid; margin: 2px;">
+                                <div class="col-md-12">
+                                    <a  href="/FileManager/UploadImages">
+                                        <img alt="Upload Images" class="center-block" src="../../Content/uploadImages.jpg" alt="" />
+                                    </a>
+                                </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <input type="submit" value="Upload Documents" class="btn btn-primary btn-block" />
+                                    </p>
+                                </div>
+                            </div>
+                       
+                          
+                            
+                        }
+                    </div>
+                        <div class="col-md-6">
+                            @using (Html.BeginForm("DisplayImages", "FileManager", FormMethod.Get))
+                            {
+                                <input type="hidden" id="tempStoreId" name="storeId"/>
+
+
+                                <div class="row" style="border: brown 1px solid; margin: 2px;">
+                                    <div class="col-md-12">
+                                        <a href="/FileManager/DisplayImages">
+                                            <img alt="Display Images" class="center-block" src="../../Content/displayImages.jpg" alt=""/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>
+                                            <input type="submit" value="Display Documents" class="btn btn-primary btn-block"/>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            }
+                        </div>
+
+                       </div>
             </div>
         </div>
     </div>
@@ -51,26 +130,26 @@
 
 @section scripts
 {
-    
-    
-<script>
 
 
-    $(document).ready(function () {
+    <script>
 
-        $("#tempStoreId").val($('select#StoreDropDownId').val());
-        $("#tempStoreId2").val($('select#StoreDropDownId').val());
-        $('select#StoreDropDownId').chosen({}).change(function (event) {
-            $("#tempStoreId").val($(this).val());
-            $("#tempStoreId2").val($(this).val());
+
+        $(document).ready(function () {
+
+            $("#tempStoreId").val($('select#StoreDropDownId').val());
+            $("#tempStoreId2").val($('select#StoreDropDownId').val());
+            $('select#StoreDropDownId').chosen({}).change(function (event) {
+                $("#tempStoreId").val($(this).val());
+                $("#tempStoreId2").val($(this).val());
+            });
+
+
         });
 
+    </script>
 
-    });
 
-</script>
-
-    
 
 
 }

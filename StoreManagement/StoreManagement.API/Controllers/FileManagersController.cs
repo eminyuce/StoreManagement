@@ -121,5 +121,10 @@ namespace StoreManagement.API.Controllers
         {
             return FileManagerRepository.GetFilesByGoogleImageId(googleImageId);
         }
+
+        public List<FileManager> GetStoreCarousels(int storeId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

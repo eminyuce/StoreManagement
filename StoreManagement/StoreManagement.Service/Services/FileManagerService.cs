@@ -58,5 +58,10 @@ namespace StoreManagement.Service.Services
                 return new FileManager();
             }
         }
+
+        public List<FileManager> GetStoreCarousels(int storeId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

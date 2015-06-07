@@ -12,7 +12,7 @@ namespace StoreManagement.Data.RequestModel
     {
         public Store Store { get; set; }  
         public List<Category> Categories  { get; set; }
-        public List<StoreCarousel> CarouselImages { get; set; }
+        public List<FileManager> CarouselImages { get; set; }
         public PagedList<Content> Blogs { get; set; }
         public PagedList<Content> News { get; set; }
         public PagedList<Content> Products { get; set; }

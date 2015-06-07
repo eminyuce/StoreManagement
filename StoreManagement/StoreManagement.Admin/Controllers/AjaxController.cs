@@ -30,7 +30,14 @@ namespace StoreManagement.Admin.Controllers
         {
 
         }
-
+        public ActionResult ChangeIsCarouselState(int fileId = 0, bool isCarousel = false)
+        {
+            var s = FileManagerRepository.GetSingle(fileId);
+            s.IsCarousel = isCarousel;
+            FileManagerRepository.Edit(s);
+            FileManagerRepository.Save();
+            return Json(new { fileId, isCarousel }, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult DeleteContentItem(List<String> values)
         {
@@ -44,7 +51,67 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(values, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ChangeCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = CategoryRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
 
+                CategoryRepository.Edit(nav);
+            }
+            CategoryRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeNavigationGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = NavigationRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
+
+                NavigationRepository.Edit(nav);
+            }
+            NavigationRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeFileManagerGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var content = FileManagerRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    content.Ordering = item.Ordering;
+                }
+                else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    content.State = item.State;
+                }
+                else if (checkbox.Equals("Carousel", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    content.IsCarousel = item.State;
+                }
+
+                FileManagerRepository.Edit(content);
+            }
+            FileManagerRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ChangeContentGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
             foreach (OrderingItem item in values)
@@ -80,11 +147,11 @@ namespace StoreManagement.Admin.Controllers
             {
                 string id = (string)result["Id"];
                 string style = (string)result["Style"];
-                var s = this.settingRepository.GetSingle(id.ToInt());
+                var s = this.SettingRepository.GetSingle(id.ToInt());
                 s.SettingValue = style;
-                settingRepository.Edit(s);
+                SettingRepository.Edit(s);
             }
-            settingRepository.Save();
+            SettingRepository.Save();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -96,10 +163,10 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult SaveSettingValue(int id = 0, string value = "")
         {
-            var s = settingRepository.GetSingle(id);
+            var s = SettingRepository.GetSingle(id);
             s.SettingValue = value;
-            settingRepository.Edit(s);
-            settingRepository.Save();
+            SettingRepository.Edit(s);
+            SettingRepository.Save();
             return Content(value);
         }
 

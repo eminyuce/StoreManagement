@@ -24,7 +24,7 @@ namespace StoreManagement.Controllers
             ViewBag.Store = Store;
             var shp =new StoreHomePage();
             shp.Store = Store;
-            shp.CarouselImages = StoreCarouselService.GetStoreCarousels(Store.Id);
+            shp.CarouselImages = FileManagerService.GetStoreCarousels(Store.Id);
             shp.Categories = CategoryService.GetCategoriesByStoreId(Store.Id);
             var m = ContentService.GetContentsCategoryId(Store.Id, null, "product", true, page, 24);
             shp.Products = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);

@@ -12,8 +12,7 @@ namespace StoreManagement.Data.Entities
         public string Layout { get; set; }
         public DateTime CreatedDate { get; set; }
 
-       // public virtual ICollection<FileManager> StoreCarousels { get; set; }
-
+        public virtual ICollection<FileManager> FileManagers { get; set; }
         public virtual ICollection<Setting> Settings { get; set; }
 
         public override string ToString()

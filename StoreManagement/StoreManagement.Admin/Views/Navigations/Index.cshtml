@@ -1,11 +1,13 @@
 ﻿@using GridMvc.Html
 @using GridMvc.Sorting
+@using StoreManagement.Data
 @using StoreManagement.Data.Entities
 @model List<StoreManagement.Data.Entities.Navigation>
 
 @{
     ViewBag.Title = "Index";
     String search = (String)ViewBag.Search;
+ 
 }
 
 
@@ -109,7 +111,7 @@
                     </div>
 
 
-                    @Html.Grid(Model).Named("navigationGrid").Columns(columns =>
+                    @Html.Grid(Model).Named("NavigationGrid").Columns(columns =>
     {
         /* Adding not mapped column, that renders body, using inline Razor html helper */
 
@@ -135,7 +137,7 @@
                    .Sanitized(false)
                    .SetWidth(30)
                    .RenderValueAs(d =>
-                       @<b>
+                       @<b> 
                    @Html.ActionLink(" ", "Details", "Navigations", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
                </b>);
 
@@ -145,7 +147,7 @@
 .SetWidth(30)
 .RenderValueAs(d =>
 @<b>
-                   @Html.ActionLink(" ", "Delete", "Navigations", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+                   @Html.ActionLink(" ", "Delete", "Navigations", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
                </b>);
                         
                         
@@ -164,21 +166,22 @@
                     SetWidth(10).
                     RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
 
+                    
         columns.Add(o => o.State)
          .Titled("State")
          .Sortable(true)
          .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
                     Sanitized(false)
-            .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  name='spanState'><img gridkey-state-id='{0}'  src='/Images/{1}.ico'/></span>",
-                  o.Id, (o.State ? "OK" : "Close"), o.State));
+           .RenderValueAs(o => String.Format("<span  gridkey-id='{0}'  grid-data-value='{2}' {1} name='spanState' ></span>",
+                                                                     o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
 
         columns.Add(o => o.LinkState)
                   .Titled("LinkState")
                   .Sortable(true)
               .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
              Sanitized(false)
-                .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  name='spanState'><img gridkey-linkstate-id='{0}'  src='/Images/{1}.ico'/></span>",
-                 o.Id, (o.State ? "OK" : "Close"), o.LinkState));
+            .RenderValueAs(o => String.Format("<span  gridkey-id='{0}'  grid-data-value='{2}' {1} name='spanLinkState' ></span>",
+                                                                     o.Id, (o.LinkState ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.LinkState));
 
         columns.Add(o => o.CreatedDate)
               .Titled("Date")

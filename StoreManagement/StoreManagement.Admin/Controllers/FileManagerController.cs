@@ -34,10 +34,20 @@ namespace StoreManagement.Admin.Controllers
         {
             return View();
         }
-        public ActionResult DisplayImages(int storeId = 1)
+        public ActionResult DisplayImages(int storeId = 1, String search="")
         {
             ViewBag.StoreId = storeId;
-            return View(FileManagerRepository.GetFilesByStoreId(storeId));
+
+            var images = FileManagerRepository.GetFilesByStoreId(storeId);
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                images = images.Where(r => r.Title.ToLower().Contains(search.ToLower())).ToList();
+            }
+
+
+
+            return View(images);
         }
         public ActionResult UploadImages(int storeId=1)
         {

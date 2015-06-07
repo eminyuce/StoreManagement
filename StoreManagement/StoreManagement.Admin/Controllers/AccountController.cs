@@ -50,8 +50,7 @@ namespace StoreManagement.Admin.Controllers
             {
 
                 model.RememberMe = true;
-                if (ModelState.IsValid &&
-                    WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
                     return RedirectToLocal(returnUrl);
                 }
@@ -282,13 +281,13 @@ namespace StoreManagement.Admin.Controllers
                 // Insert a new user into the database
                 //using (UsersContext db = new UsersContext())
                 {
-                    UserProfile user = dbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        dbContext.UserProfiles.Add(new UserProfile { UserName = model.UserName });
-                        dbContext.SaveChanges();
+                        DbContext.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        DbContext.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                         OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);

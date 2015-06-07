@@ -1,7 +1,37 @@
-﻿
+﻿@using MvcPaging
+@model StoreManagement.Data.RequestModel.ContentsViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Blogs</h2>
 
+
+<div class="row">
+
+    @if (Model.Contents.Any())
+    {
+        foreach (var product in Model.Contents)
+        {
+
+        <div>
+            @Html.DisplayFor(model => product, "BlogContentItem")
+        </div>
+        }
+
+        @Model.Contents.TotalItemCount
+                  
+        <div class="pager">
+
+            @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount).Options(o => o
+                                                                                                                            .DisplayTemplate("BootstrapPagination")
+                                                                                                                            .MaxNrOfPages(7)
+                                                                                                                            .AlwaysAddFirstPageNumber()
+                                                                                                                            .SetPreviousPageText("←")
+                                                                                                                            .SetNextPageText("→"))
+
+        </div>
+                     
+    }
+
+</div>

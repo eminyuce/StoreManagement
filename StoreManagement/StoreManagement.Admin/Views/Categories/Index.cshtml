@@ -1,5 +1,6 @@
 ﻿@using GridMvc.Html
 @using GridMvc.Sorting
+@using StoreManagement.Data
 @using StoreManagement.Data.GeneralHelper
 @model IEnumerable<StoreManagement.Data.Entities.Category>
 
@@ -7,6 +8,7 @@
     ViewBag.Title = "Index";
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
+
 }
 
 @Html.Partial("_LeftMenu")
@@ -106,7 +108,7 @@
 
                     </div>
 
-                    @Html.Grid(Model).Named("categoriesGrid").Columns(columns =>
+                    @Html.Grid(Model).Named("CategoryGrid").Columns(columns =>
     {
 
 
@@ -165,14 +167,17 @@
                     SetWidth(10).
                     RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
 
-        columns.Add(o => o.State)
-     .Titled("State")
-     .Sortable(true)
-     .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                Sanitized(false)
-        .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  name='spanState'><img gridkey-state-id='{0}'  src='/Images/{1}.ico'/></span>",
-              o.Id, (o.State ? "OK" : "Close"), o.State));
+     
 
+        columns.Add(o => o.State)
+                   .Titled("State")
+                   .Sortable(true)
+                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                    Sanitized(false)
+                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
+                                                     o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
+
+              
         columns.Add(o => o.CreatedDate)
 .Titled("Date")
 .Sortable(true).

@@ -30,13 +30,13 @@ namespace StoreManagement.Admin.Controllers
             List<Setting> items = null;
             if (!String.IsNullOrEmpty(type))
             {
-                items = settingRepository.GetStoreSettingsByType(1, type);
+                items = SettingRepository.GetStoreSettingsByType(1, type);
             }
             else
             {
-                items = settingRepository.GetAll().ToList();
+                items = SettingRepository.GetAll().ToList();
             }
-            var types = from p in settingRepository.GetAll()
+            var types = from p in SettingRepository.GetAll()
                         where !String.IsNullOrEmpty(p.Type) 
                         group p by p.Type into g
                         select new { Type = g.Key };
@@ -51,7 +51,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Setting setting = settingRepository.GetSingle(id);
+            Setting setting = SettingRepository.GetSingle(id);
             return View(setting);
         }
 
@@ -75,8 +75,8 @@ namespace StoreManagement.Admin.Controllers
             if (ModelState.IsValid)
             {
                 setting.SettingKey = setting.SettingKey.ToLower();
-                settingRepository.Add(setting);
-                settingRepository.Save();
+                SettingRepository.Add(setting);
+                SettingRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -88,7 +88,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            Setting setting = settingRepository.GetSingle(id);
+            Setting setting = SettingRepository.GetSingle(id);
             return View(setting);
         }
 
@@ -101,8 +101,8 @@ namespace StoreManagement.Admin.Controllers
             if (ModelState.IsValid)
             {
                 setting.SettingKey = setting.SettingKey.ToLower();
-                settingRepository.Edit(setting);
-                settingRepository.Save();
+                SettingRepository.Edit(setting);
+                SettingRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(setting);
@@ -113,7 +113,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
-            Setting setting = settingRepository.GetSingle(id);
+            Setting setting = SettingRepository.GetSingle(id);
             return View(setting);
         }
 
@@ -123,21 +123,21 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Setting setting = settingRepository.GetSingle(id);
-            settingRepository.Delete(setting);
-            settingRepository.Save();
+            Setting setting = SettingRepository.GetSingle(id);
+            SettingRepository.Delete(setting);
+            SettingRepository.Save();
             return RedirectToAction("Index");
         }
         public ActionResult StoreSettings(int storeId)
         {
-            return View(settingRepository.GetStoreSettings(storeId));
+            return View(SettingRepository.GetStoreSettings(storeId));
         }
 
 
         public ActionResult TestSetting(int id=1)
         {
             ViewBag.StoreId = id;
-            var settings = settingRepository.GetStoreSettings(id).Where(r => r.Type.ToLower().Contains("Style".ToLower())).ToList();
+            var settings = SettingRepository.GetStoreSettings(id).Where(r => r.Type.ToLower().Contains("Style".ToLower())).ToList();
             return View(settings);
         }
 	}

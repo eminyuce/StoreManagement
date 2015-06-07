@@ -73,7 +73,7 @@ namespace StoreManagement.Service.Repositories
 
             return items;
         }
-
+        
         public StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
             String key = String.Format("GetContentsCategoryId-{0}-{1}-{2}-{3}-{4}-{5}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "", page, pageSize);

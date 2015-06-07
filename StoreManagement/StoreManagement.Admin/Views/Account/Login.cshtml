@@ -15,7 +15,7 @@
 
             <fieldset>
                 <legend>Management Panel</legend>
-
+                @Html.HiddenFor(m => m.RememberMe)
                 <div class="form-group">
                     @Html.LabelFor(m => m.UserName)
                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
@@ -42,7 +42,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="OurMessage">  Do Not Enter, Authorized Personnel Only  </label>
+                    <label for="OurMessage">Do Not Enter, Authorized Personnel Only  </label>
                 </div>
                 <div class="form-group">
                     <label for="YourLoginDate">Your Login Date : @DateTime.Now.ToLongDateString()</label>

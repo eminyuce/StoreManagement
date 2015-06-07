@@ -27,24 +27,24 @@ namespace StoreManagement.Admin.Controllers
         {
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
-            return PartialView("_StoresFilter", storeRepository.GetAll().ToList());
+            return PartialView("_StoresFilter", StoreRepository.GetAll().ToList());
         }
 
 
         public PartialViewResult StoresDropDown(int storeId = 0)
         {
             ViewBag.StoreId = storeId;
-            return PartialView("_StoresDropDown", storeRepository.GetAll().ToList());
+            return PartialView("_StoresDropDown", StoreRepository.GetAll().ToList());
         }
         public ViewResult Index()
         {
-            return View(storeRepository.GetAll().ToList());
+            return View(StoreRepository.GetAll().ToList());
         }
         //
         // GET: /Stores/Details/5
         public ViewResult Details(int id)
         {
-            return View(storeRepository.GetSingle(id));
+            return View(StoreRepository.GetSingle(id));
         }
 
  
@@ -58,7 +58,7 @@ namespace StoreManagement.Admin.Controllers
             var store = new Store();
             if (id != 0)
             {
-                store = storeRepository.GetSingle(id);
+                store = StoreRepository.GetSingle(id);
             }
             return View(store);
         }
@@ -74,14 +74,14 @@ namespace StoreManagement.Admin.Controllers
                 store.CreatedDate = DateTime.Now;
                 if (store.Id == 0)
                 {
-                    storeRepository.Add(store);
+                    StoreRepository.Add(store);
                 }
                 else
                 {
-                    storeRepository.Edit(store);  
+                    StoreRepository.Edit(store);  
                 }
 
-                storeRepository.Save();
+                StoreRepository.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -95,7 +95,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View(storeRepository.GetSingle(id));
+            return View(StoreRepository.GetSingle(id));
         }
 
         //
@@ -104,8 +104,8 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            storeRepository.Delete(storeRepository.GetSingle(id));
-            storeRepository.Save();
+            StoreRepository.Delete(StoreRepository.GetSingle(id));
+            StoreRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -121,7 +121,7 @@ namespace StoreManagement.Admin.Controllers
                     int userId = 0;
                     // using (UsersContext db = new UsersContext())
                     {
-                        UserProfile user = dbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
+                        UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
                         userId = user.UserId;
                     }
 
@@ -144,14 +144,14 @@ namespace StoreManagement.Admin.Controllers
         // GET: /Stores/Details/5
         public ActionResult Users(int id)
         {
-            var store = this.storeRepository.GetSingle(id);
+            var store = this.StoreRepository.GetSingle(id);
             ViewBag.Store = store;
             var storeUserIds = StoreUserRepository.FindBy(r => r.StoreId == id).Select(r => r.UserId).ToArray();
 
             //using (StoreContext db = new StoreContext())
             {
-                var storeUsers = (from u in dbContext.UserProfiles where storeUserIds.Contains(u.UserId) select u).ToArray();
-                ViewBag.Roles = dbContext.Roles.ToList();
+                var storeUsers = (from u in DbContext.UserProfiles where storeUserIds.Contains(u.UserId) select u).ToArray();
+                ViewBag.Roles = DbContext.Roles.ToList();
                 return View(storeUsers.ToList());
             }
 
@@ -159,9 +159,9 @@ namespace StoreManagement.Admin.Controllers
         // GET: /Stores/Details/5
         public ActionResult Settings(int id)
         {
-            var store = this.storeRepository.GetSingle(id);
+            var store = this.StoreRepository.GetSingle(id);
             ViewBag.Store = store;
-            var settings = this.settingRepository.GetStoreSettings(id);
+            var settings = this.SettingRepository.GetStoreSettings(id);
             return View(settings);
         }
         [HttpPost]
@@ -169,8 +169,8 @@ namespace StoreManagement.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                this.settingRepository.Add(setting);
-                this.settingRepository.Save();
+                this.SettingRepository.Add(setting);
+                this.SettingRepository.Save();
             }
             return RedirectToAction("Settings", new { id = setting.StoreId });
         }

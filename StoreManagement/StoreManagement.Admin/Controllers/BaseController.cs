@@ -28,10 +28,10 @@ namespace StoreManagement.Admin.Controllers
         public ICategoryRepository CategoryRepository { set; get; }
 
         [Inject]
-        public IStoreRepository storeRepository { set; get; }
+        public IStoreRepository StoreRepository { set; get; }
 
         [Inject]
-        public INavigationRepository navigationRepository { set; get; }
+        public INavigationRepository NavigationRepository { set; get; }
 
         [Inject]
         public IPageDesignRepository PageDesignRepository { set; get; }
@@ -40,12 +40,12 @@ namespace StoreManagement.Admin.Controllers
         public IStoreUserRepository StoreUserRepository { set; get; }
 
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        protected IStoreContext dbContext;
-        protected ISettingRepository settingRepository;
-        public BaseController(IStoreContext dbContext, ISettingRepository settingRepository)
+        protected IStoreContext DbContext;
+        protected ISettingRepository SettingRepository;
+        protected BaseController(IStoreContext dbContext, ISettingRepository settingRepository)
         {
-            this.dbContext = dbContext;
-            this.settingRepository = settingRepository;
+            this.DbContext = dbContext;
+            this.SettingRepository = settingRepository;
         }
         protected string GetCleanHtml(String source)
         {

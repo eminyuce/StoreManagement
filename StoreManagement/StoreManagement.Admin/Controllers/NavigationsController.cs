@@ -31,11 +31,11 @@ namespace StoreManagement.Admin.Controllers
             List<Navigation> resultList = new List<Navigation>();
             if (storeId == 0)
             {
-                resultList = navigationRepository.GetAll().ToList();
+                resultList = NavigationRepository.GetAll().ToList();
             }
             else
             {
-                resultList = navigationRepository.GetStoreNavigations(storeId);
+                resultList = NavigationRepository.GetStoreNavigations(storeId);
             }
             if (!String.IsNullOrEmpty(search))
             {
@@ -51,7 +51,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Navigation navigation = navigationRepository.GetSingle(id);
+            Navigation navigation = NavigationRepository.GetSingle(id);
             return View(navigation);
         }
 
@@ -68,7 +68,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                item = navigationRepository.GetSingle(id);
+                item = NavigationRepository.GetSingle(id);
             }
 
             ViewBag.Moduls = GetModuls();
@@ -86,13 +86,13 @@ namespace StoreManagement.Admin.Controllers
                 navigation.ControllerName = navigation.Modul;
                 if (navigation.Id == 0)
                 {
-                    navigationRepository.Add(navigation);
-                    navigationRepository.Save();
+                    NavigationRepository.Add(navigation);
+                    NavigationRepository.Save();
                 }
                 else
                 {
-                    navigationRepository.Edit(navigation);
-                    navigationRepository.Save();
+                    NavigationRepository.Edit(navigation);
+                    NavigationRepository.Save();
                 }
 
                 return RedirectToAction("Index");
@@ -108,7 +108,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
-            Navigation navigation = navigationRepository.GetSingle(id);
+            Navigation navigation = NavigationRepository.GetSingle(id);
             return View(navigation);
         }
 
@@ -118,9 +118,9 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Navigation navigation = navigationRepository.GetSingle(id);
-            navigationRepository.Delete(navigation);
-            navigationRepository.Save();
+            Navigation navigation = NavigationRepository.GetSingle(id);
+            NavigationRepository.Delete(navigation);
+            NavigationRepository.Save();
             return RedirectToAction("Index");
         }
 

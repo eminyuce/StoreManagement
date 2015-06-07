@@ -19,7 +19,8 @@ namespace StoreManagement.Service.Repositories
       = new TypedObjectCache<List<FileManager>>("StoreFileManager");
 
 
-        public FileManagerRepository(IStoreContext dbContext) : base(dbContext)
+        public FileManagerRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
         }
 
@@ -46,6 +47,11 @@ namespace StoreManagement.Service.Repositories
             return
                 FindBy(r => r.GoogleImageId.Equals(googleImageId, StringComparison.InvariantCultureIgnoreCase))
                     .FirstOrDefault();
+        }
+
+        public List<FileManager> GetStoreCarousels(int storeId)
+        {
+            return FindBy(r => r.StoreId == storeId).Where(r => r.IsCarousel).ToList();
         }
     }
 

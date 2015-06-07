@@ -47,9 +47,7 @@ namespace StoreManagement.Controllers
         [Inject]
         public ISettingService SettingService { set; get; }
         
-        [Inject]
-        public IStoreCarouselService StoreCarouselService { set; get; }
-        
+    
         
         protected Store Store { set; get; }
 

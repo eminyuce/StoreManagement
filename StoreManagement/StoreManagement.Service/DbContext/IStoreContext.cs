@@ -23,6 +23,5 @@ namespace StoreManagement.Service.DbContext
         IDbSet<Role> Roles { get; set; }
         IDbSet<Company> Companies { get; set; }
         IDbSet<PageDesign> PageDesigns { get; set; }      
-        IDbSet<StoreCarousel> StoreCarousels { get; set; }
     }
 }

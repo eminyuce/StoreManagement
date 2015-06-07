@@ -98,4 +98,4 @@ C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.A
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Debug\StoreManagement.Admin.csprojResolveAssemblyReference.cache
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Debug\StoreManagement.Admin.dll
 C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\obj\Debug\StoreManagement.Admin.pdb
-C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\log4net.xml
+C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\bin\DotNetOpenAuth.Core.dll

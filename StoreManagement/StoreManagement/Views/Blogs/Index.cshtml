@@ -11,27 +11,25 @@
 
     @if (Model.Contents.Any())
     {
-        foreach (var product in Model.Contents)
+        foreach (var content in Model.Contents)
         {
 
         <div>
-            @Html.DisplayFor(model => product, "BlogContentItem")
+            @Html.DisplayFor(model => content, "BlogContentItem")
         </div>
         }
 
         @Model.Contents.TotalItemCount
                   
         <div class="pager">
-
             @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount).Options(o => o
                                                                                                                             .DisplayTemplate("BootstrapPagination")
                                                                                                                             .MaxNrOfPages(7)
                                                                                                                             .AlwaysAddFirstPageNumber()
                                                                                                                             .SetPreviousPageText("←")
                                                                                                                             .SetNextPageText("→"))
-
         </div>
-                     
     }
+
 
 </div>

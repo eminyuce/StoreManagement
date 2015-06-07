@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
@@ -16,7 +17,8 @@ namespace StoreManagement.Controllers
         public ActionResult Index()
         {
             var returnModel = new ProductsViewModel();
-
+            returnModel.Categories = CategoryService.GetCategoriesByStoreIdFromCache(Store.Id, "product");
+            returnModel.Store = Store;
             return View(returnModel);
         }
         //

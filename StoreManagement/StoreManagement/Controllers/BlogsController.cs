@@ -13,7 +13,7 @@ namespace StoreManagement.Controllers
     {
         //
         // GET: /Blogs/
-        public ActionResult Index(int page)
+        public ActionResult Index(int page = 1)
         {
             int categoryId = 1;
             var newsContents = new ContentsViewModel();
@@ -22,5 +22,5 @@ namespace StoreManagement.Controllers
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
             return View(newsContents);
         }
-	}
+    }
 }

@@ -16,7 +16,7 @@ namespace StoreManagement.Service.Repositories
         {
             get
             {
-                return ProjectAppSettings.GetWebConfigBool("IsCacheActive", false);
+                return ProjectAppSettings.GetWebConfigBool("IsCacheActive", true);
             }
         }
         protected StoreContext StoreDbContext;

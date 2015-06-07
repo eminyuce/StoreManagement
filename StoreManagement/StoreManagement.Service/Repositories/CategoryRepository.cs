@@ -77,8 +77,12 @@ namespace StoreManagement.Service.Repositories
 
         public List<Category> GetCategoriesByStoreId(int storeId, String type)
         {
+
             return this.FindBy(r => r.StoreId == storeId &&
-                r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
+               r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+
+
         }
 
         public List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type)
@@ -89,14 +93,41 @@ namespace StoreManagement.Service.Repositories
 
             if (items == null && IsCacheActive)
             {
-                items = GetCategoriesByStoreId(storeId, type);
+                //var ttt = from cus in StoreDbContext.Categories
+                //    join ord in StoreDbContext.Contents on cus.Id equals ord.CategoryId
+                //    join cf in StoreDbContext.ContentFiles on ord.Id equals cf.ContentId
+                //    where cus.StoreId == storeId
+                //          && cus.Contents.Any()
+                //          && cus.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)
+                //    orderby cus.Ordering, ord.Ordering
+                //    select cus;
+
+                //var mmmm = ttt
+                //    .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
+                //    .ToList();
+
+               items = this.FindBy(r => r.StoreId == storeId &&
+                        r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase))
+                        .OrderBy(r => r.Ordering)
+                        .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager))).ToList();
+
+                //var mmmm = itemss.ToList();
+
+                //  items = GetCategoriesByStoreId(storeId, type);
+
+
+                //var mmmm = StoreDbContext.Categories
+                //    .Where(r => r.StoreId == storeId && r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase))
+                //    .OrderBy(b => b.Ordering)
+                //    .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
+
                 CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
             }
 
             return items;
         }
 
-        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page = 1, int pageSize=25)
+        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page = 1, int pageSize = 25)
         {
             String key = String.Format("GetCategoryWithContents-{0}-{1}", categoryId, page);
             StorePagedList<Category> items = null;
@@ -111,10 +142,15 @@ namespace StoreManagement.Service.Repositories
                                                                   r1 => r1.ContentFiles.Select(m => m.FileManager)))
                                                           .OrderByDescending(r => r.Ordering);
 
-                var c = cats.ToList();
-                items = new StorePagedList<Category>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
-                //items = new PagedList<Category>(cats, page, cats.Count());
+                //var paging = this.Paginate(page, pageSize,
+                //        r => r.Id == categoryId,null,r=>r.Contents.Select(
+                //                                                  r1 => r1.ContentFiles.Select(m => m.FileManager)))
+                //        .OrderBy(r => r.Ordering).ToList();
 
+               var c = cats.ToList();
+                items = new StorePagedList<Category>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
+               // items = new PagedList<Category>(cats, page, cats.Count());
+               // items = new StorePagedList<Category>(paging.FindAll(), page, paging.Capacity);
                 PagingCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
             }
 

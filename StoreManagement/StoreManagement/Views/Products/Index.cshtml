@@ -1,7 +1,32 @@
-﻿@model StoreManagement.Data.RequestModel.ProductsViewModel
+﻿@using MvcPaging
+@model StoreManagement.Data.RequestModel.ProductsViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Categories.Any())
+        {
+            foreach (var cat in Model.Categories)
+            {
+            <div class="row">
+                <h2>@cat.Name</h2>
+                @foreach (var product in cat.Contents.Take(8))
+                {
+                    <div class="col-md-3">
+                        @Html.DisplayFor(model => product, "ProductThumbnail")
+                    </div>
+                }
+            </div>
+            }
+
+
+
+
+        }
+    </div>
+</div>
 

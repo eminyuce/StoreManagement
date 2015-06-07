@@ -1,10 +1,10 @@
-﻿@model StoreManagement.Data.Entities.StoreCarousel
+﻿@model StoreManagement.Data.Entities.FileManager
 
 @{
-    var image = Model.FileManager;
+    var image = Model;
 }
 <div class="item">
-    <img style="width: 100%" src="@Url.Action("Index", "Images", new { id = image.GoogleImageId, size = "", contentType = image.ContentType })" alt="bootstrap ecommerce templates">
+    <img style="width: 100%" src="@Url.Action("FetchImage", "Images", new { id = image.GoogleImageId, size = "", contentType = image.ContentType })" alt="bootstrap ecommerce templates">
     <div class="carousel-caption">
         <h4>Bootstrap Ecommerce template</h4>
         <p><span>Highly Google seo friendly</span></p>

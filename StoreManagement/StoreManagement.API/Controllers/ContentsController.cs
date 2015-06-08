@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
@@ -124,7 +125,8 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentByType(storeId, typeName);
         }
 
-         
+       
+
 
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {

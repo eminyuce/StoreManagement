@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -123,6 +124,12 @@ namespace StoreManagement.Admin.Controllers
                     {
                         UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
                         userId = user.UserId;
+                        user.FirstName = userName.FirstName;
+                        user.LastName = userName.LastName;
+                        user.PhoneNumber = userName.PhoneNumber;
+                        user.CreatedDate = DateTime.Now;
+                        DbContext.SaveChanges();
+
                     }
 
                     var su = new StoreUser();

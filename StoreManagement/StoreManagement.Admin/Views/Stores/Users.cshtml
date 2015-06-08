@@ -165,19 +165,11 @@
         columns.Add(o => o.CreatedDate)
               .Titled("Date")
               .Sortable(true).
-              RenderValueAs(o => String.Format("{0}", o.CreatedDate.ToShortDateString()))
+              RenderValueAs(o => String.Format("{0}",o.CreatedDate.HasValue ?  o.CreatedDate.Value.ToShortDateString() : ""))
               .SortInitialDirection(GridSortDirection.Descending);
 
 
-        columns.Add()
-     .Encoded(false)
-     .Sanitized(false)
-     .SetWidth(30)
-     .RenderValueAs(d =>
-         @<b>
-
-             <a class="btn btn-info btn-sm glyphicon  glyphicon-camera" href="#" data-file-id="@d.UserId"></a>
-         </b>);
+       
     }).SetRowCssClasses(item => item.UserId % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 

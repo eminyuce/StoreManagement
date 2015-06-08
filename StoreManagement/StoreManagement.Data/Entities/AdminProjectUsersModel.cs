@@ -30,7 +30,7 @@ namespace StoreManagement.Data.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 
     public class RegisterExternalLoginModel

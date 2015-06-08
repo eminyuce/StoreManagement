@@ -151,13 +151,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/08/2015 15:11:50</publishTime>
+      <publishTime>06/08/2015 16:13:31</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>06/08/2015 15:11:53</publishTime>
+      <publishTime>06/08/2015 16:13:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/08/2015 15:11:51</publishTime>
+      <publishTime>06/08/2015 16:13:32</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -853,7 +853,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Blogs/Index.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/08/2015 15:42:42</publishTime>
     </File>
     <File Include="Views/Categories/Category.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -916,16 +916,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Photos/Index.cshtml">
-      <publishTime>06/08/2015 15:11:35</publishTime>
+      <publishTime>06/08/2015 15:16:02</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/08/2015 16:04:55</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BlogContentItem.cshtml">
-      <publishTime>06/07/2015 10:56:06</publishTime>
+      <publishTime>06/08/2015 15:45:19</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BootstrapPagination.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -940,7 +940,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/FileManager.cshtml">
-      <publishTime>06/08/2015 14:19:18</publishTime>
+      <publishTime>06/08/2015 15:38:56</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/NewsContentItem.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>

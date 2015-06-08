@@ -13,7 +13,7 @@ using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Data.GeneralHelper
 {
-    public class RequestHelper
+    public class RequestHelper  
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static CacheEntryUpdateCallback _callbackU = null;
@@ -23,7 +23,20 @@ namespace StoreManagement.Data.GeneralHelper
             get { return _cacheMinute; }
             set { _cacheMinute = value; }
         }
-        public  String GetJsonFromCacheOrWebservice(string url)
+        readonly string _accountSid = "";
+        readonly string _secretKey = "";
+
+        public RequestHelper()
+        {
+
+        }
+
+        public RequestHelper(string accountSid, string secretKey)
+        {
+            _accountSid = accountSid;
+            _secretKey = secretKey;
+        }
+        public String GetJsonFromCacheOrWebservice(string url)
         {
 
             String returnJson = String.Empty;
@@ -42,8 +55,28 @@ namespace StoreManagement.Data.GeneralHelper
 
             return returnJson;
         }
-
-        public  string MakeJsonRequest(string url)
+        //public Task<T> ExecuteAsync<T>(RestRequest request, String url) where T : new()
+        //{
+        //    var client = new RestClient(url);
+        //    var taskCompletionSource = new TaskCompletionSource<T>();
+        //    // client.Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey);
+        //    //request.AddParameter("AccountSid", _accountSid, ParameterType.UrlSegment);
+        //    client.ExecuteAsync<T>(request, (response) => taskCompletionSource.SetResult(response.Data));
+        //    return taskCompletionSource.Task;
+        //}
+        
+        //public string MakeJsonRequest<T>(string url) where T : new()
+        //{
+        //    string returnJson = String.Empty;
+        //    var client = new RestClient(url);
+        //    var request = new RestRequest(Method.GET);
+        //    request.RequestFormat = DataFormat.Json;
+        //    request.AddHeader("Accept", "application/json");
+        //    request.AddHeader("Content-type", "application/json");
+        //    var myClass = await this.ExecuteAsync<T>(request,url );
+        //    return myClass.HasValue() ? myClass.Dump() : "";
+        //}
+        public string MakeJsonRequest(string url)
         {
             string returnJson = String.Empty;
             var client = new RestClient(url);
@@ -72,25 +105,30 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return returnJson;
         }
-        private  string CacheResponseOutput(string key, String responseContent)
+        private string CacheResponseOutput(string key, String responseContent)
         {
             var ret = (String)MemoryCache.Default.Get(key);
             if (String.IsNullOrEmpty(ret))
             {
                 ret = responseContent;
-                CacheItemPolicy policy = null;
-                CacheEntryRemovedCallback callback = null;
-                policy = new CacheItemPolicy();
-                policy.Priority = CacheItemPriority.Default;
-                _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
-                policy.UpdateCallback = _callbackU;
-                policy.AbsoluteExpiration = DateTime.Now.AddMinutes(CacheMinute);
-                MemoryCache.Default.Set(key, ret, policy);
+                if (!String.IsNullOrEmpty(ret))
+                {
+                    CacheItemPolicy policy = null;
+                    CacheEntryRemovedCallback callback = null;
+                    policy = new CacheItemPolicy();
+                    policy.Priority = CacheItemPriority.Default;
+                    _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
+                    policy.UpdateCallback = _callbackU;
+                    policy.AbsoluteExpiration = DateTime.Now.AddMinutes(CacheMinute);
+                    MemoryCache.Default.Set(key, ret, policy);
+                }
+
+
             }
             return ret;
         }
 
-        private  void ContentCacheUpdateCallback(CacheEntryUpdateArguments arguments)
+        private void ContentCacheUpdateCallback(CacheEntryUpdateArguments arguments)
         {
             if (arguments.RemovedReason == CacheEntryRemovedReason.Expired)
             {
@@ -124,7 +162,7 @@ namespace StoreManagement.Data.GeneralHelper
 
         }
 
-        public  IRestResponse PostBasicAuthenication(string baseUrl, string resourceUrl, string userName, string password, string json)
+        public IRestResponse PostBasicAuthenication(string baseUrl, string resourceUrl, string userName, string password, string json)
         {
             var client = new RestClient(baseUrl);
             client.Authenticator = new HttpBasicAuthenticator(userName, password);
@@ -135,7 +173,7 @@ namespace StoreManagement.Data.GeneralHelper
         }
 
 
-        public  String GetPostJsonFromCacheOrWebservice(string baseUrl, string apiAddress, string json)
+        public String GetPostJsonFromCacheOrWebservice(string baseUrl, string apiAddress, string json)
         {
             String url = String.Format("Post:{0}/{1}", baseUrl, apiAddress);
             String returnJson = String.Empty;
@@ -159,7 +197,7 @@ namespace StoreManagement.Data.GeneralHelper
 
             return returnJson;
         }
-        public  IRestResponse MakeJsonPost(string baseUrl, string resourceUrl, string json)
+        public IRestResponse MakeJsonPost(string baseUrl, string resourceUrl, string json)
         {
             var client = new RestClient(baseUrl);
             var request = new RestRequest(resourceUrl, Method.POST);
@@ -168,9 +206,9 @@ namespace StoreManagement.Data.GeneralHelper
             return client.Execute(request);
         }
 
-        public  string ConvertObjectToJason<T>(T arg)
+        public string ConvertObjectToJason<T>(T arg)
         {
-           // return JsonConvert.SerializeObject(arg);
+            // return JsonConvert.SerializeObject(arg);
 
             var jsonSer = new JsonSerializer<T>();
             var result = jsonSer.SerializeToString(arg);
@@ -178,7 +216,7 @@ namespace StoreManagement.Data.GeneralHelper
 
 
         }
-        public StorePagedList<T>  GetUrlPagedResults<T>(string url) where T : new()
+        public StorePagedList<T> GetUrlPagedResults<T>(string url) where T : new()
         {
             var responseContent = GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))
@@ -194,7 +232,7 @@ namespace StoreManagement.Data.GeneralHelper
                 throw new Exception("Url:" + url + "  is not working");
             }
         }
-        public  List<T> GetUrlResults<T>(string url)
+        public List<T> GetUrlResults<T>(string url)
         {
             var responseContent = GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))
@@ -209,7 +247,7 @@ namespace StoreManagement.Data.GeneralHelper
                 throw new Exception("Url:" + url + "  is not working");
             }
         }
-        public  T GetUrlResult<T>(string url) where T : new()
+        public T GetUrlResult<T>(string url) where T : new()
         {
             var responseContent = GetJsonFromCacheOrWebservice(url);
             if (!String.IsNullOrEmpty(responseContent))

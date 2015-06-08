@@ -66,7 +66,7 @@ namespace StoreManagement.Service.Services
         {
             try
             {
-                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdFromCache?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
                 return HttpRequestHelper.GetUrlResults<Category>(url);
             }
             catch (Exception ex)

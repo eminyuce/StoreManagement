@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.CacheHelper;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
@@ -91,7 +92,7 @@ namespace StoreManagement.Service.Repositories
             List<Category> items = null;
             CategoryCache.TryGet(key, out items);
 
-            if (items == null && IsCacheActive)
+            if (items == null )
             {
                 //var ttt = from cus in StoreDbContext.Categories
                 //    join ord in StoreDbContext.Contents on cus.Id equals ord.CategoryId
@@ -106,10 +107,20 @@ namespace StoreManagement.Service.Repositories
                 //    .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
                 //    .ToList();
 
-               items = this.FindBy(r => r.StoreId == storeId &&
+               var cats  = this.FindBy(r => r.StoreId == storeId &&
                         r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase))
                         .OrderBy(r => r.Ordering)
-                        .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager))).ToList();
+                        .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
+                
+                items = cats.ToList();
+
+                foreach (var category in items)
+                {
+                    foreach (var ccc in category.Contents)
+                    {
+                        ccc.Description = ""; // GeneralHelper.GetDescription(ccc.Description, 200);
+                    }
+                }
 
                 //var mmmm = itemss.ToList();
 
@@ -133,7 +144,7 @@ namespace StoreManagement.Service.Repositories
             StorePagedList<Category> items = null;
             PagingCategoryCache.TryGet(key, out items);
 
-            if (items == null && !IsCacheActive)
+            if (items == null)
             {
                 IQueryable<Category> cats = StoreDbContext.Categories.Where(r => r.Id == categoryId && r.Contents.Any())
                                                           .Include(

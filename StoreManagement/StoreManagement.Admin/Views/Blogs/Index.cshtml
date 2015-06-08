@@ -10,3 +10,12 @@
     var gridName = "contentGrid";
 }
 
+ 
+
+     @Html.Partial("Content/pContentsIndex",Model, new ViewDataDictionary(ViewData){
+            {"ContentGridName",gridName}
+            ,{"ContentPageTitle",title}
+            ,{"ContentControllerName",controllerName}})
+
+
+

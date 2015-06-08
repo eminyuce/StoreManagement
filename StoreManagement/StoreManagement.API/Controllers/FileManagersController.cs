@@ -124,7 +124,7 @@ namespace StoreManagement.API.Controllers
 
         public List<FileManager> GetStoreCarousels(int storeId)
         {
-            throw new NotImplementedException();
+            return FileManagerRepository.GetStoreCarousels(storeId);
         }
     }
 }

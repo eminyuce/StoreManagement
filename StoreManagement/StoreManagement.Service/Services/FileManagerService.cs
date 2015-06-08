@@ -61,7 +61,16 @@ namespace StoreManagement.Service.Services
 
         public List<FileManager> GetStoreCarousels(int storeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetStoreCarousels?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                return HttpRequestHelper.GetUrlResults<FileManager>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<FileManager>();
+            }
         }
     }
 }

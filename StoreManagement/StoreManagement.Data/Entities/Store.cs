@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using GenericRepository;
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ namespace StoreManagement.Data.Entities
         public string Name { get; set; }
         public string Domain { get; set; }
         public string Layout { get; set; }
+        [IgnoreDataMember]
         public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<FileManager> FileManagers { get; set; }

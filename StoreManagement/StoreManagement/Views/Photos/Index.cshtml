@@ -1,7 +1,33 @@
-﻿
+﻿@using MvcPaging
+@model StoreManagement.Data.RequestModel.PhotosViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.FileManagers.Any())
+        {
+                foreach (var file in Model.FileManagers)
+                {
+                    <div class="col-md-12">
+                        @Html.DisplayFor(model => file)
+                    </div>
+                }
+  <div class="pager">
+
+            @Html.Pager(Model.FileManagers.PageSize, 
+            Model.FileManagers.PageNumber, 
+            Model.FileManagers.TotalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination").MaxNrOfPages(3).DisplayFirstAndLastPage().AlwaysAddFirstPageNumber()
+                                                                                                                            .SetPreviousPageText("←")
+                                                                                                                            .SetNextPageText("→"))
+
+        </div>
+            
+        }
+    </div>
+</div>
 

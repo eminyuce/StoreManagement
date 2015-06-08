@@ -1,4 +1,5 @@
-﻿using StoreManagement.Data.Entities;
+﻿using MvcPaging;
+using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
@@ -125,6 +127,11 @@ namespace StoreManagement.API.Controllers
         public List<FileManager> GetStoreCarousels(int storeId)
         {
             return FileManagerRepository.GetStoreCarousels(storeId);
+        }
+
+        public StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize)
+        {
+            return FileManagerRepository.GetImagesByStoreId(storeId, page, pageSize);
         }
     }
 }

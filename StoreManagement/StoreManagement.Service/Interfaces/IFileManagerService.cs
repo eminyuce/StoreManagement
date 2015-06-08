@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Service.Interfaces
 {
@@ -13,6 +14,6 @@ namespace StoreManagement.Service.Interfaces
         List<FileManager> GetFilesByStoreId(int storeId);
         FileManager GetFilesByGoogleImageId(String googleImageId);
         List<FileManager> GetStoreCarousels(int storeId);
-
+        StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize);
     }
 }

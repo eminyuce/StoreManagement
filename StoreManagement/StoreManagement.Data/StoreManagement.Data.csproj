@@ -51,7 +51,7 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="MvcPaging">
-      <HintPath>..\..\..\..\..\..\..\AspNETDLL\MvcPaging.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\ProjectsEY\NetDLLFiles\MvcPaging.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
@@ -145,6 +145,7 @@
     <Compile Include="RequestModel\CompanySearchResult.cs" />
     <Compile Include="RequestModel\ContentDetailViewModel.cs" />
     <Compile Include="RequestModel\ContentsViewModel.cs" />
+    <Compile Include="RequestModel\PhotosViewModel.cs" />
     <Compile Include="RequestModel\ProductDetailViewModel.cs" />
     <Compile Include="RequestModel\ProductsViewModel.cs" />
     <Compile Include="RequestModel\StoreHomePage.cs" />

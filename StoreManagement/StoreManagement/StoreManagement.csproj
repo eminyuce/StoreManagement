@@ -519,6 +519,7 @@
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NewsContentItem.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BlogContentItem.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

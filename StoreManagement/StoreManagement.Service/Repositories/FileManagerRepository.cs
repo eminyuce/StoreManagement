@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using MvcPaging;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -15,8 +17,11 @@ namespace StoreManagement.Service.Repositories
     public class FileManagerRepository : BaseRepository<FileManager, int>, IFileManagerRepository
     {
 
-        static TypedObjectCache<List<FileManager>> CategoryCache
+        static TypedObjectCache<List<FileManager>> StoreFileManagerCache
       = new TypedObjectCache<List<FileManager>>("StoreFileManager");
+
+        static TypedObjectCache<StorePagedList<FileManager>> StorePagedListFileManagerCache
+ = new TypedObjectCache<StorePagedList<FileManager>>("StorePagedListFileManagerCache");
 
 
         public FileManagerRepository(IStoreContext dbContext)
@@ -28,11 +33,11 @@ namespace StoreManagement.Service.Repositories
         {
             String key = String.Format("StoreFileManager-{0}", storeId);
             List<FileManager> items = null;
-            CategoryCache.TryGet(key, out items);
+            StoreFileManagerCache.TryGet(key, out items);
             if (items == null)
             {
                 items = GetFilesByStoreId(storeId);
-                CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                StoreFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
             }
             return items;
         }
@@ -52,6 +57,20 @@ namespace StoreManagement.Service.Repositories
         public List<FileManager> GetStoreCarousels(int storeId)
         {
             return FindBy(r => r.StoreId == storeId).Where(r => r.IsCarousel).ToList();
+        }
+
+        public StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize)
+        {
+            String key = String.Format("StoreFileManager-{0}", storeId);
+            StorePagedList<FileManager> items = null;
+            StorePagedListFileManagerCache.TryGet(key, out items);
+            if (items == null)
+            {
+                var images = FindBy(r => r.StoreId == storeId).ToList();
+                items = new StorePagedList<FileManager>(images.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, images.Count());
+                StorePagedListFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+            }
+            return items;
         }
     }
 

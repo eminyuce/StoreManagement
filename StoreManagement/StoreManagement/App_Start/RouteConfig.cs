@@ -13,6 +13,12 @@ namespace StoreManagement
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+                routes.MapRoute(
+                          name: "ProductsDetail",
+                          url: "Products/Product/{categoryName}/{id}",
+                          defaults: new { controller = "Products", action = "Product", id = UrlParameter.Optional }
+                      );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

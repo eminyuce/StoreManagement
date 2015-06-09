@@ -1,15 +1,34 @@
 ﻿@model List<StoreManagement.Data.Entities.Store>
 @{
     int storeId = (int) ViewBag.StoreId;
-    var storesListItems = Model.ToList().Select(c => new SelectListItem
+    int loginStoreId = (int)ViewBag.LoginStoreId;
+    bool isSuperAdmin = (bool)ViewBag.IsSuperAdmin;
+
+    List<SelectListItem> storesListItems = new List<SelectListItem>();
+    if (isSuperAdmin)
     {
-        Text = c.Name,
-        Value = c.Id.ToString(),
-        Selected = c.Id == storeId  ? true : false
-    }).ToList();
-    
+        storesListItems = Model.ToList().Select(c => new SelectListItem
+            {
+                Text = c.Name,
+                Value = c.Id.ToString(),
+                Selected = c.Id == storeId ? true : false
+            }).ToList();
+
+    }
+    else
+    {
+        storeId = loginStoreId;
+    }
+
 }
+
+
 <input type="hidden" name="StoreId" value="@storeId" id="StoreId"/>
-@Html.DropDownList("StoreDropDownId", storesListItems) 
+
+@if (isSuperAdmin)
+{
+    @Html.DropDownList("StoreDropDownId", storesListItems) 
+}
+
 
  

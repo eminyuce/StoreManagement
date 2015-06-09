@@ -146,6 +146,7 @@
     <Compile Include="RequestModel\CategoryViewModel.cs" />
     <Compile Include="RequestModel\CompanySearchResult.cs" />
     <Compile Include="RequestModel\ContentDetailViewModel.cs" />
+    <Compile Include="RequestModel\ContentsAdminViewModel.cs" />
     <Compile Include="RequestModel\ContentsViewModel.cs" />
     <Compile Include="RequestModel\PhotosViewModel.cs" />
     <Compile Include="RequestModel\ProductDetailViewModel.cs" />

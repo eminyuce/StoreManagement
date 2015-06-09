@@ -3,12 +3,14 @@
 @using StoreManagement.Data.GeneralHelper
 @{
     var image = Model.ContentFiles.FirstOrDefault();
+    var categoryName = ViewData["ProductCategoryName"].ToStr();
+    var productDetailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id, GeneralHelper.GetUrlSeoString(categoryName)));
 }
 
 <div class="thumbnail">
-    <a href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))" class="overlay"></a>
+    <a href="@productDetailLink" class="overlay"></a>
   
-    <a href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))">
+    <a href="@productDetailLink">
         @if (image != null)
         {
             <img src="@Url.Action("FetchImage", "Images", new { id = image.FileManager.GoogleImageId, size = "", contentType = image.FileManager.ContentType })" style="width: 120px; height: 120px;" alt="">
@@ -23,7 +25,7 @@
         <h4>
             <a  
 
-               href="@String.Format("/Products/Product/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id))"
+               href="@productDetailLink"
                title="add to cart"> QUICK VIEW</a>
 
 

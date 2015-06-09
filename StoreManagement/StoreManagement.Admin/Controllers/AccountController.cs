@@ -52,6 +52,16 @@ namespace StoreManagement.Admin.Controllers
                 model.RememberMe = true;
                 if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
+                    UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    user.LastLoginDate = DateTime.Now;
+                    DbContext.SaveChanges();
+    
+ 
+                    if (Roles.GetRolesForUser(model.UserName).Contains("StoreAdmin"))
+                    {
+                        LoginStoreId = StoreUserRepository.GetStoreUserByUserId(user.UserId).StoreId;
+                    }
+
                     return RedirectToLocal(returnUrl);
                 }
 
@@ -347,13 +357,13 @@ namespace StoreManagement.Admin.Controllers
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (Url.IsLocalUrl(returnUrl) && !returnUrl.ToLower().Contains("account/login"))
             {
                 return Redirect(returnUrl);
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Dashboard");
             }
         }
 

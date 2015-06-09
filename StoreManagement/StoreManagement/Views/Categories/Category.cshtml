@@ -53,8 +53,13 @@ New Products
                     foreach (var product in Model.Contents)
                     {
 	                    <div class="col-md-3">
-                                 @Html.DisplayFor(model => product, "ProductThumbnail")
-                         </div>
+      
+                            
+                                 @Html.Partial("DisplayTemplates/ProductThumbnail",product, new ViewDataDictionary(ViewData){
+                                         {"ProductCategoryName",Model.Category.Name}})
+                            
+
+	                    </div>
                     }
 
                     @Model.Contents.TotalItemCount

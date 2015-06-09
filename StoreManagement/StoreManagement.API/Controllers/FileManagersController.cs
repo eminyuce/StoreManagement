@@ -124,6 +124,11 @@ namespace StoreManagement.API.Controllers
             return FileManagerRepository.GetFilesByGoogleImageId(googleImageId);
         }
 
+        public FileManager GetFilesById(int id)
+        {
+            return FileManagerRepository.GetSingle(id);
+        }
+
         public List<FileManager> GetStoreCarousels(int storeId)
         {
             return FileManagerRepository.GetStoreCarousels(storeId);

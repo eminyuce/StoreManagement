@@ -54,6 +54,11 @@ namespace StoreManagement.Service.Repositories
                     .FirstOrDefault();
         }
 
+        public FileManager GetFilesById(int id)
+        {
+            return GetSingle(id);
+        }
+
         public List<FileManager> GetStoreCarousels(int storeId)
         {
             return FindBy(r => r.StoreId == storeId).Where(r => r.IsCarousel).ToList();

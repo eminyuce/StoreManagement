@@ -27,6 +27,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult Index(int storeId = 0, String search = "")
         {
             List<Category> resultList = new List<Category>();
+            storeId = GetStoreId(storeId);
             if (storeId == 0)
             {
                 resultList = CategoryRepository.GetAll().ToList();
@@ -118,6 +119,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult TestPage(int storeId = 1, String categoryType = "family")
         {
+
             ViewBag.StoreId = storeId;
             ViewBag.CategoryType = categoryType;
 

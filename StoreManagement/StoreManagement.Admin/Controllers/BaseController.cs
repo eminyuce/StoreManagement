@@ -39,6 +39,41 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public IStoreUserRepository StoreUserRepository { set; get; }
 
+        protected bool IsSuperAdmin
+        {
+            get { return User.IsInRole("SuperAdmin"); }
+        }
+
+        protected int LoginStoreId  
+        {
+            get
+            {
+                if (Session["LoginStoreId"] != null)
+                    return Session["LoginStoreId"].ToInt();
+                else
+                {
+                    return -1;
+                };
+            }
+            set
+            {
+                Session["LoginStoreId"] = value;
+            }
+        }
+
+        protected int GetStoreId(int id)
+        {
+             if (IsSuperAdmin)
+             {
+                 return id;
+             }
+             else
+             {
+                 return LoginStoreId;
+             }
+            
+        }
+
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected IStoreContext DbContext;
         protected ISettingRepository SettingRepository;

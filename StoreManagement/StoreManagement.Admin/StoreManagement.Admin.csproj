@@ -1882,6 +1882,7 @@
     <Content Include="Views\Shared\Content\pContentSaveOrEdit.cshtml" />
     <Content Include="Views\Shared\Content\pContentDetail.cshtml" />
     <Content Include="Views\Shared\Content\pContentDelete.cshtml" />
+    <Content Include="Views\Shared\pCategoryTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

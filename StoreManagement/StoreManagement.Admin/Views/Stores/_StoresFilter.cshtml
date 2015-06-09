@@ -2,12 +2,18 @@
 @{
     String actionName = ViewBag.ActionName;
     String controllerName = ViewBag.ControllerName;
+    int loginStoreId =  ViewBag.LoginStoreId;
+    bool isSuperAdmin = ViewBag.IsSuperAdmin;
 }
-<b>
-    Store Filters   :
-</b>
- @Html.ActionLink("All", actionName, controllerName, new { storeId = 0 }, new { @class = "btn btn-default" })   |
-@foreach (var t in Model)
+
+@if (isSuperAdmin)
 {
-    @Html.ActionLink(t.Name, actionName, controllerName, new { storeId = t.Id }, new { @class = "btn btn-default" }) @: |
+    <b>Store Filters   :
+    </b>
+    @Html.ActionLink("All", actionName, controllerName, new {storeId = 0}, new {@class = "btn btn-default"})   @:|
+    foreach (var t in Model)
+    {
+        @Html.ActionLink(t.Name, actionName, controllerName, new {storeId = t.Id}, new {@class = "btn btn-default"})
+    }
 }
+ 

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -22,9 +23,10 @@ namespace StoreManagement.Admin.Controllers
              
         }
 
-        public ActionResult Index(int storeId=0, String search="")
+        public ActionResult Index(int storeId=0, String search="", int categoryId=0)
         {
             List<Content> resultList = new List<Content>();
+            storeId = GetStoreId(storeId);
             if (storeId == 0)
             {
                 resultList = ContentRepository.GetContentByType(ContentType);
@@ -39,7 +41,15 @@ namespace StoreManagement.Admin.Controllers
                 resultList =
                     resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             }
-            return View(resultList);
+
+            if (categoryId > 0)
+            {
+                resultList = resultList.Where(r => r.CategoryId == categoryId).ToList();
+            }
+            var contentsAdminViewModel = new ContentsAdminViewModel();
+            contentsAdminViewModel.Contents = resultList;
+            contentsAdminViewModel.Categories = CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, ContentType);
+            return View(contentsAdminViewModel);
         }
 
         //

@@ -28,6 +28,8 @@ namespace StoreManagement.Admin.Controllers
         {
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
+            ViewBag.LoginStoreId = LoginStoreId;
+            ViewBag.IsSuperAdmin = IsSuperAdmin;
             return PartialView("_StoresFilter", StoreRepository.GetAll().ToList());
         }
 
@@ -35,6 +37,8 @@ namespace StoreManagement.Admin.Controllers
         public PartialViewResult StoresDropDown(int storeId = 0)
         {
             ViewBag.StoreId = storeId;
+            ViewBag.LoginStoreId = LoginStoreId;
+            ViewBag.IsSuperAdmin = IsSuperAdmin;
             return PartialView("_StoresDropDown", StoreRepository.GetAll().ToList());
         }
         public ViewResult Index()

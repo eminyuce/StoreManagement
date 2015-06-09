@@ -25,8 +25,9 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Settings/
 
-        public ViewResult Index(String type="")
+        public ViewResult Index(int storeId= 0, String type="")
         {
+            storeId = GetStoreId(storeId);
             List<Setting> items = null;
             if (!String.IsNullOrEmpty(type))
             {

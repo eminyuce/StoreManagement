@@ -1,12 +1,16 @@
 ﻿@using StoreManagement.Data
 @{
     var isDevelopmentStatus = ProjectAppSettings.GetWebConfigBool("IsDevelopmentStatus", true);
+    bool isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
 }
 <!-- left, vertical navbar -->
 <div class="col-md-2 bootstrap-admin-col-left">
     <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
         @Html.MenuItem("Dashboard", "Index", "Dashboard")
-        @Html.MenuItem("Stores", "Index", "Stores")
+        @if (isSuperAdmin)
+        {
+            @Html.MenuItem("Stores", "Index", "Stores")
+        }
         @Html.MenuItem("Navigation", "Index", "Navigations")
         @Html.MenuItem("Files Manager", "Index", "FileManager")
         @Html.MenuItem("Categories", "Index", "Categories")

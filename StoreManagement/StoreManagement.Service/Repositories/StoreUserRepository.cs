@@ -16,6 +16,11 @@ namespace StoreManagement.Service.Repositories
         {
 
         }
+
+        public StoreUser GetStoreUserByUserId(int userId)
+        {
+            return this.FindBy(r => r.UserId == userId).FirstOrDefault();
+        }
     }
 
 

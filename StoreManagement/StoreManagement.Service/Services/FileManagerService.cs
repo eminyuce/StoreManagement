@@ -62,6 +62,20 @@ namespace StoreManagement.Service.Services
             }
         }
 
+        public FileManager GetFilesById(int id)
+        {
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetFilesById?id={2}", WebServiceAddress, ApiControllerName, id);
+                return HttpRequestHelper.GetUrlResult<FileManager>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new FileManager();
+            }
+        }
+
         public List<FileManager> GetStoreCarousels(int storeId)
         {
             try

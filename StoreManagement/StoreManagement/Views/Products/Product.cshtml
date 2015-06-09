@@ -60,7 +60,7 @@
 
                                             <div class="item @String.Format("{0}",(i==0 ? "active" : ""))">
                                                 <a href="#">
-                                                    <img src="@Url.Action("Index", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType})" style="width: 100px; height: 100px;" alt="">
+                                                    <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType})" style="width: 100px; height: 100px;" alt="">
                                                 </a>
                                             </div>
                                         }

@@ -151,13 +151,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/08/2015 19:27:11</publishTime>
+      <publishTime>06/09/2015 09:57:07</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>06/08/2015 19:28:13</publishTime>
+      <publishTime>06/09/2015 09:57:10</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/08/2015 19:27:12</publishTime>
+      <publishTime>06/09/2015 09:57:08</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -852,8 +852,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/_SetPasswordPartial.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
+    <File Include="Views/Blogs/Blog.cshtml">
+      <publishTime>06/09/2015 10:01:22</publishTime>
+    </File>
     <File Include="Views/Blogs/Index.cshtml">
-      <publishTime>06/08/2015 15:42:42</publishTime>
+      <publishTime>06/09/2015 09:20:47</publishTime>
     </File>
     <File Include="Views/Categories/Category.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -895,7 +898,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/09/2015 10:09:57</publishTime>
     </File>
     <File Include="Views/Home/MainMenu.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -922,10 +925,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2015 16:04:55</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/09/2015 09:23:20</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BlogContentItem.cshtml">
-      <publishTime>06/08/2015 15:45:19</publishTime>
+      <publishTime>06/09/2015 09:21:37</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BootstrapPagination.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>

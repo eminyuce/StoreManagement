@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NLog;
 using Ninject;
+using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -38,6 +39,10 @@ namespace StoreManagement.Admin.Controllers
         
         [Inject]
         public IStoreUserRepository StoreUserRepository { set; get; }
+
+        [Inject]
+        public IEmailSender EmailSender { set; get; }
+
 
         protected bool IsSuperAdmin
         {

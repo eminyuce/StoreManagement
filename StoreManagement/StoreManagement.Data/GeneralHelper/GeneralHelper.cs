@@ -938,5 +938,21 @@ namespace StoreManagement.Data.GeneralHelper
                 return ms.ToArray();
             }
         }
+
+
+
+        public static string GenerateRandomPassword(int length)
+        {
+            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+            char[] chars = new char[length];
+            Random rd = new Random();
+            for (int i = 0; i < length; i++)
+            {
+                chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
+            }
+            return new string(chars);
+        }
+
+
     }
 }

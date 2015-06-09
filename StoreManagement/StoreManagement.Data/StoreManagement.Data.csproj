@@ -108,6 +108,9 @@
   <ItemGroup>
     <Compile Include="CacheHelper\MemoryCacheHelper.cs" />
     <Compile Include="CacheHelper\TypedObjectCache.cs" />
+    <Compile Include="EmailHelper\EmailAccount.cs" />
+    <Compile Include="EmailHelper\EmailSender.cs" />
+    <Compile Include="EmailHelper\IEmailSender.cs" />
     <Compile Include="Entities\AdminProjectUsersModel.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Company.cs" />

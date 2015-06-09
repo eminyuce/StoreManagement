@@ -1,4 +1,5 @@
 using StoreManagement.Data;
+using StoreManagement.Data.EmailHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -97,6 +98,7 @@ namespace StoreManagement.Admin.App_Start
 
 
 
+            kernel.Bind<IEmailSender>().To<EmailSender>();
 
         }
     }

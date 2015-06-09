@@ -29,14 +29,7 @@ namespace StoreManagement.Admin.Controllers
         {
             storeId = GetStoreId(storeId);
             List<Setting> items = null;
-            if (!String.IsNullOrEmpty(type))
-            {
-                items = SettingRepository.GetStoreSettingsByType(1, type);
-            }
-            else
-            {
-                items = SettingRepository.GetAll().ToList();
-            }
+            items = SettingRepository.GetStoreSettingsByType(storeId, type);
             var types = from p in SettingRepository.GetAll()
                         where !String.IsNullOrEmpty(p.Type) 
                         group p by p.Type into g

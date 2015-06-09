@@ -196,16 +196,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/09/2015 14:28:37</publishTime>
+      <publishTime>06/09/2015 16:46:21</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/09/2015 12:09:12</publishTime>
+      <publishTime>06/09/2015 16:46:16</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/09/2015 12:46:31</publishTime>
+      <publishTime>06/09/2015 16:46:17</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/07/2015 10:45:02</publishTime>
@@ -4605,14 +4605,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/ExternalLoginFailure.cshtml">
       <publishTime>06/07/2015 10:44:40</publishTime>
     </File>
+    <File Include="Views/Account/ForgotPassword.cshtml">
+      <publishTime>06/09/2015 14:56:50</publishTime>
+    </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>06/07/2015 10:44:40</publishTime>
+      <publishTime>06/09/2015 14:59:37</publishTime>
     </File>
     <File Include="Views/Account/Manage.cshtml">
       <publishTime>06/07/2015 10:44:40</publishTime>
     </File>
+    <File Include="Views/Account/pForgotPassword.cshtml">
+      <publishTime>06/09/2015 16:14:09</publishTime>
+    </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>06/07/2015 10:44:40</publishTime>
+    </File>
+    <File Include="Views/Account/ResetPassword.cshtml">
+      <publishTime>06/09/2015 16:24:15</publishTime>
     </File>
     <File Include="Views/Account/_ChangePasswordPartial.cshtml">
       <publishTime>06/07/2015 10:44:40</publishTime>
@@ -4897,10 +4906,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Shared/_LeftMenu.cshtml">
-      <publishTime>06/09/2015 14:24:53</publishTime>
+      <publishTime>06/09/2015 14:51:11</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>06/07/2015 10:44:41</publishTime>
+      <publishTime>06/09/2015 14:58:35</publishTime>
     </File>
     <File Include="Views/Shared/_MyCustomGrid.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
@@ -4963,7 +4972,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/08/2015 19:27:46</publishTime>
+      <publishTime>06/09/2015 16:30:39</publishTime>
     </File>
   </ItemGroup>
 </Project>

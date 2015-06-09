@@ -20,6 +20,7 @@ namespace StoreManagement.Service.DbContext
         IDbSet<FileManager> FileManagers { get; set; }
         IDbSet<StoreUser> StoreUsers { get; set; }
         IDbSet<UserProfile> UserProfiles { get; set; }
+        IDbSet<webpages_Membership> WebpagesMemberships { get; set; }
         IDbSet<Role> Roles { get; set; }
         IDbSet<Company> Companies { get; set; }
         IDbSet<PageDesign> PageDesigns { get; set; }      

@@ -7,7 +7,10 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using StoreManagement.Data;
+using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using WebMatrix.WebData;
@@ -20,7 +23,8 @@ namespace StoreManagement.Admin.Controllers
     public class AccountController : BaseController
     {
 
-        public AccountController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
+        public AccountController(IStoreContext dbContext, ISettingRepository settingRepository)
+            : base(dbContext, settingRepository)
         {
 
         }
@@ -40,7 +44,7 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-             //validate the captcha through the session variable stored from GetCaptcha
+            //validate the captcha through the session variable stored from GetCaptcha
             if (Session["CaptchaStoreLogin"] == null || Session["CaptchaStoreLogin"].ToString() != model.Captcha)
             {
                 ModelState.AddModelError("Captcha", "Wrong sum, please try again.");
@@ -55,8 +59,8 @@ namespace StoreManagement.Admin.Controllers
                     UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     user.LastLoginDate = DateTime.Now;
                     DbContext.SaveChanges();
-    
- 
+
+
                     if (Roles.GetRolesForUser(model.UserName).Contains("StoreAdmin"))
                     {
                         LoginStoreId = StoreUserRepository.GetStoreUserByUserId(user.UserId).StoreId;
@@ -429,5 +433,190 @@ namespace StoreManagement.Admin.Controllers
             }
         }
         #endregion
+
+
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(string userName, String captcha = "")
+        {
+            //validate the captcha through the session variable stored from GetCaptcha
+            if (Session["CaptchaForgotPassword"] == null || Session["CaptchaForgotPassword"].ToString() != captcha)
+            {
+                TempData["Message"] = "Wrong sum, please try again.";
+                return View();
+            }
+            else
+            {
+
+                //check user existance
+                var user = Membership.GetUser(userName);
+                if (user == null)
+                {
+                    TempData["Message"] = "User Not exist.";
+                }
+                else
+                {
+                    String token = "";
+                    try
+                    {
+                        var userId = WebSecurity.GetUserId(userName);
+                        bool any = (from j in DbContext.WebpagesMemberships
+                                    where (j.UserId == userId)
+                                    select j).Any();
+
+                        if (any)
+                        {
+                            //generate password token
+                            token = WebSecurity.GeneratePasswordResetToken(userName);
+                        }
+                        else
+                        {
+                            WebSecurity.CreateAccount(userName, GeneralHelper.GenerateRandomPassword(6));
+                            //generate password token
+                            token = WebSecurity.GeneratePasswordResetToken(userName);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error("Exception is occured in ForgotPassword-Account controller", ex);
+                    }
+
+                    //create url with above token
+                    var resetPasswordUrl = Url.Action("ResetPassword", "Account", new { un = userName, rt = token }, "http");
+                    var resetLink = "<a href='" + resetPasswordUrl + "'>Reset Password</a>";
+                    //  var mailTemplate = MailTemplateRepository.GetMailTemplatesByTemplateName("ForgotPassword");
+                    //  mailTemplate.Body = MailHelper.GetForgotPasswordMailTemplate(mailTemplate.Body, UserName, resetLink, resetPasswordUrl);
+
+                    try
+                    {
+
+                        string subject = "Store Management Reset Password";
+                        string body = resetPasswordUrl;
+                        string fromAddress = "eminyuce@gmail.com";
+                        string fromName = "eminyuce@gmail.com";
+                        string toAddress = userName;
+                        string toName = userName;
+
+                        try
+                        {
+                            EmailSender.SendEmail(EmailAccount.GetAdminEmailAccount(), subject, body, fromAddress, fromName, toAddress, toName);
+                            TempData["Message"] =
+                                "Password Reset link is sent to your acccount.Please click the link in your mail to generate random password.";
+
+                        }
+                        catch (Exception ex)
+                        {
+                            TempData["Message"] = "Error:" + ex.Message;
+                            Logger.ErrorException("Error:" + ex.Message, ex);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        String m = "Error occured while sending email:" + ex.Message;
+                        TempData["Message"] = m;
+                        Logger.Error(ex.ToString(), ex);
+                    }
+                }
+
+                return View();
+            }
+        }
+
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string un, string rt)
+        {
+            //TODO: Check the un and rt matching and then perform following
+            //get userid of received username
+            UserProfile dbUser = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == un.ToLower());
+            //check userid and token matches
+            bool any = (from j in DbContext.WebpagesMemberships
+                        where (j.UserId == dbUser.UserId)
+                        && (j.PasswordVerificationToken == rt)
+                        //&& (j.PasswordVerificationTokenExpirationDate < DateTime.Now)
+                        select j).Any();
+
+            if (any == true)
+            {
+                //generate random password
+                string newpassword = GeneralHelper.GenerateRandomPassword(6);
+                //reset password
+                bool response = WebSecurity.ResetPassword(rt, newpassword);
+
+                var token = WebSecurity.GeneratePasswordResetToken(dbUser.UserName);
+                ViewBag.ChangePassToken = token;
+                ViewBag.UserName = dbUser.UserName;
+                ViewBag.OldPassword = newpassword;
+                TempData["Message"] = "Your New Password Is " + newpassword + ".Please change your password.";
+
+            }
+            else
+            {
+                TempData["Message"] = "Username and token not maching.";
+            }
+
+
+
+
+            return View();
+
+
+        }
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult ResetPassword(LocalPasswordModel model, string un, string rt)
+        {
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(un));
+            ViewBag.HasLocalPassword = hasLocalAccount;
+
+
+            if (hasLocalAccount)
+            {
+                if (ModelState.IsValid)
+                {
+                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
+                    bool changePasswordSucceeded = false;
+                    try
+                    {
+                        //Reset password
+                        changePasswordSucceeded = WebSecurity.ResetPassword(rt, model.NewPassword);
+
+                    }
+                    catch (Exception)
+                    {
+                        changePasswordSucceeded = false;
+                    }
+
+                    if (changePasswordSucceeded)
+                    {
+
+                        WebSecurity.Login(un, model.NewPassword);
+
+                        var userId = WebSecurity.GetUserId(un);
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The new password is invalid.");
+                    }
+                }
+            }
+
+            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.UserName = un;
+            ViewBag.ChangePassToken = rt;
+            ViewBag.OldPassword = model.OldPassword;
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
     }
 }

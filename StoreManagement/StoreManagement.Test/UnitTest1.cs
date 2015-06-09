@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
+using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
@@ -102,6 +103,30 @@ namespace StoreManagement.Test
 
 
         }
+
+        [TestMethod]
+        public void TestEmailSender()
+        {
+            IEmailSender m = new EmailSender();
+            var emailAccount = new EmailAccount();
+            emailAccount.Username = "eminyuce@gmail.com";
+            emailAccount.Email = "eminyuce@gmail.com";
+            emailAccount.DisplayName = "Store Management";
+            emailAccount.Password = "123.q456-*=";
+            emailAccount.Host = "smtp.gmail.com";
+            emailAccount.Port = 587;
+            emailAccount.EnableSsl = true;
+            emailAccount.UseDefaultCredentials = false;
+
+            string subject = "Store Management Reset Password";
+            string body = "Test";
+            string fromAddress = "eminyuce@gmail.com";
+            string fromName = "EMIN YUCE";
+            string toAddress = "eminyuce@gmail.com";
+            string toName = "EMIN YUCE";
+            m.SendEmail(emailAccount, subject, body, fromAddress, fromName, toAddress, toName);
+        }
+
         [TestMethod]
         public void TestGetCategoriesByStoreIds()
         {

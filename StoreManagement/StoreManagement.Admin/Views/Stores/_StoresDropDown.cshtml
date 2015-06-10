@@ -1,7 +1,8 @@
-﻿@model List<StoreManagement.Data.Entities.Store>
+﻿@using StoreManagement.Data.Entities
+@model List<StoreManagement.Data.Entities.Store>
 @{
     int storeId = (int) ViewBag.StoreId;
-    int loginStoreId = (int)ViewBag.LoginStoreId;
+    var loginStore = (int)ViewBag.LoginStoreId;
     bool isSuperAdmin = (bool)ViewBag.IsSuperAdmin;
 
     List<SelectListItem> storesListItems = new List<SelectListItem>();
@@ -17,13 +18,13 @@
     }
     else
     {
-        storeId = loginStoreId;
+        storeId = loginStore;
     }
 
 }
 
 
-<input type="hidden" name="StoreId" value="@storeId" id="StoreId"/>
+<input type="text" name="StoreId" value="@storeId" id="StoreId"/>
 
 @if (isSuperAdmin)
 {

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NLog;
 using Ninject;
+using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Models;
 using StoreManagement.Service.DbContext;
@@ -46,8 +47,9 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public ISettingService SettingService { set; get; }
-        
-    
+
+        [Inject]
+        public IEmailSender EmailSender { set; get; }
         
         protected Store Store { set; get; }
 

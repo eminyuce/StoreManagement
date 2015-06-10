@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 using StoreManagement.Constants;
 using StoreManagement.Data;
+using StoreManagement.Data.EmailHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -95,7 +96,6 @@ namespace StoreManagement.App_Start
                 service9.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service10 = kernel.Bind<INavigationService>().To<NavigationService>();
                 service10.WithConstructorArgument("webServiceAddress", webServiceAddress);
-
             }
             else
             {
@@ -111,10 +111,8 @@ namespace StoreManagement.App_Start
                 kernel.Bind<IStoreUserService>().To<StoreUserRepository>();
                 kernel.Bind<ICompanyService>().To<CompanyRepository>();
                 kernel.Bind<INavigationService>().To<NavigationRepository>();
-
-
             }
-          
+            kernel.Bind<IEmailSender>().To<EmailSender>();
         }
     }
 }

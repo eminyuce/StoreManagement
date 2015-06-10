@@ -36,7 +36,9 @@
                             @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
                         </div>
                         <div class="editor-field controls">
-                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                            @{
+                                Html.Action("StoresDropDown", "Stores", new { storeId });
+                            }
                         </div>
 
 

@@ -29,7 +29,6 @@ namespace StoreManagement.Service.Repositories
         }
 
 
-
         static TypedObjectCache<Store> StoreCache = new TypedObjectCache<Store>("StoreCache");
 
 
@@ -43,7 +42,7 @@ namespace StoreManagement.Service.Repositories
         public Store GetStore(String domainName)
         {
           
-            String key = String.Format("GetStore-{0}", domainName);
+            String key = String.Format("GetStoreDomain-{0}", domainName);
             Store site = null;
             StoreCache.TryGet(key, out site);
             if (site == null)
@@ -59,14 +58,22 @@ namespace StoreManagement.Service.Repositories
                 String selectedLayout = isFileExist ? layout : defaultlayout;
 
                 site.Layout = selectedLayout;
-                StoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 100000)));
+                StoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
             }
             return site;
         }
 
         public Store GetStore(int id)
         {
-            return GetSingle(id);
+            String key = String.Format("GetStore-{0}", id);
+            Store site = null;
+            StoreCache.TryGet(key, out site);
+            if (site == null)
+            {
+                site = GetSingle(id);
+                StoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
+            }
+            return site;
         }
     }
 }

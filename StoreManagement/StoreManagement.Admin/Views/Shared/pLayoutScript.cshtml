@@ -1,7 +1,4 @@
-﻿ 
-
-
-@Scripts.Render("~/bundles/bootstrap")
+﻿@Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/vendors")
 
 <script src="~/Scripts/storeManagement.js"></script>
@@ -38,18 +35,25 @@
             timepicker: false,
             closeOnDateSelect: true
         });
-        $('select#StoreDropDownId').chosen({});
-       
-        $("#StoreId").val($('select#StoreDropDownId').val());
-        if ($("#fileStoreId").length > 0) {
-            $("#fileStoreId").val($("#StoreId").val());
-        }
-        $('select#StoreDropDownId').chosen({}).change(function (event) {
-            $("#StoreId").val($(this).val());
+
+        if ($('select#StoreDropDownId').length > 0) {
+
+            $('select#StoreDropDownId').chosen({});
+
+            $("#StoreId").val($('select#StoreDropDownId').val());
             if ($("#fileStoreId").length > 0) {
                 $("#fileStoreId").val($("#StoreId").val());
             }
-        });
+            $('select#StoreDropDownId').chosen({}).change(function (event) {
+                $("#StoreId").val($(this).val());
+                if ($("#fileStoreId").length > 0) {
+                    $("#fileStoreId").val($("#StoreId").val());
+                }
+            });
+
+
+        }
+
 
         $('[datatype-font-family="c"]').chosen({});
         $('[datatype-font-size="c"]').chosen({});

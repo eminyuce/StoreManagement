@@ -4,18 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 using NLog;
 using Ninject;
+using StoreManagement.Data;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
+using WebMatrix.WebData;
 
 namespace StoreManagement.Admin.Controllers
 {
     public abstract class BaseController : Controller
     {
+
+        static readonly TypedObjectCache<Store> UserStoreCache = new TypedObjectCache<Store>("UserStoreCache");
+
+
 
         [Inject]
         public IFileManagerRepository FileManagerRepository { get; set; }
@@ -37,7 +45,7 @@ namespace StoreManagement.Admin.Controllers
 
         [Inject]
         public IPageDesignRepository PageDesignRepository { set; get; }
-        
+
         [Inject]
         public IStoreUserRepository StoreUserRepository { set; get; }
 
@@ -50,52 +58,29 @@ namespace StoreManagement.Admin.Controllers
             get { return User.IsInRole("SuperAdmin"); }
         }
 
-        protected int LoginStoreId  
-        {
-            get
-            {
-                if (Session["LoginStoreId"] != null)
-                    return Session["LoginStoreId"].ToInt();
-                else
-                {
-                    return -1;
-                };
-            }
-            set
-            {
-                Session["LoginStoreId"] = value;
-            }
-        }
-
         protected int GetStoreId(int id)
         {
-             if (IsSuperAdmin)
-             {
-                 return id;
-             }
-             else
-             {
-                 return LoginStoreId;
-             }
-            
-        }
-        protected Store LoginStore
-        {
-            get
+            if (IsSuperAdmin)
             {
-                if (Session["LoginStore"] != null)
+                return id;
+            }
+            else
+            {
+                if (LoginStore.Id > 0)
                 {
-                    return (Store)Session["LoginStore"];
+                    return LoginStore.Id;
                 }
                 else
                 {
-                    return null;
-                };
+                    return -1;
+                }
             }
-            set
-            {
-                Session["LoginStore"] = value;
-            }
+        }
+        private Store _store= new Store();
+        protected Store LoginStore
+        {
+            get { return _store; }
+            set { _store  = value; }
         }
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected IStoreContext DbContext;
@@ -104,6 +89,47 @@ namespace StoreManagement.Admin.Controllers
         {
             this.DbContext = dbContext;
             this.SettingRepository = settingRepository;
+        }
+
+        protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        {
+            try
+            {
+                if (requestContext.HttpContext.User.Identity.IsAuthenticated)
+                {
+                    SetStoreValues(requestContext.HttpContext.User.Identity.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return base.BeginExecute(requestContext, callback, state);
+        }
+
+
+        protected void SetStoreValues(String userName)
+        {
+            if (!String.IsNullOrEmpty(userName) && Roles.GetRolesForUser(userName).Contains("StoreAdmin"))
+            {
+
+                String key = String.Format("SetStoreValues-{0}", userName);
+                Store site = null;
+                UserStoreCache.TryGet(key, out site);
+                if (site == null)
+                {
+                    var userId = WebSecurity.GetUserId(userName);
+                    var m = StoreUserRepository.GetStoreUserByUserId(userId);
+                    var s = StoreRepository.GetStore(m.StoreId);
+                    site = new Store();
+                    site.Id = s.Id;
+                    site.Layout = s.Layout;
+                    site.Domain = s.Domain;
+                    site.Name = site.Name;
+                    UserStoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
+                }
+                LoginStore = site;
+            }
         }
         protected string GetCleanHtml(String source)
         {
@@ -120,6 +146,6 @@ namespace StoreManagement.Admin.Controllers
             return returnHtml;
         }
 
-       
+
     }
 }

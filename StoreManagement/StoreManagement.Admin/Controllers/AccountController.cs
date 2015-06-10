@@ -70,14 +70,8 @@ namespace StoreManagement.Admin.Controllers
                     user.LastLoginDate = DateTime.Now;
                     DbContext.SaveChanges();
 
-
-                    if (Roles.GetRolesForUser(model.UserName).Contains("StoreAdmin"))
-                    {
-                        var m = StoreUserRepository.GetStoreUserByUserId(user.UserId);
-                        LoginStoreId = m.StoreId;
-                        LoginStore = StoreRepository.GetSingle(m.StoreId);
-                    }
-
+                    SetStoreValues(model.UserName); // Set Store values for Store Admin users.
+                    
                     return RedirectToLocal(returnUrl);
                 }
 

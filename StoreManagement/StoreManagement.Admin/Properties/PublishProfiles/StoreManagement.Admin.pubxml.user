@@ -196,16 +196,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/09/2015 16:46:21</publishTime>
+      <publishTime>06/10/2015 11:12:16</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/09/2015 16:46:16</publishTime>
+      <publishTime>06/10/2015 11:12:11</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/09/2015 16:46:17</publishTime>
+      <publishTime>06/10/2015 11:12:12</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/07/2015 10:45:02</publishTime>
@@ -4621,7 +4621,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:40</publishTime>
     </File>
     <File Include="Views/Account/ResetPassword.cshtml">
-      <publishTime>06/09/2015 16:24:15</publishTime>
+      <publishTime>06/10/2015 10:00:33</publishTime>
     </File>
     <File Include="Views/Account/_ChangePasswordPartial.cshtml">
       <publishTime>06/07/2015 10:44:40</publishTime>
@@ -4711,7 +4711,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/FileManager/Index.cshtml">
-      <publishTime>06/07/2015 10:44:41</publishTime>
+      <publishTime>06/09/2015 19:26:45</publishTime>
     </File>
     <File Include="Views/FileManager/UploadImages.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
@@ -4801,16 +4801,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Settings/Delete.cshtml">
-      <publishTime>06/07/2015 10:44:41</publishTime>
+      <publishTime>06/10/2015 10:41:26</publishTime>
     </File>
     <File Include="Views/Settings/Details.cshtml">
-      <publishTime>06/07/2015 10:44:41</publishTime>
+      <publishTime>06/10/2015 10:41:11</publishTime>
     </File>
     <File Include="Views/Settings/Edit.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Settings/Index.cshtml">
-      <publishTime>06/07/2015 10:44:41</publishTime>
+      <publishTime>06/10/2015 10:40:11</publishTime>
+    </File>
+    <File Include="Views/Settings/SaveOrEdit.cshtml">
+      <publishTime>06/10/2015 10:45:46</publishTime>
     </File>
     <File Include="Views/Settings/StoreSettings.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
@@ -4825,7 +4828,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Shared/Content/pContentSaveOrEdit.cshtml">
-      <publishTime>06/09/2015 12:48:13</publishTime>
+      <publishTime>06/10/2015 10:02:41</publishTime>
     </File>
     <File Include="Views/Shared/Content/pContentsIndex.cshtml">
       <publishTime>06/09/2015 09:14:55</publishTime>
@@ -4861,7 +4864,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Shared/pLayoutBody.cshtml">
-      <publishTime>06/07/2015 10:44:41</publishTime>
+      <publishTime>06/10/2015 10:27:05</publishTime>
     </File>
     <File Include="Views/Shared/pLayoutFileUploadScript.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
@@ -4972,7 +4975,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/09/2015 16:30:39</publishTime>
+      <publishTime>06/09/2015 19:27:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

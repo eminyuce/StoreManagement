@@ -19,7 +19,8 @@ namespace StoreManagement.Service.Repositories
             = new TypedObjectCache<List<Setting>>("categoryCache");
 
 
-        public SettingRepository(IStoreContext dbContext) : base(dbContext)
+        public SettingRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
         }
@@ -46,10 +47,9 @@ namespace StoreManagement.Service.Repositories
 
         public List<Setting> GetStoreSettingsByType(int storeid, string type)
         {
-            return
-                GetStoreSettingsFromCache(storeid)
-                    .Where(r => r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase))
-                    .ToList();
+            Logger.Trace("GetStoreSettingsByType StoreId:" + storeid + " Type:" + type);
+            return  this.FindBy(r => r.StoreId == storeid 
+                &&  r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
     }
 

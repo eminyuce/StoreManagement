@@ -13,7 +13,7 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class SettingsController : BaseController
     {
-
+        private const String TYPE = "StoreSettings";
         //
         // GET: /Setting/
         public SettingsController(IStoreContext dbContext, ISettingRepository settingRepository)
@@ -25,64 +25,27 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Settings/
 
-        public ViewResult Index(int storeId= 0, String type="")
+        public ViewResult Index(int storeId= 0)
         {
+
             storeId = GetStoreId(storeId);
             List<Setting> items = null;
-            items = SettingRepository.GetStoreSettingsByType(storeId, type);
-            var types = from p in SettingRepository.GetAll()
-                        where !String.IsNullOrEmpty(p.Type) 
-                        group p by p.Type into g
-                        select new { Type = g.Key };
-
-            ViewBag.Types = types.Select(r => r.Type).ToList();
-
+            items = SettingRepository.GetStoreSettingsByType(storeId, TYPE);
             return View(items);
         }
-
-        //
-        // GET: /Settings/Details/5
-
-        public ViewResult Details(int id)
-        {
-            Setting setting = SettingRepository.GetSingle(id);
-            return View(setting);
-        }
-
-        //
-        // GET: /Settings/Create
-
-        public ActionResult Create()
-        {
-            Setting setting=new Setting();
-            setting.StoreId = 1;
-            setting.State = true;
-            return View(setting);
-        }
-
-        //
-        // POST: /Settings/Create
-
-        [HttpPost]
-        public ActionResult Create(Setting setting)
-        {
-            if (ModelState.IsValid)
-            {
-                setting.SettingKey = setting.SettingKey.ToLower();
-                SettingRepository.Add(setting);
-                SettingRepository.Save();
-                return RedirectToAction("Index");
-            }
-
-            return View(setting);
-        }
-
+         
         //
         // GET: /Settings/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult SaveOrEdit(int id=0)
         {
-            Setting setting = SettingRepository.GetSingle(id);
+            Setting setting = new Setting();
+            if (id != 0)
+            {
+                setting = SettingRepository.GetSingle(id);
+            }
+            setting.Type = TYPE;
+            setting.StoreId = GetStoreId(0);
             return View(setting);
         }
 
@@ -90,12 +53,24 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Settings/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Setting setting)
+        public ActionResult SaveOrEdit(Setting setting)
         {
             if (ModelState.IsValid)
             {
-                setting.SettingKey = setting.SettingKey.ToLower();
-                SettingRepository.Edit(setting);
+                setting.Type = TYPE;
+                setting.StoreId = GetStoreId(0);
+                if (setting.Id == 0)
+                {
+                    setting.SettingKey = setting.SettingKey.ToLower();
+                    SettingRepository.Add(setting);
+                }
+                else
+                {
+                    setting.SettingKey = setting.SettingKey.ToLower();
+                    SettingRepository.Edit(setting);
+                }
+               
+
                 SettingRepository.Save();
                 return RedirectToAction("Index");
             }
@@ -126,7 +101,6 @@ namespace StoreManagement.Admin.Controllers
         {
             return View(SettingRepository.GetStoreSettings(storeId));
         }
-
 
         public ActionResult TestSetting(int id=1)
         {

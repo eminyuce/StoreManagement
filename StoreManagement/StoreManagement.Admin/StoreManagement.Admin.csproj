@@ -1819,12 +1819,10 @@
     <Content Include="Views\Shared\DisplayTemplates\RecordsStats.cshtml" />
     <Content Include="Views\Companies\SaveOrUpdate.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
-    <Content Include="Views\Settings\Create.cshtml" />
     <Content Include="Views\Settings\Delete.cshtml" />
     <Content Include="Views\Settings\Details.cshtml" />
-    <Content Include="Views\Settings\Edit.cshtml" />
+    <Content Include="Views\Settings\SaveOrEdit.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
-    <Content Include="Views\Settings\_CreateOrEdit.cshtml" />
     <Content Include="Views\Settings\StoreSettings.cshtml" />
     <Content Include="Views\Navigations\SaveOrEdit.cshtml" />
     <Content Include="Views\Navigations\Delete.cshtml" />

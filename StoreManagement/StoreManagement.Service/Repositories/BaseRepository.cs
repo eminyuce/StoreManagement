@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository;
 using GenericRepository.EntityFramework;
+using NLog;
 using StoreManagement.Data;
 using StoreManagement.Service.DbContext;
 
@@ -12,6 +13,8 @@ namespace StoreManagement.Service.Repositories
 {
     public abstract class BaseRepository<T, TId> : EntityRepository<T, TId> where T : class, IEntity<TId> where TId : IComparable
     {
+
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         //protected bool IsCacheActive
         //{
         //    get

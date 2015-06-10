@@ -131,6 +131,7 @@
     <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\PartialViewToString.cs" />
+    <Compile Include="GeneralHelper\RegexUtilities.cs" />
     <Compile Include="GeneralHelper\RequestHelper.cs" />
     <Compile Include="GeneralHelper\SimpleAES.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />

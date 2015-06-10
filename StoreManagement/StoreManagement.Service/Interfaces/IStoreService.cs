@@ -12,7 +12,7 @@ namespace StoreManagement.Service.Interfaces
     {
         Store GetStoreByDomain(string domainName);
         Store GetStore(String domain);
-        Store GetSingle(int id);
+        Store GetStore(int id);
 
 
     }

@@ -48,7 +48,7 @@ namespace StoreManagement.Service.Services
         }
 
 
-        public Store GetSingle(int id)
+        public Store GetStore(int id)
         {
             try
             {

@@ -43,18 +43,17 @@
                         @Html.HiddenFor(model => model.Id)
 
                         @Html.HiddenFor(model => model.Type)
-                        
-                        
-                         <div class="editor-label">
-                             <b>
-                                 Selected Category
-                             </b>   
+
+
+                        <div class="editor-label">
+                            <b>Selected Category
+                            </b>
                         </div>
                         <div class="editor-field">
                             @Html.HiddenFor(model => model.CategoryId)
                             <span class="label label-success" id="SelectedCategory"></span>
                         </div>
-                        
+
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)
@@ -115,7 +114,7 @@
 
 
                         <p>
-                            <input type="submit" value="Create" />
+                            <input class="btn btn-success btn-block" type="submit" value="Save" />
                         </p>
                     </fieldset>
                 }

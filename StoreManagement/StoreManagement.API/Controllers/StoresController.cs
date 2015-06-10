@@ -32,7 +32,7 @@ namespace StoreManagement.API.Controllers
             return this.StoreRepository.GetStore(domain);
         }
 
-        public Store GetSingle(int id)
+        public Store GetStore(int id)
         {
             return this.StoreRepository.GetSingle(id);
         }

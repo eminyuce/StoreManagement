@@ -7,6 +7,7 @@ using System.Web.Routing;
 using NLog;
 using Ninject;
 using StoreManagement.Data.EmailHelper;
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -78,7 +79,24 @@ namespace StoreManagement.Admin.Controllers
              }
             
         }
-
+        protected Store LoginStore
+        {
+            get
+            {
+                if (Session["LoginStore"] != null)
+                {
+                    return (Store)Session["LoginStore"];
+                }
+                else
+                {
+                    return null;
+                };
+            }
+            set
+            {
+                Session["LoginStore"] = value;
+            }
+        }
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected IStoreContext DbContext;
         protected ISettingRepository SettingRepository;

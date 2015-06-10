@@ -63,6 +63,11 @@ namespace StoreManagement.Service.Repositories
             }
             return site;
         }
+
+        public Store GetStore(int id)
+        {
+            return GetSingle(id);
+        }
     }
 }
 

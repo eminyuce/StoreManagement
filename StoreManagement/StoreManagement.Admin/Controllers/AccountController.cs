@@ -44,6 +44,16 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+
+            var regexUtil = new RegexUtilities();
+            if (!regexUtil.IsValidEmail(model.UserName))
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                ModelState.AddModelError("UserName", "Invalid Email Address");
+                return View(model);
+            }
+
+
             //validate the captcha through the session variable stored from GetCaptcha
             if (Session["CaptchaStoreLogin"] == null || Session["CaptchaStoreLogin"].ToString() != model.Captcha)
             {
@@ -63,7 +73,9 @@ namespace StoreManagement.Admin.Controllers
 
                     if (Roles.GetRolesForUser(model.UserName).Contains("StoreAdmin"))
                     {
-                        LoginStoreId = StoreUserRepository.GetStoreUserByUserId(user.UserId).StoreId;
+                        var m = StoreUserRepository.GetStoreUserByUserId(user.UserId);
+                        LoginStoreId = m.StoreId;
+                        LoginStore = StoreRepository.GetSingle(m.StoreId);
                     }
 
                     return RedirectToLocal(returnUrl);
@@ -90,11 +102,11 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Account/Register
 
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //[AllowAnonymous]
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
 
         //
         // POST: /Account/Register

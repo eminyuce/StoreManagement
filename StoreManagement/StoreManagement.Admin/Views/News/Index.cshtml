@@ -1,0 +1,24 @@
+﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@using StoreManagement.Data.GeneralHelper;
+@model StoreManagement.Data.RequestModel.ContentsAdminViewModel
+
+@{
+    ViewBag.Title = "Index";
+    var controllerName = "News";
+    var title = "News Management";
+    var gridName = "contentGrid";
+    var contents = Model.Contents;
+    var categories = Model.Categories;
+}
+
+ 
+
+     @Html.Partial("Content/pContentsIndex",contents, new ViewDataDictionary(ViewData){
+            {"ContentGridName",gridName}
+            ,{"ContentPageTitle",title}
+            ,{"ContentControllerName",controllerName}})
+
+
+
+     @Html.Partial("pCategoryTree",categories, null)

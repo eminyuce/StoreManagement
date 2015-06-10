@@ -1,0 +1,20 @@
+﻿@model StoreManagement.Data.Entities.Content
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@Html.Partial("Content/pContentSaveOrEdit")
+ 
+
+
+
+
+@section scripts {
+
+    <script src="~/Scripts/jstree/jstree.js"></script>
+    <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
+    <script src="~/Scripts/storeContent.js"></script>
+
+}

@@ -196,16 +196,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/10/2015 16:06:43</publishTime>
+      <publishTime>06/10/2015 17:08:27</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/10/2015 15:54:55</publishTime>
+      <publishTime>06/10/2015 17:08:20</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/10/2015 15:54:57</publishTime>
+      <publishTime>06/10/2015 17:08:22</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/07/2015 10:45:02</publishTime>
@@ -4758,6 +4758,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Navigations/_CreateOrEdit.cshtml">
       <publishTime>05/17/2015 17:53:43</publishTime>
     </File>
+    <File Include="Views/News/Delete.cshtml">
+      <publishTime>06/10/2015 17:07:30</publishTime>
+    </File>
+    <File Include="Views/News/Details.cshtml">
+      <publishTime>06/10/2015 17:06:36</publishTime>
+    </File>
+    <File Include="Views/News/Index.cshtml">
+      <publishTime>06/10/2015 17:00:27</publishTime>
+    </File>
+    <File Include="Views/News/SaveOrEdit.cshtml">
+      <publishTime>06/10/2015 17:07:04</publishTime>
+    </File>
     <File Include="Views/PageDesigns/Create.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
@@ -4909,7 +4921,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Shared/_LeftMenu.cshtml">
-      <publishTime>06/09/2015 14:51:11</publishTime>
+      <publishTime>06/10/2015 17:08:05</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/09/2015 14:58:35</publishTime>
@@ -4975,7 +4987,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/10/2015 11:48:37</publishTime>
+      <publishTime>06/10/2015 17:08:54</publishTime>
     </File>
   </ItemGroup>
 </Project>

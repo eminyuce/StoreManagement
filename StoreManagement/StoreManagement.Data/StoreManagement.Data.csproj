@@ -129,6 +129,7 @@
     <Compile Include="GeneralHelper\GeneralHelper.cs" />
     <Compile Include="GeneralHelper\HtmlCleanHelper.cs" />
     <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
+    <Compile Include="GeneralHelper\LinkHelper.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\PartialViewToString.cs" />
     <Compile Include="GeneralHelper\RegexUtilities.cs" />

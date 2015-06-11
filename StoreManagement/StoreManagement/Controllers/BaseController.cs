@@ -58,19 +58,24 @@ namespace StoreManagement.Controllers
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
-            var siteStatus = ProjectAppSettings.GetWebConfigBool("IsDevelopmentStatus", true);
-            if (siteStatus)
-            {
-                this.Store = StoreService.GetStoreByDomain("login.seatechnologyjobs.com");
-            }
-            else
+
+            String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
+
+            if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
                 var request = requestContext.HttpContext.Request;
                 String domainName = "FUELTECHNOLOGYAGE.COM";
                 domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host + (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
                 domainName = GeneralHelper.GetDomainPart(domainName);
                 this.Store = StoreService.GetStore(domainName);
+
             }
+            else
+            {
+                this.Store = StoreService.GetStoreByDomain("login.seatechnologyjobs.com");
+
+            }
+ 
 
             if (Store == null)
             {

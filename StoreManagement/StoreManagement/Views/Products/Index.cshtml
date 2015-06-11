@@ -11,19 +11,20 @@
         {
             foreach (var cat in Model.Categories)
             {
-                <div class="row">
-                    <div class="page-header">
-                        <h2> 
-                            @Html.ActionLink(cat.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(cat.Name), cat.Id) }, new { @class = "btn btn-lg btn-link" })
-                        </h2>
-                        </div>
-                    @foreach (var product in cat.Contents.Take(8))
-                    {
-                        <div class="col-md-3">
-                            @Html.DisplayFor(model => product, "ProductThumbnail")
-                        </div>
-                    }
+            <div class="row">
+                <div class="page-header">
+                    <h2>
+                        @Html.ActionLink(cat.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(cat.Name), cat.Id) }, new { @class = "btn btn-lg btn-link" })
+                    </h2>
                 </div>
+                @foreach (var product in cat.Contents.Take(8))
+                {
+                    <div class="col-md-3">
+                        @Html.Partial("DisplayTemplates/ProductThumbnail", product, new ViewDataDictionary(ViewData){
+                                {"ProductCategoryName",cat.Name}})
+                    </div>
+                }
+            </div>
             }
 
 

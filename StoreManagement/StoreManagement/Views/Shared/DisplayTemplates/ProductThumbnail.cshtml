@@ -4,7 +4,7 @@
 @{
     var image = Model.ContentFiles.FirstOrDefault();
     var categoryName = ViewData["ProductCategoryName"].ToStr();
-    var productDetailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id, GeneralHelper.GetUrlSeoString(categoryName)));
+    var productDetailLink = LinkHelper.GetContentLink(Model, categoryName);
 }
 
 <div class="thumbnail">

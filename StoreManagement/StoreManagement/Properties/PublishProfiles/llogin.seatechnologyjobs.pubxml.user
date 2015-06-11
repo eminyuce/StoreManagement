@@ -151,13 +151,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/10/2015 11:48:25</publishTime>
+      <publishTime>06/11/2015 11:52:53</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>06/10/2015 12:41:27</publishTime>
+      <publishTime>06/11/2015 12:08:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/10/2015 11:48:27</publishTime>
+      <publishTime>06/11/2015 11:52:55</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -1003,10 +1003,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2015 15:16:02</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>06/08/2015 16:04:55</publishTime>
+      <publishTime>06/11/2015 11:52:10</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
-      <publishTime>06/09/2015 11:09:40</publishTime>
+      <publishTime>06/11/2015 11:49:19</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BlogContentItem.cshtml">
       <publishTime>06/09/2015 09:21:37</publishTime>
@@ -1030,7 +1030,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/ProductThumbnail.cshtml">
-      <publishTime>06/09/2015 11:21:01</publishTime>
+      <publishTime>06/11/2015 11:47:44</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -1063,7 +1063,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/10/2015 11:50:37</publishTime>
+      <publishTime>06/11/2015 12:08:35</publishTime>
     </File>
   </ItemGroup>
 </Project>

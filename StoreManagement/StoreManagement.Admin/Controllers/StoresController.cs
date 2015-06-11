@@ -14,7 +14,7 @@ using WebMatrix.WebData;
 
 namespace StoreManagement.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class StoresController : BaseController
     {
        

@@ -5,8 +5,8 @@
     Layout = "../Shared/_Layout.cshtml";
 }
 
-@Html.Partial("Content/pContentSaveOrEdit")
- 
+@Html.Partial("Content/pContentSaveOrEdit", Model, new ViewDataDictionary(ViewData){
+    {"ContentSaveOrEditPageTitle","Products"}})
 
 
 

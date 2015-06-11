@@ -1,9 +1,11 @@
-﻿@model StoreManagement.Data.Entities.Content
+﻿@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.Content
 
 @{
 
     int storeId = Model != null ? Model.StoreId : 0;
     String categoryType = Model.Type;
+    var title = ViewData["ContentSaveOrEditPageTitle"].ToStr();
 }
 
 
@@ -17,7 +19,13 @@
                 <div class="text-muted bootstrap-admin-box-title">Products</div>
             </div>
             <div class="bootstrap-admin-panel-content">
-                <h2>Create New Products</h2>
+                @if (!String.IsNullOrEmpty(title))
+                {
+                                    <h2>@title</h2>
+                }
+
+                
+
                 <input type="hidden" value="@categoryType" id="categoryType"/>
 
 
@@ -32,12 +40,9 @@
                     <fieldset>
                         <legend>Content</legend>
 
-                        <div class="editor-label control-group">
-                            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
-                        </div>
                         <div class="editor-field controls">
                             @{
-                                Html.Action("StoresDropDown", "Stores", new { storeId });
+                    Html.Action("StoresDropDown", "Stores", new { storeId });
                             }
                         </div>
 
@@ -57,18 +62,15 @@
                         </div>
 
 
-                        <div class="editor-label">
+                        <div class="form-group">
                             @Html.LabelFor(model => model.Name)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Name)
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
                             @Html.ValidationMessageFor(model => model.Name)
                         </div>
 
-                        <div class="editor-label">
+                        <div class="form-group">
                             @Html.LabelFor(model => model.Description)
-                        </div>
-                        <div class="editor-field">
+
                             @Html.TextAreaFor(model => model.Description)
                         </div>
 
@@ -80,43 +82,36 @@
                             @Html.Action("ImageGallery", "FileManager")
                         </div>
 
-                        <div class="editor-label">
+                        <div class="form-group">
+                            
                             @Html.LabelFor(model => model.MainPage)
-                        </div>
-                        <div class="editor-field">
                             @Html.EditorFor(model => model.MainPage)
                             @Html.ValidationMessageFor(model => model.MainPage)
-                        </div>
+                            
 
-                        <div class="editor-label">
+                          
                             @Html.LabelFor(model => model.State)
-                        </div>
-                        <div class="editor-field">
                             @Html.EditorFor(model => model.State)
                             @Html.ValidationMessageFor(model => model.State)
-                        </div>
 
-                        <div class="editor-label">
+                         
                             @Html.LabelFor(model => model.ImageState)
-                        </div>
-                        <div class="editor-field">
+
                             @Html.EditorFor(model => model.ImageState)
                             @Html.ValidationMessageFor(model => model.ImageState)
+
                         </div>
 
 
-
-                        <div class="editor-label">
+                        <div class="form-group">
                             @Html.LabelFor(model => model.Ordering)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Ordering)
+                            @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
                             @Html.ValidationMessageFor(model => model.Ordering)
                         </div>
 
 
                         <p>
-                            <input class="btn btn-success btn-block" type="submit" value="Save" />
+                            <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
                         </p>
                     </fieldset>
                 }

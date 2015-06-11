@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -126,6 +127,16 @@ namespace StoreManagement.Admin.Controllers
                 return HttpNotFound();
             }
             return View(content);
+        }
+        public ActionResult StoreDetails(int id = 0)
+        {
+            Content content = ContentRepository.GetSingle(id);
+            Store s = StoreRepository.GetSingle(content.StoreId);
+            Category cat = CategoryRepository.GetSingle(content.CategoryId);
+            var productDetailLink =  LinkHelper.GetProductLink(content, cat.Name);
+            String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
+            return Redirect(detailPage);
+
         }
 
         //

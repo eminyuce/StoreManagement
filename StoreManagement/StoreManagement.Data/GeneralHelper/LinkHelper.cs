@@ -9,7 +9,7 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class LinkHelper
     {
-        public static String GetContentLink(Content c, String categoryName )
+        public static String GetProductLink(Content c, String categoryName )
         {
             String productDetailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
             return productDetailLink;

@@ -22,6 +22,8 @@ namespace StoreManagement.Data.Entities
         public int Id { get; set; }
         [IgnoreDataMember]
         public int StoreId { get; set; }
+        
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public string Name { get; set; }
         

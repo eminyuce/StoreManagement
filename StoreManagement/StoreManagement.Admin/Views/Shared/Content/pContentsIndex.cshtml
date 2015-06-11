@@ -12,7 +12,7 @@
     var gridName = ViewData["ContentGridName"].ToStr();
 }
 
- 
+
 
 @Html.Partial("_LeftMenu")
 
@@ -62,12 +62,12 @@
                                     <option value="MainPage">Ana Sayfa</option>
                                 </select>
                             </span><span class="col-md-2">
-                                       <span class="btn btn-xs btn-default" id="SetStateOnAll">Set Selected State True All</span>
+                                <span class="btn btn-xs btn-default" id="SetStateOnAll">Set Selected State True All</span>
 
-                                   </span><span class="col-md-2">
-                                              <span class="btn btn-xs btn-default" id="SetStateOffAll">Set Selected State False All</span>
+                            </span><span class="col-md-2">
+                                <span class="btn btn-xs btn-default" id="SetStateOffAll">Set Selected State False All</span>
 
-                                          </span>
+                            </span>
                             <span class="col-md-2">
                                 <span class="btn btn-xs btn-default" id="OrderingAll">Ordering All
                                 </span>
@@ -134,8 +134,8 @@
                                    .SetWidth(30)
                                    .RenderValueAs(d =>
                                                   @<b>
-                                                       @Html.ActionLink(" ", "SaveOrEdit", controllerName, new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
-                                                   </b>);
+                                                      @Html.ActionLink(" ", "SaveOrEdit", controllerName, new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                                                  </b>);
 
                             columns.Add()
                                    .Encoded(false)
@@ -143,8 +143,8 @@
                                    .SetWidth(30)
                                    .RenderValueAs(d =>
                                                   @<b>
-                                                       @Html.ActionLink(" ", "Details", controllerName, new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
-                                                   </b>);
+                                                      @Html.ActionLink(" ", "Details", controllerName, new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
+                                                  </b>);
 
                             columns.Add()
                                    .Encoded(false)
@@ -152,8 +152,8 @@
                                    .SetWidth(30)
                                    .RenderValueAs(d =>
                                                   @<b>
-                                                       @Html.ActionLink(" ", "Delete", controllerName, new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
-                                                   </b>);
+                                                      @Html.ActionLink(" ", "Delete", controllerName, new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
+                                                  </b>);
 
 
                             columns.Add(c => c.Name)
@@ -162,7 +162,11 @@
                                    .Filterable(true)
                                    .Sanitized(false)
                                    .Encoded(false)
-                                   .RenderValueAs(o => Html.ActionLink(o.Name, "Details", controllerName, new { Id = o.Id }, null).ToHtmlString());
+                                   .RenderValueAs(o =>
+                                            @<b>
+                                                @Html.ActionLink(o.Name, "StoreDetails", controllerName, new { id = o.Id }, new { target = "_blank" })
+                                            </b>
+                                       );
 
 
 
@@ -217,8 +221,8 @@
                                    .RenderValueAs(d =>
                                                   @<b>
 
-                                                       <a class="btn btn-info btn-sm glyphicon  glyphicon-camera"   data-file-id="@d.Id"></a>
-                                                   </b>);
+                                                      <a class="btn btn-info btn-sm glyphicon  glyphicon-camera"   data-file-id="@d.Id"></a>
+                                                  </b>);
                         }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 
@@ -235,7 +239,6 @@
 </div>
 
 <div id="ImagesPanel">
-    
 </div>
 
 @section scripts

@@ -196,16 +196,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/11/2015 15:17:52</publishTime>
+      <publishTime>06/11/2015 15:35:51</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/11/2015 15:17:46</publishTime>
+      <publishTime>06/11/2015 15:35:44</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/11/2015 15:17:48</publishTime>
+      <publishTime>06/11/2015 15:35:47</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/07/2015 10:45:02</publishTime>
@@ -4612,7 +4612,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/09/2015 14:59:37</publishTime>
     </File>
     <File Include="Views/Account/Manage.cshtml">
-      <publishTime>06/07/2015 10:44:40</publishTime>
+      <publishTime>06/11/2015 15:39:17</publishTime>
     </File>
     <File Include="Views/Account/pForgotPassword.cshtml">
       <publishTime>06/09/2015 16:14:09</publishTime>
@@ -4624,7 +4624,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/10/2015 10:00:33</publishTime>
     </File>
     <File Include="Views/Account/_ChangePasswordPartial.cshtml">
-      <publishTime>06/07/2015 10:44:40</publishTime>
+      <publishTime>06/11/2015 15:35:17</publishTime>
     </File>
     <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
       <publishTime>06/07/2015 10:44:40</publishTime>
@@ -4699,7 +4699,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2015 13:31:40</publishTime>
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
-      <publishTime>06/07/2015 10:44:41</publishTime>
+      <publishTime>06/11/2015 15:34:39</publishTime>
     </File>
     <File Include="Views/Dashboard/Index2.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
@@ -4987,7 +4987,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/11/2015 14:02:58</publishTime>
+      <publishTime>06/11/2015 15:35:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ namespace StoreManagement.Controllers
         {
 
             int page = 1;
-            ViewBag.Store = Store;
+ 
             var shp =new StoreHomePage();
             shp.Store = Store;
             shp.CarouselImages = FileManagerService.GetStoreCarousels(Store.Id);

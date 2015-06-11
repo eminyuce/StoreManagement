@@ -3,30 +3,36 @@
     ViewBag.Title = "Manage Account";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
 
-<p class="message-success">@ViewBag.StatusMessage</p>
+@Html.Partial("_LeftMenu")
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">@ViewBag.Title</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <div class="bootstrap-admin-panel-content">
+                    <p class="message-success">@ViewBag.StatusMessage</p>
 
-@if (ViewBag.HasLocalPassword)
-{
-    @Html.Partial("_ChangePasswordPartial")
-}
-else
-{ 
-    @Html.Partial("_SetPasswordPartial")
-}
+                    <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
 
-<section id="externalLogins">
-    @Html.Action("RemoveExternalLogins")
-
-    <h3>Add an external login</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+                    @if (ViewBag.HasLocalPassword)
+                    {
+                        @Html.Partial("_ChangePasswordPartial")
+                    }
+                    else
+                    { 
+                        @Html.Partial("_SetPasswordPartial")
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

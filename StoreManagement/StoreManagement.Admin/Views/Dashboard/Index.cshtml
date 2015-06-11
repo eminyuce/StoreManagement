@@ -4,6 +4,8 @@
 }
 @Styles.Render("~/Content/Vendors")
 
+
+
 @Html.Partial("_LeftMenu")
 <!-- content -->
 <div class="col-md-10">
@@ -11,10 +13,8 @@
         <div class="alert alert-success bootstrap-admin-alert">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <h4>Welcome To Admin Page <span class="text-primary">@User.Identity.Name  </span><span class="pull-right text-danger">@DateTime.Now.ToLongDateString()  &nbsp;&nbsp;   </span></h4>
-
         </div>
-    </div>
-    <div class="row">
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="text-muted bootstrap-admin-box-title">Admin Panel</div>
@@ -93,133 +93,134 @@
                 </div>
             </div>
         </div>
+        <div class="bootstrap-admin-no-edges-padding">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="text-muted bootstrap-admin-box-title">Users</div>
+                        <div class="pull-right"><span class="badge">1,234</span></div>
+                    </div>
+                    <div class="bootstrap-admin-panel-content">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model.Users)
+                                {
+                                    <tr>
+                                        <td>@item.Item1</td>
+                                        <td>@item.Item2</td>
+                                        <td>@item.Item3</td>
+                                        <td>@item.Item4</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="text-muted bootstrap-admin-box-title">Orders</div>
+                        <div class="pull-right"><span class="badge">752</span></div>
+                    </div>
+                    <div class="bootstrap-admin-panel-content">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model.Orders)
+                                {
+                                    <tr>
+                                        <td>@item.Item1</td>
+                                        <td>@item.Item2</td>
+                                        <td>@item.Item3</td>
+                                        <td>@item.Item4</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bootstrap-admin-no-edges-padding">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="text-muted bootstrap-admin-box-title">Clients</div>
+                        <div class="pull-right"><span class="badge">17</span></div>
+                    </div>
+                    <div class="bootstrap-admin-panel-content">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model.Clients)
+                                {
+                                    <tr>
+                                        <td>@item.Item1</td>
+                                        <td>@item.Item2</td>
+                                        <td>@item.Item3</td>
+                                        <td>@item.Item4</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="text-muted bootstrap-admin-box-title">Invoices</div>
+                        <div class="pull-right"><span class="badge">812</span></div>
+                    </div>
+                    <div class="bootstrap-admin-panel-content">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model.Invoices)
+                                {
+                                    <tr>
+                                        <td>@item.Item1</td>
+                                        <td>@item.Item2.ToShortDateString()</td>
+                                        <td>$@item.Item3</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row bootstrap-admin-no-edges-padding">
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="text-muted bootstrap-admin-box-title">Users</div>
-                    <div class="pull-right"><span class="badge">1,234</span></div>
-                </div>
-                <div class="bootstrap-admin-panel-content">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in @Model.Users)
-                            {
-                                <tr>
-                                    <td>@item.Item1</td>
-                                    <td>@item.Item2</td>
-                                    <td>@item.Item3</td>
-                                    <td>@item.Item4</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="text-muted bootstrap-admin-box-title">Orders</div>
-                    <div class="pull-right"><span class="badge">752</span></div>
-                </div>
-                <div class="bootstrap-admin-panel-content">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Product</th>
-                                <th>Date</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in @Model.Orders)
-                            {
-                                <tr>
-                                    <td>@item.Item1</td>
-                                    <td>@item.Item2</td>
-                                    <td>@item.Item3</td>
-                                    <td>@item.Item4</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row bootstrap-admin-no-edges-padding">
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="text-muted bootstrap-admin-box-title">Clients</div>
-                    <div class="pull-right"><span class="badge">17</span></div>
-                </div>
-                <div class="bootstrap-admin-panel-content">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in @Model.Clients)
-                            {
-                                <tr>
-                                    <td>@item.Item1</td>
-                                    <td>@item.Item2</td>
-                                    <td>@item.Item3</td>
-                                    <td>@item.Item4</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="text-muted bootstrap-admin-box-title">Invoices</div>
-                    <div class="pull-right"><span class="badge">812</span></div>
-                </div>
-                <div class="bootstrap-admin-panel-content">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in @Model.Invoices)
-                            {
-                                <tr>
-                                    <td>@item.Item1</td>
-                                    <td>@item.Item2.ToShortDateString()</td>
-                                    <td>$@item.Item3</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 </div>
 

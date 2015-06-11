@@ -75,7 +75,7 @@ namespace StoreManagement.App_Start
             var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", true);
             if (isAPIService)
             {
-                var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "yuce.marinelink.org");
+                var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "localhost:8164");
                 var service1 = kernel.Bind<IContentService>().To<ContentService>();
                 service1.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service2 = kernel.Bind<IStoreService>().To<StoreService>();

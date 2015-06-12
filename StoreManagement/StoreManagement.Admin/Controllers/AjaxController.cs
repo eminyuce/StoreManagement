@@ -194,10 +194,8 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult GetCategoriesTree(int storeId = 0, String categoryType = "")
         {
             var tree = this.CategoryRepository.GetCategoriesByStoreId(storeId, categoryType);
-            var pts = new PartialViewToString();
 
-            var html = pts.RenderPartialToString(
-                        ControllerContext,
+            var html = this.RenderPartialToString(
                         "pCreateCategoryTree",
                         new ViewDataDictionary(tree), null);
 

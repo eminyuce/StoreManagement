@@ -151,13 +151,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/11/2015 11:52:53</publishTime>
+      <publishTime>06/12/2015 10:09:54</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>06/11/2015 12:08:33</publishTime>
+      <publishTime>06/12/2015 11:41:58</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/11/2015 11:52:55</publishTime>
+      <publishTime>06/12/2015 10:09:55</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -903,6 +903,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/npm.js">
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
+    <File Include="Scripts/storeManagement.js">
+      <publishTime>06/12/2015 11:04:22</publishTime>
+    </File>
     <File Include="Scripts/_references.js">
       <publishTime>06/07/2015 10:44:50</publishTime>
     </File>
@@ -993,6 +996,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Images/Index.cshtml">
       <publishTime>06/04/2015 14:25:14</publishTime>
     </File>
+    <File Include="Views/News/Detail.cshtml">
+      <publishTime>06/12/2015 10:05:32</publishTime>
+    </File>
     <File Include="Views/News/Index.cshtml">
       <publishTime>06/08/2015 15:11:11</publishTime>
     </File>
@@ -1006,7 +1012,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/11/2015 11:52:10</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
-      <publishTime>06/11/2015 11:49:19</publishTime>
+      <publishTime>06/12/2015 11:41:43</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BlogContentItem.cshtml">
       <publishTime>06/09/2015 09:21:37</publishTime>
@@ -1030,7 +1036,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/ProductThumbnail.cshtml">
-      <publishTime>06/11/2015 11:47:44</publishTime>
+      <publishTime>06/12/2015 09:25:51</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -1041,8 +1047,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/Layouts/_Layout2.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
+    <File Include="Views/Shared/pProductContent.cshtml">
+      <publishTime>06/12/2015 11:22:16</publishTime>
+    </File>
     <File Include="Views/Shared/pRelatedContent.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
+    </File>
+    <File Include="Views/Shared/pRelatedContents.cshtml">
+      <publishTime>06/12/2015 11:25:27</publishTime>
     </File>
     <File Include="Views/Shared/pStoreCarousel.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -1051,7 +1063,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/09/2015 10:11:18</publishTime>
+      <publishTime>06/12/2015 11:04:00</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -1063,7 +1075,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/11/2015 12:08:35</publishTime>
+      <publishTime>06/12/2015 09:24:57</publishTime>
     </File>
   </ItemGroup>
 </Project>

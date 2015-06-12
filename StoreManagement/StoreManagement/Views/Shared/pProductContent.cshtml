@@ -1,19 +1,24 @@
 ﻿@using StoreManagement.Data.GeneralHelper
-@model StoreManagement.Data.Entities.Content 
+@model StoreManagement.Data.Entities.Content
+
 @{
-    var image = Model.ContentFiles.FirstOrDefault();
+    var image =Model.ContentFiles != null ? Model.ContentFiles.FirstOrDefault();
     var desc = GeneralHelper.GetDescription(Model.Description, 200);
+    var categoryName = ViewData["ProductCategoryName"].ToStr();
+    var productDetailLink = LinkHelper.GetProductLink(Model, categoryName);
 }
 
 
 <div class="row-fluid">
     <div class="col-md-2">
-        @if (image != null)
+        <a href="@productDetailLink">
+            @if (image != null)
         {
-            <img src="@Url.Action("Index", "Images", new {id = image.FileManager.GoogleImageId, size = "", contentType = image.FileManager.ContentType})" style="width: 100px; height: 100px;" alt="">
-
+                <img src="@Url.Action("FetchImage", "Images", new { id = image.FileManager.GoogleImageId, size = "", contentType = image.FileManager.ContentType })" style="width: 120px; height: 120px;" alt="">
         }
-        
+        </a>
+
+
     </div>
     <div class="col-md-6">
         <h5>@Model.Name </h5>
@@ -32,10 +37,7 @@
             <div class="btn-group">
                 <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span>Add to cart</a>
 
-
-                @Html.ActionLink("View", "Product", "Products",
-              new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) },
-              new { @class = "btn link" })
+                <a href="@productDetailLink">View  </a>
 
             </div>
         </form>

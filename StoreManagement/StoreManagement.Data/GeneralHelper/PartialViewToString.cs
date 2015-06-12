@@ -9,18 +9,17 @@ using System.Web.UI;
 
 namespace StoreManagement.Data.GeneralHelper
 {
-    public class PartialViewToString
+    public static class PartialViewToString
     {
-        public string RenderPartialToString(ControllerContext context,
-           string partialViewName, ViewDataDictionary viewData, TempDataDictionary tempData)
+        public static string RenderPartialToString(this Controller controller, string partialViewName, ViewDataDictionary viewData, TempDataDictionary tempData)
         {
-             
+            ControllerContext controllerContext = controller.ControllerContext;
             if (tempData == null)
             {
-                tempData  = new TempDataDictionary();
+                tempData = new TempDataDictionary();
             }
 
-            ViewEngineResult result = ViewEngines.Engines.FindPartialView(context, partialViewName);
+            ViewEngineResult result = ViewEngines.Engines.FindPartialView(controllerContext, partialViewName);
 
             if (result.View != null)
             {
@@ -29,7 +28,7 @@ namespace StoreManagement.Data.GeneralHelper
                 {
                     using (HtmlTextWriter output = new HtmlTextWriter(sw))
                     {
-                        ViewContext viewContext = new ViewContext(context, result.View, viewData, tempData, output);
+                        ViewContext viewContext = new ViewContext(controllerContext, result.View, viewData, tempData, output);
                         //  viewContext.ViewBag.location = location;
                         result.View.Render(viewContext, output);
                     }
@@ -39,6 +38,20 @@ namespace StoreManagement.Data.GeneralHelper
             }
 
             return String.Empty;
+        }
+        public static string RenderPartialToString(this Controller controller, string partialView, ViewDataDictionary viewData)
+        {
+            return RenderPartialToString(controller, partialView, viewData, new TempDataDictionary());
+        }
+
+        public static string RenderPartialToString(this Controller controller, string partialView)
+        {
+            return RenderPartialToString(controller, partialView, new ViewDataDictionary(), new TempDataDictionary());
+        }
+
+        public static string RenderPartialToString(this Controller controller, string partialView, object model)
+        {
+            return RenderPartialToString(controller, partialView, new ViewDataDictionary(model), new TempDataDictionary());
         }
 
     }

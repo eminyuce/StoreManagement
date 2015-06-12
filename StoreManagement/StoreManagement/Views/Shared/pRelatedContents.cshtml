@@ -1,0 +1,11 @@
+﻿@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.RequestModel.ContentDetailViewModel
+@{
+    var relatedContents = Model.RelatedContents;
+}
+
+@foreach (var e in relatedContents)
+{
+     @Html.Partial("DisplayTemplates/ProductThumbnail", e, new ViewDataDictionary(ViewData){
+                                {"ProductCategoryName",Model.Category.Name}})
+}

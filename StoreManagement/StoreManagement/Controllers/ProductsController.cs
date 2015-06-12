@@ -31,12 +31,6 @@ namespace StoreManagement.Controllers
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetSingle(returnModel.Content.CategoryId);
             returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "product");
-            var c = new List<Content>();
-            c.Add(returnModel.Content);
-            returnModel.RelatedContents = ContentService.GetContentByTypeAndCategoryId(Store.Id, "product",
-                returnModel.Content.CategoryId).Except(c).Take(5).ToList();
-
-
             return View(returnModel);
         }
 	}

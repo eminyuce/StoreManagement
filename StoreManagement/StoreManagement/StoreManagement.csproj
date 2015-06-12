@@ -226,6 +226,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BaseController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -414,7 +415,6 @@
     </None>
     <None Include="Properties\PublishProfiles\llogin.seatechnologyjobs.pubxml" />
     <None Include="Properties\PublishProfiles\login.maritimejobs.mobi.pubxml" />
-    <None Include="Properties\PublishProfiles\yuce.marinelink.org.pubxml" />
     <None Include="Properties\PublishProfiles\yucetest.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
@@ -432,6 +432,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\storeManagement.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -486,7 +487,7 @@
     <Content Include="Views\Shared\pStoreCarouselImages.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ProductThumbnail.cshtml" />
     <Content Include="Views\Products\Product.cshtml" />
-    <Content Include="Views\Shared\pRelatedContent.cshtml" />
+    <Content Include="Views\Shared\pRelatedContents.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Pages\Index.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
@@ -506,11 +507,11 @@
     <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Shared\pProductContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Navigations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

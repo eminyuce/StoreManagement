@@ -8,17 +8,15 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Setting : IEntity
+    public class Setting : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string SettingKey { get; set; }
         public string SettingValue { get; set; }
 
 
 
-        [IgnoreDataMember]
-        public int StoreId { get; set; }
+   
         [IgnoreDataMember]
         public string Type { get; set; }
         [IgnoreDataMember]

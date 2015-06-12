@@ -31,8 +31,8 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult DisplayImages(int storeId = 1, String search="")
         {
+            storeId = GetStoreId(storeId);
             ViewBag.StoreId = storeId;
-
             var images = FileManagerRepository.GetFilesByStoreId(storeId);
 
             if (!String.IsNullOrEmpty(search))
@@ -46,6 +46,7 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult UploadImages(int storeId=1)
         {
+            storeId = GetStoreId(storeId);
             Session["storeId"] = storeId;
             ViewBag.StoreId = storeId;
             return View();

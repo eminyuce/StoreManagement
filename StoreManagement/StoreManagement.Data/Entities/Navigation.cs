@@ -8,9 +8,8 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Navigation : IEntity
+    public class Navigation : BaseEntity
     {
-        public int Id { get; set; }
         public int ParentId { get; set; }
         public string Name { get; set; }
         public string ControllerName { get; set; }
@@ -24,8 +23,6 @@ namespace StoreManagement.Data.Entities
         public string Modul { get; set; }
         [IgnoreDataMember]
         public int Ordering { get; set; }
-        [IgnoreDataMember]
-        public int StoreId { get; set; }
         [IgnoreDataMember]
         public Boolean LinkState { get; set; }
         [IgnoreDataMember]

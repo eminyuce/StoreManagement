@@ -156,7 +156,17 @@ namespace StoreManagement.Admin.Controllers
             returnHtml = GeneralHelper.NofollowExternalLinks(returnHtml);
             return returnHtml;
         }
-
+        protected bool CheckRequest(BaseEntity entity)
+        {
+            if (IsSuperAdmin)
+            {
+                return true;
+            }
+            else
+            {
+                return entity.StoreId == LoginStore.Id;
+            }
+        }
 
     }
 }

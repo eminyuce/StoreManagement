@@ -112,6 +112,7 @@
     <Compile Include="EmailHelper\EmailSender.cs" />
     <Compile Include="EmailHelper\IEmailSender.cs" />
     <Compile Include="Entities\AdminProjectUsersModel.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Content.cs" />

@@ -11,7 +11,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Content : IEntity
+    public class Content : BaseEntity
     {
 
         public Content()
@@ -19,9 +19,7 @@ namespace StoreManagement.Data.Entities
 
         }
 
-        public int Id { get; set; }
-        [IgnoreDataMember]
-        public int StoreId { get; set; }
+      
         
         [Display(Name = "Category")]
         public int CategoryId { get; set; }

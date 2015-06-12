@@ -20,6 +20,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ViewResult Index(int storeId=0)
         {
+            storeId = GetStoreId(storeId);
             List<PageDesign> resultList = new List<PageDesign>();
             if (storeId == 0)
             {

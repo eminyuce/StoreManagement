@@ -41,6 +41,11 @@ namespace StoreManagement.Admin.Controllers
 
             return View();
         }
-
+        public ActionResult NoAccessPage(int id)
+        {
+            int storeId = id;
+            Logger.Info("NoAccessPage. StoreId:"+storeId);
+            return View();
+        }
     }
 }

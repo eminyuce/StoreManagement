@@ -14,7 +14,7 @@ using WebMatrix.WebData;
 
 namespace StoreManagement.Admin.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
+
     public class StoresController : BaseController
     {
        
@@ -35,12 +35,14 @@ namespace StoreManagement.Admin.Controllers
             ViewBag.LoginStoreId = GetStoreId(storeId);
             return PartialView("_StoresDropDown", StoreRepository.GetAll().ToList());
         }
+        [Authorize(Roles = "SuperAdmin")]
         public ViewResult Index()
         {
             return View(StoreRepository.GetAll().ToList());
         }
         //
         // GET: /Stores/Details/5
+        [Authorize(Roles = "SuperAdmin")]
         public ViewResult Details(int id)
         {
             return View(StoreRepository.GetSingle(id));
@@ -51,7 +53,7 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Stores/Edit/5
-
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveOrEdit(int id=0)
         {
             var store = new Store();
@@ -66,6 +68,7 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Stores/Edit/5
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveOrEdit(Store store)
         {
             if (ModelState.IsValid)
@@ -91,7 +94,7 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Stores/Delete/5
-
+            [Authorize(Roles = "SuperAdmin")]
         public ActionResult Delete(int id)
         {
             return View(StoreRepository.GetSingle(id));
@@ -101,13 +104,14 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Stores/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
             StoreRepository.Delete(StoreRepository.GetSingle(id));
             StoreRepository.Save();
             return RedirectToAction("Index");
         }
-
+            [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveStoreUsers(int id, LoginModel userName, String roleName)
         {
             int storeId = id;
@@ -147,6 +151,7 @@ namespace StoreManagement.Admin.Controllers
         }
 
         // GET: /Stores/Details/5
+            [Authorize(Roles = "SuperAdmin")]
         public ActionResult Users(int id)
         {
             var store = this.StoreRepository.GetSingle(id);
@@ -162,6 +167,7 @@ namespace StoreManagement.Admin.Controllers
 
         }
         // GET: /Stores/Details/5
+            [Authorize(Roles = "SuperAdmin")]
         public ActionResult Settings(int id)
         {
             var store = this.StoreRepository.GetSingle(id);
@@ -170,6 +176,7 @@ namespace StoreManagement.Admin.Controllers
             return View(settings);
         }
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveOrUpdateSetting(Setting setting)
         {
             if (ModelState.IsValid)

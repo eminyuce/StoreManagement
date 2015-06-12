@@ -16,13 +16,12 @@ namespace StoreManagement.Admin.Controllers
     public class NavigationsController : BaseController
     {
 
-
- 
         //
         // GET: /Navigations/
 
         public ViewResult Index(int storeId = 0, String search = "")
         {
+            storeId = GetStoreId(storeId);
             List<Navigation> resultList = new List<Navigation>();
             if (storeId == 0)
             {

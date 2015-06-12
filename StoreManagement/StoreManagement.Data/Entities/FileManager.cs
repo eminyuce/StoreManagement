@@ -8,9 +8,8 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class FileManager : IEntity
+    public class FileManager : BaseEntity
     {
-        public int Id { get; set; }
         public string ContentType { get; set; }
         public string GoogleImageId { get; set; }
         public string Title { get; set; }
@@ -33,8 +32,6 @@ namespace StoreManagement.Data.Entities
         public int ContentLength { get; set; }
         [IgnoreDataMember]
         public bool IsCarousel { get; set; }
-        [IgnoreDataMember]
-        public int StoreId { get; set; }
         [IgnoreDataMember]
         public Boolean State { get; set; }
         [IgnoreDataMember]

@@ -8,13 +8,12 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Data.Entities
 {
-    public class PageDesign : IEntity
+    public class PageDesign : BaseEntity
     {
-        public int Id { get; set; }
         public string Type { get; set; }
         [AllowHtml]
         public string PageRazorTemplate { get; set; }
-        public int StoreId { get; set; }
+ 
       
 
 

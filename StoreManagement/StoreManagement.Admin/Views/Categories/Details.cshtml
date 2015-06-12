@@ -34,8 +34,8 @@
                     <div class="display-field">@Model.Name</div>
                 </fieldset>
                 <p>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+                    @Html.ActionLink("Edit", "SaveOrEdit", new { id = Model.Id }, new { @class = "btn btn-success btn-block btn-lg" }) |
+                    @Html.ActionLink("Back to List", "Index")
                 </p>
             </div>
         </div>

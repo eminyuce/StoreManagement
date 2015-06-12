@@ -8,17 +8,12 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Category : IEntity 
+    public class Category : BaseEntity
     {
-       
-        public int Id { get; set; }
-
         public int ParentId { get; set; }
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
-
-        [IgnoreDataMember]
-        public int StoreId { get; set; }
+ 
         [IgnoreDataMember]
         public bool State { get; set; }
         [IgnoreDataMember]

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Ninject;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -18,9 +19,9 @@ namespace StoreManagement.Admin.Controllers
     public class ProductsController : BaseController
     {
         private const String ContentType = "product";
-        
 
-        public ActionResult Index(int storeId=0, String search="", int categoryId=0)
+
+        public ActionResult Index(int storeId = 0, String search = "", int categoryId = 0)
         {
             List<Content> resultList = new List<Content>();
             storeId = GetStoreId(storeId);
@@ -41,7 +42,7 @@ namespace StoreManagement.Admin.Controllers
 
             if (categoryId > 0)
             {
-                resultList = resultList.Where(r => r.CategoryId == categoryId ).ToList();
+                resultList = resultList.Where(r => r.CategoryId == categoryId).ToList();
             }
             var contentsAdminViewModel = new ContentsAdminViewModel();
             contentsAdminViewModel.Contents = resultList;
@@ -59,13 +60,17 @@ namespace StoreManagement.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            if (!CheckRequest(content))
+            {
+                return RedirectToAction("NoAccessPage", "Home", new { id = content.StoreId });
+            }
             return View(content);
         }
 
         //
         // GET: /Content/Create
 
-        public ActionResult SaveOrEdit(int id=0)
+        public ActionResult SaveOrEdit(int id = 0)
         {
             var content = new Content();
             if (id == 0)
@@ -75,6 +80,10 @@ namespace StoreManagement.Admin.Controllers
             else
             {
                 content = ContentRepository.GetSingle(id);
+                if (!CheckRequest(content))
+                {
+                    return RedirectToAction("NoAccessPage", "Home", new { id = content.StoreId });
+                }
             }
             return View(content);
         }
@@ -84,7 +93,7 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveOrEdit(Content content, int [] selectedFileId = null)
+        public ActionResult SaveOrEdit(Content content, int[] selectedFileId = null)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +120,7 @@ namespace StoreManagement.Admin.Controllers
             return View(content);
         }
 
-      
+
 
         //
         // GET: /Content/Delete/5
@@ -130,7 +139,7 @@ namespace StoreManagement.Admin.Controllers
             Content content = ContentRepository.GetSingle(id);
             Store s = StoreRepository.GetSingle(content.StoreId);
             Category cat = CategoryRepository.GetSingle(content.CategoryId);
-            var productDetailLink =  LinkHelper.GetProductLink(content, cat.Name);
+            var productDetailLink = LinkHelper.GetProductLink(content, cat.Name);
             String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
             return Redirect(detailPage);
 
@@ -149,6 +158,6 @@ namespace StoreManagement.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        
+
     }
 }

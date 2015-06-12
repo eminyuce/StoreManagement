@@ -18,10 +18,7 @@ namespace StoreManagement.Admin.Controllers
     public class ProductsController : BaseController
     {
         private const String ContentType = "product";
-        public ProductsController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
-        {
-             
-        }
+        
 
         public ActionResult Index(int storeId=0, String search="", int categoryId=0)
         {

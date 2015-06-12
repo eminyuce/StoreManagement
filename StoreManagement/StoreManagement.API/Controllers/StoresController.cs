@@ -37,6 +37,11 @@ namespace StoreManagement.API.Controllers
             return this.StoreRepository.GetSingle(id);
         }
 
+        public Store GetStoreByUserName(string userName)
+        {
+            return this.StoreRepository.GetStoreByUserName(userName);
+        }
+
         public override IEnumerable<Store> GetAll()
         {
             throw new NotImplementedException();

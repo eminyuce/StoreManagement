@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository;
@@ -28,6 +30,17 @@ namespace StoreManagement.Service.Repositories
             StoreDbContext =   (StoreContext) dbContext;
             StoreDbContext.Configuration.LazyLoadingEnabled = false; 
         }
-         
+
+        public void ClearCache(String cacheKeyPrefix)
+        {
+            var cacheEnumerator = (IDictionaryEnumerator)((IEnumerable)MemoryCache.Default).GetEnumerator();
+            while (cacheEnumerator.MoveNext())
+            {
+                if (cacheEnumerator.Key.ToString().StartsWith(cacheKeyPrefix, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MemoryCache.Default.Remove(cacheEnumerator.Key.ToString());
+                }
+            }
+        }
     }
 }

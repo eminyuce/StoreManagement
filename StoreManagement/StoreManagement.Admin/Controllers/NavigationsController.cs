@@ -4,25 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ninject;
+using StoreManagement.Admin.Filters;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Admin.Controllers
 {
-    [Authorize]
+   // [Authorize(Roles = "StoreAdmin")]
+   // [InitializeSimpleMembership]
     public class NavigationsController : BaseController
     {
 
 
-
-        public NavigationsController(IStoreContext dbContext,
-       ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-
-        }
-
+ 
         //
         // GET: /Navigations/
 

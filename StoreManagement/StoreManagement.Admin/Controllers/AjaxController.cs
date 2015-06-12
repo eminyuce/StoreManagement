@@ -23,13 +23,8 @@ namespace StoreManagement.Admin.Controllers
             public bool State { get; set; }
 
         }
-        public AjaxController(IStoreContext dbContext,
-            ISettingRepository settingRepository,
-            IStoreRepository storeRepository)
-            : base(dbContext, settingRepository)
-        {
 
-        }
+       
         public ActionResult ChangeIsCarouselState(int fileId = 0, bool isCarousel = false)
         {
             var s = FileManagerRepository.GetSingle(fileId);

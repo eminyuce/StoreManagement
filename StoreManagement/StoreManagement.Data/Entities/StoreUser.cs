@@ -13,7 +13,7 @@ namespace StoreManagement.Data.Entities
         public int StoreId { get; set; }
         public int UserId { get; set; }
 
-
+        public virtual UserProfile UserProfile { get; set; }
 
     }
 }

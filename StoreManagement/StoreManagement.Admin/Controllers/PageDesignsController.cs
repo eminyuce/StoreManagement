@@ -14,13 +14,7 @@ namespace StoreManagement.Admin.Controllers
     public class PageDesignsController : BaseController
     {
         
-         //
-        // GET: /Setting/
-          public PageDesignsController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-
-        }
+        
         //
         // GET: /PageDesigns/
 

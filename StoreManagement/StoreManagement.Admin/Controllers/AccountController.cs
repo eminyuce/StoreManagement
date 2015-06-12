@@ -22,13 +22,7 @@ namespace StoreManagement.Admin.Controllers
     [InitializeSimpleMembership]
     public class AccountController : BaseController
     {
-
-        public AccountController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-
-        }
-
+ 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -69,9 +63,14 @@ namespace StoreManagement.Admin.Controllers
                     UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     user.LastLoginDate = DateTime.Now;
                     DbContext.SaveChanges();
-
-                    SetStoreValues(model.UserName); // Set Store values for Store Admin users.
-                    
+                    if (!IsSuperAdmin)
+                    {
+                        var isStore = SetStoreValues(model.UserName); // Set Store values for Store Admin users.
+                        if (!isStore)
+                        {
+                            return RedirectToAction("NoStoreFound", new { id = model.UserName });
+                        }
+                    }
                     return RedirectToLocal(returnUrl);
                 }
 
@@ -80,7 +79,11 @@ namespace StoreManagement.Admin.Controllers
                 return View(model);
             }
         }
-
+        public ActionResult NoStoreFound()
+        {
+            WebSecurity.Logout();
+            return View();
+        }
         //
         // POST: /Account/LogOff
 
@@ -117,7 +120,7 @@ namespace StoreManagement.Admin.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Dashboard");
                 }
                 catch (MembershipCreateUserException e)
                 {

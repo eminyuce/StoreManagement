@@ -17,11 +17,7 @@ namespace StoreManagement.Admin.Controllers
     public class BlogsController : BaseController
    {
         private const String ContentType = "blog";
-        public BlogsController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-             
-        }
+        
 
         public ActionResult Index(int storeId=0, String search="", int categoryId=0)
         {

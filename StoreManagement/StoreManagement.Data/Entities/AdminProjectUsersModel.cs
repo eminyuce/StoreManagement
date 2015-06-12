@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-
+using GenericRepository;
 
 
 namespace StoreManagement.Data.Entities
@@ -21,7 +20,7 @@ namespace StoreManagement.Data.Entities
         public string RoleName { get; set; }
     }
     [Table("UserProfile")]
-    public class UserProfile
+    public class UserProfile 
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

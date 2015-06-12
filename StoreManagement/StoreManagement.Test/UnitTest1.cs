@@ -25,6 +25,16 @@ namespace StoreManagement.Test
         {
             dbContext = new StoreContext(ConnectionString);
         }
+
+        [TestMethod]
+        public void GetStoreByUserName()
+        {
+            var s = new StoreRepository(dbContext);
+            var m = s.GetStoreByUserName("yuce18@marinelink.com");
+            Assert.IsNotNull(m);
+        }
+
+
         [TestMethod]
         public void TestApiCall2()
         {

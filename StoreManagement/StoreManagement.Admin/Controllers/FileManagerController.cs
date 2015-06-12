@@ -23,12 +23,7 @@ namespace StoreManagement.Admin.Controllers
 
         [Inject]
         public IUploadHelper UploadHelper { set; get; }
-
-        public FileManagerController(IStoreContext dbContext,
-            ISettingRepository settingRepository) : base(dbContext, settingRepository)
-        {
-            
-        }
+      
 
         public ActionResult Index()
         {

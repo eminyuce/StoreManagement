@@ -1890,6 +1890,7 @@
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\SaveOrEdit.cshtml" />
     <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\Account\NoStoreFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

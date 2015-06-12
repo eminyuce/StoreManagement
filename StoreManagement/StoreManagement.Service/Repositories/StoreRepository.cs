@@ -75,6 +75,17 @@ namespace StoreManagement.Service.Repositories
             }
             return site;
         }
+
+        public Store GetStoreByUserName(string userName)
+        {
+            var res = from s in this.StoreDbContext.Stores
+                      join c in this.StoreDbContext.StoreUsers on s.Id equals c.StoreId
+                      join u in this.StoreDbContext.UserProfiles on c.UserId equals u.UserId
+                      where u.UserName.Equals(userName,StringComparison.InvariantCultureIgnoreCase)
+                      select s;
+            var result = res.ToList();
+            return result.FirstOrDefault();
+        }
     }
 }
 

@@ -1,11 +1,8 @@
 ﻿@using StoreManagement.Data.Entities
 @{
-    var s = (Store)Session["LoginStore"];
+   
     String url = "";
-    if (s != null)
-    {
-        url = String.Format("http://{0}", s.Domain);
-    }
+     
     
 }
 <!-- main / large navbar -->

@@ -18,12 +18,7 @@ namespace StoreManagement.Admin.Controllers
     public class StoresController : BaseController
     {
        
-        public StoresController(IStoreContext dbContext,
-            ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-            
-        }
+        [AllowAnonymous]
         public PartialViewResult StoresFilter(String actionName = "", String controllerName = "")
         {
             ViewBag.ActionName = actionName;
@@ -32,7 +27,7 @@ namespace StoreManagement.Admin.Controllers
             return PartialView("_StoresFilter", StoreRepository.GetAll().ToList());
         }
 
-
+        [AllowAnonymous]
         public PartialViewResult StoresDropDown(int storeId = 0)
         {
             ViewBag.StoreId = storeId;

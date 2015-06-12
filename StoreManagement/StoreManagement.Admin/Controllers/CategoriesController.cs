@@ -12,15 +12,7 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class CategoriesController : BaseController
     {
- 
-
-        public CategoriesController(IStoreContext dbContext,
-            ISettingRepository settingRepository )
-            : base(dbContext, settingRepository)
-        {
-            
-        }
-
+       
         //
         // GET: /Categories/
 

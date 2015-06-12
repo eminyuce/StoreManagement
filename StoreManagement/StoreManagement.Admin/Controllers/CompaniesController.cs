@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GenericRepository;
+using Ninject;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
@@ -18,15 +19,11 @@ namespace StoreManagement.Admin.Controllers
     {
         //
         // GET: /Companies/
-        private ICompanyRepository companyRepository;
 
-        public CompaniesController(IStoreContext dbContext, 
-            ISettingRepository settingRepository,
-            ICompanyRepository companyRepository)
-            : base(dbContext, settingRepository)
-        {
-            this.companyRepository = companyRepository;
-        }
+        [Inject]
+        public ICompanyRepository companyRepository { get; set; }
+
+         
 
         public ActionResult Company(String id = "1")
         {

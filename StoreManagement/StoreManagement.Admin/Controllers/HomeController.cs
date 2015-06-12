@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc;
+using System.Web.Security;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -16,15 +17,14 @@ namespace StoreManagement.Admin.Controllers
     public class HomeController : BaseController
     {
 
-        public HomeController(IStoreContext dbContext, ISettingRepository settingRepository) : base(dbContext, settingRepository)
-        {
-
-        }
+        
 
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
+            var roles = Roles.GetRolesForUser("yuce18@marinelink.com");
+            String mm = "";
             return View();
         }
 

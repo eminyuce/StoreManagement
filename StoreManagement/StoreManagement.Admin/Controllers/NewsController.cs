@@ -14,11 +14,7 @@ namespace StoreManagement.Admin.Controllers
     public class NewsController : BaseController
     {
         private const String ContentType = "news";
-        public NewsController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-             
-        }
+        
 
         public ActionResult Index(int storeId=0, String search="", int categoryId=0)
         {

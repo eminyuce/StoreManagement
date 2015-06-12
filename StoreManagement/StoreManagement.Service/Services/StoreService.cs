@@ -61,5 +61,19 @@ namespace StoreManagement.Service.Services
                 return new Store();
             }
         }
+
+        public Store GetStoreByUserName(string userName)
+        {
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetStoreByUserName?userName={2}", WebServiceAddress, ApiControllerName, userName);
+                return HttpRequestHelper.GetUrlResult<Store>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new Store();
+            }
+        }
     }
 }

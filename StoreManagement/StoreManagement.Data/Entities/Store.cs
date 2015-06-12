@@ -16,6 +16,8 @@ namespace StoreManagement.Data.Entities
 
         public virtual ICollection<FileManager> FileManagers { get; set; }
         public virtual ICollection<Setting> Settings { get; set; }
+        public virtual ICollection<StoreUser> StoreUsers { get; set; }
+
 
         public override string ToString()
         {

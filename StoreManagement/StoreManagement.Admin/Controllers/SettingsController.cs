@@ -14,13 +14,7 @@ namespace StoreManagement.Admin.Controllers
     public class SettingsController : BaseController
     {
         private const String TYPE = "StoreSettings";
-        //
-        // GET: /Setting/
-        public SettingsController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-
-        }
+       
 
         //
         // GET: /Settings/

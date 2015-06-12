@@ -50,6 +50,12 @@ namespace StoreManagement.Admin.Controllers
         public IStoreUserRepository StoreUserRepository { set; get; }
 
         [Inject]
+        public ISettingRepository SettingRepository { set; get; }
+
+        [Inject]
+        public IStoreContext DbContext { set; get; }
+
+        [Inject]
         public IEmailSender EmailSender { set; get; }
 
 
@@ -83,12 +89,9 @@ namespace StoreManagement.Admin.Controllers
             set { _store  = value; }
         }
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        protected IStoreContext DbContext;
-        protected ISettingRepository SettingRepository;
-        protected BaseController(IStoreContext dbContext, ISettingRepository settingRepository)
+        protected BaseController()
         {
-            this.DbContext = dbContext;
-            this.SettingRepository = settingRepository;
+           
         }
 
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
@@ -108,7 +111,7 @@ namespace StoreManagement.Admin.Controllers
         }
 
 
-        protected void SetStoreValues(String userName)
+        protected bool SetStoreValues(String userName)
         {
             if (!String.IsNullOrEmpty(userName) && Roles.GetRolesForUser(userName).Contains("StoreAdmin"))
             {
@@ -118,18 +121,26 @@ namespace StoreManagement.Admin.Controllers
                 UserStoreCache.TryGet(key, out site);
                 if (site == null)
                 {
-                    var userId = WebSecurity.GetUserId(userName);
-                    var m = StoreUserRepository.GetStoreUserByUserId(userId);
-                    var s = StoreRepository.GetStore(m.StoreId);
-                    site = new Store();
-                    site.Id = s.Id;
-                    site.Layout = s.Layout;
-                    site.Domain = s.Domain;
-                    site.Name = site.Name;
-                    UserStoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
+                    var s = StoreRepository.GetStoreByUserName(userName);
+                    if (s == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        site = new Store();
+                        site.Id = s.Id;
+                        site.Layout = s.Layout;
+                        site.Domain = s.Domain;
+                        site.Name = site.Name;
+
+                        UserStoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
+                    }
                 }
                 LoginStore = site;
             }
+
+            return true;
         }
         protected string GetCleanHtml(String source)
         {

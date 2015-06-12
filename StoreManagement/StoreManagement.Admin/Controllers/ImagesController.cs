@@ -15,13 +15,7 @@ namespace StoreManagement.Admin.Controllers
 {
     public class ImagesController : BaseController
     {
-        //
-        // GET: /Images/
-        public ImagesController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-
-        }
+       
 
         public ActionResult Image()
         {

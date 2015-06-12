@@ -13,7 +13,7 @@ namespace StoreManagement.Service.Interfaces
         Store GetStoreByDomain(string domainName);
         Store GetStore(String domain);
         Store GetStore(int id);
-
+        Store GetStoreByUserName(String userName);
 
     }
 }

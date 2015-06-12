@@ -22,13 +22,6 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class TestController : BaseController
     {
-         //
-        // GET: /Setting/
-        public TestController(IStoreContext dbContext, ISettingRepository settingRepository)
-            : base(dbContext, settingRepository)
-        {
-
-        }
 
         public ActionResult TestJquery()
         {

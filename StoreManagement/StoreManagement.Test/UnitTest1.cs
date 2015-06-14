@@ -32,6 +32,7 @@ namespace StoreManagement.Test
             var s = new StoreRepository(dbContext);
             var m = s.GetStoreByUserName("yuce18@marinelink.com");
             Assert.IsNotNull(m);
+         
         }
 
 

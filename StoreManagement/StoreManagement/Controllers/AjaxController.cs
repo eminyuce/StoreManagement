@@ -27,6 +27,15 @@ namespace StoreManagement.Controllers
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult GetRelatedProducts(int categoryId)
+        {
+            var returnModel = new ProductDetailViewModel();
+            returnModel.Store = Store;
+            returnModel.Category = CategoryService.GetSingle(categoryId);
+            returnModel.RelatedProducts =ProductService.GetProductByTypeAndCategoryId(Store.Id, "product", categoryId).Take(5).ToList();
+            String partialViewName = "pRelatedContents";
+            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
+            return Json(html, JsonRequestBehavior.AllowGet);
+        }
 	}
 }

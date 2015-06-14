@@ -32,6 +32,7 @@ namespace StoreManagement.Service.Repositories
             {
                 this.Delete(c);
             }
+            this.Save();
         }
         public void SaveContentFiles(int[] selectedFileId, int contentId)
         {

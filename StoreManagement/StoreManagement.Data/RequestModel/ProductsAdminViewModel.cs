@@ -7,12 +7,10 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class ProductDetailViewModel
+    public  class ProductsAdminViewModel
     {
-        public Store Store { get; set; }
-        public Category Category { get; set; }
-        public Product Product { get; set; }
+        public List<Product> Products { get; set; }
+
         public List<Category> Categories { get; set; }
-        public List<Product> RelatedProducts { get; set; }
     }
 }

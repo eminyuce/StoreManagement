@@ -135,6 +135,34 @@ namespace StoreManagement.Admin.Controllers
             ContentRepository.Save();
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ChangeProductGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var product = ProductRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    product.Ordering = item.Ordering;
+                }
+                else if (checkbox.Equals("imagestate", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    product.ImageState = item.State;
+                }
+                else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    product.State = item.State;
+                }
+                else if (checkbox.Equals("mainpage", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    product.MainPage = item.State;
+                }
+
+
+                ProductRepository.Edit(product);
+            }
+            ProductRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult SaveStyles(int storeId = 0, String styleArray = "")
         {
             JObject results = JObject.Parse(styleArray);

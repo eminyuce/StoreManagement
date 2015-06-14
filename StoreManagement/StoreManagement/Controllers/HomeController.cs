@@ -26,12 +26,12 @@ namespace StoreManagement.Controllers
             shp.Store = Store;
             shp.CarouselImages = FileManagerService.GetStoreCarousels(Store.Id);
             shp.Categories = CategoryService.GetCategoriesByStoreId(Store.Id);
-            var m = ContentService.GetContentsCategoryId(Store.Id, null, "product", true, page, 24);
-            shp.Products = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            m = ContentService.GetContentsCategoryId(Store.Id, null, "news", true, page, 24);
-            shp.News = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            m = ContentService.GetContentsCategoryId(Store.Id, null, "blog", true, page, 24);
-            shp.Blogs = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+            var products = ProductService.GetProductsCategoryId(Store.Id, null, "product", true, page, 24);
+            shp.Products = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
+            var contents = ContentService.GetContentsCategoryId(Store.Id, null, "news", true, page, 24);
+            shp.News = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+            contents = ContentService.GetContentsCategoryId(Store.Id, null, "blog", true, page, 24);
+            shp.Blogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
             return View(shp);
         }
         public ActionResult About()

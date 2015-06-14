@@ -1,8 +1,8 @@
-﻿@model StoreManagement.Data.Entities.Content
+﻿@model StoreManagement.Data.Entities.Product
 @using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
 @{
-    var image = Model.ContentFiles.FirstOrDefault();
+    var image = Model.ProductFiles.FirstOrDefault();
     var categoryName = ViewData["ProductCategoryName"].ToStr();
     var productDetailLink = LinkHelper.GetProductLink(Model, categoryName);
 }

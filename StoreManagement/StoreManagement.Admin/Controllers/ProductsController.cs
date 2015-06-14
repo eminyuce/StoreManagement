@@ -18,20 +18,20 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
-        private const String ContentType = "product";
+        private const String ProductType = "product";
 
 
         public ActionResult Index(int storeId = 0, String search = "", int categoryId = 0)
         {
-            List<Content> resultList = new List<Content>();
+            List<Product> resultList = new List<Product>();
             storeId = GetStoreId(storeId);
             if (storeId == 0)
             {
-                resultList = ContentRepository.GetContentByType(ContentType);
+                resultList = ProductRepository.GetProductByType(ProductType);
             }
             else
             {
-                resultList = ContentRepository.GetContentByType(storeId, ContentType);
+                resultList = ProductRepository.GetProductByType(storeId, ProductType);
             }
 
             if (!String.IsNullOrEmpty(search))
@@ -44,18 +44,18 @@ namespace StoreManagement.Admin.Controllers
             {
                 resultList = resultList.Where(r => r.CategoryId == categoryId).ToList();
             }
-            var contentsAdminViewModel = new ContentsAdminViewModel();
-            contentsAdminViewModel.Contents = resultList;
-            contentsAdminViewModel.Categories = CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, ContentType);
+            var contentsAdminViewModel = new ProductsAdminViewModel();
+            contentsAdminViewModel.Products = resultList;
+            contentsAdminViewModel.Categories = CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, ProductType);
             return View(contentsAdminViewModel);
         }
 
         //
-        // GET: /Content/Details/5
+        // GET: /Product/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Content content = ContentRepository.GetSingle(id);
+            Product content = ProductRepository.GetSingle(id);
             if (content == null)
             {
                 return HttpNotFound();
@@ -68,18 +68,18 @@ namespace StoreManagement.Admin.Controllers
         }
 
         //
-        // GET: /Content/Create
+        // GET: /Product/Create
 
         public ActionResult SaveOrEdit(int id = 0)
         {
-            var content = new Content();
+            var content = new Product();
             if (id == 0)
             {
-                content.Type = ContentType;
+                content.Type = ProductType;
             }
             else
             {
-                content = ContentRepository.GetSingle(id);
+                content = ProductRepository.GetSingle(id);
                 if (!CheckRequest(content))
                 {
                     return RedirectToAction("NoAccessPage", "Home", new { id = content.StoreId });
@@ -89,29 +89,29 @@ namespace StoreManagement.Admin.Controllers
         }
 
         //
-        // POST: /Content/Create
+        // POST: /Product/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveOrEdit(Content content, int[] selectedFileId = null)
+        public ActionResult SaveOrEdit(Product content, int[] selectedFileId = null)
         {
             if (ModelState.IsValid)
             {
                 content.Description = GetCleanHtml(content.Description);
                 if (content.Id == 0)
                 {
-                    ContentRepository.Add(content);
+                    ProductRepository.Add(content);
                 }
                 else
                 {
-                    ContentRepository.Edit(content);
+                    ProductRepository.Edit(content);
                 }
                 content.CreatedDate = DateTime.Now;
-                ContentRepository.Save();
+                ProductRepository.Save();
                 if (selectedFileId != null)
                 {
                     int contentId = content.Id;
-                    ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
+                    ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
                 }
 
                 return RedirectToAction("Index");
@@ -123,11 +123,11 @@ namespace StoreManagement.Admin.Controllers
 
 
         //
-        // GET: /Content/Delete/5
+        // GET: /Product/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Content content = ContentRepository.GetSingle(id);
+            Product content = ProductRepository.GetSingle(id);
             if (content == null)
             {
                 return HttpNotFound();
@@ -136,25 +136,25 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult StoreDetails(int id = 0)
         {
-            Content content = ContentRepository.GetSingle(id);
-            Store s = StoreRepository.GetSingle(content.StoreId);
-            Category cat = CategoryRepository.GetSingle(content.CategoryId);
-            var productDetailLink = LinkHelper.GetProductLink(content, cat.Name);
+            Product product = ProductRepository.GetSingle(id);
+            Store s = StoreRepository.GetSingle(product.StoreId);
+            Category cat = CategoryRepository.GetSingle(product.CategoryId);
+            var productDetailLink = LinkHelper.GetProductLink(product, cat.Name);
             String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
             return Redirect(detailPage);
 
         }
 
         //
-        // POST: /Content/Delete/5
+        // POST: /Product/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Content content = ContentRepository.GetSingle(id);
-            ContentRepository.Delete(content);
-            ContentRepository.Save();
+            Product content = ProductRepository.GetSingle(id);
+            ProductRepository.Delete(content);
+            ProductRepository.Save();
             return RedirectToAction("Index");
         }
 

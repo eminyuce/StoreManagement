@@ -58,6 +58,11 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public IEmailSender EmailSender { set; get; }
 
+        [Inject]
+        public IProductRepository ProductRepository { set; get; }
+
+        [Inject]
+        public IProductFileRepository ProductFileRepository { set; get; }
 
         protected bool IsSuperAdmin
         {

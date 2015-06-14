@@ -120,6 +120,8 @@
     <Compile Include="Entities\FileManager.cs" />
     <Compile Include="Entities\Navigation.cs" />
     <Compile Include="Entities\PageDesign.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ProductFile.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\StoreUser.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="RequestModel\ContentsViewModel.cs" />
     <Compile Include="RequestModel\PhotosViewModel.cs" />
     <Compile Include="RequestModel\ProductDetailViewModel.cs" />
+    <Compile Include="RequestModel\ProductsAdminViewModel.cs" />
     <Compile Include="RequestModel\ProductsViewModel.cs" />
     <Compile Include="RequestModel\StoreHomePage.cs" />
     <Compile Include="RequestModel\VmDashboard.cs" />

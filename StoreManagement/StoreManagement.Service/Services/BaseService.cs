@@ -13,16 +13,12 @@ namespace StoreManagement.Service.Services
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected string WebServiceAddress { get; set; }
 
-
         protected RequestHelper HttpRequestHelper;
-        protected BaseService()
-        {
-            HttpRequestHelper = new RequestHelper();
-        }
 
-        protected BaseService(String webServiceAddress):this()
+        protected BaseService(String webServiceAddress)
         {
             WebServiceAddress = webServiceAddress;
+            HttpRequestHelper = new RequestHelper();
         }
 
        

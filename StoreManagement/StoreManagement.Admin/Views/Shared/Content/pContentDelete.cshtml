@@ -83,12 +83,7 @@
         @Html.DisplayFor(model => model.CreatedDate)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Url)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Url)
-    </div>
+   
 </fieldset>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

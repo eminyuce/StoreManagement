@@ -86,6 +86,9 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IContentFileRepository>().To<ContentFileRepository>();
             kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
+            kernel.Bind<IProductRepository>().To<ProductRepository>();
+            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>();
+
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();
             m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("ClientId", clientId));

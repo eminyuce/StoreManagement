@@ -23,6 +23,8 @@ namespace StoreManagement.Service.DbContext
         IDbSet<webpages_Membership> WebpagesMemberships { get; set; }
         IDbSet<Role> Roles { get; set; }
         IDbSet<Company> Companies { get; set; }
-        IDbSet<PageDesign> PageDesigns { get; set; }      
+        IDbSet<PageDesign> PageDesigns { get; set; }
+        IDbSet<Product> Products { get; set; }
+        IDbSet<ProductFile> ProductFiles { get; set; }  
     }
 }

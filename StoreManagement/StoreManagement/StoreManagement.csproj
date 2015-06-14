@@ -508,7 +508,9 @@
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\News\Detail.cshtml" />
-    <Content Include="Views\Shared\pProductContent.cshtml" />
+    <Content Include="Views\Shared\pContent.cshtml" />
+    <Content Include="Views\Shared\pRelatedProducts.cshtml" />
+    <Content Include="Views\Shared\pProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

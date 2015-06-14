@@ -50,6 +50,13 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public IEmailSender EmailSender { set; get; }
+
+
+        [Inject]
+        public IProductService ProductService { set; get; }
+
+        [Inject]
+        public IProductFileService ProductFileService { set; get; }
         
         protected Store Store { set; get; }
 

@@ -17,16 +17,6 @@ namespace StoreManagement.Service.Interfaces
         List<Content> GetContentByType(int storeId, String typeName);
         List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId);
         List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
-        /// <summary>
-        /// Returns the Content Page List with their images.
-        /// </summary>
-        /// <param name="storeId"></param>
-        /// <param name="categoryId"></param>
-        /// <param name="typeName"></param>
-        /// <param name="isActive"></param>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
         StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Content GetContentWithFiles(int id);
  

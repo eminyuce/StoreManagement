@@ -15,6 +15,6 @@ namespace StoreManagement.Data.RequestModel
         public List<FileManager> CarouselImages { get; set; }
         public PagedList<Content> Blogs { get; set; }
         public PagedList<Content> News { get; set; }
-        public PagedList<Content> Products { get; set; }
+        public PagedList<Product> Products { get; set; }
     }
 }

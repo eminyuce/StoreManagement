@@ -1,12 +1,131 @@
-﻿@model StoreManagement.Data.Entities.Content
+﻿@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.Product
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "../Shared/_Layout.cshtml";
+
+    int storeId = Model != null ? Model.StoreId : 0;
+    String categoryType = Model.Type;
+ 
 }
 
-@Html.Partial("Content/pContentSaveOrEdit", Model, new ViewDataDictionary(ViewData){
-    {"ContentSaveOrEditPageTitle","Products"}})
+
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Products</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+               
+                                 <h2>Product Management</h2>
+                
+
+                
+
+                <input type="hidden" value="@categoryType" id="categoryType"/>
+
+
+                <div id="categoryTree">
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend>Content</legend>
+
+                        <div class="editor-field controls">
+                           @Html.Action("StoresDropDown", "Stores", new { storeId })
+                        </div>
+
+
+                        @Html.HiddenFor(model => model.Id)
+
+                        @Html.HiddenFor(model => model.Type)
+
+
+                        <div class="editor-label">
+                            <b>Selected Category
+                            </b>
+                        </div>
+                        <div class="editor-field">
+                            @Html.HiddenFor(model => model.CategoryId)
+                            <span class="label label-success" id="SelectedCategory"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name)
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description)
+
+                            @Html.TextAreaFor(model => model.Description)
+                        </div>
+
+
+
+                        <div class="editor-field">
+                            <div id="contentImages"></div>
+                            <div id="existingContentImages"></div>
+                            @Html.Action("ImageGallery", "FileManager")
+                        </div>
+
+                        <div class="form-group">
+                            
+                            @Html.LabelFor(model => model.MainPage)
+                            @Html.EditorFor(model => model.MainPage)
+                            @Html.ValidationMessageFor(model => model.MainPage)
+                            
+
+                          
+                            @Html.LabelFor(model => model.State)
+                            @Html.EditorFor(model => model.State)
+                            @Html.ValidationMessageFor(model => model.State)
+
+                         
+                            @Html.LabelFor(model => model.ImageState)
+
+                            @Html.EditorFor(model => model.ImageState)
+                            @Html.ValidationMessageFor(model => model.ImageState)
+
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Ordering)
+                            @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
+                            @Html.ValidationMessageFor(model => model.Ordering)
+                        </div>
+
+
+                        <p>
+                            <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
 
 
 

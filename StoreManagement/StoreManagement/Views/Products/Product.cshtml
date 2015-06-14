@@ -3,8 +3,8 @@
 
 @{
     ViewBag.Title = "Product";
-    var product = Model.Content;
-    var images = Model.Content.ContentFiles;
+    var product = Model.Product;
+    var images = Model.Product.ProductFiles;
 
     
 }
@@ -61,7 +61,7 @@
 
                                             <div class="item @String.Format("{0}",(i==0 ? "active" : ""))">
                                                 <a href="#">
-                                                    <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType})" style="width: 100px; height: 100px;" alt="">
+                                                    <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ProductType})" style="width: 100px; height: 100px;" alt="">
                                                 </a>
                                             </div>
                                         }
@@ -102,7 +102,7 @@
                     </ul>
                 </li>
             </ul>
-            <div id="myTabContent" class="tab-content tabWrapper">
+            <div id="myTabProduct" class="tab-content tabWrapper">
                 <div class="tab-pane fade active in" id="home">
                     
                     <p>
@@ -110,7 +110,7 @@
                     </p>
                 </div>
                 <div class="tab-pane fade" id="profile">
-                      <div id="RelatedContents"></div>
+                      <div id="RelatedProducts"></div>
                 </div>
                  
                  
@@ -127,16 +127,16 @@
     <script>
 
         $(document).ready(function () {
-            GetRelatedContents();
+            GetRelatedProducts();
         });
-        function GetRelatedContents() {
+        function GetRelatedProducts() {
             var postData = JSON.stringify({ "categoryId": $("#CategoryId").val() });
-            ajaxMethodCall(postData, "/Ajax/GetRelatedContents", DisplayRelatedContents);
+            ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", DisplayRelatedProducts);
             
         }
-        function DisplayRelatedContents(data) {
-            $("#RelatedContents").empty();
-            $("#RelatedContents").html(data).animate({ 'height': '150px' }, 'slow');
+        function DisplayRelatedProducts(data) {
+            $("#RelatedProducts").empty();
+            $("#RelatedProducts").html(data).animate({ 'height': '150px' }, 'slow');
         }
 
 

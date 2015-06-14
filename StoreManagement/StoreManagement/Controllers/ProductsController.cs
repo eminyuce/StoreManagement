@@ -27,9 +27,9 @@ namespace StoreManagement.Controllers
         {
             var returnModel = new ProductDetailViewModel();
             int productId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.Content = ContentService.GetContentsContentId(productId);
+            returnModel.Product = ProductService.GetProductsProductId(productId);
             returnModel.Store = Store;
-            returnModel.Category = CategoryService.GetSingle(returnModel.Content.CategoryId);
+            returnModel.Category = CategoryService.GetSingle(returnModel.Product.CategoryId);
             returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "product");
             return View(returnModel);
         }

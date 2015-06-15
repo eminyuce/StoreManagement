@@ -1897,6 +1897,8 @@
     <Content Include="Views\ProductCategories\Details.cshtml" />
     <Content Include="Views\ProductCategories\SaveOrEdit.cshtml" />
     <Content Include="Views\ProductCategories\Delete.cshtml" />
+    <Content Include="Views\Shared\pProductCategoryTree.cshtml" />
+    <Content Include="Views\Shared\pCreateProductCategoryTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

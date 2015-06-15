@@ -20,10 +20,7 @@ namespace StoreManagement.Data.Entities
         [IgnoreDataMember]
         public string Type { get; set; }
         [IgnoreDataMember]
-        public int Ordering { get; set; }
-        [IgnoreDataMember]
         public string Description { get; set; }
-        [IgnoreDataMember]
-        public Boolean State { get; set; }
+        
     }
 }

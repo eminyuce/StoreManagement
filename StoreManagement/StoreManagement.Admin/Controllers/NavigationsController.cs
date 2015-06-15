@@ -63,6 +63,7 @@ namespace StoreManagement.Admin.Controllers
             else
             {
                 item = NavigationRepository.GetSingle(id);
+                item.UpdatedDate = DateTime.Now;
             }
 
             ViewBag.Moduls = GetModuls();

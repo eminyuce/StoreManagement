@@ -23,8 +23,6 @@ namespace StoreManagement.Data.Entities
         [IgnoreDataMember]
         public string OriginalFilename { get; set; }
         [IgnoreDataMember]
-        public DateTime? CreatedDate { get; set; }
-        [IgnoreDataMember]
         public DateTime? ModifiedDate { get; set; }
         [IgnoreDataMember]
         public string IconLink { get; set; }
@@ -32,10 +30,7 @@ namespace StoreManagement.Data.Entities
         public int ContentLength { get; set; }
         [IgnoreDataMember]
         public bool IsCarousel { get; set; }
-        [IgnoreDataMember]
-        public Boolean State { get; set; }
-        [IgnoreDataMember]
-        public int Ordering { get; set; }
+      
 
     }
 }

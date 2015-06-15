@@ -28,14 +28,15 @@
                 <input type="hidden" value="@categoryType" id="categoryType"/>
 
 
-                <div id="categoryTree">
+                <div id="productCategoryTree">
                 </div>
 
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
-
+                    @Html.HiddenFor(model => model.CreatedDate)
+                    @Html.HiddenFor(model => model.UpdatedDate)
                     <fieldset>
                         <legend>Content</legend>
 
@@ -54,8 +55,8 @@
                             </b>
                         </div>
                         <div class="editor-field">
-                            @Html.HiddenFor(model => model.CategoryId)
-                            <span class="label label-success" id="SelectedCategory"></span>
+                            @Html.HiddenFor(model => model.ProductCategoryId)
+                            <span class="label label-success" id="SelectedProductCategory"></span>
                         </div>
 
 

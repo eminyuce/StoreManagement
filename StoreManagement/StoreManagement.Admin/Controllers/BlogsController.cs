@@ -70,10 +70,12 @@ namespace StoreManagement.Admin.Controllers
             if (id == 0)
             {
                 content.Type = ContentType;
+                content.UpdatedDate = DateTime.Now;
             }
             else
             {
                 content = ContentRepository.GetSingle(id);
+                content.UpdatedDate = DateTime.Now;
             }
             return View(content);
         }

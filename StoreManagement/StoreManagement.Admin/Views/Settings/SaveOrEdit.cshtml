@@ -17,7 +17,7 @@
             </div>
             <div class="bootstrap-admin-panel-content">
 
- 
+
                 @using (Html.BeginForm())
                 {
                     @Html.ValidationSummary(true)
@@ -26,10 +26,16 @@
 
                         @Html.HiddenFor(model => model.Id)
                         @* This partial view defines form fields that will appear when creating and editing entities *@
-                        @Html.HiddenFor(model => model.State)
-                                                @Html.HiddenFor(model => model.StoreId)
-                                                @Html.HiddenFor(model => model.Type)
+                        
+                                @Html.HiddenFor(model => model.StoreId)
+                        @Html.HiddenFor(model => model.Type)
+                        
 
+                        @Html.HiddenFor(model => model.State)
+                
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+                        @Html.HiddenFor(model => model.Ordering)
                         <div class="editor-label">
                             @Html.LabelFor(model => model.SettingKey)
                         </div>
@@ -45,7 +51,7 @@
                             @Html.EditorFor(model => model.SettingValue)
                             @Html.ValidationMessageFor(model => model.SettingValue)
                         </div>
- 
+
 
 
 

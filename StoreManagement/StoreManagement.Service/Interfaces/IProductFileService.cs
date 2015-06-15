@@ -9,8 +9,8 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IProductFileService : IService
     {
-        List<ProductFile> GetProductByProductId(int productId);
-        List<ProductFile> GetProductByFileManagerId(int fileManagerId);
+        List<ProductFile> GetProductFilesByProductId(int productId);
+        List<ProductFile> GetProductFilesByFileManagerId(int fileManagerId);
         void DeleteProductFileByProductId(int productId);
         void SaveProductFiles(int[] selectedFileId, int productId);
     }

@@ -1,0 +1,50 @@
+﻿@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
+@model List<StoreManagement.Data.Entities.ProductCategory>
+@{
+    Layout = null;
+}
+
+
+@{
+
+    string action = ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToStr();
+    string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
+    string search = @Request.QueryString["search"].ToStr();
+    string storeId = @Request.QueryString["storeId"].ToStr();
+}
+
+<div id="tree">
+    <ul id="treeview">
+        @CategoryTree(Model, 0, action, controller, storeId, search)
+    </ul>
+</div>
+
+
+@helper CategoryTree(IEnumerable<ProductCategory> nodes, int? parentId, String action, String controller, String storeId, String search)
+{
+    
+    if (nodes.Any(n => n.ParentId == parentId))
+    { 
+    <ul>
+        @foreach (var node in nodes.Where(n => n.ParentId == parentId))
+        {
+            <li>
+                <span class="btn link" data-category="@node.Id">
+
+                    @using (Html.BeginForm(action, controller, FormMethod.Get))
+                    {
+                        <input type="hidden" name="storeId"  value="@storeId" />
+                        <input type="hidden" name="search"  value="@search" />
+                        <input type="hidden" name="categoryId"  value="@node.Id" />
+                        <button type="submit" class="btn btn-link">@node.Name</button>
+                    }
+                </span>
+                @CategoryTree(nodes, node.Id, action, controller, storeId, search)
+            </li>
+        }
+    </ul>
+    }
+}
+
+

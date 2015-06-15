@@ -34,12 +34,6 @@ namespace StoreManagement.Data.Entities
         public Boolean MainPage { get; set; }
         [IgnoreDataMember]
         public Boolean ImageState { get; set; }
-        [IgnoreDataMember]
-        public Boolean State { get; set; }
-        [IgnoreDataMember]
-        public int Ordering { get; set; }
-
-        public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<ContentFile> ContentFiles { get; set; }
 

@@ -11,6 +11,6 @@ namespace StoreManagement.Data.RequestModel
     {
         public List<Product> Products { get; set; }
 
-        public List<Category> Categories { get; set; }
+        public List<ProductCategory> Categories { get; set; }
     }
 }

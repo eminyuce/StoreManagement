@@ -10,6 +10,7 @@ namespace StoreManagement.Service.Services
 {
     public class StoreUserService : BaseService, IStoreUserService
     {
+        private const String ApiControllerName = "ProductCategories";
         public StoreUserService(string webServiceAddress) : base(webServiceAddress)
         {
 
@@ -17,7 +18,8 @@ namespace StoreManagement.Service.Services
 
         public StoreUser GetStoreUserByUserId(int userId)
         {
-            throw new NotImplementedException();
+            string url = string.Format("http://{0}/api/{1}/GetStoreUserByUserId?userId={2}", WebServiceAddress, ApiControllerName, userId);
+            return HttpRequestHelper.GetUrlResult<StoreUser>(url);
         }
     }
 }

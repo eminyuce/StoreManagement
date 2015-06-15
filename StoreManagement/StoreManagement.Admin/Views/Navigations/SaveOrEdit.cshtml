@@ -34,7 +34,8 @@
                         @Html.HiddenFor(model => model.ParentId)
                         @Html.HiddenFor(model => model.CreatedDate)
                         @Html.HiddenFor(model => model.ControllerName)
-
+                                      @Html.HiddenFor(model => model.CreatedDate)
+                    @Html.HiddenFor(model => model.UpdatedDate)
                         <div class="editor-label control-group">
                             @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
                         </div>

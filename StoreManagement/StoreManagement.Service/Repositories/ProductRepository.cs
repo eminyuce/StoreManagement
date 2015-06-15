@@ -51,7 +51,7 @@ namespace StoreManagement.Service.Repositories
             return this.GetAllIncluding(r1 => r1.ProductFiles.Select(r2 => r2.FileManager)).Where(
                        r => r.StoreId == storeId &&
                            r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) &&
-                           r.CategoryId == categoryId)
+                           r.ProductCategoryId == categoryId)
                        .ToList();
         }
 
@@ -85,7 +85,7 @@ namespace StoreManagement.Service.Repositories
                                  r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
                 if (categoryId.HasValue)
                 {
-                    returnList = returnList.Where(r => r.CategoryId == categoryId.Value);
+                    returnList = returnList.Where(r => r.ProductCategoryId == categoryId.Value);
                 }
                 if (isActive.HasValue)
                 {

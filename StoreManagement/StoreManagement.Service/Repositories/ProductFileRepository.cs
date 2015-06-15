@@ -16,19 +16,19 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public List<ProductFile> GetProductByProductId(int productId)
+        public List<ProductFile> GetProductFilesByProductId(int productId)
         {
             return this.GetAllIncluding(r => r.FileManager).Where(r => r.ProductId == productId).ToList();
         }
 
-        public List<ProductFile> GetProductByFileManagerId(int fileManagerId)
+        public List<ProductFile> GetProductFilesByFileManagerId(int fileManagerId)
         {
             return this.FindBy(r => r.FileManagerId == fileManagerId).ToList();
         }
 
         public void DeleteProductFileByProductId(int productId)
         {
-            foreach (var c in this.GetProductByProductId(productId))
+            foreach (var c in this.GetProductFilesByProductId(productId))
             {
                 this.Delete(c);
             }

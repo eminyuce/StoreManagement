@@ -12,5 +12,12 @@ namespace StoreManagement.Data.Entities
     {
         public int Id { get; set; }
         public int StoreId { get; set; }
+        public DateTime ? CreatedDate { get; set; }
+        public DateTime ? UpdatedDate { get; set; }
+
+        [IgnoreDataMember]
+        public bool State { get; set; }
+        [IgnoreDataMember]
+        public int Ordering { get; set; }
     }
 }

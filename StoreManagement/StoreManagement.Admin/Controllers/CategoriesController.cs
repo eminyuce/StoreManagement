@@ -51,11 +51,12 @@ namespace StoreManagement.Admin.Controllers
 
             if (id == 0)
             {
-
+                category.CreatedDate = DateTime.Now;
             }
             else
             {
                 category = CategoryRepository.GetCategory(id);
+                category.UpdatedDate = DateTime.Now;
             }
 
 

@@ -10,19 +10,19 @@ namespace StoreManagement.Service.Services
 {
     public class ProductFileService : BaseService, IProductFileService
     {
-
+        private const String ApiControllerName = "Products";
         public ProductFileService(string webServiceAddress)
             : base(webServiceAddress)
         {
 
         }
 
-        public List<ProductFile> GetProductByProductId(int productId)
+        public List<ProductFile> GetProductFilesByProductId(int productId)
         {
             throw new NotImplementedException();
         }
 
-        public List<ProductFile> GetProductByFileManagerId(int fileManagerId)
+        public List<ProductFile> GetProductFilesByFileManagerId(int fileManagerId)
         {
             throw new NotImplementedException();
         }

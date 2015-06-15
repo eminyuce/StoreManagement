@@ -34,7 +34,58 @@ namespace StoreManagement.Admin.Controllers
             return Json(new { fileId, isCarousel }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult DeleteContentItem(List<String> values)
+        public ActionResult DeleteNavigationGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = NavigationRepository.GetSingle(id);
+                NavigationRepository.Delete(item);
+            }
+            NavigationRepository.Save();
+
+            return Json(values, JsonRequestBehavior.AllowGet);
+        } 
+        [HttpPost]
+        public ActionResult DeleteProductGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = ProductRepository.GetSingle(id);
+                ProductRepository.Delete(item);
+            }
+            ProductRepository.Save();
+            
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult DeleteCategoryGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item =  CategoryRepository.GetSingle(id);
+                CategoryRepository.Delete(item);
+            }
+            CategoryRepository.Save();
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult DeleteProductCategoryGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = ProductCategoryRepository.GetProductCategory(id);
+                ProductCategoryRepository.Delete(item);
+            }
+            ProductCategoryRepository.Save();
+            
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult DeleteContentGridItem(List<String> values)
         {
             foreach (String id in values)
             {
@@ -45,6 +96,25 @@ namespace StoreManagement.Admin.Controllers
             ContentRepository.Save();
 
             return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeProductCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = ProductCategoryRepository.GetProductCategory(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
+
+                ProductCategoryRepository.Edit(nav);
+            }
+            ProductCategoryRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
@@ -230,33 +300,17 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(html, JsonRequestBehavior.AllowGet);
         }
-        //public ActionResult SaveHiearchy(string childId, string parentId)
-        //{
-        //  // JsTreeDAO.SaveNodeRelationship(childId, parentId);
+        public ActionResult GetProductCategoriesTree(int storeId = 0, String categoryType = "")
+        {
+            var tree = this.ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, categoryType);
 
-        //    return null; //you may return any success flag etc
-        //}
-        //public ActionResult RenameNode(string nodeId, string nodeNewTitle)
-        //{
-        //   // JsTreeDAO.RenameNode(nodeId, nodeNewTitle);
+            var html = this.RenderPartialToString(
+                        "pCreateProductCategoryTree",
+                        new ViewDataDictionary(tree), null);
 
-        //    return null; //you may return any success flag etc
-        //}
-
-        //public JsonResult CreateFolder(string folderName, string parentId)
-        //{
-        //   // int newNodeId = JsTreeDAO.AddSubNode(parentId, folderName);
-
-        //    return Json(new { nodeId = newNodeId });//id of newly created node is required for rename callback.
-        //}
-
-        //public ActionResult DeleteSubNode(string folderId)
-        //{
-        //   // JsTreeDAO.DeleteSubNode(folderId);
-
-        //    return null; //you may return any success flag etc
-        //}
-
+            return Json(html, JsonRequestBehavior.AllowGet);
+        }
+    
 
 
     }

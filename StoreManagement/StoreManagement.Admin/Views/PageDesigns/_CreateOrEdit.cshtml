@@ -19,7 +19,8 @@
     @Html.EditorFor(model => model.Type)
     @Html.ValidationMessageFor(model => model.Type)
 </div>
-
+              @Html.HiddenFor(model => model.CreatedDate)
+                    @Html.HiddenFor(model => model.UpdatedDate)
 <div class="editor-label">
     @Html.LabelFor(model => model.PageRazorTemplate)
 </div>

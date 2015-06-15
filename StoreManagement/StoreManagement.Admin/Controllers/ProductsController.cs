@@ -42,11 +42,11 @@ namespace StoreManagement.Admin.Controllers
 
             if (categoryId > 0)
             {
-                resultList = resultList.Where(r => r.CategoryId == categoryId).ToList();
+                resultList = resultList.Where(r => r.ProductCategoryId == categoryId).ToList();
             }
             var contentsAdminViewModel = new ProductsAdminViewModel();
             contentsAdminViewModel.Products = resultList;
-            contentsAdminViewModel.Categories = CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, ProductType);
+            contentsAdminViewModel.Categories = ProductCategoryRepository.GetProductCategoriesByStoreIdFromCache(storeId, ProductType);
             return View(contentsAdminViewModel);
         }
 
@@ -76,10 +76,12 @@ namespace StoreManagement.Admin.Controllers
             if (id == 0)
             {
                 content.Type = ProductType;
+                content.CreatedDate = DateTime.Now;
             }
             else
             {
                 content = ProductRepository.GetSingle(id);
+                content.UpdatedDate = DateTime.Now;
                 if (!CheckRequest(content))
                 {
                     return RedirectToAction("NoAccessPage", "Home", new { id = content.StoreId });
@@ -106,7 +108,7 @@ namespace StoreManagement.Admin.Controllers
                 {
                     ProductRepository.Edit(content);
                 }
-                content.CreatedDate = DateTime.Now;
+
                 ProductRepository.Save();
                 if (selectedFileId != null)
                 {
@@ -138,7 +140,7 @@ namespace StoreManagement.Admin.Controllers
         {
             Product product = ProductRepository.GetSingle(id);
             Store s = StoreRepository.GetSingle(product.StoreId);
-            Category cat = CategoryRepository.GetSingle(product.CategoryId);
+            Category cat = CategoryRepository.GetSingle(product.ProductCategoryId);
             var productDetailLink = LinkHelper.GetProductLink(product, cat.Name);
             String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
             return Redirect(detailPage);

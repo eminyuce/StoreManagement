@@ -13,7 +13,7 @@ namespace StoreManagement.Data.Entities
     {
 
         [Display(Name = "Category")]
-        public int CategoryId { get; set; }
+        public int ProductCategoryId { get; set; }
         public string Name { get; set; }
 
         [AllowHtml]
@@ -25,12 +25,6 @@ namespace StoreManagement.Data.Entities
         public Boolean MainPage { get; set; }
         [IgnoreDataMember]
         public Boolean ImageState { get; set; }
-        [IgnoreDataMember]
-        public Boolean State { get; set; }
-        [IgnoreDataMember]
-        public int Ordering { get; set; }
-
-        public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<ProductFile> ProductFiles { get; set; }
 

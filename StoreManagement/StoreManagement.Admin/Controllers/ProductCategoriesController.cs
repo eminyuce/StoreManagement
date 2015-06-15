@@ -47,16 +47,16 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult SaveOrEdit(int id = 0)
         {
             ProductCategory category = new ProductCategory();
-
             if (id == 0)
             {
-
+                category.CreatedDate = DateTime.Now;
             }
             else
             {
                 category = ProductCategoryRepository.GetProductCategory(id);
+                category.UpdatedDate = DateTime.Now;
             }
-
+            category.CategoryType = "product";
 
             return View(category);
         }
@@ -77,7 +77,7 @@ namespace StoreManagement.Admin.Controllers
                 {
                     ProductCategoryRepository.Edit(category);
                 }
-                category.CreatedDate = DateTime.Now;
+ 
                 ProductCategoryRepository.Save();
 
                 return RedirectToAction("Index");

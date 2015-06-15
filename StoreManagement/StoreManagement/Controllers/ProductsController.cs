@@ -29,7 +29,7 @@ namespace StoreManagement.Controllers
             int productId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Product = ProductService.GetProductsProductId(productId);
             returnModel.Store = Store;
-            returnModel.Category = ProductCategoryService.GetProductCategory(returnModel.Product.CategoryId);
+            returnModel.Category = ProductCategoryService.GetProductCategory(returnModel.Product.ProductCategoryId);
             returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreId(Store.Id, "product");
             return View(returnModel);
         }

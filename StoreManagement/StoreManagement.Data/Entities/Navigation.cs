@@ -15,17 +15,13 @@ namespace StoreManagement.Data.Entities
         public string ControllerName { get; set; }
         public Boolean Static { get; set; }
         public string Link { get; set; }
-        public DateTime CreatedDate { get; set; }
 
 
 
         [IgnoreDataMember]
         public string Modul { get; set; }
         [IgnoreDataMember]
-        public int Ordering { get; set; }
-        [IgnoreDataMember]
         public Boolean LinkState { get; set; }
-        [IgnoreDataMember]
-        public Boolean State { get; set; }
+     
     }
 }

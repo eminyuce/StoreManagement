@@ -10,7 +10,7 @@ $(document).ready(function () {
         $("#GridListItemSize").val(q);
     }
 
-    $("input[type='checkbox'][name='checkboxGrid']").click(function() {
+    $("input[type='checkbox'][name='checkboxGrid']").click(function () {
         console.log("1212");
         var m = $(this).is(':checked');
         if (m) {
@@ -61,13 +61,13 @@ $(document).ready(function () {
             var id = $(this).attr("gridkey-id");
             //var m = $("input[name=checkboxGrid]").find('[gridkey-id='+id+']').is(':checked');
             //if (m) {
-                var item = new OrderingItem();
-                item.Id = id;
-                item.Ordering=$(this).val();
-                itemArray[i++] = item;
+            var item = new OrderingItem();
+            item.Id = id;
+            item.Ordering = $(this).val();
+            itemArray[i++] = item;
             //}
         });
-     
+
         var jsonRequest = JSON.stringify({ "values": itemArray });
         return jsonRequest;
     }
@@ -77,13 +77,9 @@ $(document).ready(function () {
         var parsedPostData = jQuery.parseJSON(postData);
         if (parsedPostData.values.length > 0) {
             var tableName = $("[data-gridname]").attr("data-gridname");
-            if (tableName == "imagesGrid") {
-                ajaxMethodCall(postData, "/FileManager/DeleteAll", deleteItemsSuccess);
-            } else if (tableName == "contentGrid") {
-                ajaxMethodCall(postData, "/Ajax/DeleteContentItem", deleteItemsSuccess);
-            }
+            console.log("Delete" + tableName + "Item");
+            ajaxMethodCall(postData, "/Ajax/Delete" + tableName + "Item", deleteItemsSuccess);
         }
-        
     });
     $("#OrderingAll").click(function () {
         console.log("OrderingAll is clicked.");
@@ -93,21 +89,21 @@ $(document).ready(function () {
         ajaxMethodCall(postData, "/Ajax/Change" + tableName + "OrderingOrState", changeOrderingSuccess);
     });
 
-    function GetSelectedStateValues(checkboxName,state) {
+    function GetSelectedStateValues(checkboxName, state) {
         var itemArray = new Array();
         var i = 0;
         $('span[name=' + checkboxName + ']').each(function () {
             var id = $(this).attr("gridkey-id");
             var m = $('input[name="checkboxGrid"]').filter('[gridkey-id="' + id + '"]').is(':checked');
             if (m) {
-            var item = new OrderingItem();
-            item.Id = id;
-            item.Ordering = 0;
-            item.State = state;
-            itemArray[i++] = item;
+                var item = new OrderingItem();
+                item.Id = id;
+                item.Ordering = 0;
+                item.State = state;
+                itemArray[i++] = item;
             }
         });
-      
+
         return itemArray;
     }
     $("#SetStateOffAll").click(function () {
@@ -123,15 +119,15 @@ $(document).ready(function () {
         var selectedValues = GetSelectedStateValues("span" + ppp, state);
         if (selectedValues.length > 0) {
             var postData = JSON.stringify({ "values": selectedValues, "checkbox": ppp });
-                    console.log(postData);
-                    var tableName = $("[data-gridname]").attr("data-gridname");
-                    ajaxMethodCall(postData, "/Ajax/Change"+tableName+"OrderingOrState", changeStateSuccess);
-                    displayMessage("hide", "");
-            
+            console.log(postData);
+            var tableName = $("[data-gridname]").attr("data-gridname");
+            ajaxMethodCall(postData, "/Ajax/Change" + tableName + "OrderingOrState", changeStateSuccess);
+            displayMessage("hide", "");
+
         } else {
             displayMessage("error", "Checkboxes on the grid does not selected");
         }
-        
+
     }
     $("#GridListItemSize").change(function (e) {
         var originalURL = window.location.href;
@@ -144,7 +140,7 @@ $(document).ready(function () {
             } else {
                 window.location.href = window.location.href + "?GridPageSize=" + $('#GridListItemSize option:selected').val();
             }
-            
+
         }
     });
     function displayMessage(messageType, message) {
@@ -154,16 +150,15 @@ $(document).ready(function () {
         if (messageType == "info") {
             messagePanel.attr("class", "alert alert-info");
             errorMessage.text(message);
-        } else if(messageType == "error") {
+        } else if (messageType == "error") {
             messagePanel.attr("class", "alert alert-danger");
             errorMessage.text(message);
-        }else if (messageType == "hide") {
+        } else if (messageType == "hide") {
             messagePanel.hide();
         }
     }
 
-    function updateUrlParameter(originalURL, param, value)
-    {
+    function updateUrlParameter(originalURL, param, value) {
         console.log(value);
         var windowUrl = originalURL.split('?')[0];
         var qs = originalURL.split('?')[1];
@@ -176,14 +171,14 @@ $(document).ready(function () {
                 if (param == qsArray[i].split('=')[0]) {
                     //exists key
                     qsArray[i] = param + '=' + value;
-                }  
+                }
             }
         }
-         
+
         var finalQs = qsArray.join('&');
         return windowUrl + '?' + finalQs;
         //6- prepare final url
-       // window.location = windowUrl + '?' + finalQs;
+        // window.location = windowUrl + '?' + finalQs;
     }
     function hasQueryStringParameter(originalURL) {
 
@@ -196,7 +191,7 @@ $(document).ready(function () {
         }
     }
     function getQueryStringParameter(originalURL, param) {
-   
+
         if (originalURL.split('?').length > 1) {
             var qs = originalURL.split('?')[1];
             //3- get list of query strings
@@ -217,14 +212,14 @@ $(document).ready(function () {
     }
 });
 
-function ajaxMethodCall(postData,ajaxUrl, successFunction) {
+function ajaxMethodCall(postData, ajaxUrl, successFunction) {
 
     $.ajax({
         type: "POST",
         url: ajaxUrl,
         data: postData,
         success: successFunction,
-        contentType:"application/json",
+        contentType: "application/json",
         dataType: "json",
         traditional: true
     });
@@ -245,7 +240,7 @@ function changeStateSuccess(data) {
         } else {
             $('span[name=span' + data.checkbox + ']').filter('[gridkey-id="' + entry.Id + '"]').attr('style', 'color:red;  font-size:2em;').attr('class', 'glyphicon  glyphicon-remove-circle');
         }
-       
+
 
     });
 }
@@ -285,6 +280,6 @@ function changeCarouselStateSuccess(data) {
     } else if (!data.isCarousel) {
         mmm.addClass("btn-danger");
     }
-   
+
 
 }

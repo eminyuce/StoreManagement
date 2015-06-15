@@ -29,5 +29,6 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<PageDesign> PageDesigns { get; set; }
         public IDbSet<Product> Products { get; set; }
         public IDbSet<ProductFile> ProductFiles { get; set; }
+        public IDbSet<ProductCategory> ProductCategories { get; set; }
     }
 }

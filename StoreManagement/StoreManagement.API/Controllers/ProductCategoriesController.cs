@@ -12,23 +12,23 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class CategoriesController : BaseApiController<Category>, ICategoryService
+    public class ProductCategoriesController : BaseApiController<ProductCategory>, IProductCategoryService
     {
         // GET api/Default1
-        public IEnumerable<Category> GetCategories(int storeId)
+        public IEnumerable<ProductCategory> GetProductCategories(int storeId)
         {
-            return this.CategoryRepository.GetCategoriesByStoreId(storeId);
+            return this.ProductCategoryRepository.GetProductCategoriesByStoreId(storeId);
         }
 
         // GET api/Default1/5
-        public override IEnumerable<Category> GetAll()
+        public override IEnumerable<ProductCategory> GetAll()
         {
-            return this.CategoryRepository.GetAll();
+            return this.ProductCategoryRepository.GetAll();
         }
 
-        public override Category Get(int id)
+        public override ProductCategory Get(int id)
         {
-            Category category = this.CategoryRepository.GetCategory(id);
+            ProductCategory category = this.ProductCategoryRepository.GetProductCategory(id);
             if (category == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -38,7 +38,7 @@ namespace StoreManagement.API.Controllers
         }
 
         // PUT api/Default1/5
-        public override HttpResponseMessage Put(int id, Category category)
+        public override HttpResponseMessage Put(int id, ProductCategory category)
         {
             if (!ModelState.IsValid)
             {
@@ -51,10 +51,10 @@ namespace StoreManagement.API.Controllers
             }
 
 
-            this.CategoryRepository.Edit(category);
+            this.ProductCategoryRepository.Edit(category);
             try
             {
-                this.CategoryRepository.Save();
+                this.ProductCategoryRepository.Save();
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -65,13 +65,13 @@ namespace StoreManagement.API.Controllers
         }
 
         // POST api/Default1
-        public override HttpResponseMessage Post(Category category)
+        public override HttpResponseMessage Post(ProductCategory category)
         {
             if (ModelState.IsValid)
             {
 
-                this.CategoryRepository.Add(category);
-                this.CategoryRepository.Save();
+                this.ProductCategoryRepository.Add(category);
+                this.ProductCategoryRepository.Save();
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, category);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = category.Id }));
@@ -106,35 +106,34 @@ namespace StoreManagement.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, category);
         }
 
-        public List<Category> GetCategoriesByStoreId(int storeId)
+        public List<ProductCategory> GetProductCategoriesByStoreId(int storeId)
         {
-            return CategoryRepository.GetCategoriesByStoreId(storeId);
+            return ProductCategoryRepository.GetProductCategoriesByStoreId(storeId);
         }
 
-        public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
+        public List<ProductCategory> GetProductCategoriesByStoreIdWithContent(int storeId)
         {
-            return CategoryRepository.GetCategoriesByStoreIdWithContent(storeId);
+            return ProductCategoryRepository.GetProductCategoriesByStoreIdWithContent(storeId);
         }
 
-        public List<Category> GetCategoriesByStoreId(int storeId, string type)
+        public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type)
         {
-            return CategoryRepository.GetCategoriesByStoreId(storeId, type);
+            return ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, type);
         }
 
-        public List<Category> GetCategoriesByStoreIdFromCache(int storeId, string type)
+        public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)
         {
-            return CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, type);
+            return ProductCategoryRepository.GetProductCategoriesByStoreIdFromCache(storeId, type);
         }
 
-
-        public Category GetCategory(int id)
+        public ProductCategory GetProductCategory(int id)
         {
-            return CategoryRepository.GetCategory(id);
+            return ProductCategoryRepository.GetProductCategory(id);
         }
 
-        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize)
+        public StorePagedList<ProductCategory> GetProductCategoryWithContents(int categoryId, int page, int pageSize)
         {
-            return CategoryRepository.GetCategoryWithContents(categoryId, page, pageSize);
+            return ProductCategoryRepository.GetProductCategoryWithContents(categoryId, page, pageSize);
         }
     }
 }

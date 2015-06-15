@@ -297,6 +297,7 @@
     <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PageDesignsController.cs" />
+    <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -1892,6 +1893,10 @@
     <Content Include="Views\News\Delete.cshtml" />
     <Content Include="Views\Account\NoStoreFound.cshtml" />
     <Content Include="Views\Home\NoAccessPage.cshtml" />
+    <Content Include="Views\ProductCategories\Index.cshtml" />
+    <Content Include="Views\ProductCategories\Details.cshtml" />
+    <Content Include="Views\ProductCategories\SaveOrEdit.cshtml" />
+    <Content Include="Views\ProductCategories\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -100,6 +100,8 @@ namespace StoreManagement.App_Start
                 service11.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service12 = kernel.Bind<IProductFileService>().To<ProductFileService>();
                 service12.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service13 = kernel.Bind<IProductCategoryService>().To<ProductCategoryService>();
+                service13.WithConstructorArgument("webServiceAddress", webServiceAddress);
 
             }
             else
@@ -117,7 +119,9 @@ namespace StoreManagement.App_Start
                 kernel.Bind<ICompanyService>().To<CompanyRepository>();
                 kernel.Bind<INavigationService>().To<NavigationRepository>();
                 kernel.Bind<IProductService>().To<ProductRepository>();
-                kernel.Bind<IProductFileService>().To<ProductFileRepository>();
+                kernel.Bind<IProductFileService>().To<ProductFileRepository>(); 
+                kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>();
+
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();
         }

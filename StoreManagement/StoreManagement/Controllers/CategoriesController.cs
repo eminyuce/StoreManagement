@@ -26,7 +26,7 @@ namespace StoreManagement.Controllers
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "product");
             returnModel.Store = Store;
-            returnModel.Category = CategoryService.GetSingle(categoryId);
+            returnModel.Category = CategoryService.GetCategory(categoryId);
             var m = ContentService.GetContentsCategoryId(Store.Id, categoryId, "product", true, page, 24);
             returnModel.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
 

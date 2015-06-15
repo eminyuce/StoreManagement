@@ -17,7 +17,7 @@ namespace StoreManagement.Controllers
         public ActionResult Index()
         {
             var returnModel = new ProductsViewModel();
-            returnModel.Categories = CategoryService.GetCategoriesByStoreIdFromCache(Store.Id, "product");
+            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(Store.Id, "product");
             returnModel.Store = Store;
             return View(returnModel);
         }
@@ -29,8 +29,8 @@ namespace StoreManagement.Controllers
             int productId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Product = ProductService.GetProductsProductId(productId);
             returnModel.Store = Store;
-            returnModel.Category = CategoryService.GetSingle(returnModel.Product.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "product");
+            returnModel.Category = ProductCategoryService.GetProductCategory(returnModel.Product.CategoryId);
+            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreId(Store.Id, "product");
             return View(returnModel);
         }
 	}

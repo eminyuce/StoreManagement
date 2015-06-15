@@ -47,6 +47,9 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public IProductFileRepository ProductFileRepository { set; get; }
 
+        [Inject]
+        public IProductCategoryRepository ProductCategoryRepository { set; get; }
+
         
         
 

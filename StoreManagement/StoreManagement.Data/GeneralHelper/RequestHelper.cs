@@ -13,7 +13,7 @@ using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Data.GeneralHelper
 {
-    public class RequestHelper  
+    public class RequestHelper
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static CacheEntryUpdateCallback _callbackU = null;
@@ -64,7 +64,7 @@ namespace StoreManagement.Data.GeneralHelper
         //    client.ExecuteAsync<T>(request, (response) => taskCompletionSource.SetResult(response.Data));
         //    return taskCompletionSource.Task;
         //}
-        
+
         //public string MakeJsonRequest<T>(string url) where T : new()
         //{
         //    string returnJson = String.Empty;
@@ -218,47 +218,76 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public StorePagedList<T> GetUrlPagedResults<T>(string url) where T : new()
         {
-            var responseContent = GetJsonFromCacheOrWebservice(url);
-            if (!String.IsNullOrEmpty(responseContent))
+            try
             {
-                String jsonString = responseContent;
-                //var result = JsonConvert.DeserializeObject<StorePagedList<T>>(jsonString);
-                var jsonSer = new JsonSerializer<StorePagedList<T>>();
-                var result = jsonSer.DeserializeFromString(jsonString);
-                return result;
+
+                var responseContent = GetJsonFromCacheOrWebservice(url);
+                if (!String.IsNullOrEmpty(responseContent))
+                {
+                    String jsonString = responseContent;
+                    //var result = JsonConvert.DeserializeObject<StorePagedList<T>>(jsonString);
+                    var jsonSer = new JsonSerializer<StorePagedList<T>>();
+                    var result = jsonSer.DeserializeFromString(jsonString);
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Url:" + url + "  is not working");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Url:" + url + "  is not working");
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new StorePagedList<T>();
             }
         }
-        public List<T> GetUrlResults<T>(string url)
+        public List<T> GetUrlResults<T>(string url) where T : new()
         {
-            var responseContent = GetJsonFromCacheOrWebservice(url);
-            if (!String.IsNullOrEmpty(responseContent))
+            try
             {
-                String jsonString = responseContent;
-                var jsonSer = new JsonSerializer<List<T>>();
-                var result = jsonSer.DeserializeFromString(jsonString);
-                return result;
+
+                var responseContent = GetJsonFromCacheOrWebservice(url);
+                if (!String.IsNullOrEmpty(responseContent))
+                {
+                    String jsonString = responseContent;
+                    var jsonSer = new JsonSerializer<List<T>>();
+                    var result = jsonSer.DeserializeFromString(jsonString);
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Url:" + url + "  is not working");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Url:" + url + "  is not working");
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new List<T>();
             }
+
         }
         public T GetUrlResult<T>(string url) where T : new()
         {
-            var responseContent = GetJsonFromCacheOrWebservice(url);
-            if (!String.IsNullOrEmpty(responseContent))
+            try
             {
-                String jsonString = responseContent;
-                var jsonSer = new JsonSerializer<T>();
-                var result = jsonSer.DeserializeFromString(jsonString);
-                return result;
+                var responseContent = GetJsonFromCacheOrWebservice(url);
+                if (!String.IsNullOrEmpty(responseContent))
+                {
+                    String jsonString = responseContent;
+                    var jsonSer = new JsonSerializer<T>();
+                    var result = jsonSer.DeserializeFromString(jsonString);
+                    return result;
+                }
+
+                throw new Exception("Url:" + url + "  is not working");
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Error:" + ex.Message, ex);
+                return new T();
             }
 
-            throw new Exception("Url:" + url + "  is not working");
         }
     }
 

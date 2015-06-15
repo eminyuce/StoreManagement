@@ -1,0 +1,149 @@
+﻿@model StoreManagement.Data.Entities.ProductCategory
+
+@{
+    ViewBag.Title = "Create";
+    int storeId = Model != null ? Model.StoreId : 0;
+}
+
+
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Category</legend>
+        @Html.HiddenFor(model => model.Id)
+               @Html.HiddenFor(model => model.CategoryType)
+        <div class="editor-label control-group">
+            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+        </div>
+        <div class="editor-field controls">
+            @Html.Action("StoresDropDown", "Stores", new { storeId })
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParentId)
+        </div>
+        <div class="editor-field">
+            <input type="hidden" id="ParentId" name="ParentId" value="0"/>
+            <select id="ParentIdDropDown" class="chosen-select" style="width:350px;">
+                
+            </select>
+            
+
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ordering)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ordering)
+            @Html.ValidationMessageFor(model => model.Ordering)
+        </div>
+
+       
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+
+        <p>
+            <input type="submit" class="btn btn-success btn-block btn-lg" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+                 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            console.log("1212");
+       
+            loadParentCategories($("#StoreDropDownId").val());
+            
+            $('select#StoreDropDownId').change(function (event) {
+                var storeId = $(this).val();
+                loadParentCategories(storeId);
+            });
+            
+            function loadParentCategories(storeId) {
+                var url = "/Ajax/GetRootProductCategories?storeId=" + storeId;
+                console.log(url);
+                $.post(url, function (data) {
+                    
+
+                    $('select#ParentIdDropDown').empty(); //remove all child nodes
+                    var isData = false;
+                    $.each(data, function (i, slaveValue) {
+                        isData = true;
+                        $('select#ParentIdDropDown').append($('<option></option>').val(slaveValue.Value).html(slaveValue.Text));
+                    });
+                    if (!isData) {
+                        $("#ParentId").val(0);
+                    } else {
+                        $("#ParentId").val($('select#ParentIdDropDown').val());
+                    }
+                    $('select#ParentIdDropDown').trigger("chosen:updated");
+   
+                    $('select#ParentIdDropDown').chosen({}).change(function (event) {
+                        $("#ParentId").val($(this).val());
+                    });
+                });
+
+            }
+        });
+        
+      
+
+
+    </script>
+
+
+    }

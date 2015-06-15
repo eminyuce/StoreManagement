@@ -21,7 +21,7 @@ namespace StoreManagement.Controllers
         {
             var returnModel = new ContentDetailViewModel();
             returnModel.Store = Store;
-            returnModel.Category = CategoryService.GetSingle(categoryId);
+            returnModel.Category = CategoryService.GetCategory(categoryId);
             returnModel.RelatedContents =ContentService.GetContentByTypeAndCategoryId(Store.Id, "product", categoryId).Take(5).ToList();
             String partialViewName = "pRelatedContents";
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
@@ -31,7 +31,7 @@ namespace StoreManagement.Controllers
         {
             var returnModel = new ProductDetailViewModel();
             returnModel.Store = Store;
-            returnModel.Category = CategoryService.GetSingle(categoryId);
+            returnModel.Category = ProductCategoryService.GetProductCategory(categoryId);
             returnModel.RelatedProducts =ProductService.GetProductByTypeAndCategoryId(Store.Id, "product", categoryId).Take(5).ToList();
             String partialViewName = "pRelatedContents";
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));

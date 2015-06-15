@@ -1,0 +1,51 @@
+﻿@model StoreManagement.Data.Entities.ProductCategory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+@Html.Partial("_LeftMenu")
+
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>Details</h2>
+                <fieldset>
+                    <legend>Category</legend>
+
+                    <div class="display-label">StoreId</div>
+                    <div class="display-field">@Model.StoreId</div>
+
+                    <div class="display-label">ParentId</div>
+                    <div class="display-field">@Model.ParentId</div>
+
+                    <div class="display-label">Ordering</div>
+                    <div class="display-field">@Model.Ordering</div>
+
+                    <div class="display-label">CategoryType</div>
+                    <div class="display-field">@Model.CategoryType</div>
+
+                    <div class="display-label">Name</div>
+                    <div class="display-field">@Model.Name</div>
+                </fieldset>
+                <p>
+                    @Html.ActionLink("Edit", "SaveOrEdit", new { id = Model.Id }, new { @class = "btn btn-success btn-block btn-lg" }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+

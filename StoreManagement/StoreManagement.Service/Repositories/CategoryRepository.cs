@@ -138,6 +138,11 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
+        public Category GetCategory(int id)
+        {
+            return this.GetSingle(id);
+        }
+
         public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page = 1, int pageSize = 25)
         {
             String key = String.Format("GetCategoryWithContents-{0}-{1}", categoryId, page);

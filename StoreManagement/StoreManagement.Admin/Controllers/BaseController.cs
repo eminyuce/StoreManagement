@@ -64,6 +64,9 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public IProductFileRepository ProductFileRepository { set; get; }
 
+        [Inject]
+        public IProductCategoryRepository ProductCategoryRepository { set; get; }
+
         protected bool IsSuperAdmin
         {
             get { return User.IsInRole("SuperAdmin"); }

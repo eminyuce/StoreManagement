@@ -57,6 +57,9 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public IProductFileService ProductFileService { set; get; }
+
+        [Inject]
+        public IProductCategoryService ProductCategoryService { set; get; }
         
         protected Store Store { set; get; }
 
@@ -89,7 +92,10 @@ namespace StoreManagement.Controllers
                 throw new Exception("Store cannot be NULL");
             }
         }
-     
+        protected bool CheckRequest(BaseEntity entity)
+        {
+            return entity.StoreId == Store.Id;
+        }
 
     }
 }

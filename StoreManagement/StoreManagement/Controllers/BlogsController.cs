@@ -28,7 +28,7 @@ namespace StoreManagement.Controllers
             int blogId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Content = ContentService.GetContentsContentId(blogId);
             returnModel.Store = Store;
-            returnModel.Category = CategoryService.GetSingle(returnModel.Content.CategoryId);
+            returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
             returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "blog");
             var c = new List<Content>();
             c.Add(returnModel.Content);

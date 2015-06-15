@@ -76,12 +76,12 @@ namespace StoreManagement.Service.Services
             }
         }
 
-
-        public Category GetSingle(int id)
+       
+        public Category GetCategory(int id)
         {
             try
             {
-                string url = string.Format("http://{0}/api/{1}/GetSingle?id={2}", WebServiceAddress, ApiControllerName, id);
+                string url = string.Format("http://{0}/api/{1}/GetCategory?id={2}", WebServiceAddress, ApiControllerName, id);
                 return HttpRequestHelper.GetUrlResult<Category>(url);
             }
             catch (Exception ex)

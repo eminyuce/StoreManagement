@@ -87,7 +87,8 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
-            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>();
+            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>(); 
+            kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>();
 
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();

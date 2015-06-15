@@ -184,6 +184,12 @@ namespace StoreManagement.Admin.Controllers
             var returnJson = from c in cat select new { Text = c.Name, Value = c.Id };
             return Json(returnJson, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetRootProductCategories(int storeId = 0)
+        {
+            var cat = ProductCategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList();
+            var returnJson = from c in cat select new { Text = c.Name, Value = c.Id };
+            return Json(returnJson, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult SaveSettingValue(int id = 0, string value = "")
         {
             var s = SettingRepository.GetSingle(id);

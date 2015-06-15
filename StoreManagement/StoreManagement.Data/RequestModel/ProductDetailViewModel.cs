@@ -10,9 +10,9 @@ namespace StoreManagement.Data.RequestModel
     public class ProductDetailViewModel
     {
         public Store Store { get; set; }
-        public Category Category { get; set; }
+        public ProductCategory Category { get; set; }
         public Product Product { get; set; }
-        public List<Category> Categories { get; set; }
+        public List<ProductCategory> Categories { get; set; }
         public List<Product> RelatedProducts { get; set; }
     }
 }

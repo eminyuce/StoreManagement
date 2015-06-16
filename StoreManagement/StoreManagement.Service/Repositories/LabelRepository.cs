@@ -11,9 +11,20 @@ namespace StoreManagement.Service.Repositories
 {
     public class LabelRepository : BaseRepository<Label, int>, ILabelRepository
     {
-        public LabelRepository(IStoreContext dbContext) : base(dbContext)
+        public LabelRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
+        }
+
+        public List<Label> GetLabelsByItemType(int itemType)
+        {
+            return this.FindBy(r => r.ItemType == itemType).ToList();
+        }
+
+        public List<Label> GetLabelsByItemType(int storeId, int itemType)
+        {
+            return this.FindBy(r => r.ItemType == itemType && r.StoreId == storeId).ToList();
         }
     }
 }

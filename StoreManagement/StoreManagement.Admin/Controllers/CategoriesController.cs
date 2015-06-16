@@ -10,9 +10,16 @@ using StoreManagement.Service.Repositories.Interfaces;
 namespace StoreManagement.Admin.Controllers
 {
     [Authorize]
-    public class CategoriesController : BaseController
+    public abstract class CategoriesController : BaseController
     {
-       
+
+        private String CategoryType { set; get; }
+
+        public CategoriesController(String categoryType)
+        {
+            this.CategoryType = categoryType;
+        }
+
         //
         // GET: /Categories/
 
@@ -22,11 +29,11 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId == 0)
             {
-                resultList = CategoryRepository.GetAll().ToList();
+                resultList = CategoryRepository.GetCategoriesByType(CategoryType);
             }
             else
             {
-                resultList = CategoryRepository.GetCategoriesByStoreId(storeId);
+                resultList = CategoryRepository.GetCategoriesByStoreId(storeId, CategoryType);
             }
 
             if (!String.IsNullOrEmpty(search))
@@ -52,13 +59,14 @@ namespace StoreManagement.Admin.Controllers
             if (id == 0)
             {
                 category.CreatedDate = DateTime.Now;
+                category.UpdatedDate = DateTime.Now;
             }
             else
             {
                 category = CategoryRepository.GetCategory(id);
                 category.UpdatedDate = DateTime.Now;
             }
-
+            category.CategoryType = CategoryType;
 
             return View(category);
         }
@@ -71,6 +79,7 @@ namespace StoreManagement.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.CategoryType = CategoryType;
                 if (category.Id == 0)
                 {
                     CategoryRepository.Add(category);
@@ -95,7 +104,7 @@ namespace StoreManagement.Admin.Controllers
             Category category = CategoryRepository.GetSingle(id);
             return View(category);
         }
-       
+
         //
         // POST: /Categories/Delete/5
 
@@ -108,7 +117,7 @@ namespace StoreManagement.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-       
+
 
         public ActionResult TestPage(int storeId = 1, String categoryType = "family")
         {
@@ -119,7 +128,7 @@ namespace StoreManagement.Admin.Controllers
             return View();
         }
 
-         
+
         public ActionResult Test()
         {
             return View();

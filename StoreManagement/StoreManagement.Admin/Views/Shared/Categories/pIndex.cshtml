@@ -8,6 +8,9 @@
     ViewBag.Title = "Index";
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
+    var controllerName = ViewData["ContentControllerName"].ToStr();
+    var title = ViewData["ContentPageTitle"].ToStr();
+    var gridName = ViewData["ContentGridName"].ToStr();
 
 }
 
@@ -34,7 +37,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <span class="col-md-3">
-                                @Html.ActionLink("Create", "SaveOrEdit", "Categories", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
+                                @Html.ActionLink("Create", "SaveOrEdit", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
                             </span>
                             <span class="col-md-9">
                                 @Html.Partial("pSearchForm")
@@ -130,7 +133,7 @@
            .SetWidth(30)
            .RenderValueAs(d =>
                @<b>
-                   @Html.ActionLink(" ", "SaveOrEdit", "Categories", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                   @Html.ActionLink(" ", "SaveOrEdit",  new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                </b>);
 
         columns.Add()
@@ -139,7 +142,7 @@
                    .SetWidth(30)
                    .RenderValueAs(d =>
                        @<b>
-                           @Html.ActionLink(" ", "Details", "Categories", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
+                           @Html.ActionLink(" ", "Details", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
                        </b>);
 
         columns.Add()
@@ -148,7 +151,7 @@
 .SetWidth(30)
 .RenderValueAs(d =>
 @<b>
-    @Html.ActionLink(" ", "Delete", "Categories", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+    @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
 </b>);
 
 
@@ -159,7 +162,7 @@
             .Filterable(true)
             .Sanitized(false)
             .Encoded(false)
-            .RenderValueAs(o => Html.ActionLink(o.Name, "Details", "Categories", new { Id = o.Id }, null).ToHtmlString());
+            .RenderValueAs(o => Html.ActionLink(o.Name, "Details", new { Id = o.Id }, null).ToHtmlString());
 
 
         columns.Add(o => o.Ordering).Encoded(false).

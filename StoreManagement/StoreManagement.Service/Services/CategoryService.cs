@@ -62,6 +62,11 @@ namespace StoreManagement.Service.Services
             }
         }
 
+        public List<Category> GetCategoriesByType(string type)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Category> GetCategoriesByStoreIdFromCache(int storeId, string type)
         {
             try

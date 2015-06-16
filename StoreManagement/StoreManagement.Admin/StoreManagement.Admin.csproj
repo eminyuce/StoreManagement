@@ -283,18 +283,22 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\BlogsCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\ButtonsController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EditorsController.cs" />
     <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\InterfaceController.cs" />
+    <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\NavigationsController.cs" />
+    <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PageDesignsController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
@@ -1803,8 +1807,6 @@
     <Content Include="Views\Products\SaveOrEdit.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Shared\pCreateCategoryTree.cshtml" />
-    <Content Include="Views\Categories\Test.cshtml" />
-    <Content Include="Views\Categories\TestPage.cshtml" />
     <Content Include="Views\FileManager\UploadImages.cshtml" />
     <Content Include="Upload\UploadHandler.ashx" />
     <Content Include="Views\Shared\_LayoutFileUpload.cshtml" />
@@ -1839,7 +1841,6 @@
     <Content Include="Views\Shared\_MyCustomGrid.cshtml" />
     <Content Include="Views\Stores\_StoresDropDown.cshtml" />
     <Content Include="Views\Stores\_StoresFilter.cshtml" />
-    <Content Include="Views\Categories\_RadioButtonCategories.cshtml" />
     <Content Include="Views\Test\TestJquery.cshtml" />
     <Content Include="Views\FileManager\_ImageGallery.cshtml" />
     <Content Include="Views\Test\DetailRazorPage.cshtml" />
@@ -1851,10 +1852,6 @@
     <Content Include="Views\PageDesigns\Edit.cshtml" />
     <Content Include="Views\PageDesigns\Index.cshtml" />
     <Content Include="Views\PageDesigns\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Categories\SaveOrEdit.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
-    <Content Include="Views\Categories\Details.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Tables\Index.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Interface\Index.cshtml" />
@@ -1899,6 +1896,23 @@
     <Content Include="Views\ProductCategories\Delete.cshtml" />
     <Content Include="Views\Shared\pProductCategoryTree.cshtml" />
     <Content Include="Views\Shared\pCreateProductCategoryTree.cshtml" />
+    <Content Include="Views\Labels\Delete.cshtml" />
+    <Content Include="Views\Labels\Details.cshtml" />
+    <Content Include="Views\Labels\CreateOrEdit.cshtml" />
+    <Content Include="Views\Labels\Index.cshtml" />
+    <Content Include="Views\BlogsCategories\Index.cshtml" />
+    <Content Include="Views\BlogsCategories\SaveOrEdit.cshtml" />
+    <Content Include="Views\BlogsCategories\Details.cshtml" />
+    <Content Include="Views\BlogsCategories\Delete.cshtml" />
+    <Content Include="Views\Shared\Categories\pDelete.cshtml" />
+    <Content Include="Views\Shared\Categories\pDetails.cshtml" />
+    <Content Include="Views\Shared\Categories\pIndex.cshtml" />
+    <Content Include="Views\Shared\Categories\pSaveOrEdit.cshtml" />
+    <Content Include="Views\Shared\Categories\_RadioButtonCategories.cshtml" />
+    <Content Include="Views\NewsCategories\Delete.cshtml" />
+    <Content Include="Views\NewsCategories\Details.cshtml" />
+    <Content Include="Views\NewsCategories\Index.cshtml" />
+    <Content Include="Views\NewsCategories\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

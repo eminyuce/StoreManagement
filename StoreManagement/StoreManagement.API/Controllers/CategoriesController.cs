@@ -121,6 +121,11 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetCategoriesByStoreId(storeId, type);
         }
 
+        public List<Category> GetCategoriesByType(string type)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Category> GetCategoriesByStoreIdFromCache(int storeId, string type)
         {
             return CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, type);

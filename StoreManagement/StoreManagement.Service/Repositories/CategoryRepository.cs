@@ -81,9 +81,11 @@ namespace StoreManagement.Service.Repositories
 
             return this.FindBy(r => r.StoreId == storeId &&
                r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
 
-
-
+        public List<Category> GetCategoriesByType(string type)
+        {
+            return this.FindBy(r => r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
         public List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type)

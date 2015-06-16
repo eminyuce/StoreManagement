@@ -9,8 +9,8 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface ILabelService : IService
     {
-        List<Label> GetLabelsByItemType(int itemType);
-        List<Label> GetLabelsByItemType(int storeId, int itemType);
+        List<Label> GetLabelsByLabelType(String labelType);
+        List<Label> GetLabelsByLabelType(int storeId, String labelType);
 
     }
 }

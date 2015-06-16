@@ -285,6 +285,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BlogsCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\BlogLabelsController.cs" />
     <Compile Include="Controllers\ButtonsController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -1896,10 +1897,10 @@
     <Content Include="Views\ProductCategories\Delete.cshtml" />
     <Content Include="Views\Shared\pProductCategoryTree.cshtml" />
     <Content Include="Views\Shared\pCreateProductCategoryTree.cshtml" />
-    <Content Include="Views\Labels\Delete.cshtml" />
-    <Content Include="Views\Labels\Details.cshtml" />
-    <Content Include="Views\Labels\CreateOrEdit.cshtml" />
-    <Content Include="Views\Labels\Index.cshtml" />
+    <Content Include="Views\Shared\Labels\pDelete.cshtml" />
+    <Content Include="Views\Shared\Labels\pDetails.cshtml" />
+    <Content Include="Views\Shared\Labels\pSaveOrEdit.cshtml" />
+    <Content Include="Views\Shared\Labels\pIndex.cshtml" />
     <Content Include="Views\BlogsCategories\Index.cshtml" />
     <Content Include="Views\BlogsCategories\SaveOrEdit.cshtml" />
     <Content Include="Views\BlogsCategories\Details.cshtml" />
@@ -1913,6 +1914,10 @@
     <Content Include="Views\NewsCategories\Details.cshtml" />
     <Content Include="Views\NewsCategories\Index.cshtml" />
     <Content Include="Views\NewsCategories\SaveOrEdit.cshtml" />
+    <Content Include="Views\BlogLabels\Index.cshtml" />
+    <Content Include="Views\BlogLabels\Details.cshtml" />
+    <Content Include="Views\BlogLabels\SaveOrEdit.cshtml" />
+    <Content Include="Views\BlogLabels\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

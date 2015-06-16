@@ -7,13 +7,14 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Admin.Controllers
 {
-    public class LabelsController : BaseController
+    public abstract class LabelsController : BaseController
     {
-        private int _labelType = 1;
-        protected int LabelType
+        
+        private String LabelType { set; get; }
+
+        protected LabelsController(String labelType)
         {
-            get { return _labelType; }
-            set { _labelType = value; }
+            this.LabelType = labelType;
         }
 
         public ActionResult Index(int storeId = 0, String search = "", int categoryId = 0)
@@ -22,11 +23,11 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId == 0)
             {
-                resultList = LabelRepository.GetLabelsByItemType(_labelType);
+                resultList = LabelRepository.GetLabelsByLabelType(LabelType);
             }
             else
             {
-                resultList = LabelRepository.GetLabelsByItemType(storeId, _labelType);
+                resultList = LabelRepository.GetLabelsByLabelType(storeId, LabelType);
             }
 
             if (!String.IsNullOrEmpty(search))
@@ -52,18 +53,19 @@ namespace StoreManagement.Admin.Controllers
             return View(label);
         }
 
-        public ActionResult CreateOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0)
         {
             Label label = new Label();
             if (id != 0)
             {
                 label = LabelRepository.GetSingle(id);
             }
+            label.LabelType = LabelType;
             return View(label);
         }
 
         [HttpPost]
-        public ActionResult CreateOrEdit(Label label)
+        public ActionResult SaveOrEdit(Label label)
         {
             if (ModelState.IsValid)
             {

@@ -16,15 +16,15 @@ namespace StoreManagement.Service.Repositories
         {
 
         }
-
-        public List<Label> GetLabelsByItemType(int itemType)
+ 
+        public List<Label> GetLabelsByLabelType(string labelType)
         {
-            return this.FindBy(r => r.ItemType == itemType).ToList();
+            return this.FindBy(r => r.LabelType.Equals(labelType)).ToList();
         }
 
-        public List<Label> GetLabelsByItemType(int storeId, int itemType)
+        public List<Label> GetLabelsByLabelType(int storeId, string labelType)
         {
-            return this.FindBy(r => r.ItemType == itemType && r.StoreId == storeId).ToList();
+            return this.FindBy(r => r.LabelType.Equals(labelType)  && r.StoreId == storeId).ToList();  
         }
     }
 }

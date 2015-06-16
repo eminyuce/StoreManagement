@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="DbContext\IStoreContext.cs" />
     <Compile Include="DbContext\StoreContext.cs" />
+    <Compile Include="Interfaces\ILabelLineService.cs" />
+    <Compile Include="Interfaces\ILabelService.cs" />
     <Compile Include="Interfaces\IProductCategoryService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\ICompanyService.cs" />
@@ -92,6 +94,8 @@
     <Compile Include="Repositories\Interfaces\IContentRepository.cs" />
     <Compile Include="Repositories\ContentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFileManagerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILabelLineRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILabelRepository.cs" />
     <Compile Include="Repositories\Interfaces\INavigationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPageDesignRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductCategoryRepository.cs" />
@@ -100,6 +104,8 @@
     <Compile Include="Repositories\Interfaces\IStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreUserRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductFileRepository.cs" />
+    <Compile Include="Repositories\LabelLineRepository.cs" />
+    <Compile Include="Repositories\LabelRepository.cs" />
     <Compile Include="Repositories\NavigationRepository.cs" />
     <Compile Include="Repositories\PageDesignRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />

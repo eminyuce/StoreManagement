@@ -207,7 +207,7 @@
                                    .Titled("Date")
                                    .Sortable(true)
                                    .Css("gridDateClass")
-                                    .RenderValueAs(o => String.Format("{0}", o.CreatedDate.ToShortDateString()))
+                               .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
                                    .SortInitialDirection(GridSortDirection.Descending);
 
 

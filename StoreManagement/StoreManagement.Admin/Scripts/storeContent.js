@@ -6,7 +6,7 @@
         
 
 
-
+ 
         $("#contentTreeview").bind("select_node.jstree", function(event, data) {
             var m = $("#" + data.selected[0]).find("[data-category]");
             var selectedCategoryId = m.first().attr("data-category");
@@ -14,8 +14,9 @@
             $("#CategoryId").val(selectedCategoryId);
 
         });
-
+        $("#productTreeview").jstree();
         $("#productTreeview").bind("select_node.jstree", function (event, data) {
+            console.log("test 123");
             var m = $("#" + data.selected[0]).find("[data-product-category]");
             var selectedCategoryId = m.first().attr("data-product-category");
             console.log(selectedCategoryId);
@@ -125,6 +126,7 @@ function GetProductCategoryTree(id, categoryType) {
 }
 
 function bindProductCategoryTree() {
+    console.log("bindProductCategoryTree");
     $('[data-product-category]').each(function () {
         $(this).off("click");
         $(this).on("click", handleProductCategoryTree);
@@ -132,6 +134,7 @@ function bindProductCategoryTree() {
 }
 
 function handleProductCategoryTree(e) {
+    console.log("handleProductCategoryTree");
     var caller = e.target;
     var categoryId = $(caller).attr('data-product-category');
     var category = $(caller).text();

@@ -1,4 +1,5 @@
 ﻿
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.RequestModel;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace StoreManagement.Admin.Controllers
         // GET: /Dashboard/
         public ActionResult Index()
         {
-            VmDashboard dummyData = getDummyData();
+            VmDashboard dummyData = GetData();
             return View(dummyData);
         }
 
-        private VmDashboard getDummyData()
+        private VmDashboard GetData()
         {
             VmDashboard data = new VmDashboard();
             data.RateVisitors = 73;
@@ -28,13 +29,26 @@ namespace StoreManagement.Admin.Controllers
             data.RatePageViews = 42;
 
             data.Clients = new List<Tuple<int, string, string, string>>();
-            data.Clients.Add(new Tuple<int, string, string, string>(1, "Mark", "Otto", "@mdo"));
-            data.Clients.Add(new Tuple<int, string, string, string>(2, "Jacob", "Thornton", "@fat"));
-            data.Clients.Add(new Tuple<int, string, string, string>(3, "Vincent", "Gabriel", "@gabrielva"));
+
+            var storeUsers = new List<StoreUser>();
+            if (IsSuperAdmin)
+            {
+                storeUsers = StoreUserRepository.GetAllIncluding(r => r.UserProfile).OrderByDescending(r=>r.Id).Take(5).ToList();
+            }
+            else
+            {
+                storeUsers = StoreUserRepository.GetAllIncluding(r => r.UserProfile).Where(r => r.StoreId == LoginStore.Id).OrderByDescending(r => r.Id).Take(5).ToList();
+            }
+            foreach (var storeUser in storeUsers)
+            {
+                data.Clients.Add(new Tuple<int, string, string, string>(storeUser.Id, storeUser.UserProfile.UserName, storeUser.UserProfile.FirstName,storeUser.UserProfile.LastName));
+            }
+            
+
 
             data.Invoices = new List<Tuple<int, DateTime, double>>();
             data.Invoices.Add(new Tuple<int, DateTime, double>(1, new DateTime(2013, 2, 2), 25.12));
-            data.Invoices.Add(new Tuple<int, DateTime, double>(2, new DateTime(2013, 2, 1),335.00));
+            data.Invoices.Add(new Tuple<int, DateTime, double>(2, new DateTime(2013, 2, 1), 335.00));
             data.Invoices.Add(new Tuple<int, DateTime, double>(3, new DateTime(2013, 2, 1), 29.99));
 
             data.Orders = new List<Tuple<int, string, string, string>>();
@@ -49,5 +63,5 @@ namespace StoreManagement.Admin.Controllers
 
             return data;
         }
-	}
+    }
 }

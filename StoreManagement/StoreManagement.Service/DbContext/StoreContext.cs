@@ -30,5 +30,7 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<Product> Products { get; set; }
         public IDbSet<ProductFile> ProductFiles { get; set; }
         public IDbSet<ProductCategory> ProductCategories { get; set; }
+        public IDbSet<Label> Labels { get; set; }
+        public IDbSet<LabelLine> LabelLines { get; set; }
     }
 }

@@ -29,7 +29,7 @@
                     @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Stores" })
                 </div>
 
-              
+
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <div class="row">
@@ -105,8 +105,8 @@
                    .SetWidth(30)
                    .RenderValueAs(d =>
                        @<b>
-                   @Html.ActionLink(" ", "Details", "Stores", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
-               </b>);
+                           @Html.ActionLink(" ", "Details", "Stores", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
+                       </b>);
 
         columns.Add()
 .Encoded(false)
@@ -114,26 +114,27 @@
 .SetWidth(30)
 .RenderValueAs(d =>
 @<b>
-                   @Html.ActionLink(" ", "Delete", "Stores", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
-               </b>);
-                        
-                            columns.Add()
-                   .Encoded(false)
-                   .Sanitized(false)
-                   .SetWidth(30)
-                   .RenderValueAs(d =>
-                       @<b>
-                   @Html.ActionLink("Settings", "Settings", "Stores", new { id = d.Id }, new { @class = "btn btn-default" })
-               </b>);
-                        
-                            columns.Add()
-                   .Encoded(false)
-                   .Sanitized(false)
-                   .SetWidth(30)
-                   .RenderValueAs(d =>
-                       @<b>
-                   @Html.ActionLink("Users", "Users", "Stores", new { id = d.Id }, new { @class = "btn btn-default" })
-               </b>);
+    @Html.ActionLink(" ", "Delete", "Stores", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+</b>);
+                    
+                    
+        columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(30)
+.RenderValueAs(d =>
+   @<b>
+                           @Html.ActionLink(" Settings", "Settings", "Stores", new { id = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-wrench" })
+                       </b>);
+
+        columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(30)
+.RenderValueAs(d =>
+   @<b>
+                           @Html.ActionLink(" Users", "Users", "Stores", new { id = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-user" })
+                       </b>);
 
 
         columns.Add(c => c.Name)
@@ -145,7 +146,23 @@
 
 
 
-        columns.Add(o => o.Domain);
+
+
+
+        columns.Add(c => c.Domain)
+         .Titled("Domain")
+         .Filterable(true)
+         .Sanitized(false)
+         .Encoded(false)
+        .RenderValueAs(d =>
+                                                  @<b>
+
+                                                                    <a class="btn btn-info glyphicon glyphicon-globe"    
+
+			target="_blank"  href="@String.Format("http://{0}", d.Domain)"><b style='color:black'>   @d.Domain  </b></a>
+                                                  </b>);
+
+
 
         columns.Add(o => o.CreatedDate)
               .Titled("Date")
@@ -153,8 +170,9 @@
               RenderValueAs(o => String.Format("{0}", o.CreatedDate.ToShortDateString()))
               .SortInitialDirection(GridSortDirection.Descending);
 
- 
+
     }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
+
 
 
                 </div>

@@ -301,6 +301,7 @@
     <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\NewsLabelsController.cs" />
     <Compile Include="Controllers\PageDesignsController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -1918,6 +1919,10 @@
     <Content Include="Views\BlogLabels\Details.cshtml" />
     <Content Include="Views\BlogLabels\SaveOrEdit.cshtml" />
     <Content Include="Views\BlogLabels\Delete.cshtml" />
+    <Content Include="Views\NewsLabels\Delete.cshtml" />
+    <Content Include="Views\NewsLabels\Details.cshtml" />
+    <Content Include="Views\NewsLabels\Index.cshtml" />
+    <Content Include="Views\NewsLabels\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,85 +2,79 @@
 
 @{
     ViewBag.Title = "Edit";
+
+    int storeId = Model != null ? Model.StoreId : 0;
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Label</legend>
+@Html.Partial("_LeftMenu")
 
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.LabelType)
-        
+<div class="col-md-10">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Labels</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>Label Management</h2>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StoreId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StoreId)
-            @Html.ValidationMessageFor(model => model.StoreId)
-        </div>
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Label</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CategoryId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CategoryId)
-            @Html.ValidationMessageFor(model => model.CategoryId)
-        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.LabelType)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.CategoryId)
+                        <div class="editor-field controls">
+                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
 
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UpdatedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UpdatedDate)
-            @Html.ValidationMessageFor(model => model.UpdatedDate)
-        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Ordering)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Ordering)
+                            @Html.ValidationMessageFor(model => model.Ordering)
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CreatedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CreatedDate)
-            @Html.ValidationMessageFor(model => model.CreatedDate)
-        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.State)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.State)
+                            @Html.ValidationMessageFor(model => model.State)
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ordering)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ordering)
-            @Html.ValidationMessageFor(model => model.Ordering)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.State)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.State)
-            @Html.ValidationMessageFor(model => model.State)
-        </div>
+                        <p>
+                            <input type="submit" class="btn btn-success btn-block btn-lg" value="Save" />
+                        </p>
+                    </fieldset>
+                }
 
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+                <div>
+                                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
+

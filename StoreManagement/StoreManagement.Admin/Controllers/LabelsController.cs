@@ -59,6 +59,13 @@ namespace StoreManagement.Admin.Controllers
             if (id != 0)
             {
                 label = LabelRepository.GetSingle(id);
+                label.UpdatedDate = DateTime.Now;
+            }
+            else
+            {
+                label.UpdatedDate = DateTime.Now;
+                label.CreatedDate = DateTime.Now;
+
             }
             label.LabelType = LabelType;
             return View(label);

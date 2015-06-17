@@ -83,8 +83,8 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <input  class="btn btn-danger btn-block btn-lg" type="submit" value="Delete" /> |
+                            @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
     </p>
 }
 

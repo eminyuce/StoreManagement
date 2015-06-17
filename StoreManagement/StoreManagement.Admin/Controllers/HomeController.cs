@@ -17,15 +17,9 @@ namespace StoreManagement.Admin.Controllers
     public class HomeController : BaseController
     {
 
-        
-
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
-            var roles = Roles.GetRolesForUser("yuce18@marinelink.com");
-            String mm = "";
-            return View();
+            return RedirectToAction("Index", "Dashboard");
         }
 
       

@@ -370,7 +370,7 @@ namespace StoreManagement.Admin.Controllers
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl) && !returnUrl.ToLower().Contains("account/login"))
+            if (Url.IsLocalUrl(returnUrl) && !returnUrl.ToLower().Contains("account/login") && !returnUrl.ToLower().Contains("home/index"))
             {
                 return Redirect(returnUrl);
             }

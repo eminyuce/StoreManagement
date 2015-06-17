@@ -17,11 +17,11 @@ namespace StoreManagement.Data.Entities
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int RoleId { get; set; }
-        public string RoleName { get; set; }        
+        public string RoleName { get; set; }
         public string Description { get; set; }
     }
     [Table("UserProfile")]
-    public class UserProfile 
+    public class UserProfile
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -102,7 +102,7 @@ namespace StoreManagement.Data.Entities
         public string PhoneNumber { get; set; }
         public DateTime CreatedDate { get { return DateTime.Now; } }
 
-
+        [Display(Name = "Security Question")]
         public string Captcha { get; set; }
     }
 

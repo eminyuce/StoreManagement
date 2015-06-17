@@ -87,3 +87,10 @@ div .roleradio {
 	border-left: 1px solid #f2f2f2;
 	border-right: 1px solid #ffffff;
 }
+
+ .rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #8AC007;
+    padding: 20px; 
+   background-color:#F7F9EC;
+}

@@ -2,46 +2,52 @@
 @{
    
     String url = "";
-     
     
 }
-<!-- main / large navbar -->
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="row">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Admin Panel</a>
-            </div>
-            <div class="collapse navbar-collapse main-navbar-collapse">
-                <div class="collapse navbar-collapse bootstrap-admin-navbar-sm">
-                    <ul class="nav navbar-nav navbar-right ">
-                        <li>
-                            <a href="/Settings">Settings <i class="glyphicon glyphicon-cog"></i></a>
-                        </li>
-                        @if (!String.IsNullOrEmpty(url))
-                        {
+
+@if (Request.IsAuthenticated)
+{
+    <!-- main / large navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Admin Panel</a>
+                </div>
+                <div class="collapse navbar-collapse main-navbar-collapse">
+                    <div class="collapse navbar-collapse bootstrap-admin-navbar-sm">
+                        <ul class="nav navbar-nav navbar-right ">
                             <li>
-                                <a href="@url">Go to frontend <i class="glyphicon glyphicon-share-alt"></i></a>
+                                <a href="/Settings">Settings <i class="glyphicon glyphicon-cog"></i></a>
                             </li>
-                        }
+                            @if (!String.IsNullOrEmpty(url))
+                            {
+                                <li>
+                                    <a href="@url">Go to frontend <i class="glyphicon glyphicon-share-alt"></i></a>
+                                </li>
+                            }
 
-                              @Html.Partial("_LoginPartial")
+                            @Html.Partial("_LoginPartial")
                         
-                        <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search...">
-                        </div>
-                        <button type="submit" class="btn btn-default glyphicon glyphicon-search"></button>
-                    </form>
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                </div>
+                                <button type="submit" class="btn btn-default glyphicon glyphicon-search"></button>
+                            </form>
 
-                    </ul>
+                        </ul>
                     
                   
+                    </div>
                 </div>
             </div>
+
+            <div class="row">
+                @Html.Partial("_LeftMenu")
+            </div>
         </div>
-        <div class="row">
-            @Html.Partial("_LeftMenu")
-        </div>
-    </div>
-</nav>
+    </nav>
+    <br/>
+
+}

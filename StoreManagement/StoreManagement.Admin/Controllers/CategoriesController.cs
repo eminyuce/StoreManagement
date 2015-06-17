@@ -98,7 +98,7 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Categories/Delete/5
-
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult Delete(int id)
         {
             Category category = CategoryRepository.GetSingle(id);
@@ -109,6 +109,7 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Categories/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = CategoryRepository.GetCategory(id);

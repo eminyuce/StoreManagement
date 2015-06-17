@@ -1,10 +1,22 @@
-﻿@using StoreManagement.Data
+﻿@using StoreManagement.Admin.Constants
+@using StoreManagement.Data
 @{
     var isDevelopmentStatus = ProjectAppSettings.GetWebConfigBool("IsDevelopmentStatus", true);
-    bool isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    bool isSuperAdmin = false;
+    
+    try
+    {
+        isSuperAdmin =  User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    }
+    catch (Exception ex)
+    {
+ 
+    }
+   
+    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
 }
 
-<nav  class="navbar navbar-custom" >
+<nav class="navbar navbar-custom">
     <div class="container-fluid">
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -14,50 +26,51 @@
                 @Html.MenuItem("Dashboard", "Index", "Dashboard")
                 @if (isSuperAdmin)
                 {
-                                    <li role="separator" class="divider-vertical"></li>
+                    <li role="separator" class="divider-vertical"></li>
                     @Html.MenuItem("Stores", "Index", "Stores")
                 }
-                                <li role="separator" class="divider-vertical"></li>
-                @Html.MenuItem("Navigation", "Index", "Navigations")
-                                <li role="separator" class="divider-vertical"></li>
-                @Html.MenuItem("Files Manager", "Index", "FileManager")
-
-
                 <li role="separator" class="divider-vertical"></li>
-                 @Html.MenuItem("Products", "Index", "Products")
+                @Html.MenuItem("Navigation", "Index", "Navigations")
+                <li role="separator" class="divider-vertical"></li>
+                @Html.MenuItem("Files Manager", "Index", "FileManager")
+                <li role="separator" class="divider-vertical"></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        @Html.MenuItem("Prod.Categories", "Index", "ProductCategories")
+                    <ul class="dropdown-menu pull-left">
+                        @Html.MenuItem("Products Categories", "Index", "ProductCategories")
                         @Html.MenuItem("Products Labels", "Index", "NewsLabels")
                     </ul>
                 </li>
-
-
+                @Html.MenuItem("Products", "Index", "Products")
                 <li role="separator" class="divider-vertical"></li>
-                @Html.MenuItem("News", "Index", "News")
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu pull-left">
                         @Html.MenuItem("News Categories", "Index", "NewsCategories")
                         @Html.MenuItem("News Labels", "Index", "NewsLabels")
                     </ul>
                 </li>
+
+                @Html.MenuItem("News", "Index", "News")
                 <li role="separator" class="divider-vertical"></li>
-                @Html.MenuItem("Blogs", "Index", "Blogs")
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu pull-left">
                         @Html.MenuItem("Blogs Categories", "Index", "BlogsCategories")
                         @Html.MenuItem("Blogs Labels", "Index", "BlogLabels")
                     </ul>
                 </li>
+                @Html.MenuItem("Blogs", "Index", "Blogs")
 
-                 <li role="separator" class="divider-vertical"></li>
-                @Html.MenuItem("Settings", "Index", "Settings")
-                 <li role="separator" class="divider-vertical"></li>
+                <li role="separator" class="divider-vertical"></li>
+                @if (!isRegularUser)
+                {
+                      @Html.MenuItem("Settings", "Index", "Settings")
+                    <li role="separator" class="divider-vertical"></li>
+                }
             </ul>
-         
+
 
         </div>
         <!-- /.navbar-collapse -->

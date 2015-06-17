@@ -74,10 +74,32 @@ namespace StoreManagement.Admin.Controllers
         public ILabelLineRepository LabelLineRepository { set; get; }
 
 
-
+        private bool _IsSuperAdmin { get; set; }
         protected bool IsSuperAdmin
         {
-            get { return User.IsInRole("SuperAdmin"); }
+            get
+            {
+                if (String.IsNullOrEmpty(User.Identity.Name))
+                {
+                    return _IsSuperAdmin;
+                }
+                else
+                {
+                    if (WebSecurity.UserExists(User.Identity.Name))
+                    {
+                        _IsSuperAdmin = Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+                        return _IsSuperAdmin;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            set
+            {
+                _IsSuperAdmin = value;
+            }
         }
 
         protected int GetStoreId(int id)
@@ -98,16 +120,16 @@ namespace StoreManagement.Admin.Controllers
                 }
             }
         }
-        private Store _store= new Store();
+        private Store _store = new Store();
         protected Store LoginStore
         {
             get { return _store; }
-            set { _store  = value; }
+            set { _store = value; }
         }
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected BaseController()
         {
-           
+
         }
 
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
@@ -129,7 +151,7 @@ namespace StoreManagement.Admin.Controllers
 
         protected bool SetStoreValues(String userName)
         {
-            if (!String.IsNullOrEmpty(userName) && Roles.GetRolesForUser(userName).Contains("StoreAdmin"))
+            if (!String.IsNullOrEmpty(userName) && !IsSuperAdmin)
             {
 
                 String key = String.Format("SetStoreValues-{0}", userName);

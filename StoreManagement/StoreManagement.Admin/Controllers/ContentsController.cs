@@ -114,7 +114,7 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Content/Delete/5
-
+                [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult Delete(int id = 0)
         {
             Content content = ContentRepository.GetSingle(id);
@@ -130,6 +130,7 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Content content = ContentRepository.GetSingle(id);

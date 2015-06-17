@@ -1,7 +1,7 @@
 ﻿@using StoreManagement.Data.Entities
 @{
    
-    String url = "";
+ 
     
 }
 
@@ -17,18 +17,11 @@
                 <div class="collapse navbar-collapse main-navbar-collapse">
                     <div class="collapse navbar-collapse bootstrap-admin-navbar-sm">
                         <ul class="nav navbar-nav navbar-right ">
-                            <li>
-                                <a href="/Settings">Settings <i class="glyphicon glyphicon-cog"></i></a>
-                            </li>
-                            @if (!String.IsNullOrEmpty(url))
-                            {
-                                <li>
-                                    <a href="@url">Go to frontend <i class="glyphicon glyphicon-share-alt"></i></a>
-                                </li>
-                            }
+                            
+                            @Html.Action("ReturnFrontEndUrl", "Home")
 
                             @Html.Partial("_LoginPartial")
-                        
+
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Search...">
@@ -37,8 +30,8 @@
                             </form>
 
                         </ul>
-                    
-                  
+
+
                     </div>
                 </div>
             </div>
@@ -48,6 +41,6 @@
             </div>
         </div>
     </nav>
-    <br/>
+    <br />    <br />
 
 }

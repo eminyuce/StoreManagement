@@ -2,6 +2,7 @@
 @using GridMvc.Html
 @using GridMvc.Sorting
 @using StoreManagement.Data
+@using StoreManagement.Admin.Constants;
 @using StoreManagement.Data.GeneralHelper;
 @{
     ViewBag.Title = "Index";
@@ -10,6 +11,7 @@
     string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
+    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
     
 }
 
@@ -147,7 +149,9 @@
                                                       @Html.ActionLink(" ", "Details", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
                                                   </b>);
 
-                            columns.Add()
+                          if (!isRegularUser)
+                          {
+                                 columns.Add()
                                    .Encoded(false)
                                    .Sanitized(false)
                                    .SetWidth(30)
@@ -155,6 +159,8 @@
                                                   @<b>
                                                       @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
                                                   </b>);
+                          }
+                         
 
 
                             columns.Add(c => c.Name)

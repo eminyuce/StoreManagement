@@ -11,6 +11,8 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Admin.Controllers
 {
+
+    [Authorize]
     public class AjaxController : BaseController
     {
         //
@@ -34,6 +36,7 @@ namespace StoreManagement.Admin.Controllers
             return Json(new { fileId, isCarousel }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteNavigationGridItem(List<String> values)
         {
             foreach (String v in values)
@@ -47,6 +50,7 @@ namespace StoreManagement.Admin.Controllers
             return Json(values, JsonRequestBehavior.AllowGet);
         } 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductGridItem(List<String> values)
         {
             foreach (String v in values)
@@ -60,6 +64,7 @@ namespace StoreManagement.Admin.Controllers
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteCategoryGridItem(List<String> values)
         {
             foreach (String v in values)
@@ -72,6 +77,7 @@ namespace StoreManagement.Admin.Controllers
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductCategoryGridItem(List<String> values)
         {
             foreach (String v in values)
@@ -85,6 +91,7 @@ namespace StoreManagement.Admin.Controllers
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteContentGridItem(List<String> values)
         {
             foreach (String id in values)

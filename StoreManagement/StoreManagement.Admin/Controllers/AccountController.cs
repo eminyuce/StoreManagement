@@ -63,6 +63,10 @@ namespace StoreManagement.Admin.Controllers
                     UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     user.LastLoginDate = DateTime.Now;
                     DbContext.SaveChanges();
+
+                    var isSuper = Roles.GetRolesForUser(model.UserName).Contains("SuperAdmin");
+
+                    IsSuperAdmin = isSuper;
                     if (!IsSuperAdmin)
                     {
                         var isStore = SetStoreValues(model.UserName); // Set Store values for Store Admin users.

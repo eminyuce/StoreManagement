@@ -10,16 +10,16 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "StoreAdmin,SuperAdmin")]
     public class SettingsController : BaseController
     {
         private const String TYPE = "StoreSettings";
-       
+
 
         //
         // GET: /Settings/
 
-        public ViewResult Index(int storeId= 0)
+        public ViewResult Index(int storeId = 0)
         {
 
             storeId = GetStoreId(storeId);
@@ -27,11 +27,11 @@ namespace StoreManagement.Admin.Controllers
             items = SettingRepository.GetStoreSettingsByType(storeId, TYPE);
             return View(items);
         }
-         
+
         //
         // GET: /Settings/Edit/5
 
-        public ActionResult SaveOrEdit(int id=0)
+        public ActionResult SaveOrEdit(int id = 0)
         {
             Setting setting = new Setting();
             if (id != 0)
@@ -63,7 +63,7 @@ namespace StoreManagement.Admin.Controllers
                     setting.SettingKey = setting.SettingKey.ToLower();
                     SettingRepository.Edit(setting);
                 }
-               
+
 
                 SettingRepository.Save();
                 return RedirectToAction("Index");
@@ -96,11 +96,11 @@ namespace StoreManagement.Admin.Controllers
             return View(SettingRepository.GetStoreSettings(storeId));
         }
 
-        public ActionResult TestSetting(int id=1)
+        public ActionResult TestSetting(int id = 1)
         {
             ViewBag.StoreId = id;
             var settings = SettingRepository.GetStoreSettings(id).Where(r => r.Type.ToLower().Contains("Style".ToLower())).ToList();
             return View(settings);
         }
-	}
+    }
 }

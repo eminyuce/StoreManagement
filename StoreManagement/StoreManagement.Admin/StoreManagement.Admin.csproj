@@ -281,6 +281,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Constants\StoreConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BlogsCategoriesController.cs" />
@@ -1902,10 +1903,10 @@
     <Content Include="Views\NewsLabels\Details.cshtml" />
     <Content Include="Views\NewsLabels\Index.cshtml" />
     <Content Include="Views\NewsLabels\SaveOrEdit.cshtml" />
+    <Content Include="Views\Home\ReturnFrontEndUrl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Constants\" />
     <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>

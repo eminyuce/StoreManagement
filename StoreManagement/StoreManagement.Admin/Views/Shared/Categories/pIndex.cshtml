@@ -3,6 +3,7 @@
 @using StoreManagement.Data
 @using StoreManagement.Data.GeneralHelper
 @model IEnumerable<StoreManagement.Data.Entities.Category>
+@using StoreManagement.Admin.Constants;
 
 @{
     ViewBag.Title = "Index";
@@ -11,6 +12,7 @@
     var controllerName = ViewData["ContentControllerName"].ToStr();
     var title = ViewData["ContentPageTitle"].ToStr();
     var gridName = ViewData["ContentGridName"].ToStr();
+    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
 
 }
 
@@ -133,7 +135,7 @@
            .SetWidth(30)
            .RenderValueAs(d =>
                @<b>
-                   @Html.ActionLink(" ", "SaveOrEdit",  new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                   @Html.ActionLink(" ", "SaveOrEdit", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                </b>);
 
         columns.Add()
@@ -145,7 +147,11 @@
                            @Html.ActionLink(" ", "Details", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
                        </b>);
 
-        columns.Add()
+
+        if (!isRegularUser)
+        {
+
+            columns.Add()
 .Encoded(false)
 .Sanitized(false)
 .SetWidth(30)
@@ -153,6 +159,12 @@
 @<b>
     @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
 </b>);
+
+
+
+
+        }
+
 
 
 
@@ -170,7 +182,7 @@
                     SetWidth(10).
                     RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
 
-     
+
 
         columns.Add(o => o.State)
                    .Titled("State")
@@ -180,7 +192,7 @@
                    .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
                                                      o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
 
-              
+
         columns.Add(o => o.CreatedDate)
 .Titled("Date")
 .Sortable(true).

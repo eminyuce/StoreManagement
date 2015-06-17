@@ -11,8 +11,7 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Admin.Controllers
 {
-   // [Authorize(Roles = "StoreAdmin")]
-   // [InitializeSimpleMembership]
+    [Authorize]
     public class NavigationsController : BaseController
     {
 

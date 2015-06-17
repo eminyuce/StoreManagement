@@ -29,5 +29,22 @@ namespace StoreManagement.Admin.Controllers
             Logger.Info("NoAccessPage. StoreId:"+storeId);
             return View();
         }
+
+         //<li>
+         //                           <a href="@url">Go to frontend <i class="glyphicon glyphicon-share-alt"></i></a>
+         //                       </li>
+
+        public ActionResult ReturnFrontEndUrl()
+        {
+            if (IsSuperAdmin)
+            {
+                return new EmptyResult();
+            }
+            else
+            {
+                return PartialView("ReturnFrontEndUrl", this.LoginStore);
+            }
+              
+        }
     }
 }

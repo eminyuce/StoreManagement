@@ -3,11 +3,12 @@
 @using StoreManagement.Data
 @using StoreManagement.Data.Entities
 @model List<StoreManagement.Data.Entities.Navigation>
+@using StoreManagement.Admin.Constants;
 
 @{
     ViewBag.Title = "Index";
     String search = (String)ViewBag.Search;
- 
+    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
 }
 
  
@@ -139,7 +140,9 @@
                    @Html.ActionLink(" ", "Details", "Navigations", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
                </b>);
 
-        columns.Add()
+        if (!isRegularUser)
+        {
+             columns.Add()
 .Encoded(false)
 .Sanitized(false)
 .SetWidth(30)
@@ -147,7 +150,11 @@
 @<b>
                    @Html.ActionLink(" ", "Delete", "Navigations", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
                </b>);
+                       
                         
+        }
+
+        
                         
         columns.Add(o => o.Id, true);
         columns.Add(c => c.Name)

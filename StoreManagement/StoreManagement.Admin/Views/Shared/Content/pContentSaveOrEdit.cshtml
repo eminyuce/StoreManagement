@@ -1,12 +1,14 @@
 ﻿@using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.Entities.Content
 
+
 @{
 
     int storeId = Model != null ? Model.StoreId : 0;
     String categoryType = Model.Type;
     var title = ViewData["ContentSaveOrEditPageTitle"].ToStr();
     var panelTitle = ViewData["ContentSaveOrEditPanelTitle"].ToStr();
+ 
 }
 
 

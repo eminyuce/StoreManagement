@@ -33,7 +33,7 @@
                         <div class="col-md-2">
                             <img width="120" height="70" src="@Url.Action("GetCaptcha", "Images", new { prefix = "StoreLogin" })" alt="Captcha"/>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             @Html.LabelFor(model => model.Captcha)
                             @Html.TextBoxFor(model => model.Captcha, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Captcha)

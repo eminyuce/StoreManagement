@@ -3,70 +3,64 @@
     var isDevelopmentStatus = ProjectAppSettings.GetWebConfigBool("IsDevelopmentStatus", true);
     bool isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
 }
-<!-- left, vertical navbar -->
-<div class="col-md-2 bootstrap-admin-col-left">
-    <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
-        @Html.MenuItem("Dashboard", "Index", "Dashboard")
-        @if (isSuperAdmin)
-        {
-            @Html.MenuItem("Stores", "Index", "Stores")
-        }
-        @Html.MenuItem("Navigation", "Index", "Navigations")
-        @Html.MenuItem("Files Manager", "Index", "FileManager")
 
-        @Html.MenuItem("Products", "Index", "Products")
-        @Html.MenuItem("Prod.Categories", "Index", "ProductCategories")
+<nav  class="navbar navbar-custom" >
+    <div class="container-fluid">
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
 
-        @Html.MenuItem("Blogs", "Index", "Blogs")
-        @Html.MenuItem("Blogs Categories", "Index", "BlogsCategories")
-        @Html.MenuItem("Blogs Labels", "Index", "BlogLabels")
-
-        @Html.MenuItem("News", "Index", "News")
-        @Html.MenuItem("News Categories", "Index", "NewsCategories")
-        @Html.MenuItem("News Labels", "Index", "NewsLabels")
-
-        @Html.MenuItem("Settings", "Index", "Settings")
+                @Html.MenuItem("Dashboard", "Index", "Dashboard")
+                @if (isSuperAdmin)
+                {
+                                    <li role="separator" class="divider-vertical"></li>
+                    @Html.MenuItem("Stores", "Index", "Stores")
+                }
+                                <li role="separator" class="divider-vertical"></li>
+                @Html.MenuItem("Navigation", "Index", "Navigations")
+                                <li role="separator" class="divider-vertical"></li>
+                @Html.MenuItem("Files Manager", "Index", "FileManager")
 
 
-        @if (isDevelopmentStatus)
-        {
-            @Html.MenuItem("About", "Index", "Home")
-            @Html.MenuItem("DatePickers", "Index", "Calendar")
-            @Html.MenuItem("Statistics (Charts)", "Index", "Statistics")
-            @Html.MenuItem("Forms", "Index", "Forms")
-            @Html.MenuItem("Tables", "Index", "Tables")
-            @Html.MenuItem("Buttons &amp; Icons", "Index", "Buttons")
-            @Html.MenuItem(" WYSIWYG Editors", "Index", "Editors")
-            @Html.MenuItem(" UI &amp; Interface", "Index", "Interface")
+                <li role="separator" class="divider-vertical"></li>
+                 @Html.MenuItem("Products", "Index", "Products")
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @Html.MenuItem("Prod.Categories", "Index", "ProductCategories")
+                        @Html.MenuItem("Products Labels", "Index", "NewsLabels")
+                    </ul>
+                </li>
 
-            <li>
-                <a href="#"><span class="badge pull-right">731</span> Orders</a>
-            </li>
-            <li>
-                <a href="#"><span class="badge pull-right">812</span> Invoices</a>
-            </li>
-            <li>
-                <a href="#"><span class="badge pull-right">27</span> Clients</a>
-            </li>
-            <li>
-                <a href="#"><span class="badge pull-right">1,234</span> Users</a>
-            </li>
-            <li>
-                <a href="#"><span class="badge pull-right">2,221</span> Messages</a>
-            </li>
-            <li>
-                <a href="#"><span class="badge pull-right">11</span> Reports</a>
-            </li>
-            <li>
-                <a href="#"><span class="badge pull-right">83</span> Errors</a>
-            </li>
-            <li>
-                <a href="#"><span class="badge pull-right">4,231</span> Logs</a>
-            </li>
-            
-        }
 
-    </ul>
-</div>
+                <li role="separator" class="divider-vertical"></li>
+                @Html.MenuItem("News", "Index", "News")
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @Html.MenuItem("News Categories", "Index", "NewsCategories")
+                        @Html.MenuItem("News Labels", "Index", "NewsLabels")
+                    </ul>
+                </li>
+                <li role="separator" class="divider-vertical"></li>
+                @Html.MenuItem("Blogs", "Index", "Blogs")
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @Html.MenuItem("Blogs Categories", "Index", "BlogsCategories")
+                        @Html.MenuItem("Blogs Labels", "Index", "BlogLabels")
+                    </ul>
+                </li>
 
+                 <li role="separator" class="divider-vertical"></li>
+                @Html.MenuItem("Settings", "Index", "Settings")
+                 <li role="separator" class="divider-vertical"></li>
+            </ul>
+         
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>

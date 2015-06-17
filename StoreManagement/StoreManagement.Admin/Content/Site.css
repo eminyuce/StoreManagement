@@ -1,4 +1,5 @@
-﻿ 
+﻿
+ 
 input.GridOrderingTextbox {
   max-width: 30px;
   width: 35px;
@@ -34,4 +35,55 @@ input.GridOrderingTextbox {
 .container-full {
   margin: 0 auto;
   width: 100%;
+}
+
+div .roleradio.selected {
+  border: #50B346 solid 3px;
+}
+
+div .roleradio {
+  border: #385F8D solid 3px;
+  margin: 0 10px 0 0;
+  padding: 0;
+}
+.divider-vertical {
+    height: floor(@navbar-height - @navbar-margin-bottom);
+    margin: floor(@navbar-margin-bottom / 2) 9px;
+    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid #ffffff;
+}
+.navbar-default .navbar-nav > li > a {
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #8B1313;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.navbar-default .navbar-nav > li:hover {
+  background-color: #EFD7D7;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li  > a {
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li  > a:hover {
+  color: #8B1313;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu > li:hover {
+  background-color: #EFD7D7;
+}
+.navbar-default {
+    background-image: linear-gradient(to bottom, #fff 0%, #C4D7D8 100%);
+}
+ .navbar .divider-vertical {
+	height: 40px;
+	margin: 0 9px;
+	border-left: 1px solid #f2f2f2;
+	border-right: 1px solid #ffffff;
 }

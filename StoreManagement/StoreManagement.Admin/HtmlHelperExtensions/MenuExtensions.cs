@@ -30,7 +30,7 @@ namespace StoreManagement.Admin.HtmlHelperExtensions
             {
                 li.AddCssClass("active");
             }
-            li.InnerHtml = String.Format("<a href=\"{0}\"><i class=\"glyphicon glyphicon-chevron-right\"></i>{1}</a>",
+            li.InnerHtml = String.Format("<a href=\"{0}\"><i class=\"\"></i>{1}</a>",
                new UrlHelper(htmlHelper.ViewContext.RequestContext).Action(action, controller).ToString()
                 , text);
             return MvcHtmlString.Create(li.ToString());

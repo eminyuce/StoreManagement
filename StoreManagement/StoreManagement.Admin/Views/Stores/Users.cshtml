@@ -13,16 +13,15 @@
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
 }
 
-<h2>Users of @s.Name</h2>
 
-
-
-@Html.Partial("_LeftMenu")
-<div class="col-md-10">
+ 
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="text-muted bootstrap-admin-box-title">Store Management</div>
+                <div class="text-muted bootstrap-admin-box-title">
+                    <h4>@s.Name Users Management</h4>
+                </div>
+
             </div>
             <div class="bootstrap-admin-panel-content">
 
@@ -36,55 +35,75 @@
 
                         <input type="hidden" name="id" value="@s.Id"/>
 
-                        <div class="editor-label control-group">
-                            @Html.LabelFor(model => userName.UserName, new { @class = "control-label" })
-                        </div>
-                        <div class="editor-field controls">
-                            @Html.EditorFor(model => userName.UserName, new { @class = "input-xlarge" })
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.UserName)
+                            @Html.TextBoxFor(model => userName.UserName, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => userName.UserName)
                         </div>
-                        <div class="editor-label control-group">
-                            @Html.LabelFor(model => userName.Password, new { @class = "control-label" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.Password)
+                            @Html.TextBoxFor(model => userName.Password, new { @class = "form-control" })
+
                         </div>
-                        <div class="editor-field controls">
-                            @Html.EditorFor(model => userName.Password, new { @class = "input-xlarge" })
-                        </div>
-                        <div class="editor-label control-group">
-                            @Html.LabelFor(model => userName.FirstName, new { @class = "control-label" })
-                        </div>
-                        <div class="editor-field controls">
-                            @Html.EditorFor(model => userName.FirstName, new { @class = "input-xlarge" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.FirstName)
+                            @Html.TextBoxFor(model => userName.FirstName, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => userName.FirstName)
                         </div>
-                        <div class="editor-label control-group">
-                            @Html.LabelFor(model => userName.LastName, new { @class = "control-label" })
-                        </div>
-                        <div class="editor-field controls">
-                            @Html.EditorFor(model => userName.LastName, new { @class = "input-xlarge" })
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.LastName)
+                            @Html.TextBoxFor(model => userName.LastName, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => userName.LastName)
                         </div>
-                        <div class="editor-label control-group">
-                            @Html.LabelFor(model => userName.PhoneNumber, new { @class = "control-label" })
-                        </div>
-                        <div class="editor-field controls">
-                            @Html.EditorFor(model => userName.PhoneNumber, new { @class = "input-xlarge" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.PhoneNumber)
+                            @Html.TextBoxFor(model => userName.PhoneNumber, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => userName.PhoneNumber)
                         </div>
 
-                        @foreach (var r in roles)
-                        {
-                            <div>
-                                @Html.RadioButton("roleName", r.RoleName) @r.RoleName
+                        <div class="form-group">
+                            <div class="a-table" style="display: table; width: 100%;">
+
+                                @foreach (var r in roles)
+                                {
+                                    <div style="display: table-cell; width: 33.3333333333333%;">
+                                        <div class="roleradio selected">
+                                            <label>
+
+
+                                                @Html.RadioButton("roleName", r.RoleName, new { @class = "form-control" }) @r.RoleName
+
+
+                                            </label>
+
+                                            <div style="padding: 5px;">
+                                                @r.Description
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
                             </div>
-                        }
+                        </div>
+
+
 
                         <p>
-                            <input  class="btn btn-primary btn-lg btn-block" type="submit" value="Create" />
+
+
+                            <input class="btn btn-success btn-lg btn-block" type="submit" value="Save" />
                         </p>
                     </fieldset>
                 }
 
-
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
@@ -165,11 +184,11 @@
         columns.Add(o => o.CreatedDate)
               .Titled("Date")
               .Sortable(true).
-              RenderValueAs(o => String.Format("{0}",o.CreatedDate.HasValue ?  o.CreatedDate.Value.ToShortDateString() : ""))
+              RenderValueAs(o => String.Format("{0}", o.CreatedDate.HasValue ? o.CreatedDate.Value.ToShortDateString() : ""))
               .SortInitialDirection(GridSortDirection.Descending);
 
 
-       
+
     }).SetRowCssClasses(item => item.UserId % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 
@@ -179,6 +198,4 @@
         </div>
     </div>
 
-
-
-</div>
+ 

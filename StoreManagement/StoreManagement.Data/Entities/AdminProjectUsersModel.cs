@@ -17,7 +17,8 @@ namespace StoreManagement.Data.Entities
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int RoleId { get; set; }
-        public string RoleName { get; set; }
+        public string RoleName { get; set; }        
+        public string Description { get; set; }
     }
     [Table("UserProfile")]
     public class UserProfile 

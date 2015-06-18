@@ -37,9 +37,9 @@ namespace StoreManagement.API.Controllers
             throw new NotImplementedException();
         }
 
-        public Product GetProductsProductId(int productId)
+        public Product GetProductsById(int productId)
         {
-            return ProductRepository.GetProductsProductId(productId);
+            return ProductRepository.GetProductsById(productId);
         }
 
         public List<Product> GetProductByType(string typeName)

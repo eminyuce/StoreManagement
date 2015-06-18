@@ -20,44 +20,26 @@ namespace StoreManagement.Service.Services
 
         public List<Setting> GetStoreSettings(int storeid)
         {
-            try
-            {
+            
                 string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
                 return HttpRequestHelper.GetUrlResults<Setting>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Setting>();
-            }
+            
         }
 
         public List<Setting> GetStoreSettingsFromCache(int storeid)
         {
-            try
-            {
+             
                 string url = string.Format("http://{0}/api/{1}/GetStoreSettingsFromCache?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
                 return HttpRequestHelper.GetUrlResults<Setting>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Setting>();
-            }
+             
         }
 
         public List<Setting> GetStoreSettingsByType(int storeid, string type)
         {
-            try
-            {
+             
                 string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}&type={3}", WebServiceAddress, ApiControllerName, storeid, type);
                 return HttpRequestHelper.GetUrlResults<Setting>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Setting>();
-            }
+            
         }
     }
 }

@@ -38,12 +38,12 @@ namespace StoreManagement.API.Controllers
 
         public List<Label> GetLabelsByLabelType(string labelType)
         {
-            throw new NotImplementedException();
+            return LabelRepository.GetLabelsByLabelType(labelType);
         }
 
         public List<Label> GetLabelsByLabelType(int storeId, string labelType)
         {
-            throw new NotImplementedException();
+            return LabelRepository.GetLabelsByLabelType(storeId, labelType);
         }
     }
 }

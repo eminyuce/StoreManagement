@@ -22,7 +22,7 @@
                     {        
                     <li>
                         <span class="icon-chevron-right">
-                            @Html.ActionLink(item.Name, "Categories", "ProductCategories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                            @Html.ActionLink(item.Name, "Category", "ProductCategories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
                         </span>
                     </li>
                     }

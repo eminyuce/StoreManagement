@@ -10,7 +10,7 @@ namespace StoreManagement.Service.Services
 {
     public class ProductFileService : BaseService, IProductFileService
     {
-        private const String ApiControllerName = "Products";
+        private const String ApiControllerName = "ProductFiles";
         public ProductFileService(string webServiceAddress)
             : base(webServiceAddress)
         {

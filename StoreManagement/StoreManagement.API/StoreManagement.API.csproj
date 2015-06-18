@@ -132,6 +132,7 @@
     <Compile Include="Controllers\FileManagersController.cs" />
     <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\PageDesignsController.cs" />
+    <Compile Include="Controllers\ProductFilesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />

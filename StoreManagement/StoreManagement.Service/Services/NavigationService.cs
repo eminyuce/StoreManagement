@@ -26,44 +26,23 @@ namespace StoreManagement.Service.Services
         {
             string url = string.Format("http://{0}//api/home/testconnection", webServiceAddress);
             int cacheSecond = 0;
-            try
-            {
-                var response = HttpRequestHelper.MakeJsonRequest(url);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return String.Empty;
-            }
+            var response = HttpRequestHelper.MakeJsonRequest(url);
+            return response;
+
         }
         public List<Navigation> GetStoreNavigations(int storeId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return HttpRequestHelper.GetUrlResults<Navigation>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Navigation>();
-            }
+            string url = string.Format("http://{0}/api/{1}/GetNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResults<Navigation>(url);
+
         }
 
         public List<Navigation> GetStoreActiveNavigations(int storeId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                HttpRequestHelper.CacheMinute = ProjectAppSettings.GetWebConfigInt("RequestHelperCacheLongMinute", 600);
-                return HttpRequestHelper.GetUrlResults<Navigation>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Navigation>();
-            }
+            string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            HttpRequestHelper.CacheMinute = ProjectAppSettings.GetWebConfigInt("RequestHelperCacheLongMinute", 600);
+            return HttpRequestHelper.GetUrlResults<Navigation>(url);
+
         }
     }
 }

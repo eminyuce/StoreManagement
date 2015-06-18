@@ -16,6 +16,12 @@ namespace StoreManagement.API.Controllers
 {
     public class StoresController : BaseApiController<Store>, IStoreService
     {
+
+        public StoresController()
+        {
+            
+        }
+       
         // GET api/Stores
         public Store GetStores(String domainName)
         {

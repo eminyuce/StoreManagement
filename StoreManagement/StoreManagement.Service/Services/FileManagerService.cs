@@ -22,87 +22,49 @@ namespace StoreManagement.Service.Services
 
         public List<FileManager> GetFilesByStoreIdFromCache(int storeId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetFilesByStoreIdFromCache?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return HttpRequestHelper.GetUrlResults<FileManager>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<FileManager>();
-            }
+            string url = string.Format("http://{0}/api/{1}/GetFilesByStoreIdFromCache?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResults<FileManager>(url);
+
         }
 
         public List<FileManager> GetFilesByStoreId(int storeId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetFilesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return HttpRequestHelper.GetUrlResults<FileManager>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<FileManager>();
-            }
+            string url = string.Format("http://{0}/api/{1}/GetFilesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResults<FileManager>(url);
+
         }
 
         public FileManager GetFilesByGoogleImageId(string googleImageId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetFilesByGoogleImageId?storeId={2}", WebServiceAddress, ApiControllerName, googleImageId);
-                return HttpRequestHelper.GetUrlResult<FileManager>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new FileManager();
-            }
+
+            string url = string.Format("http://{0}/api/{1}/GetFilesByGoogleImageId?storeId={2}", WebServiceAddress, ApiControllerName, googleImageId);
+            return HttpRequestHelper.GetUrlResult<FileManager>(url);
+
         }
 
         public FileManager GetFilesById(int id)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetFilesById?id={2}", WebServiceAddress, ApiControllerName, id);
-                return HttpRequestHelper.GetUrlResult<FileManager>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new FileManager();
-            }
+
+            string url = string.Format("http://{0}/api/{1}/GetFilesById?id={2}", WebServiceAddress, ApiControllerName, id);
+            return HttpRequestHelper.GetUrlResult<FileManager>(url);
+
         }
 
         public List<FileManager> GetStoreCarousels(int storeId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetStoreCarousels?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return HttpRequestHelper.GetUrlResults<FileManager>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<FileManager>();
-            }
+
+            string url = string.Format("http://{0}/api/{1}/GetStoreCarousels?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResults<FileManager>(url);
+
         }
 
         public StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize)
         {
-            try
-            {
-                String parameters = string.Format("GetImagesByStoreId?storeId={0}&page={1}&pageSize={2}", storeId, page, pageSize);
-                string url = string.Format("http://{0}/api/{1}/{2}", WebServiceAddress, ApiControllerName, parameters);
-                return HttpRequestHelper.GetUrlPagedResults<FileManager>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new StorePagedList<FileManager>();
-            }
+
+            String parameters = string.Format("GetImagesByStoreId?storeId={0}&page={1}&pageSize={2}", storeId, page, pageSize);
+            string url = string.Format("http://{0}/api/{1}/{2}", WebServiceAddress, ApiControllerName, parameters);
+            return HttpRequestHelper.GetUrlPagedResults<FileManager>(url);
+
         }
     }
 }

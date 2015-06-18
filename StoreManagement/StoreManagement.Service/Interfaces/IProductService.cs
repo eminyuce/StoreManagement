@@ -10,7 +10,7 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IProductService : IService
     {
-        Product GetProductsProductId(int productId);
+        Product GetProductsById(int productId);
         List<Product> GetProductByType(String typeName);
         List<Product> GetProductByType(int storeId, String typeName);
         List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId);

@@ -26,7 +26,7 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public Product GetProductsProductId(int productId)
+        public Product GetProductsById(int productId)
         {
             return this.GetSingleIncluding(productId, r => r.ProductFiles.Select(r1 => r1.FileManager));
         }

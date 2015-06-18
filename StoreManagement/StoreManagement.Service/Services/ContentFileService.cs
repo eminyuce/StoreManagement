@@ -19,30 +19,18 @@ namespace StoreManagement.Service.Services
 
         public List<ContentFile> GetContentByContentId(int contentId)
         {
-            try
-            {
+            
                 string url = string.Format("http://{0}/api/{1}/GetContentByContentId?contentId={2}", WebServiceAddress, ApiControllerName, contentId);
                 return HttpRequestHelper.GetUrlResults<ContentFile>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<ContentFile>();
-            }
+           
         }
 
         public List<ContentFile> GetContentByFileManagerId(int fileManagerId)
         {
-            try
-            {
+             
                 string url = string.Format("http://{0}/api/{1}/GetContentByFileManagerId?fileManagerId={2}", WebServiceAddress, ApiControllerName, fileManagerId);
                 return HttpRequestHelper.GetUrlResults<ContentFile>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<ContentFile>();
-            }
+            
         }
 
         public void DeleteContentFileByContentId(int contentId)

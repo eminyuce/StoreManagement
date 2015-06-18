@@ -22,44 +22,26 @@ namespace StoreManagement.Service.Services
 
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return HttpRequestHelper.GetUrlResults<Category>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Category>();
-            }
+
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResults<Category>(url);
+
         }
 
         public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return HttpRequestHelper.GetUrlResults<Category>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Category>();
-            }
+
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResults<Category>(url);
+
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId, string type)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-                return HttpRequestHelper.GetUrlResults<Category>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Category>();
-            }
+
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResults<Category>(url);
+
         }
 
         public List<Category> GetCategoriesByType(string type)
@@ -69,45 +51,22 @@ namespace StoreManagement.Service.Services
 
         public List<Category> GetCategoriesByStoreIdFromCache(int storeId, string type)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdFromCache?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
-                return HttpRequestHelper.GetUrlResults<Category>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<Category>();
-            }
+
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdFromCache?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
+            return HttpRequestHelper.GetUrlResults<Category>(url);
         }
 
-       
+
         public Category GetCategory(int id)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetCategory?id={2}", WebServiceAddress, ApiControllerName, id);
-                return HttpRequestHelper.GetUrlResult<Category>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return new Category();
-            }
+            string url = string.Format("http://{0}/api/{1}/GetCategory?id={2}", WebServiceAddress, ApiControllerName, id);
+            return HttpRequestHelper.GetUrlResult<Category>(url);
         }
 
         public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize = 25)
         {
-            try
-            {
-                string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
-                return HttpRequestHelper.GetUrlPagedResults<Category>(url);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException("Error:" + ex.Message, ex);
-                return null;
-            }
+            string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
+            return HttpRequestHelper.GetUrlPagedResults<Category>(url);
         }
     }
 }

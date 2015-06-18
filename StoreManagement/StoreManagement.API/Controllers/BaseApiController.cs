@@ -50,8 +50,15 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public IProductCategoryRepository ProductCategoryRepository { set; get; }
 
+        [Inject]
+        public ILabelLineRepository LabelLineRepository { set; get; }
+
+        [Inject]
+        public ILabelRepository LabelRepository { set; get; }
         
-        
+ 
+
+
 
         // GET api/<controller>
         public abstract IEnumerable<T> GetAll();
@@ -64,6 +71,9 @@ namespace StoreManagement.API.Controllers
         // DELETE api/<controller>/5
         public abstract HttpResponseMessage Delete(int id);
 
+
+        
+     
 
     }
 }

@@ -10,7 +10,7 @@ namespace StoreManagement.Service.Services
 {
     public class StoreUserService : BaseService, IStoreUserService
     {
-        private const String ApiControllerName = "ProductCategories";
+        private const String ApiControllerName = "StoreUsers";
         public StoreUserService(string webServiceAddress) : base(webServiceAddress)
         {
 

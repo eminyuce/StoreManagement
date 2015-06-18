@@ -19,8 +19,8 @@ namespace StoreManagement.Service.Repositories
     public class ContentRepository : BaseRepository<Content, int>, IContentRepository
     {
 
-        static TypedObjectCache<List<Content>> contentCache = new TypedObjectCache<List<Content>>("GetContentByTypeAndCategoryIdFromCache");
-        static TypedObjectCache<StorePagedList<Content>> ContentCacheStorePagedList = new TypedObjectCache<StorePagedList<Content>>("StorePagedListContent");
+        private static readonly TypedObjectCache<List<Content>> ContentCache = new TypedObjectCache<List<Content>>("GetContentByTypeAndCategoryIdFromCache");
+        private static readonly TypedObjectCache<StorePagedList<Content>> ContentCacheStorePagedList = new TypedObjectCache<StorePagedList<Content>>("StorePagedListContent");
 
         public ContentRepository(IStoreContext dbContext)
             : base(dbContext)
@@ -61,14 +61,14 @@ namespace StoreManagement.Service.Repositories
 
         public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
-            String key = String.Format("GetContentByTypeAndCategoryIdFromCache-{0}-{1}-{2}", storeId, typeName, categoryId);
+            String key = String.Format("Store-{0}-GetContentByTypeAndCategoryIdFromCache-{1}-{2}", storeId, typeName, categoryId);
             List<Content> items = null;
-            contentCache.TryGet(key, out items);
+            ContentCache.TryGet(key, out items);
 
             if (items == null)
             {
                 items = GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
-                contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                ContentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;
@@ -76,7 +76,7 @@ namespace StoreManagement.Service.Repositories
         
         public StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            String key = String.Format("GetContentsCategoryId-{0}-{1}-{2}-{3}-{4}-{5}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "", page, pageSize);
+            String key = String.Format("Store-{0}-GetContentsCategoryId-{1}-{2}-{3}-{4}-{5}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "", page, pageSize);
             StorePagedList<Content> items = null;
             ContentCacheStorePagedList.TryGet(key, out items);
 
@@ -99,7 +99,7 @@ namespace StoreManagement.Service.Repositories
                 items = new StorePagedList<Content>(cat.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, cat.Count());
                 //  items = new PagedList<Content>(cat, page, cat.Count());
                 //  items = (PagedList<Content>) cat.ToPagedList(page, pageSize);
-                ContentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                ContentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;

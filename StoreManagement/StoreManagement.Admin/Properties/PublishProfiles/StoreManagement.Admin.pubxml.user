@@ -169,7 +169,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:45:06</publishTime>
     </File>
     <File Include="bin/NLog.config">
-      <publishTime>06/07/2015 10:44:39</publishTime>
+      <publishTime>06/18/2015 16:03:36</publishTime>
     </File>
     <File Include="bin/NLog.dll">
       <publishTime>06/07/2015 10:45:03</publishTime>
@@ -196,16 +196,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/18/2015 13:34:40</publishTime>
+      <publishTime>06/18/2015 16:29:48</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/18/2015 13:34:36</publishTime>
+      <publishTime>06/18/2015 16:26:59</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/18/2015 13:34:37</publishTime>
+      <publishTime>06/18/2015 16:29:30</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/07/2015 10:45:02</publishTime>
@@ -4417,7 +4417,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:39</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>06/07/2015 10:44:39</publishTime>
+      <publishTime>06/18/2015 16:03:36</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>06/07/2015 10:44:48</publishTime>
@@ -5137,7 +5137,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/18/2015 13:34:44</publishTime>
+      <publishTime>06/18/2015 15:43:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Runtime.Caching;
 
@@ -50,6 +52,16 @@ namespace StoreManagement.Data.CacheHelper
             returnItem = (T)this[cacheKey];
             return returnItem != null;
         }
-
+        public  void ClearCache(String cacheKeyPrefix)
+        {
+            var cacheEnumerator = (IDictionaryEnumerator)((IEnumerable)Default).GetEnumerator();
+            while (cacheEnumerator.MoveNext())
+            {
+                if (cacheEnumerator.Key.ToString().StartsWith(cacheKeyPrefix, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Default.Remove(cacheEnumerator.Key.ToString());
+                }
+            }
+        }
     }
 }

@@ -18,8 +18,10 @@ namespace StoreManagement.Service.Repositories
     public class StoreRepository : BaseRepository<Store, int>, IStoreRepository
     {
   
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private static string defaultlayout = "~/Views/Shared/Layouts/{0}.cshtml";
+        private static string _defaultlayout = "~/Views/Shared/Layouts/{0}.cshtml";
+
+        private static readonly TypedObjectCache<Store> StoreCache = new TypedObjectCache<Store>("StoreCache");
+
 
 
         public StoreRepository(IStoreContext dbContext)
@@ -27,9 +29,6 @@ namespace StoreManagement.Service.Repositories
         {
 
         }
-
-
-        static TypedObjectCache<Store> StoreCache = new TypedObjectCache<Store>("StoreCache");
 
 
         
@@ -50,15 +49,15 @@ namespace StoreManagement.Service.Repositories
                 site = this.GetStoreByDomain(domainName);
                 string layout = String.Format("~/Views/Shared/Layouts/{0}.cshtml", !String.IsNullOrEmpty((String)site.Layout) ? (String)site.Layout : "_Layout1");
                 var isFileExist = File.Exists(System.Web.HttpContext.Current.Server.MapPath(layout));
-                defaultlayout = String.Format(defaultlayout, ProjectAppSettings.GetWebConfigString("DefaultLayout", "_Layout1"));
+                _defaultlayout = String.Format(_defaultlayout, ProjectAppSettings.GetWebConfigString("DefaultLayout", "_Layout1"));
                 if (!isFileExist)
                 {
-                    Logger.Info(String.Format("Layout is not found.Default Layout {0} is used.Site Domain is {1} ", defaultlayout, site.Domain));
+                    Logger.Info(String.Format("Layout is not found.Default Layout {0} is used.Site Domain is {1} ", _defaultlayout, site.Domain));
                 }
-                String selectedLayout = isFileExist ? layout : defaultlayout;
+                String selectedLayout = isFileExist ? layout : _defaultlayout;
 
                 site.Layout = selectedLayout;
-                StoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
+                StoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration_Minute", 100000)));
             }
             return site;
         }
@@ -71,7 +70,7 @@ namespace StoreManagement.Service.Repositories
             if (site == null)
             {
                 site = GetSingle(id);
-                StoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
+                StoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration_Minute", 100000)));
             }
             return site;
         }

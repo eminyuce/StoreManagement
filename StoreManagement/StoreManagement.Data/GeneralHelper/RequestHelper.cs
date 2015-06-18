@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using NLog;
 using RestSharp;
 using ServiceStack.Text;
+using StoreManagement.Data.CacheHelper;
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 
@@ -15,6 +17,10 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class RequestHelper
     {
+
+        private static readonly TypedObjectCache<String> RequestHelperCache = new TypedObjectCache<String>("RequestHelperCache");
+
+
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static CacheEntryUpdateCallback _callbackU = null;
         private int _cacheMinute = 10;
@@ -43,14 +49,14 @@ namespace StoreManagement.Data.GeneralHelper
             returnJson = CacheResponseOutput(url, String.Empty);
             if (!String.IsNullOrEmpty(returnJson))
             {
-                Logger.Info(String.Format("Return Categories From Cache {0}", url));
+                Logger.Info(String.Format("Return JSON RESPONSE ----> CACHE {0}", url));
                 return returnJson;
             }
             else
             {
                 String responseJson = MakeJsonRequest(url);
                 returnJson = CacheResponseOutput(url, responseJson);
-                Logger.Info(String.Format("Return Categories From Webservise {0}", url));
+                Logger.Info(String.Format("Return JSON RESPONSE ----> WEB SERVICE API {0}", url));
             }
 
             return returnJson;
@@ -107,25 +113,17 @@ namespace StoreManagement.Data.GeneralHelper
         }
         private string CacheResponseOutput(string key, String responseContent)
         {
-            var ret = (String)MemoryCache.Default.Get(key);
-            if (String.IsNullOrEmpty(ret))
+            String jsonOutput = "";
+            RequestHelperCache.TryGet(key, out jsonOutput);
+            if (String.IsNullOrEmpty(jsonOutput))
             {
-                ret = responseContent;
-                if (!String.IsNullOrEmpty(ret))
+                jsonOutput = responseContent;
+                if (!String.IsNullOrEmpty(jsonOutput))
                 {
-                    CacheItemPolicy policy = null;
-                    CacheEntryRemovedCallback callback = null;
-                    policy = new CacheItemPolicy();
-                    policy.Priority = CacheItemPriority.Default;
-                    _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
-                    policy.UpdateCallback = _callbackU;
-                    policy.AbsoluteExpiration = DateTime.Now.AddMinutes(CacheMinute);
-                    MemoryCache.Default.Set(key, ret, policy);
+                    RequestHelperCache.Set(key, jsonOutput, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("RequestHelperCache_CacheAbsoluteExpiration_Minute", 30)));
                 }
-
-
             }
-            return ret;
+            return jsonOutput;
         }
 
         private void ContentCacheUpdateCallback(CacheEntryUpdateArguments arguments)

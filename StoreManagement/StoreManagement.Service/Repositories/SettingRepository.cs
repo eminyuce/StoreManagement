@@ -15,7 +15,7 @@ namespace StoreManagement.Service.Repositories
 {
     public class SettingRepository : BaseRepository<Setting, int>, ISettingRepository
     {
-        static TypedObjectCache<List<Setting>> SettingStoreCache
+        private static readonly TypedObjectCache<List<Setting>> SettingStoreCache
             = new TypedObjectCache<List<Setting>>("categoryCache");
 
 
@@ -40,7 +40,7 @@ namespace StoreManagement.Service.Repositories
             if (items == null)
             {
                 items = GetStoreSettings(storeid);
-                SettingStoreCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                SettingStoreCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Setting_CacheAbsoluteExpiration_Minute", 10)));
             }
             return items;
         }

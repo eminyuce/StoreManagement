@@ -20,10 +20,10 @@ namespace StoreManagement.Service.Repositories
     public class CategoryRepository : BaseRepository<Category, int>, ICategoryRepository
     {
 
-        static TypedObjectCache<List<Category>> CategoryCache
+        private static readonly TypedObjectCache<List<Category>> CategoryCache
             = new TypedObjectCache<List<Category>>("categoryCache");
 
-        static TypedObjectCache<StorePagedList<Category>> PagingCategoryCache
+        private static readonly TypedObjectCache<StorePagedList<Category>> PagingCategoryCache
          = new TypedObjectCache<StorePagedList<Category>>("PagingCategoryCache");
 
 
@@ -134,7 +134,7 @@ namespace StoreManagement.Service.Repositories
                 //    .OrderBy(b => b.Ordering)
                 //    .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
 
-                CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
+                CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;
@@ -169,7 +169,7 @@ namespace StoreManagement.Service.Repositories
                 items = new StorePagedList<Category>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
                // items = new PagedList<Category>(cats, page, cats.Count());
                // items = new StorePagedList<Category>(paging.FindAll(), page, paging.Capacity);
-                PagingCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
+                PagingCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;

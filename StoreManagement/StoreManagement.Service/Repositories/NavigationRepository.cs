@@ -15,7 +15,7 @@ namespace StoreManagement.Service.Repositories
     public class NavigationRepository : BaseRepository<Navigation, int>, INavigationRepository
     {
 
-        static TypedObjectCache<List<Navigation>> NavigationsCache = new TypedObjectCache<List<Navigation>>("NavigationsCache");
+        private static readonly TypedObjectCache<List<Navigation>> NavigationsCache = new TypedObjectCache<List<Navigation>>("NavigationsCache");
 
 
         public NavigationRepository(IStoreContext dbContext) : base(dbContext)
@@ -37,7 +37,7 @@ namespace StoreManagement.Service.Repositories
             if (items == null)
             {
                 items = GetStoreNavigations(storeId).Where(r => r.State).ToList();
-                NavigationsCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("MainMenuNavigation_CacheAbsoluteExpiration", 10)));
+                NavigationsCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("MainMenuNavigation_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;

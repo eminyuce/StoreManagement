@@ -17,10 +17,10 @@ namespace StoreManagement.Service.Repositories
     public class FileManagerRepository : BaseRepository<FileManager, int>, IFileManagerRepository
     {
 
-        static TypedObjectCache<List<FileManager>> StoreFileManagerCache
+        private static readonly TypedObjectCache<List<FileManager>> StoreFileManagerCache
       = new TypedObjectCache<List<FileManager>>("StoreFileManager");
 
-        static TypedObjectCache<StorePagedList<FileManager>> StorePagedListFileManagerCache
+        private static readonly TypedObjectCache<StorePagedList<FileManager>> StorePagedListFileManagerCache
  = new TypedObjectCache<StorePagedList<FileManager>>("StorePagedListFileManagerCache");
 
 
@@ -37,7 +37,7 @@ namespace StoreManagement.Service.Repositories
             if (items == null)
             {
                 items = GetFilesByStoreId(storeId);
-                StoreFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                StoreFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("FileManager_CacheAbsoluteExpiration_Minute", 10)));
             }
             return items;
         }
@@ -73,7 +73,7 @@ namespace StoreManagement.Service.Repositories
             {
                 var images = FindBy(r => r.StoreId == storeId).ToList();
                 items = new StorePagedList<FileManager>(images.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, images.Count());
-                StorePagedListFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Content_CacheAbsoluteExpiration", 10)));
+                StorePagedListFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("FileManager_CacheAbsoluteExpiration_Minute", 10)));
             }
             return items;
         }

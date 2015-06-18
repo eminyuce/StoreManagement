@@ -15,7 +15,7 @@ namespace StoreManagement.Service.Repositories
     public class StoreUserRepository : BaseRepository<StoreUser, int>, IStoreUserRepository
     {
 
-        static TypedObjectCache<StoreUser> _storeUserCache = new TypedObjectCache<StoreUser>("_storeUserCache");
+        private static readonly TypedObjectCache<StoreUser> StoreUserCache = new TypedObjectCache<StoreUser>("_storeUserCache");
 
         public StoreUserRepository(IStoreContext dbContext)
             : base(dbContext)
@@ -27,12 +27,12 @@ namespace StoreManagement.Service.Repositories
         {
             String key = String.Format("GetStoreUserByUserId-{0}", userId);
             StoreUser item = null;
-            _storeUserCache.TryGet(key, out item);
+            StoreUserCache.TryGet(key, out item);
 
             if (item == null)
             {
                 item = this.FindBy(r => r.UserId == userId).FirstOrDefault();
-                _storeUserCache.Set(key, item, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("MainMenuNavigation_CacheAbsoluteExpiration", 10)));
+                StoreUserCache.Set(key, item, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("MainMenuNavigation_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return item;

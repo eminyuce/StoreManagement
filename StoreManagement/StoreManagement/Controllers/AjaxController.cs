@@ -33,7 +33,7 @@ namespace StoreManagement.Controllers
             returnModel.Store = Store;
             returnModel.Category = ProductCategoryService.GetProductCategory(categoryId);
             returnModel.RelatedProducts =ProductService.GetProductByTypeAndCategoryId(Store.Id, "product", categoryId).Take(5).ToList();
-            String partialViewName = "pRelatedContents";
+            String partialViewName = "pRelatedProducts";
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);
         }

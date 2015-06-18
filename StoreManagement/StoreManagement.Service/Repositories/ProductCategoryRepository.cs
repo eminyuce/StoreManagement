@@ -17,10 +17,10 @@ namespace StoreManagement.Service.Repositories
     {
 
 
-        static readonly TypedObjectCache<List<ProductCategory>> ProductCategoryCache
+        private static readonly TypedObjectCache<List<ProductCategory>> ProductCategoryCache
         = new TypedObjectCache<List<ProductCategory>>("ProductCategoryCache");
 
-        static readonly TypedObjectCache<StorePagedList<ProductCategory>> PagingProductCategoryCache
+        private static readonly TypedObjectCache<StorePagedList<ProductCategory>> PagingProductCategoryCache
          = new TypedObjectCache<StorePagedList<ProductCategory>>("PagingProductCategoryCache");
 
         public ProductCategoryRepository(IStoreContext dbContext) : base(dbContext)
@@ -74,7 +74,7 @@ namespace StoreManagement.Service.Repositories
                 }
 
                
-                ProductCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
+                ProductCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("ProductCategories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;
@@ -103,7 +103,7 @@ namespace StoreManagement.Service.Repositories
               
                 var c = cats.ToList();
                 items = new StorePagedList<ProductCategory>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
-                PagingProductCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration", 10)));
+                PagingProductCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("ProductCategories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;

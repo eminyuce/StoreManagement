@@ -187,7 +187,7 @@ namespace StoreManagement.Admin.Controllers
                         site.Domain = s.Domain;
                         site.Name = site.Name;
 
-                        UserStoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration", 100000)));
+                        UserStoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration_Minute", 100000)));
                     }
                 }
                 LoginStore = site;

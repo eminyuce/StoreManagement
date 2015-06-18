@@ -74,31 +74,29 @@ namespace StoreManagement.Admin.Controllers
         public ILabelLineRepository LabelLineRepository { set; get; }
 
 
-        private bool _IsSuperAdmin { get; set; }
-        protected bool IsSuperAdmin
+
+        private Boolean MySuperAdmin
         {
             get
             {
-                if (String.IsNullOrEmpty(User.Identity.Name))
-                {
-                    return _IsSuperAdmin;
-                }
+                if (Session["MySuperAdmin"] != null)
+                    return Session["MySuperAdmin"].ToBool();
                 else
                 {
-                    if (WebSecurity.UserExists(User.Identity.Name))
-                    {
-                        _IsSuperAdmin = Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
-                        return _IsSuperAdmin;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
+                    return false;
+                };
             }
             set
             {
-                _IsSuperAdmin = value;
+                Session["MySuperAdmin"] = value;
+            }
+        }
+        protected Boolean IsSuperAdmin
+        {
+            get { return MySuperAdmin; }
+            set
+            {
+                MySuperAdmin = value;
             }
         }
 
@@ -121,10 +119,27 @@ namespace StoreManagement.Admin.Controllers
             }
         }
         private Store _store = new Store();
+        private Store MyLoginStore
+        {
+            get
+            {
+                if (Session["MyLoginStore"] != null)
+                    return Session["MyLoginStore"] as Store;
+                else
+                {
+                    return new Store();
+                };
+            }
+            set
+            {
+                Session["MyLoginStore"] = value;
+            }
+        }
+
         protected Store LoginStore
         {
-            get { return _store; }
-            set { _store = value; }
+            get { return MyLoginStore; }
+            set { MyLoginStore = value; }
         }
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected BaseController()

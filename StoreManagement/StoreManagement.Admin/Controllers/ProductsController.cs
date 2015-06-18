@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
+using StoreManagement.Admin.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
@@ -18,7 +19,7 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
-        private const String ProductType = "product";
+     
 
 
         public ActionResult Index(int storeId = 0, String search = "", int categoryId = 0)
@@ -27,11 +28,11 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId == 0)
             {
-                resultList = ProductRepository.GetProductByType(ProductType);
+                resultList = ProductRepository.GetProductByType(StoreConstants.ProductType);
             }
             else
             {
-                resultList = ProductRepository.GetProductByType(storeId, ProductType);
+                resultList = ProductRepository.GetProductByType(storeId, StoreConstants.ProductType);
             }
 
             if (!String.IsNullOrEmpty(search))
@@ -46,7 +47,7 @@ namespace StoreManagement.Admin.Controllers
             }
             var contentsAdminViewModel = new ProductsAdminViewModel();
             contentsAdminViewModel.Products = resultList;
-            contentsAdminViewModel.Categories = ProductCategoryRepository.GetProductCategoriesByStoreIdFromCache(storeId, ProductType);
+            contentsAdminViewModel.Categories = ProductCategoryRepository.GetProductCategoriesByStoreIdFromCache(storeId, StoreConstants.ProductType);
             return View(contentsAdminViewModel);
         }
 
@@ -73,10 +74,12 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult SaveOrEdit(int id = 0)
         {
             var content = new Product();
+            var labels = new List<LabelLine>();
             if (id == 0)
             {
-                content.Type = ProductType;
+                content.Type = StoreConstants.ProductType;
                 content.CreatedDate = DateTime.Now;
+                content.State = true;
             }
             else
             {
@@ -86,7 +89,9 @@ namespace StoreManagement.Admin.Controllers
                 {
                     return RedirectToAction("NoAccessPage", "Home", new { id = content.StoreId });
                 }
+                labels = LabelLineRepository.GetLabelLinesByItem(id, StoreConstants.ProductType);
             }
+            ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
             return View(content);
         }
 
@@ -95,7 +100,7 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveOrEdit(Product content, int[] selectedFileId = null)
+        public ActionResult SaveOrEdit(Product content, int[] selectedFileId = null, int[] selectedLabelId = null)
         {
             if (ModelState.IsValid)
             {
@@ -110,12 +115,12 @@ namespace StoreManagement.Admin.Controllers
                 }
 
                 ProductRepository.Save();
+                int contentId = content.Id;
                 if (selectedFileId != null)
                 {
-                    int contentId = content.Id;
                     ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
                 }
-
+                LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
                 return RedirectToAction("Index");
             }
 

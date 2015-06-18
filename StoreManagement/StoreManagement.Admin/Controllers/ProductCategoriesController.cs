@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StoreManagement.Admin.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Repositories;
 
@@ -50,13 +51,14 @@ namespace StoreManagement.Admin.Controllers
             if (id == 0)
             {
                 category.CreatedDate = DateTime.Now;
+                category.State = true;
             }
             else
             {
                 category = ProductCategoryRepository.GetProductCategory(id);
                 category.UpdatedDate = DateTime.Now;
             }
-            category.CategoryType = "product";
+            category.CategoryType = StoreConstants.ProductType;
 
             return View(category);
         }

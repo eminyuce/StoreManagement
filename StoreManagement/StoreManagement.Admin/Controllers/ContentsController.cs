@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Admin.Controllers
@@ -67,16 +68,25 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult SaveOrEdit(int id = 0)
         {
             var content = new Content();
+            var labels = new List<LabelLine>();
             if (id == 0)
             {
                 content.Type = ContentType;
                 content.UpdatedDate = DateTime.Now;
+                content.State = true;
+  
             }
             else
             {
                 content = ContentRepository.GetSingle(id);
                 content.UpdatedDate = DateTime.Now;
+                labels = LabelLineRepository.GetLabelLinesByItem(id, ContentType);
+        
             }
+
+            ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
+
+
             return View(content);
         }
 
@@ -85,7 +95,7 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveOrEdit(Content content, int[] selectedFileId = null)
+        public ActionResult SaveOrEdit(Content content, int[] selectedFileId = null, int[] selectedLabelId = null)
         {
             if (ModelState.IsValid)
             {
@@ -98,12 +108,12 @@ namespace StoreManagement.Admin.Controllers
                     ContentRepository.Edit(content);
                 }
                 ContentRepository.Save();
+                int contentId = content.Id;
                 if (selectedFileId != null)
                 {
-                    int contentId = content.Id;
                     ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
                 }
-
+                LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, ContentType);
                 return RedirectToAction("Index");
             }
 
@@ -114,7 +124,7 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Content/Delete/5
-                [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult Delete(int id = 0)
         {
             Content content = ContentRepository.GetSingle(id);
@@ -139,5 +149,7 @@ namespace StoreManagement.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-	}
+
+
+    }
 }

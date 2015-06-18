@@ -301,6 +301,7 @@
     <Compile Include="Controllers\PageDesignsController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductsLabelsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
@@ -1904,6 +1905,11 @@
     <Content Include="Views\NewsLabels\Index.cshtml" />
     <Content Include="Views\NewsLabels\SaveOrEdit.cshtml" />
     <Content Include="Views\Home\ReturnFrontEndUrl.cshtml" />
+    <Content Include="Views\Home\LabelsDropDown.cshtml" />
+    <Content Include="Views\ProductsLabels\Delete.cshtml" />
+    <Content Include="Views\ProductsLabels\Details.cshtml" />
+    <Content Include="Views\ProductsLabels\Index.cshtml" />
+    <Content Include="Views\ProductsLabels\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

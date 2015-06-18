@@ -8,26 +8,24 @@
     String categoryType = Model.Type;
     var title = ViewData["ContentSaveOrEditPageTitle"].ToStr();
     var panelTitle = ViewData["ContentSaveOrEditPanelTitle"].ToStr();
- 
+    int[] selectedLabelId = ViewBag.SelectedLabels;
 }
 
-
-
-
+ 
 
 <div class="col-md-12">
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="text-muted bootstrap-admin-box-title"> @String.IsNullOrEmpty(panelTitle) ? @title : @panelTitle </div>
+                <div class="text-muted bootstrap-admin-box-title">@String.IsNullOrEmpty(panelTitle) ? @title : @panelTitle </div>
             </div>
             <div class="bootstrap-admin-panel-content">
                 @if (!String.IsNullOrEmpty(title))
                 {
-                                    <h2>@title</h2>
+                    <h2>@title</h2>
                 }
 
-                
+
 
                 <input type="hidden" value="@categoryType" id="categoryType"/>
 
@@ -45,7 +43,7 @@
                         <legend>Content</legend>
 
                         <div class="editor-field controls">
-                           @Html.Action("StoresDropDown", "Stores", new { storeId })
+                            @Html.Action("StoresDropDown", "Stores", new { storeId })
                         </div>
 
 
@@ -85,18 +83,18 @@
                         </div>
 
                         <div class="form-group">
-                            
+
                             @Html.LabelFor(model => model.MainPage)
                             @Html.EditorFor(model => model.MainPage)
                             @Html.ValidationMessageFor(model => model.MainPage)
-                            
 
-                          
+
+
                             @Html.LabelFor(model => model.State)
                             @Html.EditorFor(model => model.State)
                             @Html.ValidationMessageFor(model => model.State)
 
-                         
+
                             @Html.LabelFor(model => model.ImageState)
 
                             @Html.EditorFor(model => model.ImageState)
@@ -111,6 +109,11 @@
                             @Html.ValidationMessageFor(model => model.Ordering)
                         </div>
 
+                        <div class="form-group">
+                            <label for="Labels">Labels</label>
+                            @Html.Action("LabelsDropDown", "Home", new { storeId, labelType = Model.Type, selectedLabelsId = selectedLabelId })
+                        </div>
+
 
                         <p>
                             <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
@@ -119,7 +122,7 @@
                 }
 
                 <div>
-                                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
                 </div>
             </div>
         </div>

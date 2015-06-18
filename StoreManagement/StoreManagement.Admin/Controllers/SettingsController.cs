@@ -34,6 +34,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult SaveOrEdit(int id = 0)
         {
             Setting setting = new Setting();
+            setting.State = true;
             if (id != 0)
             {
                 setting = SettingRepository.GetSingle(id);

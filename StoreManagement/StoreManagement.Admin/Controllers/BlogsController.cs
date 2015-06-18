@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ninject;
+using StoreManagement.Admin.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
@@ -16,7 +17,8 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class BlogsController : ContentsController
     {
-        public BlogsController() : base("blog")
+        public BlogsController()
+            : base(StoreConstants.BlogsType)
         {
             
         }

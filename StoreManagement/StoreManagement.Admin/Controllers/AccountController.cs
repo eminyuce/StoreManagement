@@ -85,6 +85,8 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult NoStoreFound()
         {
+            Session.Remove("MySuperAdmin");
+            Session.Remove("MyLoginStore");
             WebSecurity.Logout();
             return View();
         }
@@ -95,8 +97,9 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session.Remove("MySuperAdmin");
+            Session.Remove("MyLoginStore");
             WebSecurity.Logout();
-
             return RedirectToAction("Index", "Home");
         }
 

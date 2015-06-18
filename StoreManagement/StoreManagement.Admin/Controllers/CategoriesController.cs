@@ -65,6 +65,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 category = CategoryRepository.GetCategory(id);
                 category.UpdatedDate = DateTime.Now;
+                category.State = true;
             }
             category.CategoryType = CategoryType;
 

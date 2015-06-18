@@ -58,6 +58,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 item.ParentId = 0;
                 item.CreatedDate = DateTime.Now;
+                item.State = true;
             }
             else
             {

@@ -11,5 +11,10 @@ namespace StoreManagement.Admin.Constants
         public const String RoleStoreAdmin = "StoreAdmin";
         public const String RoleSuperAdmin = "SuperAdmin";
 
+
+        public const String ProductType = "product";
+        public const String NewsType = "news";
+        public const String BlogsType = "blog";
+
     }
 }

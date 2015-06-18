@@ -7,12 +7,13 @@ using StoreManagement.Admin.Constants;
 
 namespace StoreManagement.Admin.Controllers
 {
-    public class BlogsCategoriesController : CategoriesController
+    public class ProductsLabelsController : LabelsController
     {
-        public BlogsCategoriesController() : base(StoreConstants.BlogsType)
+        public ProductsLabelsController() : base(StoreConstants.ProductType)
         {
 
         }
+
         
     }
 }

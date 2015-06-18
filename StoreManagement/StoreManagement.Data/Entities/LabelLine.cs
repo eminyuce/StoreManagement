@@ -11,7 +11,7 @@ namespace StoreManagement.Data.Entities
     {
         public int Id { get; set; }
         public int ItemId { get; set; }
-        public int ItemType { get; set; }
+        public String ItemType { get; set; }
         public int LabelId { get; set; }
 
     }

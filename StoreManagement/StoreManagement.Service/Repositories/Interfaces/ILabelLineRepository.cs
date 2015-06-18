@@ -12,6 +12,8 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface ILabelLineRepository : IEntityRepository<LabelLine, int>, ILabelLineService
     {
 
+        void DeleteLabelLinesByItem(int itemId, String itemType);
+        void SaveLabelLines(int[] labelId, int itemId, String itemType);
 
     }
 }

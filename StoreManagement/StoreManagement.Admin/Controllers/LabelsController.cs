@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Admin.Controllers
 {
     public abstract class LabelsController : BaseController
     {
-        
+
         private String LabelType { set; get; }
 
         protected LabelsController(String labelType)
@@ -65,6 +66,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 label.UpdatedDate = DateTime.Now;
                 label.CreatedDate = DateTime.Now;
+                label.State = true;
 
             }
             label.LabelType = LabelType;
@@ -111,5 +113,8 @@ namespace StoreManagement.Admin.Controllers
             LabelRepository.Save();
             return RedirectToAction("Index");
         }
+
+
+    
     }
 }

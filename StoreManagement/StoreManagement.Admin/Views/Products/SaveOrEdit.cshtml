@@ -5,7 +5,7 @@
 
     int storeId = Model != null ? Model.StoreId : 0;
     String categoryType = Model.Type;
- 
+    int[] selectedLabelId = ViewBag.SelectedLabels;
 }
 
 
@@ -83,19 +83,19 @@
                         <div class="form-group">
                             
                             @Html.LabelFor(model => model.MainPage)
-                            @Html.EditorFor(model => model.MainPage)
+                            @Html.EditorFor(model => model.MainPage, new { @class = "form-control"})
                             @Html.ValidationMessageFor(model => model.MainPage)
                             
 
                           
                             @Html.LabelFor(model => model.State)
-                            @Html.EditorFor(model => model.State)
+                            @Html.EditorFor(model => model.State, new { @class = "form-control"})
                             @Html.ValidationMessageFor(model => model.State)
 
                          
                             @Html.LabelFor(model => model.ImageState)
 
-                            @Html.EditorFor(model => model.ImageState)
+                            @Html.EditorFor(model => model.ImageState, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.ImageState)
 
                         </div>
@@ -105,6 +105,10 @@
                             @Html.LabelFor(model => model.Ordering)
                             @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
                             @Html.ValidationMessageFor(model => model.Ordering)
+                        </div>
+                           <div class="form-group">
+                            <label for="Labels">Labels</label>
+                            @Html.Action("LabelsDropDown", "Home", new { storeId, labelType = Model.Type, selectedLabelsId = selectedLabelId })
                         </div>
 
 

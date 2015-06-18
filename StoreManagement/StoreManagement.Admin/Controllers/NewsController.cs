@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StoreManagement.Admin.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
@@ -14,7 +15,7 @@ namespace StoreManagement.Admin.Controllers
     public class NewsController : ContentsController
     {
         public NewsController()
-            : base("news")
+            : base(StoreConstants.NewsType)
         {
 
         }

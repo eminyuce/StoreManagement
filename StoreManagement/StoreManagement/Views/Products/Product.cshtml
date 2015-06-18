@@ -20,7 +20,7 @@
                     {        
                     <li>
                         <span class="icon-chevron-right">
-                            @Html.ActionLink(item.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                            @Html.ActionLink(item.Name, "Category", "ProductCategories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
                         </span>
                     </li>
                     }
@@ -61,7 +61,7 @@
 
                                             <div class="item @String.Format("{0}",(i==0 ? "active" : ""))">
                                                 <a href="#">
-                                                    <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ProductType})" style="width: 100px; height: 100px;" alt="">
+                                                    <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType })" style="width: 100px; height: 100px;" alt="">
                                                 </a>
                                             </div>
                                         }
@@ -75,7 +75,7 @@
                             }
                 </div>
                 <div class="col-md-7">
-                    <input type="hidden" id="CategoryId" value="@product.CategoryId"/>
+                    <input type="hidden" id="ProductCategoryId" value="@product.ProductCategoryId"/>
                     <h3>@product.Name</h3>
                     <hr class="soft" />
 
@@ -130,7 +130,7 @@
             GetRelatedProducts();
         });
         function GetRelatedProducts() {
-            var postData = JSON.stringify({ "categoryId": $("#CategoryId").val() });
+            var postData = JSON.stringify({ "categoryId": $("#ProductCategoryId").val() });
             ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", DisplayRelatedProducts);
             
         }

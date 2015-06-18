@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -25,14 +26,21 @@ namespace StoreManagement.Test
         {
             dbContext = new StoreContext(ConnectionString);
         }
+        [TestMethod]
+        public void GetProductCategoriesByStoreIdFromCache()
+        {
+            ProductCategoryRepository sss = new ProductCategoryRepository(dbContext);
+            var m = sss.GetProductCategoriesByStoreIdFromCache(9, StoreConstants.ProductType);
+            Assert.IsNotNull(m);
 
+        }
         [TestMethod]
         public void GetStoreByUserName()
         {
             var s = new StoreRepository(dbContext);
             var m = s.GetStoreByUserName("yuce18@marinelink.com");
             Assert.IsNotNull(m);
-         
+
         }
 
 
@@ -71,10 +79,10 @@ namespace StoreManagement.Test
         {
             String json = File.ReadAllText(@"C:\nLogs\logs\sssss.txt");
             JObject results = JObject.Parse(json);
- 
+
             foreach (var result in results["styleArray"])
             {
-                string id = (string) result["Id"];
+                string id = (string)result["Id"];
                 string style = (string)result["Style"];
 
                 Console.WriteLine(id);
@@ -85,7 +93,7 @@ namespace StoreManagement.Test
         public void TestGetContentsCategoryId()
         {
             ContentRepository rep = new ContentRepository(dbContext);
-          //  StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
+            //  StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
             var blogs = rep.GetContentByType("blog");
             var m = rep.GetContentsCategoryId(2, null, "blog", true, 1, 24);
 
@@ -99,7 +107,7 @@ namespace StoreManagement.Test
 
 
         }
-            
+
         [TestMethod]
         public void TestContentService()
         {
@@ -189,7 +197,7 @@ namespace StoreManagement.Test
             String mm = "%25c3%2587ek_cumhur%25c4%25b0yet%25c4%25b0";
             String mm1 = "OTOMOTİV";
             String pp = mm1.UrlEncode();
-            Console.WriteLine(GeneralHelper.UrlDencode(mm,false));
+            Console.WriteLine(GeneralHelper.UrlDencode(mm, false));
             Console.WriteLine(mm.UrlDecode());
         }
 

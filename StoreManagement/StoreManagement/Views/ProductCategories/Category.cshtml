@@ -1,0 +1,90 @@
+﻿@model StoreManagement.Data.RequestModel.ProductCategoryViewModel
+@using MvcPaging
+@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
+@{
+    ViewBag.Title = "Category";
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="well well-small">
+            <ul class="nav nav-list">
+                @{
+                    foreach (var item in Model.Categories)
+                    {        
+                    <li>
+                        <span class="icon-chevron-right">
+                            @Html.ActionLink(item.Name, "Category", "ProductCategories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                        </span>
+                    </li>
+                    }
+                }
+
+
+            </ul>
+        </div>
+
+
+        <div class="well well-small">
+            <a href="#">
+                <img src="assets/img/paypal.jpg" alt="payment method paypal"></a>
+        </div>
+
+        <a class="shopBtn btn-block" href="#">Upcoming products
+            <br>
+            <small>Click to view</small></a>
+        <br>
+        <br>
+    </div>
+    <div class="col-md-9">
+        <!-- 
+New Products
+-->
+        <div class="well well-small">
+            <h3><strong>@Model.Category.Name</strong> Products </h3>
+            <div class="row">
+
+                @if (Model.Products.Any())
+                {
+                    foreach (var product in Model.Products)
+                    {
+                    <div class="col-md-3">
+
+
+                        @Html.Partial("DisplayTemplates/ProductThumbnail", product, new ViewDataDictionary(ViewData){
+                                         {"ProductCategoryName",Model.Category.Name}})
+
+
+                    </div>
+                    }
+
+                    @Model.Products.TotalItemCount
+                  
+                    <div class="pager">
+
+
+                        @Html.Pager(Model.Products.PageSize, Model.Products.PageNumber, Model.Products.TotalItemCount).Options(o => o
+            .DisplayTemplate("BootstrapPagination")
+            .MaxNrOfPages(7)
+            .AlwaysAddFirstPageNumber()
+            .SetPreviousPageText("←")
+            .SetNextPageText("→"))
+
+
+                    </div>
+
+  
+
+
+                     
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>

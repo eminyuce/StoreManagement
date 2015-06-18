@@ -14,6 +14,5 @@ namespace StoreManagement.Data.RequestModel
         public List<Category> Categories { get; set; }
         public Category Category { get; set; }
         public List<Content> RelatedContents { get; set; }
-         
     }
 }

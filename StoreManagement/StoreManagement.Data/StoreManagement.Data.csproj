@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="CacheHelper\MemoryCacheHelper.cs" />
     <Compile Include="CacheHelper\TypedObjectCache.cs" />
+    <Compile Include="Constants\StoreConstants.cs" />
     <Compile Include="EmailHelper\EmailAccount.cs" />
     <Compile Include="EmailHelper\EmailSender.cs" />
     <Compile Include="EmailHelper\IEmailSender.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="RequestModel\ContentsAdminViewModel.cs" />
     <Compile Include="RequestModel\ContentsViewModel.cs" />
     <Compile Include="RequestModel\PhotosViewModel.cs" />
+    <Compile Include="RequestModel\ProductCategoryViewModel.cs" />
     <Compile Include="RequestModel\ProductDetailViewModel.cs" />
     <Compile Include="RequestModel\ProductsAdminViewModel.cs" />
     <Compile Include="RequestModel\ProductsViewModel.cs" />

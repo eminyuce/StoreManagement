@@ -8,13 +8,11 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class StoreHomePage
+    public class ProductCategoryViewModel
     {
         public Store Store { get; set; }
-        public List<ProductCategory> ProductCategories { get; set; }
-        public List<FileManager> CarouselImages { get; set; }
-        public PagedList<Content> Blogs { get; set; }
-        public PagedList<Content> News { get; set; }
+        public ProductCategory Category { get; set; }
+        public List<ProductCategory> Categories { get; set; }
         public PagedList<Product> Products { get; set; }
     }
 }

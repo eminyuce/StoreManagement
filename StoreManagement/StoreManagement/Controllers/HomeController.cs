@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MvcPaging;
 using NLog;
 using Ninject;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
@@ -21,17 +22,26 @@ namespace StoreManagement.Controllers
         {
 
             int page = 1;
- 
-            var shp =new StoreHomePage();
-            shp.Store = Store;
-            shp.CarouselImages = FileManagerService.GetStoreCarousels(Store.Id);
-            shp.Categories = CategoryService.GetCategoriesByStoreId(Store.Id);
-            var products = ProductService.GetProductsCategoryId(Store.Id, null, "product", true, page, 24);
-            shp.Products = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
-            var contents = ContentService.GetContentsCategoryId(Store.Id, null, "news", true, page, 24);
-            shp.News = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
-            contents = ContentService.GetContentsCategoryId(Store.Id, null, "blog", true, page, 24);
-            shp.Blogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+            var shp = new StoreHomePage();
+            try
+            {
+
+                shp.Store = Store;
+                shp.CarouselImages = FileManagerService.GetStoreCarousels(Store.Id);
+                shp.ProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(Store.Id);
+                var products = ProductService.GetProductsCategoryId(Store.Id, null, StoreConstants.ProductType, true, page, 24);
+                shp.Products = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
+                var contents = ContentService.GetContentsCategoryId(Store.Id, null, StoreConstants.NewsType, true, page, 24);
+                shp.News = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+                contents = ContentService.GetContentsCategoryId(Store.Id, null, StoreConstants.BlogsType, true, page, 24);
+                shp.Blogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.ErrorException("Home page exception" + ex.Message, ex);
+            }
+
             return View(shp);
         }
         public ActionResult About()
@@ -44,7 +54,7 @@ namespace StoreManagement.Controllers
         }
         public ActionResult RecentUpdates()
         {
-           return View();
+            return View();
         }
         public ActionResult MainMenu()
         {

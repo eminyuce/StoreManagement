@@ -18,11 +18,11 @@
             <ul class="nav nav-list">
 
                 @{
-                    foreach (var item in Model.Categories)
+                    foreach (var item in Model.ProductCategories)
                     {        
                     <li>
                         <span class="icon-chevron-right">
-                            @Html.ActionLink(item.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                            @Html.ActionLink(item.Name, "Categories", "ProductCategories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
                         </span>
                     </li>
                     }

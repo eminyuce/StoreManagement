@@ -250,6 +250,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -511,6 +512,7 @@
     <Content Include="Views\Shared\pContent.cshtml" />
     <Content Include="Views\Shared\pRelatedProducts.cshtml" />
     <Content Include="Views\Shared\pProduct.cshtml" />
+    <Content Include="Views\ProductCategories\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -48,27 +48,28 @@
         <div class="well well-small">
             <div class="row-fluid">
                 <div class="col-md-5">
-                     @if (images != null && images.Any())
-                            {
-                                <div id="myCarousel" class="carousel slide cntr">
-                                    <div class="carousel-inner">
-                                        @for (int i=0;  i< images.Count; i++)
-                                        {
-                                            var m = images.ToList()[i];
+                    @if (images != null && images.Any())
+                    {
+                        <div id="myCarousel" class="carousel slide cntr">
+                            <div class="carousel-inner">
+                                @for (int i=0;  i< images.Count; i++)
+                                {
+                                    var m = images.ToList()[i];
 
-                                            <div class="item @String.Format("{0}",(i==0 ? "active" : ""))">
-                                                <a href="#">
-                                                    <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType})" style="width: 100px; height: 100px;" alt="">
-                                                </a>
-                                            </div>
-                                        }
+                                    <div class="item @String.Format("{0}",(i==0 ? "active" : ""))">
+                                        <a href="#">
+                                            <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType})" style="width: 100px; height: 100px;" alt="">
+                                        </a>
                                     </div>
-                                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-                                    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-                                </div>
+                                }
+                            </div>
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                        </div>
                          
-                            }
+                    }
                 </div>
+                                    <input type="hidden" id="CategoryId" value="@blog.CategoryId"/>
                 <div class="col-md-7">
                     <h3>@blog.Name</h3>
                     <hr class="soft" />
@@ -82,14 +83,38 @@
             </div>
             <hr class="softn clr" />
             <h3>Related Blogs</h3>
-          <div class="tab-pane fade" id="profile">
-                    @foreach (var p in Model.RelatedContents)
-                    {
-                        @Html.Partial("pRelatedContent", p)
-                    }
+           <div class="tab-pane fade" id="profile">
+                      <div id="RelatedBlogs"></div>
                 </div>
+                 
 
         </div>
     </div>
 
 </div>
+
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            GetRelatedContents();
+        });
+        function GetRelatedContents() {
+            var postData = JSON.stringify({ "categoryId": $("#CategoryId").val() });
+            ajaxMethodCall(postData, "/Ajax/GetRelatedContents", DisplayRelatedContents);
+            
+        }
+        function DisplayRelatedContents(data) {
+            $("#RelatedBlogs").empty();
+            $("#RelatedBlogs").html(data).animate({ 'height': '150px' }, 'slow');
+        }
+
+
+
+    </script>
+    
+
+    
+}

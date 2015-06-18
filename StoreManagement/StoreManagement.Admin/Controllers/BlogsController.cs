@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ninject;
-using StoreManagement.Admin.Constants;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;

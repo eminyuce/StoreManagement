@@ -20,7 +20,7 @@
     
 }
 
-   
+
 
 
 
@@ -33,217 +33,229 @@
                 </div>
             </div>
             <div class="bootstrap-admin-panel-content">
-
-
-                <div>
-                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = controllerName })
-                </div>
-
-
-                <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div class="row">
-                            <span class="col-md-3">
-                                @Html.ActionLink("Create", "SaveOrEdit", controllerName, new { id = 0 }, new { @class = "btn btn-primary btn-block glyphicon glyphicon-plus" })
-                            </span>
-                            <span class="col-md-9">
-                                @Html.Partial("pSearchForm")
-                            </span>
-                        </div>
-                        <div class="row">
-                            <span class="col-md-1">
-                                <span class="btn btn-xs btn-default " id="SelectAll">Select All
-                                </span>
-                            </span>
-                            <span class="col-md-1">
-                                <span class="btn btn-xs btn-default" id="DeselectAll">Deselect All
-                                </span>
-                            </span>
-                            <span class="col-md-2">
-                                <span class="btn btn-xs btn-default" id="DeleteAll">Delete Selected 
-                                </span>
-                            </span>
-                            <span class="col-md-2">
-                                <select name="ItemStateSelection" id="ItemStateSelection">
-                                    <option value="State">Durum</option>
-                                    <option value="ImageState">Resim Yayında</option>
-                                    <option value="MainPage">Ana Sayfa</option>
-                                </select>
-                            </span><span class="col-md-2">
-                                <span class="btn btn-xs btn-default" id="SetStateOnAll">Set Selected State True All</span>
-
-                            </span><span class="col-md-2">
-                                <span class="btn btn-xs btn-default" id="SetStateOffAll">Set Selected State False All</span>
-
-                            </span>
-                            <span class="col-md-2">
-                                <span class="btn btn-xs btn-default" id="OrderingAll">Ordering All
-                                </span>
-                            </span>
-                        </div>
-
-                        <div id="ErrorMessagePanel" style="display: none;" class="alert alert-danger">
-                            <span id="ErrorMessage"></span>
-                        </div>
-
+                <div class="row">
+                    
+                    <div class="col-md-2">
+                        @Html.Partial("pProductCategoryTree", categories, null)
                     </div>
 
-                </div>
+                    <div class="col-md-10">
+                        
+                        <div>
+                            @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = controllerName })
+                        </div>
+                        
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <span class="col-md-3">
+                                        @Html.ActionLink("Create", "SaveOrEdit", controllerName, new { id = 0 }, new { @class = "btn btn-primary btn-block glyphicon glyphicon-plus" })
+                                    </span>
+                                    <span class="col-md-9">
+                                        @Html.Partial("pSearchForm")
+                                    </span>
+                                </div>
+                                <div class="row">
+                                    <span class="col-md-1">
+                                        <span class="btn btn-xs btn-default " id="SelectAll">Select All
+                                        </span>
+                                    </span>
+                                    <span class="col-md-1">
+                                        <span class="btn btn-xs btn-default" id="DeselectAll">Deselect All
+                                        </span>
+                                    </span>
+                                    <span class="col-md-2">
+                                        <span class="btn btn-xs btn-default" id="DeleteAll">Delete Selected 
+                                        </span>
+                                    </span>
+                                    <span class="col-md-2">
+                                        <select name="ItemStateSelection" id="ItemStateSelection">
+                                            <option value="State">Durum</option>
+                                            <option value="ImageState">Resim Yayında</option>
+                                            <option value="MainPage">Ana Sayfa</option>
+                                        </select>
+                                    </span><span class="col-md-2">
+                                               <span class="btn btn-xs btn-default" id="SetStateOnAll">Set Selected State True All</span>
 
+                                           </span><span class="col-md-2">
+                                                      <span class="btn btn-xs btn-default" id="SetStateOffAll">Set Selected State False All</span>
 
+                                                  </span>
+                                    <span class="col-md-2">
+                                        <span class="btn btn-xs btn-default" id="OrderingAll">Ordering All
+                                        </span>
+                                    </span>
+                                </div>
 
+                                <div id="ErrorMessagePanel" style="display: none;" class="alert alert-danger">
+                                    <span id="ErrorMessage"></span>
+                                </div>
 
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <span class="col-md-6">
-                                <span class="label "><span class="badge text-danger text-large">@products.Count() </span>
+                            </div>
 
-
-                                    Records exists  
-                                </span>
-
-                            </span>
-                            <span class="col-md-3">
-                                <p class=" text-right">Grid Paging Number</p>
-                            </span>
-                            <span class="col-md-3">
-                                <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
-                                    <option class="text-info" value="25">25</option>
-                                    <option selected="selected" class="text-info" value="50">50</option>
-                                    <option class="text-info" value="100">100</option>
-                                    <option class="text-info" value="250">250</option>
-                                    <option class="text-info" value="500">500</option>
-                                    <option class="text-info" value="1000">1000</option>
-                                </select>
-                            </span>
                         </div>
 
 
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <span class="col-md-6">
+                                        <span class="label "><span class="badge text-danger text-large">@products.Count() </span>
+
+
+                                            Records exists  
+                                        </span>
+
+                                    </span>
+                                    <span class="col-md-3">
+                                        <p class=" text-right">Grid Paging Number</p>
+                                    </span>
+                                    <span class="col-md-3">
+                                        <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
+                                            <option class="text-info" value="25">25</option>
+                                            <option selected="selected" class="text-info" value="50">50</option>
+                                            <option class="text-info" value="100">100</option>
+                                            <option class="text-info" value="250">250</option>
+                                            <option class="text-info" value="500">500</option>
+                                            <option class="text-info" value="1000">1000</option>
+                                        </select>
+                                    </span>
+                                </div>
+
+
+                            </div>
+                            @Html.Grid(products).Named(gridName).Columns(columns =>
+                                {
+
+
+                                    columns.Add().Encoded(false).
+                                            Sanitized(false).
+                                            SetWidth(10).
+                                            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
+
+
+
+
+
+                                    columns.Add(o => o.Id, true);
+
+                                    columns.Add()
+                                           .Encoded(false)
+                                           .Sanitized(false)
+                                           .SetWidth(30)
+                                           .RenderValueAs(d =>
+                                                          @<b>
+                                                               @Html.ActionLink(" ", "SaveOrEdit", controllerName, new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                                                           </b>);
+
+                                    columns.Add()
+                                           .Encoded(false)
+                                           .Sanitized(false)
+                                           .SetWidth(30)
+                                           .RenderValueAs(d =>
+                                                          @<b>
+                                                               @Html.ActionLink(" ", "Details", controllerName, new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
+                                                           </b>);
+
+
+                                    if (!isRegularUser)
+                                    {
+
+                                        columns.Add()
+                                               .Encoded(false)
+                                               .Sanitized(false)
+                                               .SetWidth(30)
+                                               .RenderValueAs(d =>
+                                                              @<b>
+                                                                   @Html.ActionLink(" ", "Delete", controllerName, new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
+                                                               </b>);
+
+                                    }
+
+
+
+
+
+                                    columns.Add(c => c.Name)
+                                           .Titled("Title")
+                                           .Css("gridTitleClass")
+                                           .Filterable(true)
+                                           .Sanitized(false)
+                                           .Encoded(false)
+                                           .RenderValueAs(o =>
+                                                          @<b>
+                                                               @Html.ActionLink(o.Name, "StoreDetails", controllerName, new { id = o.Id }, new { target = "_blank" })
+                                                           </b>
+                                        );
+
+
+
+                                    columns.Add(o => o.Ordering).Encoded(false).
+                                            Sanitized(false).
+                                            SetWidth(10).
+                                            RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'   class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
+
+                                    columns.Add(o => o.State)
+                                           .Titled("State")
+                                           .Sortable(true)
+                                           .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                            Sanitized(false)
+                                           .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
+                                                                             o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
+
+                                    columns.Add(o => o.ImageState)
+                                           .Titled("ImageState")
+                                           .Sortable(true)
+                                           .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                            Sanitized(false)
+                                           .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  {1}  name='spanImageState'></span>",
+                                                                             o.Id, (o.ImageState ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.ImageState));
+
+
+
+                                    columns.Add(o => o.MainPage)
+                                           .Titled("MainPage")
+                                           .Sortable(true)
+                                           .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                            Sanitized(false)
+                                           .RenderValueAs(o => String.Format("<span  gridkey-id='{0}'  grid-data-value='{2}' {1} name='spanMainPage' ></span>",
+                                                                             o.Id, (o.MainPage ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.MainPage));
+
+
+
+                                    columns.Add(o => o.CreatedDate)
+                                           .Titled("Date")
+                                           .Sortable(true)
+                                           .Css("gridDateClass")
+                                           .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
+                                           .SortInitialDirection(GridSortDirection.Descending);
+
+
+
+                                    columns.Add()
+                                           .Titled("Images")
+                                           .Encoded(false)
+                                           .Sanitized(false)
+
+                                           .SetWidth(30)
+                                           .RenderValueAs(d =>
+                                                          @<b>
+
+                                                               <a class="btn btn-info btn-sm glyphicon  glyphicon-camera"   data-file-id="@d.Id"></a>
+                                                           </b>);
+                                }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
+
+
+                        </div>
+
+
+
+
                     </div>
-                    @Html.Grid(products).Named(gridName).Columns(columns =>
-                        {
-
-
-                            columns.Add().Encoded(false).
-                                    Sanitized(false).
-                                    SetWidth(10).
-                                    RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
-
-
-
-
-
-                            columns.Add(o => o.Id, true);
-
-                            columns.Add()
-                                   .Encoded(false)
-                                   .Sanitized(false)
-                                   .SetWidth(30)
-                                   .RenderValueAs(d =>
-                                                  @<b>
-                                                      @Html.ActionLink(" ", "SaveOrEdit", controllerName, new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
-                                                  </b>);
-
-                            columns.Add()
-                                   .Encoded(false)
-                                   .Sanitized(false)
-                                   .SetWidth(30)
-                                   .RenderValueAs(d =>
-                                                  @<b>
-                                                      @Html.ActionLink(" ", "Details", controllerName, new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
-                                                  </b>);
-                        
-                        
-                            if (!isRegularUser)
-                            {
-                            
-                                  columns.Add()
-                                   .Encoded(false)
-                                   .Sanitized(false)
-                                   .SetWidth(30)
-                                   .RenderValueAs(d =>
-                                                  @<b>
-                                                      @Html.ActionLink(" ", "Delete", controllerName, new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
-                                                  </b>);
-                            
-                            }
-
-
-
-
-
-                            columns.Add(c => c.Name)
-                                   .Titled("Title")
-                                   .Css("gridTitleClass")
-                                   .Filterable(true)
-                                   .Sanitized(false)
-                                   .Encoded(false)
-                                   .RenderValueAs(o =>
-                                            @<b>
-                                                @Html.ActionLink(o.Name, "StoreDetails", controllerName, new { id = o.Id }, new { target = "_blank" })
-                                            </b>
-                                       );
-
-
-
-                            columns.Add(o => o.Ordering).Encoded(false).
-                                    Sanitized(false).
-                                    SetWidth(10).
-                                    RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'   class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
-
-                            columns.Add(o => o.State)
-                                   .Titled("State")
-                                   .Sortable(true)
-                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                    Sanitized(false)
-                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
-                                                                     o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
-
-                            columns.Add(o => o.ImageState)
-                                   .Titled("ImageState")
-                                   .Sortable(true)
-                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                    Sanitized(false)
-                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  {1}  name='spanImageState'></span>",
-                                                                     o.Id, (o.ImageState ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.ImageState));
-
-
-
-                            columns.Add(o => o.MainPage)
-                                   .Titled("MainPage")
-                                   .Sortable(true)
-                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                    Sanitized(false)
-                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}'  grid-data-value='{2}' {1} name='spanMainPage' ></span>",
-                                                                     o.Id, (o.MainPage ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.MainPage));
-
-
-
-                            columns.Add(o => o.CreatedDate)
-                                   .Titled("Date")
-                                   .Sortable(true)
-                                   .Css("gridDateClass")
-                                    .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
-                                   .SortInitialDirection(GridSortDirection.Descending);
-
-
-
-                            columns.Add()
-                                   .Titled("Images")
-                                   .Encoded(false)
-                                   .Sanitized(false)
-
-                                   .SetWidth(30)
-                                   .RenderValueAs(d =>
-                                                  @<b>
-
-                                                      <a class="btn btn-info btn-sm glyphicon  glyphicon-camera"   data-file-id="@d.Id"></a>
-                                                  </b>);
-                        }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
-
-
                 </div>
+
 
 
 
@@ -256,7 +268,6 @@
 </div>
 
 
-     @Html.Partial("pProductCategoryTree",categories, null)
 
 
 <div id="ImagesPanel">

@@ -45,11 +45,15 @@
             $('select#StoreDropDownId').chosen({});
 
             $("#StoreId").val($('select#StoreDropDownId').val());
+            $("#SelectedStoreText").text($("select#StoreDropDownId option:selected").text());
+            
             if ($("#fileStoreId").length > 0) {
                 $("#fileStoreId").val($("#StoreId").val());
             }
             $('select#StoreDropDownId').chosen({}).change(function (event) {
                 $("#StoreId").val($(this).val());
+				console.log($("select#StoreDropDownId option :selected").text());
+              $("#SelectedStoreText").text($("select#StoreDropDownId option:selected").text());
                 if ($("#fileStoreId").length > 0) {
                     $("#fileStoreId").val($("#StoreId").val());
                 }

@@ -37,5 +37,12 @@ namespace StoreManagement.Controllers
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult Refresh(String domain)
+        {
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
 	}
 }

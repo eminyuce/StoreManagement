@@ -13,7 +13,9 @@ namespace StoreManagement.Data.Entities
     {
 
         [Display(Name = "Category")]
+        [Required]
         public int ProductCategoryId { get; set; }
+        [Required]
         public string Name { get; set; }
 
         [AllowHtml]

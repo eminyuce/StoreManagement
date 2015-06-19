@@ -14,7 +14,7 @@
     string storeId = @Request.QueryString["storeId"].ToStr();
 }
 
-<div id="tree">
+<div  class="treeview" id="tree">
     <ul id="treeview">
         @CategoryTree(Model, 0, action, controller, storeId, search)
     </ul>

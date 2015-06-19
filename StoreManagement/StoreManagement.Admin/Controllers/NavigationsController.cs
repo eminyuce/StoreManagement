@@ -66,7 +66,7 @@ namespace StoreManagement.Admin.Controllers
                 item.UpdatedDate = DateTime.Now;
             }
 
-            ViewBag.Moduls = GetModuls();
+
             return View(item);
         }
 
@@ -92,8 +92,7 @@ namespace StoreManagement.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.Moduls = GetModuls();
-            return View(navigation);
+
         }
 
 
@@ -120,46 +119,6 @@ namespace StoreManagement.Admin.Controllers
         }
 
 
-        private SelectList GetModuls()
-        {
-            var moduls = new List<SelectListItem>();
-            var m = new SelectListItem();
-            m.Value = "Home";
-            m.Text = "Home";
-            moduls.Add(m);
-            m = new SelectListItem();
-            m.Value = "News";
-            m.Text = "News";
-            moduls.Add(m);
-            m = new SelectListItem();
-            m.Value = "Products";
-            m.Text = "Products";
-            moduls.Add(m);
-            m = new SelectListItem();
-            m.Value = "Pages";
-            m.Text = "Pages";
-            moduls.Add(m);
-            m = new SelectListItem();
-            m.Value = "Blogs";
-            m.Text = "Blogs";
-            moduls.Add(m);
-            m = new SelectListItem();
-            m.Value = "Events";
-            m.Text = "Events";
-            moduls.Add(m);
-            m = new SelectListItem();
-            m.Value = "Contact";
-            m.Text = "Contact";
-            moduls.Add(m);
-            m = new SelectListItem();
-            m.Value = "Photos";
-            m.Text = "Photo Gallery";
-            moduls.Add(m);
-            var sList = new SelectList(moduls, "Value", "Text");
-
-
-            return sList;
-
-        }
+    
     }
 }

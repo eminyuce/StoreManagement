@@ -317,9 +317,74 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(html, JsonRequestBehavior.AllowGet);
         }
-    
 
 
+        private SelectList GetModuls(int storeId = 0)
+        {
+            var moduls = GetDefaultModuls();
+            storeId = GetStoreId(storeId);
+            var navigations = NavigationRepository.GetStoreNavigations(storeId);
+
+
+            foreach (var navigation in navigations)
+            {
+                if (moduls.Any(r => r.Value.Equals(navigation.Modul, StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    moduls.Remove(
+                        moduls.FirstOrDefault(
+                            r => r.Value.Equals(navigation.Modul, StringComparison.InvariantCultureIgnoreCase)));
+                }
+            }
+
+            var m = new SelectListItem();
+            m.Value = "Pages";
+            m.Text = "Pages";
+            moduls.Add(m);
+
+            var sList = new SelectList(moduls, "Value", "Text");
+            return sList;
+        }
+
+        private static List<SelectListItem> GetDefaultModuls()
+        {
+            var moduls = new List<SelectListItem>();
+            var m = new SelectListItem();
+            m.Value = "Home";
+            m.Text = "Home";
+            moduls.Add(m);
+            m = new SelectListItem();
+            m.Value = "News";
+            m.Text = "News";
+            moduls.Add(m);
+            m = new SelectListItem();
+            m.Value = "Products";
+            m.Text = "Products";
+            moduls.Add(m);
+
+            m = new SelectListItem();
+            m.Value = "Blogs";
+            m.Text = "Blogs";
+            moduls.Add(m);
+            m = new SelectListItem();
+            m.Value = "Events";
+            m.Text = "Events";
+            moduls.Add(m);
+            m = new SelectListItem();
+            m.Value = "Contact";
+            m.Text = "Contact";
+            moduls.Add(m);
+            m = new SelectListItem();
+            m.Value = "Photos";
+            m.Text = "Photo Gallery";
+            moduls.Add(m);
+            return moduls;
+        }
+        public ActionResult GetStoreModuls(int id)
+        {
+            int storeId = id;
+            var moduls = GetModuls(storeId);
+            return Json(moduls, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }

@@ -3,9 +3,16 @@
 @{
     ViewBag.Title = "Create";
     Layout = "../Shared/_Layout.cshtml";
+    var contentSaveOrEditPageTitle = "Blogs";
+    var contentSaveOrEditPanelTitle = "Blogs";
 }
 
-@Html.Partial("Content/pContentSaveOrEdit")
+
+@Html.Partial("Content/pContentSaveOrEdit",
+Model, 
+new ViewDataDictionary(ViewData)
+{{"ContentSaveOrEditPageTitle",contentSaveOrEditPageTitle}
+  ,{"ContentSaveOrEditPanelTitle",contentSaveOrEditPanelTitle}})
  
 
 

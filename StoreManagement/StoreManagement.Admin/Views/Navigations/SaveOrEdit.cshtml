@@ -5,8 +5,6 @@
     ViewBag.Title = "Create";
     Layout = "../Shared/_Layout.cshtml";
     int storeId = Model != null ? Model.StoreId : 0;
-    SelectList moduls= (SelectList)ViewBag.Moduls;
-    
     
 }
 
@@ -34,8 +32,8 @@
                         @Html.HiddenFor(model => model.ParentId)
                         @Html.HiddenFor(model => model.CreatedDate)
                         @Html.HiddenFor(model => model.ControllerName)
-                                      @Html.HiddenFor(model => model.CreatedDate)
-                    @Html.HiddenFor(model => model.UpdatedDate)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.UpdatedDate)
                         <div class="editor-label control-group">
                             @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
                         </div>
@@ -56,10 +54,11 @@
                             @Html.LabelFor(model => model.Modul, new { @class = "control-label" })
                         </div>
                         <div class="editor-field controls">
-                            @Html.DropDownListFor(model => model.Modul, moduls, new { @class = "input-xlarge" })
+                            <select class="input-xlarge valid" id="Modul" name="Modul">
+                            </select>
                             @Html.ValidationMessageFor(model => model.Modul)
                         </div>
- 
+
 
                         <div class="editor-label control-group">
                             @Html.LabelFor(model => model.Static, new { @class = "control-label" })
@@ -111,7 +110,7 @@
                 }
 
                 <div>
-                                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
                 </div>
 
 
@@ -126,7 +125,59 @@
 
 </div>
 
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            console.log("jquery is workingg");
 
+            if ($('select#StoreDropDownId').length > 0) {
+                GetStoreModuls($('select#StoreDropDownId').val());
+                $('select#StoreDropDownId').chosen({}).change(function(event) {
+                    GetStoreModuls($(this).val());
+                });
+            } else {
+                GetStoreModuls($("#StoreId").val());
+            }
+
+        });
+
+        function GetStoreModuls(id) {
+
+            var jsonRequest = JSON.stringify({ "id": id });
+            console.log(jsonRequest);
+
+            jQuery.ajax({
+                url: "/Ajax/GetStoreModuls",
+                type: 'POST',
+                data: jsonRequest,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $('select#Modul').empty();
+                    $.each(data, function (value, i) {
+
+                        $('select#Modul').append(
+                                $('<option/>', {
+                                    value: i.Value,
+                                    html: i.Text
+                                }));
+
+                    });
+                },
+                error: function (request, status, error) {
+                    console.error('Error ' + status + ' ' + request.responseText);
+                },
+                beforeSend: function () {
+
+                }
+            });
+
+        }
+    </script>
+
+}
 
 
 

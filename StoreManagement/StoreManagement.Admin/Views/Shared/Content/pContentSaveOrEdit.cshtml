@@ -9,6 +9,8 @@
     var title = ViewData["ContentSaveOrEditPageTitle"].ToStr();
     var panelTitle = ViewData["ContentSaveOrEditPanelTitle"].ToStr();
     int[] selectedLabelId = ViewBag.SelectedLabels;
+
+    ViewBag.Title = title;
 }
 
 
@@ -17,7 +19,7 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="text-muted bootstrap-admin-box-title">@String.IsNullOrEmpty(panelTitle) ? @title : @panelTitle </div>
+                <div class="text-muted bootstrap-admin-box-title">  @panelTitle </div>
             </div>
             <div class="bootstrap-admin-panel-content">
                 @if (!String.IsNullOrEmpty(title))
@@ -58,14 +60,22 @@
                             @Html.HiddenFor(model => model.Type)
 
 
-                            <div class="editor-label">
-                                <b>Selected Category
-                                </b>
-                            </div>
-                            <div class="editor-field">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <b>Selected Category  :            
+                                        </b>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3><span class="text-left text-danger" id="SelectedCategory"></span></h3>
+                                    </div>
+                                </div>
+
+
                                 @Html.HiddenFor(model => model.CategoryId)
-                                <span class="label label-success" id="SelectedCategory"></span>
+
                             </div>
+
 
 
                             <div class="form-group">

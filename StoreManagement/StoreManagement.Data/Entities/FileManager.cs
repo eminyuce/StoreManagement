@@ -15,22 +15,30 @@ namespace StoreManagement.Data.Entities
         public string Title { get; set; }
         public string WebContentLink { get; set; }
 
-
-
-
         [IgnoreDataMember]
         public string ThumbnailLink { get; set; }
+        
         [IgnoreDataMember]
         public string OriginalFilename { get; set; }
+        
         [IgnoreDataMember]
         public DateTime? ModifiedDate { get; set; }
+        
         [IgnoreDataMember]
         public string IconLink { get; set; }
+        
         [IgnoreDataMember]
         public int ContentLength { get; set; }
+        
         [IgnoreDataMember]
         public bool IsCarousel { get; set; }
-      
+
+        [IgnoreDataMember]
+        public int ? Width { get; set; }
+        
+        [IgnoreDataMember]
+        public int ?  Height { get; set; }
+
 
     }
 }

@@ -2,7 +2,8 @@
 @using GridMvc.Sorting
 @using StoreManagement.Data
 @using StoreManagement.Data.GeneralHelper;
-@using StoreManagement.Data.Constants;;
+@using StoreManagement.Data.Constants;
+@using StoreManagement.Data.Entities;
 @model StoreManagement.Data.RequestModel.ProductsAdminViewModel
 
 @{
@@ -11,7 +12,7 @@
     var title = "Products Management";
     var gridName = "ProductGrid";
     var products = Model.Products;
-    var categories = Model.Categories;
+    var categories = new List<BaseCategory>(Model.Categories);
 
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
@@ -36,7 +37,7 @@
                 <div class="row">
                     
                     <div class="col-md-2">
-                        @Html.Partial("pProductCategoryTree", categories, null)
+                        @Html.Partial("pCategoryTree", categories, null)
                     </div>
 
                     <div class="col-md-10">

@@ -10,7 +10,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Admin.Controllers
 {
-    [Authorize(Roles = "StoreAdmin,SuperAdmin")]
+    [Authorize]
     public class SettingsController : BaseController
     {
         private const String TYPE = "StoreSettings";

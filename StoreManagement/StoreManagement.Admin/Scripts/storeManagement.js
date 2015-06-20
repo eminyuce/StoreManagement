@@ -158,9 +158,44 @@ $(document).ready(function () {
         }
     }
 
-    function updateUrlParameter(originalURL, param, value) {
-        console.log(value);
-        var windowUrl = originalURL.split('?')[0];
+});
+
+
+function updateUrlParameter(originalURL, param, value) {
+    console.log(value);
+    var windowUrl = originalURL.split('?')[0];
+    var qs = originalURL.split('?')[1];
+    //3- get list of query strings
+    var qsArray = qs.split('&');
+    var flag = false;
+    //4- try to find query string key
+    for (var i = 0; i < qsArray.length; i++) {
+        if (qsArray[i].split('=').length > 0) {
+            if (param == qsArray[i].split('=')[0]) {
+                //exists key
+                qsArray[i] = param + '=' + value;
+            }
+        }
+    }
+
+    var finalQs = qsArray.join('&');
+    return windowUrl + '?' + finalQs;
+    //6- prepare final url
+    // window.location = windowUrl + '?' + finalQs;
+}
+function hasQueryStringParameter(originalURL) {
+
+    if (originalURL.split('?').length > 1) {
+        var qs = originalURL.split('?')[1];
+        var qsArray = qs.split('&');
+        return qsArray.length > 0;
+    } else {
+        return false;
+    }
+}
+function getQueryStringParameter(originalURL, param) {
+
+    if (originalURL.split('?').length > 1) {
         var qs = originalURL.split('?')[1];
         //3- get list of query strings
         var qsArray = qs.split('&');
@@ -170,47 +205,14 @@ $(document).ready(function () {
             if (qsArray[i].split('=').length > 0) {
                 if (param == qsArray[i].split('=')[0]) {
                     //exists key
-                    qsArray[i] = param + '=' + value;
+                    return qsArray[i].split('=')[1];
                 }
             }
         }
 
-        var finalQs = qsArray.join('&');
-        return windowUrl + '?' + finalQs;
-        //6- prepare final url
-        // window.location = windowUrl + '?' + finalQs;
     }
-    function hasQueryStringParameter(originalURL) {
-
-        if (originalURL.split('?').length > 1) {
-            var qs = originalURL.split('?')[1];
-            var qsArray = qs.split('&');
-            return qsArray.length > 0;
-        } else {
-            return false;
-        }
-    }
-    function getQueryStringParameter(originalURL, param) {
-
-        if (originalURL.split('?').length > 1) {
-            var qs = originalURL.split('?')[1];
-            //3- get list of query strings
-            var qsArray = qs.split('&');
-            var flag = false;
-            //4- try to find query string key
-            for (var i = 0; i < qsArray.length; i++) {
-                if (qsArray[i].split('=').length > 0) {
-                    if (param == qsArray[i].split('=')[0]) {
-                        //exists key
-                        return qsArray[i].split('=')[1];
-                    }
-                }
-            }
-
-        }
-        return "";
-    }
-});
+    return "";
+}
 
 function ajaxMethodCall(postData, ajaxUrl, successFunction) {
 

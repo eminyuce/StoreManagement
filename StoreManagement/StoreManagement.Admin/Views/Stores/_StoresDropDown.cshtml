@@ -10,7 +10,7 @@
     {
         storesListItems = Model.ToList().Select(c => new SelectListItem
             {
-                Text = c.Name,
+                Text = c.Name.Equals(c.Domain,StringComparison.InvariantCultureIgnoreCase) ? c.Name : c.Name +"  "+c.Domain,
                 Value = c.Id.ToString(),
                 Selected = c.Id == storeId ? true : false
             }).ToList();

@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Data.Entities
 {
-    public class ProductCategory : BaseCategory
+    public class BaseCategory : BaseEntity
     {
-        public virtual ICollection<Product> Products { get; set; }
+        public int ParentId { get; set; }
+        public string Name { get; set; }
+        [IgnoreDataMember]
+        public string CategoryType { get; set; }
+       
     }
 }

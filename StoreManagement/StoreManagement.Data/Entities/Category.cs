@@ -8,19 +8,8 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Category : BaseEntity
+    public class Category : BaseCategory
     {
-        public int ParentId { get; set; }
-        public string Name { get; set; }
-       
-        [IgnoreDataMember]
-        public string CategoryType { get; set; }
-
         public virtual ICollection<Content> Contents { get; set; }
-
-
-      
-
-         
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using Ninject;
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -257,13 +258,13 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult GetRootCategories(int storeId = 0)
         {
-            var cat = CategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList();
+             var cat = CategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList() ;
             var returnJson = from c in cat select new { Text = c.Name, Value = c.Id };
             return Json(returnJson, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetRootProductCategories(int storeId = 0)
         {
-            var cat = ProductCategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList();
+            var cat =  ProductCategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList() ;
             var returnJson = from c in cat select new { Text = c.Name, Value = c.Id };
             return Json(returnJson, JsonRequestBehavior.AllowGet);
         }
@@ -299,7 +300,7 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult GetCategoriesTree(int storeId = 0, String categoryType = "")
         {
-            var tree = this.CategoryRepository.GetCategoriesByStoreId(storeId, categoryType);
+            var tree = new List<BaseCategory>(this.CategoryRepository.GetCategoriesByStoreId(storeId, categoryType));
 
             var html = this.RenderPartialToString(
                         "pCreateCategoryTree",
@@ -309,10 +310,10 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult GetProductCategoriesTree(int storeId = 0, String categoryType = "")
         {
-            var tree = this.ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, categoryType);
+            var tree =  new List<BaseCategory>(this.ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, categoryType));
 
             var html = this.RenderPartialToString(
-                        "pCreateProductCategoryTree",
+                        "pCreateCategoryTree",
                         new ViewDataDictionary(tree), null);
 
             return Json(html, JsonRequestBehavior.AllowGet);

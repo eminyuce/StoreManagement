@@ -3,16 +3,16 @@
 @{
     var isDevelopmentStatus = ProjectAppSettings.GetWebConfigBool("IsDevelopmentStatus", true);
     bool isSuperAdmin = false;
-    
+
     try
     {
-        isSuperAdmin =  User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+        isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
     }
     catch (Exception ex)
     {
- 
+
     }
-   
+
     var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
 }
 
@@ -62,13 +62,9 @@
                     </ul>
                 </li>
                 @Html.MenuItem("Blogs", "Index", "Blogs")
-
                 <li role="separator" class="divider-vertical"></li>
-                @if (!isRegularUser)
-                {
-                      @Html.MenuItem("Settings", "Index", "Settings")
-                    <li role="separator" class="divider-vertical"></li>
-                }
+                @Html.MenuItem("Settings", "Index", "Settings")
+                <li role="separator" class="divider-vertical"></li>
             </ul>
 
 

@@ -1,55 +1,49 @@
 ﻿
 
 
-    $(document).ready(function() {
-        console.log("jquery is workingg");
-        
+$(document).ready(function () {
+    console.log("jquery is workingg");
 
 
- 
-        $("#contentTreeview").bind("select_node.jstree", function(event, data) {
-            var m = $("#" + data.selected[0]).find("[data-category]");
-            var selectedCategoryId = m.first().attr("data-category");
-            console.log(selectedCategoryId);
-            $("#CategoryId").val(selectedCategoryId);
-
-        });
-        $("#productTreeview").jstree();
-        $("#productTreeview").bind("select_node.jstree", function (event, data) {
-            console.log("test 123");
-            var m = $("#" + data.selected[0]).find("[data-product-category]");
-            var selectedCategoryId = m.first().attr("data-product-category");
-            console.log(selectedCategoryId);
-            $("#ProductCategoryId").val(selectedCategoryId);
-
-        });
-
-        GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
-        GetProductCategoryTree($("#StoreId").val(), $("#categoryType").val());
-        
 
 
-        $('select#StoreDropDownId').chosen({}).change(function(event) {
-            GetCategoryTree($(this).val(), $("#categoryType").val());
-            GetProductCategoryTree($(this).val(), $("#categoryType").val());
-        });
+    $("#contentTreeview").bind("select_node.jstree", function (event, data) {
+        var m = $("#" + data.selected[0]).find("[data-category]");
+        var selectedCategoryId = m.first().attr("data-category");
+        console.log(selectedCategoryId);
+        $("#CategoryId").val(selectedCategoryId);
 
-        console.log("jquery is working");
-
-        GetFiles($("#Id").val());
-        
-
-        $('textarea#Description').ckeditor({
-            height: '150px',
-            toolbar: [
-                { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-                ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
-                { name: 'basicstyles', items: ['Bold', 'Italic'] }
-            ]
-        });
-
+        $("#ProductCategoryId").val(selectedCategoryId);
 
     });
+
+
+    GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
+    GetProductCategoryTree($("#StoreId").val(), $("#categoryType").val());
+
+
+
+    $('select#StoreDropDownId').chosen({}).change(function (event) {
+        GetCategoryTree($(this).val(), $("#categoryType").val());
+        GetProductCategoryTree($(this).val(), $("#categoryType").val());
+    });
+
+    console.log("jquery is working");
+
+    GetFiles($("#Id").val());
+
+
+    $('textarea#Description').ckeditor({
+        height: '150px',
+        toolbar: [
+            { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
+            { name: 'basicstyles', items: ['Bold', 'Italic'] }
+        ]
+    });
+
+
+});
 
 function GetCategoryTree(id, categoryType) {
 
@@ -62,18 +56,18 @@ function GetCategoryTree(id, categoryType) {
         data: jsonRequest,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
-        success: function(data) {
+        success: function (data) {
             $("#categoryTree").html(data);
             bindcategoryTree();
             var categoryId = $("#CategoryId").val();
-            var selectedCategory =  $('[data-category=' + categoryId + ']').text();
+            var selectedCategory = $('[data-category=' + categoryId + ']').text();
             console.log(selectedCategory);
             $("#SelectedCategory").text(selectedCategory);
         },
-        error: function(request, status, error) {
+        error: function (request, status, error) {
             console.error('Error ' + status + ' ' + request.responseText);
         },
-        beforeSend: function() {
+        beforeSend: function () {
 
         }
     });
@@ -91,8 +85,33 @@ function handleCategoryTree(e) {
     var caller = e.target;
     var categoryId = $(caller).attr('data-category');
     var category = $(caller).text();
-    $("#SelectedCategory").text(category);
-    $("#CategoryId").val(categoryId);
+    
+    
+    $('[data-category]').each(function () {
+        $(this).attr("class", "btn btn-link");
+    });
+
+    $(caller).attr("class", "btn btn-danger");
+
+    
+
+    if ($("#SelectedCategory").length) {
+        $("#SelectedCategory").text(category);
+    }
+    
+    if ($("#CategoryId").length) {
+        $("#CategoryId").val(categoryId);
+    }
+
+    if ($("#ProductSelectedCategory").length) {
+        $("#ProductSelectedCategory").text(category);
+    }
+    
+    if ($("#ProductCategoryId").length) {
+        $("#ProductCategoryId").val(categoryId);
+    }
+
+
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -109,9 +128,9 @@ function GetProductCategoryTree(id, categoryType) {
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
             $("#productCategoryTree").html(data);
-            bindProductCategoryTree();
+            bindcategoryTree();
             var categoryId = $("#ProductCategoryId").val();
-            var selectedCategory = $('[data-product-category=' + categoryId + ']').text();
+            var selectedCategory = $('[data-category=' + categoryId + ']').text();
             console.log(selectedCategory);
             $("#ProductSelectedCategory").text(selectedCategory);
         },
@@ -125,22 +144,6 @@ function GetProductCategoryTree(id, categoryType) {
 
 }
 
-function bindProductCategoryTree() {
-    console.log("bindProductCategoryTree");
-    $('[data-product-category]').each(function () {
-        $(this).off("click");
-        $(this).on("click", handleProductCategoryTree);
-    });
-}
-
-function handleProductCategoryTree(e) {
-    console.log("handleProductCategoryTree");
-    var caller = e.target;
-    var categoryId = $(caller).attr('data-product-category');
-    var category = $(caller).text();
-    $("#ProductSelectedCategory").text(category);
-    $("#ProductCategoryId").val(categoryId);
-}
 
 
 function GetFiles(id) {
@@ -154,9 +157,9 @@ function GetFiles(id) {
         data: jsonRequest,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
-        success: function(data) {
+        success: function (data) {
             var files = data;
-            $.each(files, function(i, file) {
+            $.each(files, function (i, file) {
                 var imageId = file.FileManagerId;
                 var fileName = file.FileManager.FileName;
                 var thumbnailLink = file.FileManager.ThumbnailLink;
@@ -181,10 +184,10 @@ function GetFiles(id) {
                 bindRemoveImage();
             });
         },
-        error: function(request, status, error) {
+        error: function (request, status, error) {
             console.error('Error ' + status + ' ' + request.responseText);
         },
-        beforeSend: function() {
+        beforeSend: function () {
 
         }
     });

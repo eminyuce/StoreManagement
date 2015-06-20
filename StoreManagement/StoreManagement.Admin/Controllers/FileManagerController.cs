@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.Enums;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data.GeneralHelper;
@@ -19,17 +20,17 @@ namespace StoreManagement.Admin.Controllers
     public class FileManagerController : BaseController
     {
         private const String ControllerName = "FileManager";
-      
+
 
         [Inject]
         public IUploadHelper UploadHelper { set; get; }
-      
+
 
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult DisplayImages(int storeId = 1, String search="")
+        public ActionResult DisplayImages(int storeId = 1, String search = "")
         {
             storeId = GetStoreId(storeId);
             ViewBag.StoreId = storeId;
@@ -44,7 +45,7 @@ namespace StoreManagement.Admin.Controllers
 
             return View(images);
         }
-        public ActionResult UploadImages(int storeId=1)
+        public ActionResult UploadImages(int storeId = 1)
         {
             storeId = GetStoreId(storeId);
             Session["storeId"] = storeId;
@@ -76,7 +77,7 @@ namespace StoreManagement.Admin.Controllers
 
         private void DeleteFile(string id)
         {
-            var f =new FileManager();
+            var f = new FileManager();
             if (id.ToInt() > 0)
             {
                 f = FileManagerRepository.GetSingle(id.ToInt());
@@ -88,10 +89,10 @@ namespace StoreManagement.Admin.Controllers
 
 
             var filename = f.Title;
-           
+
             try
             {
-               this.UploadHelper.deleteFile(f.GoogleImageId);
+                this.UploadHelper.deleteFile(f.GoogleImageId);
             }
             catch (Exception ewx)
             {
@@ -118,7 +119,7 @@ namespace StoreManagement.Admin.Controllers
             //    context.Response.ContentType = "application/octet-stream";
             //    context.Response.ClearContent();
             //    context.Response.WriteFile(filePath);
-                
+
             //}
             //else
             //{
@@ -131,7 +132,7 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult UploadFiles()
         {
-        
+
             var r = new List<ViewDataUploadFilesResult>();
 
             foreach (string file in Request.Files)
@@ -149,7 +150,7 @@ namespace StoreManagement.Admin.Controllers
                 {
                     UploadPartialFile(headers["X-File-Name"], Request, statuses);
                 }
-                 
+
 
                 JsonResult result = Json(statuses);
                 result.ContentType = "text/plain";
@@ -160,11 +161,10 @@ namespace StoreManagement.Admin.Controllers
             return Json(r);
         }
 
-        private   FileManager  SaveFiles(HttpPostedFileBase file, int storeId = 1)
+        private FileManager SaveFiles(HttpPostedFileBase file, int storeId = 1)
         {
 
-            var t =  Task.Factory.StartNew(() =>
-                {
+           
                     var fileManager = ConvertToFileManager(file, storeId);
                     try
                     {
@@ -182,9 +182,7 @@ namespace StoreManagement.Admin.Controllers
 
                     return fileManager;
 
-                });
-            t.Wait(); 
-            return   t.Result;
+               
         }
 
         private static void ConvertToFileManager(FileManager fileManager, GoogleDriveFile googleFile)
@@ -197,8 +195,10 @@ namespace StoreManagement.Admin.Controllers
             fileManager.IconLink = googleFile.IconLink;
             fileManager.CreatedDate = googleFile.CreatedDate;
             fileManager.WebContentLink = googleFile.WebContentLink;
+            fileManager.Width = googleFile.Width.HasValue ? googleFile.Width.Value : 0;
+            fileManager.Height = googleFile.Height.HasValue ? googleFile.Height.Value : 0;
         }
-
+       
         private string EncodeFile(string fileName)
         {
             return Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName));
@@ -211,15 +211,15 @@ namespace StoreManagement.Admin.Controllers
             if (request.Files.Count != 1) throw new HttpRequestValidationException("Attempt to upload chunked file containing more than one fragment per request");
             var file = request.Files[0];
             int storeId = Session["storeId"].ToString().ToInt();
-            var fileManager = SaveFiles(file, storeId); 
+            var fileManager = SaveFiles(file, storeId);
 
-  
+
             statuses.Add(new ViewDataUploadFilesResult()
             {
                 name = fileName,
                 size = file.ContentLength,
                 type = file.ContentType,
-                url = String.Format("/{0}/Download/",ControllerName) + fileManager.GoogleImageId,
+                url = String.Format("/{0}/Download/", ControllerName) + fileManager.GoogleImageId,
                 delete_url = String.Format("/{0}/Delete/", ControllerName) + fileManager.GoogleImageId,
                 //thumbnail_url = @"data:image/png;base64," + EncodeFile(fullName),
                 thumbnail_url = String.Format("https://docs.google.com/uc?id={0}", fileManager.GoogleImageId),
@@ -231,7 +231,7 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
-        private static FileManager ConvertToFileManager(HttpPostedFileBase file, int storeId=1)
+        private static FileManager ConvertToFileManager(HttpPostedFileBase file, int storeId = 1)
         {
             var fileManager = new FileManager();
             fileManager.ContentType = file.ContentType;
@@ -252,14 +252,14 @@ namespace StoreManagement.Admin.Controllers
             {
                 var file = request.Files[i];
 
-               // var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
+                // var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
 
-               // file.SaveAs(fullPath);
+                // file.SaveAs(fullPath);
                 int storeId = Session["storeId"].ToString().ToInt();
                 var fileManager = SaveFiles(file, storeId);
-                
 
-       
+
+
 
                 statuses.Add(new ViewDataUploadFilesResult()
                 {
@@ -268,7 +268,7 @@ namespace StoreManagement.Admin.Controllers
                     type = file.ContentType,
                     url = String.Format("/{0}/Download/", ControllerName) + fileManager.GoogleImageId,
                     delete_url = String.Format("/{0}/Delete/", ControllerName) + fileManager.GoogleImageId,
-                   // thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath),
+                    // thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath),
                     thumbnail_url = String.Format("https://docs.google.com/uc?id={0}", fileManager.GoogleImageId),
                     delete_type = "GET",
                 });

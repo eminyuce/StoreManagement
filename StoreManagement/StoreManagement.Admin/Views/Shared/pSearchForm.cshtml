@@ -6,11 +6,13 @@
     string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
     string search = @Request.QueryString["search"].ToStr();
     string storeId = @Request.QueryString["storeId"].ToStr();
+    int selectedCategoryId = @Request.QueryString["categoryId"].ToInt();
 }
 
 @using (Html.BeginForm(action, controller, FormMethod.Get))
 {
     <input type="hidden" name="storeId"  value="@storeId" />
+      <input type="hidden" name="categoryId"  value="@selectedCategoryId" />
     <div class="row">
         <div class="col-md-7 col-xs-6">
             <div class="form-group">

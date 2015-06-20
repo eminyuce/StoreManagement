@@ -1,5 +1,5 @@
 ﻿@using StoreManagement.Data.Entities
-@model List<StoreManagement.Data.Entities.Category>
+@model List<StoreManagement.Data.Entities.BaseCategory>
 @{
     Layout = null;
 }
@@ -10,7 +10,7 @@
 </div>
  
 
-@helper CategoryTree(IEnumerable<Category> nodes, int? parentId)
+@helper CategoryTree(IEnumerable<BaseCategory> nodes, int? parentId)
 {
     
     if (nodes.Any(n => n.ParentId == parentId)) 

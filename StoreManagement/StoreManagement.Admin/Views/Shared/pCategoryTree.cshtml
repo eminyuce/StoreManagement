@@ -1,6 +1,6 @@
 ﻿@using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
-@model List<StoreManagement.Data.Entities.Category>
+@model List<StoreManagement.Data.Entities.BaseCategory>
 @{
     Layout = null;
 }
@@ -12,16 +12,17 @@
     string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
     string search = @Request.QueryString["search"].ToStr();
     string storeId = @Request.QueryString["storeId"].ToStr();
+    int selectedCategoryId = @Request.QueryString["categoryId"].ToInt();
 }
 
-<div  class="treeview" id="tree">
+<div class="treeview" id="tree">
     <ul id="treeview">
-        @CategoryTree(Model, 0, action, controller, storeId, search)
+        @CategoryTree(Model, 0, action, controller, storeId, search, selectedCategoryId)
     </ul>
 </div>
 
 
-@helper CategoryTree(IEnumerable<Category> nodes, int? parentId, String action, String controller, String storeId, String search)
+@helper CategoryTree(IEnumerable<BaseCategory> nodes, int? parentId, String action, String controller, String storeId, String search, int selectedCategoryId)
 {
     
     if (nodes.Any(n => n.ParentId == parentId))
@@ -37,10 +38,18 @@
                         <input type="hidden" name="storeId"  value="@storeId" />
                         <input type="hidden" name="search"  value="@search" />
                         <input type="hidden" name="categoryId"  value="@node.Id" />
-                        <button type="submit" class="btn btn-link">@node.Name</button>
+                        if (selectedCategoryId == node.Id)
+                        {
+                        <button type="submit" class="btn btn-danger">@node.Name</button>
+                        }
+                        else
+                        {
+                        <button type="submit" class="btn btn-link ">@node.Name</button>
+                        }
+
                     }
                 </span>
-                @CategoryTree(nodes, node.Id, action, controller, storeId, search)
+                @CategoryTree(nodes, node.Id, action, controller, storeId, search,selectedCategoryId)
             </li>
         }
     </ul>

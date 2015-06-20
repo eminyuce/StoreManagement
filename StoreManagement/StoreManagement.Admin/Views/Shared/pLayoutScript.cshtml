@@ -106,7 +106,26 @@
             $(this).colpickSetColor(this.value);
         });
 
+        if ($('select#StoreAdminDropDownId').length > 0) {
 
+            $('select#StoreAdminDropDownId').chosen({});
+
+
+            $("#AdminSelectedStoreText").text($("select#StoreAdminDropDownId option:selected").text());
+
+
+            $('select#StoreAdminDropDownId').chosen({}).change(function (event) {
+
+                $("#AdminSelectedStoreText").text($("select#StoreAdminDropDownId option:selected").text());
+                var originalURL = window.location.href;
+                if (originalURL.split('?').length > 1) {
+                    originalURL = originalURL.split('?')[0];
+                }
+                window.location.href = originalURL + "?storeId=" + $(this).val();
+            });
+
+
+        }
 
     });
 

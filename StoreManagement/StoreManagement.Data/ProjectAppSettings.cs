@@ -43,7 +43,7 @@ namespace StoreManagement.Data
             var appValue = WebConfigurationManager.AppSettings[configName];
             if (String.IsNullOrEmpty(appValue))
             {
-                Logger.Trace(String.Format("Config Name {0} is using default value {1}    <add key=\"{0}\" value=\"{1}\" />", configName, defaultValue));
+                Logger.Trace(String.Format("<add key=\"{0}\" value=\"{1}\" />", configName, defaultValue));
                 return defaultValue;
             }
             else
@@ -63,7 +63,7 @@ namespace StoreManagement.Data
             }
             else
             {
-                Logger.Trace(String.Format("Config Name {0} is using default value {1}   <add key=\"{0}\" value=\"{1}\" /> ", configName, defaultValue));
+                Logger.Trace(String.Format("<add key=\"{0}\" value=\"{1}\" /> ", configName, defaultValue));
             }
             return configValue;
 
@@ -78,7 +78,7 @@ namespace StoreManagement.Data
             }
             else
             {
-                Logger.Trace(String.Format("Config Name {0} is using default value {1}   <add key=\"{0}\" value=\"{1}\" /> ", configName, defaultValue));
+                Logger.Trace(String.Format("<add key=\"{0}\" value=\"{1}\" /> ", configName, defaultValue));
             }
             return configValue == -1 ? defaultValue : configValue;
         }

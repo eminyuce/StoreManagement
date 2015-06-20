@@ -53,7 +53,8 @@ namespace StoreManagement.Data.Entities
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
@@ -81,7 +82,8 @@ namespace StoreManagement.Data.Entities
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         [Required]
@@ -109,7 +111,8 @@ namespace StoreManagement.Data.Entities
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         [Required]

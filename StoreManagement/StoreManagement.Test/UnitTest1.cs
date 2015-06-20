@@ -42,7 +42,14 @@ namespace StoreManagement.Test
             Assert.IsNotNull(m);
 
         }
+        [TestMethod]
+        public void GetStoreUserRepository()
+        {
+            var s = new StoreUserRepository(dbContext);
+            var m = s.GetStoreUserByUserId(28);
+            Assert.IsNotNull(m);
 
+        }
 
         [TestMethod]
         public void TestApiCall2()

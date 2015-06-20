@@ -35,7 +35,21 @@ namespace StoreManagement.Admin.Controllers
             FileManagerRepository.Edit(s);
             FileManagerRepository.Save();
             return Json(new { fileId, isCarousel }, JsonRequestBehavior.AllowGet);
-        }
+        }  
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteSettingGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = SettingRepository.GetSingle(id);
+                SettingRepository.Delete(item);
+            }
+            SettingRepository.Save();
+
+            return Json(values, JsonRequestBehavior.AllowGet);
+        } 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteNavigationGridItem(List<String> values)

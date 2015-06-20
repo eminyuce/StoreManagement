@@ -1817,7 +1817,6 @@
     <Content Include="Views\Settings\Details.cshtml" />
     <Content Include="Views\Settings\SaveOrEdit.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
-    <Content Include="Views\Settings\StoreSettings.cshtml" />
     <Content Include="Views\Navigations\SaveOrEdit.cshtml" />
     <Content Include="Views\Navigations\Delete.cshtml" />
     <Content Include="Views\Navigations\Details.cshtml" />

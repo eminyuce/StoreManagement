@@ -152,7 +152,7 @@
            .SetWidth(30)
            .RenderValueAs(d =>
                @<b>
-                   @Html.ActionLink(" ", "SaveOrEdit", "Products", new { id = d.UserId }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                   @Html.ActionLink(" ", "SaveOrEditUser", "Settings", new { id = d.UserId }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                </b>);
 
 
@@ -162,7 +162,7 @@
 .SetWidth(30)
 .RenderValueAs(d =>
 @<b>
-    @Html.ActionLink(" ", "Delete", "Products", new { id = d.UserId }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
+    @Html.ActionLink(" ", "DeleteUser", "Settings", new { id = d.UserId }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
 </b>);
 
 

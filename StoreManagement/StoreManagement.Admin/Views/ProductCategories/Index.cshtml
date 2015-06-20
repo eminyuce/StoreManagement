@@ -10,6 +10,8 @@
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
     var controllerName = "ProductCategories";
 
+    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
+
 }
 
 
@@ -50,10 +52,18 @@
                                 <span class="btn btn-link btn-xs" id="DeselectAll">Deselect All
                                 </span>
                             </span>
-                            <span class="col-md-2">
-                                <span class="btn btn-link btn-xs" id="DeleteAll">Delete Selected 
-                                </span>
-                            </span>
+                          
+                            
+                              @if (!isRegularUser)
+                                    {
+                                        <span class="col-md-2">
+                                            <span class="btn btn-xs btn-default" id="DeleteAll">Delete Selected 
+                                            </span>
+                                        </span>
+                                        
+                                    }
+                                 
+
                             <span class="col-md-2">
                                 <select name="ItemStateSelection" id="ItemStateSelection">
                                     <option value="State">Durum</option>
@@ -143,16 +153,18 @@
                            @Html.ActionLink(" ", "Details",controllerName, new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
                        </b>);
 
-        columns.Add()
-.Encoded(false)
-.Sanitized(false)
-.SetWidth(30)
-.RenderValueAs(d =>
-@<b>
-    @Html.ActionLink(" ", "Delete", controllerName, new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
-</b>);
+        if (!isRegularUser)
+        {
 
-
+            columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(d =>
+                                  @<b>
+                                       @Html.ActionLink(" ", "Delete", controllerName, new {id = d.Id}, new {@class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white"})
+                                   </b>);
+        }
 
 
         columns.Add(c => c.Name)

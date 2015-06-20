@@ -23,6 +23,8 @@ namespace StoreManagement.Data.Entities
         public virtual ICollection<Setting> Settings { get; set; }
         public virtual ICollection<StoreUser> StoreUsers { get; set; }
 
+        public int CategoryId { get; set; }
+
 
         public override string ToString()
         {

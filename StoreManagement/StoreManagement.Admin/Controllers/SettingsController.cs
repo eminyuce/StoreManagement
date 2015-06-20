@@ -80,6 +80,11 @@ namespace StoreManagement.Admin.Controllers
             Setting setting = SettingRepository.GetSingle(id);
             return View(setting);
         }
+        public ActionResult DeleteUser(int id)
+        {
+            var user = StoreUserRepository.GetStoreUserByUserId(id);
+            return View(user);
+        }
 
         //
         // POST: /Settings/Delete/5
@@ -92,16 +97,6 @@ namespace StoreManagement.Admin.Controllers
             SettingRepository.Save();
             return RedirectToAction("Index");
         }
-        public ActionResult StoreSettings(int storeId)
-        {
-            return View(SettingRepository.GetStoreSettings(storeId));
-        }
-
-        public ActionResult TestSetting(int id = 1)
-        {
-            ViewBag.StoreId = id;
-            var settings = SettingRepository.GetStoreSettings(id).Where(r => r.Type.ToLower().Contains("Style".ToLower())).ToList();
-            return View(settings);
-        }
+      
     }
 }

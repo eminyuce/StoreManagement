@@ -50,14 +50,25 @@
                                 <span class="btn btn-xs btn-default " id="SelectAll">Select All
                                 </span>
                             </span>
+                            
+                                  
                             <span class="col-md-1">
                                 <span class="btn btn-xs btn-default" id="DeselectAll">Deselect All
                                 </span>
                             </span>
-                            <span class="col-md-2">
-                                <span class="btn btn-xs btn-default" id="DeleteAll">Delete Selected 
-                                </span>
-                            </span>
+                            
+
+                             
+                            @if (!isRegularUser)
+                                    {
+                                        <span class="col-md-2">
+                                            <span class="btn btn-xs btn-default" id="DeleteAll">Delete Selected 
+                                            </span>
+                                        </span>
+                                        
+                                    }
+                                 
+                         
                             <span class="col-md-2">
                                 <select name="ItemStateSelection" id="ItemStateSelection">
                                     <option value="State">Durum</option>

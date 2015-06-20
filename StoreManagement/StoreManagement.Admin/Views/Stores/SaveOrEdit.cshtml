@@ -22,7 +22,8 @@
                         <legend>Store</legend>
 
                         @Html.HiddenFor(model => model.Id)
-
+                                    @Html.HiddenFor(model => model.CategoryId)
+)
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)
                         </div>

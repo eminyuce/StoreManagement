@@ -67,10 +67,17 @@
                                         <span class="btn btn-xs btn-default" id="DeselectAll">Deselect All
                                         </span>
                                     </span>
-                                    <span class="col-md-2">
-                                        <span class="btn btn-xs btn-default" id="DeleteAll">Delete Selected 
+                                    
+                                    @if (!isRegularUser)
+                                    {
+                                        <span class="col-md-2">
+                                            <span class="btn btn-xs btn-default" id="DeleteAll">Delete Selected 
+                                            </span>
                                         </span>
-                                    </span>
+                                        
+                                    }
+                                 
+
                                     <span class="col-md-2">
                                         <select name="ItemStateSelection" id="ItemStateSelection">
                                             <option value="State">Durum</option>
@@ -126,115 +133,115 @@
 
                             </div>
                             @Html.Grid(contents).Named(gridName).Columns(columns =>
-                                        {
+                       {
 
 
-                                            columns.Add().Encoded(false).
-                                                    Sanitized(false).
-                                                    SetWidth(10).
-                                                    RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
+                           columns.Add().Encoded(false).
+                                   Sanitized(false).
+                                   SetWidth(10).
+                                   RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
 
 
 
 
 
-                                            columns.Add(o => o.Id, true);
+                           columns.Add(o => o.Id, true);
 
-                                            columns.Add()
-                                                   .Encoded(false)
-                                                   .Sanitized(false)
-                                                   .SetWidth(30)
-                                                   .RenderValueAs(d =>
-                                                                  @<b>
+                           columns.Add()
+                                  .Encoded(false)
+                                  .Sanitized(false)
+                                  .SetWidth(30)
+                                  .RenderValueAs(d =>
+                                                 @<b>
                                                                       @Html.ActionLink(" ", "SaveOrEdit", controllerName, new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                                                                   </b>);
 
-                                            columns.Add()
-                                                   .Encoded(false)
-                                                   .Sanitized(false)
-                                                   .SetWidth(30)
-                                                   .RenderValueAs(d =>
-                                                                  @<b>
+                           columns.Add()
+                                  .Encoded(false)
+                                  .Sanitized(false)
+                                  .SetWidth(30)
+                                  .RenderValueAs(d =>
+                                                 @<b>
                                                                       @Html.ActionLink(" ", "Details", controllerName, new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
                                                                   </b>);
-                                            if (!isRegularUser)
-                                            {
-                                                columns.Add()
-                                                       .Encoded(false)
-                                                       .Sanitized(false)
-                                                       .SetWidth(30)
-                                                       .RenderValueAs(d =>
-                                                                      @<b>
+                           if (!isRegularUser)
+                           {
+                               columns.Add()
+                                      .Encoded(false)
+                                      .Sanitized(false)
+                                      .SetWidth(30)
+                                      .RenderValueAs(d =>
+                                                     @<b>
                                                                           @Html.ActionLink(" ", "Delete", controllerName, new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
                                                                       </b>);
-                                            }
+                           }
 
 
 
-                                            columns.Add(c => c.Name)
-                                                   .Titled("Title")
-                                                   .Css("gridTitleClass")
-                                                   .Filterable(true)
-                                                   .Sanitized(false)
-                                                   .Encoded(false)
-                                                   .RenderValueAs(o =>
-                                                                  @<b>
+                           columns.Add(c => c.Name)
+                                  .Titled("Title")
+                                  .Css("gridTitleClass")
+                                  .Filterable(true)
+                                  .Sanitized(false)
+                                  .Encoded(false)
+                                  .RenderValueAs(o =>
+                                                 @<b>
                                                                       @Html.ActionLink(o.Name, "StoreDetails", controllerName, new { id = o.Id }, new { target = "_blank" })
                                                                   </b>
-                                                );
+                               );
 
 
 
-                                            columns.Add(o => o.Ordering).Encoded(false).
-                                                    Sanitized(false).
-                                                    SetWidth(10).
-                                                    RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'   class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
+                           columns.Add(o => o.Ordering).Encoded(false).
+                                   Sanitized(false).
+                                   SetWidth(10).
+                                   RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'   class='GridOrderingTextbox input-xs' name='gridOrdering' type='type'>", o.Id, o.Ordering));
 
-                                            columns.Add(o => o.State)
-                                                   .Titled("State")
-                                                   .Sortable(true)
-                                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                                    Sanitized(false)
-                                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
-                                                                                     o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
+                           columns.Add(o => o.State)
+                                  .Titled("State")
+                                  .Sortable(true)
+                                  .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                   Sanitized(false)
+                                  .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
+                                                                    o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
 
-                                            columns.Add(o => o.ImageState)
-                                                   .Titled("ImageState")
-                                                   .Sortable(true)
-                                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                                    Sanitized(false)
-                                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  {1}  name='spanImageState'></span>",
-                                                                                     o.Id, (o.ImageState ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.ImageState));
-
-
-
-                                            columns.Add(o => o.MainPage)
-                                                   .Titled("MainPage")
-                                                   .Sortable(true)
-                                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                                    Sanitized(false)
-                                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}'  grid-data-value='{2}' {1} name='spanMainPage' ></span>",
-                                                                                     o.Id, (o.MainPage ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.MainPage));
+                           columns.Add(o => o.ImageState)
+                                  .Titled("ImageState")
+                                  .Sortable(true)
+                                  .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                   Sanitized(false)
+                                  .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}'  {1}  name='spanImageState'></span>",
+                                                                    o.Id, (o.ImageState ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.ImageState));
 
 
 
-                                            columns.Add(o => o.CreatedDate)
-                                                   .Titled("Date")
-                                                   .Sortable(true)
-                                                   .Css("gridDateClass")
-                                                   .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
-                                                   .SortInitialDirection(GridSortDirection.Descending);
+                           columns.Add(o => o.MainPage)
+                                  .Titled("MainPage")
+                                  .Sortable(true)
+                                  .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                   Sanitized(false)
+                                  .RenderValueAs(o => String.Format("<span  gridkey-id='{0}'  grid-data-value='{2}' {1} name='spanMainPage' ></span>",
+                                                                    o.Id, (o.MainPage ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.MainPage));
 
 
 
-                                            columns.Add()
-                                                   .Titled("Images")
-                                                   .Encoded(false)
-                                                   .Sanitized(false)
+                           columns.Add(o => o.CreatedDate)
+                                  .Titled("Date")
+                                  .Sortable(true)
+                                  .Css("gridDateClass")
+                                  .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
+                                  .SortInitialDirection(GridSortDirection.Descending);
 
-                                                   .SetWidth(30)
-                                                   .RenderValueAs(d =>
-                                                                  @<b>
+
+
+                           columns.Add()
+                                  .Titled("Images")
+                                  .Encoded(false)
+                                  .Sanitized(false)
+
+                                  .SetWidth(30)
+                                  .RenderValueAs(d =>
+                                                 @<b>
 
                                                                       <a class="btn btn-info btn-sm glyphicon  glyphicon-camera"   data-file-id="@d.Id"></a>
                                                                   </b>);

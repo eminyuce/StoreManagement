@@ -39,10 +39,14 @@
                                 <span class="btn btn-link btn-xs" id="SelectAll">Select All
                                 </span>
                             </span>
+                            
+                            
                             <span class="col-md-1">
                                 <span class="btn btn-link btn-xs" id="DeselectAll">Deselect All
                                 </span>
                             </span>
+                            
+
                             <span class="col-md-2">
                                 <span class="btn btn-link btn-xs" id="DeleteAll">Delete Selected 
                                 </span>
@@ -110,7 +114,7 @@
                 </b>);
 
 
-        columns.Add(o => o.Id, false);
+        columns.Add(o => o.Id, true);
         columns.Add(c => c.SettingKey);
         columns.Add(c => c.SettingValue);
 

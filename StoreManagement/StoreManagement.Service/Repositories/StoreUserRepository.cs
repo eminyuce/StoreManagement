@@ -31,7 +31,14 @@ namespace StoreManagement.Service.Repositories
 
             if (item == null)
             {
-                item = this.FindBy(r => r.UserId == userId).FirstOrDefault();
+               item = this.FindBy(r => r.UserId == userId).FirstOrDefault();
+              //  item = this.GetSingleIncluding(userId, r => r.UserProfile);
+                //var res = from s in  this.StoreDbContext.StoreUsers  
+                //          join u in this.StoreDbContext.UserProfiles on s.UserId equals u.UserId
+                //          where s.UserId == userId
+                //          select s;
+
+               // item = res.FirstOrDefault();
                 StoreUserCache.Set(key, item, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("MainMenuNavigation_CacheAbsoluteExpiration_Minute", 10)));
             }
 

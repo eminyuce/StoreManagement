@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using StoreManagement.Admin.Models;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -36,9 +37,26 @@ namespace StoreManagement.Admin.Controllers
             return PartialView("_StoresDropDown", StoreRepository.GetAll().ToList());
         }
         [Authorize(Roles = "SuperAdmin")]
-        public ViewResult Index()
+        public ViewResult Index(String search="", int categoryId=0)
         {
-            return View(StoreRepository.GetAll().ToList());
+
+            var resultList = new List<Store>();
+            resultList = StoreRepository.GetAll().ToList();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                resultList =
+                    resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
+
+            if (categoryId > 0)
+            {
+                resultList = resultList.Where(r => r.CategoryId == categoryId).ToList();
+            }
+
+            resultList = resultList.OrderBy(r => r.Domain).ToList();
+
+            return View(resultList);
         }
         //
         // GET: /Stores/Details/5
@@ -114,6 +132,16 @@ namespace StoreManagement.Admin.Controllers
             [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveStoreUsers(int id, LoginModel userName, String roleName)
         {
+
+
+            var regexUtil = new RegexUtilities();
+            if (!regexUtil.IsValidEmail(userName.UserName))
+            {
+                ModelState.AddModelError("UserName", "Invalid Email Address");
+                return View(userName);
+            }
+
+
             int storeId = id;
             //if (ModelState.IsValid)
             {
@@ -137,6 +165,9 @@ namespace StoreManagement.Admin.Controllers
                     var su = new StoreUser();
                     su.StoreId = storeId;
                     su.UserId = userId;
+                    su.CreatedDate = DateTime.Now;
+                    su.UpdatedDate = DateTime.Now;
+
                     StoreUserRepository.Add(su);
                     StoreUserRepository.Save();
 
@@ -166,8 +197,10 @@ namespace StoreManagement.Admin.Controllers
             }
 
         }
+
+
         // GET: /Stores/Details/5
-            [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Settings(int id)
         {
             var store = this.StoreRepository.GetSingle(id);
@@ -181,7 +214,9 @@ namespace StoreManagement.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 this.SettingRepository.Add(setting);
+
                 this.SettingRepository.Save();
             }
             return RedirectToAction("Settings", new { id = setting.StoreId });

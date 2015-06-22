@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -24,7 +26,7 @@ namespace StoreManagement.Test
         [TestInitialize]
         public void MyTestInitialize()
         {
-            dbContext = new StoreContext(ConnectionString);
+           // dbContext = new StoreContext(ConnectionString);
         }
         [TestMethod]
         public void GetProductCategoriesByStoreIdFromCache()
@@ -33,7 +35,35 @@ namespace StoreManagement.Test
             var m = sss.GetProductCategoriesByStoreIdFromCache(9, StoreConstants.ProductType);
             Assert.IsNotNull(m);
 
+        } 
+        [TestMethod]
+        public void InsertALlData()
+        {
+            ExecuteSP();
         }
+        private static void ExecuteSP()
+        {
+            SqlConnection connection =
+                new SqlConnection(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString);
+            connection.Open();
+
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\emin\Desktop\11212\11212.sql");
+            String line = "";
+            while ((line = file.ReadLine()) != null)
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(line, connection);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            file.Close();
+        }
+
         [TestMethod]
         public void GetStoreByUserName()
         {

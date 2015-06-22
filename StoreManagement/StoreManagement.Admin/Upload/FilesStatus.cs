@@ -18,11 +18,20 @@ namespace jQuery_File_Upload.MVC3.Upload
         public string delete_type { get; set; }
         public string error { get; set; }
 
-        public FilesStatus() { }
+        public FilesStatus()
+        {
+            
+        }
 
-        public FilesStatus(FileInfo fileInfo) { SetValues(fileInfo.Name, (int)fileInfo.Length, fileInfo.FullName); }
+        public FilesStatus(FileInfo fileInfo)
+        {
+            SetValues(fileInfo.Name, (int)fileInfo.Length, fileInfo.FullName);
+        }
 
-        public FilesStatus(string fileName, int fileLength, string fullPath) { SetValues(fileName, fileLength, fullPath); }
+        public FilesStatus(string fileName, int fileLength, string fullPath)
+        {
+            SetValues(fileName, fileLength, fullPath);
+        }
 
         private void SetValues(string fileName, int fileLength, string fullPath)
         {

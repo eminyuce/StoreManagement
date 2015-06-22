@@ -1,0 +1,59 @@
+@model StoreManagement.Data.Entities.Setting
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">
+                    <h4>Category Management</h4>
+                </div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+ 
+                <h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Setting</legend>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+
+    <div class="display-label">SettingKey</div>
+    <div class="display-field">@Model.SettingKey</div>
+
+    <div class="display-label">SettingValue</div>
+    <div class="display-field">@Model.SettingValue</div>
+
+    <div class="display-label">State</div>
+    <div class="display-field">@Model.State</div>
+
+    
+</fieldset>
+@using (Html.BeginForm("DeleteStoreSettings"))
+{
+    <p>
+         <input  class="btn btn-danger btn-block btn-lg" type="submit" value="Delete" /> |
+                            @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+    </p>
+}
+
+
+
+
+ 
+
+                 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

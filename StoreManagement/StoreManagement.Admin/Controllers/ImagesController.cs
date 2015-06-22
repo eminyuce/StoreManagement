@@ -167,6 +167,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception e)
             {
+                Logger.Error(e);
             }
 
             return img;

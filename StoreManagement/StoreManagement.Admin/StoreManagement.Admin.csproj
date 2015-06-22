@@ -1903,6 +1903,12 @@
     <Content Include="Views\ProductsLabels\Details.cshtml" />
     <Content Include="Views\ProductsLabels\Index.cshtml" />
     <Content Include="Views\ProductsLabels\SaveOrEdit.cshtml" />
+    <Content Include="Views\Stores\SaveOrEditStoreUser.cshtml" />
+    <Content Include="Views\Stores\StoreUserDetail.cshtml" />
+    <Content Include="Views\Stores\SaveOrEditStoreSettings.cshtml" />
+    <Content Include="Views\Stores\DeleteStoreSettings.cshtml" />
+    <Content Include="Views\Home\StoreName.cshtml" />
+    <Content Include="Views\Settings\pSettingTextBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

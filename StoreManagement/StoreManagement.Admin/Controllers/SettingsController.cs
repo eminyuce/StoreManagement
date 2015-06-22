@@ -23,6 +23,11 @@ namespace StoreManagement.Admin.Controllers
         {
 
             storeId = GetStoreId(storeId);
+
+            var store = this.StoreRepository.GetSingle(storeId);
+            ViewBag.Store = store;
+
+
             List<Setting> items = null;
             items = SettingRepository.GetStoreSettingsByType(storeId, TYPE);
             return View(items);

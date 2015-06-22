@@ -45,7 +45,7 @@ namespace StoreManagement.Service.Repositories
         {
             return
                 this.FindBy(
-                    r => r.StoreId == storeId && r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase))
+                    r => r.StoreId == storeId && r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)).OrderByDescending(r=>r.Ordering).ThenByDescending(r=>r.Id)
                     .ToList();
         }
 

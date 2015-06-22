@@ -81,9 +81,6 @@
             RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
 
 
-
-
-
         columns.Add(o => o.Id, false);
 
         columns.Add()
@@ -120,7 +117,7 @@
 .SetWidth(30)
 .RenderValueAs(d =>
    @<b>
-                           @Html.ActionLink(" Settings", "Settings", "Stores", new { id = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-wrench" })
+                           @Html.ActionLink(" Settings", "Settings", "Stores", new { storeId = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-wrench" })
                        </b>);
 
         columns.Add()
@@ -129,7 +126,7 @@
 .SetWidth(30)
 .RenderValueAs(d =>
    @<b>
-                           @Html.ActionLink(" Users", "Users", "Stores", new { id = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-user" })
+                           @Html.ActionLink(" Users", "Users", "Stores", new { storeId = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-user" })
                        </b>);
 
 

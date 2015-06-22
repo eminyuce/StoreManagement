@@ -1,136 +1,143 @@
 ﻿@using GridMvc.Html
+@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
 @model IEnumerable<StoreManagement.Data.Entities.Setting>
 
 @{
     ViewBag.Title = "Index";
+        // Store s = ViewBag.Store;
+    string storeId = Request.QueryString["storeId"].ToStr();
 }
+ 
 
-
-
-
+<input type="hidden" name="StoreId" value="@storeId" id="StoreId"/>
 
 <div class="col-md-12">
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="text-muted bootstrap-admin-box-title">
-                    <h4>Category Management</h4>
+                    <h4>Settings</h4>
                 </div>
             </div>
             <div class="bootstrap-admin-panel-content">
-
-
-                <div>
-                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Settings" })
-                </div>
-
-                <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div class="row">
-                            <span class="col-md-3">
-                                @Html.ActionLink("Create", "SaveOrEdit", "Settings", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
-                            </span>
-                            <span class="col-md-9">
-                                @Html.Partial("pSearchForm")
-                            </span>
+                     <div>
+                            @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Settings" })
                         </div>
-                        <div class="row">
-                            <span class="col-md-1">
-                                <span class="btn btn-link btn-xs" id="SelectAll">Select All
-                                </span>
-                            </span>
-                            
-                            
-                            <span class="col-md-1">
-                                <span class="btn btn-link btn-xs" id="DeselectAll">Deselect All
-                                </span>
-                            </span>
-                            
-
-                            <span class="col-md-2">
-                                <span class="btn btn-link btn-xs" id="DeleteAll">Delete Selected 
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <span class="col-md-6">
-                                <span class="label "><span class="badge text-danger text-large">@Model.Count() </span>
+                @{
+                    Setting item = Model.FirstOrDefault(r => r.SettingKey.Equals("StoreMetaKey", StringComparison.InvariantCultureIgnoreCase));
+                    if (item == null)
+                    {
+                        item = new Setting();
+                        item.SettingKey = "StoreMetaKey";
+                        item.Id = 0;
+                    } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Meta Key"}
+                            });
 
 
-                                    Records exists  
-                                </span>
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals("GoogleAnalytics", StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = "GoogleAnalytics";
+                                  item.Id = 0;
+                              } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Google Analytics"}
+                            });
 
-                            </span>
-                            <span class="col-md-3">
-                                <p class=" text-right">Grid Paging Number</p>
-                            </span>
-                            <span class="col-md-3">
-                                <select name="GridListItemSize" class="form-control dropdown-toggle" id="GridListItemSize">
-                                    <option class="text-info" value="25">25</option>
-                                    <option selected="selected" class="text-info" value="50">50</option>
-                                    <option class="text-info" value="100">100</option>
-                                    <option class="text-info" value="250">250</option>
-                                    <option class="text-info" value="500">500</option>
-                                    <option class="text-info" value="1000">1000</option>
-                                </select>
-                            </span>
-                        </div>
+                }
 
+                <p>
+                    <input class="btn btn-success btn-block btn-lg" id="SaveSetttings" type="submit" value="Save" />
+                </p>
 
-                    </div>
-
-
-                    @Html.Grid(Model).Named("SettingGrid").Columns(columns =>
-    {
-        /* Adding not mapped column, that renders body, using inline Razor html helper */
-
-        columns.Add().Encoded(false).
-           Sanitized(false).
-           SetWidth(10).
-           RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
-
-        columns.Add()
-            .Encoded(false)
-            .Sanitized(false)
-            .SetWidth(30)
-            .RenderValueAs(d =>
-                @<b>
-                   @Html.ActionLink(" ", "SaveOrEdit", "Settings", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
-               </b>);
-
-
-        columns.Add()
-                .Encoded(false)
-                .Sanitized(false)
-                .SetWidth(30)
-                .RenderValueAs(d =>
-                @<b>
-                    @Html.ActionLink(" ", "Delete", "Settings", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
-                </b>);
-
-
-        columns.Add(o => o.Id, true);
-        columns.Add(c => c.SettingKey);
-        columns.Add(c => c.SettingValue);
-
-
-    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
-
-
-                </div>
             </div>
         </div>
     </div>
 </div>
+ 
 
 
 
+@section scripts
+{
 
+
+    <script>
+        
+        function Setting(settingId, settingKey, settingValue) {
+            var m = this;
+            m.Id = settingId;
+            m.SettingKey = settingKey;
+            m.SettingValue = settingValue;
+
+            return m;
+        }
+
+
+
+        $(document).ready(function () {
+            $("#SaveSetttings").on("click", handleAllSettings);
+        });
+
+
+        function handleAllSettings(e) {
+            var allSettings = [];
+
+            $('[data-setting-id]').each(function () {
+                var settingId = $(this).attr('data-setting-id');
+                var settingKey = $(this).attr('data-setting-key');
+                var settingValue = $(this).val();
+
+                var item = new Setting(settingId, settingKey, settingValue);
+                allSettings.push(item);
+            });
+
+            console.log(allSettings);
+              
+            var postData = JSON.stringify({ "settings": allSettings, "storeId": $("#StoreId").val() });
+            $.ajax({
+                type: "POST",
+                url: "/Ajax/SetSettings",
+                data: postData,
+                success: function(data) {
+                    
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.status === 0) {
+                        console.error('Not connect.\n Verify Network.');
+                    } else if (jqXHR.status == 404) {
+                        console.error('Requested page not found. [404]');
+                    } else if (jqXHR.status == 500) {
+                        console.error('Internal Server Error [500].');
+                    } else if (exception === 'parsererror') {
+                        console.error('Requested JSON parse failed.');
+                    } else if (exception === 'timeout') {
+                        console.error('Time out error.');
+                    } else if (exception === 'abort') {
+                        console.error('Ajax request aborted.');
+                    } else {
+                        console.error('Uncaught Error.\n' + jqXHR.responseText);
+                    }
+                },
+                contentType: "application/json",
+                dataType: "json"
+            });
+        }
+        
+    </script>
+}
 
 
 

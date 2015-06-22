@@ -166,9 +166,7 @@ namespace StoreManagement.Admin.Controllers
 
         protected bool SetStoreValues(String userName)
         {
-            if (!String.IsNullOrEmpty(userName) && !IsSuperAdmin)
-            {
-
+           
                 String key = String.Format("SetStoreValues-{0}", userName);
                 Store site = null;
                 UserStoreCache.TryGet(key, out site);
@@ -181,17 +179,11 @@ namespace StoreManagement.Admin.Controllers
                     }
                     else
                     {
-                        site = new Store();
-                        site.Id = s.Id;
-                        site.Layout = s.Layout;
-                        site.Domain = s.Domain;
-                        site.Name = site.Name;
-
-                        UserStoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration_Minute", 100000)));
+                        UserStoreCache.Set(key, s, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration_Minute", 100000)));
                     }
                 }
                 LoginStore = site;
-            }
+            
 
             return true;
         }

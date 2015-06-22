@@ -17,47 +17,48 @@
 
                 @using (Html.BeginForm())
                 {
+                    
+                 
                     @Html.ValidationSummary(true)
                     <fieldset>
-                        <legend>Store</legend>
-
+                        <legend>Create Store</legend>
                         @Html.HiddenFor(model => model.Id)
-                                    @Html.HiddenFor(model => model.CategoryId)
-)
+                        @Html.HiddenFor(model => model.CategoryId)
+
+
+
+
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Name)
+
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Name)
                         </div>
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Domain)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Domain)
+
+                            @Html.TextBoxFor(model => model.Domain, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Domain)
                         </div>
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Layout)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Layout)
+
+                            @Html.TextBoxFor(model => model.Layout, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Layout)
                         </div>
 
 
 
                         <p>
-                             <input  class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
+                            <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
                         </p>
                     </fieldset>
                 }
 
                 <div>
-                                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
                 </div>
 
 

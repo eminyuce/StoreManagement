@@ -33,7 +33,18 @@ namespace StoreManagement.Admin.Controllers
         //<li>
         //                           <a href="@url">Go to frontend <i class="glyphicon glyphicon-share-alt"></i></a>
         //                       </li>
+        public ActionResult StoreName()
+        {
+            if (IsSuperAdmin)
+            {
+                return new EmptyResult();
+            }
+            else
+            {
+                return PartialView("StoreName", this.LoginStore);
+            }
 
+        }
         public ActionResult ReturnFrontEndUrl()
         {
             if (IsSuperAdmin)

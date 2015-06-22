@@ -73,6 +73,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 content.Type = ContentType;
                 content.UpdatedDate = DateTime.Now;
+                content.CreatedDate = DateTime.Now;
                 content.State = true;
   
             }

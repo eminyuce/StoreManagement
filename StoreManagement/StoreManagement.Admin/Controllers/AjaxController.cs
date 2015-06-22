@@ -27,7 +27,36 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
-       
+        [HttpPost]
+        public ActionResult SetSettings(List<Setting> settings, int storeId)
+        {
+            foreach (Setting v in settings)
+            {
+                var item = new Setting();
+                if (v.Id == 0)
+                {
+                    item.SettingKey = v.SettingKey;
+                    item.CreatedDate = DateTime.Now;
+                    SettingRepository.Add(item);
+                }
+                else
+                {
+                    item = SettingRepository.GetSingle(v.Id);
+                    SettingRepository.Edit(item);
+                }
+                item.SettingValue = v.SettingValue;
+                item.State = true;
+                item.StoreId = storeId;
+                item.UpdatedDate = DateTime.Now;
+                item.Name = "";
+                item.Description = "";
+                item.Type = "StoreSettings";
+
+            }
+            SettingRepository.Save();
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ChangeIsCarouselState(int fileId = 0, bool isCarousel = false)
         {
             var s = FileManagerRepository.GetSingle(fileId);

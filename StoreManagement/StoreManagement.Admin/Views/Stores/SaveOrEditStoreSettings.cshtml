@@ -1,0 +1,98 @@
+﻿@model StoreManagement.Data.Entities.Setting
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">
+                    <h4>Category Management</h4>
+                </div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Setting</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+                        @* This partial view defines form fields that will appear when creating and editing entities *@
+                        
+                                @Html.HiddenFor(model => model.StoreId)
+                        @Html.HiddenFor(model => model.Type)
+                        
+
+                        @Html.HiddenFor(model => model.State)
+                
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+                        @Html.HiddenFor(model => model.Ordering)
+
+                    
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+                                    <div class="editor-label">
+                            @Html.LabelFor(model => model.Description)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.SettingKey)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.SettingKey)
+                            @Html.ValidationMessageFor(model => model.SettingKey)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.SettingValue)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.SettingValue)
+                            @Html.ValidationMessageFor(model => model.SettingValue)
+                        </div>
+
+
+
+
+                        <p>
+                            <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

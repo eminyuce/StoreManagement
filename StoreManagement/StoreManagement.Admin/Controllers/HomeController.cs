@@ -49,25 +49,25 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult AdminSearch(String adminsearchkey, int page = 1)
         {
-
+            ViewBag.SearchKey = adminsearchkey;
+            adminsearchkey = adminsearchkey.Trim().ToLower();
             List<BaseContent> resultList = new List<BaseContent>();
             int storeId = this.LoginStore.Id;
 
             var contentList = from cus in this.DbContext.Contents
                               where cus.StoreId == storeId
-                              && (cus.Name.Contains(adminsearchkey) || cus.Description.Contains(adminsearchkey))
-                              orderby cus.Ordering
+                              && cus.Name.ToLower().Contains(adminsearchkey)
+                              orderby cus.Ordering, cus.Id descending 
                               select cus;
             resultList.AddRange(contentList.ToList());
 
             var productList = from cus in this.DbContext.Products
                               where cus.StoreId == storeId
-                              && (cus.Name.Contains(adminsearchkey) || cus.Description.Contains(adminsearchkey))
-                              orderby cus.Ordering
+                                     && cus.Name.ToLower().Contains(adminsearchkey)
+                              orderby cus.Ordering, cus.Id descending 
                               select cus;
             resultList.AddRange(productList.ToList());
-            ViewBag.SearchKey = adminsearchkey;
-            var returnSearchModel = new PagedList<BaseContent>(resultList, page, 20, resultList.Count);
+            var returnSearchModel = new PagedList<BaseContent>(resultList, page - 1, 20, resultList.Count);
             return View(returnSearchModel);
         }
         public ActionResult StoreSearch()

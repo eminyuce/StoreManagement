@@ -1916,6 +1916,7 @@
     <Content Include="Views\Home\StoreSearch.cshtml" />
     <Content Include="Views\Home\AdminSearch.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BaseContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

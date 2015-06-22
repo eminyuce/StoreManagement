@@ -1,4 +1,5 @@
 ﻿@using MvcPaging
+@using StoreManagement.Data.Entities
 @model  PagedList<StoreManagement.Data.Entities.BaseContent>
 @{
     ViewBag.Title = "AdminSearch";
@@ -21,12 +22,16 @@
                 <h2>Admin Search Result For @searchKey</h2>
                 @if (Model.Any())
                 {
-                    foreach (var product in Model)
+                    foreach (var baseContent in Model)
                     {
 
-                    <div>
-                        @Html.DisplayFor(model => product.Name)
-                    </div>
+                        <div>
+
+                              @Html.DisplayFor(item => baseContent)
+                        
+
+
+                        </div>
                     }
 
                     @Model.TotalItemCount
@@ -35,7 +40,7 @@
 
                         @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o
                                                                                                                             .DisplayTemplate("BootstrapPagination")
-                                                                                                                            .AddRouteValue("adminsearchkey",searchKey)
+                                                                                                                            .AddRouteValue("adminsearchkey", searchKey)
                                                                                                                             .MaxNrOfPages(7)
                                                                                                                             .AlwaysAddFirstPageNumber()
                                                                                                                             .SetPreviousPageText("←")

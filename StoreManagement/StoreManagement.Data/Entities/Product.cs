@@ -9,24 +9,14 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Product: BaseEntity
+    public class Product : BaseContent
     {
 
         [Display(Name = "Category")]
         [Required]
         public int ProductCategoryId { get; set; }
-        [Required]
-        public string Name { get; set; }
-
-        [AllowHtml]
-        public string Description { get; set; }
-
-        [IgnoreDataMember]
-        public string Type { get; set; }
-        [IgnoreDataMember]
-        public Boolean MainPage { get; set; }
-        [IgnoreDataMember]
-        public Boolean ImageState { get; set; }
+     
+ 
 
         public virtual ICollection<ProductFile> ProductFiles { get; set; }
 

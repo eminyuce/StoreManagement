@@ -11,33 +11,16 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-    public class Content : BaseEntity
+    public class Content : BaseContent
     {
-
         public Content()
         {
 
         }
-
-      
-        
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        public string Name { get; set; }
-        
-        [AllowHtml]
-        public string Description { get; set; }
-        
-        [IgnoreDataMember]
-        public string Type { get; set; }
-        [IgnoreDataMember]
-        public Boolean MainPage { get; set; }
-        [IgnoreDataMember]
-        public Boolean ImageState { get; set; }
 
         public virtual ICollection<ContentFile> ContentFiles { get; set; }
-
- 
 
     }
 }

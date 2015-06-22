@@ -1,0 +1,57 @@
+﻿@using MvcPaging
+@model  PagedList<StoreManagement.Data.Entities.BaseContent>
+@{
+    ViewBag.Title = "AdminSearch";
+    var searchKey = ViewBag.SearchKey;
+}
+
+
+
+
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>Admin Search Result For @searchKey</h2>
+                @if (Model.Any())
+                {
+                    foreach (var product in Model)
+                    {
+
+                    <div>
+                        @Html.DisplayFor(model => product.Name)
+                    </div>
+                    }
+
+                    @Model.TotalItemCount
+                  
+                    <div class="pager">
+
+                        @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o
+                                                                                                                            .DisplayTemplate("BootstrapPagination")
+                                                                                                                            .AddRouteValue("adminsearchkey",searchKey)
+                                                                                                                            .MaxNrOfPages(7)
+                                                                                                                            .AlwaysAddFirstPageNumber()
+                                                                                                                            .SetPreviousPageText("←")
+                                                                                                                            .SetNextPageText("→"))
+
+                    </div>
+                     
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+

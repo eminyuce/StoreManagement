@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using RazorEngine;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
@@ -512,10 +513,13 @@ namespace StoreManagement.Admin.Controllers
                     //  mailTemplate.Body = MailHelper.GetForgotPasswordMailTemplate(mailTemplate.Body, UserName, resetLink, resetPasswordUrl);
 
                     try
-                    {
+                    { 
+                        String forgotPasswordEmailTemplate = "";
+                        forgotPasswordEmailTemplate = System.IO.File.ReadAllText(Server.MapPath(@"~\Views\Shared\DisplayTemplates\ForgotPasswordEmail.cshtml"));
+                        var model = new { Email=userName, Link = resetLink, Url = resetPasswordUrl };
 
                         string subject = "Store Management Reset Password";
-                        string body = resetPasswordUrl;
+                        string body = Razor.Parse(forgotPasswordEmailTemplate, model);
                         string fromAddress = "eminyuce@gmail.com";
                         string fromName = "eminyuce@gmail.com";
                         string toAddress = userName;

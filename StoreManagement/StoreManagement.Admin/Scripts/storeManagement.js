@@ -3,6 +3,11 @@
 }
 
 $(document).ready(function () {
+    
+    $('#MyDeleteSubmit').click(function () {
+        $('#DeleteItemButton').click();
+    });
+    
     bindCarouselImage();
     var originalURL = window.location.href;
     var q = getQueryStringParameter(originalURL, "GridPageSize");

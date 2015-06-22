@@ -5,10 +5,10 @@
 
 @{
     ViewBag.Title = "Index";
-        // Store s = ViewBag.Store;
+    // Store s = ViewBag.Store;
     string storeId = Request.QueryString["storeId"].ToStr();
 }
- 
+
 
 <input type="hidden" name="StoreId" value="@storeId" id="StoreId"/>
 
@@ -21,15 +21,16 @@
                 </div>
             </div>
             <div class="bootstrap-admin-panel-content">
-                     <div>
-                            @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Settings" })
-                        </div>
+                <div>
+                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Settings" })
+                </div>
                 @{
-                    Setting item = Model.FirstOrDefault(r => r.SettingKey.Equals("StoreMetaKey", StringComparison.InvariantCultureIgnoreCase));
+                    String key = "StoreMetaKey";
+                    Setting item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                     if (item == null)
                     {
                         item = new Setting();
-                        item.SettingKey = "StoreMetaKey";
+                        item.SettingKey = key;
                         item.Id = 0;
                     } 
                     
@@ -40,12 +41,45 @@
                                 {"StoreSettingTitle", "Meta Key"}
                             });
 
-
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals("GoogleAnalytics", StringComparison.InvariantCultureIgnoreCase));
+                              key = "GoogleAnalytics";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                               if (item == null)
                               {
                                   item = new Setting();
-                                  item.SettingKey = "GoogleAnalytics";
+                                  item.SettingKey = key;
+                                  item.Id = 0;
+                              }
+                
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Google Analytics"}
+                            });
+                    
+                    
+                    key = "Zopim";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = key;
+                                  item.Id = 0;
+                              }
+                
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Zopim Code"}
+                            });
+
+                              key = "AboutUs";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = key;
                                   item.Id = 0;
                               } 
                     
@@ -53,7 +87,109 @@
                             item,
                             new ViewDataDictionary(ViewData)
                             {
-                                {"StoreSettingTitle", "Google Analytics"}
+                                {"StoreSettingTitle", "About US"}
+                            })
+
+                    
+                    key = "Footer";
+                    item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                    if (item == null)
+                    {
+                        item = new Setting();
+                        item.SettingKey = key;
+                        item.Id = 0;
+                    } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Footer"}
+                            });
+
+
+                              key = "TermsAndCondition";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = key;
+                                  item.Id = 0;
+                              } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Terms And Condition"}
+                            });
+
+                              key = "StoreMailAddress";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = key;
+                                  item.Id = 0;
+                              } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Site Mail Address"}
+                            });
+
+
+                              key = "StoreMailPassword";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = key;
+                                  item.Id = 0;
+                              } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Site Mail Address"}
+                            });
+
+
+
+                              key = "Contacts";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = key;
+                                  item.Id = 0;
+                              } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Contacts"}
+                            });
+
+
+                              key = "Location";
+                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                              if (item == null)
+                              {
+                                  item = new Setting();
+                                  item.SettingKey = key;
+                                  item.Id = 0;
+                              } 
+                    
+                    @Html.Partial("pSettingTextBox",
+                            item,
+                            new ViewDataDictionary(ViewData)
+                            {
+                                {"StoreSettingTitle", "Location"}
                             });
 
                 }
@@ -66,7 +202,7 @@
         </div>
     </div>
 </div>
- 
+
 
 
 
@@ -75,7 +211,7 @@
 
 
     <script>
-        
+
         function Setting(settingId, settingKey, settingValue) {
             var m = this;
             m.Id = settingId;
@@ -105,14 +241,14 @@
             });
 
             console.log(allSettings);
-              
+
             var postData = JSON.stringify({ "settings": allSettings, "storeId": $("#StoreId").val() });
             $.ajax({
                 type: "POST",
                 url: "/Ajax/SetSettings",
                 data: postData,
-                success: function(data) {
-                    
+                success: function (data) {
+
                 },
                 error: function (jqXHR, exception) {
                     if (jqXHR.status === 0) {
@@ -135,7 +271,7 @@
                 dataType: "json"
             });
         }
-        
+
     </script>
 }
 

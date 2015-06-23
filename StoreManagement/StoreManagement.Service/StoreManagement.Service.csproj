@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="DbContext\IStoreContext.cs" />
     <Compile Include="DbContext\StoreContext.cs" />
+    <Compile Include="Interfaces\IEmailListService.cs" />
     <Compile Include="Interfaces\ILabelLineService.cs" />
     <Compile Include="Interfaces\ILabelService.cs" />
     <Compile Include="Interfaces\IProductCategoryService.cs" />
@@ -87,12 +88,14 @@
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\ContentFileRepository.cs" />
+    <Compile Include="Repositories\EmailListRepository.cs" />
     <Compile Include="Repositories\FileManagerRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICategoryRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICompanyRepository.cs" />
     <Compile Include="Repositories\Interfaces\IContentFileRepository.cs" />
     <Compile Include="Repositories\Interfaces\IContentRepository.cs" />
     <Compile Include="Repositories\ContentRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEmailListRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFileManagerRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILabelLineRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILabelRepository.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\ContentFileService.cs" />
     <Compile Include="Services\ContentService.cs" />
+    <Compile Include="Services\EmailListService.cs" />
     <Compile Include="Services\FileManagerService.cs" />
     <Compile Include="Services\LabelService.cs" />
     <Compile Include="Services\NavigationService.cs" />

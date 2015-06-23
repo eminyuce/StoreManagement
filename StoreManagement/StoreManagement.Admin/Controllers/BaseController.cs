@@ -73,7 +73,8 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public ILabelLineRepository LabelLineRepository { set; get; }
 
-
+        [Inject]
+        public IEmailListRepository EmailListRepository { set; get; }
 
         private Boolean MySuperAdmin
         {

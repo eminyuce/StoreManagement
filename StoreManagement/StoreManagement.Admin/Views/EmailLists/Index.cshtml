@@ -1,19 +1,19 @@
-﻿@model IEnumerable<StoreManagement.Data.Entities.Label>
-@using GridMvc.Html
+﻿@using GridMvc.Html
 @using GridMvc.Sorting
 @using StoreManagement.Data
-@using StoreManagement.Data.Constants;;
 @using StoreManagement.Data.GeneralHelper;
+@using StoreManagement.Data.Constants;
+@using StoreManagement.Data.Entities;
+@model IEnumerable<EmailList>
+
 
 
 @{
     ViewBag.Title = "Index";
-    var title = "Labels Management";
-    var gridName = "LabelGrid";
-    string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
     var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
+    String gridName = "EmailListGrid";
     
 }
 
@@ -26,14 +26,14 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="text-muted bootstrap-admin-box-title">
-                    <h4>@title</h4>
+                    <h4>Email list</h4>
                 </div>
             </div>
             <div class="bootstrap-admin-panel-content">
 
 
                 <div>
-                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = controller })
+                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "EmailLists" })
                 </div>
 
 
@@ -173,21 +173,18 @@
                                                       @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
                                                   </b>);
                           }
-                         
 
 
-                            columns.Add(c => c.Name)
-                                   .Titled("Title")
-                                   .Css("gridTitleClass")
-                                   .Filterable(true)
-                                   .Sanitized(false)
-                                   .Encoded(false)
-                                   .RenderValueAs(o =>
-                                            @<b>
-                                                @Html.ActionLink(o.Name, "StoreDetails", new { id = o.Id }, new { target = "_blank" })
-                                            </b>
-                                       );
 
+                            columns.Add(c => c.Email)
+                                   .Titled("Email");
+
+                            columns.Add(c => c.FirstName)
+                                 .Titled("FirstName");
+
+                            columns.Add(c => c.LastName)
+                                   .Titled("LastName");
+                                   
 
 
                             columns.Add(o => o.Ordering).Encoded(false).
@@ -198,7 +195,7 @@
                             columns.Add(o => o.State)
                                    .Titled("State")
                                    .Sortable(true)
-                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                   .SortInitialDirection(GridMvc.Sorting.GridSortDirection.Descending).Encoded(false).
                                     Sanitized(false)
                                    .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
                                                                      o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
@@ -210,7 +207,7 @@
                                    .Sortable(true)
                                    .Css("gridDateClass")
                                     .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
-                                   .SortInitialDirection(GridSortDirection.Descending);
+                                   .SortInitialDirection(GridMvc.Sorting.GridSortDirection.Descending);
 
 
  
@@ -228,3 +225,6 @@
 
 
 </div>
+
+
+ 

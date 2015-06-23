@@ -64,7 +64,22 @@ namespace StoreManagement.Admin.Controllers
             FileManagerRepository.Edit(s);
             FileManagerRepository.Save();
             return Json(new { fileId, isCarousel }, JsonRequestBehavior.AllowGet);
-        }  
+        }
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteEmailListGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = EmailListRepository.GetSingle(id);
+                EmailListRepository.Delete(item);
+            }
+            EmailListRepository.Save();
+
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+    
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteSettingGridItem(List<String> values)
@@ -148,6 +163,26 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(values, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ChangeEmailListGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = EmailListRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
+
+                EmailListRepository.Edit(nav);
+            }
+            EmailListRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult ChangeProductCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
             foreach (OrderingItem item in values)

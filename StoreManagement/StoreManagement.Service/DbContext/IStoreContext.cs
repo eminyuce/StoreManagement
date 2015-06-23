@@ -29,5 +29,6 @@ namespace StoreManagement.Service.DbContext
         IDbSet<ProductCategory> ProductCategories { get; set; }
         IDbSet<Label> Labels { get; set; }
         IDbSet<LabelLine> LabelLines { get; set; }
+        IDbSet<EmailList> EmailLists { get; set; }
     }
 }

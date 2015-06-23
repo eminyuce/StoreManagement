@@ -219,8 +219,14 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public Task<StorePagedList<T>> GetUrlPagedResultsAsync<T>(string url) where T : new()
         {
-            var res = Task.FromResult(GetUrlPagedResults<T>(url));
-            return res;
+            //var res = Task.FromResult(GetUrlPagedResults<T>(url));
+            //return res;
+
+            var task = new Task<StorePagedList<T>>(() => GetUrlPagedResults<T>(url));
+            task.Start();
+
+            return task;
+
         }
         public StorePagedList<T> GetUrlPagedResults<T>(string url) where T : new()
         {
@@ -249,8 +255,11 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public  Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
         {
-            var res = Task.FromResult(GetUrlResults<T>(url));
-            return res;
+            var task = new Task<List<T>>(() => GetUrlResults<T>(url));
+            task.Start();
+
+            return task;
+           // return Task<T>.Factory.StartNew(() => { GetUrlResults<T>(url); });
         }
         public List<T> GetUrlResults<T>(string url) where T : new()
         {
@@ -280,8 +289,10 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public Task<T> GetUrlResultAsync<T>(string url) where T : new()
         {
-            var res = Task.FromResult(GetUrlResult<T>(url));
-            return res;
+            var task = new Task<T>(() => GetUrlResult<T>(url));
+            task.Start();
+
+            return task;
         }
         public T GetUrlResult<T>(string url) where T : new()
         {

@@ -120,6 +120,7 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\ContentFile.cs" />
+    <Compile Include="Entities\EmailList.cs" />
     <Compile Include="Entities\FileManager.cs" />
     <Compile Include="Entities\Label.cs" />
     <Compile Include="Entities\LabelLine.cs" />

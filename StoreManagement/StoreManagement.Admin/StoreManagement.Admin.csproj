@@ -291,6 +291,7 @@
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\EmailListsController.cs" />
     <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LabelsController.cs" />
@@ -1918,6 +1919,10 @@
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BaseContent.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ForgotPasswordEmail.cshtml" />
+    <Content Include="Views\EmailLists\SaveOrEdit.cshtml" />
+    <Content Include="Views\EmailLists\Delete.cshtml" />
+    <Content Include="Views\EmailLists\Details.cshtml" />
+    <Content Include="Views\EmailLists\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

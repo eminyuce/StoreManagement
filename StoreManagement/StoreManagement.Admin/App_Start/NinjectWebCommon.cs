@@ -91,6 +91,8 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>();
             kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>();
             kernel.Bind<ILabelRepository>().To<LabelRepository>();
+            kernel.Bind<IEmailListRepository>().To<EmailListRepository>();
+
 
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();

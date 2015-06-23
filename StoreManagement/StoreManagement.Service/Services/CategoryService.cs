@@ -22,7 +22,6 @@ namespace StoreManagement.Service.Services
 
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
-
             string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
             return HttpRequestHelper.GetUrlResults<Category>(url);
 
@@ -67,6 +66,31 @@ namespace StoreManagement.Service.Services
         {
             string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
             return HttpRequestHelper.GetUrlPagedResults<Category>(url);
+        }
+
+        public Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetCategoryWithContentsAsync?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
+            return HttpRequestHelper.GetUrlPagedResultsAsync<Category>(url);
+        }
+
+        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
+        {
+
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdAsync?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            return HttpRequestHelper.GetUrlResultsAsync<Category>(url);
+        }
+
+        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdAsync?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
+            return HttpRequestHelper.GetUrlResultsAsync<Category>(url);
+        }
+
+        public Task<Category> GetCategoryAsync(int id)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetCategoryAsync?id={2}", WebServiceAddress, ApiControllerName, id);
+            return HttpRequestHelper.GetUrlResultAsync<Category>(url);
         }
     }
 }

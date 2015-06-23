@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
@@ -21,17 +23,66 @@ namespace StoreManagement.Controllers
         {
             return View();
         }
-        public ActionResult Category(String id, int page = 1)
+        public async Task<ActionResult> Category(String id, int page = 1)
         {
+            // Create new stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+
+            // Begin timing
+            stopwatch.Start();
+
+           
+    
+
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, StoreConstants.BlogsType);
-            returnModel.Store = Store;
-            returnModel.Category = CategoryService.GetCategory(categoryId);
-            var m = ContentService.GetContentsCategoryId(Store.Id, categoryId, StoreConstants.BlogsType, true, page, 24);
-            returnModel.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
 
+            Task<List<Category>> task1 = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType);
+            var task2 = ContentService.GetContentsCategoryIdAsync(Store.Id, categoryId, StoreConstants.BlogsType, true, page, 600);
+            var task3 = CategoryService.GetCategoryAsync(categoryId);
+            await Task.WhenAll(task1, task2, task3);
+
+            returnModel.Categories = task1.Result;
+            returnModel.Store = Store;
+            returnModel.Category = task3.Result;
+
+            returnModel.Contents = new PagedList<Content>(task2.Result.items, task2.Result.page - 1, task2.Result.pageSize, task2.Result.totalItemCount);
+
+            // Stop timing
+            stopwatch.Stop();
+            Logger.Info("Async Time elapsed 3: {0}", stopwatch.ElapsedMilliseconds);
             return View(returnModel);
+
+        }
+        public ActionResult Category2(String id, int page = 1)
+        {
+            // Create new stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+
+            // Begin timing
+            stopwatch.Start();
+
+
+
+
+            var returnModel = new CategoryViewModel();
+            int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
+
+            var task1 = CategoryService.GetCategoriesByStoreId(Store.Id, StoreConstants.BlogsType);
+            var task2 = ContentService.GetContentsCategoryId(Store.Id, categoryId, StoreConstants.BlogsType, true, page, 600);
+            var task3 = CategoryService.GetCategory(categoryId);
+            //await Task.WhenAll(task1, task2, task3);
+
+            returnModel.Categories = task1;
+            returnModel.Store = Store;
+            returnModel.Category = task3;
+
+            returnModel.Contents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);
+
+            // Stop timing
+            stopwatch.Stop();
+            Logger.Info("Sync Time elapsed 3: {0}", stopwatch.ElapsedMilliseconds);
+            return View("Category",returnModel);
 
         }
     }

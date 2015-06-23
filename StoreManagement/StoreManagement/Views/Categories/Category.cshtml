@@ -52,30 +52,29 @@ New Products
                 {
                     foreach (var product in Model.Contents)
                     {
-	                    <div class="col-md-3">
-      
-                            
-                                 @Html.Partial("DisplayTemplates/ProductThumbnail",product, new ViewDataDictionary(ViewData){
-                                         {"ProductCategoryName",Model.Category.Name}})
-                            
+                    <div class="col-md-3">
 
-	                    </div>
+
+                        @Html.DisplayFor(m => product.Name)
+
+
+                    </div>
                     }
 
                     @Model.Contents.TotalItemCount
                   
-                       <div class="pager">
- 
-                           
-                           @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount).Options(o => o
-			.DisplayTemplate("BootstrapPagination")
-			.MaxNrOfPages(7)
-			.AlwaysAddFirstPageNumber()
-			.SetPreviousPageText("←")
-			.SetNextPageText("→"))
-                           
+                    <div class="pager">
 
-                       </div>
+
+                        @Html.Pager(Model.Contents.PageSize, Model.Contents.PageNumber, Model.Contents.TotalItemCount).Options(o => o
+            .DisplayTemplate("BootstrapPagination")
+            .MaxNrOfPages(7)
+            .AlwaysAddFirstPageNumber()
+            .SetPreviousPageText("←")
+            .SetNextPageText("→"))
+
+
+                    </div>
 
   
 

@@ -125,8 +125,7 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            StoreRepository.Delete(StoreRepository.GetSingle(id));
-            StoreRepository.Save();
+            StoreRepository.DeleteStore(id);
             return RedirectToAction("Index");
         }
         [Authorize(Roles = "SuperAdmin")]

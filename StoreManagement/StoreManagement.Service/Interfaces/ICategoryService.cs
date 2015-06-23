@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
@@ -15,6 +16,10 @@ namespace StoreManagement.Service.Interfaces
         List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type);
         Category GetCategory(int id);
         StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize = 25);
+        Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25);
+        Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId);
+        Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, String type);
+        Task<Category> GetCategoryAsync(int id);
     }
 
 }

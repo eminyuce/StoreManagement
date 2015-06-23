@@ -1,4 +1,5 @@
-﻿using StoreManagement.Data.Entities;
+﻿using System.Threading.Tasks;
+using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -140,6 +141,26 @@ namespace StoreManagement.API.Controllers
         public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize)
         {
             return CategoryRepository.GetCategoryWithContents(categoryId, page, pageSize);
+        }
+
+        public async Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25)
+        {
+            return await CategoryRepository.GetCategoryWithContentsAsync(categoryId, page, pageSize);
+        }
+
+        public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
+        {
+            return await CategoryRepository.GetCategoriesByStoreIdAsync(storeId);
+        }
+
+        public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type)
+        {
+            return await CategoryRepository.GetCategoriesByStoreIdAsync(storeId, type);
+        }
+
+        public async Task<Category> GetCategoryAsync(int id)
+        {
+            return await CategoryRepository.GetCategoryAsync(id);
         }
     }
 }

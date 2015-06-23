@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NLog;
 using RestSharp;
@@ -49,14 +50,14 @@ namespace StoreManagement.Data.GeneralHelper
             returnJson = CacheResponseOutput(url, String.Empty);
             if (!String.IsNullOrEmpty(returnJson))
             {
-                Logger.Info(String.Format("Return JSON RESPONSE ----> CACHE {0}", url));
+                //Logger.Info(String.Format("Return JSON RESPONSE ----> CACHE {0}", url));
                 return returnJson;
             }
             else
             {
-                String responseJson = MakeJsonRequest(url);
+                var responseJson = MakeJsonRequest(url);
                 returnJson = CacheResponseOutput(url, responseJson);
-                Logger.Info(String.Format("Return JSON RESPONSE ----> WEB SERVICE API {0}", url));
+                //Logger.Info(String.Format("Return JSON RESPONSE ----> WEB SERVICE API {0}", url));
             }
 
             return returnJson;
@@ -84,6 +85,8 @@ namespace StoreManagement.Data.GeneralHelper
         //}
         public string MakeJsonRequest(string url)
         {
+
+
             string returnJson = String.Empty;
             var client = new RestClient(url);
             var request = new RestRequest(Method.GET);
@@ -214,6 +217,11 @@ namespace StoreManagement.Data.GeneralHelper
 
 
         }
+        public Task<StorePagedList<T>> GetUrlPagedResultsAsync<T>(string url) where T : new()
+        {
+            var res = Task.FromResult(GetUrlPagedResults<T>(url));
+            return res;
+        }
         public StorePagedList<T> GetUrlPagedResults<T>(string url) where T : new()
         {
             try
@@ -238,6 +246,11 @@ namespace StoreManagement.Data.GeneralHelper
                 Logger.ErrorException("Error:" + ex.Message, ex);
                 return new StorePagedList<T>();
             }
+        }
+        public  Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
+        {
+            var res = Task.FromResult(GetUrlResults<T>(url));
+            return res;
         }
         public List<T> GetUrlResults<T>(string url) where T : new()
         {
@@ -264,6 +277,11 @@ namespace StoreManagement.Data.GeneralHelper
                 return new List<T>();
             }
 
+        }
+        public Task<T> GetUrlResultAsync<T>(string url) where T : new()
+        {
+            var res = Task.FromResult(GetUrlResult<T>(url));
+            return res;
         }
         public T GetUrlResult<T>(string url) where T : new()
         {

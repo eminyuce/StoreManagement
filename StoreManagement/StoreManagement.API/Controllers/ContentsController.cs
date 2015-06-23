@@ -1,4 +1,5 @@
-﻿using StoreManagement.Data.Entities;
+﻿using System.Threading.Tasks;
+using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -153,6 +154,18 @@ namespace StoreManagement.API.Controllers
         public Content GetContentWithFiles(int id)
         {
             return this.ContentRepository.GetContentWithFiles(id);
+        }
+
+        public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        {
+            var items = await this.ContentRepository.GetContentsCategoryIdAsync(storeId,
+                     categoryId,
+                     typeName,
+                     isActive,
+                     page,
+                     pageSize);
+
+            return items;
         }
     }
 }

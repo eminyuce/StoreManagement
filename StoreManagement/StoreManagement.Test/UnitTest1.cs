@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
@@ -26,8 +29,10 @@ namespace StoreManagement.Test
         [TestInitialize]
         public void MyTestInitialize()
         {
-           // dbContext = new StoreContext(ConnectionString);
+          // dbContext = new StoreContext(ConnectionString);
         }
+
+     
         [TestMethod]
         public void GetProductCategoriesByStoreIdFromCache()
         {
@@ -187,8 +192,9 @@ namespace StoreManagement.Test
         public void TestGetCategoriesByStoreIds()
         {
             CategoryRepository rep = new CategoryRepository(dbContext);
-            var m = rep.GetCategoryWithContents(1, 1);
+            var m = rep.GetCategoryWithContentsAsync(77, 1);
 
+            Console.WriteLine(m.Result.totalItemCount);
 
         }
         [TestMethod]

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -84,6 +86,33 @@ namespace StoreManagement.Service.Repositories
                       select s;
             var result = res.ToList();
             return result.FirstOrDefault();
+        }
+
+        public void DeleteStore(int storeId)
+        {
+           
+            // Create a SQL command to execute the sproc 
+            using (SqlCommand cmd = (SqlCommand)this.StoreDbContext.Database.Connection.CreateCommand())
+            {
+                cmd.CommandText = "dbo.DeleteStore";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("StoreId", SqlDbType.Int).Value = storeId;
+
+
+                try
+                {
+
+                    StoreDbContext.Database.Connection.Open();
+                    var reader = cmd.ExecuteNonQuery();
+                   
+                }
+                finally
+                {
+                    StoreDbContext.Database.Connection.Close();
+                }
+            }
+             
+
         }
     }
 }

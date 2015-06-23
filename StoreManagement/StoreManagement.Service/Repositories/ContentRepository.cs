@@ -37,7 +37,7 @@ namespace StoreManagement.Service.Repositories
         public List<Content> GetContentByType(string typeName)
         {
             return
-             this.FindBy( r=> r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase))
+             this.FindBy(r => r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase))
                  .ToList();
         }
 
@@ -45,11 +45,11 @@ namespace StoreManagement.Service.Repositories
         {
             return
                 this.FindBy(
-                    r => r.StoreId == storeId && r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)).OrderByDescending(r=>r.Ordering).ThenByDescending(r=>r.Id)
+                    r => r.StoreId == storeId && r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)).OrderByDescending(r => r.Ordering).ThenByDescending(r => r.Id)
                     .ToList();
         }
 
-     
+
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {
             return this.GetAllIncluding(r1 => r1.ContentFiles.Select(r2 => r2.FileManager)).Where(
@@ -73,8 +73,8 @@ namespace StoreManagement.Service.Repositories
 
             return items;
         }
-        
-        public StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, string typeName, bool? isActive, int page, int pageSize)
+
+        public StorePagedList<Content> GetContentsCategoryId(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
             String key = String.Format("Store-{0}-GetContentsCategoryId-{1}-{2}-{3}-{4}-{5}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "", page, pageSize);
             StorePagedList<Content> items = null;
@@ -109,6 +109,12 @@ namespace StoreManagement.Service.Repositories
         public Content GetContentWithFiles(int id)
         {
             return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
+        }
+
+        public  Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        {
+            var res =  Task.FromResult(GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
+            return res;
         }
     }
 }

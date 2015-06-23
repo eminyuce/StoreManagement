@@ -46,11 +46,33 @@ namespace StoreManagement.Controllers
         }
         public ActionResult About()
         {
-            return View();
+            String  key = "AboutUs";
+            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            return View(item);
         }
         public ActionResult Contact()
         {
-            return View();
+            String key = "Contacts";
+            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            return View(item);
+        }
+        public ActionResult Locations()
+        {
+            String key = "Location";
+            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            return View(item);
+        }
+        public ActionResult TermsAndCondition()
+        {
+            String key = "TermsAndCondition";
+            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            return View(item);
+        }
+        public ActionResult Footer()
+        {
+            String key = "Footer";
+            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            return View(item);
         }
         public ActionResult RecentUpdates()
         {
@@ -61,11 +83,7 @@ namespace StoreManagement.Controllers
             var mainMenu = NavigationService.GetStoreActiveNavigations(Store.Id);
             return View(mainMenu);
         }
-        public ActionResult Footer()
-        {
-            return View();
-        }
-
+       
         public ActionResult Test()
         {
             return View();

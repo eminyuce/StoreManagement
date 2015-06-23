@@ -27,14 +27,11 @@ namespace StoreManagement.Admin.Controllers
         {
             List<Category> resultList = new List<Category>();
             storeId = GetStoreId(storeId);
-            if (storeId == 0)
-            {
-                resultList = CategoryRepository.GetCategoriesByType(CategoryType);
-            }
-            else
+            if (storeId != 0)
             {
                 resultList = CategoryRepository.GetCategoriesByStoreId(storeId, CategoryType);
             }
+            
 
             if (!String.IsNullOrEmpty(search))
             {

@@ -12,6 +12,7 @@ namespace StoreManagement.Data.Entities
     {
         public int ParentId { get; set; }
         public string Name { get; set; }
+        public string ActionName { get; set; }
         public string ControllerName { get; set; }
         public Boolean Static { get; set; }
         public string Link { get; set; }

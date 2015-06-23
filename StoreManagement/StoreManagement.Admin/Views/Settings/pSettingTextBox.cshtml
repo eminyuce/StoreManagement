@@ -3,6 +3,7 @@
 @{
  
     var storeSettingTitle = ViewData["StoreSettingTitle"].ToStr();
+    var isHtmlEditor = ViewData["IsHtmlEditor"].ToBool();
 }
 
 <h2>
@@ -16,6 +17,7 @@
         new { @class = "form-control"
             , @data_setting_id = String.Format("{0}", Model.Id) 
           , @data_setting_key = String.Format("{0}", Model.SettingKey)
+          , @data_setting_html_editor=String.Format("{0}", isHtmlEditor)
            })
     </div>
 </div>

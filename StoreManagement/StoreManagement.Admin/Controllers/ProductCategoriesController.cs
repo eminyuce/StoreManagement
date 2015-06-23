@@ -18,14 +18,11 @@ namespace StoreManagement.Admin.Controllers
         {
             List<ProductCategory> resultList = new List<ProductCategory>();
             storeId = GetStoreId(storeId);
-            if (storeId == 0)
-            {
-                resultList = ProductCategoryRepository.GetAll().ToList();
-            }
-            else
+            if (storeId != 0)
             {
                 resultList = ProductCategoryRepository.GetProductCategoriesByStoreId(storeId);
             }
+            
 
             if (!String.IsNullOrEmpty(search))
             {

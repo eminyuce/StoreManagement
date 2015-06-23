@@ -9,7 +9,7 @@
 
     int storeId = Request.QueryString["storeId"].ToInt();
     List<SelectListItem> storesListItems = new List<SelectListItem>();
-    storesListItems.Add(new SelectListItem() { Text = "All", Value = "0" });
+    storesListItems.Add(new SelectListItem() { Text = "Select a Store", Value = "0" });
 
     var items = Model.ToList().Select(c => new SelectListItem
            {

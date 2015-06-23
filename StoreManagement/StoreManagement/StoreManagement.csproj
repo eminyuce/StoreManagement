@@ -234,7 +234,6 @@
     <Compile Include="Controllers\CategoriesController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ContentsController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -513,6 +512,8 @@
     <Content Include="Views\Shared\pRelatedProducts.cshtml" />
     <Content Include="Views\Shared\pProduct.cshtml" />
     <Content Include="Views\ProductCategories\Category.cshtml" />
+    <Content Include="Views\Home\Locations.cshtml" />
+    <Content Include="Views\Home\TermsAndCondition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

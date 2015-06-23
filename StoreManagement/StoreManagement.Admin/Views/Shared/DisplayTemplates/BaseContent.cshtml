@@ -8,7 +8,7 @@
     var actionNameDelete = "Delete";
     var actionNameEdit = "";
     var controllerName = "";
-    
+    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
     
     
         if (Model is Product)
@@ -52,7 +52,13 @@
 
         <br/>
         @Html.ActionLink("Edit", actionNameEdit, controllerName, new { id = Model.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white", @target = "_blank" })
-                @Html.ActionLink("Delete", actionNameDelete,controllerName, new { id = Model.Id }, new { @class = "btn btn-danger btn-sm    glyphicon glyphicon-trash glyphicon-white", @target = "_blank" })
+        
+        @if (!isRegularUser)
+        {
+              @Html.ActionLink("Delete", actionNameDelete,controllerName, new { id = Model.Id }, new { @class = "btn btn-danger btn-sm    glyphicon glyphicon-trash glyphicon-white", @target = "_blank" })
+ 
+        }
+             
 
     </div>
 </div>

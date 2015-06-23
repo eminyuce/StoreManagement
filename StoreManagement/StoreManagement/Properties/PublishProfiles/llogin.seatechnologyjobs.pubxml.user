@@ -151,13 +151,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/18/2015 16:26:59</publishTime>
+      <publishTime>06/22/2015 19:27:13</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>06/18/2015 16:30:13</publishTime>
+      <publishTime>06/22/2015 19:28:10</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/18/2015 16:29:30</publishTime>
+      <publishTime>06/22/2015 15:38:14</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -973,22 +973,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/22/2015 19:05:32</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/22/2015 19:05:45</publishTime>
     </File>
     <File Include="Views/Home/Footer.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/22/2015 19:06:37</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>06/18/2015 15:34:47</publishTime>
     </File>
+    <File Include="Views/Home/Locations.cshtml">
+      <publishTime>06/22/2015 19:06:00</publishTime>
+    </File>
     <File Include="Views/Home/MainMenu.cshtml">
-      <publishTime>06/07/2015 10:44:51</publishTime>
+      <publishTime>06/22/2015 19:17:19</publishTime>
     </File>
     <File Include="Views/Home/RecentUpdates.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
+    </File>
+    <File Include="Views/Home/TermsAndCondition.cshtml">
+      <publishTime>06/22/2015 19:06:20</publishTime>
     </File>
     <File Include="Views/Home/Test.cshtml">
       <publishTime>06/07/2015 10:44:51</publishTime>
@@ -1087,7 +1093,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/18/2015 15:32:56</publishTime>
+      <publishTime>06/22/2015 19:07:47</publishTime>
     </File>
   </ItemGroup>
 </Project>

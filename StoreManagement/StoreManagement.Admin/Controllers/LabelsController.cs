@@ -22,14 +22,11 @@ namespace StoreManagement.Admin.Controllers
         {
             var resultList = new List<Label>();
             storeId = GetStoreId(storeId);
-            if (storeId == 0)
-            {
-                resultList = LabelRepository.GetLabelsByLabelType(LabelType);
-            }
-            else
+            if (storeId != 0)
             {
                 resultList = LabelRepository.GetLabelsByLabelType(storeId, LabelType);
             }
+           
 
             if (!String.IsNullOrEmpty(search))
             {

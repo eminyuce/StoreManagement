@@ -26,15 +26,11 @@ namespace StoreManagement.Admin.Controllers
         {
             List<Product> resultList = new List<Product>();
             storeId = GetStoreId(storeId);
-            if (storeId == 0)
-            {
-                resultList = ProductRepository.GetProductByType(StoreConstants.ProductType);
-            }
-            else
+            if (storeId != 0)
             {
                 resultList = ProductRepository.GetProductByType(storeId, StoreConstants.ProductType);
             }
-
+            
             if (!String.IsNullOrEmpty(search))
             {
                 resultList =

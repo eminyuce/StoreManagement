@@ -1,4 +1,5 @@
 ﻿@using GridMvc.Html
+@using StoreManagement.Data.Constants
 @using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
 @model IEnumerable<StoreManagement.Data.Entities.Setting>
@@ -7,10 +8,21 @@
     ViewBag.Title = "Index";
     // Store s = ViewBag.Store;
     string storeId = Request.QueryString["storeId"].ToStr();
+
+    var isSuperAdmin = User.IsInRole(StoreConstants.RoleSuperAdmin);
 }
 
 
-<input type="hidden" name="StoreId" value="@storeId" id="StoreId"/>
+@if (isSuperAdmin)
+{
+    <input type="hidden" name="StoreId" value="@storeId" id="StoreId"/>
+}
+else
+{
+       @Html.Action("StoresDropDown", "Stores", new { storeId })
+}
+
+
 
 <div class="col-md-12">
     <div class="row">
@@ -21,181 +33,276 @@
                 </div>
             </div>
             <div class="bootstrap-admin-panel-content">
+
+                <div style="display: none;" id="SettingsMessage" class="alert alert-info">
+                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    <strong>Info!</strong> This is an information message.
+                </div>
+
                 <div>
                     @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = "Settings" })
                 </div>
-                @{
-                    String key = "StoreMetaKey";
-                    Setting item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                    if (item == null)
-                    {
-                        item = new Setting();
-                        item.SettingKey = key;
-                        item.Id = 0;
-                    } 
-                    
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+            
+                       
+                <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active"><a href="#StoreMetaKey" data-toggle="tab">Store Meta Key</a></li>
+                    <li><a href="#GoogleAnalytics" data-toggle="tab">Google Analytics</a></li>
+                    <li><a href="#Zopim" data-toggle="tab">Zopim</a></li>
+                    <li><a href="#AboutUs" data-toggle="tab">About Us</a></li>
+                    <li><a href="#Footer" data-toggle="tab">Footer</a></li>
+                    <li><a href="#TermsAndCondition" data-toggle="tab">Terms And Condition</a></li>
+                    <li><a href="#StoreMailAddress" data-toggle="tab">Store Mail Address</a></li>
+                    <li><a href="#StoreMailPassword" data-toggle="tab">Store Mail Password</a></li>
+                    <li><a href="#Contacts" data-toggle="tab">Contacts</a></li>
+                    <li><a href="#Location" data-toggle="tab">Location</a></li>
+                </ul>
+                <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active" id="StoreMetaKey">
+                        @{
+                            
+                            String key = "StoreMetaKey";
+                            Setting item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "Meta Key"}
-                            });
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
+                    
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Meta Key"}
+                                                                                                                                 ,{"IsHtmlEditor", false}
+	                                                                                                          });
 
-                              key = "GoogleAnalytics";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              }
                 
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+
+                            
+                        }
+
+                    </div>
+                    <div class="tab-pane" id="GoogleAnalytics">
+                        @{
+                            
+                            key = "GoogleAnalytics";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "Google Analytics"}
-                            });
-                    
-                    
-                    key = "Zopim";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              }
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            }
                 
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
-                            {
-                                {"StoreSettingTitle", "Zopim Code"}
-                            });
-
-                              key = "AboutUs";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              } 
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Google Analytics"}
+                                                                                                                                 ,{"IsHtmlEditor", false}
+	                                                                                                          });
                     
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+                  
+                            
+                        }
+
+                    </div>
+                    <div class="tab-pane" id="Zopim">
+                        @{
+                              
+                            key = "Zopim";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "About US"}
-                            })
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            }
+                
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Zopim Code"}
+                                                                                                                                 ,{"IsHtmlEditor", false}
+	                                                                                                          });
+
+
+                            
+                            
+                        }
+                    </div>
+                    <div class="tab-pane" id="AboutUs">
+
+                        @{
+                            
+                            key = "AboutUs";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
+                            {
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
+                    
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "About US"}
+                                                                                                                                 ,{"IsHtmlEditor", true}
+	                                                                                                          })
 
                     
-                    key = "Footer";
-                    item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                    if (item == null)
-                    {
-                        item = new Setting();
-                        item.SettingKey = key;
-                        item.Id = 0;
-                    } 
+                  
                     
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+                            
+                            
+                        }
+                    </div>
+                    <div class="tab-pane" id="Footer">
+                        @{
+                            
+                            key = "Footer";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "Footer"}
-                            });
-
-
-                              key = "TermsAndCondition";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              } 
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
                     
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
-                            {
-                                {"StoreSettingTitle", "Terms And Condition"}
-                            });
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Footer"}
+                                                                                                                                 ,{"IsHtmlEditor", true}
+	                                                                                                          });
 
-                              key = "StoreMailAddress";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              } 
+
+                  
+
+                            
+                            
+                        }
+                    </div>
+                    <div class="tab-pane" id="TermsAndCondition">
+                        @{
+                            
+                            key = "TermsAndCondition";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
+                            {
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
                     
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Terms And Condition"}
+                                                                                                                      ,{"IsHtmlEditor", true}
+	                                                                                                          });
+
+                        }
+
+                    </div>
+                    <div class="tab-pane" id="StoreMailAddress">
+                        @{
+                            
+                            key = "StoreMailAddress";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "Site Mail Address"}
-                            });
-
-
-                              key = "StoreMailPassword";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              } 
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
                     
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Site Mail Address"}
+                                                                                                                      ,{"IsHtmlEditor", false}
+	                                                                                                          });
+
+
+                   
+
+
+                        }
+                    </div>
+                    <div class="tab-pane" id="StoreMailPassword">
+                        @{
+                            key = "StoreMailPassword";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "Site Mail Address"}
-                            });
-
-
-
-                              key = "Contacts";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              } 
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
                     
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Site Mail Address"}
+                                                                                                                  ,{"IsHtmlEditor", false}
+	                                                                                                          });
+                             
+                        }
+                    </div>
+                    <div class="tab-pane" id="Contacts">
+                        @{
+                            key = "Contacts";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "Contacts"}
-                            });
-
-
-                              key = "Location";
-                              item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                              if (item == null)
-                              {
-                                  item = new Setting();
-                                  item.SettingKey = key;
-                                  item.Id = 0;
-                              } 
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
                     
-                    @Html.Partial("pSettingTextBox",
-                            item,
-                            new ViewDataDictionary(ViewData)
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Contacts"}
+                                                                                                                    ,{"IsHtmlEditor", true}
+	                                                                                                          }); 
+                             
+                        }
+                    </div>
+                    <div class="tab-pane" id="Location">
+                        @{
+                            key = "Location";
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
                             {
-                                {"StoreSettingTitle", "Location"}
-                            });
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.Id = 0;
+                            } 
+                    
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Location"}
+                                                                                                                    ,{"IsHtmlEditor", true}
+	                                                                                                          });
+                        }
+                    </div>
 
-                }
-
-                <p>
-                    <input class="btn btn-success btn-block btn-lg" id="SaveSetttings" type="submit" value="Save" />
+                </div>
+                    <p>
+                    <input class="btn btn-success btn-block btn-lg" id="SaveSetttings" type="submit" value="Save All Settings" />
                 </p>
 
             </div>
@@ -209,7 +316,14 @@
 @section scripts
 {
 
+    
+     
 
+    <script src="~/Scripts/jstree/jstree.js"></script>
+    <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
+    <script src="~/Scripts/storeContent.js"></script>
+    
+ 
     <script>
 
         function Setting(settingId, settingKey, settingValue) {
@@ -221,10 +335,22 @@
             return m;
         }
 
+         
 
 
         $(document).ready(function () {
             $("#SaveSetttings").on("click", handleAllSettings);
+            
+            $('[data-setting-html-editor="True"]').each(function () {
+                $(this).ckeditor({
+                    height: '150px',
+                    toolbar: [
+                        { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+                        ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
+                        { name: 'basicstyles', items: ['Bold', 'Italic'] }
+                    ]
+                });
+            });
         });
 
 
@@ -248,7 +374,10 @@
                 url: "/Ajax/SetSettings",
                 data: postData,
                 success: function (data) {
-
+                    $("#SettingsMessage").show("slow");
+                    setInterval(function () {
+                        $("#SettingsMessage").hide("slow");
+                    }, 10000);
                 },
                 error: function (jqXHR, exception) {
                     if (jqXHR.status === 0) {

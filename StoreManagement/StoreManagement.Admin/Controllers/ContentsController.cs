@@ -24,14 +24,11 @@ namespace StoreManagement.Admin.Controllers
         {
             List<Content> resultList = new List<Content>();
             storeId = GetStoreId(storeId);
-            if (storeId == 0)
-            {
-                resultList = ContentRepository.GetContentByType(ContentType);
-            }
-            else
+            if (storeId != 0)
             {
                 resultList = ContentRepository.GetContentByType(storeId, ContentType);
             }
+           
 
             if (!String.IsNullOrEmpty(search))
             {

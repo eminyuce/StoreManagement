@@ -22,14 +22,11 @@ namespace StoreManagement.Admin.Controllers
         {
             storeId = GetStoreId(storeId);
             List<Navigation> resultList = new List<Navigation>();
-            if (storeId == 0)
-            {
-                resultList = NavigationRepository.GetAll().ToList();
-            }
-            else
+            if (storeId != 0)
             {
                 resultList = NavigationRepository.GetStoreNavigations(storeId);
             }
+          
             if (!String.IsNullOrEmpty(search))
             {
                 resultList =
@@ -78,18 +75,19 @@ namespace StoreManagement.Admin.Controllers
         {
             // if (ModelState.IsValid)
             {
-                navigation.ControllerName = navigation.Modul;
+                var c = navigation.Modul.Split("-".ToCharArray());
+                navigation.ControllerName = c[0];
+                navigation.ActionName = c[1];
                 if (navigation.Id == 0)
                 {
                     NavigationRepository.Add(navigation);
-                    NavigationRepository.Save();
                 }
                 else
                 {
                     NavigationRepository.Edit(navigation);
-                    NavigationRepository.Save();
+                    
                 }
-
+                NavigationRepository.Save();
                 return RedirectToAction("Index");
             }
 

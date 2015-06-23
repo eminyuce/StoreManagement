@@ -372,11 +372,13 @@ namespace StoreManagement.Admin.Controllers
 
             foreach (var navigation in navigations)
             {
-                if (moduls.Any(r => r.Value.Equals(navigation.Modul, StringComparison.InvariantCultureIgnoreCase)))
+                String value = navigation.ControllerName.ToLower() + "-" + navigation.ActionName.ToLower();
+
+                if (moduls.Any(r => value.Equals(r.Value.ToLower(), StringComparison.InvariantCultureIgnoreCase)))
                 {
                     moduls.Remove(
                         moduls.FirstOrDefault(
-                            r => r.Value.Equals(navigation.Modul, StringComparison.InvariantCultureIgnoreCase)));
+                            r => r.Value.ToLower().Equals(value, StringComparison.InvariantCultureIgnoreCase)));
                 }
             }
 
@@ -393,32 +395,31 @@ namespace StoreManagement.Admin.Controllers
         {
             var moduls = new List<SelectListItem>();
             var m = new SelectListItem();
-            m.Value = "Home";
+            m.Value = "Home-Index";
             m.Text = "Home";
             moduls.Add(m);
             m = new SelectListItem();
-            m.Value = "News";
+            m.Value = "News-Index";
             m.Text = "News";
             moduls.Add(m);
             m = new SelectListItem();
-            m.Value = "Products";
+            m.Value = "Products-Index";
             m.Text = "Products";
             moduls.Add(m);
-
             m = new SelectListItem();
-            m.Value = "Blogs";
+            m.Value = "Blogs-Index";
             m.Text = "Blogs";
             moduls.Add(m);
             m = new SelectListItem();
-            m.Value = "Events";
+            m.Value = "Events-Index";
             m.Text = "Events";
             moduls.Add(m);
             m = new SelectListItem();
-            m.Value = "Contact";
+            m.Value = "Home-Contact";
             m.Text = "Contact";
             moduls.Add(m);
             m = new SelectListItem();
-            m.Value = "Photos";
+            m.Value = "Photos-Index";
             m.Text = "Photo Gallery";
             moduls.Add(m);
             return moduls;

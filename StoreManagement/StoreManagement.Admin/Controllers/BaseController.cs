@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using NLog;
 using Ninject;
@@ -80,25 +81,24 @@ namespace StoreManagement.Admin.Controllers
         {
             get
             {
-                if (Session["MySuperAdmin"] != null)
-                    return Session["MySuperAdmin"].ToBool();
+                var formsIdentity = HttpContext.User.Identity as FormsIdentity;
+                if (formsIdentity != null)
+                {
+                    FormsAuthenticationTicket ticket = formsIdentity.Ticket;
+                    string userData = ticket.UserData;
+
+                    return userData.Equals("true",StringComparison.InvariantCultureIgnoreCase);
+                }
                 else
                 {
                     return false;
-                };
+                }
             }
-            set
-            {
-                Session["MySuperAdmin"] = value;
-            }
+             
         }
         protected Boolean IsSuperAdmin
         {
             get { return MySuperAdmin; }
-            set
-            {
-                MySuperAdmin = value;
-            }
         }
 
         protected int GetStoreId(int id)
@@ -124,23 +124,27 @@ namespace StoreManagement.Admin.Controllers
         {
             get
             {
-                if (Session["MyLoginStore"] != null)
-                    return Session["MyLoginStore"] as Store;
+                 
+                var formsIdentity = HttpContext.User.Identity as FormsIdentity;
+                if (formsIdentity != null)
+                {
+                    FormsAuthenticationTicket ticket = formsIdentity.Ticket;
+                    string userData = ticket.UserData;
+                    var serializer = new JavaScriptSerializer();
+                    var s = serializer.Deserialize<Store>(userData);
+
+                    return s;
+                }
                 else
                 {
-                    return new Store();
-                };
+                    return null;
+                }
             }
-            set
-            {
-                Session["MyLoginStore"] = value;
-            }
+            
         }
-
         protected Store LoginStore
         {
             get { return MyLoginStore; }
-            set { MyLoginStore = value; }
         }
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected BaseController()
@@ -148,46 +152,8 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
-        protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
-        {
-            try
-            {
-                if (requestContext.HttpContext.User.Identity.IsAuthenticated)
-                {
-                    SetStoreValues(requestContext.HttpContext.User.Identity.Name);
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return base.BeginExecute(requestContext, callback, state);
-        }
-
-
-        protected bool SetStoreValues(String userName)
-        {
-           
-                String key = String.Format("SetStoreValues-{0}", userName);
-                Store site = null;
-                UserStoreCache.TryGet(key, out site);
-                if (site == null)
-                {
-                    var s = StoreRepository.GetStoreByUserName(userName);
-                    if (s == null)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        UserStoreCache.Set(key, s, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration_Minute", 100000)));
-                    }
-                }
-                LoginStore = site;
-            
-
-            return true;
-        }
+      
+ 
         protected string GetCleanHtml(String source)
         {
             if (String.IsNullOrEmpty(source))

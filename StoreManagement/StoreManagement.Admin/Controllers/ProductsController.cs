@@ -28,7 +28,7 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = ProductRepository.GetProductByType(storeId, StoreConstants.ProductType);
+                resultList = ProductRepository.GetProductByTypeAndCategoryId(storeId, StoreConstants.ProductType, categoryId);
             }
             
             if (!String.IsNullOrEmpty(search))
@@ -36,11 +36,7 @@ namespace StoreManagement.Admin.Controllers
                 resultList =
                     resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             }
-
-            if (categoryId > 0)
-            {
-                resultList = resultList.Where(r => r.ProductCategoryId == categoryId).ToList();
-            }
+ 
             var contentsAdminViewModel = new ProductsAdminViewModel();
             contentsAdminViewModel.Products = resultList;
             contentsAdminViewModel.Categories = ProductCategoryRepository.GetProductCategoriesByStoreIdFromCache(storeId, StoreConstants.ProductType);
@@ -100,6 +96,14 @@ namespace StoreManagement.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                if (content.ProductCategoryId == 0)
+                {
+                    ModelState.AddModelError("ProductCategoryId", "You should select category from category tree.");
+                    return View(content);
+                }
+
+
                 content.Description = GetCleanHtml(content.Description);
                 if (content.Id == 0)
                 {

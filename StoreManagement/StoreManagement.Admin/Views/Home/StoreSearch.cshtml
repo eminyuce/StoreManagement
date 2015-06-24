@@ -1,10 +1,13 @@
 ﻿@using StoreManagement.Data.GeneralHelper
-@model StoreManagement.Data.Entities.Store
+ 
 @{
     string search = @Request.QueryString["adminsearchkey"].ToStr();
+    var isSuperAdmin = Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+ 
+
 }
 
-@using (Html.BeginForm("AdminSearch", "Home", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+@using (Html.BeginForm(isSuperAdmin ? "SuperAdminSearch" : "AdminSearch", "Home", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
 {
     <div class="form-group">
         <input type="text" class="form-control" name="adminsearchkey" value="@search" placeholder="Search...">

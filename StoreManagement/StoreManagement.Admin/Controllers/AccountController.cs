@@ -4,6 +4,7 @@ using System.Linq;
 using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
@@ -23,7 +24,7 @@ namespace StoreManagement.Admin.Controllers
     [InitializeSimpleMembership]
     public class AccountController : BaseController
     {
- 
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -66,16 +67,43 @@ namespace StoreManagement.Admin.Controllers
                     DbContext.SaveChanges();
 
                     var isSuper = Roles.GetRolesForUser(model.UserName).Contains("SuperAdmin");
-
-                    IsSuperAdmin = isSuper;
-                    if (!IsSuperAdmin)
+                    string userData = "";
+                    if (!isSuper)
                     {
-                        var isStore = SetStoreValues(model.UserName); // Set Store values for Store Admin users.
-                        if (!isStore)
+
+                        JavaScriptSerializer serializer = new JavaScriptSerializer();
+                        var s = StoreRepository.GetStoreByUserName(model.UserName);
+                        userData = serializer.Serialize(s);
+
+                        if (s == null)
                         {
                             return RedirectToAction("NoStoreFound", new { id = model.UserName });
                         }
+
+
+
                     }
+                    else
+                    {
+                        userData = isSuper.ToString();
+                    }
+
+                    FormsAuthenticationTicket ticket;
+                    String cookiestr;
+                    HttpCookie ck;
+                    ticket = new FormsAuthenticationTicket(1, model.UserName, DateTime.Now,
+                                                           DateTime.Now.AddMinutes(30), model.RememberMe, userData);
+
+                    cookiestr = FormsAuthentication.Encrypt(ticket);
+                    ck = new HttpCookie(FormsAuthentication.FormsCookieName.ToString(), cookiestr);
+
+                    if (model.RememberMe)
+                    {
+                        ck.Expires = ticket.Expiration;
+                    }
+                    ck.Path = FormsAuthentication.FormsCookiePath;
+
+                    Response.Cookies.Add(ck);
                     return RedirectToLocal(returnUrl);
                 }
 
@@ -86,8 +114,17 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult NoStoreFound()
         {
-            Session.Remove("MySuperAdmin");
-            Session.Remove("MyLoginStore");
+
+            FormsAuthentication.SignOut();
+            Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
+            Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+            HttpCookie cookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookie);
+            }
+
             WebSecurity.Logout();
             return View();
         }
@@ -513,10 +550,10 @@ namespace StoreManagement.Admin.Controllers
                     //  mailTemplate.Body = MailHelper.GetForgotPasswordMailTemplate(mailTemplate.Body, UserName, resetLink, resetPasswordUrl);
 
                     try
-                    { 
+                    {
                         String forgotPasswordEmailTemplate = "";
                         forgotPasswordEmailTemplate = System.IO.File.ReadAllText(Server.MapPath(@"~\Views\Shared\DisplayTemplates\ForgotPasswordEmail.cshtml"));
-                        var model = new { Email=userName, Link = resetLink, Url = resetPasswordUrl };
+                        var model = new { Email = userName, Link = resetLink, Url = resetPasswordUrl };
 
                         string subject = "Store Management Reset Password";
                         string body = Razor.Parse(forgotPasswordEmailTemplate, model);

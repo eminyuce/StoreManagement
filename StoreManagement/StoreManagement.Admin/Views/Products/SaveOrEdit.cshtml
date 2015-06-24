@@ -45,81 +45,82 @@
                             @Html.HiddenFor(model => model.UpdatedDate)
                           
 
-                                <div class="editor-field controls">
-                                    @Html.Action("StoresDropDown", "Stores", new { storeId })
-                                </div>
+                            <div class="editor-field controls">
+                                @Html.Action("StoresDropDown", "Stores", new { storeId })
+                            </div>
 
 
-                                @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.Id)
 
-                                @Html.HiddenFor(model => model.Type)
+                            @Html.HiddenFor(model => model.Type)
 
 
-                               <div class="form-group">
-                                    <b>Selected Category : 
-                                         <h3>
+                            <div class="form-group">
+                                <b>Selected Category : 
+                                       @Html.ValidationMessageFor(model => model.ProductCategoryId)
+                                    <h3>
                                         <span class="text-danger" id="SelectedCategory"></span>
                                     </h3>
-                                    </b>
-                                    @Html.HiddenFor(model => model.ProductCategoryId)
-                                </div>
+                                </b>
+                                @Html.HiddenFor(model => model.ProductCategoryId)
+                            </div>
 
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Name)
-                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
-                                    @Html.ValidationMessageFor(model => model.Name)
-                                </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name)
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Description)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description)
 
-                                    @Html.TextAreaFor(model => model.Description)
-                                </div>
-
-
-
-                                <div class="editor-field">
-                                    <div id="contentImages"></div>
-                                    <div id="existingContentImages"></div>
-                                    @Html.Action("ImageGallery", "FileManager")
-                                </div>
-
-                                <div class="form-group">
-
-                                    @Html.LabelFor(model => model.MainPage)
-                                    @Html.EditorFor(model => model.MainPage, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.MainPage)
+                                @Html.TextAreaFor(model => model.Description)
+                            </div>
 
 
 
-                                    @Html.LabelFor(model => model.State)
-                                    @Html.EditorFor(model => model.State, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.State)
+                            <div class="editor-field">
+                                <div id="contentImages"></div>
+                                <div id="existingContentImages"></div>
+                                @Html.Action("ImageGallery", "FileManager")
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(model => model.MainPage)
+                                @Html.EditorFor(model => model.MainPage, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MainPage)
 
 
-                                    @Html.LabelFor(model => model.ImageState)
 
-                                    @Html.EditorFor(model => model.ImageState, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.ImageState)
-
-                                </div>
+                                @Html.LabelFor(model => model.State)
+                                @Html.EditorFor(model => model.State, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.State)
 
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Ordering)
-                                    @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
-                                    @Html.ValidationMessageFor(model => model.Ordering)
-                                </div>
-                                <div class="form-group">
-                                    <label for="Labels">Labels</label>
-                                    @Html.Action("LabelsDropDown", "Home", new { storeId, labelType = Model.Type, selectedLabelsId = selectedLabelId })
-                                </div>
+                                @Html.LabelFor(model => model.ImageState)
+
+                                @Html.EditorFor(model => model.ImageState, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ImageState)
+
+                            </div>
 
 
-                                <p>
-                                    <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
-                                </p>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Ordering)
+                                @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
+                                @Html.ValidationMessageFor(model => model.Ordering)
+                            </div>
+                            <div class="form-group">
+                                <label for="Labels">Labels</label>
+                                @Html.Action("LabelsDropDown", "Home", new { storeId, labelType = Model.Type, selectedLabelsId = selectedLabelId })
+                            </div>
+
+
+                            <p>
+                                <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
+                            </p>
                  
                         }
 
@@ -149,7 +150,7 @@
     <script src="~/Scripts/jstree/jstree.js"></script>
     <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
     <script src="~/Scripts/storeContent.js"></script>
-    
+
 
 
 }

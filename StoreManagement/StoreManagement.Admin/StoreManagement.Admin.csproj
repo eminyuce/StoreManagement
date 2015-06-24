@@ -1923,6 +1923,7 @@
     <Content Include="Views\EmailLists\Delete.cshtml" />
     <Content Include="Views\EmailLists\Details.cshtml" />
     <Content Include="Views\EmailLists\Index.cshtml" />
+    <Content Include="Views\Home\SuperAdminSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

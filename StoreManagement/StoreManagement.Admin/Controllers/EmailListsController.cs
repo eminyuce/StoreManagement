@@ -81,7 +81,14 @@ namespace StoreManagement.Admin.Controllers
                 }
                 EmailListRepository.Save();
 
-                return RedirectToAction("Index");
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = emaillist.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return View(emaillist);
         }
@@ -104,7 +111,15 @@ namespace StoreManagement.Admin.Controllers
             EmailList emaillist = EmailListRepository.GetSingle(id);
             EmailListRepository.Delete(emaillist);
             EmailListRepository.Save();
-            return RedirectToAction("Index");
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = emaillist.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 

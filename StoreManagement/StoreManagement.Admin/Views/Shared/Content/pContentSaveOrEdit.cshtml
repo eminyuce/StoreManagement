@@ -3,8 +3,10 @@
 
 
 @{
+    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    int storeId = Model != null ? Model.StoreId : requestStoreId;
 
-    int storeId = Model != null ? Model.StoreId : 0;
+    
     String categoryType = Model.Type;
     var title = ViewData["ContentSaveOrEditPageTitle"].ToStr();
     var panelTitle = ViewData["ContentSaveOrEditPanelTitle"].ToStr();

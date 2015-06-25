@@ -28,7 +28,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 resultList = ContentRepository.GetContentByTypeAndCategoryId(storeId, ContentType, categoryId);
             }
-           
+
 
             if (!String.IsNullOrEmpty(search))
             {
@@ -68,14 +68,14 @@ namespace StoreManagement.Admin.Controllers
                 content.UpdatedDate = DateTime.Now;
                 content.CreatedDate = DateTime.Now;
                 content.State = true;
-  
+
             }
             else
             {
                 content = ContentRepository.GetSingle(id);
                 content.UpdatedDate = DateTime.Now;
                 labels = LabelLineRepository.GetLabelLinesByItem(id, ContentType);
-        
+
             }
 
             ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
@@ -95,7 +95,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 if (content.CategoryId == 0)
                 {
-                    ModelState.AddModelError("CategoryId","You should select category from category tree.");
+                    ModelState.AddModelError("CategoryId", "You should select category from category tree.");
                     return View(content);
                 }
 
@@ -114,12 +114,24 @@ namespace StoreManagement.Admin.Controllers
                     ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
                 }
                 LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, ContentType);
-                return RedirectToAction("Index");
+
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = content.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+
             }
 
             return View(content);
         }
 
+    
 
 
         //
@@ -146,7 +158,16 @@ namespace StoreManagement.Admin.Controllers
             Content content = ContentRepository.GetSingle(id);
             ContentRepository.Delete(content);
             ContentRepository.Save();
-            return RedirectToAction("Index");
+
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = content.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 

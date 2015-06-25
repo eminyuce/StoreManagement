@@ -115,6 +115,14 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult NoStoreFound()
         {
 
+            DeleteAuthCookie();
+
+            WebSecurity.Logout();
+            return View();
+        }
+
+        private void DeleteAuthCookie()
+        {
             FormsAuthentication.SignOut();
             Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
             Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
@@ -124,10 +132,8 @@ namespace StoreManagement.Admin.Controllers
                 cookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(cookie);
             }
-
-            WebSecurity.Logout();
-            return View();
         }
+
         //
         // POST: /Account/LogOff
 
@@ -135,8 +141,7 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            Session.Remove("MySuperAdmin");
-            Session.Remove("MyLoginStore");
+            DeleteAuthCookie();
             WebSecurity.Logout();
             return RedirectToAction("Index", "Home");
         }
@@ -415,14 +420,16 @@ namespace StoreManagement.Admin.Controllers
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl) && !returnUrl.ToLower().Contains("account/login") && !returnUrl.ToLower().Contains("home/index"))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Dashboard");
-            }
+            //if (Url.IsLocalUrl(returnUrl) && !returnUrl.ToLower().Contains("account/login") && !returnUrl.ToLower().Contains("home/index"))
+            //{
+            //    return Redirect(returnUrl);
+            //}
+            //else
+            //{
+        
+            //}
+
+            return RedirectToAction("Index", "Dashboard");
         }
 
         public enum ManageMessageId

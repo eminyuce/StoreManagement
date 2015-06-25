@@ -1,10 +1,12 @@
+@using StoreManagement.Data.GeneralHelper
 @model  StoreManagement.Data.Entities.Navigation
 
 
 @{
     ViewBag.Title = "Create";
     Layout = "../Shared/_Layout.cshtml";
-    int storeId = Model != null ? Model.StoreId : 0;
+    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    int storeId = Model != null ? Model.StoreId : requestStoreId;
     
 }
 

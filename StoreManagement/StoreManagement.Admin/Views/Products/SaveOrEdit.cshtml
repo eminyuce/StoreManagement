@@ -2,8 +2,8 @@
 @model StoreManagement.Data.Entities.Product
 
 @{
-
-    int storeId = Model != null ? Model.StoreId : 0;
+    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    int storeId = Model != null ? Model.StoreId : requestStoreId;
     String categoryType = Model.Type;
     int[] selectedLabelId = ViewBag.SelectedLabels;
 }

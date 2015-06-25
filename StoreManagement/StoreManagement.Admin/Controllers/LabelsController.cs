@@ -84,7 +84,15 @@ namespace StoreManagement.Admin.Controllers
                     LabelRepository.Edit(label);
                 }
                 LabelRepository.Save();
-                return RedirectToAction("Index");
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = label.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return View(label);
         }
@@ -108,7 +116,15 @@ namespace StoreManagement.Admin.Controllers
             Label label = LabelRepository.GetSingle(id);
             LabelRepository.Delete(label);
             LabelRepository.Save();
-            return RedirectToAction("Index");
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = label.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 

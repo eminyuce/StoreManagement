@@ -79,7 +79,15 @@ namespace StoreManagement.Admin.Controllers
  
                 ProductCategoryRepository.Save();
 
-                return RedirectToAction("Index");
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = category.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return View(category);
         }
@@ -102,7 +110,15 @@ namespace StoreManagement.Admin.Controllers
             ProductCategory category = ProductCategoryRepository.GetProductCategory(id);
             ProductCategoryRepository.Delete(category);
             ProductCategoryRepository.Save();
-            return RedirectToAction("Index");
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = category.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
     }

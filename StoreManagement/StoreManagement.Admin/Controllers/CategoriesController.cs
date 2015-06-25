@@ -89,7 +89,15 @@ namespace StoreManagement.Admin.Controllers
                 category.CreatedDate = DateTime.Now;
                 CategoryRepository.Save();
 
-                return RedirectToAction("Index");
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = category.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return View(category);
         }
@@ -113,7 +121,16 @@ namespace StoreManagement.Admin.Controllers
             Category category = CategoryRepository.GetCategory(id);
             CategoryRepository.Delete(category);
             CategoryRepository.Save();
-            return RedirectToAction("Index");
+
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = category.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 

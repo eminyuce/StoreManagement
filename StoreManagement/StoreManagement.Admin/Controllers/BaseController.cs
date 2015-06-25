@@ -179,6 +179,6 @@ namespace StoreManagement.Admin.Controllers
                 return entity.StoreId == LoginStore.Id;
             }
         }
-
+ 
     }
 }

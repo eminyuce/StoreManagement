@@ -18,7 +18,7 @@ namespace StoreManagement.Controllers
 
         public ActionResult Index(int page=1)
         {
-            if (IsModulActive(StoreConstants.NewsType))
+            if (!IsModulActive(StoreConstants.NewsType))
             {
                 return HttpNotFound("Not Found");
             }

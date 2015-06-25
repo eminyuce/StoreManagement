@@ -121,7 +121,16 @@ namespace StoreManagement.Admin.Controllers
                     ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
                 }
                 LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
-                return RedirectToAction("Index");
+
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = content.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(content);
@@ -163,7 +172,16 @@ namespace StoreManagement.Admin.Controllers
             Product content = ProductRepository.GetSingle(id);
             ProductRepository.Delete(content);
             ProductRepository.Save();
-            return RedirectToAction("Index");
+
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = content.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 

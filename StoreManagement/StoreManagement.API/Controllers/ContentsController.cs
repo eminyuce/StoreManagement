@@ -134,6 +134,11 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
         }
 
+        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
             return this.ContentRepository.GetContentByTypeAndCategoryIdFromCache(storeId, typeName, categoryId);

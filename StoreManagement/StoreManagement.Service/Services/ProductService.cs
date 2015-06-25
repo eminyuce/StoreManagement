@@ -59,6 +59,11 @@ namespace StoreManagement.Service.Services
 
         }
 
+        public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Product> GetProductByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
             string url = string.Format("http://{0}/api/{1}/GetProductByTypeAndCategoryIdFromCache" +

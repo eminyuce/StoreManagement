@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -47,6 +48,19 @@ namespace StoreManagement.Service.Repositories
            r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
 
 
+        }
+
+        public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, string search)
+        {
+            var items = this.FindBy(r => r.StoreId == storeId &&
+                                         r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
 
         public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)

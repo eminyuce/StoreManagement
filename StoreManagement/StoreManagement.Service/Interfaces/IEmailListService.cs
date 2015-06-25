@@ -10,6 +10,6 @@ namespace StoreManagement.Service.Interfaces
     public interface IEmailListService : IService
     {
         List<EmailList> GetStoreEmailList(int storeId);
-
+      
     }
 }

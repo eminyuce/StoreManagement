@@ -30,5 +30,10 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetLabelsByLabelType?storeId={2}&labelType={3}", WebServiceAddress, ApiControllerName, storeId, labelType);
             return HttpRequestHelper.GetUrlResults<Label>(url);
         }
+
+        public List<Label> GetLabelsByTypeAndCategoryAndSearch(int storeId, string labelType, int categoryId, string search)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

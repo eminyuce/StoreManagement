@@ -202,6 +202,25 @@ namespace StoreManagement.Admin.Controllers
             ProductCategoryRepository.Save();
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ChangeLabelGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = LabelRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
+
+                LabelRepository.Edit(nav);
+            }
+            LabelRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ChangeCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
             foreach (OrderingItem item in values)

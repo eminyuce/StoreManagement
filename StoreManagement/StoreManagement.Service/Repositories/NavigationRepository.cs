@@ -7,6 +7,7 @@ using GenericRepository.EntityFramework;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -41,6 +42,17 @@ namespace StoreManagement.Service.Repositories
             }
 
             return items;
+        }
+
+        public List<Navigation> GetStoreNavigations(int storeId, string search)
+        {
+            var navigations = this.FindBy(r => r.StoreId == storeId);
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                navigations = navigations.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return navigations.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
     }
 

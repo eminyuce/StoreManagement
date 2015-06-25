@@ -65,6 +65,11 @@ namespace StoreManagement.Service.Services
 
         }
 
+        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
 

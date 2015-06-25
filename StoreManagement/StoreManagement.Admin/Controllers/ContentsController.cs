@@ -26,16 +26,11 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = ContentRepository.GetContentByTypeAndCategoryId(storeId, ContentType, categoryId);
+                resultList = ContentRepository.GetContentByTypeAndCategoryId(storeId, ContentType, categoryId, search);
             }
 
 
-            if (!String.IsNullOrEmpty(search))
-            {
-                resultList =
-                    resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            }
-
+           
             var contentsAdminViewModel = new ContentsAdminViewModel();
             contentsAdminViewModel.Contents = resultList;
             contentsAdminViewModel.Categories = CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, ContentType);

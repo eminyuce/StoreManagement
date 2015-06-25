@@ -20,15 +20,9 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = EmailListRepository.GetStoreEmailList(storeId);
+                resultList = EmailListRepository.GetStoreEmailList(storeId,search);
             }
-
-            if (!String.IsNullOrEmpty(search))
-            {
-                resultList =
-                    resultList.Where(r => r.Email.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            }
-
+ 
             return View(resultList);
         }
 

@@ -59,6 +59,19 @@ namespace StoreManagement.Service.Repositories
                r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
+        public List<Category> GetCategoriesByStoreId(int storeId, string type, string search)
+        {
+            var cats = this.FindBy(r => r.StoreId == storeId &&
+                                    r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                cats = cats.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return cats.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+        }
+
         public List<Category> GetCategoriesByType(string type)
         {
             return this.FindBy(r => r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();

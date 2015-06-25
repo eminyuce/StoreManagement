@@ -11,6 +11,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface IEmailListRepository : IEntityRepository<EmailList, int>, IEmailListService
     {
-
+        List<EmailList> GetStoreEmailList(int storeId, String search);
     }
 }

@@ -14,8 +14,9 @@ namespace StoreManagement.Service.Interfaces
         List<Product> GetProductByType(String typeName);
         List<Product> GetProductByType(int storeId, String typeName);
         List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId);
+        List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId, String search);
         List<Product> GetProductByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
-        StorePagedList<Product> GetProductsCategoryId(int storeId, int ? categoryId, String typeName, bool? isActive, int page, int pageSize);
+        StorePagedList<Product> GetProductsCategoryId(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Product GetProductWithFiles(int id);
     }
 }

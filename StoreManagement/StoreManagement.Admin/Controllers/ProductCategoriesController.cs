@@ -20,15 +20,11 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = ProductCategoryRepository.GetProductCategoriesByStoreId(storeId);
+                resultList = ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, StoreConstants.ProductType, search);
             }
-            
 
-            if (!String.IsNullOrEmpty(search))
-            {
-                resultList =
-                    resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            }
+
+
             return View(resultList);
         }
 
@@ -76,7 +72,7 @@ namespace StoreManagement.Admin.Controllers
                 {
                     ProductCategoryRepository.Edit(category);
                 }
- 
+
                 ProductCategoryRepository.Save();
 
 

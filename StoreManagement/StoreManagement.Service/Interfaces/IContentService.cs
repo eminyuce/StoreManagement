@@ -16,6 +16,7 @@ namespace StoreManagement.Service.Interfaces
         List<Content> GetContentByType(String typeName);
         List<Content> GetContentByType(int storeId, String typeName);
         List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId);
+        List<Content> GetContentByTypeAndCategoryId(int storeId, String typeName, int categoryId, String search);
         List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
         StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Content GetContentWithFiles(int id);

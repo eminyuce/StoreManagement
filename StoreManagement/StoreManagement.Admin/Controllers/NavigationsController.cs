@@ -24,14 +24,9 @@ namespace StoreManagement.Admin.Controllers
             List<Navigation> resultList = new List<Navigation>();
             if (storeId != 0)
             {
-                resultList = NavigationRepository.GetStoreNavigations(storeId);
+                resultList = NavigationRepository.GetStoreNavigations(storeId,search);
             }
-          
-            if (!String.IsNullOrEmpty(search))
-            {
-                resultList =
-                    resultList.Where(r => r.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            }
+           
             ViewBag.Search = search;
             return View(resultList);
         }

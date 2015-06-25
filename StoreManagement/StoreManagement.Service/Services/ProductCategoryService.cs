@@ -34,6 +34,11 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResults<ProductCategory>(url);
         }
 
+        public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, string search)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)
         {
             string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdFromCache?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);

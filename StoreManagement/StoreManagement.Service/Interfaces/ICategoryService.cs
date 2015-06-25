@@ -12,6 +12,7 @@ namespace StoreManagement.Service.Interfaces
         List<Category> GetCategoriesByStoreId(int storeId);
         List<Category> GetCategoriesByStoreIdWithContent(int storeId);
         List<Category> GetCategoriesByStoreId(int storeId, String type);
+        List<Category> GetCategoriesByStoreId(int storeId, String type,String search);
         List<Category> GetCategoriesByType(String type);
         List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type);
         Category GetCategory(int id);

@@ -11,6 +11,8 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface INavigationRepository : IEntityRepository<Navigation, int>, INavigationService
     {
-       
+
+
+        List<Navigation> GetStoreNavigations(int storeId, string search);
     }
 }

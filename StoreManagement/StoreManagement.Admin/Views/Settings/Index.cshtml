@@ -58,7 +58,7 @@ else
                     <div class="tab-pane active" id="StoreMetaKey">
                         @{
                             
-                            String key = "MetaTagKey";
+                            String key = StoreConstants.MetaTagKey;
                             Setting item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -77,7 +77,7 @@ else
                         }
                                           <hr/>
                         @{
-                            key = "MetaTagKeywords";
+                            key = StoreConstants.MetaTagKeywords;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -93,7 +93,7 @@ else
                         }
                                           <hr/>
                           @{
-                              key = "MetaTagDescription";
+                              key = StoreConstants.MetaTagDescription;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -112,7 +112,7 @@ else
                     <div class="tab-pane" id="GoogleAnalytics">
                         @{
                             
-                            key = "GoogleAnalytics";
+                            key = StoreConstants.GoogleAnalytics;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -135,7 +135,7 @@ else
                         <hr/>
                         
                           @{
-                           key = "GoogleMapEmbed";
+                           key =StoreConstants.GoogleMapEmbed;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -157,7 +157,7 @@ else
                     <div class="tab-pane" id="Zopim">
                         @{
                               
-                            key = "Zopim";
+                            key = StoreConstants.Zopim;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -183,7 +183,7 @@ else
                     <div class="tab-pane" id="Footer">
                         @{
                             
-                            key = "Footer";
+                            key = StoreConstants.Footer;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -210,7 +210,7 @@ else
                     <div class="tab-pane" id="TermsAndCondition">
                         @{
                             
-                            key = "TermsAndCondition";
+                            key = StoreConstants.TermsAndCondition;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -233,7 +233,7 @@ else
                     <div class="tab-pane" id="StoreMailAddress">
                         @{
                             
-                            key = "MailAddress";
+                            key = StoreConstants.MailAddress;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -258,7 +258,7 @@ else
                         <hr/>
 
                            @{
-                            key = "MailPassword";
+                            key = StoreConstants.MailPassword;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -280,7 +280,7 @@ else
                    
                     <div class="tab-pane" id="Contacts">
                         @{
-                            key = "Contacts";
+                            key =  StoreConstants.Contacts;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -300,7 +300,7 @@ else
                         }
                                           <hr/>
                         @{
-                            key = "Location";
+                            key =  StoreConstants.Location;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -320,7 +320,8 @@ else
                         <hr/>
                           @{
                             
-                            key = "AboutUs";
+                              
+                            key =  StoreConstants.AboutUs;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -348,7 +349,7 @@ else
                     </div>
                     <div class="tab-pane" id="SocialMediaLinks">
                             @{
-                                key = "SocialMediaLinks";
+                                key =  StoreConstants.SocialMediaLinks;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
@@ -363,7 +364,7 @@ else
                             }
                         <hr/>
                            @{
-                               key = "SocialMediaEmbedFeed";
+                               key =  StoreConstants.SocialMediaEmbedFeed;
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {

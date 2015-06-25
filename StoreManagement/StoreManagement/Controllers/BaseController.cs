@@ -6,8 +6,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NLog;
 using Ninject;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Helper;
 using StoreManagement.Models;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
@@ -60,7 +62,7 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public IProductCategoryService ProductCategoryService { set; get; }
-        
+
         protected Store Store { set; get; }
 
 
@@ -69,33 +71,57 @@ namespace StoreManagement.Controllers
         {
             base.Initialize(requestContext);
 
-            String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
+            GetStoreByDomain(requestContext);
 
-            if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                var request = requestContext.HttpContext.Request;
-                String domainName = "FUELTECHNOLOGYAGE.COM";
-                domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host + (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
-                domainName = GeneralHelper.GetDomainPart(domainName);
-                this.Store = StoreService.GetStore(domainName);
-
-            }
-            else
-            {
-                this.Store = StoreService.GetStoreByDomain("login.seatechnologyjobs.com");
-
-            }
- 
-
-            if (Store == null)
+        }
+        private void GetStoreByDomain(RequestContext requestContext)
+        {
+            var sh = new StoreHelper();
+            var store = sh.GetStoreByDomain(StoreService, requestContext.HttpContext.Request);
+            this.Store = store;
+            if (store == null)
             {
                 throw new Exception("Store cannot be NULL");
             }
+        }
+
+        protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
+        {
+            return new HttpNotFoundResult(statusDescription);
+        }
+        protected bool IsModulActive(String controllerName)
+        {
+            return NavigationService.GetStoreActiveNavigations(Store.Id).Any(r => r.ControllerName.StartsWith(controllerName.ToLower()));
         }
         protected bool CheckRequest(BaseEntity entity)
         {
             return entity.StoreId == Store.Id;
         }
+
+        protected BaseController()
+        {
+            ViewBag.MetaDescription = GetSettingValue(StoreConstants.MetaTagDescription);
+            ViewBag.MetaKeywords = GetSettingValue(StoreConstants.MetaTagKeywords);
+        }
+
+
+        protected String GetSettingValue(String key)
+        {
+            try
+            {
+                var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+
+                return item != null ? item.SettingValue : "";
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Store= " + Store.Domain + " Key=" + key, ex);
+                return "";
+            }
+
+
+        }
+
 
     }
 }

@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using StoreManagement.Constants;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
+using StoreManagement.Filters;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -71,6 +72,7 @@ namespace StoreManagement.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+       
 
             var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", true);
             if (isAPIService)
@@ -109,7 +111,7 @@ namespace StoreManagement.App_Start
 
                 kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
                 kernel.Bind<IContentService>().To<ContentRepository>();
-                kernel.Bind<IStoreService>().To<StoreRepository>();
+                var m = kernel.Bind<IStoreService>().To<StoreRepository>();
                 kernel.Bind<ISettingService>().To<SettingRepository>();
                 kernel.Bind<IFileManagerService>().To<FileManagerRepository>();
                 kernel.Bind<ICategoryService>().To<CategoryRepository>();
@@ -121,9 +123,11 @@ namespace StoreManagement.App_Start
                 kernel.Bind<IProductService>().To<ProductRepository>();
                 kernel.Bind<IProductFileService>().To<ProductFileRepository>(); 
                 kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>();
-
+                           
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();
+
+           
         }
     }
 }

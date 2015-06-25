@@ -16,6 +16,9 @@ namespace StoreManagement.Controllers
         // GET: /Blogs/
         public ActionResult Index(int page = 1)
         {
+
+           
+
             var newsContents = new ContentsViewModel();
             newsContents.Store = Store;
             var m = ContentService.GetContentsCategoryId(Store.Id, null, "blog", true, page, 24);

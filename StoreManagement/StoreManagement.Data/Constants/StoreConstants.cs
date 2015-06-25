@@ -17,5 +17,36 @@ namespace StoreManagement.Data.Constants
         public const String NewsType = "news";
         public const String BlogsType = "blog";
         public const String StoreType = "store";
+
+
+        public const String MetaTagKey = "MetaTagKey";
+
+        public const String MetaTagKeywords = "MetaTagKeywords";
+
+        public const String MetaTagDescription = "MetaTagDescription";
+
+        public const String GoogleAnalytics = "GoogleAnalytics";
+
+        public const String GoogleMapEmbed = "GoogleMapEmbed";
+
+        public static String Zopim = "Zopim";
+
+        public static String Footer = "Footer";
+
+        public static String TermsAndCondition = "TermsAndCondition";
+
+        public static String MailAddress = "MailAddress";
+
+        public static String MailPassword = "MailPassword";
+
+        public static String Contacts = "Contacts";
+
+        public static String Location = "Location";
+
+        public static String AboutUs = "AboutUs";
+
+        public static String SocialMediaLinks = "SocialMediaLinks";
+
+        public static String SocialMediaEmbedFeed = "SocialMediaEmbedFeed";
     }
 }

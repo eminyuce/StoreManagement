@@ -46,32 +46,27 @@ namespace StoreManagement.Controllers
         }
         public ActionResult About()
         {
-            String  key = "AboutUs";
-            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = GetSettingValue(StoreConstants.AboutUs);
             return View(item);
         }
         public ActionResult Contact()
         {
-            String key = "Contacts";
-            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = GetSettingValue(StoreConstants.Contacts);
             return View(item);
         }
         public ActionResult Locations()
         {
-            String key = "Location";
-            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = GetSettingValue(StoreConstants.Location);
             return View(item);
         }
         public ActionResult TermsAndCondition()
         {
-            String key = "TermsAndCondition";
-            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = GetSettingValue(StoreConstants.TermsAndCondition);
             return View(item);
         }
         public ActionResult Footer()
         {
-            String key = "Footer";
-            var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = GetSettingValue(StoreConstants.Footer);
             return View(item);
         }
         public ActionResult RecentUpdates()

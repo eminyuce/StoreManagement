@@ -18,6 +18,10 @@ namespace StoreManagement.Controllers
         // GET: /News/
         public ActionResult Index(int page=1)
         {
+            if (IsModulActive(StoreConstants.NewsType))
+            {
+                return HttpNotFound("Not Found");
+            }
             var newsContents = new ContentsViewModel();
             newsContents.Store = Store;
             var m = ContentService.GetContentsCategoryId(Store.Id, null, StoreConstants.NewsType, true, page, 24);

@@ -2,9 +2,9 @@
 @using GridMvc.Sorting
 @using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
-@model LoginModel
-
+@model List<StoreManagement.Data.Entities.UserProfile>
 @{
     ViewBag.Title = "Users";
 }
-@Html.Partial("Users/pSaveOrEdit",Model)
+
+@Html.Partial("Users/pIndex",Model)

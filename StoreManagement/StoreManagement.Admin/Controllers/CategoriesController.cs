@@ -57,12 +57,12 @@ namespace StoreManagement.Admin.Controllers
             {
                 category.CreatedDate = DateTime.Now;
                 category.UpdatedDate = DateTime.Now;
+                category.State = true;
             }
             else
             {
                 category = CategoryRepository.GetCategory(id);
                 category.UpdatedDate = DateTime.Now;
-                category.State = true;
             }
             category.CategoryType = CategoryType;
 

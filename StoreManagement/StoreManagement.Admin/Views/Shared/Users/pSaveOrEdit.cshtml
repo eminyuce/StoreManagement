@@ -1,0 +1,106 @@
+﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
+@model LoginModel
+
+@{
+
+    Store s = ViewBag.Store;
+    var userName = Model;
+    var roles = (List<Role>)ViewBag.Roles;
+    int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
+    pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
+
+
+    bool isSuperAdmin = false;
+
+    try
+    {
+        isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    }
+    catch (Exception ex)
+    {
+
+    }
+    
+}
+
+
+                @using (Html.BeginForm("SaveOrEditStoreUser",isSuperAdmin ?  "Stores" : "StoreUsers", FormMethod.Post))
+                {
+                    
+                    <fieldset>
+                        <legend>Create User</legend>
+
+                        <input type="hidden" name="storeId" value="@s.Id"/>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.UserName)
+                            @Html.TextBoxFor(model => userName.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => userName.UserName)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.Password)
+                            @Html.TextBoxFor(model => userName.Password, new { @class = "form-control" })
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.FirstName)
+                            @Html.TextBoxFor(model => userName.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => userName.FirstName)
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.LastName)
+                            @Html.TextBoxFor(model => userName.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => userName.LastName)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => userName.PhoneNumber)
+                            @Html.TextBoxFor(model => userName.PhoneNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => userName.PhoneNumber)
+                        </div>
+
+                        <div class="form-group">
+                            <div class="a-table" style="display: table; width: 100%;">
+
+                                @foreach (var r in roles)
+                                {
+                                    <div style="display: table-cell; width: 33.3333333333333%;">
+                                        <div class="roleradio selected">
+                                            <label>
+
+
+                                                @Html.RadioButton("roleName", r.RoleName, new { @class = "form-control" }) @r.RoleName
+
+
+                                            </label>
+
+                                            <div style="padding: 5px;">
+                                                @r.Description
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+
+
+
+                        <p>
+
+
+                            <input class="btn btn-success btn-lg btn-block" type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+

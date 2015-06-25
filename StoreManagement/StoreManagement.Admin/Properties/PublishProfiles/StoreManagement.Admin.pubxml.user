@@ -196,16 +196,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:47:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/24/2015 14:08:52</publishTime>
+      <publishTime>06/25/2015 11:28:26</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/24/2015 09:05:27</publishTime>
+      <publishTime>06/25/2015 10:10:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/24/2015 09:05:30</publishTime>
+      <publishTime>06/25/2015 11:27:23</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/07/2015 10:45:02</publishTime>
@@ -4729,7 +4729,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2015 13:31:40</publishTime>
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
-      <publishTime>06/17/2015 11:29:15</publishTime>
+      <publishTime>06/25/2015 10:02:09</publishTime>
     </File>
     <File Include="Views/Dashboard/Index2.cshtml">
       <publishTime>06/17/2015 11:32:17</publishTime>
@@ -5091,6 +5091,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/Themes/_Layout2.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
+    <File Include="Views/Shared/Users/pDetail.cshtml">
+      <publishTime>06/25/2015 09:35:08</publishTime>
+    </File>
+    <File Include="Views/Shared/Users/pIndex.cshtml">
+      <publishTime>06/25/2015 10:03:09</publishTime>
+    </File>
+    <File Include="Views/Shared/Users/pSaveOrEdit.cshtml">
+      <publishTime>06/25/2015 09:41:01</publishTime>
+    </File>
     <File Include="Views/Shared/_Grid.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
@@ -5110,7 +5119,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Shared/_LeftMenu.cshtml">
-      <publishTime>06/23/2015 15:39:04</publishTime>
+      <publishTime>06/24/2015 17:06:10</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/09/2015 14:58:35</publishTime>
@@ -5120,6 +5129,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Statistics/Index.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
+    </File>
+    <File Include="Views/StoreCategories/Delete.cshtml">
+      <publishTime>06/16/2015 14:57:28</publishTime>
+    </File>
+    <File Include="Views/StoreCategories/Details.cshtml">
+      <publishTime>06/16/2015 14:57:28</publishTime>
+    </File>
+    <File Include="Views/StoreCategories/Index.cshtml">
+      <publishTime>06/16/2015 14:57:28</publishTime>
+    </File>
+    <File Include="Views/StoreCategories/SaveOrEdit.cshtml">
+      <publishTime>06/16/2015 14:57:28</publishTime>
     </File>
     <File Include="Views/Stores/Create.cshtml">
       <publishTime>05/27/2015 07:38:13</publishTime>
@@ -5146,16 +5167,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/21/2015 16:07:53</publishTime>
     </File>
     <File Include="Views/Stores/SaveOrEditStoreUser.cshtml">
-      <publishTime>06/21/2015 16:07:53</publishTime>
+      <publishTime>06/25/2015 09:41:21</publishTime>
     </File>
     <File Include="Views/Stores/Settings.cshtml">
       <publishTime>06/21/2015 16:07:53</publishTime>
     </File>
     <File Include="Views/Stores/StoreUserDetail.cshtml">
-      <publishTime>06/21/2015 16:07:53</publishTime>
+      <publishTime>06/25/2015 09:42:03</publishTime>
     </File>
     <File Include="Views/Stores/Users.cshtml">
-      <publishTime>06/21/2015 16:07:53</publishTime>
+      <publishTime>06/24/2015 17:05:29</publishTime>
     </File>
     <File Include="Views/Stores/_CreateOrEdit.cshtml">
       <publishTime>05/27/2015 07:38:13</publishTime>
@@ -5165,6 +5186,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Stores/_StoresFilter.cshtml">
       <publishTime>06/22/2015 19:45:25</publishTime>
+    </File>
+    <File Include="Views/StoreUsers/Index.cshtml">
+      <publishTime>06/25/2015 09:41:42</publishTime>
+    </File>
+    <File Include="Views/StoreUsers/SaveOrEditStoreUser.cshtml">
+      <publishTime>06/25/2015 09:41:14</publishTime>
+    </File>
+    <File Include="Views/StoreUsers/StoreUserDetail.cshtml">
+      <publishTime>06/25/2015 09:42:02</publishTime>
     </File>
     <File Include="Views/Tables/Index.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
@@ -5188,7 +5218,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/24/2015 13:39:19</publishTime>
+      <publishTime>06/24/2015 16:39:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

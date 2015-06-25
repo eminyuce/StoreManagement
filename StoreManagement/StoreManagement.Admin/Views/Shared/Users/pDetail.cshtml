@@ -1,0 +1,103 @@
+﻿@using StoreManagement.Data.Entities
+@model StoreManagement.Data.Entities.UserProfile
+
+
+@{
+
+    bool isSuperAdmin = false;
+
+    try
+    {
+        isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    }
+    catch (Exception ex)
+    {
+
+    }
+    
+}
+
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Create New Stores</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+
+                <div>
+                    <h4>User Profile</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
+                        <dt>Roles
+                        </dt>
+                        <dd>
+                            @String.Join(",", Roles.GetRolesForUser(Model.UserName))
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LastName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreatedDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastLoginDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LastLoginDate)
+                        </dd>
+
+                    </dl>
+                </div>
+
+
+                <div>
+                    @Html.ActionLink("Back to List", isSuperAdmin ? "Users" : "Index", new { userId = Model.UserId }, new { @class = "btn btn-default btn-lg btn-block" })
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

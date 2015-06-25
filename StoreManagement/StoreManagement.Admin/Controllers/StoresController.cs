@@ -15,8 +15,8 @@ using WebMatrix.WebData;
 
 namespace StoreManagement.Admin.Controllers
 {
-
-    public class StoresController : BaseController
+    [Authorize(Roles = "SuperAdmin")]
+    public class StoresController : UsersController
     {
 
         [AllowAnonymous]
@@ -25,7 +25,7 @@ namespace StoreManagement.Admin.Controllers
             ViewBag.ActionName = actionName;
             ViewBag.ControllerName = controllerName;
             ViewBag.IsSuperAdmin = IsSuperAdmin;
-            return PartialView("_StoresFilter", StoreRepository.GetAll().ToList());
+            return PartialView("_StoresFilter", StoreRepository.GetAllStores());
         }
 
         [AllowAnonymous]
@@ -34,9 +34,8 @@ namespace StoreManagement.Admin.Controllers
             ViewBag.StoreId = storeId;
             ViewBag.IsSuperAdmin = IsSuperAdmin;
             ViewBag.LoginStoreId = GetStoreId(storeId);
-            return PartialView("_StoresDropDown", StoreRepository.GetAll().ToList());
+            return PartialView("_StoresDropDown", StoreRepository.GetAllStores());
         }
-        [Authorize(Roles = "SuperAdmin")]
         public ViewResult Index(String search = "", int categoryId = 0)
         {
 
@@ -71,7 +70,6 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Stores/Edit/5
-        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveOrEdit(int id = 0)
         {
             var store = new Store();
@@ -86,7 +84,6 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Stores/Edit/5
 
         [HttpPost]
-        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveOrEdit(Store store)
         {
             if (ModelState.IsValid)
@@ -101,7 +98,7 @@ namespace StoreManagement.Admin.Controllers
                     StoreRepository.Edit(store);
                 }
 
-                StoreRepository.Save();
+                StoreRepository.SaveStore();
                 return RedirectToAction("Index");
             }
             else
@@ -112,7 +109,6 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Stores/Delete/5
-        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Delete(int id)
         {
             return View(StoreRepository.GetSingle(id));
@@ -122,13 +118,11 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Stores/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "SuperAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
             StoreRepository.DeleteStore(id);
             return RedirectToAction("Index");
         }
-        [Authorize(Roles = "SuperAdmin")]
         public ActionResult SaveStoreUsers(int id, LoginModel userName, String roleName)
         {
 
@@ -183,160 +177,7 @@ namespace StoreManagement.Admin.Controllers
             }
             return RedirectToAction("Users", new { id = storeId });
         }
-
-        // GET: /Stores/Details/5
-        [Authorize(Roles = "SuperAdmin")]
-        public ActionResult Users(int storeId, String search = "")
-        {
-            var store = this.StoreRepository.GetSingle(storeId);
-            ViewBag.Store = store;
-            var storeUserIds = StoreUserRepository.FindBy(r => r.StoreId == storeId).Select(r => r.UserId).ToList();
-
-
-            var storeUsers = (from u in DbContext.UserProfiles where storeUserIds.Contains(u.UserId) select u).ToList();
-
-            if (!String.IsNullOrEmpty(search))
-            {
-                storeUsers =
-                    storeUsers.Where(r => r.UserName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-            }
-
-            ViewBag.Roles = DbContext.Roles.ToList();
-            return View(storeUsers.ToList());
-        }
-
-        [Authorize(Roles = "SuperAdmin")]
-        public ActionResult DeleteStoreUser(int storeId = 0, String userName = "")
-        {
-            try
-            {
-
-                try
-                {
-                    UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.ToLower());
-                    if (user != null)
-                    {
-                        var su = StoreUserRepository.GetStoreUserByUserId(user.UserId);
-                        StoreUserRepository.Delete(su);
-                        StoreUserRepository.Save();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error("Exception " + ex.Message, ex);
-                }
-
-
-
-                if (Roles.GetRolesForUser(userName).Any())
-                {
-                    Roles.RemoveUserFromRoles(userName, Roles.GetRolesForUser(userName));
-                }
-                ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(userName); // deletes record from webpages_Membership table
-                ((SimpleMembershipProvider)Membership.Provider).DeleteUser(userName, true); // deletes record from UserProfile table
-
-
-
-
-                return RedirectToAction("Users", new { storeId = storeId });
-
-            }
-            catch
-            {
-                return View(userName);
-            }
-        }
-
-        [Authorize(Roles = "SuperAdmin")]
-        public ActionResult StoreUserDetail(int storeId = 0, int userId = 0)
-        {
-            UserProfile storeUser = DbContext.UserProfiles.FirstOrDefault(r => r.UserId == userId);
-            var store = StoreRepository.GetSingle(storeId);
-            ViewBag.Store = store;
-            return View(storeUser);
-        }
-
-        [Authorize(Roles = "SuperAdmin")]
-        public ActionResult SaveOrEditStoreUser(int storeId = 0, int userId = 0)
-        {
-            var store = StoreRepository.GetSingle(storeId);
-            ViewBag.Store = store;
-
-            ViewBag.Roles = DbContext.Roles.ToList();
-            var loginModel = new LoginModel();
-            if (userId > 0)
-            {
-                UserProfile storeUser = DbContext.UserProfiles.FirstOrDefault(r => r.UserId == userId);
-                if (storeUser != null)
-                {
-                    loginModel.UserName = storeUser.UserName;
-                    loginModel.FirstName = storeUser.FirstName;
-                    loginModel.LastName = storeUser.LastName;
-                    loginModel.PhoneNumber = storeUser.PhoneNumber;
-                }
-            }
-            return View(loginModel);
-        }
-        [HttpPost]
-        [Authorize(Roles = "SuperAdmin")]
-        public ActionResult SaveOrEditStoreUser(int storeId, LoginModel userName, String roleName = "")
-        {
-
-            if (String.IsNullOrEmpty(roleName))
-            {
-                ModelState.AddModelError("UserName", "SELECT A ROLE PLEASE");
-
-            }
-            var store = this.StoreRepository.GetSingle(storeId);
-            ViewBag.Store = store;
-
-            ViewBag.Roles = DbContext.Roles.ToList();
-
-            UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
-            // Check if user already exists
-            if (user == null)
-            {
-
-                WebSecurity.CreateUserAndAccount(userName.UserName, userName.Password);
-                Roles.AddUserToRole(userName.UserName, roleName);
-
-                var i = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
-
-                i.FirstName = userName.FirstName;
-                i.LastName = userName.LastName;
-                i.PhoneNumber = userName.PhoneNumber;
-                i.CreatedDate = DateTime.Now;
-                i.LastLoginDate = DateTime.Now;
-                DbContext.SaveChanges();
-
-                if (!roleName.Equals("SuperAdmin", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    StoreUser su = new StoreUser();
-                    su.StoreId = storeId;
-                    su.UserId = i.UserId;
-                    su.State = true;
-                    su.Ordering = 1;
-                    su.CreatedDate = DateTime.Now;
-                    su.UpdatedDate = DateTime.Now;
-
-                    StoreUserRepository.Add(su);
-                    StoreUserRepository.Save();
-                }
-
-            }
-            else
-            {
-
-                user.UserName = userName.UserName;
-                user.FirstName = userName.FirstName;
-                user.LastName = userName.LastName;
-                user.PhoneNumber = userName.PhoneNumber;
-                DbContext.SaveChanges();
-            }
-
-
-            return RedirectToAction("Users", new { storeId = storeId });
-        }
+ 
 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]

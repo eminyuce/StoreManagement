@@ -305,9 +305,12 @@
     <Compile Include="Controllers\ProductsLabelsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StoreCategoriesController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StoreUsersController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\LabelExtensions.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -1924,6 +1927,16 @@
     <Content Include="Views\EmailLists\Details.cshtml" />
     <Content Include="Views\EmailLists\Index.cshtml" />
     <Content Include="Views\Home\SuperAdminSearch.cshtml" />
+    <Content Include="Views\Shared\Users\pIndex.cshtml" />
+    <Content Include="Views\Shared\Users\pSaveOrEdit.cshtml" />
+    <Content Include="Views\StoreUsers\Index.cshtml" />
+    <Content Include="Views\Shared\Users\pDetail.cshtml" />
+    <Content Include="Views\StoreUsers\StoreUserDetail.cshtml" />
+    <Content Include="Views\StoreUsers\SaveOrEditStoreUser.cshtml" />
+    <Content Include="Views\StoreCategories\Delete.cshtml" />
+    <Content Include="Views\StoreCategories\Details.cshtml" />
+    <Content Include="Views\StoreCategories\Index.cshtml" />
+    <Content Include="Views\StoreCategories\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

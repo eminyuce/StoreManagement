@@ -7,13 +7,14 @@ using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class BlogsController : BaseController
     {
-        //
-        // GET: /Blogs/
+         
+
         public ActionResult Index(int page = 1)
         {
 

@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class AjaxController : BaseController
     {
-        //
-        // GET: /Ajax/
+        
+
         public ActionResult Index()
         {
             return View();

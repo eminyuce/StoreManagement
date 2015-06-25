@@ -12,12 +12,14 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class CategoriesController : BaseController
     {
+         
 
         public ActionResult Index()
         {

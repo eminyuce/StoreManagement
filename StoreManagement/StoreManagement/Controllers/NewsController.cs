@@ -8,14 +8,14 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class NewsController : BaseController
     {
+        
 
-        //
-        // GET: /News/
         public ActionResult Index(int page=1)
         {
             if (IsModulActive(StoreConstants.NewsType))

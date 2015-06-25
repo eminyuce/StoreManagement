@@ -24,6 +24,12 @@ namespace StoreManagement.Controllers
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         [Inject]
+        public IStoreService StoreService { set; get; }
+        [Inject]
+        public ISettingService SettingService { set; get; }
+
+
+        [Inject]
         public IFileManagerService FileManagerService { get; set; }
 
         [Inject]
@@ -35,8 +41,7 @@ namespace StoreManagement.Controllers
         [Inject]
         public ICategoryService CategoryService { set; get; }
 
-        [Inject]
-        public IStoreService StoreService { set; get; }
+
 
         [Inject]
         public INavigationService NavigationService { set; get; }
@@ -47,8 +52,7 @@ namespace StoreManagement.Controllers
         [Inject]
         public IStoreUserService StoreUserService { set; get; }
 
-        [Inject]
-        public ISettingService SettingService { set; get; }
+
 
         [Inject]
         public IEmailSender EmailSender { set; get; }
@@ -72,6 +76,10 @@ namespace StoreManagement.Controllers
             base.Initialize(requestContext);
 
             GetStoreByDomain(requestContext);
+
+
+            ViewBag.MetaDescription = GetSettingValue(StoreConstants.MetaTagDescription);
+            ViewBag.MetaKeywords = GetSettingValue(StoreConstants.MetaTagKeywords);
 
         }
         private void GetStoreByDomain(RequestContext requestContext)
@@ -98,17 +106,16 @@ namespace StoreManagement.Controllers
             return entity.StoreId == Store.Id;
         }
 
-        protected BaseController()
-        {
-            ViewBag.MetaDescription = GetSettingValue(StoreConstants.MetaTagDescription);
-            ViewBag.MetaKeywords = GetSettingValue(StoreConstants.MetaTagKeywords);
-        }
 
 
         protected String GetSettingValue(String key)
         {
             try
             {
+                if (Store == null)
+                {
+                    return "";
+                }
                 var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
 
                 return item != null ? item.SettingValue : "";

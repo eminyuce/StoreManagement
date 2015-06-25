@@ -7,15 +7,15 @@ using Ninject;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class ContentsController : BaseController
     {
+         
 
-
-   
         public ActionResult Index()
         {
             return View();

@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.RequestModel;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class PhotosController : BaseController
     {
-        //
-        // GET: /Photos/
+         
+
         public ActionResult Index(int page = 1)
         {
             var photos = new PhotosViewModel();

@@ -8,12 +8,14 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Services;
 
 namespace StoreManagement.Controllers
 {
     public class ProductsController : BaseController
     {
+        
 
         public ActionResult Index()
         {

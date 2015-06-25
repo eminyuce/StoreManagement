@@ -18,6 +18,8 @@ namespace StoreManagement.Controllers
 {
     public class HomeController : BaseController
     {
+         
+
         public ActionResult Index()
         {
 

@@ -5,14 +5,14 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class CssController : BaseController
     {
-        
-        
+         
 
         public ContentResult GetTheme()
         {

@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class ImagesController : BaseController
     {
- 
+        
+
         public ActionResult FetchImage(String id = "", string size = "", string contentType = "")
         {
             var dic = new Dictionary<String, String>();

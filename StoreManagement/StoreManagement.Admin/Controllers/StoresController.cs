@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using StoreManagement.Admin.Models;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
@@ -177,7 +178,7 @@ namespace StoreManagement.Admin.Controllers
             }
             return RedirectToAction("Users", new { id = storeId });
         }
- 
+
 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]
@@ -198,11 +199,8 @@ namespace StoreManagement.Admin.Controllers
         {
             var store = this.StoreRepository.GetSingle(storeId);
             ViewBag.Store = store;
-            var settings = this.SettingRepository.GetStoreSettings(storeId);
-            if (!String.IsNullOrEmpty(search))
-            {
-                settings = settings.Where(r => r.SettingKey.Contains(search.ToLower()) || r.SettingValue.Contains(search.ToLower())).ToList();
-            }
+            var settings = this.SettingRepository.GetStoreSettingsByType(storeId, StoreConstants.SuperSettings, search);
+
             return View(settings);
         }
 

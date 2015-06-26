@@ -11,7 +11,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface ISettingRepository : IEntityRepository<Setting>, ISettingService
     {
-      
+        List<Setting> GetStoreSettingsByType(int storeid, string type, String search);
     }
 
 

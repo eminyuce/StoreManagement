@@ -25,6 +25,7 @@ namespace StoreManagement.API.Controllers
         {
             return SettingRepository.GetStoreSettingsByType(storeid, type);
         }
+ 
 
         public override IEnumerable<Setting> GetAll()
         {

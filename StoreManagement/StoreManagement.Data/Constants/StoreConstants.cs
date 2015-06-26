@@ -12,6 +12,8 @@ namespace StoreManagement.Data.Constants
         public const String RoleStoreAdmin = "StoreAdmin";
         public const String RoleSuperAdmin = "SuperAdmin";
 
+        public const String SuperSettings = "SuperSettings";
+        public const String StoreSettings = "StoreSettings";
 
         public const String ProductType = "product";
         public const String NewsType = "news";

@@ -83,7 +83,14 @@ namespace StoreManagement.Admin.Controllers
                     
                 }
                 NavigationRepository.Save();
-                return RedirectToAction("Index");
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = navigation.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
         }
@@ -108,7 +115,14 @@ namespace StoreManagement.Admin.Controllers
             Navigation navigation = NavigationRepository.GetSingle(id);
             NavigationRepository.Delete(navigation);
             NavigationRepository.Save();
-            return RedirectToAction("Index");
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = navigation.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 

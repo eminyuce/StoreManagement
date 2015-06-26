@@ -41,5 +41,7 @@ namespace StoreManagement.Service.Services
                 return HttpRequestHelper.GetUrlResults<Setting>(url);
             
         }
+
+        
     }
 }

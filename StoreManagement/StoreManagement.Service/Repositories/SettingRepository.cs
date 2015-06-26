@@ -51,6 +51,19 @@ namespace StoreManagement.Service.Repositories
             return  this.FindBy(r => r.StoreId == storeid 
                 &&  r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
+
+        public List<Setting> GetStoreSettingsByType(int storeid, string type, string search)
+        {
+            var items = this.FindBy(r => r.StoreId == storeid
+                                         && r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                items = items.Where(r => r.SettingKey.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+        }
     }
 
 

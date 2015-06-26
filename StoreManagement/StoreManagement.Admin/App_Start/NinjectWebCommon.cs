@@ -63,12 +63,8 @@ namespace StoreManagement.Admin.App_Start
                 throw;
             }
         }
-        private const string GoogleDriveClientId = "660481316212-u3atcqu89sd2rl2ae36d9ja9np6ibv7i.apps.googleusercontent.com";
-        private const string GoogleDriveServiceAccountPkCs12FilePath = @"~\Content\GoogleDrive\Google Drive File Upload-d13d89d921a2.p12";
-        private const string GoogleDriveServiceAccountEmail = "660481316212-u3atcqu89sd2rl2ae36d9ja9np6ibv7i@developer.gserviceaccount.com";
-        private const string GoogleDriveFolder = "MyStoreFolder";
-        private const String GoogleDrivePassword = "notasecret";
-        private const String GoogleDriveUserEmail = "eminyuce@gmail.com";
+
+
         /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
@@ -96,12 +92,24 @@ namespace StoreManagement.Admin.App_Start
 
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();
-            m.WithConstructorArgument("clientId", ProjectAppSettings.GetWebConfigString("GoogleDriveClientId", GoogleDriveClientId));
-            m.WithConstructorArgument("userEmail", ProjectAppSettings.GetWebConfigString("GoogleDriveUserEmail", GoogleDriveUserEmail));
-            m.WithConstructorArgument("serviceAccountEmail", ProjectAppSettings.GetWebConfigString("GoogleDriveServiceAccountEmail", GoogleDriveServiceAccountEmail));
-            m.WithConstructorArgument("certificate", GeneralHelper.CreateCert(HostingEnvironment.MapPath(GoogleDriveServiceAccountPkCs12FilePath), GoogleDrivePassword));
-            m.WithConstructorArgument("folderName", ProjectAppSettings.GetWebConfigString("GoogleDriveFolder",GoogleDriveFolder));
-            m.WithConstructorArgument("password", ProjectAppSettings.GetWebConfigString("GoogleDrivePassword", GoogleDrivePassword));
+            m.WithConstructorArgument("clientId", 
+                ProjectAppSettings.GetWebConfigString("GoogleDriveClientId"));
+            m.WithConstructorArgument("userEmail", 
+                ProjectAppSettings.GetWebConfigString("GoogleDriveUserEmail"));
+            m.WithConstructorArgument("serviceAccountEmail", 
+                ProjectAppSettings.GetWebConfigString("GoogleDriveServiceAccountEmail"));
+
+            String p12FileName = ProjectAppSettings.GetWebConfigString("GoogleDriveCertificateP12FileName");
+            var cert =GeneralHelper.CreateCert(
+                HostingEnvironment.MapPath(
+                String.Format(@"~\App_Data\GoogleDrive\{0}",p12FileName)),
+                ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
+            
+            m.WithConstructorArgument("certificate",cert);
+            m.WithConstructorArgument("folderName", 
+                ProjectAppSettings.GetWebConfigString("GoogleDriveFolder"));
+            m.WithConstructorArgument("password", 
+                ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
 
 
 

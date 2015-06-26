@@ -10,13 +10,11 @@
 <body class="bootstrap-admin-with-small-navbar">
     @Html.Partial("pLayoutBody")
     <div class="container">
-@*        @RenderSection("featured", required: false)*@
+ 
         <div class="row">
             @RenderBody()
         </div>
-        <div class="row">
-            @Html.Partial("pLayoutFooter")
-        </div>
+       
     </div>
 </body>
 @Scripts.Render("~/bundles/jquery")

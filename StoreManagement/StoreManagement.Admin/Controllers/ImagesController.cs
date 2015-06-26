@@ -78,6 +78,8 @@ namespace StoreManagement.Admin.Controllers
             var dic = new Dictionary<String, String>();
             // Loading photos’ info from database for specific image...
             var file = FileManagerRepository.GetFilesByStoreIdFromCache(storeId).FirstOrDefault(r => r.Id == id);
+
+
             String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);
             byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
 
@@ -85,6 +87,7 @@ namespace StoreManagement.Admin.Controllers
                     .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
                     .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
                     .Write();
+
 
 
         }

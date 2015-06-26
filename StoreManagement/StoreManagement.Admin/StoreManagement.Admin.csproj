@@ -293,6 +293,7 @@
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailListsController.cs" />
+    <Compile Include="Controllers\FileManagerCategoriesController.cs" />
     <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LabelsController.cs" />
@@ -1691,8 +1692,8 @@
     <Content Include="Content\Theme\vendors\ckeditor\CHANGES.md" />
     <Content Include="Content\Theme\vendors\ckeditor\LICENSE.md" />
     <Content Include="Content\Theme\vendors\ckeditor\README.md" />
-    <Content Include="Content\GoogleDrive\Google Drive File Upload-d13d89d921a2.p12" />
     <Content Include="Grid.mvc.readme" />
+    <Content Include="App_Data\GoogleDrive\Google Drive File Upload-02b81c6f609a.p12" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1939,9 +1940,12 @@
     <Content Include="Views\StoreCategories\Details.cshtml" />
     <Content Include="Views\StoreCategories\Index.cshtml" />
     <Content Include="Views\StoreCategories\SaveOrEdit.cshtml" />
+    <Content Include="Views\FileManagerCategories\Delete.cshtml" />
+    <Content Include="Views\FileManagerCategories\Details.cshtml" />
+    <Content Include="Views\FileManagerCategories\Index.cshtml" />
+    <Content Include="Views\FileManagerCategories\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>

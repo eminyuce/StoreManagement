@@ -10,6 +10,7 @@ namespace StoreManagement.Data.Entities
 {
     public class FileManager : BaseEntity
     {
+        public int CategoryId { get; set; }
         public string ContentType { get; set; }
         public string GoogleImageId { get; set; }
         public string Title { get; set; }

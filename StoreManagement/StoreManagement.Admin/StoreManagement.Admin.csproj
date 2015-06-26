@@ -71,8 +71,9 @@
       <HintPath>..\packages\Google.Apis.1.9.0\lib\net40\Google.Apis.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GridMvc">
-      <HintPath>..\..\..\..\..\Downloads\Grid.Mvc.3\Grid.Mvc.3\GridMvc.dll</HintPath>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
@@ -1691,6 +1692,7 @@
     <Content Include="Content\Theme\vendors\ckeditor\LICENSE.md" />
     <Content Include="Content\Theme\vendors\ckeditor\README.md" />
     <Content Include="Content\GoogleDrive\Google Drive File Upload-d13d89d921a2.p12" />
+    <Content Include="Grid.mvc.readme" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

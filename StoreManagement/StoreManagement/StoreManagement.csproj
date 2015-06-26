@@ -52,6 +52,10 @@
       <HintPath>..\packages\GenericRepository.EntityFramework.0.3.1-pre01\lib\net40\GenericRepository.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -268,6 +272,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\default2.css" />
     <Content Include="Content\default.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\shop-cart\about_us.html" />
     <Content Include="Content\shop-cart\agrements.txt" />
     <Content Include="Content\shop-cart\assets\css\bootstrap-responsive.css" />
@@ -412,6 +417,7 @@
     <Content Include="Content\shop-cart\assets\font-awesome\scss\_path.scss" />
     <Content Include="Content\shop-cart\assets\font-awesome\scss\_variables.scss" />
     <Content Include="Content\shop-cart\logo.PSD" />
+    <Content Include="Grid.mvc.readme" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -423,6 +429,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
@@ -441,6 +450,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
@@ -516,6 +526,8 @@
     <Content Include="Views\ProductCategories\Category.cshtml" />
     <Content Include="Views\Home\Locations.cshtml" />
     <Content Include="Views\Home\TermsAndCondition.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

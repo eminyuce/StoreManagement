@@ -6,7 +6,7 @@
 
 @{
 
-    Store s = ViewBag.Store;
+    int storeId = Request.QueryString["storeId"].ToInt();
     var userName = Model;
     var roles = (List<Role>)ViewBag.Roles;
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
@@ -23,17 +23,25 @@
     {
 
     }
+
+    
+    String controllerName = "StoreUsers";
+    
+    if (isSuperAdmin)
+    {
+        controllerName = "Stores";
+    }
     
 }
 
 
-                @using (Html.BeginForm("SaveOrEditStoreUser",isSuperAdmin ?  "Stores" : "StoreUsers", FormMethod.Post))
+                @using (Html.BeginForm("SaveOrEditStoreUser", controllerName, FormMethod.Post))
                 {
                     
                     <fieldset>
                         <legend>Create User</legend>
 
-                        <input type="hidden" name="storeId" value="@s.Id"/>
+                        <input type="hidden" name="storeId" value="@storeId"/>
 
 
 
@@ -73,6 +81,15 @@
 
                                 @foreach (var r in roles)
                                 {
+                                    if (!isSuperAdmin)
+                                    {
+                                        if (r.RoleName.Equals("SuperAdmin", StringComparison.InvariantCultureIgnoreCase))
+                                        {
+                                            continue;
+
+                                        }
+                                    }
+                                    
                                     <div style="display: table-cell; width: 33.3333333333333%;">
                                         <div class="roleradio selected">
                                             <label>

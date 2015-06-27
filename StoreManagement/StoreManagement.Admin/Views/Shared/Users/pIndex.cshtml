@@ -4,6 +4,7 @@
 @using StoreManagement.Data.GeneralHelper
 @model List<StoreManagement.Data.Entities.UserProfile>
 @{
+    int storeId = Request.QueryString["storeId"].ToInt();
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
     bool isSuperAdmin = false;
@@ -44,7 +45,25 @@
 
             <div class="row">
                 <span class="col-md-3">
-                    @Html.ActionLink("Create", "SaveOrEditStoreUser", isSuperAdmin ? "Stores" : "StoreUsers", new { userId = 0 }, new { @class = "btn btn-primary btn-block glyphicon glyphicon-plus" })
+                    @if (isSuperAdmin)
+                    {
+                   
+                           <a class="btn btn-primary btn-block glyphicon glyphicon-plus" href="/Stores/SaveOrEditStoreUser?userId=0&storeId=@storeId">Create</a>
+                       
+                    
+                    
+                    }
+                    else
+                    {
+                        
+                              <a class="btn btn-primary btn-block glyphicon glyphicon-plus" href="/StoreUsers/SaveOrEditStoreUser?userId=0">Create</a>
+                   
+                        
+                    
+                    
+                    }
+                 
+
                 </span>
                 <span class="col-md-9">
                     @Html.Partial("pSearchForm")

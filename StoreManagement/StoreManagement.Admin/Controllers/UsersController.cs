@@ -120,7 +120,17 @@ namespace StoreManagement.Admin.Controllers
             ViewBag.Store = store;
 
             ViewBag.Roles = DbContext.Roles.ToList();
-            var isSuperAdmin = false;
+            bool isSuperAdmin = false;
+
+            try
+            {
+                isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+            }
+            catch (Exception ex)
+            {
+
+            }
+    
             UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
             // Check if user already exists
             if (user == null)
@@ -151,10 +161,7 @@ namespace StoreManagement.Admin.Controllers
                     StoreUserRepository.Add(su);
                     StoreUserRepository.Save();
                 }
-                else
-                {
-                    isSuperAdmin = true;
-                }
+              
 
             }
             else

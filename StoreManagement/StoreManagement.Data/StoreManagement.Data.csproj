@@ -118,6 +118,7 @@
     <Compile Include="Entities\BaseContent.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\ContentFile.cs" />
@@ -176,16 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Grid.mvc.readme" />
     <None Include="packages.config" />
-    <None Include="Views\Shared\_Grid.cshtml" />
-    <None Include="Views\Shared\_GridPager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Gridmvc.css" />
-    <Content Include="Scripts\gridmvc.js" />
-    <Content Include="Scripts\gridmvc.lang.ru.js" />
-    <Content Include="Scripts\gridmvc.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

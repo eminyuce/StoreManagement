@@ -79,7 +79,7 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(values, JsonRequestBehavior.AllowGet);
         }
-    
+
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteSettingGridItem(List<String> values)
@@ -93,7 +93,7 @@ namespace StoreManagement.Admin.Controllers
             SettingRepository.Save();
 
             return Json(values, JsonRequestBehavior.AllowGet);
-        } 
+        }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteNavigationGridItem(List<String> values)
@@ -107,7 +107,7 @@ namespace StoreManagement.Admin.Controllers
             NavigationRepository.Save();
 
             return Json(values, JsonRequestBehavior.AllowGet);
-        } 
+        }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductGridItem(List<String> values)
@@ -119,7 +119,7 @@ namespace StoreManagement.Admin.Controllers
                 ProductRepository.Delete(item);
             }
             ProductRepository.Save();
-            
+
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -129,7 +129,7 @@ namespace StoreManagement.Admin.Controllers
             foreach (String v in values)
             {
                 var id = v.ToInt();
-                var item =  CategoryRepository.GetSingle(id);
+                var item = CategoryRepository.GetSingle(id);
                 CategoryRepository.Delete(item);
             }
             CategoryRepository.Save();
@@ -146,7 +146,7 @@ namespace StoreManagement.Admin.Controllers
                 ProductCategoryRepository.Delete(item);
             }
             ProductCategoryRepository.Save();
-            
+
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -355,13 +355,13 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult GetRootCategories(int storeId = 0)
         {
-             var cat = CategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList() ;
+            var cat = CategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList();
             var returnJson = from c in cat select new { Text = c.Name, Value = c.Id };
             return Json(returnJson, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetRootProductCategories(int storeId = 0)
         {
-            var cat =  ProductCategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList() ;
+            var cat = ProductCategoryRepository.FindBy(r => r.ParentId == 0 && r.StoreId == storeId).ToList();
             var returnJson = from c in cat select new { Text = c.Name, Value = c.Id };
             return Json(returnJson, JsonRequestBehavior.AllowGet);
         }
@@ -374,9 +374,19 @@ namespace StoreManagement.Admin.Controllers
             return Content(value);
         }
 
-        public ActionResult GetContentImages(int contentId)
+        public ActionResult GetImagesByItemTypeAndId(int itemId, String itemType)
         {
-            var images = ContentFileRepository.GetContentByContentId(contentId).Select(r => r.FileManager);
+
+            var images = new List<FileManager>();
+            if (itemType == "product")
+            {
+                images = ProductFileRepository.GetProductFilesByProductId(itemId).Select(r => r.FileManager).ToList();
+            }
+            if (itemType == "content")
+            {
+                images = ContentFileRepository.GetContentByContentId(itemId).Select(r => r.FileManager).ToList();
+            }
+
             return Json(images, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetImages(int storeId)
@@ -407,7 +417,7 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult GetProductCategoriesTree(int storeId = 0, String categoryType = "")
         {
-            var tree =  new List<BaseCategory>(this.ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, categoryType));
+            var tree = new List<BaseCategory>(this.ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, categoryType));
 
             var html = this.RenderPartialToString(
                         "pCreateCategoryTree",

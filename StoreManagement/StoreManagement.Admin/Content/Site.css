@@ -130,3 +130,9 @@ div .roleradio {
  .treeview >  ul > li:last-child {
     border-left: 2px solid transparent;
 }
+
+ .fileManagerImg {
+     width: 100%;
+     max-width: 120px;
+
+ }

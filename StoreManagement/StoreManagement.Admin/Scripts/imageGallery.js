@@ -4,43 +4,52 @@ $(document).ready(function () {
     console.log("image gallery script is working");
     
     $("#ImageDialog").click(function () {
-        $("#dialog-message").dialog({
-            modal: true,
-            height: 600,
-            width: 800,
-            draggable: true,
-            position: 'center',
-            show: {
-                effect: "fade",
-                duration: 1000
-            },
-            hide: {
-                effect: "fade",
-                duration: 500
-            },
-            buttons: {
-                Ok: function () {
-                    $("#contentImages").empty();
-                    $("#contentImages").html($("#SelectedImageGallery").clone().html());
-                    $(this).dialog("close");
-                },
-                Close: function () {
-                    $(this).dialog("close");
-                }
-            },
-            open: function (event, ui) {
-                setTimeout(function () {
-                    LoadImages();
-                }, 2);
-            }
-        });
+        createAndOpenDialog();
     });
     RetrieveContentImages();
-
+    bindRemoveImage();
 });
+function createAndOpenDialog() {
+    $("#dialog-message").dialog({
+        modal: true,
+        height: 520,
+        width: 720,
+        show: {
+            effect: "fade",
+            duration: 1000
+        },
+        hide: {
+            effect: "fade",
+            duration: 500
+        },
+        buttons: {
+            Ok: function () {
 
+                $("#contentImages").empty();
+                $("#contentImages").html($("#SelectedImageGallery").clone().html());
+                $(this).dialog("close");
+
+
+            },
+            Close: function () {
+                $(this).dialog("close");
+            }
+        },
+        open: function (event, ui) {
+            setTimeout(function () {
+                LoadImages();
+            }, 2);
+        }
+    });
+
+    $("#dialog-message").position({
+        my: "center",
+        at: "center",
+        of: window
+    });
+}
 function RetrieveContentImages() {
-    $('[data-file-id]').each(function () {
+    $('[data-file-item-id]').each(function () {
         $(this).off("click");
         $(this).on("click", handleRetrieveContentImages);
     });
@@ -49,12 +58,13 @@ function RetrieveContentImages() {
 function handleRetrieveContentImages(e) {
     e.preventDefault();
     var caller = e.target;
-    var contentId = $(caller).attr('data-file-id');
+    var itemId = $(caller).attr('data-file-item-id');
+    var itemType = $(caller).attr('data-file-item-type');
     var list = $("<ul></ul");
     $("#ImagesPanel").empty();
-    var jsonRequest = JSON.stringify({ "contentId": contentId });
+    var jsonRequest = JSON.stringify({ "itemId": itemId, "itemType": itemType });
     jQuery.ajax({
-        url: "/Ajax/GetContentImages",
+        url: "/Ajax/GetImagesByItemTypeAndId",
         type: 'POST',
         data: jsonRequest,
         dataType: 'json',
@@ -63,7 +73,7 @@ function handleRetrieveContentImages(e) {
             var photos = data;
             $.each(photos, function (i, photo) {
                 console.log(photo);
-                var img = $("<img/>").attr("src", '/Images/ThumbnailWithGoogleId?googleId=' + photo.GoogleImageId + '')
+                var img = $("<img/>").attr("src",  'https://docs.google.com/uc?id=' +  photo.GoogleImageId)
                                     .attr("title", photo.FileName).attr("id", photo.Id);
                 var div = $("<li/>").attr("class", "col-md-4").attr("data-file-image", photo.Id).append(img);
                 $(list).append($("<div/>").append(div));
@@ -81,24 +91,14 @@ function handleRetrieveContentImages(e) {
 }
 function createImageDialog() {
     
-    var win = $(window);
-    var dialog = $("#dialog");
-    var top = (win.height() - dialog.height()) / 2;
-    var left = (win.width() - dialog.width()) / 2;
-    
-
+   
     $("#ImagesPanel").dialog({
         modal: true,
-        height: 500,
-        width: 800,
-        draggable: true,
-        //position: ['center', 'middle'],
-        position: "absolute",
-        top: top,
-        left: left,
+        height: 520,
+        width: 720,
         show: {
             effect: "fade",
-            duration: 750
+            duration: 1000
         },
         hide: {
             effect: "fade",
@@ -114,19 +114,25 @@ function createImageDialog() {
             }
         },
         open: function (event, ui) {
-            
+         
         }
+    });
+
+    $("#ImagesPanel").position({
+        my: "center",
+        at: "center",
+        of: window
     });
 }
 
-function createImage(thumnailLink, fileName, photoId, eventLink) {
-    var img = $("<img/>").attr("src",   thumnailLink)
+function createImage(googleImageId, fileName, photoId, eventLink) {
+    var img = $("<img/>").attr("src", 'https://docs.google.com/uc?id=' + googleImageId)
         .attr("title", fileName)
         .attr("id", photoId)
-        .attr("style", "width:100%;max-width:70px;");
+        .attr("class", "fileManagerImg");
     var link = $("<a></a>").attr("href", "#").append(img);
     var caption = $("<div/>").text(fileName).addClass("caption");
-    var div = $("<li/>").attr("class", "col-md-4").attr("data-file-image", photoId).append(link).append(eventLink).append(caption);
+    var div = $("<li/>").attr("class", "col-md-4 thumbnail").attr("data-file-image", photoId).append(link).append(eventLink).append(caption);
     return div;
 }
 
@@ -141,15 +147,15 @@ function LoadImages() {
 
         var list = $("<ul></ul");
         $.each(photos, function(i, photo) {
-            var thumnailLink = photo.ThumbnailLink;
+            var googleImageId = photo.GoogleImageId;
             var fileName = photo.Title;
             var photoId = photo.Id;
             var addLink = $("<div/>")
                 .attr("data-image-add-link", photoId)
                 .attr("data-image-file-name", fileName)
-                .attr("data-image-file-thumnailLink", thumnailLink)
-                .text("Add").addClass("addLink");
-            var div = createImage(thumnailLink, fileName, photoId, addLink);
+                .attr("data-image-file-googleImageId", googleImageId)
+                .text("Add").addClass("addLink btn btn-default btn-block");
+            var div = createImage(googleImageId, fileName, photoId, addLink);
             $(list).append($("<div/>").append(div));
 
         });
@@ -186,7 +192,7 @@ function handleRemoveImage(e) {
     var caller = e.target;
     var imageId = $(caller).attr('data-image-remove-link');
     var fileName = $(caller).attr('data-image-file-name');
-    var thumnailLink = $(caller).attr('data-image-file-thumnailLink');
+    var googleImageId = $(caller).attr('data-image-file-googleImageId');
     $("#SelectedImageGallery").find('[data-file-image=' + imageId + ']').remove();
     $("#SelectedImageGallery").find('[data-selected-file=' + imageId + ']').remove();
     
@@ -198,8 +204,8 @@ function handleRemoveImage(e) {
     var addLink = $("<div/>")
         .attr("data-image-add-link", imageId)
         .attr("data-image-file-name", fileName)
-        .text("Add").addClass("addLink");
-    var div = createImage(thumnailLink,fileName, imageId, addLink);
+        .text("Add").addClass("addLink btn btn-default  btn-block");
+    var div = createImage(googleImageId, fileName, imageId, addLink);
     $("#flickr-photos").append(div);
     bindAddImage();
 }
@@ -215,14 +221,14 @@ function handleAddImage(e) {
     var caller = e.target;
     var imageId = $(caller).attr('data-image-add-link');
     var fileName = $(caller).attr('data-image-file-name');
-    var thumnailLink = $(caller).attr('data-image-file-thumnailLink');
+    var googleImageId = $(caller).attr('data-image-file-googleImageId');
     
     $(caller).addClass("addedImage");
     var removeLink = $("<div/>")
         .attr("data-image-remove-link", imageId)
         .attr("data-image-file-name", fileName)
-        .text("Remove").addClass("addLink");
-    var div = createImage(thumnailLink,fileName, imageId, removeLink);
+        .text("Remove").addClass("addLink btn btn-danger  btn-block");
+    var div = createImage(googleImageId, fileName, imageId, removeLink);
     var file = $('<input>').attr({
         type: 'hidden',
         id: 'fileId_' + imageId,

@@ -256,7 +256,7 @@
                                            .RenderValueAs(d =>
                                                           @<b>
 
-                                                               <a class="btn btn-info btn-sm glyphicon  glyphicon-camera"   data-file-id="@d.Id"></a>
+                                                               <a class="btn btn-info btn-sm glyphicon  glyphicon-camera"  data-file-item-id="@d.Id"   data-file-item-type="product"></a>
                                                            </b>);
                                 }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 

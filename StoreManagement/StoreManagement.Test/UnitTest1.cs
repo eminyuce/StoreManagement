@@ -52,9 +52,9 @@ namespace StoreManagement.Test
                 new SqlConnection(ConfigurationManager.ConnectionStrings[ConnectionString].ConnectionString);
             connection.Open();
 
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\emin\Desktop\11212\11212.sql");
-            String line = "";
-            while ((line = file.ReadLine()) != null)
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\emin\Desktop\script\script.sql");
+            String line = "";// file.ReadToEnd();
+           while ((line = file.ReadLine()) != null)
             {
                 try
                 {

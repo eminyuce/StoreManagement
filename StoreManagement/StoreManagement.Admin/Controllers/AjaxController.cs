@@ -27,6 +27,18 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
+        public ActionResult CreatingNewLabel(String labelName)
+        {
+            Label label = new Label();
+            label.Name = labelName;
+            label.LabelType = "News";
+            label.CategoryId = 1;
+            
+            LabelRepository.Add(label);
+            int labelId =  LabelRepository.Save();
+            label = LabelRepository.GetSingle(labelId);
+            return Json(label, JsonRequestBehavior.AllowGet); 
+        }
         [HttpPost]
         public ActionResult SetSettings(List<Setting> settings, int storeId)
         {

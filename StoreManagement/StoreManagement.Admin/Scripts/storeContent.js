@@ -23,7 +23,7 @@ $(document).ready(function () {
 
 
 
-    $('select#StoreDropDownId').chosen({}).change(function (event) {
+    $('select#StoreDropDownId').select2({}).change(function (event) {
         GetCategoryTree($(this).val(), $("#categoryType").val());
         GetProductCategoryTree($(this).val(), $("#categoryType").val());
     });

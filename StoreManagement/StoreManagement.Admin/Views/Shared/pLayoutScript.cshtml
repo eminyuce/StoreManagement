@@ -5,10 +5,8 @@
 <script src="~/Scripts/imageGallery.js"></script>
 <script src="~/Scripts/jquery.datetimepicker.js"></script>
 <script src="~/Scripts/colpick.js"></script>
-<script src="~/Scripts/chosen.proto.min.js"></script>
-<link href="~/Content/chosen.css" rel="stylesheet" />
-<script src="~/Scripts/chosen.jquery.min.js"></script>
-
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
 <script>
     (function (i, s, o, g, r, a, m) {
@@ -35,26 +33,37 @@
             timepicker: false,
             closeOnDateSelect: true
         });
-        $('[chosen-selection-box="multiple"]').chosen({});
         
- 
+        $('[chosen-selection-box="multiple"]').select2();
 
-
+        
         if ($('select#StoreDropDownId').length > 0) {
 
-            $('select#StoreDropDownId').chosen({});
+
+            $('select#StoreDropDownId').select2({});
+            var adminDropDown = $('select#StoreDropDownId').select2('data');
+
+            var theID = adminDropDown[0].id;
+            var theSelection = adminDropDown[0].text;
 
             $("#StoreId").val($('select#StoreDropDownId').val());
-            $("#SelectedStoreText").text($("select#StoreDropDownId option:selected").text());
+            $("#SelectedStoreText").text(theSelection);
             
             if ($("#fileStoreId").length > 0) {
                 $("#fileStoreId").val($("#StoreId").val());
             }
-            $('select#StoreDropDownId').chosen({}).change(function (event) {
-                $("#StoreId").val($(this).val());
-				console.log($("select#StoreDropDownId option :selected").text());
-              $("#SelectedStoreText").text($("select#StoreDropDownId option:selected").text());
-                if ($("#fileStoreId").length > 0) {
+            $('select#StoreDropDownId').select2({}).change(function (event) {
+
+                adminDropDown = $('select#StoreDropDownId').select2('data');
+                var theID = adminDropDown[0].id;
+                var theSelection = adminDropDown[0].text;
+                $("#StoreId").val(theID);
+
+                
+				$("#SelectedStoreText").text(theSelection);
+
+				if ($("#fileStoreId").length > 0)
+				{
                     $("#fileStoreId").val($("#StoreId").val());
                 }
             });
@@ -63,8 +72,8 @@
         }
 
 
-        $('[datatype-font-family="c"]').chosen({});
-        $('[datatype-font-size="c"]').chosen({});
+        $('[datatype-font-family="c"]').select2({});
+        $('[datatype-font-size="c"]').select2({});
 
         $('input[datatype-color-mousehover="c"]').colpick({
             onChange: function (hsb, hex, rgb, el, bySetColor) {
@@ -106,26 +115,35 @@
             $(this).colpickSetColor(this.value);
         });
 
+
         if ($('select#StoreAdminDropDownId').length > 0) {
 
-            $('select#StoreAdminDropDownId').chosen({});
 
+            $('select#StoreAdminDropDownId').select2({});
 
-            $("#AdminSelectedStoreText").text($("select#StoreAdminDropDownId option:selected").text());
+            var adminDropDown = $('select#StoreAdminDropDownId').select2('data');
+ 
+            var theID = adminDropDown[0].id;
+            var theSelection = adminDropDown[0].text;
+          
+            $("#AdminSelectedStoreText").text(theSelection);
 
+            $('select#StoreAdminDropDownId').select2({}).change(function (event) {
+                adminDropDown = $('select#StoreAdminDropDownId').select2('data');
+                //var adminDropDownObj = adminDropDown[0];
+                theID = adminDropDown[0].id;
+                theSelection = adminDropDown[0].text;
+                console.log(adminDropDown);
 
-            $('select#StoreAdminDropDownId').chosen({}).change(function (event) {
-
-                $("#AdminSelectedStoreText").text($("select#StoreAdminDropDownId option:selected").text());
+                $("#AdminSelectedStoreText").text(theSelection);
                 var originalURL = window.location.href;
                 if (originalURL.split('?').length > 1) {
                     originalURL = originalURL.split('?')[0];
                 }
-                window.location.href = originalURL + "?storeId=" + $(this).val();
+                window.location.href = originalURL + "?storeId=" + theID;
             });
-
-
         }
+        
 
     });
 

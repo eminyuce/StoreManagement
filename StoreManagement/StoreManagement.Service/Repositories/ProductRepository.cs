@@ -59,8 +59,12 @@ namespace StoreManagement.Service.Repositories
         {
             var products = this.FindBy(
                 r => r.StoreId == storeId &&
-                     r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) &&
-                     r.ProductCategoryId == categoryId);
+                     r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
+
+            if (categoryId > 0)
+            {
+                products = products.Where(r => r.ProductCategoryId == categoryId);
+            }
 
             if (!String.IsNullOrEmpty(search.ToStr()))
             {

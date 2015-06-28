@@ -19,7 +19,7 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
-     
+
 
 
         public ActionResult Index(int storeId = 0, String search = "", int categoryId = 0)
@@ -30,7 +30,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 resultList = ProductRepository.GetProductByTypeAndCategoryId(storeId, StoreConstants.ProductType, categoryId, search);
             }
- 
+
             var contentsAdminViewModel = new ProductsAdminViewModel();
             contentsAdminViewModel.Products = resultList;
             contentsAdminViewModel.Categories = ProductCategoryRepository.GetProductCategoriesByStoreIdFromCache(storeId, StoreConstants.ProductType);
@@ -61,6 +61,7 @@ namespace StoreManagement.Admin.Controllers
         {
             var content = new Product();
             var labels = new List<LabelLine>();
+            var fileManagers = new List<FileManager>();
             if (id == 0)
             {
                 content.Type = StoreConstants.ProductType;
@@ -69,15 +70,18 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                content = ProductRepository.GetSingle(id);
+                content = ProductRepository.GetSingleIncluding(id, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 content.UpdatedDate = DateTime.Now;
                 if (!CheckRequest(content))
                 {
                     return RedirectToAction("NoAccessPage", "Home", new { id = content.StoreId });
                 }
                 labels = LabelLineRepository.GetLabelLinesByItem(id, StoreConstants.ProductType);
+
+                fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
             }
-            ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
+            ViewBag.LabelLines = labels;
+            ViewBag.FileManagers = fileManagers;
             return View(content);
         }
 
@@ -86,30 +90,30 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveOrEdit(Product content, int[] selectedFileId = null, int[] selectedLabelId = null)
+        public ActionResult SaveOrEdit(Product product, int[] selectedFileId = null, int[] selectedLabelId = null)
         {
             if (ModelState.IsValid)
             {
 
-                if (content.ProductCategoryId == 0)
+                if (product.ProductCategoryId == 0)
                 {
                     ModelState.AddModelError("ProductCategoryId", "You should select category from category tree.");
-                    return View(content);
+                    return View(product);
                 }
 
 
-                content.Description = GetCleanHtml(content.Description);
-                if (content.Id == 0)
+                product.Description = GetCleanHtml(product.Description);
+                if (product.Id == 0)
                 {
-                    ProductRepository.Add(content);
+                    ProductRepository.Add(product);
                 }
                 else
                 {
-                    ProductRepository.Edit(content);
+                    ProductRepository.Edit(product);
                 }
 
                 ProductRepository.Save();
-                int contentId = content.Id;
+                int contentId = product.Id;
                 if (selectedFileId != null)
                 {
                     ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
@@ -119,15 +123,15 @@ namespace StoreManagement.Admin.Controllers
 
                 if (IsSuperAdmin)
                 {
-                    return RedirectToAction("Index", new { storeId = content.StoreId });
+                    return RedirectToAction("Index", new { storeId = product.StoreId, categoryId = product.ProductCategoryId });
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { categoryId = product.ProductCategoryId });
                 }
             }
 
-            return View(content);
+            return View(product);
         }
 
 

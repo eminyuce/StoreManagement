@@ -10,6 +10,6 @@ namespace StoreManagement.Data.Entities
     {
         public String Name { get; set; }
         public String LabelType { get; set; }
-        public int CategoryId { get; set; }
+        public int ParentId { get; set; }
     }
 }

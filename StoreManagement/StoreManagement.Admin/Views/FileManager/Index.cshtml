@@ -129,12 +129,38 @@
 
         $(document).ready(function () {
 
-            $("#tempStoreId").val($('select#StoreDropDownId').val());
-            $("#tempStoreId2").val($('select#StoreDropDownId').val());
-            $('select#StoreDropDownId').chosen({}).change(function (event) {
-                $("#tempStoreId").val($(this).val());
-                $("#tempStoreId2").val($(this).val());
-            });
+            //$("#tempStoreId").val($('select#StoreDropDownId').val());
+            //$("#tempStoreId2").val($('select#StoreDropDownId').val());
+            //$('select#StoreDropDownId').select2({}).change(function (event) {
+              
+            //});
+            
+
+
+
+            if ($('select#StoreDropDownId').length > 0) {
+
+
+                $('select#StoreDropDownId').select2({});
+                var adminDropDown = $('select#StoreDropDownId').select2('data');
+
+                var theID = adminDropDown[0].id;
+                var theSelection = adminDropDown[0].text;
+                $("#tempStoreId").val(theID);
+                $("#tempStoreId2").val(theID);
+                
+                $('select#StoreDropDownId').select2({}).change(function (event) {
+
+                    adminDropDown = $('select#StoreDropDownId').select2('data');
+                    theID = adminDropDown[0].id;
+                    theSelection = adminDropDown[0].text;
+                    $("#tempStoreId").val(theID);
+                    $("#tempStoreId2").val(theID);
+                });
+
+
+            }
+
 
 
         });

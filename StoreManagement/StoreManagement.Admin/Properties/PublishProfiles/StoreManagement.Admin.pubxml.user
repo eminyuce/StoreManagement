@@ -94,7 +94,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:32</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>06/26/2015 18:14:52</publishTime>
+      <publishTime>06/29/2015 15:46:32</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>06/26/2015 11:43:33</publishTime>
@@ -199,16 +199,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>06/26/2015 19:04:00</publishTime>
+      <publishTime>06/29/2015 16:12:42</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/26/2015 19:03:54</publishTime>
+      <publishTime>06/29/2015 16:11:00</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/26/2015 19:03:56</publishTime>
+      <publishTime>06/29/2015 16:11:45</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/26/2015 11:33:39</publishTime>
@@ -283,25 +283,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:47</publishTime>
     </File>
     <File Include="bin/Zlib.Portable.dll">
-      <publishTime>06/07/2015 10:47:48</publishTime>
+      <publishTime>06/26/2015 11:33:48</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
-      <publishTime>06/26/2015 11:33:18</publishTime>
+      <publishTime>06/29/2015 11:19:18</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css.map">
-      <publishTime>06/26/2015 11:33:18</publishTime>
+      <publishTime>06/29/2015 11:19:18</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css">
-      <publishTime>06/26/2015 11:33:18</publishTime>
+      <publishTime>06/29/2015 11:19:16</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>06/26/2015 11:33:18</publishTime>
+      <publishTime>06/29/2015 11:19:22</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>06/26/2015 11:33:18</publishTime>
+      <publishTime>06/29/2015 11:19:21</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>06/26/2015 11:33:18</publishTime>
+      <publishTime>06/29/2015 11:19:18</publishTime>
     </File>
     <File Include="Content/chosen-sprite.png">
       <publishTime>06/26/2015 11:33:18</publishTime>
@@ -376,7 +376,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:18</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>06/26/2015 14:03:20</publishTime>
+      <publishTime>06/29/2015 14:59:11</publishTime>
     </File>
     <File Include="Content/Theme/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>06/26/2015 11:33:05</publishTime>
@@ -4330,19 +4330,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 11:19:16</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 11:19:15</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 11:19:15</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 11:19:15</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 11:19:15</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>06/26/2015 11:33:19</publishTime>
@@ -4351,7 +4351,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:45:45</publishTime>
     </File>
     <File Include="Icon.png">
-      <publishTime>06/26/2015 11:33:19</publishTime>
+      <publishTime>06/29/2015 11:19:10</publishTime>
     </File>
     <File Include="Images/accent.png">
       <publishTime>06/26/2015 11:33:19</publishTime>
@@ -4429,16 +4429,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:19</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/26/2015 11:45:57</publishTime>
+      <publishTime>06/29/2015 11:19:22</publishTime>
     </File>
     <File Include="Scripts/bootstrap-image-gallery.min.js">
       <publishTime>06/26/2015 11:33:19</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>06/26/2015 11:33:19</publishTime>
+      <publishTime>06/29/2015 11:19:10</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>06/26/2015 11:33:19</publishTime>
+      <publishTime>06/29/2015 11:19:10</publishTime>
+    </File>
+    <File Include="Scripts/Bootstrap.Multiselect.0.9.13/Bootstrap.Multiselect.0.9.13.nupkg">
+      <publishTime>06/29/2015 11:06:15</publishTime>
+    </File>
+    <File Include="Scripts/Bootstrap.Multiselect.0.9.13/Css/bootstrap-multiselect.css">
+      <publishTime>06/29/2015 11:06:15</publishTime>
+    </File>
+    <File Include="Scripts/Bootstrap.Multiselect.0.9.13/Less/bootstrap-multiselect.less">
+      <publishTime>06/29/2015 11:06:15</publishTime>
+    </File>
+    <File Include="Scripts/Bootstrap.Multiselect.0.9.13/Scripts/bootstrap-multiselect-collapsible-groups.js">
+      <publishTime>06/29/2015 11:06:15</publishTime>
+    </File>
+    <File Include="Scripts/Bootstrap.Multiselect.0.9.13/Scripts/bootstrap-multiselect.js">
+      <publishTime>06/29/2015 11:06:15</publishTime>
     </File>
     <File Include="Scripts/chosen.jquery.min.js">
       <publishTime>06/26/2015 11:33:19</publishTime>
@@ -4489,7 +4504,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:45:42</publishTime>
     </File>
     <File Include="Scripts/imageGallery.js">
-      <publishTime>06/26/2015 11:33:19</publishTime>
+      <publishTime>06/29/2015 15:45:52</publishTime>
     </File>
     <File Include="Scripts/img/generalFile.png">
       <publishTime>06/26/2015 11:33:19</publishTime>
@@ -4573,7 +4588,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:20</publishTime>
     </File>
     <File Include="Scripts/npm.js">
-      <publishTime>06/26/2015 11:33:20</publishTime>
+      <publishTime>06/29/2015 11:19:10</publishTime>
     </File>
     <File Include="Scripts/prism.js">
       <publishTime>06/26/2015 11:33:20</publishTime>
@@ -4582,7 +4597,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:20</publishTime>
     </File>
     <File Include="Scripts/storeContent.js">
-      <publishTime>06/26/2015 11:33:20</publishTime>
+      <publishTime>06/28/2015 15:52:25</publishTime>
     </File>
     <File Include="Scripts/storeManagement.js">
       <publishTime>06/26/2015 11:33:20</publishTime>
@@ -4756,16 +4771,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:20</publishTime>
     </File>
     <File Include="Views/FileManager/DisplayImages.cshtml">
-      <publishTime>06/26/2015 15:59:13</publishTime>
+      <publishTime>06/29/2015 16:02:29</publishTime>
     </File>
     <File Include="Views/FileManager/Index.cshtml">
-      <publishTime>06/26/2015 11:33:20</publishTime>
+      <publishTime>06/29/2015 09:35:03</publishTime>
     </File>
     <File Include="Views/FileManager/UploadImages.cshtml">
       <publishTime>06/26/2015 11:33:20</publishTime>
     </File>
     <File Include="Views/FileManager/_ImageGallery.cshtml">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 15:42:06</publishTime>
     </File>
     <File Include="Views/FileManagerCategories/Delete.cshtml">
       <publishTime>06/26/2015 11:33:20</publishTime>
@@ -4798,7 +4813,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Home/LabelsDropDown.cshtml">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 12:09:45</publishTime>
     </File>
     <File Include="Views/Home/NoAccessPage.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -4818,20 +4833,35 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Interface/Index.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
+    <File Include="Views/LabelCategories/Delete.cshtml">
+      <publishTime>06/26/2015 11:33:20</publishTime>
+    </File>
+    <File Include="Views/LabelCategories/Details.cshtml">
+      <publishTime>06/26/2015 11:33:20</publishTime>
+    </File>
+    <File Include="Views/LabelCategories/Index.cshtml">
+      <publishTime>06/26/2015 11:33:20</publishTime>
+    </File>
+    <File Include="Views/LabelCategories/SaveOrEdit.cshtml">
+      <publishTime>06/26/2015 11:33:20</publishTime>
+    </File>
     <File Include="Views/Labels/CreateOrEdit.cshtml">
       <publishTime>06/16/2015 14:07:23</publishTime>
     </File>
     <File Include="Views/Labels/Delete.cshtml">
-      <publishTime>06/16/2015 14:06:55</publishTime>
+      <publishTime>06/29/2015 16:12:31</publishTime>
     </File>
     <File Include="Views/Labels/Details.cshtml">
-      <publishTime>06/16/2015 14:06:58</publishTime>
+      <publishTime>06/29/2015 16:12:34</publishTime>
     </File>
     <File Include="Views/Labels/Edit.cshtml">
       <publishTime>06/16/2015 14:07:23</publishTime>
     </File>
     <File Include="Views/Labels/Index.cshtml">
-      <publishTime>06/16/2015 14:07:48</publishTime>
+      <publishTime>06/29/2015 09:49:58</publishTime>
+    </File>
+    <File Include="Views/Labels/SaveOrEdit.cshtml">
+      <publishTime>06/29/2015 16:12:21</publishTime>
     </File>
     <File Include="Views/Navigations/Create.cshtml">
       <publishTime>05/17/2015 17:53:43</publishTime>
@@ -4846,7 +4876,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/17/2015 17:53:43</publishTime>
     </File>
     <File Include="Views/Navigations/Index.cshtml">
-      <publishTime>06/26/2015 16:56:51</publishTime>
+      <publishTime>06/29/2015 10:46:54</publishTime>
     </File>
     <File Include="Views/Navigations/SaveOrEdit.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -4936,10 +4966,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/18/2015 10:55:00</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 10:45:30</publishTime>
     </File>
     <File Include="Views/Products/SaveOrEdit.cshtml">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 15:37:14</publishTime>
     </File>
     <File Include="Views/ProductsLabels/Delete.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -4996,7 +5026,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Shared/Categories/pIndex.cshtml">
-      <publishTime>06/26/2015 16:58:17</publishTime>
+      <publishTime>06/29/2015 10:46:07</publishTime>
     </File>
     <File Include="Views/Shared/Categories/pSaveOrEdit.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5023,7 +5053,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Shared/Content/pContentsIndex.cshtml">
-      <publishTime>06/26/2015 16:58:17</publishTime>
+      <publishTime>06/29/2015 10:46:20</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BaseContent.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5089,10 +5119,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Shared/pLayoutScript.cshtml">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 12:36:32</publishTime>
     </File>
     <File Include="Views/Shared/pLayoutStyle.cshtml">
-      <publishTime>06/26/2015 11:33:21</publishTime>
+      <publishTime>06/29/2015 11:28:03</publishTime>
     </File>
     <File Include="Views/Shared/pPager.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5113,7 +5143,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Shared/Users/pIndex.cshtml">
-      <publishTime>06/26/2015 19:45:57</publishTime>
+      <publishTime>06/29/2015 10:46:33</publishTime>
     </File>
     <File Include="Views/Shared/Users/pSaveOrEdit.cshtml">
       <publishTime>06/26/2015 19:49:25</publishTime>
@@ -5137,7 +5167,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Shared/_LeftMenu.cshtml">
-      <publishTime>06/26/2015 16:47:44</publishTime>
+      <publishTime>06/29/2015 16:10:07</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5185,7 +5215,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Stores/SaveOrEditStoreUser.cshtml">
-      <publishTime>06/25/2015 09:41:21</publishTime>
+      <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/Stores/Settings.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5236,7 +5266,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/26/2015 18:31:59</publishTime>
+      <publishTime>06/29/2015 15:46:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

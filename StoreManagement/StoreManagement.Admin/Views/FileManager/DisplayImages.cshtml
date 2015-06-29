@@ -107,7 +107,7 @@
         columns.Add().Encoded(false).
             Sanitized(false).
             SetWidth(10).
-            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.GoogleImageId));
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'   class='gridCheckboxes'   name='checkboxGrid' type='checkbox'>", o.GoogleImageId));
 
         columns.Add(o => o.Id, true);
 
@@ -119,6 +119,8 @@
                    @<b>
                        @Html.ActionLink(" ", "Edit", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                    </b>);
+                        
+                        
         columns.Add()
                    .Encoded(false)
                    .Sanitized(false)
@@ -127,8 +129,13 @@
                        @<b>
                            @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
                        </b>);
-
-        columns.Add(c => c.Title).Titled("Name").Filterable(true);
+                        
+        columns.Add(c => c.OriginalFilename).Titled("OriginalFilename").Filterable(true);
+        
+        columns.Add(c => c.Title).Titled("Name").Encoded(false).
+                    Sanitized(false).
+                    RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='input-xs' type='type'>", o.Id, o.Title));
+                    
         columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
 
         columns.Add(o => o.Ordering).Encoded(false).

@@ -4,50 +4,20 @@ $(document).ready(function () {
     console.log("image gallery script is working");
     
     $("#ImageDialog").click(function () {
-        createAndOpenDialog();
+        
+        setTimeout(function () {
+            LoadImages();
+        }, 2);
+        
+
+       // $("#contentImages").empty();
+       // $("#contentImages").html($("#SelectedImageGallery").clone().html());
+  
+        
     });
     RetrieveContentImages();
     bindRemoveImage();
 });
-function createAndOpenDialog() {
-    $("#dialog-message").dialog({
-        modal: true,
-        height: 520,
-        width: 720,
-        show: {
-            effect: "fade",
-            duration: 1000
-        },
-        hide: {
-            effect: "fade",
-            duration: 500
-        },
-        buttons: {
-            Ok: function () {
-
-                $("#contentImages").empty();
-                $("#contentImages").html($("#SelectedImageGallery").clone().html());
-                $(this).dialog("close");
-
-
-            },
-            Close: function () {
-                $(this).dialog("close");
-            }
-        },
-        open: function (event, ui) {
-            setTimeout(function () {
-                LoadImages();
-            }, 2);
-        }
-    });
-
-    $("#dialog-message").position({
-        my: "center",
-        at: "center",
-        of: window
-    });
-}
 function RetrieveContentImages() {
     $('[data-file-item-id]').each(function () {
         $(this).off("click");

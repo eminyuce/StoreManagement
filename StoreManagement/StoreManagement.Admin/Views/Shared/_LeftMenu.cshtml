@@ -36,13 +36,6 @@
                 }
                 <li role="separator" class="divider-vertical"></li>
                 @Html.MenuItem("Navigation", "Index", "Navigations")
-                <li role="separator" class="divider-vertical"></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-                    <ul class="dropdown-menu pull-left">
-                        @Html.MenuItem("File Manager Categories", "Index", "FileManagerCategories")
-                    </ul>
-                </li>
                 @Html.MenuItem("Files Manager", "Index", "FileManager")
 
                 <li role="separator" class="divider-vertical"></li>
@@ -50,27 +43,24 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                     <ul class="dropdown-menu pull-left">
                         @Html.MenuItem("Products Categories", "Index", "ProductCategories")
-                        @Html.MenuItem("Products Labels", "Index", "ProductsLabels")
                     </ul>
                 </li>
                 @Html.MenuItem("Products", "Index", "Products")
                 <li role="separator" class="divider-vertical"></li>
-                <li class="dropdown">
+                @Html.MenuItem("Labels", "Index", "Labels")
+                <li role="separator" class="divider-vertical"></li>
+                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                     <ul class="dropdown-menu pull-left">
                         @Html.MenuItem("News Categories", "Index", "NewsCategories")
-                        @Html.MenuItem("News Labels", "Index", "NewsLabels")
                     </ul>
                 </li>
-
                 @Html.MenuItem("News", "Index", "News")
                 <li role="separator" class="divider-vertical"></li>
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                     <ul class="dropdown-menu pull-left">
                         @Html.MenuItem("Blogs Categories", "Index", "BlogsCategories")
-                        @Html.MenuItem("Blogs Labels", "Index", "BlogLabels")
                     </ul>
                 </li>
                 @Html.MenuItem("Blogs", "Index", "Blogs")

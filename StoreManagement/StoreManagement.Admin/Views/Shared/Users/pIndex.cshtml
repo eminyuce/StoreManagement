@@ -104,7 +104,7 @@
         columns.Add().Encoded(false).
             Sanitized(false).
             SetWidth(10).
-            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.UserId));
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'   class='gridCheckboxes'  name='checkboxGrid' type='checkbox'>", o.UserId));
 
 
         columns.Add(o => o.UserId, true);

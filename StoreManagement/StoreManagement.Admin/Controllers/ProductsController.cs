@@ -59,6 +59,8 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult SaveOrEdit(int id = 0)
         {
+        
+
             var content = new Product();
             var labels = new List<LabelLine>();
             var fileManagers = new List<FileManager>();
@@ -70,7 +72,12 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
+                
                 content = ProductRepository.GetSingleIncluding(id, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                if (!CheckRequest(content))
+                {
+                    return new HttpNotFoundResult("Not Found");
+                }
                 content.UpdatedDate = DateTime.Now;
                 if (!CheckRequest(content))
                 {
@@ -94,7 +101,10 @@ namespace StoreManagement.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                if (!CheckRequest(product))
+                {
+                    return new HttpNotFoundResult("Not Found");
+                }
                 if (product.ProductCategoryId == 0)
                 {
                     ModelState.AddModelError("ProductCategoryId", "You should select category from category tree.");
@@ -142,6 +152,10 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult Delete(int id = 0)
         {
             Product content = ProductRepository.GetSingle(id);
+            if (!CheckRequest(content))
+            {
+                return new HttpNotFoundResult("Not Found");
+            }
             if (content == null)
             {
                 return HttpNotFound();
@@ -168,6 +182,11 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product content = ProductRepository.GetSingle(id);
+            if (!CheckRequest(content))
+            {
+                return new HttpNotFoundResult("Not Found");
+            }
+
             ProductRepository.Delete(content);
             ProductRepository.Save();
 

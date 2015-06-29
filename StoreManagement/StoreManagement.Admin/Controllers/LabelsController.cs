@@ -8,27 +8,17 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Admin.Controllers
 {
-    public abstract class LabelsController : BaseController
+    public class LabelsController : BaseController
     {
 
-        private String LabelType { set; get; }
-
-        protected LabelsController(String labelType)
-        {
-            this.LabelType = labelType;
-        }
-
-        public ActionResult Index(int storeId = 0, String search = "", int categoryId = 0)
+        public ActionResult Index(int storeId = 0, String search = "")
         {
             var resultList = new List<Label>();
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = LabelRepository.GetLabelsByTypeAndCategoryAndSearch(storeId, LabelType,categoryId,search);
+                resultList = LabelRepository.GetLabelsCategoryAndSearch(storeId,search);
             }
-           
-
-          
 
             return View(resultList);
         }
@@ -44,7 +34,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult SaveOrEdit(int id = 0)
         {
-            Label label = new Label();
+            var label = new Label();
             if (id != 0)
             {
                 label = LabelRepository.GetSingle(id);
@@ -57,7 +47,7 @@ namespace StoreManagement.Admin.Controllers
                 label.State = true;
 
             }
-            label.LabelType = LabelType;
+            label.LabelType = "";
             return View(label);
         }
 

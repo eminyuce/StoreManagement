@@ -5,11 +5,12 @@
 @{
     var product = Model;
     List<LabelLine> labelLines = ViewBag.LabelLines;
+    int[] selectedLabelId = labelLines.Select(r => r.Id).ToArray();
     List<FileManager> fileManagers = ViewBag.FileManagers;
     var requestStoreId = @Request.QueryString["storeId"].ToInt();
     int storeId = product != null ? product.StoreId : requestStoreId;
     String categoryType = product.Type;
-    int[] selectedLabelId = labelLines.Select(r => r.Id).ToArray();
+    
 }
 
 
@@ -45,6 +46,7 @@
                                 <li class="active"><a href="#ProductDetail" data-toggle="tab">Product</a></li>
                                 <li><a href="#ProductDesription" data-toggle="tab">Description</a></li>
                                 <li><a href="#ProductImages" data-toggle="tab">Product Images </a></li>
+                                <li><a href="#ImagesGallery" data-toggle="tab">Images Gallery </a></li>
                             </ul>
                           
                             <div id="my-tab-content" class="tab-content">
@@ -144,24 +146,34 @@
                                 <div class="tab-pane" id="ProductImages">
 
                                     <div class="form-group">
+                                        <div id="contentImages"></div>
+
+                                        @if (fileManagers != null)
+                                        {    
+                                            <div id="existingContentImages">
+                                                @foreach (var file in fileManagers)
+                                                {
+                                                    <li class="col-md-4 thumbnail" data-file-image="@file.Id"><a href="#">
+                                                        <img class="fileManagerImg" src=@String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId) title="bootstrap-template.png" id="@file.Id"></a>
+                                                        <div data-image-remove-link="@file.Id" data-image-file-name="bootstrap-template.png" class="addLink btn btn-danger btn-block">Remove</div>
+                                                        <div class="caption">bootstrap-template.png</div>
+                                                    </li>
+                                                    <input type="hidden" id="fileId_@file.Id" value="@file.Id" name="selectedFileId" data-selected-file="@file.Id">
+                                                }
+
+                                            </div>
+                                        
+                                            <div id="SelectedImageGallery" class="row">
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="ImagesGallery">
+                                    <div class="form-group">
                                         @Html.Action("ImageGallery", "FileManager")
                                     </div>
-                                    <div class="form-group">
-                                        <div id="contentImages"></div>
-                                        <div id="existingContentImages">
-                                            @foreach (var file in fileManagers)
-                                            {
-                                                <li class="col-md-4 thumbnail" data-file-image="@file.Id"><a href="#">
-                                                    <img class="fileManagerImg" src=@String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId) title="bootstrap-template.png" id="@file.Id"></a>
-                                                    <div data-image-remove-link="@file.Id" data-image-file-name="bootstrap-template.png" class="addLink btn btn-danger btn-block">Remove</div>
-                                                    <div class="caption">bootstrap-template.png</div>
-                                                </li>
-                                                <input type="hidden" id="fileId_@file.Id" value="@file.Id" name="selectedFileId" data-selected-file="@file.Id">
-                                            }
 
-                                        </div>
-
-                                    </div>
                                 </div>
                             </div>
                             <div>

@@ -32,7 +32,7 @@ namespace StoreManagement.Admin.Controllers
             Label label = new Label();
             label.Name = labelName;
             label.LabelType = "News";
-            label.CategoryId = 1;
+            label.ParentId = 1;
             
             LabelRepository.Add(label);
             int labelId =  LabelRepository.Save();

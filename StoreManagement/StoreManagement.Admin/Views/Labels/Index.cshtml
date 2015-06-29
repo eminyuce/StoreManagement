@@ -2,7 +2,7 @@
 @using GridMvc.Html
 @using GridMvc.Sorting
 @using StoreManagement.Data
-@using StoreManagement.Data.Constants;;
+@using StoreManagement.Data.Constants;
 @using StoreManagement.Data.GeneralHelper;
 
 
@@ -10,7 +10,7 @@
     ViewBag.Title = "Index";
     var title = "Labels Management";
     var gridName = "LabelGrid";
-    string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
+    string controller = "Labels";
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
     var isRegularUser = User.IsInRole(StoreConstants.RoleUser);

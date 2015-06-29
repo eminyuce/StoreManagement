@@ -97,7 +97,7 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveOrEdit(Product product, int[] selectedFileId = null, int[] selectedLabelId = null)
+        public ActionResult SaveOrEdit(Product product, int[] selectedFileId = null, int [] selectedLabelId = null)
         {
             if (ModelState.IsValid)
             {
@@ -128,6 +128,8 @@ namespace StoreManagement.Admin.Controllers
                 {
                     ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
                 }
+
+                  
                 LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
 
 

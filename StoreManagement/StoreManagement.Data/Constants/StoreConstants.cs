@@ -20,6 +20,7 @@ namespace StoreManagement.Data.Constants
         public const String BlogsType = "blog";
         public const String StoreType = "store";
         public const String FilesType = "files";
+        public const String LabelsType = "label";
 
         public const String MetaTagKey = "MetaTagKey";
 

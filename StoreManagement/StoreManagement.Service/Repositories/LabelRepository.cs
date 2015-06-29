@@ -31,7 +31,19 @@ namespace StoreManagement.Service.Repositories
         public List<Label> GetLabelsByTypeAndCategoryAndSearch(int storeId, string labelType, int categoryId, string search)
         {
             var items =
-                this.FindBy(r => r.LabelType.Equals(labelType) && r.StoreId == storeId && r.CategoryId == categoryId);
+                this.FindBy(r => r.LabelType.Equals(labelType) && r.StoreId == storeId && r.ParentId == categoryId);
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+        }
+
+        public List<Label> GetLabelsCategoryAndSearch(int storeId,  string search)
+        {
+            var items =this.FindBy(r =>  r.StoreId == storeId);
 
             if (!String.IsNullOrEmpty(search.ToStr()))
             {

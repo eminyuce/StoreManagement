@@ -1,138 +1,146 @@
 ﻿
- 
+
 input.GridOrderingTextbox {
-  max-width: 30px;
-  width: 35px;
-  margin-left: 5px;
-  margin-top: 2px;
-  text-align: center;
-  line-height: 20px;
-  max-height:30px;
-  /* height: 20px; */
-}/* Your grid header column style */
-.grid-header
-{
+    max-width: 30px;
+    width: 35px;
+    margin-left: 5px;
+    margin-top: 2px;
+    text-align: center;
+    line-height: 20px;
+    max-height: 30px;
+    /* height: 20px; */
+}
+/* Your grid header column style */
+.grid-header {
     background-color: rgb(217, 231, 255);
     border: none;
     text-align: left;
     font-weight: bold;
     font-size: 15px;
     padding: 4px;
-    color:Black;
+    color: Black;
 }
-.grid-header-title a
-{
+
+.grid-header-title a {
     text-align: left;
     font-weight: bold;
     font-size: 15px;
     padding: 4px;
-    color:Black;
-}
-.gridChecked  {
-    background-color: aqua  !important;
+    color: Black;
 }
 
-.container-full {
-  margin: 0 auto;
-  width: 100%;
+.gridChecked {
+    background-color: aqua !important;
+}
+
+.container {
+    margin: 0 auto;
+    width: 92%;
 }
 
 div .roleradio.selected {
-  border: #50B346 solid 3px;
+    border: #50B346 solid 3px;
 }
 
 div .roleradio {
-  border: #385F8D solid 3px;
-  margin: 0 10px 0 0;
-  padding: 0;
+    border: #385F8D solid 3px;
+    margin: 0 10px 0 0;
+    padding: 0;
 }
+
 .divider-vertical {
     height: floor(@navbar-height - @navbar-margin-bottom);
     margin: floor(@navbar-margin-bottom / 2) 9px;
     border-left: 1px solid #f2f2f2;
     border-right: 1px solid #ffffff;
 }
+
 .navbar-default .navbar-nav > li > a {
     color: black;
     font-size: 1em;
     font-weight: bold;
 }
-.navbar-default .navbar-nav > li > a:hover {
-  color: #8B1313;
-  font-size: 1em;
-  font-weight: bold;
-}
+
+    .navbar-default .navbar-nav > li > a:hover {
+        color: #8B1313;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
 .navbar-default .navbar-nav > li:hover {
-  background-color: #EFD7D7;
+    background-color: #EFD7D7;
 }
-.navbar-default .navbar-nav > li > .dropdown-menu > li  > a {
+
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
     color: black;
     font-size: 1em;
     font-weight: bold;
 }
-.navbar-default .navbar-nav > li > .dropdown-menu > li  > a:hover {
-  color: #8B1313;
-  font-size: 1em;
-  font-weight: bold;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu > li:hover {
-  background-color: #EFD7D7;
-}
-.navbar-default {
-    background-image: linear-gradient(to bottom, #fff 0%, #C4D7D8 100%);
-}
- .navbar .divider-vertical {
-	height: 40px;
-	margin: 0 9px;
-	border-left: 1px solid #f2f2f2;
-	border-right: 1px solid #ffffff;
+
+    .navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover {
+        color: #8B1313;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+.navbar .divider-vertical {
+    height: 40px;
+    margin: 0 9px;
+    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid #ffffff;
 }
 
- .rcorners2 {
+.rcorners2 {
     border-radius: 25px;
     border: 2px solid #8AC007;
-    padding: 20px; 
-   background-color:#F7F9EC;
+    padding: 20px;
+    background-color: #F7F9EC;
 }
 
 
 
-.treeview >  ul {
+.treeview > ul {
     padding: 0;
     margin: 0;
     list-style-type: none;
     position: relative;
 }
 
-.treeview >  li {
+.treeview > li {
     list-style-type: none;
     border-left: 2px solid #000;
     margin-left: 1em;
 }
 
-.treeview >  li div {
-    padding-left: 1em;
-    position: relative;
-}
+    .treeview > li div {
+        padding-left: 1em;
+        position: relative;
+    }
 
-.treeview >  li div::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -2px;
-    bottom: 50%;
-    width: 0.75em;
-    border: 2px solid #000;
-    border-top: 0 none transparent;
-    border-right: 0 none transparent;
-}
+        .treeview > li div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2px;
+            bottom: 50%;
+            width: 0.75em;
+            border: 2px solid #000;
+            border-top: 0 none transparent;
+            border-right: 0 none transparent;
+        }
 
- .treeview >  ul > li:last-child {
+.treeview > ul > li:last-child {
     border-left: 2px solid transparent;
 }
 
- .fileManagerImg {
-     width: 100%;
-     max-width: 120px;
+.fileManagerImg {
+    max-width: 120px;
+    max-height: 120px;
+}
 
- }
+.gridCheckboxes {
+    width: 34px;
+    height: 30px;
+    padding: 5em;
+    border: 1px solid #369;
+}

@@ -287,24 +287,20 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BlogsCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
-    <Compile Include="Controllers\BlogLabelsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailListsController.cs" />
-    <Compile Include="Controllers\FileManagerCategoriesController.cs" />
     <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\NewsLabelsController.cs" />
     <Compile Include="Controllers\PageDesignsController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\ProductsLabelsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StoreCategoriesController.cs" />
@@ -1521,12 +1517,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Icon.png" />
     <Content Include="Images\Dashboard\01.png" />
     <Content Include="Images\Dashboard\02.png" />
@@ -1537,8 +1527,6 @@
     <Content Include="Images\Dashboard\07.png" />
     <Content Include="Images\Dashboard\08.png" />
     <Content Include="Scripts\bootstrap-image-gallery.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1694,6 +1682,12 @@
     <Content Include="Content\Theme\vendors\ckeditor\README.md" />
     <Content Include="Grid.mvc.readme" />
     <Content Include="App_Data\GoogleDrive\Google Drive File Upload-02b81c6f609a.p12" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1703,7 +1697,14 @@
     <None Include="Properties\PublishProfiles\StoreManagement.Admin.pubxml" />
     <None Include="Properties\PublishProfiles\YuceMachine.pubxml" />
     <None Include="Properties\PublishProfiles\yucetest.pubxml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Bootstrap.Multiselect.0.9.13\Bootstrap.Multiselect.0.9.13.nupkg" />
+    <Content Include="Scripts\Bootstrap.Multiselect.0.9.13\Less\bootstrap-multiselect.less" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\Bootstrap.Multiselect.0.9.13\Css\bootstrap-multiselect.css" />
+    <Content Include="Scripts\Bootstrap.Multiselect.0.9.13\Scripts\bootstrap-multiselect-collapsible-groups.js" />
+    <Content Include="Scripts\Bootstrap.Multiselect.0.9.13\Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\colpick.js" />
     <Content Include="Scripts\FileUpload\canvas-to-blob.min.js" />
     <Content Include="Scripts\FileUpload\jquery.fileupload-ip.js" />
@@ -1882,10 +1883,10 @@
     <Content Include="Views\ProductCategories\Details.cshtml" />
     <Content Include="Views\ProductCategories\SaveOrEdit.cshtml" />
     <Content Include="Views\ProductCategories\Delete.cshtml" />
-    <Content Include="Views\Shared\Labels\pDelete.cshtml" />
-    <Content Include="Views\Shared\Labels\pDetails.cshtml" />
-    <Content Include="Views\Shared\Labels\pSaveOrEdit.cshtml" />
-    <Content Include="Views\Shared\Labels\pIndex.cshtml" />
+    <Content Include="Views\Labels\Delete.cshtml" />
+    <Content Include="Views\Labels\Details.cshtml" />
+    <Content Include="Views\Labels\SaveOrEdit.cshtml" />
+    <Content Include="Views\Labels\Index.cshtml" />
     <Content Include="Views\BlogsCategories\Index.cshtml" />
     <Content Include="Views\BlogsCategories\SaveOrEdit.cshtml" />
     <Content Include="Views\BlogsCategories\Details.cshtml" />
@@ -1899,20 +1900,8 @@
     <Content Include="Views\NewsCategories\Details.cshtml" />
     <Content Include="Views\NewsCategories\Index.cshtml" />
     <Content Include="Views\NewsCategories\SaveOrEdit.cshtml" />
-    <Content Include="Views\BlogLabels\Index.cshtml" />
-    <Content Include="Views\BlogLabels\Details.cshtml" />
-    <Content Include="Views\BlogLabels\SaveOrEdit.cshtml" />
-    <Content Include="Views\BlogLabels\Delete.cshtml" />
-    <Content Include="Views\NewsLabels\Delete.cshtml" />
-    <Content Include="Views\NewsLabels\Details.cshtml" />
-    <Content Include="Views\NewsLabels\Index.cshtml" />
-    <Content Include="Views\NewsLabels\SaveOrEdit.cshtml" />
     <Content Include="Views\Home\ReturnFrontEndUrl.cshtml" />
     <Content Include="Views\Home\LabelsDropDown.cshtml" />
-    <Content Include="Views\ProductsLabels\Delete.cshtml" />
-    <Content Include="Views\ProductsLabels\Details.cshtml" />
-    <Content Include="Views\ProductsLabels\Index.cshtml" />
-    <Content Include="Views\ProductsLabels\SaveOrEdit.cshtml" />
     <Content Include="Views\Stores\SaveOrEditStoreUser.cshtml" />
     <Content Include="Views\Stores\StoreUserDetail.cshtml" />
     <Content Include="Views\Stores\SaveOrEditStoreSettings.cshtml" />
@@ -1939,10 +1928,6 @@
     <Content Include="Views\StoreCategories\Details.cshtml" />
     <Content Include="Views\StoreCategories\Index.cshtml" />
     <Content Include="Views\StoreCategories\SaveOrEdit.cshtml" />
-    <Content Include="Views\FileManagerCategories\Delete.cshtml" />
-    <Content Include="Views\FileManagerCategories\Details.cshtml" />
-    <Content Include="Views\FileManagerCategories\Index.cshtml" />
-    <Content Include="Views\FileManagerCategories\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

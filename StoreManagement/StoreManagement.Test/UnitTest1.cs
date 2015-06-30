@@ -31,6 +31,13 @@ namespace StoreManagement.Test
         {
           dbContext = new StoreContext(ConnectionString);
         }
+
+        [TestMethod]
+        public void TestLog2222()
+        {
+             
+
+        } 
         [TestMethod]
         public void TestLog()
         {

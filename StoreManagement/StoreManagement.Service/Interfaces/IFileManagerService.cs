@@ -13,6 +13,7 @@ namespace StoreManagement.Service.Interfaces
         List<FileManager> GetFilesByStoreIdFromCache(int storeId);
         List<FileManager> GetFilesByStoreId(int storeId);
         FileManager GetFilesByGoogleImageId(String googleImageId);
+        List<FileManager> GetFilesByGoogleImageIdArray(String[] googleImageId);
         FileManager GetFilesById(int id);
         List<FileManager> GetStoreCarousels(int storeId);
         StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize);

@@ -295,6 +295,7 @@
     <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LabelsController.cs" />
+    <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -1928,6 +1929,9 @@
     <Content Include="Views\StoreCategories\Details.cshtml" />
     <Content Include="Views\StoreCategories\Index.cshtml" />
     <Content Include="Views\StoreCategories\SaveOrEdit.cshtml" />
+    <Content Include="Views\Logs\Index.cshtml" />
+    <Content Include="Views\Logs\AppLogDetail.cshtml" />
+    <Content Include="Views\Logs\LogDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.LogEntities;
 
 namespace StoreManagement.Service.DbContext
 {
@@ -33,5 +34,6 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<Label> Labels { get; set; }
         public IDbSet<LabelLine> LabelLines { get; set; }        
         public IDbSet<EmailList> EmailLists { get; set; }
+        public IDbSet<system_logging> system_loggings { get; set; }
     }
 }

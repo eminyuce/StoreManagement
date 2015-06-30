@@ -195,5 +195,24 @@ namespace StoreManagement.Data.GeneralHelper
 
 
         }
+
+        public static string LogPageLink(HttpRequestBase httpRequestBase, ViewContext viewContext, String appName, String logLevel)
+        {
+
+            var rv = new RouteValueDictionary();
+            if (!String.IsNullOrEmpty(appName))
+            {
+                rv.Add("appName", appName.ToStr());
+            }
+
+            if (!String.IsNullOrEmpty(logLevel))
+            {
+                rv.Add("logLevel", logLevel.ToStr());
+            }
+
+            var urlHelper = new UrlHelper(httpRequestBase.RequestContext);
+            return urlHelper.Action("AppLogDetail", "Logs", rv);
+
+        }
     }
 }

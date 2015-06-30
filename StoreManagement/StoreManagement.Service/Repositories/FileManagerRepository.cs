@@ -54,6 +54,12 @@ namespace StoreManagement.Service.Repositories
                     .FirstOrDefault();
         }
 
+        public List<FileManager> GetFilesByGoogleImageIdArray(string[] googleImageId)
+        {
+            return
+                FindBy(r => googleImageId.Contains(r.GoogleImageId)).ToList();
+        }
+
         public FileManager GetFilesById(int id)
         {
             return GetSingle(id);

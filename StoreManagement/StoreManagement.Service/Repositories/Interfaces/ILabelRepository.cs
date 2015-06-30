@@ -12,5 +12,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface ILabelRepository : IEntityRepository<Label, int>, ILabelService
     {
         List<Label> GetLabelsCategoryAndSearch(int storeId, string search);
+        List<Label> GetActiveLabels(int storeId);
     }
 }

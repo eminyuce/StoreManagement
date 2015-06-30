@@ -1,0 +1,84 @@
+﻿@model StoreManagement.Data.LogEntities.system_logging
+
+
+
+@{
+    var modalId = "modal-" + Model.GetHashCode();
+    string cssClass = "";
+    switch (Model.log_level)
+    {
+        case "Fatal":
+        case "Error":
+            cssClass = "danger";
+            break;
+        case "Warn":
+            cssClass = "warning";
+            break;
+        case "Info":
+            cssClass = "success";
+            break;
+        case "Debug":
+        case "Trace":
+            cssClass = "info";
+            break;
+
+    }
+}
+
+
+<tr class="@cssClass">
+    <td>
+        @Html.DisplayFor(model => model.log_date)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(model => model.log_level)
+    </td>  
+               
+
+    <td>
+        @Html.DisplayFor(model => model.log_message)
+    </td>  
+    <td>
+        <a data-log-item-id="@modalId"  data-log-item-action="show" class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i> View</a>
+        <a data-log-item-id="@modalId" data-log-item-action="hide" style="display:none;" class="btn btn-primary"><i class="glyphicon glyphicon-eye-close"></i> Hide</a>
+    </td>                                         
+</tr>
+              
+<tr  data-log-item-row="@modalId" class="@cssClass" style="display:none;">
+    <td colspan="4">
+        <dl class="dl-horizontal">
+                <dt class="display-label">
+                    @Html.DisplayNameFor(model => model.log_exception)
+                </dt>
+                <dd class="display-field">
+                    @Html.DisplayFor(model => model.log_exception)
+                </dd>
+
+                <dt class="display-label">
+                    @Html.DisplayNameFor(model => model.log_logger)
+                </dt>
+                <dd class="display-field">
+                    @Html.DisplayFor(model => model.log_logger)
+                </dd>
+
+                <dt class="display-label">
+                    @Html.DisplayNameFor(model => model.log_call_site)
+                </dt>
+
+                <dd class="display-field">
+                    @Html.DisplayFor(model => model.log_call_site)
+                </dd>
+
+                <dt class="display-label">
+                    @Html.DisplayNameFor(model => model.log_stacktrace)
+                </dt>
+                <dd class="display-field">
+                    @Html.DisplayFor(model => model.log_stacktrace)
+                </dd>
+            </dl>
+    </td>
+</tr>
+
+ 

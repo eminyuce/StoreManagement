@@ -71,18 +71,7 @@ $(document).ready(function () {
             var m = $(this).prop('checked', true);
         });
     });
-    function GetSelectedCheckBoxValues() {
-        var stringArray = new Array();
-        var i = 0;
-        $("input[name=checkboxGrid]").each(function () {
-            var m = $(this).is(':checked');
-            if (m) {
-                stringArray[i++] = $(this).attr("gridkey-id");
-            }
-        });
-        var jsonRequest = JSON.stringify({ "values": stringArray });
-        return jsonRequest;
-    }
+   
     function OrderingItem() {
         var item = this;
         item.Id = "";
@@ -194,8 +183,22 @@ $(document).ready(function () {
     }
 
 });
-
-
+function GetSelectedCheckBoxValues() {
+    var stringArray = GetSelectedCheckBoxValuesArray();
+    var jsonRequest = JSON.stringify({ "values": stringArray });
+    return jsonRequest;
+}
+function GetSelectedCheckBoxValuesArray() {
+    var stringArray = new Array();
+    var i = 0;
+    $("input[name=checkboxGrid]").each(function () {
+        var m = $(this).is(':checked');
+        if (m) {
+            stringArray[i++] = $(this).attr("gridkey-id");
+        }
+    });
+    return stringArray;
+}
 function updateUrlParameter(originalURL, param, value) {
     console.log(value);
     var windowUrl = originalURL.split('?')[0];

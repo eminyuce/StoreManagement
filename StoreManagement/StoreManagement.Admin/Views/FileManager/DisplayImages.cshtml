@@ -26,7 +26,7 @@
                             <div class="col-md-3">
                                 @using (Html.BeginForm("UploadImages", "FileManager", FormMethod.Get))
                                 {
-                                    <input type="hidden" value="@storeId" name="storeId"/>
+                                    <input type="hidden" value="@storeId" id="storeId" name="storeId"/>
                                     <p>
                                         <input type="submit" value="Upload Images" class="btn btn-primary btn-block" />
                                     </p>
@@ -65,8 +65,20 @@
                                 <span class="btn btn-link btn-xs" id="OrderingAll">Ordering All
                                 </span>
                             </span>
-                        </div>
 
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <select class="form-control" id="selectedLabels" multiple="" name="SelectedLabels"  tabindex="-1" aria-hidden="true">
+                                </select>
+
+
+
+                            </div>
+                            <div class="col-md-2">
+                                <input type="button" name="AddLabels" id="AddLabels" value="Apply Labels" />
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -107,7 +119,7 @@
         columns.Add().Encoded(false).
             Sanitized(false).
             SetWidth(10).
-            RenderValueAs(o => String.Format("<input gridkey-id='{0}'   class='gridCheckboxes'   name='checkboxGrid' type='checkbox'>", o.GoogleImageId));
+            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  gridkey-item-id='{1}'  class='gridCheckboxes'   name='checkboxGrid' type='checkbox'>", o.GoogleImageId, o.Id));
 
         columns.Add(o => o.Id, true);
 
@@ -119,8 +131,8 @@
                    @<b>
                        @Html.ActionLink(" ", "Edit", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                    </b>);
-                        
-                        
+
+
         columns.Add()
                    .Encoded(false)
                    .Sanitized(false)
@@ -129,13 +141,13 @@
                        @<b>
                            @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
                        </b>);
-                        
+
         columns.Add(c => c.OriginalFilename).Titled("OriginalFilename").Filterable(true);
-        
+
         columns.Add(c => c.Title).Titled("Name").Encoded(false).
                     Sanitized(false).
                     RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='input-xs' type='type'>", o.Id, o.Title));
-                    
+
         columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
 
         columns.Add(o => o.Ordering).Encoded(false).
@@ -181,8 +193,8 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
                .Titled("Download")
          .RenderValueAs(d =>
              @<b>
-                                <a class="btn btn-info btn-sm glyphicon   glyphicon-download-alt" href="@d.WebContentLink" data-file-id="@d.Id"></a>
-                            </b>);
+                 <a class="btn btn-info btn-sm glyphicon   glyphicon-download-alt" href="@d.WebContentLink" data-file-id="@d.Id"></a>
+             </b>);
 
 
         columns.Add(c => c.WebContentLink).Titled("").Filterable(true).Sanitized(false)
@@ -211,11 +223,81 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
 {
     <script>
         $(function () {
-            //pageGrids.imagesGrid.onRowSelect(function (e) {
-            //    console.log(e.row);
-            //});
+            populateDropDown();
+            $("#AddLabels").bind("click", function () {
+                var labels = $('#selectedLabels').select2("val");
+                var selectedFiles = new Array();
+                var i = 0;
+                $("input[name=checkboxGrid]").each(function () {
+                    var m = $(this).is(':checked');
+                    if (m) {
+                        selectedFiles[i++] = $(this).attr("gridkey-item-id");
+                    }
+                });
 
+                if (selectedFiles.length > 0) {
+                    if (labels.length > 0) {
+                        addLabels(labels, selectedFiles);
+                    }
+                }
+                else {
+                    alert("Please select checkboxes");
+                }
 
+            });
+            function addLabels(labels, selectedFiles) {
+
+                var jsonRequest = JSON.stringify({ "labels": labels, "selectedFiles": selectedFiles, "storeId": $("#storeId").val() });
+                jQuery.ajax({
+                    url: "/Ajax/AddFileManagerLabels",
+                    type: 'POST',
+                    data: jsonRequest,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#selectedLabels').select2('val', '');
+                        populateDropDown();
+                    },
+                    error: function (request, status, error) {
+                        console.error('Error ' + status + ' ' + request.responseText);
+                    },
+                    beforeSend: function () {
+
+                    }
+                });
+
+            }
+            function populateDropDown() {
+
+                var jsonRequest = JSON.stringify({ "storeId": $("#storeId").val() });
+                jQuery.ajax({
+                    url: "/Ajax/GetStoreLabels",
+                    type: 'POST',
+                    data: jsonRequest,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        console.log(data);
+                        // Parse the returned json data
+                        //   var opts = $.parseJSON(data);
+                        // Use jQuery's each to iterate over the opts value
+                        $.each(data, function (i, d) {
+                            // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
+                             $('#selectedLabels').append('<option value="' + d.Id + '">' + d.Name + '</option>');
+                            
+                        });
+ 
+                        $("#selectedLabels").select2({ tags:true });
+                    },
+                    error: function (request, status, error) {
+                        console.error('Error ' + status + ' ' + request.responseText);
+                    },
+                    beforeSend: function () {
+
+                    }
+                });
+
+            }
         });
     </script>
 

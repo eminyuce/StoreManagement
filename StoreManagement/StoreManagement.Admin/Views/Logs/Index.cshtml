@@ -1,0 +1,70 @@
+﻿@using StoreManagement.Data.GeneralHelper
+@model IEnumerable<StoreManagement.Data.LogEntities.AppNames>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+            
+                
+@Html.ActionLink("Delete Logs Except the last 3 days for all projects","DeleteLogs","Home", new { id= "" },new { @class="btn btn-danger", onclick = "return confirm('Are you sure you wish to delete these logs?');" })
+
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Application Name 
+        </th>
+        <th>Last Activity 
+        </th>
+        <th>Last Error 
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <strong>
+                    @Html.DisplayFor(modelItem => item.Log_application)
+                </strong>  
+            </td>
+            <td>
+                <a href="@FilterHelper.LogPageLink(this.Request, this.ViewContext, @item.Log_application, "Info")">@item.LastActivity</a>
+            </td>
+            <td>
+
+                @if (DateTime.Now.Year - item.LastError.Year < 10)
+                {
+                    <a href="@FilterHelper.LogPageLink(this.Request, this.ViewContext, @item.Log_application, "Error")">@item.LastError</a>
+                }
+
+            </td>
+            <td>
+                  @Html.ActionLink("Delete Logs Except the last 3 days","DeleteLogs","Home", new { id= item.Log_application },new { @class="btn btn-warning",onclick = "return confirm('Are you sure you wish to delete these logs?');" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+            </div>
+        </div>
+    </div>
+
+  
+
+
+</div>
+
+

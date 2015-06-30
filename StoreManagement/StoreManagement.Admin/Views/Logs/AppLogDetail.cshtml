@@ -1,0 +1,176 @@
+﻿
+@using StoreManagement.Data.GeneralHelper
+@using StoreManagement.Data.LogEntities
+@model StoreManagement.Data.LogEntities.LoggingModel
+
+@{
+    ViewBag.Title = "AppLogDetail";
+    string search = @Request.QueryString["search"];
+}
+
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                
+                
+                
+
+
+<h2>@Model.ApplicationName</h2>
+<br />
+
+@Html.ActionLink("Delete Logs Except the last 3 days", "DeleteLogs", "Home", new { id = Model.ApplicationName }, new { onclick = "return confirm('Are you sure you wish to delete these logs?');" })
+<br />
+
+@using (Html.BeginForm("AppLogDetail", "Home", FormMethod.Get))
+{
+  
+    <input type="hidden" name="appName" value="@Model.ApplicationName" />
+    <input type="hidden" name="logLevel" value="@ViewBag.CurrentLogLevelText" /> 
+    
+    
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="search"  value="@search" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+    </div>
+     
+    
+     
+    
+}
+
+<div class="btn-group" style="margin-bottom: 10px;">
+    @foreach (var enumValue in Enum.GetValues(typeof(LogLevels)))
+    {
+
+
+        if (ViewBag.CurrentLogLevel < ((int)enumValue))
+        {
+        <a class="btn" href="@FilterHelper.LogPageLink(this.Request, this.ViewContext, Model.ApplicationName, enumValue.ToStr())">@enumValue</a>
+        }
+        else
+        {
+            if (ViewBag.CurrentLogLevel - ((int)enumValue) == 0)
+            {
+        <span class="btn btn-default active">@enumValue</span>
+            }
+            else
+            {
+        <a class="btn btn-default active" href="@FilterHelper.LogPageLink(this.Request, this.ViewContext, Model.ApplicationName, enumValue.ToStr())">@enumValue</a>
+            }
+        }
+    }
+</div>
+
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Level</th>
+            <th>Message</th>
+            <th>#</th>
+        </tr>
+    </thead>
+
+    @{
+        // Fatal Error Warn Info Debug Trace
+        //        success	Indicates a successful or positive action.
+        // error	Indicates a dangerous or potentially negative action.
+        // warning	Indicates a warning that might need attention.
+        // info
+        string cssClass = "";
+        foreach (var item in Model.SystemLoggingList)
+        {
+            switch (item.log_level)
+            {
+                case "Fatal":
+                case "Error":
+                    cssClass = "danger";
+                    break;
+                case "Warn":
+                    cssClass = "warning";
+                    break;
+                case "Info":
+                    cssClass = "success";
+                    break;
+                case "Debug":
+                case "Trace":
+                    cssClass = "info";
+                    break;
+
+            }
+        <tr class="@cssClass">
+            @Html.Partial("LogDetail", item)
+        </tr>            
+        }
+    }
+</table>
+
+@Html.DisplayFor(m => m.RecordsStats)
+
+@Html.Partial("Pager", Model.RecordsStats)
+            
+
+            </div>
+        </div>
+    </div>
+
+  
+
+
+</div>
+
+
+
+@section scripts
+{
+    <script>
+        $(function() {
+            hideOrShow();
+
+            function hideOrShow() {
+                $('[data-log-item-id]').each(function() {
+                    $(this).off("click");
+                    $(this).on("click", handleHideOrShow);
+                });
+            }
+
+            function handleHideOrShow(e) {
+                console.log("2323");
+                var caller = e.target;
+                var callerId = $(caller).attr('data-log-item-id');
+                var action = $(caller).attr('data-log-item-action');
+                
+                if (action == "hide") {
+                    $('[data-log-item-row=' + callerId + ']').hide();
+                    $('[data-log-item-id=' + callerId + '][data-log-item-action="hide"]').hide();
+                    $('[data-log-item-id=' + callerId + '][data-log-item-action="show"]').show();
+                } else if (action == "show") {
+                    $('[data-log-item-row=' + callerId + ']').show();
+                    $('[data-log-item-id=' + callerId + '][data-log-item-action="show"]').hide();
+                    $('[data-log-item-id=' + callerId + '][data-log-item-action="hide"]').show();
+                }
+            }
+
+
+        });
+    </script>
+
+}
+
+                   
+
+ 

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using Ninject;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
@@ -26,18 +27,80 @@ namespace StoreManagement.Admin.Controllers
             public bool State { get; set; }
 
         }
+        public ActionResult GetStoreLabels(int storeId)
+        {
+            var labels = LabelRepository.GetActiveLabels(storeId);
+            return Json(labels, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AddFileManagerLabels(String[] labels, List<String> selectedFiles, int storeId)
+        {
 
+            // List<FileManager> files = FileManagerRepository.GetFilesByGoogleImageIdArray(selectedFiles.ToArray());
+            Boolean isNewLabelExists = false;
+            foreach (var label in labels)
+            {
+                if (label.ToInt() > 0)
+                {
+                    foreach (var m in selectedFiles)
+                    {
+                        LabelLine labelLine = new LabelLine();
+                        labelLine.ItemId = m.ToInt();
+                        labelLine.ItemType = StoreConstants.Files;
+                        labelLine.LabelId = label.ToInt();
+                        LabelLineRepository.Add(labelLine);
+
+                    }
+                }
+                else
+                {
+
+                    Label newLabel = new Label();
+                    newLabel.StoreId = storeId;
+                    newLabel.Name = label;
+                    newLabel.LabelType = StoreConstants.Files;
+                    newLabel.ParentId = 1;
+                    newLabel.State = true;
+                    newLabel.Ordering = 1;
+                    newLabel.CreatedDate = DateTime.Now;
+                    newLabel.UpdatedDate = DateTime.Now;
+                    LabelRepository.Add(newLabel);
+                    int labelId = LabelRepository.Save();
+
+                    isNewLabelExists = true;
+                    foreach (var m in selectedFiles)
+                    {
+                        LabelLine labelLine = new LabelLine();
+                        labelLine.ItemId = m.ToInt();
+                        labelLine.ItemType = StoreConstants.Files;
+                        labelLine.LabelId = labelId;
+                        LabelLineRepository.Add(labelLine);
+                    }
+                }
+            }
+
+            try
+            {
+                LabelLineRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error is " + ex.Message, ex);
+            }
+
+
+            return Json(isNewLabelExists, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CreatingNewLabel(String labelName)
         {
             Label label = new Label();
             label.Name = labelName;
             label.LabelType = "News";
             label.ParentId = 1;
-            
+
             LabelRepository.Add(label);
-            int labelId =  LabelRepository.Save();
+            int labelId = LabelRepository.Save();
             label = LabelRepository.GetSingle(labelId);
-            return Json(label, JsonRequestBehavior.AllowGet); 
+            return Json(label, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult SetSettings(List<Setting> settings, int storeId)

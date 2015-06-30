@@ -102,6 +102,7 @@
     <Compile Include="Repositories\Interfaces\IFileManagerRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILabelLineRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILabelRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILogRepository.cs" />
     <Compile Include="Repositories\Interfaces\INavigationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPageDesignRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductCategoryRepository.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Repositories\Interfaces\IProductFileRepository.cs" />
     <Compile Include="Repositories\LabelLineRepository.cs" />
     <Compile Include="Repositories\LabelRepository.cs" />
+    <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\NavigationRepository.cs" />
     <Compile Include="Repositories\PageDesignRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />

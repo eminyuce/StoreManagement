@@ -42,6 +42,11 @@ namespace StoreManagement.Service.Services
 
         }
 
+        public List<FileManager> GetFilesByGoogleImageIdArray(string[] googleImageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public FileManager GetFilesById(int id)
         {
 

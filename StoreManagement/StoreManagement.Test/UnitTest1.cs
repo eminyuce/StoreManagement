@@ -31,7 +31,25 @@ namespace StoreManagement.Test
         {
           dbContext = new StoreContext(ConnectionString);
         }
+        [TestMethod]
+        public void TestLog()
+        {
+            LogRepository ssss = new LogRepository(dbContext);
+            var logs = ssss.GetSingle(1);
+            Assert.IsNotNull(logs);
 
+        } 
+        [TestMethod]
+        public void GetProductCategoriesByStoreIdFromCache2()
+        {
+           FileManagerRepository ssss = new FileManagerRepository(dbContext);
+           var m =   ssss.GetFilesByGoogleImageIdArray(new string[] {"0B9lWnliAZuUdaFRwZmVLZXRYWE0","0B9lWnliAZuUdb1RaamRITnhkbXc","0B9lWnliAZuUdNHlKdTVaRzg3OWM"});
+
+      
+
+            Assert.IsNotNull(m);
+
+        } 
      
         [TestMethod]
         public void GetProductCategoriesByStoreIdFromCache()

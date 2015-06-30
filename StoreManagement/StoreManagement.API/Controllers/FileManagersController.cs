@@ -124,6 +124,11 @@ namespace StoreManagement.API.Controllers
             return FileManagerRepository.GetFilesByGoogleImageId(googleImageId);
         }
 
+        public List<FileManager> GetFilesByGoogleImageIdArray(string[] googleImageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public FileManager GetFilesById(int id)
         {
             return FileManagerRepository.GetSingle(id);

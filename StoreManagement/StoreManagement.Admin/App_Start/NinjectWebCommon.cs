@@ -88,7 +88,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>();
             kernel.Bind<ILabelRepository>().To<LabelRepository>();
             kernel.Bind<IEmailListRepository>().To<EmailListRepository>();
-
+            kernel.Bind<ILogRepository>().To<LogRepository>();
 
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();

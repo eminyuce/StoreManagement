@@ -135,7 +135,7 @@ namespace StoreManagement.Admin.Controllers
         {
 
             var r = new List<ViewDataUploadFilesResult>();
-
+            var labels = Request.Form["labels"].ToStr();
             foreach (string file in Request.Files)
             {
                 var statuses = new List<ViewDataUploadFilesResult>();

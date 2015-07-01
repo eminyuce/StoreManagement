@@ -2,7 +2,7 @@
     ViewBag.Title = "Bootstrap version demo";
 
     Layout = "~/Views/Shared/_LayoutFileUpload.cshtml";
-    var storeId = ViewBag.StoreId;
+    int storeId = (int) ViewBag.StoreId;
 }
 
 
@@ -20,7 +20,7 @@
                     <div class="col-md-5">
                          @using (Html.BeginForm("DisplayImages", "FileManager", FormMethod.Get))
                         {
-                            <input type="hidden" id="@storeId" name="storeId"/>
+                            <input type="hidden" value="@storeId"  id="storeId"/>
                             <p>
                                 <input type="submit" value="Display Images" class = "btn btn-primary btn-block" />
                             </p>
@@ -110,6 +110,17 @@ PER ACTION BASIS
                             </div>
                         </div>
                     </div>
+                      <div class="row">
+                          <div class="col-md-10">
+                               
+
+                              <select class="form-control" id="selectedLabels" multiple="" name="SelectedLabels" tabindex="-1" aria-hidden="true">
+                              </select>
+                          </div>
+                    </div>
+                  
+                    
+
                     <!-- The loading indicator is shown during image processing -->
                     <div class="fileupload-loading"></div>
                     <br>
@@ -190,7 +201,7 @@ PER ACTION BASIS
             <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
         {% } else { %}
             <td class="preview">{% if (file.thumbnail_url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img class="fileManagerImg" src="{%=file.thumbnail_url%}"></a>
             {% } %}</td>
             <td class="name">
                 <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
@@ -224,3 +235,27 @@ PER ACTION BASIS
 
 
 
+  <script>
+        $(function () {
+            populateDropDown();
+            console.log("jquery console.");
+            $("#AddLabelsAndStartUploadImages").bind("click", function () {
+                 
+
+            });
+            
+            $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+                // The example input, doesn't have to be part of the upload form:
+                var labels = $('#selectedLabels').select2("val");
+                console.log(labels);
+                data.formData = { labels: labels };
+                if (!data.formData.labels) {
+                    data.context.find('button').prop('disabled', false);
+                    input.focus();
+                    return false;
+                }
+            });
+            
+        });
+    </script>
+ 

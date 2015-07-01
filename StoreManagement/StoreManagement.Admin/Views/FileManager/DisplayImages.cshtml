@@ -69,7 +69,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-10">
-                                <select class="form-control" id="selectedLabels" multiple="" name="SelectedLabels"  tabindex="-1" aria-hidden="true">
+                                <select class="form-control" id="selectedLabels" multiple="" name="SelectedLabels" tabindex="-1" aria-hidden="true">
                                 </select>
 
 
@@ -77,6 +77,11 @@
                             </div>
                             <div class="col-md-2">
                                 <input type="button" name="AddLabels" id="AddLabels" value="Apply Labels" />
+                            </div>
+                        </div>
+                        <div style="display: none;" id="OutputMessage" class="row">
+                            <div class="alert alert-info">
+                                    <span id="MyMessage"></span>
                             </div>
                         </div>
                     </div>
@@ -236,7 +241,7 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
                 });
 
                 if (selectedFiles.length > 0) {
-                    if (labels.length > 0) {
+                    if (labels != null && labels.length > 0) {
                         addLabels(labels, selectedFiles);
                     }
                 }
@@ -255,39 +260,16 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        $('#selectedLabels').select2('val', '');
-                        populateDropDown();
-                    },
-                    error: function (request, status, error) {
-                        console.error('Error ' + status + ' ' + request.responseText);
-                    },
-                    beforeSend: function () {
-
-                    }
-                });
-
-            }
-            function populateDropDown() {
-
-                var jsonRequest = JSON.stringify({ "storeId": $("#storeId").val() });
-                jQuery.ajax({
-                    url: "/Ajax/GetStoreLabels",
-                    type: 'POST',
-                    data: jsonRequest,
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
                         console.log(data);
-                        // Parse the returned json data
-                        //   var opts = $.parseJSON(data);
-                        // Use jQuery's each to iterate over the opts value
-                        $.each(data, function (i, d) {
-                            // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
-                             $('#selectedLabels').append('<option value="' + d.Id + '">' + d.Name + '</option>');
-                            
-                        });
- 
-                        $("#selectedLabels").select2({ tags:true });
+                        $('#selectedLabels').select2('val', '');
+                        if (data) {
+                            populateDropDown();
+                        }
+                        $("#MyMessage").text("Tags are applied to selected images");
+                        $("#OutputMessage").show("slow");
+                        setInterval(function () {
+                            $("#OutputMessage").hide("slow");
+                        }, 10000);
                     },
                     error: function (request, status, error) {
                         console.error('Error ' + status + ' ' + request.responseText);
@@ -298,6 +280,7 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
                 });
 
             }
+          
         });
     </script>
 

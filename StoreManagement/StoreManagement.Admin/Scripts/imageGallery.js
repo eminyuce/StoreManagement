@@ -2,18 +2,11 @@
 var linkUrl = "{id}";
 $(document).ready(function () {
     console.log("image gallery script is working");
-    
     $("#ImageDialog").click(function () {
-        
-        setTimeout(function () {
-            LoadImages();
-        }, 2);
-        
-
-       // $("#contentImages").empty();
-       // $("#contentImages").html($("#SelectedImageGallery").clone().html());
-  
-        
+        var labels = $('#selectedLabels').select2("val");
+        if (labels != null) {
+            LoadImages(labels);
+        }
     });
     RetrieveContentImages();
     bindRemoveImage();
@@ -49,7 +42,6 @@ function handleRetrieveContentImages(e) {
                 $(list).append($("<div/>").append(div));
             });
             $("#ImagesPanel").append(list);
-            createImageDialog();
         },
         error: function (request, status, error) {
             console.error('Error ' + status + ' ' + request.responseText);
@@ -59,41 +51,7 @@ function handleRetrieveContentImages(e) {
         }
     });
 }
-function createImageDialog() {
-    
-   
-    $("#ImagesPanel").dialog({
-        modal: true,
-        height: 520,
-        width: 720,
-        show: {
-            effect: "fade",
-            duration: 1000
-        },
-        hide: {
-            effect: "fade",
-            duration: 500
-        },
-        buttons: {
-            Ok: function () {
-                $(this).dialog("close");
-            },
-            Close: function () {
-                $("#ImagesPanel").empty();
-                $(this).dialog("close");
-            }
-        },
-        open: function (event, ui) {
-         
-        }
-    });
-
-    $("#ImagesPanel").position({
-        my: "center",
-        at: "center",
-        of: window
-    });
-}
+ 
 
 function createImage(googleImageId, fileName, photoId, eventLink) {
     var img = $("<img/>").attr("src", 'https://docs.google.com/uc?id=' + googleImageId)
@@ -106,35 +64,53 @@ function createImage(googleImageId, fileName, photoId, eventLink) {
     return div;
 }
 
-function LoadImages() {
+function LoadImages(labels) {
     $("#flickr-photos").empty();
+    
+
     var storeId = $("#StoreId").val();
-    $.getJSON("/Ajax/GetImages?storeId=" + storeId, function(data) {
-        var photos = data;
-        $("#image-count").text(photos.length);
-        $("#filter-count").text(photos.length);
+    var jsonRequest = JSON.stringify({ "labels": labels, "storeId": storeId });
+    jQuery.ajax({
+        url: "/Ajax/GetImagesByLabels",
+        type: 'POST',
+        data: jsonRequest,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            console.log(data);
+            var photos = data;
+            $("#image-count").text(photos.length);
+            $("#filter-count").text(photos.length);
+            $("#flickr-photos").empty();
+            var list = $("<ul></ul");
+            $.each(photos, function(i, photo) {
+                var googleImageId = photo.GoogleImageId;
+                var fileName = photo.Title;
+                var photoId = photo.Id;
+                var addLink = $("<div/>")
+                    .attr("data-image-add-link", photoId)
+                    .attr("data-image-file-name", fileName)
+                    .attr("data-image-file-googleImageId", googleImageId)
+                    .text("Add").addClass("addLink btn btn-default btn-block");
+                var div = createImage(googleImageId, fileName, photoId, addLink);
+                $(list).append($("<div/>").append(div));
+            });
+            $("#flickr-photos .loading").remove();
+            $("#flickr-photos").append(list);
+            bindAddImage();
+        },
+        error: function (request, status, error) {
+            console.error('Error ' + status + ' ' + request.responseText);
+        },
+        beforeSend: function () {
 
-
-        var list = $("<ul></ul");
-        $.each(photos, function(i, photo) {
-            var googleImageId = photo.GoogleImageId;
-            var fileName = photo.Title;
-            var photoId = photo.Id;
-            var addLink = $("<div/>")
-                .attr("data-image-add-link", photoId)
-                .attr("data-image-file-name", fileName)
-                .attr("data-image-file-googleImageId", googleImageId)
-                .text("Add").addClass("addLink btn btn-default btn-block");
-            var div = createImage(googleImageId, fileName, photoId, addLink);
-            $(list).append($("<div/>").append(div));
-
-        });
+        }
+    });
+ 
         
 
-        $("#flickr-photos .loading").remove();
-        $("#flickr-photos").append(list);
-        bindAddImage();
-    });
+   
+ 
 
     $("#filter").keyup(function () {
         var filter = $(this).val(), count = 0;
@@ -212,3 +188,5 @@ function handleAddImage(e) {
     bindRemoveImage();
 
 }
+
+ 

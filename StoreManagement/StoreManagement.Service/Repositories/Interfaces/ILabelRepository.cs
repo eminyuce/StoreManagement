@@ -13,5 +13,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
     {
         List<Label> GetLabelsCategoryAndSearch(int storeId, string search);
         List<Label> GetActiveLabels(int storeId);
+        Label GetLabelByName(string label, int storeId);
     }
 }

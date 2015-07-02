@@ -20,7 +20,7 @@
                     <div class="col-md-5">
                          @using (Html.BeginForm("DisplayImages", "FileManager", FormMethod.Get))
                         {
-                            <input type="hidden" value="@storeId"  id="storeId"/>
+                            <input type="hidden" value="@storeId"  id="StoreId"/>
                             <p>
                                 <input type="submit" value="Display Images" class = "btn btn-primary btn-block" />
                             </p>
@@ -113,7 +113,7 @@ PER ACTION BASIS
                       <div class="row">
                           <div class="col-md-10">
                                
-
+                              Labels:
                               <select class="form-control" id="selectedLabels" multiple="" name="SelectedLabels" tabindex="-1" aria-hidden="true">
                               </select>
                           </div>
@@ -247,13 +247,15 @@ PER ACTION BASIS
             $('#fileupload').bind('fileuploadsubmit', function (e, data) {
                 // The example input, doesn't have to be part of the upload form:
                 var labels = $('#selectedLabels').select2("val");
+                if (labels != null) {
+                    data.formData = { labels: labels };
+                    if (!data.formData.labels) {
+                        data.context.find('button').prop('disabled', false);
+                        input.focus();
+                        return false;
+                    }
+                }  
                 console.log(labels);
-                data.formData = { labels: labels };
-                if (!data.formData.labels) {
-                    data.context.find('button').prop('disabled', false);
-                    input.focus();
-                    return false;
-                }
             });
             
         });

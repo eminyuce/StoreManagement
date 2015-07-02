@@ -1,13 +1,26 @@
 ﻿<div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            <input type="button" id="ImageDialog" class="btn btn-warning form-control" value="Select Images from Image Gallery" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <input id="filter" placeholder="Search images" class="form-control" name="filter" size="40" />
+                <span class="count">showing <span id="filter-count">0</span> of <span id="image-count">0</span> images</span>
+            </div>
         </div>
     </div>
-    <div class="col-md-8">
-        <div class="form-group">
-                <input id="filter" placeholder="Search images" class="form-control" name="filter" size="40" />
-            <span class="count">showing <span id="filter-count">0</span> of <span id="image-count">0</span> images</span>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                Labels:
+                <select class="form-control" id="selectedLabels" multiple="" name="SelectedLabels" tabindex="-1" aria-hidden="true">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <input type="button" id="ImageDialog" class="btn btn-warning form-control" value="Select Images from Image Gallery" />
+            </div>
         </div>
     </div>
 </div>

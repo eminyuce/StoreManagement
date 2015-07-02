@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Enums;
 using StoreManagement.Service.DbContext;
@@ -109,23 +110,6 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult Download(string id)
         {
             var f = FileManagerRepository.GetFilesByGoogleImageId(id);
-            //var filename = f.FileName;
-            //var filePath = Path.Combine(Server.MapPath("~/Files"), filename);
-
-            //var context = HttpContext;
-
-            //if (System.IO.File.Exists(filePath))
-            //{
-            //    context.Response.AddHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-            //    context.Response.ContentType = "application/octet-stream";
-            //    context.Response.ClearContent();
-            //    context.Response.WriteFile(filePath);
-
-            //}
-            //else
-            //{
-            //    context.Response.StatusCode = 404;   
-            //}
             return RedirectToAction("Index");
         }
 
@@ -136,6 +120,9 @@ namespace StoreManagement.Admin.Controllers
 
             var r = new List<ViewDataUploadFilesResult>();
             var labels = Request.Form["labels"].ToStr();
+            List<String> labelArray = labels.Split(",".ToCharArray()).ToList();
+            int storeId = Session["storeId"].ToString().ToInt();
+
             foreach (string file in Request.Files)
             {
                 var statuses = new List<ViewDataUploadFilesResult>();
@@ -152,6 +139,7 @@ namespace StoreManagement.Admin.Controllers
                     UploadPartialFile(headers["X-File-Name"], Request, statuses);
                 }
 
+                SaveImagesLabels(labelArray.ToArray(), statuses.Select(r1 => r1.Id.ToStr()).ToList(), storeId);
 
                 JsonResult result = Json(statuses);
                 result.ContentType = "text/plain";
@@ -162,28 +150,30 @@ namespace StoreManagement.Admin.Controllers
             return Json(r);
         }
 
+       
+
         private FileManager SaveFiles(HttpPostedFileBase file, int storeId = 1)
         {
 
-           
-                    var fileManager = ConvertToFileManager(file, storeId);
-                    try
-                    {
-                        var fileByte = GeneralHelper.ReadFully(file.InputStream);
-                        var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
-                        ConvertToFileManager(fileManager, googleFile);
-                    }
-                    catch (Exception ewx)
-                    {
-                        Logger.Error("this.UploadHelper.InsertFile Exception is occured." + ewx.StackTrace, ewx);
-                    }
 
-                    FileManagerRepository.Add(fileManager);
-                    FileManagerRepository.Save();
+            var fileManager = ConvertToFileManager(file, storeId);
+            try
+            {
+                var fileByte = GeneralHelper.ReadFully(file.InputStream);
+                var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
+                ConvertToFileManager(fileManager, googleFile);
+            }
+            catch (Exception ewx)
+            {
+                Logger.Error("this.UploadHelper.InsertFile Exception is occured." + ewx.StackTrace, ewx);
+            }
 
-                    return fileManager;
+            FileManagerRepository.Add(fileManager);
+            FileManagerRepository.Save();
 
-               
+            return fileManager;
+
+
         }
 
         private static void ConvertToFileManager(FileManager fileManager, GoogleDriveFile googleFile)
@@ -199,7 +189,7 @@ namespace StoreManagement.Admin.Controllers
             fileManager.Width = googleFile.Width.HasValue ? googleFile.Width.Value : 0;
             fileManager.Height = googleFile.Height.HasValue ? googleFile.Height.Value : 0;
         }
-       
+
         private string EncodeFile(string fileName)
         {
             return Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName));
@@ -217,6 +207,8 @@ namespace StoreManagement.Admin.Controllers
 
             statuses.Add(new ViewDataUploadFilesResult()
             {
+                Id = fileManager.Id,
+                GoogleImageId = fileManager.GoogleImageId,
                 name = fileName,
                 size = file.ContentLength,
                 type = file.ContentType,
@@ -249,6 +241,7 @@ namespace StoreManagement.Admin.Controllers
         //Credit to i-e-b and his ASP.Net uploader for the bulk of the upload helper methods - https://github.com/i-e-b/jQueryFileUpload.Net
         private void UploadWholeFile(HttpRequestBase request, List<ViewDataUploadFilesResult> statuses)
         {
+
             for (int i = 0; i < request.Files.Count; i++)
             {
                 var file = request.Files[i];
@@ -264,6 +257,8 @@ namespace StoreManagement.Admin.Controllers
 
                 statuses.Add(new ViewDataUploadFilesResult()
                 {
+                    Id = fileManager.Id,
+                    GoogleImageId = fileManager.GoogleImageId,
                     name = file.FileName,
                     size = file.ContentLength,
                     type = file.ContentType,
@@ -286,8 +281,8 @@ namespace StoreManagement.Admin.Controllers
         public string delete_url { get; set; }
         public string thumbnail_url { get; set; }
         public string delete_type { get; set; }
-
-
+        public string GoogleImageId { get; set; }
+        public int Id { get; set; }
     }
 
 }

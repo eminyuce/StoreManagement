@@ -1,3 +1,5 @@
+using GenericRepository;
+using GenericRepository.EntityFramework;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Service.DbContext;
@@ -89,6 +91,8 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<ILabelRepository>().To<LabelRepository>();
             kernel.Bind<IEmailListRepository>().To<EmailListRepository>();
             kernel.Bind<ILogRepository>().To<LogRepository>();
+
+           
 
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             m.InSingletonScope();

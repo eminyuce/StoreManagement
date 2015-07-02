@@ -327,7 +327,7 @@ function changeCarouselStateSuccess(data) {
 
 function populateDropDown() {
 
-    var jsonRequest = JSON.stringify({ "storeId": $("#storeId").val() });
+    var jsonRequest = JSON.stringify({ "storeId": $("#StoreId").val() });
     jQuery.ajax({
         url: "/Ajax/GetStoreLabels",
         type: 'POST',
@@ -346,6 +346,7 @@ function populateDropDown() {
             });
 
             $("#selectedLabels").select2({ tags: true });
+
         },
         error: function (request, status, error) {
             console.error('Error ' + status + ' ' + request.responseText);

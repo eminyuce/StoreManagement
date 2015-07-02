@@ -34,62 +34,14 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult AddFileManagerLabels(String[] labels, List<String> selectedFiles, int storeId)
         {
-
             // List<FileManager> files = FileManagerRepository.GetFilesByGoogleImageIdArray(selectedFiles.ToArray());
-            Boolean isNewLabelExists = false;
-            foreach (var label in labels)
-            {
-                if (label.ToInt() > 0)
-                {
-                    foreach (var m in selectedFiles)
-                    {
-                        LabelLine labelLine = new LabelLine();
-                        labelLine.ItemId = m.ToInt();
-                        labelLine.ItemType = StoreConstants.Files;
-                        labelLine.LabelId = label.ToInt();
-                        LabelLineRepository.Add(labelLine);
-
-                    }
-                }
-                else
-                {
-
-                    Label newLabel = new Label();
-                    newLabel.StoreId = storeId;
-                    newLabel.Name = label;
-                    newLabel.LabelType = StoreConstants.Files;
-                    newLabel.ParentId = 1;
-                    newLabel.State = true;
-                    newLabel.Ordering = 1;
-                    newLabel.CreatedDate = DateTime.Now;
-                    newLabel.UpdatedDate = DateTime.Now;
-                    LabelRepository.Add(newLabel);
-                    int labelId = LabelRepository.Save();
-
-                    isNewLabelExists = true;
-                    foreach (var m in selectedFiles)
-                    {
-                        LabelLine labelLine = new LabelLine();
-                        labelLine.ItemId = m.ToInt();
-                        labelLine.ItemType = StoreConstants.Files;
-                        labelLine.LabelId = labelId;
-                        LabelLineRepository.Add(labelLine);
-                    }
-                }
-            }
-
-            try
-            {
-                LabelLineRepository.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Error is " + ex.Message, ex);
-            }
-
-
+            var isNewLabelExists = SaveImagesLabels(labels, selectedFiles, storeId);
             return Json(isNewLabelExists, JsonRequestBehavior.AllowGet);
         }
+
+
+      
+
         public ActionResult CreatingNewLabel(String labelName)
         {
             Label label = new Label();
@@ -449,19 +401,9 @@ namespace StoreManagement.Admin.Controllers
             return Content(value);
         }
 
-        public ActionResult GetImagesByItemTypeAndId(int itemId, String itemType)
+        public ActionResult GetImagesByLabels(int storeId, String[] labels)
         {
-
-            var images = new List<FileManager>();
-            if (itemType == "product")
-            {
-                images = ProductFileRepository.GetProductFilesByProductId(itemId).Select(r => r.FileManager).ToList();
-            }
-            if (itemType == "content")
-            {
-                images = ContentFileRepository.GetContentByContentId(itemId).Select(r => r.FileManager).ToList();
-            }
-
+            var images = FileManagerRepository.GetFilesByStoreIdAndLabels(storeId, labels);
             return Json(images, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetImages(int storeId)

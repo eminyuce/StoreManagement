@@ -7,7 +7,9 @@ using GenericRepository.EntityFramework;
 using MvcPaging;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -82,6 +84,20 @@ namespace StoreManagement.Service.Repositories
                 StorePagedListFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("FileManager_CacheAbsoluteExpiration_Minute", 10)));
             }
             return items;
+        }
+
+        public List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels)
+        {
+            var labelIds = labels.Select(r => r.ToInt());
+            var res = from s in this.StoreDbContext.FileManagers
+                      join c in this.StoreDbContext.LabelLines on s.Id equals c.ItemId 
+                      join u in this.StoreDbContext.Labels on c.LabelId equals u.Id
+                      where s.StoreId == storeId && u.StoreId == storeId && c.ItemType.Equals(StoreConstants.Files) && labelIds.Contains(u.Id)
+                      select s;
+
+            var result = res.ToList();
+
+            return result;
         }
     }
 

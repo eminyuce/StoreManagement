@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
@@ -12,6 +13,9 @@ namespace StoreManagement.Service.Repositories
 {
     public class LabelRepository : BaseRepository<Label, int>, ILabelRepository
     {
+
+
+
         public LabelRepository(IStoreContext dbContext)
             : base(dbContext)
         {
@@ -59,5 +63,11 @@ namespace StoreManagement.Service.Repositories
 
             return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
         }
+
+        public Label GetLabelByName(string label, int storeId)
+        {
+            return this.FindBy(r => r.StoreId == storeId && r.Name.Equals(label,StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+        }
+
     }
 }

@@ -2,9 +2,9 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=44BF60A982E74EC297B92BE1EF184876/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=44BF60A982E74EC297B92BE1EF184876/Name/@EntryValue">TestLog</s:String>
-	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=44BF60A982E74EC297B92BE1EF184876/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:StoreManagement.Test.UnitTest1" type="MsTestTestClassElement" TypeName="StoreManagement.Test.UnitTest1" Project="6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8" /&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:StoreManagement.Test.UnitTest1.TestLog" ParentId="MsTest:StoreManagement.Test.UnitTest1" type="MsTestTestMethodElement" MethodName="TestLog" TypeName="StoreManagement.Test.UnitTest1" Project="6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String>
+	
+	
+	
 	
 	
 	</wpf:ResourceDictionary>

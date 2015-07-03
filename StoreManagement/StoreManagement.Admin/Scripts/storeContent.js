@@ -20,12 +20,15 @@ $(document).ready(function () {
 
     GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
     GetProductCategoryTree($("#StoreId").val(), $("#categoryType").val());
-
+    populateStoreLabelsDropDown($("#StoreId").val());
 
 
     $('select#StoreDropDownId').select2({}).change(function (event) {
         GetCategoryTree($(this).val(), $("#categoryType").val());
         GetProductCategoryTree($(this).val(), $("#categoryType").val());
+        populateStoreLabelsDropDown($(this).val());
+
+        console.log("deneme");
     });
 
     console.log("jquery is working");

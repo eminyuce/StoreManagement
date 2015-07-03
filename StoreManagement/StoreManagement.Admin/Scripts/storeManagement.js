@@ -325,9 +325,9 @@ function changeCarouselStateSuccess(data) {
 }
 
 
-function populateStoreLabelsDropDown() {
+function populateStoreLabelsDropDown(storeId) {
 
-    var jsonRequest = JSON.stringify({ "storeId": $("#StoreId").val() });
+    var jsonRequest = JSON.stringify({ "storeId": storeId });
     jQuery.ajax({
         url: "/Ajax/GetStoreLabels",
         type: 'POST',
@@ -339,6 +339,7 @@ function populateStoreLabelsDropDown() {
             // Parse the returned json data
             //   var opts = $.parseJSON(data);
             // Use jQuery's each to iterate over the opts value
+            $('#selectedLabels').empty();
             $.each(data, function (i, d) {
                 // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
                 $('#selectedLabels').append('<option value="' + d.Id + '">' + d.Name + '</option>');

@@ -214,7 +214,6 @@ namespace StoreManagement.Admin.Controllers
                             var newLabel = new Label();
                             newLabel.StoreId = storeId;
                             newLabel.Name = label;
-                            newLabel.LabelType = StoreConstants.Files;
                             newLabel.ParentId = 1;
                             newLabel.State = true;
                             newLabel.Ordering = 1;

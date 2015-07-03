@@ -228,7 +228,7 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
 {
     <script>
         $(function () {
-            populateDropDown();
+            populateStoreLabelsDropDown();
             $("#AddLabels").bind("click", function () {
                 var labels = $('#selectedLabels').select2("val");
                 var selectedFiles = new Array();
@@ -263,7 +263,7 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
                         console.log(data);
                         $('#selectedLabels').select2('val', '');
                         if (data) {
-                            populateDropDown();
+                            populateStoreLabelsDropDown();
                         }
                         $("#MyMessage").text("Tags are applied to selected images");
                         $("#OutputMessage").show("slow");

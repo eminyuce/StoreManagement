@@ -47,7 +47,6 @@ namespace StoreManagement.Admin.Controllers
                 label.State = true;
 
             }
-            label.LabelType = "";
             return View(label);
         }
 

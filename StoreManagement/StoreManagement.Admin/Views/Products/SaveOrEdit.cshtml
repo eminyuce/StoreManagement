@@ -176,10 +176,15 @@
 
                                 </div>
                             </div>
+                            
+                            <div>
+                                <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
+                            </div>
                             <div>
                                 @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
                             </div>
-                            <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
+                                         
+                          
 
 
                         }
@@ -212,14 +217,15 @@
     <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
     <script src="~/Scripts/storeContent.js"></script>
 
-    
-  <script>
-      $(function () {
-          populateDropDown();
 
-      });
+    <script>
+        $(function () {
+            populateStoreLabelsDropDown();
+            $('select#StoreDropDownId').select2({}).change(function (event) {
+                populateStoreLabelsDropDown();
+            });
+        });
     </script>
- 
+
 
 }
- 

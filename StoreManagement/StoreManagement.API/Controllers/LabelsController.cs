@@ -35,20 +35,7 @@ namespace StoreManagement.API.Controllers
         {
             throw new NotImplementedException();
         }
-
-        public List<Label> GetLabelsByLabelType(string labelType)
-        {
-            return LabelRepository.GetLabelsByLabelType(labelType);
-        }
-
-        public List<Label> GetLabelsByLabelType(int storeId, string labelType)
-        {
-            return LabelRepository.GetLabelsByLabelType(storeId, labelType);
-        }
-
-        public List<Label> GetLabelsByTypeAndCategoryAndSearch(int storeId, string labelType, int categoryId, string search)
-        {
-            throw new NotImplementedException();
-        }
+ 
+ 
     }
 }

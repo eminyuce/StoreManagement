@@ -127,14 +127,7 @@ namespace StoreManagement.Admin.Controllers
         {
             var resultList = new List<Label>();
             storeId = GetStoreId(storeId);
-            if (storeId == 0)
-            {
-                resultList = LabelRepository.GetLabelsByLabelType(labelType);
-            }
-            else
-            {
-                resultList = LabelRepository.GetLabelsByLabelType(storeId, labelType);
-            }
+            resultList = LabelRepository.GetStoreLabels(storeId);
 
             var items = new List<SelectListItem>();
             foreach (var label in resultList)

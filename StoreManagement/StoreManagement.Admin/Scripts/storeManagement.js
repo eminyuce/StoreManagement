@@ -325,7 +325,7 @@ function changeCarouselStateSuccess(data) {
 }
 
 
-function populateDropDown() {
+function populateStoreLabelsDropDown() {
 
     var jsonRequest = JSON.stringify({ "storeId": $("#StoreId").val() });
     jQuery.ajax({

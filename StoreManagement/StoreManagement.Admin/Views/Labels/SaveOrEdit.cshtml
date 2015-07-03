@@ -27,7 +27,6 @@
                         <legend>Label</legend>
 
                         @Html.HiddenFor(model => model.Id)
-                        @Html.HiddenFor(model => model.LabelType)
                         @Html.HiddenFor(model => model.UpdatedDate)
                         @Html.HiddenFor(model => model.CreatedDate)
                         <div class="editor-field controls">
@@ -66,10 +65,8 @@
                 }
 
 
-
-
                 <div>
-                                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+                     @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
                 </div>
             </div>
         </div>

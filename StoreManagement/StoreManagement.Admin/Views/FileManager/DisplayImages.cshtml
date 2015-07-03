@@ -26,10 +26,12 @@
                             <div class="col-md-3">
                                 @using (Html.BeginForm("UploadImages", "FileManager", FormMethod.Get))
                                 {
+                                     
                                     <input type="hidden" value="@storeId" id="StoreId" name="StoreId"/>
                                     <p>
-                                        <input type="submit" value="Upload Images" class="btn btn-primary btn-block" />
+                                        <input type="submit" value="Upload Images" class="btn btn-primary btn-block"/>
                                     </p>
+                                     
                                 }
                             </div>
                             <span class="col-md-9">
@@ -228,7 +230,8 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
 {
     <script>
         $(function () {
-            populateStoreLabelsDropDown();
+            console.log("jquery console.");
+            populateStoreLabelsDropDown($("#StoreId").val());
             $("#AddLabels").bind("click", function () {
                 var labels = $('#selectedLabels').select2("val");
                 var selectedFiles = new Array();

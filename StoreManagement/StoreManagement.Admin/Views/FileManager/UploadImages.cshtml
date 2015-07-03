@@ -192,9 +192,12 @@
 
 
   <script>
-        $(function () {
-            populateStoreLabelsDropDown();
-            console.log("jquery console.");
+      $(function () {
+
+
+          console.log("jquery console.");
+          populateStoreLabelsDropDown($("#StoreId").val());
+          
             $("#AddLabelsAndStartUploadImages").bind("click", function () {
                  
 

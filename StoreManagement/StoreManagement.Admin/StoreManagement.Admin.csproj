@@ -318,10 +318,6 @@
     <Compile Include="HtmlHelperExtensions\MenuExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Upload\FilesStatus.cs" />
-    <Compile Include="Upload\UploadHandler.ashx.cs">
-      <DependentUpon>UploadHandler.ashx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-image-gallery.min.css" />
@@ -1811,7 +1807,6 @@
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Shared\pCreateCategoryTree.cshtml" />
     <Content Include="Views\FileManager\UploadImages.cshtml" />
-    <Content Include="Upload\UploadHandler.ashx" />
     <Content Include="Views\Shared\_LayoutFileUpload.cshtml" />
     <Content Include="Views\FileManager\DisplayImages.cshtml" />
     <Content Include="Views\Companies\Index.cshtml" />

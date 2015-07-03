@@ -91,33 +91,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<ILabelRepository>().To<LabelRepository>();
             kernel.Bind<IEmailListRepository>().To<EmailListRepository>();
             kernel.Bind<ILogRepository>().To<LogRepository>();
-
-           
-
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
-            m.InSingletonScope();
-            m.WithConstructorArgument("clientId", 
-                ProjectAppSettings.GetWebConfigString("GoogleDriveClientId"));
-            m.WithConstructorArgument("userEmail", 
-                ProjectAppSettings.GetWebConfigString("GoogleDriveUserEmail"));
-            m.WithConstructorArgument("serviceAccountEmail", 
-                ProjectAppSettings.GetWebConfigString("GoogleDriveServiceAccountEmail"));
-
-            String p12FileName = ProjectAppSettings.GetWebConfigString("GoogleDriveCertificateP12FileName");
-            var cert =GeneralHelper.CreateCert(
-                HostingEnvironment.MapPath(
-                String.Format(@"~\App_Data\GoogleDrive\{0}",p12FileName)),
-                ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
-            
-            m.WithConstructorArgument("certificate",cert);
-            m.WithConstructorArgument("folderName", 
-                ProjectAppSettings.GetWebConfigString("GoogleDriveFolder"));
-            m.WithConstructorArgument("password", 
-                ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
-
-
-
-
             kernel.Bind<IEmailSender>().To<EmailSender>();
 
         }

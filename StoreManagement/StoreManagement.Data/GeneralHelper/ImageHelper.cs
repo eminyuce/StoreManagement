@@ -42,7 +42,20 @@ namespace StoreManagement.Data.GeneralHelper
             }
         }
 
+        private bool IsImage(string ext)
+        {
+            return ext == ".gif" || ext == ".jpg" || ext == ".png";
+        }
 
+        private string EncodeFile(string fileName)
+        {
+            return Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName));
+        }
+
+        static double ConvertBytesToMegabytes(long bytes)
+        {
+            return (bytes / 1024f) / 1024f;
+        }
         public static byte[] CropImage(byte[] content, int x, int y, int width, int height)
         {
             using (MemoryStream stream = new MemoryStream(content))

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using StoreManagement.Data.Entities;
@@ -13,6 +15,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data.GeneralHelper;
 using GoogleDriveUploader;
 using Ninject;
+using StoreManagement.Data;
 
 namespace StoreManagement.Admin.Controllers
 {
@@ -25,6 +28,63 @@ namespace StoreManagement.Admin.Controllers
 
         [Inject]
         public IUploadHelper UploadHelper { set; get; }
+
+        private String GoogleDriveClientId { set; get; }
+        private String GoogleDriveUserEmail { set; get; }
+        private String GoogleDriveFolder { set; get; }
+        private String GoogleDriveServiceAccountEmail { set; get; }
+        private X509Certificate2 Certificate { set; get; }
+        private String GoogleDrivePassword { set; get; }
+
+
+        public void ConnectToStoreGoogleDrive()
+        {
+            //GoogleDriveClientId = ProjectAppSettings.GetWebConfigString("GoogleDriveClientId");
+            //GoogleDriveUserEmail = ProjectAppSettings.GetWebConfigString("GoogleDriveUserEmail");
+            //GoogleDriveServiceAccountEmail = ProjectAppSettings.GetWebConfigString("GoogleDriveServiceAccountEmail");
+            //String googleDriveCertificateP12FileName = ProjectAppSettings.GetWebConfigString("GoogleDriveCertificateP12FileName");
+            //Certificate = GeneralHelper.CreateCert(
+            //    HostingEnvironment.MapPath(
+            //    String.Format(@"~\App_Data\GoogleDrive\{0}", googleDriveCertificateP12FileName)),
+            //    ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
+            //GoogleDriveFolder = ProjectAppSettings.GetWebConfigString("GoogleDriveFolder");
+            //GoogleDrivePassword = ProjectAppSettings.GetWebConfigString("GoogleDrivePassword");
+
+
+            if (IsSuperAdmin)
+            {
+                int storeId = Session["storeId"].ToString().ToInt();
+                var selectedStore = StoreRepository.GetStore(storeId);
+                GoogleDriveClientId = selectedStore.GoogleDriveClientId;
+                GoogleDriveUserEmail = selectedStore.GoogleDriveUserEmail;
+                GoogleDriveFolder = selectedStore.GoogleDriveFolder;
+                GoogleDriveServiceAccountEmail = selectedStore.GoogleDriveServiceAccountEmail;
+                GoogleDrivePassword = selectedStore.GoogleDrivePassword;
+                Certificate = GeneralHelper.CreateCert(
+                    HostingEnvironment.MapPath(
+                    String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName)),
+                    ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
+            }
+            else
+            {
+                GoogleDriveClientId = LoginStore.GoogleDriveClientId;
+                GoogleDriveUserEmail = LoginStore.GoogleDriveUserEmail;
+                GoogleDriveFolder = LoginStore.GoogleDriveFolder;
+                GoogleDriveServiceAccountEmail = LoginStore.GoogleDriveServiceAccountEmail;
+                GoogleDrivePassword = LoginStore.GoogleDrivePassword;
+                Certificate = GeneralHelper.CreateCert(
+                    HostingEnvironment.MapPath(
+                    String.Format(@"~\App_Data\GoogleDrive\{0}", LoginStore.GoogleDriveCertificateP12FileName)),
+                    ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
+            }
+            this.UploadHelper.Connect(GoogleDriveClientId,
+                   GoogleDriveUserEmail,
+                   GoogleDriveServiceAccountEmail,
+                   Certificate,
+                   GoogleDriveFolder, GoogleDrivePassword);
+
+
+        }
 
 
         public ActionResult Index()
@@ -58,7 +118,6 @@ namespace StoreManagement.Admin.Controllers
         {
             return PartialView("_ImageGallery");
         }
-        //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
 
         [HttpPost]
         public ActionResult DeleteAll(List<String> values)
@@ -94,6 +153,7 @@ namespace StoreManagement.Admin.Controllers
 
             try
             {
+                ConnectToStoreGoogleDrive();
                 this.UploadHelper.deleteFile(f.GoogleImageId);
             }
             catch (Exception ewx)
@@ -105,7 +165,6 @@ namespace StoreManagement.Admin.Controllers
             FileManagerRepository.Save();
         }
 
-        //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
         [HttpGet]
         public ActionResult Download(string id)
         {
@@ -113,7 +172,6 @@ namespace StoreManagement.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
         [HttpPost]
         public ActionResult UploadFiles()
         {
@@ -150,7 +208,7 @@ namespace StoreManagement.Admin.Controllers
             return Json(r);
         }
 
-       
+
 
         private FileManager SaveFiles(HttpPostedFileBase file, int storeId = 1)
         {
@@ -160,6 +218,7 @@ namespace StoreManagement.Admin.Controllers
             try
             {
                 var fileByte = GeneralHelper.ReadFully(file.InputStream);
+                ConnectToStoreGoogleDrive();
                 var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
                 ConvertToFileManager(fileManager, googleFile);
             }

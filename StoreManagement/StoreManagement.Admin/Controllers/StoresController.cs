@@ -78,6 +78,8 @@ namespace StoreManagement.Admin.Controllers
             {
                 store = StoreRepository.GetSingle(id);
             }
+
+            ViewBag.StoreCategories = CategoryRepository.GetCategoriesByType(StoreConstants.StoreType);
             return View(store);
         }
 
@@ -87,6 +89,8 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Store store)
         {
+
+            ViewBag.StoreCategories = CategoryRepository.GetCategoriesByType(StoreConstants.StoreType);
             if (ModelState.IsValid)
             {
                 store.CreatedDate = DateTime.Now;
@@ -104,7 +108,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                return View();
+                return View(store);
             }
         }
 

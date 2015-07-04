@@ -64,6 +64,8 @@ namespace StoreManagement.Admin.Controllers
                     HostingEnvironment.MapPath(
                     String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName)),
                     ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
+
+              
             }
             else
             {

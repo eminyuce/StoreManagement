@@ -15,7 +15,7 @@ namespace StoreManagement.Admin.Controllers
 
         private String CategoryType { set; get; }
 
-        public CategoriesController(String categoryType)
+        protected CategoriesController(String categoryType)
         {
             this.CategoryType = categoryType;
         }
@@ -23,7 +23,7 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Categories/
 
-        public ActionResult Index(int storeId = 0, String search = "")
+        public virtual  ActionResult Index(int storeId = 0, String search = "")
         {
             List<Category> resultList = new List<Category>();
             storeId = GetStoreId(storeId);

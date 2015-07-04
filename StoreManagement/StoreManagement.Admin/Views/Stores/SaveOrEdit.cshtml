@@ -1,7 +1,10 @@
+@using System.Web.Mvc.Html
+@using StoreManagement.Data.Entities
 @model StoreManagement.Data.Entities.Store
 
 @{
     ViewBag.Title = "Edit";
+    List<Category> storeCategories = ViewBag.StoreCategories;
 }
 
 
@@ -23,9 +26,15 @@
                     <fieldset>
                         <legend>Create Store</legend>
                         @Html.HiddenFor(model => model.Id)
-                        @Html.HiddenFor(model => model.CategoryId)
+                  
 
+                         <div class="editor-label">
+                            @Html.LabelFor(model => model.CategoryId)
 
+                            @Html.DropDownListFor(model => model.CategoryId,  new SelectList(storeCategories, 
+                                        "Id", "Name",Model.CategoryId), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId)
+                        </div>
 
 
                         <div class="editor-label">
@@ -70,7 +79,7 @@
                         <div class="editor-label">
                             @Html.LabelFor(model => model.GoogleDrivePassword)
 
-                            @Html.PasswordFor(model => model.GoogleDrivePassword, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.GoogleDrivePassword, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GoogleDrivePassword)
                         </div>
 
@@ -107,6 +116,23 @@
 
 </div>
 
+
+@section scripts
+{
+    <script>
+        
+
+        $(document).ready(function () {
+            
+            //   $('[chosen-selection-box="multiple"]').select2();
+            $('#CategoryId').select2({
+               
+            });
+        });
+
+
+    </script>
+}
 
 
 

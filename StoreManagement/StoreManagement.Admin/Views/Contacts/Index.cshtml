@@ -1,0 +1,89 @@
+@model IEnumerable<MvcScallfoldingProject.Models.Contact>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            StoreId
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            PhoneWork
+        </th>
+        <th>
+            PhoneCell
+        </th>
+        <th>
+            Ordering
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            CreatedDate
+        </th>
+        <th>
+            UpdatedDate
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+			@item.StoreId
+        </td>
+        <td>
+			@item.Name
+        </td>
+        <td>
+			@item.Title
+        </td>
+        <td>
+			@item.Email
+        </td>
+        <td>
+			@item.PhoneWork
+        </td>
+        <td>
+			@item.PhoneCell
+        </td>
+        <td>
+			@item.Ordering
+        </td>
+        <td>
+			@item.State
+        </td>
+        <td>
+			@String.Format("{0:g}", item.CreatedDate)
+        </td>
+        <td>
+			@String.Format("{0:g}", item.UpdatedDate)
+        </td>
+    </tr>
+}
+
+</table>
+
+

@@ -1,0 +1,50 @@
+@model  StoreManagement.Data.Entities.Contact
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Contact</legend>
+
+    <div class="display-label">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">Title</div>
+    <div class="display-field">@Model.Title</div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">@Model.Email</div>
+
+    <div class="display-label">PhoneWork</div>
+    <div class="display-field">@Model.PhoneWork</div>
+
+    <div class="display-label">PhoneCell</div>
+    <div class="display-field">@Model.PhoneCell</div>
+
+    <div class="display-label">Ordering</div>
+    <div class="display-field">@Model.Ordering</div>
+
+    <div class="display-label">State</div>
+    <div class="display-field">@Model.State</div>
+
+    <div class="display-label">CreatedDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+    <div class="display-label">UpdatedDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.UpdatedDate)</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

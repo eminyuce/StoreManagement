@@ -40,7 +40,7 @@ namespace StoreManagement.Admin.Controllers
         }
 
 
-      
+
 
         public ActionResult CreatingNewLabel(String labelName)
         {
@@ -58,28 +58,40 @@ namespace StoreManagement.Admin.Controllers
         {
             foreach (Setting v in settings)
             {
-                var item = new Setting();
-                if (v.Id == 0)
+
+                try
                 {
-                    item.SettingKey = v.SettingKey;
-                    item.CreatedDate = DateTime.Now;
-                    SettingRepository.Add(item);
+
+                    var item = new Setting();
+                    if (v.Id == 0)
+                    {
+                        item.SettingKey = v.SettingKey;
+                        item.CreatedDate = DateTime.Now;
+                        SettingRepository.Add(item);
+                    }
+                    else
+                    {
+                        item = SettingRepository.GetSingle(v.Id);
+                        SettingRepository.Edit(item);
+                    }
+                    item.SettingValue = v.SettingValue;
+                    item.State = true;
+                    item.StoreId = storeId;
+                    item.UpdatedDate = DateTime.Now;
+                    item.Name = "";
+                    item.Description = "";
+                    item.Type = "StoreSettings";
+                    SettingRepository.Save();
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    item = SettingRepository.GetSingle(v.Id);
-                    SettingRepository.Edit(item);
+                    Logger.ErrorException("Exception is occured while saving settings:" + v, ex);
+
                 }
-                item.SettingValue = v.SettingValue;
-                item.State = true;
-                item.StoreId = storeId;
-                item.UpdatedDate = DateTime.Now;
-                item.Name = "";
-                item.Description = "";
-                item.Type = "StoreSettings";
 
             }
-            SettingRepository.Save();
+
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }

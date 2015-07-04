@@ -99,7 +99,9 @@ namespace StoreManagement.Controllers
         }
         protected bool IsModulActive(String controllerName)
         {
-            return NavigationService.GetStoreActiveNavigations(Store.Id).Any(r => r.ControllerName.StartsWith(controllerName.ToLower()));
+            var navigations = NavigationService.GetStoreActiveNavigations(Store.Id);
+            var item = navigations.Any(r => r.ControllerName.ToLower().StartsWith(controllerName.ToLower()));
+            return item;
         }
         protected bool CheckRequest(BaseEntity entity)
         {

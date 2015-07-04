@@ -21,6 +21,10 @@ namespace StoreManagement.Data.Entities
         public string Type { get; set; }
         [IgnoreDataMember]
         public string Description { get; set; }
-        
+
+        public override string ToString()
+        {
+            return String.Format("{2}-{0}-{1}",SettingKey,SettingValue,Id);
+        }
     }
 }

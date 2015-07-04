@@ -30,9 +30,19 @@ namespace StoreManagement.Controllers
         }
         public ActionResult Detail(String id)
         {
+            if (!IsModulActive(StoreConstants.NewsType))
+            {
+                return HttpNotFound("Not Found");
+            }
             var returnModel = new ContentDetailViewModel();
-            int blogId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.Content = ContentService.GetContentsContentId(blogId);
+            int newsId = id.Split("-".ToCharArray()).Last().ToInt();
+            returnModel.Content = ContentService.GetContentsContentId(newsId);
+
+            if (!CheckRequest(returnModel.Content))
+            {
+                return HttpNotFound("Not Found"); 
+            }
+
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
             returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, StoreConstants.NewsType);

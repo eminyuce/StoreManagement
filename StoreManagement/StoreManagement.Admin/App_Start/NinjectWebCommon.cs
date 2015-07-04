@@ -93,7 +93,8 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<ILogRepository>().To<LogRepository>();
             var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
             kernel.Bind<IEmailSender>().To<EmailSender>();
-
+            kernel.Bind<IContactRepository>().To<ContactRepository>();
+            kernel.Bind<ILocationRepository>().To<LocationRepository>();
         }
     }
 }

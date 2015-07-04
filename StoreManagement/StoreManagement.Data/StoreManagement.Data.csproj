@@ -120,12 +120,14 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\ContentFile.cs" />
     <Compile Include="Entities\EmailList.cs" />
     <Compile Include="Entities\FileManager.cs" />
     <Compile Include="Entities\Label.cs" />
     <Compile Include="Entities\LabelLine.cs" />
+    <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Navigation.cs" />
     <Compile Include="Entities\PageDesign.cs" />
     <Compile Include="Entities\Product.cs" />

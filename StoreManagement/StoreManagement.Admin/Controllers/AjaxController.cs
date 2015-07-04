@@ -463,7 +463,7 @@ namespace StoreManagement.Admin.Controllers
             }
 
             var m = new SelectListItem();
-            m.Value = "Pages";
+            m.Value = "Pages-Pages";
             m.Text = "Pages";
             moduls.Add(m);
 

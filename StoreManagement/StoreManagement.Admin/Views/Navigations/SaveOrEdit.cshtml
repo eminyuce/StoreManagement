@@ -137,7 +137,7 @@
 
             if ($('select#StoreDropDownId').length > 0) {
                 GetStoreModuls($('select#StoreDropDownId').val());
-                $('select#StoreDropDownId').chosen({}).change(function(event) {
+                $('select#StoreDropDownId').select2({}).change(function(event) {
                     GetStoreModuls($(this).val());
                 });
             } else {

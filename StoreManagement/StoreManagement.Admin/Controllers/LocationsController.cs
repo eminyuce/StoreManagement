@@ -13,9 +13,16 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Locations/
 
-        public ViewResult Index()
+      
+        public ActionResult Index(int storeId = 0, String search = "")
         {
-            return View(LocationRepository.GetAll());
+            List<Location> resultList = new List<Location>();
+            storeId = GetStoreId(storeId);
+            if (storeId != 0)
+            {
+                resultList = LocationRepository.GetLocationsByStoreId(storeId, search);
+            }
+            return View(resultList);
         }
 
         //

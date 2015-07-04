@@ -12,10 +12,15 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /Contacts/
-
-        public ViewResult Index()
+        public ActionResult Index(int storeId = 0, String search = "")
         {
-            return View(ContactRepository.GetAll());
+            List<Contact> resultList = new List<Contact>();
+            storeId = GetStoreId(storeId);
+            if (storeId != 0)
+            {
+                resultList = ContactRepository.GetContactsByStoreId(storeId, search);
+            }
+            return View(resultList);
         }
 
         //

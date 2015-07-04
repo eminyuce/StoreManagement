@@ -12,5 +12,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
 
     public interface ILocationRepository : IEntityRepository<Location, int>, ILocationService
     {
+        List<Location> GetLocationsByStoreId(int storeId, string search);
     }
 }

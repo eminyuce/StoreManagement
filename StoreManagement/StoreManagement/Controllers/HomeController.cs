@@ -53,13 +53,13 @@ namespace StoreManagement.Controllers
         }
         public ActionResult Contact()
         {
-            var item = GetSettingValue(StoreConstants.Contacts);
-            return View(item);
+           
+            return View( );
         }
         public ActionResult Locations()
         {
-            var item = GetSettingValue(StoreConstants.Location);
-            return View(item);
+       
+            return View( );
         }
         public ActionResult TermsAndCondition()
         {

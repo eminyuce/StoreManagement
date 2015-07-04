@@ -62,48 +62,7 @@ namespace StoreManagement.Admin.Controllers
                 model.RememberMe = true;
                 if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
-                    UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
-                    user.LastLoginDate = DateTime.Now;
-                    DbContext.SaveChanges();
-
-                    var isSuper = Roles.GetRolesForUser(model.UserName).Contains("SuperAdmin");
-                    string userData = "";
-                    if (!isSuper)
-                    {
-
-                        JavaScriptSerializer serializer = new JavaScriptSerializer();
-                        var s = StoreRepository.GetStoreByUserName(model.UserName);
-                        userData = serializer.Serialize(s);
-
-                        if (s == null)
-                        {
-                            return RedirectToAction("NoStoreFound", new { id = model.UserName });
-                        }
-
-
-
-                    }
-                    else
-                    {
-                        userData = isSuper.ToString();
-                    }
-
-                    FormsAuthenticationTicket ticket;
-                    String cookiestr;
-                    HttpCookie ck;
-                    ticket = new FormsAuthenticationTicket(1, model.UserName, DateTime.Now,
-                                                           DateTime.Now.AddMinutes(30), model.RememberMe, userData);
-
-                    cookiestr = FormsAuthentication.Encrypt(ticket);
-                    ck = new HttpCookie(FormsAuthentication.FormsCookieName.ToString(), cookiestr);
-
-                    if (model.RememberMe)
-                    {
-                        ck.Expires = ticket.Expiration;
-                    }
-                    ck.Path = FormsAuthentication.FormsCookiePath;
-
-                    Response.Cookies.Add(ck);
+                    LoginUserCredential(model.UserName, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
 
@@ -112,6 +71,45 @@ namespace StoreManagement.Admin.Controllers
                 return View(model);
             }
         }
+
+        private void LoginUserCredential(String userName, bool rememberMe)
+        {
+
+            UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.ToLower());
+            user.LastLoginDate = DateTime.Now;
+            DbContext.SaveChanges();
+
+            var isSuper = Roles.GetRolesForUser(userName).Contains("SuperAdmin");
+            string userData = "";
+            if (!isSuper)
+            {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                var s = StoreRepository.GetStoreByUserName(userName);
+                userData = serializer.Serialize(s);
+            }
+            else
+            {
+                userData = isSuper.ToString();
+            }
+
+            FormsAuthenticationTicket ticket;
+            String cookiestr;
+            HttpCookie ck;
+            ticket = new FormsAuthenticationTicket(1, userName, DateTime.Now,
+                DateTime.Now.AddMinutes(30), rememberMe, userData);
+
+            cookiestr = FormsAuthentication.Encrypt(ticket);
+            ck = new HttpCookie(FormsAuthentication.FormsCookieName.ToString(), cookiestr);
+
+            if (rememberMe)
+            {
+                ck.Expires = ticket.Expiration;
+            }
+            ck.Path = FormsAuthentication.FormsCookiePath;
+
+            Response.Cookies.Add(ck);
+        }
+
         public ActionResult NoStoreFound()
         {
 
@@ -426,7 +424,7 @@ namespace StoreManagement.Admin.Controllers
             //}
             //else
             //{
-        
+
             //}
 
             return RedirectToAction("Index", "Dashboard");
@@ -662,9 +660,7 @@ namespace StoreManagement.Admin.Controllers
                     if (changePasswordSucceeded)
                     {
 
-                        WebSecurity.Login(un, model.NewPassword);
-
-                        var userId = WebSecurity.GetUserId(un);
+                        LoginUserCredential(un, true);
                         return RedirectToAction("Index", "Dashboard");
                     }
                     else

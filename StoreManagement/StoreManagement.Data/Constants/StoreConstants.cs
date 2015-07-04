@@ -42,10 +42,6 @@ namespace StoreManagement.Data.Constants
 
         public static String MailPassword = "MailPassword";
 
-        public static String Contacts = "Contacts";
-
-        public static String Location = "Location";
-
         public static String AboutUs = "AboutUs";
 
         public static String SocialMediaLinks = "SocialMediaLinks";

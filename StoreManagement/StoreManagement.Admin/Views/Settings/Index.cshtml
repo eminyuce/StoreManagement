@@ -279,45 +279,8 @@ else
                     </div>
                    
                     <div class="tab-pane" id="Contacts">
-                        @{
-                            key =  StoreConstants.Contacts;
-                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                            if (item == null)
-                            {
-                                item = new Setting();
-                                item.SettingKey = key;
-                                item.Id = 0;
-                            } 
-                    
-                            @Html.Partial("pSettingTextBox",
-                                                                                                          item,
-                                                                                                          new ViewDataDictionary(ViewData)
-	                                                                                                          {
-	                                                                                                              {"StoreSettingTitle", "Contacts"}
-                                                                                                                    ,{"IsHtmlEditor", true}
-	                                                                                                          }); 
-                             
-                        }
-                                          <hr/>
-                        @{
-                            key =  StoreConstants.Location;
-                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-                            if (item == null)
-                            {
-                                item = new Setting();
-                                item.SettingKey = key;
-                                item.Id = 0;
-                            } 
-                    
-                            @Html.Partial("pSettingTextBox",
-                                                                                                          item,
-                                                                                                          new ViewDataDictionary(ViewData)
-	                                                                                                          {
-	                                                                                                              {"StoreSettingTitle", "Location"}
-                                                                                                                    ,{"IsHtmlEditor", true}
-	                                                                                                          });
-                        }
-                        <hr/>
+                        
+                         
                           @{
                             
                               

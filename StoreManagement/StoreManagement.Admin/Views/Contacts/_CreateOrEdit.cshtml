@@ -1,0 +1,84 @@
+@model  StoreManagement.Data.Entities.Contact
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.StoreId)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StoreId)
+    @Html.ValidationMessageFor(model => model.StoreId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Title)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Title)
+    @Html.ValidationMessageFor(model => model.Title)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Email)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Email)
+    @Html.ValidationMessageFor(model => model.Email)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.PhoneWork)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PhoneWork)
+    @Html.ValidationMessageFor(model => model.PhoneWork)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.PhoneCell)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PhoneCell)
+    @Html.ValidationMessageFor(model => model.PhoneCell)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Ordering)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Ordering)
+    @Html.ValidationMessageFor(model => model.Ordering)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.State)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.State)
+    @Html.ValidationMessageFor(model => model.State)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CreatedDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CreatedDate)
+    @Html.ValidationMessageFor(model => model.CreatedDate)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.UpdatedDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.UpdatedDate)
+    @Html.ValidationMessageFor(model => model.UpdatedDate)
+</div>
+

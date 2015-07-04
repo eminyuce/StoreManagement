@@ -78,6 +78,16 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public IEmailListRepository EmailListRepository { set; get; }
 
+
+
+        [Inject]
+        public IContactRepository ContactRepository { set; get; }
+
+
+
+        [Inject]
+        public ILocationRepository LocationRepository { set; get; }
+
         private Boolean MySuperAdmin
         {
             get

@@ -35,5 +35,7 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<LabelLine> LabelLines { get; set; }        
         public IDbSet<EmailList> EmailLists { get; set; }
         public IDbSet<system_logging> system_loggings { get; set; }
+        public IDbSet<Location> Locations { get; set; }
+        public IDbSet<Contact> Contacts { get; set; }
     }
 }

@@ -9,103 +9,103 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Readme/readme.txt">
-      <publishTime>06/07/2015 10:44:26</publishTime>
+      <publishTime>06/26/2015 11:33:05</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>06/07/2015 10:44:56</publishTime>
+      <publishTime>06/26/2015 11:33:31</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>06/07/2015 10:44:57</publishTime>
+      <publishTime>06/26/2015 11:33:31</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>06/07/2015 10:44:57</publishTime>
+      <publishTime>06/26/2015 11:33:31</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
-      <publishTime>09/25/2013 04:23:06</publishTime>
+      <publishTime>06/26/2015 11:43:33</publishTime>
     </File>
     <File Include="bin/HtmlAgilityPack.dll">
-      <publishTime>06/07/2015 10:47:34</publishTime>
+      <publishTime>06/26/2015 11:33:33</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>06/07/2015 10:45:02</publishTime>
+      <publishTime>06/26/2015 11:33:40</publishTime>
     </File>
     <File Include="bin/MvcPaging.dll">
-      <publishTime>06/08/2015 19:25:14</publishTime>
+      <publishTime>06/26/2015 11:33:40</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>06/07/2015 10:47:52</publishTime>
+      <publishTime>06/26/2015 11:33:42</publishTime>
     </File>
     <File Include="bin/Ninject.dll">
-      <publishTime>06/07/2015 10:45:05</publishTime>
+      <publishTime>06/26/2015 11:33:44</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.dll">
-      <publishTime>06/07/2015 10:45:06</publishTime>
+      <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
     <File Include="bin/Ninject.Web.WebApi.dll">
-      <publishTime>06/07/2015 10:47:53</publishTime>
+      <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
     <File Include="bin/Ninject.Web.WebApi.WebHost.dll">
-      <publishTime>06/07/2015 10:47:53</publishTime>
+      <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
     <File Include="bin/Ninject.WebApi.DependencyResolver.dll">
-      <publishTime>06/07/2015 10:47:53</publishTime>
+      <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
     <File Include="bin/NLog.dll">
-      <publishTime>06/07/2015 10:45:03</publishTime>
+      <publishTime>06/26/2015 11:33:40</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
-      <publishTime>06/07/2015 10:47:35</publishTime>
+      <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/ServiceStack.Text.dll">
-      <publishTime>06/07/2015 10:47:36</publishTime>
+      <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>06/23/2015 12:12:44</publishTime>
+      <publishTime>07/03/2015 15:37:49</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>06/23/2015 12:12:17</publishTime>
+      <publishTime>07/03/2015 15:37:45</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>06/23/2015 12:12:19</publishTime>
+      <publishTime>07/03/2015 15:37:47</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>06/07/2015 10:47:50</publishTime>
+      <publishTime>06/26/2015 11:33:34</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>06/07/2015 10:47:50</publishTime>
+      <publishTime>06/26/2015 11:33:34</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>06/07/2015 10:47:51</publishTime>
+      <publishTime>06/26/2015 11:33:34</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>06/07/2015 10:44:57</publishTime>
+      <publishTime>06/26/2015 11:33:33</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>06/07/2015 10:44:58</publishTime>
+      <publishTime>06/26/2015 11:33:33</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>06/07/2015 10:44:58</publishTime>
+      <publishTime>06/26/2015 11:33:35</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>06/07/2015 10:44:58</publishTime>
+      <publishTime>06/26/2015 11:33:35</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>06/07/2015 10:44:58</publishTime>
+      <publishTime>06/26/2015 11:33:35</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
-      <publishTime>06/07/2015 10:45:08</publishTime>
+      <publishTime>06/26/2015 11:33:47</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>06/07/2015 10:44:26</publishTime>
+      <publishTime>06/26/2015 11:33:05</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/08/2015 19:25:16</publishTime>
+      <publishTime>06/26/2015 11:33:05</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/23/2015 09:44:01</publishTime>
+      <publishTime>07/04/2015 10:57:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

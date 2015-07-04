@@ -41,7 +41,7 @@
 
         
 
-              @{if (filters != null && filters.Any() || !string.IsNullOrEmpty(this.Request.QueryString["search"]))
+              @{if (filters.Any() || !string.IsNullOrEmpty(this.Request.QueryString["search"]))
                 {
                     <br/> 
                     <a class="btn btn-danger btn-xs" 

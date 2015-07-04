@@ -26,26 +26,41 @@
 <h2>@Model.ApplicationName</h2>
 <br />
 
-@Html.ActionLink("Delete Logs Except the last 3 days", "DeleteLogs", "Home", new { id = Model.ApplicationName }, new { onclick = "return confirm('Are you sure you wish to delete these logs?');" })
+@Html.ActionLink("Delete Logs Except the last 3 days", "DeleteLogs", "Logs", new { id = Model.ApplicationName }, new { onclick = "return confirm('Are you sure you wish to delete these logs?');" })
 <br />
 
-@using (Html.BeginForm("AppLogDetail", "Home", FormMethod.Get))
+@using (Html.BeginForm("AppLogDetail", "Logs", FormMethod.Get))
 {
   
     <input type="hidden" name="appName" value="@Model.ApplicationName" />
     <input type="hidden" name="logLevel" value="@ViewBag.CurrentLogLevelText" /> 
     
     
-    <div class="row">
-        <div class="col-md-9">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" name="search"  value="@search" />
+      
+
+        <div class="row">
+            <div class="col-md-7 col-xs-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" name="search" value="@search"/>
+                </div>
             </div>
+            @if (!String.IsNullOrEmpty(search))
+            {
+                <div class="col-md-3 col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                    @Html.ActionLink("Clear", "AppLogDetail", "Logs", new{appName=Model.ApplicationName, logLevel = ViewBag.CurrentLogLevelText}, new {@class = "btn btn-danger btn-block glyphicon glyphicon-remove-circle"})
+                </div>
+            }
+            else
+            {
+                <div class="col-md-5 col-xs-6">
+                    <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
+                </div>
+            }
+
         </div>
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary btn-block">Search</button>
-        </div>
-    </div>
      
     
      
@@ -119,9 +134,7 @@
     }
 </table>
 
-@Html.DisplayFor(m => m.RecordsStats)
 
-@Html.Partial("Pager", Model.RecordsStats)
             
 
             </div>

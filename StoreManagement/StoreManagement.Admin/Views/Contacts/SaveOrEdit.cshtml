@@ -1,0 +1,107 @@
+@using StoreManagement.Data.GeneralHelper
+@model  StoreManagement.Data.Entities.Contact
+
+@{
+    ViewBag.Title = "Edit";
+    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    int storeId = Model != null ? Model.StoreId : requestStoreId;
+}
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Contacts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>Contact Management</h2>
+
+
+
+                <h2>Edit</h2>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Contact</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.Ordering)
+                        @Html.HiddenFor(model => model.State)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+
+
+                        <div class="editor-field controls">
+                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Title)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Email)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.PhoneWork)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.PhoneWork)
+                            @Html.ValidationMessageFor(model => model.PhoneWork)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.PhoneCell)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.PhoneCell)
+                            @Html.ValidationMessageFor(model => model.PhoneCell)
+                        </div>
+
+
+                        <p>
+                            <input type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+

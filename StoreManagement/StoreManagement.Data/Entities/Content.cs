@@ -18,6 +18,7 @@ namespace StoreManagement.Data.Entities
 
         }
         [Display(Name = "Category")]
+        [Required(ErrorMessage = "Please enter category")]
         public int CategoryId { get; set; }
 
         public virtual ICollection<ContentFile> ContentFiles { get; set; }

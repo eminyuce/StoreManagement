@@ -13,7 +13,7 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Locations/
 
-      
+
         public ActionResult Index(int storeId = 0, String search = "")
         {
             List<Location> resultList = new List<Location>();
@@ -35,35 +35,17 @@ namespace StoreManagement.Admin.Controllers
         }
 
         //
-        // GET: /Locations/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Locations/Create
-
-        [HttpPost]
-        public ActionResult Create(Location location)
-        {
-            if (ModelState.IsValid)
-            {
-                LocationRepository.Add(location);
-                LocationRepository.Save();
-                return RedirectToAction("Index");
-            }
-
-            return View(location);
-        }
-
-        //
         // GET: /Locations/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult SaveOrEdit(int id = 0)
         {
-            Location location = LocationRepository.GetSingle(id);
+            Location location = new Location();
+
+            if (id != 0)
+            {
+                location = LocationRepository.GetSingle(id);
+            }
+
             return View(location);
         }
 
@@ -71,13 +53,35 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Locations/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Location location)
+        public ActionResult SaveOrEdit(Location location)
         {
             if (ModelState.IsValid)
             {
-                LocationRepository.Edit(location);
+                location.Latitude = 1;
+                location.Longitude = 1;
+                if (location.Id > 0)
+                {
+                    location.UpdatedDate = DateTime.Now;
+                    LocationRepository.Edit(location);
+                }
+                else
+                {
+                    location.State = true;
+                    location.UpdatedDate = DateTime.Now;
+                    location.CreatedDate = DateTime.Now;
+                    LocationRepository.Add(location);
+                }
+
                 LocationRepository.Save();
-                return RedirectToAction("Index");
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = location.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return View(location);
         }
@@ -100,8 +104,16 @@ namespace StoreManagement.Admin.Controllers
             Location location = LocationRepository.GetSingle(id);
             LocationRepository.Delete(location);
             LocationRepository.Save();
-            return RedirectToAction("Index");
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = location.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
-	}
+    }
 }

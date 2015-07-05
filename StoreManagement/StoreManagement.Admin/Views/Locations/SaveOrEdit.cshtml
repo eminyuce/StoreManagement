@@ -1,0 +1,108 @@
+@using StoreManagement.Data.GeneralHelper
+@model  StoreManagement.Data.Entities.Location
+
+@{
+    ViewBag.Title = "Edit";
+    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    int storeId = Model != null ? Model.StoreId : requestStoreId;
+}
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Location</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>Location Management</h2>
+
+
+                <h2>Edit</h2>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Location</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.Latitude)
+                        @Html.HiddenFor(model => model.Longitude)
+                        @Html.HiddenFor(model => model.Ordering)
+                        @Html.HiddenFor(model => model.State)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+
+
+                        <div class="editor-field controls">
+                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Address)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Address)
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.City)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.City)
+                            @Html.ValidationMessageFor(model => model.City)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.LocationState)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.LocationState)
+                            @Html.ValidationMessageFor(model => model.LocationState)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Postal)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Postal)
+                            @Html.ValidationMessageFor(model => model.Postal)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Country)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Country)
+                            @Html.ValidationMessageFor(model => model.Country)
+                        </div>
+
+ 
+
+                        <p>
+                            <input type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+

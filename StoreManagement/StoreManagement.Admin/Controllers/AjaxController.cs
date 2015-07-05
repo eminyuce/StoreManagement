@@ -162,6 +162,34 @@ namespace StoreManagement.Admin.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteLocationsGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = LocationRepository.GetSingle(id);
+                LocationRepository.Delete(item);
+            }
+            LocationRepository.Save();
+
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteContactsGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = ContactRepository.GetSingle(id);
+                ContactRepository.Delete(item);
+            }
+            ContactRepository.Save();
+
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteCategoryGridItem(List<String> values)
         {
             foreach (String v in values)
@@ -276,6 +304,44 @@ namespace StoreManagement.Admin.Controllers
                 CategoryRepository.Edit(nav);
             }
             CategoryRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeLocationsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = LocationRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
+
+                LocationRepository.Edit(nav);
+            }
+            LocationRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeContactsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = ContactRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
+
+                ContactRepository.Edit(nav);
+            }
+            ContactRepository.Save();
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeNavigationGridOrderingOrState(List<OrderingItem> values, String checkbox = "")

@@ -1930,18 +1930,14 @@
     <Content Include="Views\Logs\Index.cshtml" />
     <Content Include="Views\Logs\AppLogDetail.cshtml" />
     <Content Include="Views\Logs\LogDetail.cshtml" />
-    <Content Include="Views\Locations\Create.cshtml" />
     <Content Include="Views\Locations\Delete.cshtml" />
     <Content Include="Views\Locations\Details.cshtml" />
-    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Locations\SaveOrEdit.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
-    <Content Include="Views\Locations\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Contacts\Create.cshtml" />
     <Content Include="Views\Contacts\Delete.cshtml" />
     <Content Include="Views\Contacts\Details.cshtml" />
-    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\Contacts\SaveOrEdit.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
-    <Content Include="Views\Contacts\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

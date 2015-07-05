@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -10,6 +11,7 @@ namespace StoreManagement.Data.Entities
 {
     public abstract class BaseContent : BaseEntity 
     {
+         [Required]
         public string Name { get; set; }
 
         [AllowHtml]

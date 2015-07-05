@@ -2,14 +2,18 @@ using System;
 using System.Runtime.Serialization;
 using GenericRepository;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace StoreManagement.Data.Entities
 {
     public class Store : IEntity
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please enter domain")]
         public string Domain { get; set; }
+        [Required(ErrorMessage = "Please enter layout")]
         public string Layout { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
@@ -36,7 +40,7 @@ namespace StoreManagement.Data.Entities
         {
             return Id + " " + Name;
         }
-         
+
     }
 
 }

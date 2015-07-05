@@ -13,7 +13,7 @@ namespace StoreManagement.Data.Entities
     {
 
         [Display(Name = "Category")]
-        [Required]
+        [Required(ErrorMessage = "Please enter category")]
         public int ProductCategoryId { get; set; }
      
  

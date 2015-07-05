@@ -32,36 +32,17 @@ namespace StoreManagement.Admin.Controllers
             return View(contact);
         }
 
-        //
-        // GET: /Contacts/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Contacts/Create
-
-        [HttpPost]
-        public ActionResult Create(Contact contact)
-        {
-            if (ModelState.IsValid)
-            {
-                ContactRepository.Add(contact);
-                ContactRepository.Save();
-                return RedirectToAction("Index");
-            }
-
-            return View(contact);
-        }
-
+         
         //
         // GET: /Contacts/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult SaveOrEdit(int id = 0)
         {
-            Contact contact = ContactRepository.GetSingle(id);
+            Contact contact =new Contact();
+            if (id != 0)
+            {
+                contact = ContactRepository.GetSingle(id);
+            }
             return View(contact);
         }
 
@@ -69,13 +50,33 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Contacts/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Contact contact)
+        public ActionResult SaveOrEdit(Contact contact)
         {
             if (ModelState.IsValid)
             {
-                ContactRepository.Edit(contact);
+                if (contact.Id == 0)
+                {
+                    contact.State = true;
+                    contact.UpdatedDate = DateTime.Now;
+                    contact.CreatedDate = DateTime.Now;
+                    ContactRepository.Add(contact);
+                }
+                else
+                {
+                    contact.UpdatedDate = DateTime.Now;
+                    ContactRepository.Edit(contact);
+                }
+
                 ContactRepository.Save();
-                return RedirectToAction("Index");
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = contact.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             return View(contact);
         }
@@ -98,7 +99,15 @@ namespace StoreManagement.Admin.Controllers
             Contact contact = ContactRepository.GetSingle(id);
             ContactRepository.Delete(contact);
             ContactRepository.Save();
-            return RedirectToAction("Index");
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = contact.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 

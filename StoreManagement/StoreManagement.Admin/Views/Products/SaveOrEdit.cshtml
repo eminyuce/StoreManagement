@@ -2,10 +2,17 @@
 @using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.Entities.Product
 
+@* ReSharper disable once AssignNullToNotNullAttribute *@
 @{
     var product = Model;
     List<LabelLine> labelLines = ViewBag.LabelLines;
-    int[] selectedLabelId = labelLines.Select(r => r.Id).ToArray();
+    int[] selectedLabelId = null;
+    if (labelLines != null)
+    {
+        selectedLabelId = labelLines.Select(r => r.Id).ToArray();
+    }
+   
+    
     List<FileManager> fileManagers = ViewBag.FileManagers;
     var requestStoreId = @Request.QueryString["storeId"].ToInt();
     int storeId = product != null ? product.StoreId : requestStoreId;

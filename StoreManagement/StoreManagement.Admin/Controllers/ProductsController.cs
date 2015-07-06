@@ -59,7 +59,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult SaveOrEdit(int id = 0)
         {
-        
+
 
             var content = new Product();
             var labels = new List<LabelLine>();
@@ -72,7 +72,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                
+
                 content = ProductRepository.GetSingleIncluding(id, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 if (!CheckRequest(content))
                 {
@@ -97,7 +97,7 @@ namespace StoreManagement.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveOrEdit(Product product, int[] selectedFileId = null, int [] selectedLabelId = null)
+        public ActionResult SaveOrEdit(Product product, int[] selectedFileId = null, int[] selectedLabelId = null)
         {
             if (ModelState.IsValid)
             {
@@ -105,8 +105,23 @@ namespace StoreManagement.Admin.Controllers
                 {
                     return new HttpNotFoundResult("Not Found");
                 }
+
+
+
+
                 if (product.ProductCategoryId == 0)
                 {
+                    List<FileManager> fileManagers = new List<FileManager>();
+                    var labelList = new List<LabelLine>();
+                    if (product.Id > 0)
+                    {
+                        var content = ProductRepository.GetSingleIncluding(product.Id, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                        fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
+                        labelList = LabelLineRepository.GetLabelLinesByItem(product.Id, StoreConstants.ProductType);
+                        
+                    }
+                    ViewBag.FileManagers = fileManagers;
+                    ViewBag.LabelLines = labelList;
                     ModelState.AddModelError("ProductCategoryId", "You should select category from category tree.");
                     return View(product);
                 }
@@ -129,7 +144,7 @@ namespace StoreManagement.Admin.Controllers
                     ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
                 }
 
-                  
+
                 LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
 
 

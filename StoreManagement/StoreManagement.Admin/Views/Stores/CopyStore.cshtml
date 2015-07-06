@@ -12,6 +12,13 @@
                 <div class="text-muted bootstrap-admin-box-title">Delete</div>
             </div>
             <div class="bootstrap-admin-panel-content">
+                <span>
+                    You will be copying all <strong class="text text-danger">
+                                                @Model.Name
+                                            </strong>
+                    data
+                </span>
+        
 
                 @using (Html.BeginForm("CopyStore", "Stores", FormMethod.Post))
                 {

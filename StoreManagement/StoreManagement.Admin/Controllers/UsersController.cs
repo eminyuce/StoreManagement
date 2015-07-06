@@ -15,7 +15,7 @@ namespace StoreManagement.Admin.Controllers
     {
 
         // GET: /Stores/Details/5
-        public ActionResult Users(int storeId, String search = "")
+        public virtual ActionResult Users(int storeId, String search = "")
         {
             storeId = GetStoreId(storeId);
             var storeUserIds = StoreUserRepository.FindBy(r => r.StoreId == storeId).Select(r => r.UserId).ToList();
@@ -33,46 +33,48 @@ namespace StoreManagement.Admin.Controllers
         }
 
 
-        public ActionResult DeleteStoreUser(String userName = "")
+        public virtual ActionResult DeleteStoreUser(String userName = "")
         {
             int storeId = GetStoreId(0);
             try
             {
-
-                try
-                {
-                    UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.ToLower());
-                    if (user != null)
-                    {
-                        var su = StoreUserRepository.GetStoreUserByUserId(user.UserId);
-                        StoreUserRepository.Delete(su);
-                        StoreUserRepository.Save();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error("Exception " + ex.Message, ex);
-                }
-
-
-
-                if (Roles.GetRolesForUser(userName).Any())
-                {
-                    Roles.RemoveUserFromRoles(userName, Roles.GetRolesForUser(userName));
-                }
-                ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(userName); // deletes record from webpages_Membership table
-                ((SimpleMembershipProvider)Membership.Provider).DeleteUser(userName, true); // deletes record from UserProfile table
-
-
+                DeleteUser(userName);
 
 
                 return RedirectToAction("Index");
-
             }
             catch
             {
                 return View(userName);
             }
+        }
+
+        protected void DeleteUser(string userName)
+        {
+            try
+            {
+                UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.ToLower());
+                if (user != null)
+                {
+                    var su = StoreUserRepository.GetStoreUserByUserId(user.UserId);
+                    StoreUserRepository.Delete(su);
+                    StoreUserRepository.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Exception " + ex.Message, ex);
+            }
+
+
+            if (Roles.GetRolesForUser(userName).Any())
+            {
+                Roles.RemoveUserFromRoles(userName, Roles.GetRolesForUser(userName));
+            }
+            ((SimpleMembershipProvider) Membership.Provider).DeleteAccount(userName);
+                // deletes record from webpages_Membership table
+            ((SimpleMembershipProvider) Membership.Provider).DeleteUser(userName, true);
+                // deletes record from UserProfile table
         }
 
 
@@ -84,7 +86,7 @@ namespace StoreManagement.Admin.Controllers
             return View(storeUser);
         }
 
-        public ActionResult SaveOrEditStoreUser(int storeId = 0, int userId = 0)
+        public virtual ActionResult SaveOrEditStoreUser(int storeId = 0, int userId = 0)
         {
             storeId = GetStoreId(storeId);
             var store = StoreRepository.GetSingle(storeId);
@@ -108,7 +110,7 @@ namespace StoreManagement.Admin.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveOrEditStoreUser(int storeId, LoginModel userName, String roleName = "")
+        public virtual ActionResult SaveOrEditStoreUser(int storeId, LoginModel userName, String roleName = "")
         {
             storeId = GetStoreId(storeId);
             if (String.IsNullOrEmpty(roleName))

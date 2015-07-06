@@ -11,8 +11,8 @@
     {
         selectedLabelId = labelLines.Select(r => r.Id).ToArray();
     }
-   
-    
+
+
     List<FileManager> fileManagers = ViewBag.FileManagers;
     var requestStoreId = @Request.QueryString["storeId"].ToInt();
     int storeId = product != null ? product.StoreId : requestStoreId;
@@ -45,6 +45,13 @@
                         @using (Html.BeginForm())
                         {
                         
+                            <div style="display: none;" id="FormMessage" class="alert alert-info">
+                                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                                <strong>Info!</strong> <span id="messageContent"></span>
+                            </div>
+                            
+
+                            
                             <div class="editor-field controls">
                                 @Html.Action("StoresDropDown", "Stores", new { storeId })
                             </div>
@@ -227,8 +234,8 @@
 
     <script>
         $(function () {
-            
-             
+
+
         });
     </script>
 

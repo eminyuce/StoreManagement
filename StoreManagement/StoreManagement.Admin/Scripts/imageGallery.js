@@ -1,5 +1,13 @@
-﻿
+﻿var googleLink = "https://drive.google.com/uc?id=";
 var linkUrl = "{id}";
+
+function ShowMessage(message) {
+    $("#FormMessage").show("slow");
+    $("#messageContent").text(message);
+    setInterval(function () {
+        $("#FormMessage").hide("slow");
+    }, 10000);
+}
 $(document).ready(function () {
     console.log("image gallery script is working");
     $("#ImageDialog").click(function () {
@@ -7,6 +15,11 @@ $(document).ready(function () {
         if (labels != null) {
             LoadImages(labels);
         }
+        else {
+            ShowMessage("Please select labels to get images");
+            $("#flickr-photos").empty();
+        }
+        
     });
     RetrieveContentImages();
     bindRemoveImage();
@@ -36,7 +49,7 @@ function handleRetrieveContentImages(e) {
             var photos = data;
             $.each(photos, function (i, photo) {
                 console.log(photo);
-                var img = $("<img/>").attr("src",  'https://docs.google.com/uc?id=' +  photo.GoogleImageId)
+                var img = $("<img/>").attr("src", googleLink + photo.GoogleImageId)
                                     .attr("title", photo.FileName).attr("id", photo.Id);
                 var div = $("<li/>").attr("class", "col-md-4").attr("data-file-image", photo.Id).append(img);
                 $(list).append($("<div/>").append(div));
@@ -54,7 +67,7 @@ function handleRetrieveContentImages(e) {
  
 
 function createImage(googleImageId, fileName, photoId, eventLink) {
-    var img = $("<img/>").attr("src", 'https://docs.google.com/uc?id=' + googleImageId)
+    var img = $("<img/>").attr("src", googleLink + googleImageId)
         .attr("title", fileName)
         .attr("id", photoId)
         .attr("class", "fileManagerImg");

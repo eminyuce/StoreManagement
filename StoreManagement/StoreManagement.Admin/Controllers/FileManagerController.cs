@@ -39,17 +39,6 @@ namespace StoreManagement.Admin.Controllers
 
         public void ConnectToStoreGoogleDrive()
         {
-            //GoogleDriveClientId = ProjectAppSettings.GetWebConfigString("GoogleDriveClientId");
-            //GoogleDriveUserEmail = ProjectAppSettings.GetWebConfigString("GoogleDriveUserEmail");
-            //GoogleDriveServiceAccountEmail = ProjectAppSettings.GetWebConfigString("GoogleDriveServiceAccountEmail");
-            //String googleDriveCertificateP12FileName = ProjectAppSettings.GetWebConfigString("GoogleDriveCertificateP12FileName");
-            //Certificate = GeneralHelper.CreateCert(
-            //    HostingEnvironment.MapPath(
-            //    String.Format(@"~\App_Data\GoogleDrive\{0}", googleDriveCertificateP12FileName)),
-            //    ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
-            //GoogleDriveFolder = ProjectAppSettings.GetWebConfigString("GoogleDriveFolder");
-            //GoogleDrivePassword = ProjectAppSettings.GetWebConfigString("GoogleDrivePassword");
-
 
             if (IsSuperAdmin)
             {
@@ -65,7 +54,7 @@ namespace StoreManagement.Admin.Controllers
                     String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName)),
                     ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
 
-              
+
             }
             else
             {
@@ -177,16 +166,15 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult UploadFiles()
         {
+            var labels = Request.Form["labels"].ToStr();
+            int storeId = Session["storeId"].ToString().ToInt();
 
             var r = new List<ViewDataUploadFilesResult>();
-            var labels = Request.Form["labels"].ToStr();
             List<String> labelArray = labels.Split(",".ToCharArray()).ToList();
-            int storeId = Session["storeId"].ToString().ToInt();
 
             foreach (string file in Request.Files)
             {
                 var statuses = new List<ViewDataUploadFilesResult>();
-
 
                 var headers = Request.Headers;
 
@@ -204,12 +192,15 @@ namespace StoreManagement.Admin.Controllers
                 JsonResult result = Json(statuses);
                 result.ContentType = "text/plain";
 
+
                 return result;
+
+
             }
 
             return Json(r);
-        }
 
+        }
 
 
         private FileManager SaveFiles(HttpPostedFileBase file, int storeId = 1)

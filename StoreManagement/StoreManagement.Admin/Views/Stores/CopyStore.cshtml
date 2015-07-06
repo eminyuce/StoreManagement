@@ -1,0 +1,44 @@
+﻿@model StoreManagement.Data.Entities.Store
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Delete</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+                @using (Html.BeginForm("CopyStore", "Stores", FormMethod.Post))
+                {
+                    <input name="copyStoreId" value="@Model.Id"/>
+                    <div class="editor-label">
+                        <label for="Name">Name</label>
+                        <input class="form-control" data-val="true" data-val-required="Please enter name" id="Name" name="Name" type="text" value="">
+                    </div>
+                    
+                    <div class="editor-label">
+                        <label for="Domain">Domain</label>
+                        <input class="form-control" data-val="true" data-val-required="Please enter domain" id="Domain" name="Domain" type="text" value="">
+                    </div>
+                    
+                    <input type="submit"  class="glyphicon glyphicon-copy btn btn-warning btn-block" id="Copy" />
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+

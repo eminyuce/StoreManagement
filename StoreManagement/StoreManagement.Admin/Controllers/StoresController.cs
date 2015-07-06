@@ -111,6 +111,18 @@ namespace StoreManagement.Admin.Controllers
                 return View(store);
             }
         }
+        [HttpGet]
+        public ActionResult CopyStore(int id)
+        {
+            return View(StoreRepository.GetSingle(id));
+        }
+        [HttpPost]
+        public ActionResult CopyStore(int copyStoreId, String name, String domain)
+        {
+            String layout = "";
+            StoreRepository.CopyStore(copyStoreId, name, domain, layout);
+            return RedirectToAction("Index", new { search = name.ToLower() });
+        }
 
         //
         // GET: /Stores/Delete/5

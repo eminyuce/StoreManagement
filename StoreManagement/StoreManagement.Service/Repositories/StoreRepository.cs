@@ -38,6 +38,34 @@ namespace StoreManagement.Service.Repositories
             AllStoreCache.Remove("GetAllStores");
             return base.Save();
         }
+
+        public void CopyStore(int copyStoreId, string name, string domain, string layout)
+        {
+            // Create a SQL command to execute the sproc 
+            using (SqlCommand cmd = (SqlCommand)this.StoreDbContext.Database.Connection.CreateCommand())
+            {
+                cmd.CommandText = "dbo.DuplicateStoreData";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("StoreId", SqlDbType.Int).Value = copyStoreId;
+                cmd.Parameters.Add("StoreName", SqlDbType.NVarChar).Value = name;
+                cmd.Parameters.Add("Domain", SqlDbType.NVarChar).Value = domain;
+                cmd.Parameters.Add("Layout", SqlDbType.NVarChar).Value = layout;
+
+
+                try
+                {
+
+                    StoreDbContext.Database.Connection.Open();
+                    var reader = cmd.ExecuteNonQuery();
+
+                }
+                finally
+                {
+                    StoreDbContext.Database.Connection.Close();
+                }
+            }
+        }
+
         public List<Store> GetAllStores()
         {
             String key = String.Format("GetAllStores");

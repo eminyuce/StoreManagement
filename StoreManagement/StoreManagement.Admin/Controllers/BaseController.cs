@@ -163,7 +163,27 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
-
+        protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
+        {
+            try
+            {
+                if (IsSuperAdmin)
+                {
+                    Logger.Trace("HttpNotFoundResult exception for Store " + statusDescription);
+                }
+                else
+                {
+                    Logger.Trace("HttpNotFoundResult exception for Store " + statusDescription + " Store:" + LoginStore);
+                }
+            
+            }
+            catch (Exception ex)
+            {
+                    
+             
+            }
+            return new HttpNotFoundResult(statusDescription);
+        }
 
         protected string GetCleanHtml(String source)
         {

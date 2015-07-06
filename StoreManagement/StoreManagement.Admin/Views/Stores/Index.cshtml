@@ -24,7 +24,7 @@
             </div>
             <div class="bootstrap-admin-panel-content">
 
- 
+
 
                 <div class="panel panel-info">
                     <div class="panel-body">
@@ -109,16 +109,7 @@
 @<b>
     @Html.ActionLink(" ", "Delete", "Stores", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
 </b>);
-                    
-                    
-        columns.Add()
-.Encoded(false)
-.Sanitized(false)
-.SetWidth(30)
-.RenderValueAs(d =>
-   @<b>
-                           @Html.ActionLink(" Settings", "Settings", "Stores", new { storeId = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-wrench" })
-                       </b>);
+
 
         columns.Add()
 .Encoded(false)
@@ -126,8 +117,17 @@
 .SetWidth(30)
 .RenderValueAs(d =>
    @<b>
-                           @Html.ActionLink(" Users", "Users", "Stores", new { storeId = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-user" })
-                       </b>);
+       @Html.ActionLink(" Settings", "Settings", "Stores", new { storeId = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-wrench" })
+   </b>);
+
+        columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(30)
+.RenderValueAs(d =>
+   @<b>
+       @Html.ActionLink(" Users", "Users", "Stores", new { storeId = d.Id }, new { @class = "btn btn-default glyphicon glyphicon-user" })
+   </b>);
 
 
         columns.Add(c => c.Name)
@@ -150,12 +150,22 @@
         .RenderValueAs(d =>
                                                   @<b>
 
-                                                                    <a class="btn btn-info glyphicon glyphicon-globe"    
+                                                      <a class="btn btn-info glyphicon glyphicon-globe"    
 
-			target="_blank"  href="@String.Format("http://{0}", d.Domain)"><b style='color:black'>   @d.Domain  </b></a>
+			target="_blank"  href="@String.Format("http://{0}", d.Domain)"><b style='color: black'>@d.Domain  </b></a>
                                                   </b>);
 
 
+
+        columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(d =>
+                @<b>
+                    @Html.ActionLink("Copy Store", "CopyStore", "Stores", new { id = d.Id }, new { @class = "glyphicon glyphicon-copy btn btn-warning btn-block" })
+                </b>);
+                        
 
         columns.Add(o => o.CreatedDate)
               .Titled("Date")

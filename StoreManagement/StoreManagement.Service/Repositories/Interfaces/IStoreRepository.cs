@@ -11,5 +11,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
         void DeleteStore(int storeId);
         List<Store> GetAllStores();
         int SaveStore();
+        void CopyStore(int copyStoreId, string name, string domain, string layout);
     }
 }

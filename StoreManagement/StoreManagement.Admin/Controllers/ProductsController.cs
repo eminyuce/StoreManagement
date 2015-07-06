@@ -57,11 +57,14 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Product/Create
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0, int selectedCategoryId = 0)
         {
 
 
             var content = new Product();
+            content.ProductCategoryId = selectedCategoryId;  
+            content.StoreId = GetStoreId(selectedStoreId); 
+
             var labels = new List<LabelLine>();
             var fileManagers = new List<FileManager>();
             if (id == 0)
@@ -74,15 +77,11 @@ namespace StoreManagement.Admin.Controllers
             {
 
                 content = ProductRepository.GetSingleIncluding(id, r => r.ProductFiles.Select(r1 => r1.FileManager));
-                if (!CheckRequest(content))
+                if (!CheckRequest(content)) //security for right store and its item.
                 {
-                    return new HttpNotFoundResult("Not Found");
+                    return HttpNotFound("Not Found");
                 }
                 content.UpdatedDate = DateTime.Now;
-                if (!CheckRequest(content))
-                {
-                    return RedirectToAction("NoAccessPage", "Home", new { id = content.StoreId });
-                }
                 labels = LabelLineRepository.GetLabelLinesByItem(id, StoreConstants.ProductType);
 
                 fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
@@ -118,7 +117,7 @@ namespace StoreManagement.Admin.Controllers
                         var content = ProductRepository.GetSingleIncluding(product.Id, r => r.ProductFiles.Select(r1 => r1.FileManager));
                         fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
                         labelList = LabelLineRepository.GetLabelLinesByItem(product.Id, StoreConstants.ProductType);
-                        
+
                     }
                     ViewBag.FileManagers = fileManagers;
                     ViewBag.LabelLines = labelList;

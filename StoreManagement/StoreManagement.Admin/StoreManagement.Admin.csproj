@@ -1693,6 +1693,7 @@
     </None>
     <None Include="Properties\PublishProfiles\ftp faqulte.pubxml" />
     <None Include="Properties\PublishProfiles\FTP_StoreManagement.Admin.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalMachineAdmin.pubxml" />
     <None Include="Properties\PublishProfiles\LocalYuce.pubxml" />
     <None Include="Properties\PublishProfiles\StoreManagement.Admin.pubxml" />
     <None Include="Properties\PublishProfiles\YuceMachine.pubxml" />

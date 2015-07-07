@@ -30,7 +30,8 @@ namespace StoreManagement.Data.Entities
         public int CategoryId { get; set; }
 
         public String GoogleDriveClientId { set; get; }
-        public String GoogleDriveUserEmail { set; get; }
+        public String GoogleDriveUserEmail { set; get; }        
+        public String GoogleDriveUserEmailPassword { set; get; }
         public String GoogleDriveFolder { set; get; }
         public String GoogleDriveServiceAccountEmail { set; get; }
         public String GoogleDriveCertificateP12FileName { set; get; }

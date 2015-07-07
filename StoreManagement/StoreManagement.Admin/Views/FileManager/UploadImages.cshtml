@@ -2,7 +2,8 @@
     ViewBag.Title = "Bootstrap version demo";
 
     Layout = "~/Views/Shared/_LayoutFileUpload.cshtml";
-    int storeId = (int) ViewBag.StoreId;
+    StoreManagement.Data.Entities.Store store = ViewBag.Store;
+    int storeId = store.Id;
 }
 
 
@@ -20,7 +21,7 @@
                     <div class="col-md-5">
                          @using (Html.BeginForm("DisplayImages", "FileManager", FormMethod.Get))
                         {
-                            <input type="hidden" value="@storeId"  id="StoreId"/>
+                       <input type="hidden" value="@storeId" name="storeId" id="StoreId" />
                             <p>
                                 <input type="submit" value="Display Images" class = "btn btn-primary btn-block" />
                             </p>

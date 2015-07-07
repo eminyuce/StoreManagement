@@ -76,6 +76,12 @@
                             @Html.TextBoxFor(model => model.GoogleDriveUserEmail, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GoogleDriveUserEmail)
                         </div>
+                           <div class="editor-label">
+                            @Html.LabelFor(model => model.GoogleDriveUserEmailPassword) 
+
+                            @Html.TextBoxFor(model => model.GoogleDriveUserEmailPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GoogleDriveUserEmailPassword)
+                        </div>
                         <div class="editor-label">
                             @Html.LabelFor(model => model.GoogleDrivePassword)
 

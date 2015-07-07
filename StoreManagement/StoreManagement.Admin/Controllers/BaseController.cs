@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using GoogleDriveUploader;
 using NLog;
 using Ninject;
 using StoreManagement.Data;
@@ -78,11 +81,14 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public IEmailListRepository EmailListRepository { set; get; }
 
-
+  
 
         [Inject]
         public IContactRepository ContactRepository { set; get; }
 
+
+        [Inject]
+        public IUploadHelper UploadHelper { set; get; }
 
 
         [Inject]
@@ -130,7 +136,6 @@ namespace StoreManagement.Admin.Controllers
                 }
             }
         }
-        private Store _store = new Store();
         private Store MyLoginStore
         {
             get
@@ -211,6 +216,51 @@ namespace StoreManagement.Admin.Controllers
             }
         }
 
+        protected String GoogleDriveClientId { set; get; }
+        protected String GoogleDriveUserEmail { set; get; }
+        protected String GoogleDriveFolder { set; get; }
+        protected String GoogleDriveServiceAccountEmail { set; get; }
+        protected X509Certificate2 Certificate { set; get; }
+        protected String GoogleDrivePassword { set; get; }
+        protected void ConnectToStoreGoogleDrive(int storeId)
+        {
+
+            if (IsSuperAdmin)
+            {
+
+                var selectedStore = StoreRepository.GetStore(storeId);
+                GoogleDriveClientId = selectedStore.GoogleDriveClientId;
+                GoogleDriveUserEmail = selectedStore.GoogleDriveUserEmail;
+                GoogleDriveFolder = selectedStore.GoogleDriveFolder;
+                GoogleDriveServiceAccountEmail = selectedStore.GoogleDriveServiceAccountEmail;
+                GoogleDrivePassword = selectedStore.GoogleDrivePassword;
+                Certificate = GeneralHelper.CreateCert(
+                    HostingEnvironment.MapPath(
+                    String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName)),
+                    selectedStore.GoogleDrivePassword);
+
+
+            }
+            else
+            {
+                GoogleDriveClientId = LoginStore.GoogleDriveClientId;
+                GoogleDriveUserEmail = LoginStore.GoogleDriveUserEmail;
+                GoogleDriveFolder = LoginStore.GoogleDriveFolder;
+                GoogleDriveServiceAccountEmail = LoginStore.GoogleDriveServiceAccountEmail;
+                GoogleDrivePassword = LoginStore.GoogleDrivePassword;
+                Certificate = GeneralHelper.CreateCert(
+                    HostingEnvironment.MapPath(
+                    String.Format(@"~\App_Data\GoogleDrive\{0}", LoginStore.GoogleDriveCertificateP12FileName)),
+                        LoginStore.GoogleDrivePassword);
+            }
+            this.UploadHelper.Connect(GoogleDriveClientId,
+                   GoogleDriveUserEmail,
+                   GoogleDriveServiceAccountEmail,
+                   Certificate,
+                   GoogleDriveFolder, GoogleDrivePassword);
+
+
+        }
 
         protected bool SaveImagesLabels(string[] labels, String selectedFile, int storeId)
         {

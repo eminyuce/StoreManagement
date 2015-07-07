@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Web;
 using StoreManagement.Data.Enums;
 
 namespace StoreManagement.Data.GeneralHelper
@@ -50,63 +51,40 @@ namespace StoreManagement.Data.GeneralHelper
                 return ms.ToArray();
             }
         }
+        // Create a thumbnail in byte array format from the image encoded in the passed byte array.  
         // (RESIZE an image in a byte[] variable.)  
-        public static byte[] CreateThumbnail(byte[] PassedImage, int LargestSide)
+        public static byte[] CreateThumbnail(byte[] PassedImage, int LargestSide, int Height, int Width)
         {
             byte[] ReturnedThumbnail;
 
-            using (MemoryStream StartMemoryStream = new MemoryStream(),
-                                NewMemoryStream = new MemoryStream())
+            using (System.IO.MemoryStream StartMemoryStream = new System.IO.MemoryStream(), NewMemoryStream = new System.IO.MemoryStream())
             {
                 // write the string to the stream  
                 StartMemoryStream.Write(PassedImage, 0, PassedImage.Length);
 
                 // create the start Bitmap from the MemoryStream that contains the image  
-                Bitmap startBitmap = new Bitmap(StartMemoryStream);
+                System.Drawing.Bitmap startBitmap = new System.Drawing.Bitmap(StartMemoryStream);
 
                 // set thumbnail height and width proportional to the original image.  
-                //int newHeight;
-                //int newWidth;
-                //double HW_ratio;
-                //if (startBitmap.Height > startBitmap.Width)
-                //{
-                //    newHeight = LargestSide;
-                //    HW_ratio = (double)((double)LargestSide / (double)startBitmap.Height);
-                //    newWidth = (int)(HW_ratio * (double)startBitmap.Width);
-                //}
-                //else
-                //{
-                //    newWidth = LargestSide;
-                //    HW_ratio = (double)((double)LargestSide / (double)startBitmap.Width);
-                //    newHeight = (int)(HW_ratio * (double)startBitmap.Height);
-                //}
                 int newHeight;
                 int newWidth;
                 double HW_ratio;
-                if (startBitmap.Height > LargestSide)
-                // If the original image isn't larger on any side than LargestSide
-                //  then don't increase the size of the image.gestSide || startBitmap.Width > LargestSide)
+                if (startBitmap.Height > startBitmap.Width)
                 {
-                    if (startBitmap.Height > startBitmap.Width)
-                    {
-                        newHeight = LargestSide;
-                        HW_ratio = (double)((double)LargestSide / (double)startBitmap.Height);
-                        newWidth = (int)(HW_ratio * (double)startBitmap.Width);
-                    }
-                    else
-                    {
-                        newWidth = LargestSide;
-                        HW_ratio = (double)((double)LargestSide / (double)startBitmap.Width);
-                        newHeight = (int)(HW_ratio * (double)startBitmap.Height);
-                    }
+                    newHeight = LargestSide;
+                    HW_ratio = (double)((double)LargestSide / (double)startBitmap.Height);
+                    newWidth = (int)(HW_ratio * (double)startBitmap.Width);
                 }
                 else
                 {
-                    newHeight = startBitmap.Height;
-                    newWidth = startBitmap.Width;
+                    newWidth = LargestSide;
+                    HW_ratio = (double)((double)LargestSide / (double)startBitmap.Width);
+                    newHeight = (int)(HW_ratio * (double)startBitmap.Height);
                 }
+                newHeight = Height;
+                newWidth = Width;
                 // create a new Bitmap with dimensions for the thumbnail.  
-                Bitmap newBitmap = new Bitmap(newWidth, newHeight);
+                System.Drawing.Bitmap newBitmap = new System.Drawing.Bitmap(newWidth, newHeight);
 
                 // Copy the image from the START Bitmap into the NEW Bitmap.  
                 // This will create a thumnail size of the same image.  
@@ -118,11 +96,23 @@ namespace StoreManagement.Data.GeneralHelper
                 // Fill the byte[] for the thumbnail from the new MemoryStream.  
                 ReturnedThumbnail = NewMemoryStream.ToArray();
             }
-
             // return the resized image as a string of bytes.  
             return ReturnedThumbnail;
         }
+ 
 
+        public static byte[] ImageToByteArray(Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
+        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
+            return returnImage;
+        }
         // Resize a Bitmap  
         private static Bitmap ResizeImage(Bitmap image, int width, int height)
         {
@@ -134,11 +124,22 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return resizedImage;
         } 
-        private bool IsImage(string ext)
+        public static bool IsImage(string ext)
         {
             return ext == ".gif" || ext == ".jpg" || ext == ".png";
         }
+        /// <summary>
+        /// Determines if a file is a known image type by checking the extension.
+        /// </summary>
+        /// <param name="fileName">The file name to check.</param>
+        /// <returns>True if the file is an image.</returns>
+        public static bool IsImageByFileName(string fileName)
+        {
+            string ext = Path.GetExtension(fileName).ToLower();
+            string types = "|.png|.gif|.jpg|.jpeg|.bmp|.tiff|";
 
+            return types.IndexOf("|" + ext + "|") >= 0;
+        }
         private string EncodeFile(string fileName)
         {
             return Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName));
@@ -203,6 +204,19 @@ namespace StoreManagement.Data.GeneralHelper
 
                 return result;
             }
+        }
+
+        public static byte[] CreateGoogleImage(HttpPostedFileBase file)
+        {
+            var fileByte = GeneralHelper.ReadFully(file.InputStream);
+            //Create image from Bytes array
+            System.Drawing.Image img = ByteArrayToImage(fileByte);
+            int height = Convert.ToInt32(Convert.ToDouble(img.Height) * .7);
+            int width = Convert.ToInt32(Convert.ToDouble(img.Width) * .7);
+            //Resize Image - ORIGINAL
+            var byteArrayIn = CreateThumbnail(fileByte, 10000, height, width);
+
+            return byteArrayIn;
         }
     }
 }

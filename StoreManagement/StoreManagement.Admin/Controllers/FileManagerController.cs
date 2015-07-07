@@ -26,57 +26,12 @@ namespace StoreManagement.Admin.Controllers
         private const String ControllerName = "FileManager";
 
 
-        [Inject]
-        public IUploadHelper UploadHelper { set; get; }
-
-        private String GoogleDriveClientId { set; get; }
-        private String GoogleDriveUserEmail { set; get; }
-        private String GoogleDriveFolder { set; get; }
-        private String GoogleDriveServiceAccountEmail { set; get; }
-        private X509Certificate2 Certificate { set; get; }
-        private String GoogleDrivePassword { set; get; }
-
-
-        public void ConnectToStoreGoogleDrive()
+        public int SessionStoreId
         {
-
-            if (IsSuperAdmin)
-            {
-                int storeId = Session["storeId"].ToString().ToInt();
-                var selectedStore = StoreRepository.GetStore(storeId);
-                GoogleDriveClientId = selectedStore.GoogleDriveClientId;
-                GoogleDriveUserEmail = selectedStore.GoogleDriveUserEmail;
-                GoogleDriveFolder = selectedStore.GoogleDriveFolder;
-                GoogleDriveServiceAccountEmail = selectedStore.GoogleDriveServiceAccountEmail;
-                GoogleDrivePassword = selectedStore.GoogleDrivePassword;
-                Certificate = GeneralHelper.CreateCert(
-                    HostingEnvironment.MapPath(
-                    String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName)),
-                    ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
-
-
-            }
-            else
-            {
-                GoogleDriveClientId = LoginStore.GoogleDriveClientId;
-                GoogleDriveUserEmail = LoginStore.GoogleDriveUserEmail;
-                GoogleDriveFolder = LoginStore.GoogleDriveFolder;
-                GoogleDriveServiceAccountEmail = LoginStore.GoogleDriveServiceAccountEmail;
-                GoogleDrivePassword = LoginStore.GoogleDrivePassword;
-                Certificate = GeneralHelper.CreateCert(
-                    HostingEnvironment.MapPath(
-                    String.Format(@"~\App_Data\GoogleDrive\{0}", LoginStore.GoogleDriveCertificateP12FileName)),
-                    ProjectAppSettings.GetWebConfigString("GoogleDrivePassword"));
-            }
-            this.UploadHelper.Connect(GoogleDriveClientId,
-                   GoogleDriveUserEmail,
-                   GoogleDriveServiceAccountEmail,
-                   Certificate,
-                   GoogleDriveFolder, GoogleDrivePassword);
-
-
+            get { return Session["storeId"].ToString().ToInt(); }
+            set { Session["storeId"] = value; }
         }
-
+     
 
         public ActionResult Index()
         {
@@ -85,7 +40,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DisplayImages(int storeId = 1, String search = "")
         {
             storeId = GetStoreId(storeId);
-            ViewBag.StoreId = storeId;
+            ViewBag.Store = StoreRepository.GetSingle(storeId);
             var images = FileManagerRepository.GetFilesByStoreId(storeId);
 
             if (!String.IsNullOrEmpty(search))
@@ -93,16 +48,13 @@ namespace StoreManagement.Admin.Controllers
                 images = images.Where(r => r.Title.ToLower().Contains(search.ToLower())).ToList();
             }
 
-
-
-
             return View(images);
         }
         public ActionResult UploadImages(int storeId = 1)
         {
             storeId = GetStoreId(storeId);
-            Session["storeId"] = storeId;
-            ViewBag.StoreId = storeId;
+            SessionStoreId = storeId;
+            ViewBag.Store = StoreRepository.GetSingle(storeId);
             return View();
         }
         public PartialViewResult ImageGallery()
@@ -144,7 +96,7 @@ namespace StoreManagement.Admin.Controllers
 
             try
             {
-                ConnectToStoreGoogleDrive();
+                ConnectToStoreGoogleDrive(SessionStoreId);
                 this.UploadHelper.deleteFile(f.GoogleImageId);
             }
             catch (Exception ewx)
@@ -167,7 +119,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult UploadFiles()
         {
             var labels = Request.Form["labels"].ToStr();
-            int storeId = Session["storeId"].ToString().ToInt();
+            int storeId = SessionStoreId;
 
             var r = new List<ViewDataUploadFilesResult>();
             List<String> labelArray = labels.Split(",".ToCharArray()).ToList();
@@ -210,9 +162,9 @@ namespace StoreManagement.Admin.Controllers
             var fileManager = ConvertToFileManager(file, storeId);
             try
             {
-                var fileByte = GeneralHelper.ReadFully(file.InputStream);
-                ConnectToStoreGoogleDrive();
-                var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", fileByte);
+                var imageBype =  ImageHelper.CreateGoogleImage(file);
+                ConnectToStoreGoogleDrive(SessionStoreId);
+                var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", imageBype);
                 ConvertToFileManager(fileManager, googleFile);
             }
             catch (Exception ewx)
@@ -253,7 +205,7 @@ namespace StoreManagement.Admin.Controllers
         {
             if (request.Files.Count != 1) throw new HttpRequestValidationException("Attempt to upload chunked file containing more than one fragment per request");
             var file = request.Files[0];
-            int storeId = Session["storeId"].ToString().ToInt();
+            int storeId = SessionStoreId;
             var fileManager = SaveFiles(file, storeId);
 
 
@@ -301,7 +253,7 @@ namespace StoreManagement.Admin.Controllers
                 // var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
 
                 // file.SaveAs(fullPath);
-                int storeId = Session["storeId"].ToString().ToInt();
+                int storeId =SessionStoreId;
                 var fileManager = SaveFiles(file, storeId);
 
 

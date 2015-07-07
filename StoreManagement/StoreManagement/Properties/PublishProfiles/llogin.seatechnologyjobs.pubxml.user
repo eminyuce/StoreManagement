@@ -130,7 +130,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
     <File Include="bin/NLog.config">
-      <publishTime>06/26/2015 11:33:24</publishTime>
+      <publishTime>07/04/2015 13:07:50</publishTime>
     </File>
     <File Include="bin/NLog.dll">
       <publishTime>06/26/2015 11:33:40</publishTime>
@@ -151,13 +151,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/04/2015 11:57:30</publishTime>
+      <publishTime>07/07/2015 10:17:29</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>07/04/2015 11:58:22</publishTime>
+      <publishTime>07/07/2015 10:17:36</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/04/2015 11:57:31</publishTime>
+      <publishTime>07/07/2015 10:17:30</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -850,7 +850,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:24</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>06/26/2015 11:33:24</publishTime>
+      <publishTime>07/04/2015 13:07:50</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>06/26/2015 11:46:11</publishTime>
@@ -991,7 +991,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:25</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>06/26/2015 11:33:25</publishTime>
+      <publishTime>07/04/2015 15:01:19</publishTime>
     </File>
     <File Include="Views/Home/Footer.cshtml">
       <publishTime>06/26/2015 11:33:25</publishTime>
@@ -1000,7 +1000,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:25</publishTime>
     </File>
     <File Include="Views/Home/Locations.cshtml">
-      <publishTime>06/26/2015 11:33:25</publishTime>
+      <publishTime>07/04/2015 15:01:19</publishTime>
     </File>
     <File Include="Views/Home/MainMenu.cshtml">
       <publishTime>06/26/2015 11:33:25</publishTime>
@@ -1114,7 +1114,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/04/2015 10:58:08</publishTime>
+      <publishTime>07/07/2015 11:11:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

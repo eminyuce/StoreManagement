@@ -44,9 +44,7 @@ namespace StoreManagement.Data.Constants
 
         public static String AboutUs = "AboutUs";
 
-        public static String SocialMediaLinks = "SocialMediaLinks";
 
-        public static String SocialMediaEmbedFeed = "SocialMediaEmbedFeed";
 
         public static String Files = "Files";
     }

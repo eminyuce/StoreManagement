@@ -12,6 +12,8 @@ namespace StoreManagement.Data.Entities
         public int Id { get; set; }
         public int ProductId { get; set; }
         public int FileManagerId { get; set; }
+        public bool IsMainImage { get; set; }
+
 
         //public virtual ICollection<FileManager> FileManagers { get; set; }
         //public virtual ICollection<Content> Contents { get; set; }

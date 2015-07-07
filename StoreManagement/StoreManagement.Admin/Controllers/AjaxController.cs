@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
@@ -188,6 +190,47 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(values, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteFileManagerGridItem(List<String> values)
+        {
+            var item = FileManagerRepository.GetFilesByGoogleImageId(values.FirstOrDefault());
+            ConnectToStoreGoogleDrive(item.StoreId);
+
+            foreach (String v in values)
+            {
+                string googledriveFileId = v;
+                Task.Run(() => DeleteFile(googledriveFileId));
+                Thread.Sleep(50);
+            }
+   
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+
+        private void DeleteFile(string googledriveFileId)
+        {
+         
+            try
+            {
+              
+                UploadHelper.deleteFile(googledriveFileId);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException(String.Format("GoogleId={0} file could not deleted from google drive", googledriveFileId), ex);
+            }
+            try
+            {
+                var item = FileManagerRepository.GetFilesByGoogleImageId(googledriveFileId);
+                FileManagerRepository.Delete(item);
+                FileManagerRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException(String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId), ex);
+            }
+        }
+
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteCategoryGridItem(List<String> values)

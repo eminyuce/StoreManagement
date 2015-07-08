@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v2;
+using Google.Apis.Drive.v2.Data;
+using Google.Apis.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
@@ -18,6 +24,7 @@ using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
 using Newtonsoft.Json.Linq;
 using StoreManagement.Service.Services;
+using File = System.IO.File;
 
 namespace StoreManagement.Test
 {
@@ -29,15 +36,62 @@ namespace StoreManagement.Test
         [TestInitialize]
         public void MyTestInitialize()
         {
-          dbContext = new StoreContext(ConnectionString);
-        }
+            dbContext = new StoreContext(ConnectionString);
 
+        }
+        public static string GetImportPath()
+        {
+            string[] importPaths =
+    {
+            @"GoogleDrive", @"..\GoogleDrive", @"..\..\GoogleDrive",
+    };
+            string importPath = importPaths.FirstOrDefault(Directory.Exists);
+            return importPath;
+        }
         [TestMethod]
         public void TestLog2222()
         {
-             
+            var s = new StoreRepository(dbContext);
+            var laptopBilgisayar = s.GetSingle(5); var store = laptopBilgisayar;
+           // var loginSeaTechnology = s.GetSingle(9); var store = loginSeaTechnology;
+   
 
-        } 
+            try
+            {
+                var scopes = new[]
+                {
+                    DriveService.Scope.Drive,
+                    DriveService.Scope.DriveFile 
+                };
+
+                var p12File = String.Format("{0}/{1}", @"C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\App_Data\GoogleDrive", store.GoogleDriveCertificateP12FileName);
+                //string p12File = Path.Combine(GetImportPath(), store.GoogleDriveCertificateP12FileName);
+                X509Certificate2 certificate = new X509Certificate2(p12File,
+                    store.GoogleDrivePassword, X509KeyStorageFlags.Exportable);
+                ServiceAccountCredential credential = new ServiceAccountCredential(
+                    new ServiceAccountCredential.Initializer(store.GoogleDriveServiceAccountEmail)
+                    {
+                        Scopes = scopes,
+                        User = store.GoogleDriveUserEmail
+                    }.FromCertificate(certificate));
+
+                // Create the service.
+                var service = new DriveService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "StoreManagement"
+                });
+
+                var listReq = service.Files.List();
+                FileList files = listReq.Execute();
+                Console.WriteLine(files.Items.Count());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error " + ex.Message);
+            }
+
+        }
         [TestMethod]
         public void TestLog()
         {
@@ -45,19 +99,19 @@ namespace StoreManagement.Test
             var logs = ssss.GetSingle(1);
             Assert.IsNotNull(logs);
 
-        } 
+        }
         [TestMethod]
         public void GetProductCategoriesByStoreIdFromCache2()
         {
-           FileManagerRepository ssss = new FileManagerRepository(dbContext);
-           var m =   ssss.GetFilesByGoogleImageIdArray(new string[] {"0B9lWnliAZuUdaFRwZmVLZXRYWE0","0B9lWnliAZuUdb1RaamRITnhkbXc","0B9lWnliAZuUdNHlKdTVaRzg3OWM"});
+            FileManagerRepository ssss = new FileManagerRepository(dbContext);
+            var m = ssss.GetFilesByGoogleImageIdArray(new string[] { "0B9lWnliAZuUdaFRwZmVLZXRYWE0", "0B9lWnliAZuUdb1RaamRITnhkbXc", "0B9lWnliAZuUdNHlKdTVaRzg3OWM" });
 
-      
+
 
             Assert.IsNotNull(m);
 
-        } 
-     
+        }
+
         [TestMethod]
         public void GetProductCategoriesByStoreIdFromCache()
         {
@@ -65,7 +119,7 @@ namespace StoreManagement.Test
             var m = sss.GetProductCategoriesByStoreIdFromCache(9, StoreConstants.ProductType);
             Assert.IsNotNull(m);
 
-        } 
+        }
         [TestMethod]
         public void InsertALlData()
         {
@@ -79,7 +133,7 @@ namespace StoreManagement.Test
 
             System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\emin\Desktop\script\script.sql");
             String line = "";// file.ReadToEnd();
-           while ((line = file.ReadLine()) != null)
+            while ((line = file.ReadLine()) != null)
             {
                 try
                 {

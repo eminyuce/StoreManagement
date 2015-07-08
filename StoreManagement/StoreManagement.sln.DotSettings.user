@@ -3,6 +3,9 @@
   &lt;Assembly Path="C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\EMIN\Documents\GitHub\StoreManagement\StoreManagement\packages\GenericRepository.EntityFramework.0.3.1-pre01\lib\net40\GenericRepository.EntityFramework.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=AB4DAD5838174D3B8DF42DAFB3BA7474/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=AB4DAD5838174D3B8DF42DAFB3BA7474/Name/@EntryValue">TestLog2222</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=AB4DAD5838174D3B8DF42DAFB3BA7474/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:StoreManagement.Test.UnitTest1" type="MsTestTestClassElement" TypeName="StoreManagement.Test.UnitTest1" Project="6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8" /&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:StoreManagement.Test.UnitTest1.TestLog2222" ParentId="MsTest:StoreManagement.Test.UnitTest1" type="MsTestTestMethodElement" MethodName="TestLog2222" TypeName="StoreManagement.Test.UnitTest1" Project="6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String>
 	
 	
 	

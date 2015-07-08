@@ -194,7 +194,17 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteFileManagerGridItem(List<String> values)
         {
-            var item = FileManagerRepository.GetFilesByGoogleImageId(values.FirstOrDefault());
+            List<String> googleIdList = new List<string>();
+            List<int> idList = new List<int>();
+            foreach (var value in values)
+            {
+                String googleId = value.Split("-".ToCharArray())[0];
+                String id = value.Split("-".ToCharArray())[1];
+
+                googleIdList.Add(googleId);
+                idList.Add(id.ToInt());
+            }
+            var item = FileManagerRepository.GetSingle(idList.FirstOrDefault());
             ConnectToStoreGoogleDrive(item.StoreId);
 
             foreach (String v in values)
@@ -209,19 +219,27 @@ namespace StoreManagement.Admin.Controllers
 
         private void DeleteFile(string googledriveFileId)
         {
-         
+
+            String googleId = googledriveFileId.Split("-".ToCharArray())[0];
+            String id = googledriveFileId.Split("-".ToCharArray())[1];
+ 
+            if (!String.IsNullOrEmpty(googleId))
+            {
+                try
+                {
+
+                    UploadHelper.deleteFile(googleId);
+                }
+                catch (Exception ex)
+                {
+                    Logger.ErrorException(String.Format("GoogleId={0} file could not deleted from google drive", googledriveFileId), ex);
+                }
+            }
+           
+
             try
             {
-              
-                UploadHelper.deleteFile(googledriveFileId);
-            }
-            catch (Exception ex)
-            {
-                Logger.ErrorException(String.Format("GoogleId={0} file could not deleted from google drive", googledriveFileId), ex);
-            }
-            try
-            {
-                var item = FileManagerRepository.GetFilesByGoogleImageId(googledriveFileId);
+                var item = FileManagerRepository.GetSingle(id.ToInt());
                 FileManagerRepository.Delete(item);
                 FileManagerRepository.Save();
             }

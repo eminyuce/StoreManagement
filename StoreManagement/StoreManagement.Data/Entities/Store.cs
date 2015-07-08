@@ -15,8 +15,8 @@ namespace StoreManagement.Data.Entities
         public string Domain { get; set; }
         [Required(ErrorMessage = "Please enter layout")]
         public string Layout { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public  DateTime ? CreatedDate { get; set; }
+        public DateTime ? UpdatedDate { get; set; }
 
         [IgnoreDataMember]
         public bool State { get; set; }

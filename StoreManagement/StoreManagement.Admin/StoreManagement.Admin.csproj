@@ -1681,14 +1681,14 @@
     <Content Include="Content\Theme\vendors\ckeditor\LICENSE.md" />
     <Content Include="Content\Theme\vendors\ckeditor\README.md" />
     <Content Include="Grid.mvc.readme" />
-    <Content Include="App_Data\GoogleDrive\Google Drive File Upload-02b81c6f609a.p12" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="App_Data\GoogleDrive\StoreManagement-17bd366cfd76.p12" />
+    <Content Include="App_Data\GoogleDrive\Google Drive File Upload-0a4e9c9ae21c.p12" />
+    <Content Include="App_Data\GoogleDrive\StoreManagement-8a75a9d8bb51.p12" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -15,6 +15,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="App_Data/GoogleDrive/Google Drive File Upload-0a4e9c9ae21c.p12">
       <publishTime>07/08/2015 11:36:21</publishTime>
     </File>
+    <File Include="App_Data/GoogleDrive/Google Drive File Upload-f57bb89e0e11.p12">
+      <publishTime>07/08/2015 16:34:25</publishTime>
+    </File>
     <File Include="App_Data/GoogleDrive/StoreManagement-17bd366cfd76.p12">
       <publishTime>07/07/2015 15:34:42</publishTime>
     </File>
@@ -106,7 +109,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:32</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>07/08/2015 11:44:26</publishTime>
+      <publishTime>07/08/2015 15:19:18</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>06/26/2015 11:43:33</publishTime>
@@ -211,16 +214,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>07/08/2015 13:25:32</publishTime>
+      <publishTime>07/08/2015 16:38:38</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/08/2015 09:28:59</publishTime>
+      <publishTime>07/08/2015 15:19:19</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/08/2015 09:29:01</publishTime>
+      <publishTime>07/08/2015 15:19:23</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/26/2015 11:33:39</publishTime>
@@ -4807,10 +4810,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:20</publishTime>
     </File>
     <File Include="Views/FileManager/DisplayImages.cshtml">
-      <publishTime>07/08/2015 11:49:24</publishTime>
+      <publishTime>07/08/2015 16:22:46</publishTime>
     </File>
     <File Include="Views/FileManager/Index.cshtml">
-      <publishTime>06/29/2015 09:35:03</publishTime>
+      <publishTime>07/08/2015 15:18:05</publishTime>
     </File>
     <File Include="Views/FileManager/UploadImages.cshtml">
       <publishTime>07/08/2015 11:49:49</publishTime>
@@ -5275,7 +5278,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/27/2015 07:38:13</publishTime>
     </File>
     <File Include="Views/Stores/Index.cshtml">
-      <publishTime>07/06/2015 13:27:29</publishTime>
+      <publishTime>07/08/2015 13:59:35</publishTime>
     </File>
     <File Include="Views/Stores/SaveOrEdit.cshtml">
       <publishTime>07/07/2015 17:04:30</publishTime>
@@ -5335,7 +5338,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/08/2015 10:47:58</publishTime>
+      <publishTime>07/08/2015 15:20:35</publishTime>
     </File>
   </ItemGroup>
 </Project>

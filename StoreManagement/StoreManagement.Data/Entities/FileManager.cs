@@ -13,7 +13,8 @@ namespace StoreManagement.Data.Entities
         public string ContentType { get; set; }
         public string GoogleImageId { get; set; }
         public string Title { get; set; }
-        public string WebContentLink { get; set; }
+        public string WebContentLink { get; set; }       
+        public string FileStatus { get; set; }
 
         [IgnoreDataMember]
         public string ThumbnailLink { get; set; }

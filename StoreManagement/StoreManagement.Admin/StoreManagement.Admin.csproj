@@ -1687,8 +1687,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="App_Data\GoogleDrive\Google Drive File Upload-0a4e9c9ae21c.p12" />
     <Content Include="App_Data\GoogleDrive\StoreManagement-8a75a9d8bb51.p12" />
+    <Content Include="App_Data\GoogleDrive\Google Drive File Upload-f57bb89e0e11.p12" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

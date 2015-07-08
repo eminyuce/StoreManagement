@@ -96,11 +96,14 @@ namespace StoreManagement.Admin.Controllers
                 store.CreatedDate = DateTime.Now;
                 if (store.Id == 0)
                 {
+                    store.UpdatedDate = DateTime.Now;
+                    store.CreatedDate = DateTime.Now;
                     StoreRepository.Add(store);
                 }
                 else
                 {
                     StoreRepository.Edit(store);
+                    store.UpdatedDate = DateTime.Now;
                 }
 
                 StoreRepository.SaveStore();

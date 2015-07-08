@@ -168,12 +168,19 @@
                         
 
         columns.Add(o => o.CreatedDate)
-              .Titled("Date")
+              .Titled("CreatedDate")
               .Sortable(true).
-              RenderValueAs(o => String.Format("{0}", o.CreatedDate.ToShortDateString()))
+              RenderValueAs(o => String.Format("{0}", o.CreatedDate.Value.ToShortDateString()))
               .SortInitialDirection(GridSortDirection.Descending);
 
 
+        columns.Add(o => o.UpdatedDate)
+              .Titled("UpdatedDate")
+              .Sortable(true).
+              RenderValueAs(o => String.Format("{0}", o.UpdatedDate.Value.ToShortDateString()))
+              .SortInitialDirection(GridSortDirection.Descending);
+              
+              
     }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 

@@ -1,12 +1,15 @@
 ﻿@using GridMvc.Html
 @using GridMvc.Sorting
 @using StoreManagement.Data
+@using StoreManagement.Data.GeneralHelper
 @model IEnumerable<StoreManagement.Data.Entities.FileManager>
 
 @{
     ViewBag.Title = "View1";
     StoreManagement.Data.Entities.Store store = ViewBag.Store;
     int storeId = store.Id;
+    int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
+    pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
 }
 
 
@@ -209,7 +212,7 @@ RenderValueAs(o => o.ModifiedDate != null ? String.Format("{0}", o.ModifiedDate.
             .Encoded(false).RenderValueAs(d => Html.Raw(string.Format("<text><img style='width:100%; max-width: 150px' src=\"{0}\" alt=\"Image\"/></text>",
                 d.WebContentLink)).ToHtmlString());
 
-    }).SetRowCssClasses(item => (item.Id % 2 == 0 ? "warning" : string.Empty)).SetRowCssClasses(item => String.Format("MyGrid-Row-{0}", item.Id)).WithPaging(15).Sortable().Filterable().WithMultipleFilters().Selectable(false)
+    }).SetRowCssClasses(item => (item.Id % 2 == 0 ? "warning" : string.Empty)).WithPaging(pageSizeNumber).SetRowCssClasses(item => String.Format("MyGrid-Row-{0}", item.Id)).WithPaging(15).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
                 </div>
 

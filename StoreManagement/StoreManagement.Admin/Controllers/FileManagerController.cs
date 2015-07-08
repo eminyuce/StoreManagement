@@ -166,10 +166,12 @@ namespace StoreManagement.Admin.Controllers
                 ConnectToStoreGoogleDrive(SessionStoreId);
                 var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", imageBype);
                 ConvertToFileManager(fileManager, googleFile);
+                fileManager.FileStatus = "Success";
             }
             catch (Exception ewx)
             {
                 Logger.Error("this.UploadHelper.InsertFile Exception is occured." + ewx.StackTrace, ewx);
+                fileManager.FileStatus = "Error";
             }
 
             FileManagerRepository.Add(fileManager);

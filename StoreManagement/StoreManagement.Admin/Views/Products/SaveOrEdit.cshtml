@@ -95,17 +95,32 @@
                                         @Html.HiddenFor(model => model.ProductCategoryId)
                                     </div>
 
-
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Name)
                                         @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
                                         @Html.ValidationMessageFor(model => model.Name)
                                     </div>
-
-
-
-
-
+                                    
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ProductCode)
+                                        @Html.TextBoxFor(model => model.ProductCode, new { @class = "form-control", @placeholder = "Name" })
+                                        @Html.ValidationMessageFor(model => model.ProductCode)
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Price)
+                                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "Name" })
+                                        @Html.ValidationMessageFor(model => model.Price)
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Discount)
+                                        @Html.TextBoxFor(model => model.Discount, new { @class = "form-control", @placeholder = "Name" })
+                                        @Html.ValidationMessageFor(model => model.Discount)
+                                    </div>
+                                    
 
 
                                     <div class="form-group">

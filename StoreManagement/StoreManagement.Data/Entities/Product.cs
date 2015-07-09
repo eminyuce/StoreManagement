@@ -16,10 +16,10 @@ namespace StoreManagement.Data.Entities
         [Required(ErrorMessage = "Please enter category")]
         public int ProductCategoryId { get; set; }
 
-        public float Price { get; set; }
-        public float Discount { get; set; }
+        public double ?  Price { get; set; }
+        public double ? Discount { get; set; }
         public int BrandId { get; set; }
-        public int ProductCode { get; set; }
+        public String ProductCode { get; set; }
 
 
         public virtual ICollection<ProductFile> ProductFiles { get; set; }

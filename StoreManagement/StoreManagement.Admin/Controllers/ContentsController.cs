@@ -70,7 +70,10 @@ namespace StoreManagement.Admin.Controllers
                 content = ContentRepository.GetSingle(id);
                 content.UpdatedDate = DateTime.Now;
                 labels = LabelLineRepository.GetLabelLinesByItem(id, ContentType);
-
+                if (!CheckRequest(content)) //security for right store and its item.
+                {
+                    return HttpNotFound("Not Found");
+                }
             }
 
             ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
@@ -90,6 +93,16 @@ namespace StoreManagement.Admin.Controllers
             {
                 if (content.CategoryId == 0)
                 {
+
+                    var labels = new List<LabelLine>();
+
+                    if (content.Id > 0)
+                    {
+                        labels = LabelLineRepository.GetLabelLinesByItem(content.Id, ContentType);
+                    }
+                    
+                    ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
+
                     ModelState.AddModelError("CategoryId", "You should select category from category tree.");
                     return View(content);
                 }
@@ -110,14 +123,13 @@ namespace StoreManagement.Admin.Controllers
                 }
                 LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, ContentType);
 
-
                 if (IsSuperAdmin)
                 {
-                    return RedirectToAction("Index", new { storeId = content.StoreId });
+                    return RedirectToAction("Index", new { storeId = content.StoreId, categoryId = content.CategoryId });
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { categoryId = content.CategoryId });
                 }
 
 

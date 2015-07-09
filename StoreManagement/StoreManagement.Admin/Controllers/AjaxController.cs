@@ -248,7 +248,19 @@ namespace StoreManagement.Admin.Controllers
                 Logger.ErrorException(String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId), ex);
             }
         }
-
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteBrandGridItem(List<String> values)
+        {
+            foreach (String v in values)
+            {
+                var id = v.ToInt();
+                var item = BrandRepository.GetSingle(id);
+                BrandRepository.Delete(item);
+            }
+            BrandRepository.Save();
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteCategoryGridItem(List<String> values)
@@ -365,6 +377,25 @@ namespace StoreManagement.Admin.Controllers
                 CategoryRepository.Edit(nav);
             }
             CategoryRepository.Save();
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeBrandGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            foreach (OrderingItem item in values)
+            {
+                var nav = BrandRepository.GetSingle(item.Id);
+                if (String.IsNullOrEmpty(checkbox))
+                {
+                    nav.Ordering = item.Ordering;
+                }
+                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nav.State = item.State;
+                }
+
+                BrandRepository.Edit(nav);
+            }
+            BrandRepository.Save();
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeLocationsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")

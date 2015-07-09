@@ -34,7 +34,7 @@ namespace StoreManagement.Service.DbContext
         IDbSet<system_logging> system_loggings { get; set; }
         IDbSet<Location> Locations { get; set; }
         IDbSet<Contact> Contacts { get; set; }
-
+        IDbSet<Brand> Brands { get; set; }
 
 
 

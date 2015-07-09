@@ -1,0 +1,96 @@
+@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.Brand
+
+@{
+    ViewBag.Title = "Edit";
+    var brand = Model;
+    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    int storeId = brand != null ? brand.StoreId : requestStoreId;
+}
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">
+                    <h4>Save Brand</h4>
+                </div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+
+
+
+                <h2>Edit</h2>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Brand</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.StoreId)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+
+                                   
+                        <div class="editor-field controls">
+                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Description)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.State)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.State)
+                            @Html.ValidationMessageFor(model => model.State)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Ordering)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Ordering)
+                            @Html.ValidationMessageFor(model => model.Ordering)
+                        </div>
+
+
+
+
+                        <p>
+                            <input type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

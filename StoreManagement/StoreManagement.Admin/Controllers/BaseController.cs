@@ -94,6 +94,12 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public ILocationRepository LocationRepository { set; get; }
 
+
+        [Inject]
+        public IBrandRepository BrandRepository { set; get; }
+
+
+
         private Boolean MySuperAdmin
         {
             get

@@ -95,6 +95,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IEmailSender>().To<EmailSender>();
             kernel.Bind<IContactRepository>().To<ContactRepository>();
             kernel.Bind<ILocationRepository>().To<LocationRepository>();
+            kernel.Bind<IBrandRepository>().To<BrandRepository>();
         }
     }
 }

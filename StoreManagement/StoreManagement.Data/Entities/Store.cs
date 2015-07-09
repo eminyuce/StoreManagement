@@ -15,8 +15,8 @@ namespace StoreManagement.Data.Entities
         public string Domain { get; set; }
         [Required(ErrorMessage = "Please enter layout")]
         public string Layout { get; set; }
-        public  DateTime ? CreatedDate { get; set; }
-        public DateTime ? UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
 
         [IgnoreDataMember]
         public bool State { get; set; }
@@ -30,12 +30,20 @@ namespace StoreManagement.Data.Entities
         public int CategoryId { get; set; }
 
         public String GoogleDriveClientId { set; get; }
-        public String GoogleDriveUserEmail { set; get; }        
+        [IgnoreDataMember]
+        public String GoogleDriveUserEmail { set; get; }
+        [IgnoreDataMember]
         public String GoogleDriveUserEmailPassword { set; get; }
+        [IgnoreDataMember]
         public String GoogleDriveFolder { set; get; }
+        [IgnoreDataMember]
         public String GoogleDriveServiceAccountEmail { set; get; }
+        [IgnoreDataMember]
         public String GoogleDriveCertificateP12FileName { set; get; }
+        [IgnoreDataMember]
         public String GoogleDrivePassword { set; get; }
+        [IgnoreDataMember]
+        public byte[] GoogleDriveCertificateP12RawData { set; get; }
 
         public override string ToString()
         {

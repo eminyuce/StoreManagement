@@ -56,6 +56,22 @@ namespace StoreManagement.Data.GeneralHelper
                 return html;
             }
         }
+
+        public static string EncodeFile(string fileName)
+        {
+            return Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName));
+        }
+        public static X509Certificate2 ImportCert(byte[] rawData, String password)
+        {
+            var x509 = new X509Certificate2();
+            x509.Import(rawData, password, X509KeyStorageFlags.Exportable);
+            return x509;
+        }
+        public static X509Certificate2 CreateCert(Byte [] serviceAccountPkCs12FilePath, String password)
+        {
+            X509Certificate2 cert = new X509Certificate2(serviceAccountPkCs12FilePath, password, X509KeyStorageFlags.Exportable);
+            return cert;
+        }
         public static X509Certificate2 CreateCert(String serviceAccountPkCs12FilePath, String password)
         {
             X509Certificate2 cert = new X509Certificate2(serviceAccountPkCs12FilePath, password, X509KeyStorageFlags.Exportable);
@@ -953,6 +969,18 @@ namespace StoreManagement.Data.GeneralHelper
             return new string(chars);
         }
 
+        public static Byte[] ToByteArray(HttpPostedFileBase value)
+        {
+            if (value == null)
+                return null;
 
+            var array = new Byte[value.ContentLength];
+            value.InputStream.Position = 0;
+            value.InputStream.Read(array, 0, value.ContentLength);
+            return array;
+
+        }
+
+       
     }
 }

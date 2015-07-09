@@ -123,7 +123,9 @@ namespace StoreManagement.Data.GeneralHelper
                 jsonOutput = responseContent;
                 if (!String.IsNullOrEmpty(jsonOutput))
                 {
-                    RequestHelperCache.Set(key, jsonOutput, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("RequestHelperCache_CacheAbsoluteExpiration_Minute", 30)));
+                    RequestHelperCache.Set(key, jsonOutput,
+                        MemoryCacheHelper.CacheAbsoluteExpirationPolicy(
+                        ProjectAppSettings.GetWebConfigInt("RequestHelperCache_CacheAbsoluteExpiration_Minute", 30)));
                 }
             }
             return jsonOutput;

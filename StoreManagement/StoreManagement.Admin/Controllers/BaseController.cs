@@ -234,10 +234,15 @@ namespace StoreManagement.Admin.Controllers
                 GoogleDriveFolder = selectedStore.GoogleDriveFolder;
                 GoogleDriveServiceAccountEmail = selectedStore.GoogleDriveServiceAccountEmail;
                 GoogleDrivePassword = selectedStore.GoogleDrivePassword;
-                Certificate = GeneralHelper.CreateCert(
-                    HostingEnvironment.MapPath(
-                    String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName)),
-                    selectedStore.GoogleDrivePassword);
+                
+               // String serviceAccountPkCs12FilePath = HostingEnvironment.MapPath(String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName));
+               // var rawData = System.IO.File.ReadAllBytes(serviceAccountPkCs12FilePath);
+                //X509Certificate2 Certificate2 = GeneralHelper.CreateCert(serviceAccountPkCs12FilePath, selectedStore.GoogleDrivePassword);
+         
+                Certificate = GeneralHelper.ImportCert(selectedStore.GoogleDriveCertificateP12RawData,
+                                                       selectedStore.GoogleDrivePassword);
+
+                //  Certificate = GeneralHelper.CreateCert(rawData, selectedStore.GoogleDrivePassword);
 
 
             }
@@ -248,10 +253,8 @@ namespace StoreManagement.Admin.Controllers
                 GoogleDriveFolder = LoginStore.GoogleDriveFolder;
                 GoogleDriveServiceAccountEmail = LoginStore.GoogleDriveServiceAccountEmail;
                 GoogleDrivePassword = LoginStore.GoogleDrivePassword;
-                Certificate = GeneralHelper.CreateCert(
-                    HostingEnvironment.MapPath(
-                    String.Format(@"~\App_Data\GoogleDrive\{0}", LoginStore.GoogleDriveCertificateP12FileName)),
-                        LoginStore.GoogleDrivePassword);
+                Certificate = GeneralHelper.ImportCert(LoginStore.GoogleDriveCertificateP12RawData,
+                                                       LoginStore.GoogleDrivePassword);
             }
             this.UploadHelper.Connect(GoogleDriveClientId,
                    GoogleDriveUserEmail,

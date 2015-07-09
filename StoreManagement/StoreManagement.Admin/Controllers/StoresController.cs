@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -87,7 +88,7 @@ namespace StoreManagement.Admin.Controllers
         // POST: /Stores/Edit/5
 
         [HttpPost]
-        public ActionResult SaveOrEdit(Store store)
+        public ActionResult SaveOrEdit(Store store, HttpPostedFileBase certUpload = null)
         {
 
             ViewBag.StoreCategories = CategoryRepository.GetCategoriesByType(StoreConstants.StoreType);
@@ -104,6 +105,12 @@ namespace StoreManagement.Admin.Controllers
                 {
                     StoreRepository.Edit(store);
                     store.UpdatedDate = DateTime.Now;
+                }
+
+                if (certUpload != null)
+                {
+                    store.GoogleDriveCertificateP12FileName = Path.GetFileName(certUpload.FileName);
+                    store.GoogleDriveCertificateP12RawData = GeneralHelper.ToByteArray(certUpload);
                 }
 
                 StoreRepository.SaveStore();

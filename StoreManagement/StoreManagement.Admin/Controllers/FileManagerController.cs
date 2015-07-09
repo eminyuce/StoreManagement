@@ -196,10 +196,7 @@ namespace StoreManagement.Admin.Controllers
             fileManager.Height = googleFile.Height.HasValue ? googleFile.Height.Value : 0;
         }
 
-        private string EncodeFile(string fileName)
-        {
-            return Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName));
-        }
+     
 
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
         //Credit to i-e-b and his ASP.Net uploader for the bulk of the upload helper methods - https://github.com/i-e-b/jQueryFileUpload.Net

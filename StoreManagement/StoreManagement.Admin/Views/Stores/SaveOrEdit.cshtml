@@ -18,21 +18,21 @@
             </div>
             <div class="bootstrap-admin-panel-content">
 
-                @using (Html.BeginForm())
-                {
+                @using (Html.BeginForm("SaveOrEdit", "Stores", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                { 
                     
                  
                     @Html.ValidationSummary(true)
                     <fieldset>
                         <legend>Create Store</legend>
                         @Html.HiddenFor(model => model.Id)
-                  
+                                          @Html.HiddenFor(model => model.GoogleDriveCertificateP12FileName)
 
-                         <div class="editor-label">
+                        <div class="editor-label">
                             @Html.LabelFor(model => model.CategoryId)
 
-                            @Html.DropDownListFor(model => model.CategoryId,  new SelectList(storeCategories, 
-                                        "Id", "Name",Model.CategoryId), new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.CategoryId, new SelectList(storeCategories,
+                                        "Id", "Name", Model.CategoryId), new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CategoryId)
                         </div>
 
@@ -76,8 +76,8 @@
                             @Html.TextBoxFor(model => model.GoogleDriveUserEmail, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GoogleDriveUserEmail)
                         </div>
-                           <div class="editor-label">
-                            @Html.LabelFor(model => model.GoogleDriveUserEmailPassword) 
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.GoogleDriveUserEmailPassword)
 
                             @Html.TextBoxFor(model => model.GoogleDriveUserEmailPassword, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GoogleDriveUserEmailPassword)
@@ -95,14 +95,11 @@
                             @Html.TextBoxFor(model => model.GoogleDriveFolder, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GoogleDriveFolder)
                         </div>
-
+ 
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.GoogleDriveCertificateP12FileName)
-
-                            @Html.TextBoxFor(model => model.GoogleDriveCertificateP12FileName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.GoogleDriveCertificateP12FileName)
+                            <label for="Certificate">Google Drive  Certificate P12 File </label>
+                            <input type="file" name="CertUpload" />
                         </div>
-
                         <p>
                             <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
                         </p>
@@ -126,13 +123,13 @@
 @section scripts
 {
     <script>
-        
+
 
         $(document).ready(function () {
-            
+
             //   $('[chosen-selection-box="multiple"]').select2();
             $('#CategoryId').select2({
-               
+
             });
         });
 

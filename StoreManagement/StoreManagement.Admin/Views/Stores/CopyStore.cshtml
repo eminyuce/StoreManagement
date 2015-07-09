@@ -12,17 +12,16 @@
                 <div class="text-muted bootstrap-admin-box-title">Delete</div>
             </div>
             <div class="bootstrap-admin-panel-content">
-                <span>
-                    You will be copying all <strong class="text text-danger">
-                                                @Model.Name
-                                            </strong>
+                <span>You will be copying all <strong class="text text-danger">
+                    @Model.Name
+                </strong>
                     data
                 </span>
-        
+
 
                 @using (Html.BeginForm("CopyStore", "Stores", FormMethod.Post))
                 {
-                    <input name="copyStoreId" value="@Model.Id"/>
+                    <input name="copyStoreId" type="hidden" value="@Model.Id"/>
                     <div class="editor-label">
                         <label for="Name">Name</label>
                         <input class="form-control" data-val="true" data-val-required="Please enter name" id="Name" name="Name" type="text" value="">
@@ -32,8 +31,11 @@
                         <label for="Domain">Domain</label>
                         <input class="form-control" data-val="true" data-val-required="Please enter domain" id="Domain" name="Domain" type="text" value="">
                     </div>
-                    
-                    <input type="submit"  class="glyphicon glyphicon-copy btn btn-warning btn-block" id="Copy" />
+                    <div class="editor-label">
+                        <label for="Layout">Layout</label>
+                        <input class="form-control" data-val="true" data-val-required="Please enter layout" id="Layout" name="Layout" type="text" value="">
+                    </div>
+                    <input type="submit" class="glyphicon glyphicon-copy btn btn-warning btn-block" id="Copy" />
                 }
 
             </div>

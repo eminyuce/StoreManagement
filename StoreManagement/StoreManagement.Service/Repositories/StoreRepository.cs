@@ -35,7 +35,8 @@ namespace StoreManagement.Service.Repositories
         public int SaveStore()
         {
             // do additional work
-            AllStoreCache.Remove("GetAllStores");
+            AllStoreCache.ClearCache("GetAllStores");
+            AllStoreCache.ClearCache("StoreCache");
             return base.Save();
         }
 

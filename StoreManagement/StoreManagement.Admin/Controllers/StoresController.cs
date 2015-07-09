@@ -95,6 +95,22 @@ namespace StoreManagement.Admin.Controllers
             if (ModelState.IsValid)
             {
                 store.CreatedDate = DateTime.Now;
+
+                if (certUpload != null)
+                {
+                    store.GoogleDriveCertificateP12FileName = Path.GetFileName(certUpload.FileName);
+                    store.GoogleDriveCertificateP12RawData = GeneralHelper.ToByteArray(certUpload);
+                }
+                else
+                {
+                    if (store.Id != 0)
+                    {
+                      //  var oldStore = StoreRepository.GetSingle(store.Id);
+                      //  store.GoogleDriveCertificateP12RawData = oldStore.GoogleDriveCertificateP12RawData;
+                    }
+                }
+
+
                 if (store.Id == 0)
                 {
                     store.UpdatedDate = DateTime.Now;
@@ -103,14 +119,9 @@ namespace StoreManagement.Admin.Controllers
                 }
                 else
                 {
+                
                     StoreRepository.Edit(store);
                     store.UpdatedDate = DateTime.Now;
-                }
-
-                if (certUpload != null)
-                {
-                    store.GoogleDriveCertificateP12FileName = Path.GetFileName(certUpload.FileName);
-                    store.GoogleDriveCertificateP12RawData = GeneralHelper.ToByteArray(certUpload);
                 }
 
                 StoreRepository.SaveStore();
@@ -131,6 +142,7 @@ namespace StoreManagement.Admin.Controllers
         {
             String layout = "";
             StoreRepository.CopyStore(copyStoreId, name, domain, layout);
+ 
             return RedirectToAction("Index", new { search = name.ToLower() });
         }
 

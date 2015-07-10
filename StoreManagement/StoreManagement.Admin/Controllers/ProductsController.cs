@@ -62,8 +62,8 @@ namespace StoreManagement.Admin.Controllers
 
 
             var content = new Product();
-            content.ProductCategoryId = selectedCategoryId;  
-            content.StoreId = GetStoreId(selectedStoreId); 
+            content.ProductCategoryId = selectedCategoryId;
+            content.StoreId = GetStoreId(selectedStoreId);
 
             var labels = new List<LabelLine>();
             var fileManagers = new List<FileManager>();
@@ -205,8 +205,8 @@ namespace StoreManagement.Admin.Controllers
 
             ProductRepository.Delete(content);
             ProductRepository.Save();
-
-
+            LabelLineRepository.DeleteLabelLinesByItem(content.Id, StoreConstants.ProductType);
+            ProductFileRepository.DeleteProductFileByProductId(content.Id);
             if (IsSuperAdmin)
             {
                 return RedirectToAction("Index", new { storeId = content.StoreId });

@@ -48,14 +48,6 @@ namespace StoreManagement.API.Controllers
             throw new NotImplementedException();
         }
 
-        public void DeleteProductFileByProductId(int productId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveProductFiles(int[] selectedFileId, int productId)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

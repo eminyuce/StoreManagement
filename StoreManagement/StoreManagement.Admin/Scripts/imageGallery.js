@@ -177,6 +177,8 @@ function bindAddImage() {
 }
 
 function handleAddImage(e) {
+    console.log("jquery is called");
+    
     var caller = e.target;
     var imageId = $(caller).attr('data-image-add-link');
     var fileName = $(caller).attr('data-image-file-name');

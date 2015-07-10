@@ -11,7 +11,6 @@ namespace StoreManagement.Service.Interfaces
     {
         List<ProductFile> GetProductFilesByProductId(int productId);
         List<ProductFile> GetProductFilesByFileManagerId(int fileManagerId);
-        void DeleteProductFileByProductId(int productId);
-        void SaveProductFiles(int[] selectedFileId, int productId);
+    
     }
 }

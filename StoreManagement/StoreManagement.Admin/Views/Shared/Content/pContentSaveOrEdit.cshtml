@@ -1,20 +1,25 @@
-﻿@using StoreManagement.Data.GeneralHelper
+﻿@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.Entities.Content
 
 
 @{
     var requestStoreId = @Request.QueryString["storeId"].ToInt();
     int storeId = Model != null ? Model.StoreId : requestStoreId;
-
+  
+}
+@{
     
+    List<FileManager> fileManagers = ViewBag.FileManagers;
+
     String categoryType = Model.Type;
     var title = ViewData["ContentSaveOrEditPageTitle"].ToStr();
     var panelTitle = ViewData["ContentSaveOrEditPanelTitle"].ToStr();
     int[] selectedLabelId = ViewBag.SelectedLabels;
 
+
     ViewBag.Title = title;
 }
-
 
 
 <div class="col-md-12">
@@ -47,102 +52,162 @@
 
                         @using (Html.BeginForm())
                         {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true)
-                            @Html.HiddenFor(model => model.CreatedDate)
-                            @Html.HiddenFor(model => model.UpdatedDate)
-                  
+                        
+                            <div style="display: none;" id="FormMessage" class="alert alert-info">
+                                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                                <strong>Info!</strong> <span id="messageContent"></span>
+                            </div>
+                            
+
+                            
                             <div class="editor-field controls">
                                 @Html.Action("StoresDropDown", "Stores", new { storeId })
                             </div>
 
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active"><a href="#ContentDetail" data-toggle="tab">Content</a></li>
+                                <li><a href="#ContentDesription" data-toggle="tab">Description</a></li>
+                                <li><a href="#ContentImages" data-toggle="tab">Content Images </a></li>
+                                <li><a href="#ImagesGallery" data-toggle="tab">Images Gallery </a></li>
+                            </ul>
+                          
+                            <div id="my-tab-content" class="tab-content">
+                                <div class="tab-pane active" id="ContentDetail">
 
-                            @Html.HiddenFor(model => model.Id)
-
-                            @Html.HiddenFor(model => model.Type)
 
 
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <b>Selected Category  :            
-                                             @Html.ValidationMessageFor(model => model.CategoryId)
+
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(model => model.CreatedDate)
+                                    @Html.HiddenFor(model => model.UpdatedDate)
+
+
+
+                                    <input type="hidden" value="@categoryType" id="categoryType"/>
+                                    @Html.HiddenFor(model => model.CategoryId)
+
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    @Html.HiddenFor(model => model.Type)
+
+
+                                    <div class="form-group">
+                                        <b>Selected Category :
+                                            @Html.ValidationMessageFor(model => model.CategoryId)
+                                            <h3>
+                                                <span class="text-danger" id="SelectedCategory"></span>
+                                            </h3>
                                         </b>
+                                        @Html.HiddenFor(model => model.CategoryId)
                                     </div>
-                                    <div class="col-md-9">
-                                        <h3><span class="text-left text-danger" id="SelectedCategory"></span></h3>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Name)
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Ordering)
+                                        @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
+                                        @Html.ValidationMessageFor(model => model.Ordering)
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.MainPage)
+                                                @Html.CheckBoxFor(model => model.MainPage, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.MainPage)
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                @Html.LabelFor(model => model.State)
+                                                @Html.CheckBoxFor(model => model.State, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.State)
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                @Html.LabelFor(model => model.ImageState)
+                                                @Html.CheckBoxFor(model => model.ImageState, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.ImageState)
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Labels">Labels</label>
+                                        @Html.Action("LabelsDropDown", "Home", new { storeId, labelType = Model.Type, selectedLabelsId = selectedLabelId })
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="tab-pane" id="ContentDesription">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Description)
+
+                                        @Html.TextAreaFor(model => model.Description, new { @data_html_editor = "normal" })
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane" id="ContentImages">
+
+                                    <div class="form-group">
+                                        <div id="contentImages"></div>
+
+                                        @if (fileManagers != null)
+                                        {    
+                                            <div id="existingContentImages">
+                                                @foreach (var file in fileManagers)
+                                                {
+                                                    <li class="col-md-4 thumbnail" data-file-image="@file.Id"><a href="#">
+                                                        <img class="fileManagerImg" src=@String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId) title="bootstrap-template.png" id="@file.Id"></a>
+                                                        <div data-image-remove-link="@file.Id" data-image-file-name="bootstrap-template.png" class="addLink btn btn-danger btn-block">Remove</div>
+                                                        <div class="caption">bootstrap-template.png</div>
+                                                    </li>
+                                                    <input type="hidden" id="fileId_@file.Id" value="@file.Id" name="selectedFileId" data-selected-file="@file.Id">
+                                                }
+
+                                            </div>
+                                        
+                                            
+                                        }
+                                        <div id="SelectedImageGallery" class="row">
+                                        </div>
+
+
                                     </div>
                                 </div>
+                                <div class="tab-pane" id="ImagesGallery">
+                                    <div class="form-group">
+                                        @Html.Action("ImageGallery", "FileManager")
+                                    </div>
 
-                                @Html.HiddenFor(model => model.CategoryId)
+                                </div>
+                            </div>
                             
-                            </div>
-
-
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Name)
-                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
-                                @Html.ValidationMessageFor(model => model.Name)
-                        
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Description)
-
-                                @Html.TextAreaFor(model => model.Description)
-                            </div>
-
-
-
-                            <div class="editor-field">
-                                <div id="contentImages"></div>
-                                <div id="existingContentImages"></div>
-                                @Html.Action("ImageGallery", "FileManager")
-                            </div>
-
-                            <div class="form-group">
-
-                                @Html.LabelFor(model => model.MainPage)
-                                @Html.EditorFor(model => model.MainPage)
-                                @Html.ValidationMessageFor(model => model.MainPage)
-
-
-
-                                @Html.LabelFor(model => model.State)
-                                @Html.EditorFor(model => model.State)
-                                @Html.ValidationMessageFor(model => model.State)
-
-
-                                @Html.LabelFor(model => model.ImageState)
-
-                                @Html.EditorFor(model => model.ImageState)
-                                @Html.ValidationMessageFor(model => model.ImageState)
-
-                            </div>
-
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Ordering)
-                                @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
-                                @Html.ValidationMessageFor(model => model.Ordering)
-                            </div>
-
-                            <div class="form-group">
-                                <label for="Labels">Labels</label>
-                                @Html.Action("LabelsDropDown", "Home", new { storeId, labelType = Model.Type, selectedLabelsId = selectedLabelId })
-                            </div>
-
-
-                            <p>
+                            <div>
                                 <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
-                            </p>
-          
+                            </div>
+                            <div>
+                                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
+                            </div>
+                          
+
                         }
 
-                        <div>
-                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
-                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -157,3 +222,21 @@
 
 
 
+
+
+
+@section scripts {
+
+
+    <script src="~/Scripts/storeContent.js"></script>
+
+
+    <script>
+        $(function () {
+
+
+        });
+    </script>
+
+
+}

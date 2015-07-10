@@ -30,7 +30,7 @@ namespace StoreManagement.Admin.Controllers
             }
 
 
-           
+
             var contentsAdminViewModel = new ContentsAdminViewModel();
             contentsAdminViewModel.Contents = resultList;
             contentsAdminViewModel.Categories = CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, ContentType);
@@ -57,6 +57,7 @@ namespace StoreManagement.Admin.Controllers
         {
             var content = new Content();
             var labels = new List<LabelLine>();
+            var fileManagers = new List<FileManager>();
             if (id == 0)
             {
                 content.Type = ContentType;
@@ -70,6 +71,7 @@ namespace StoreManagement.Admin.Controllers
                 content = ContentRepository.GetSingle(id);
                 content.UpdatedDate = DateTime.Now;
                 labels = LabelLineRepository.GetLabelLinesByItem(id, ContentType);
+                fileManagers = content.ContentFiles.Select(r => r.FileManager).ToList();
                 if (!CheckRequest(content)) //security for right store and its item.
                 {
                     return HttpNotFound("Not Found");
@@ -77,7 +79,7 @@ namespace StoreManagement.Admin.Controllers
             }
 
             ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
-
+            ViewBag.FileManagers = fileManagers;
 
             return View(content);
         }
@@ -95,13 +97,15 @@ namespace StoreManagement.Admin.Controllers
                 {
 
                     var labels = new List<LabelLine>();
-
+                    var fileManagers = new List<FileManager>();
                     if (content.Id > 0)
                     {
                         labels = LabelLineRepository.GetLabelLinesByItem(content.Id, ContentType);
+                        fileManagers = content.ContentFiles.Select(r => r.FileManager).ToList();
                     }
-                    
+
                     ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
+                    ViewBag.FileManagers = fileManagers;
 
                     ModelState.AddModelError("CategoryId", "You should select category from category tree.");
                     return View(content);
@@ -138,7 +142,7 @@ namespace StoreManagement.Admin.Controllers
             return View(content);
         }
 
-    
+
 
 
         //
@@ -163,6 +167,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Content content = ContentRepository.GetSingle(id);
+            LabelLineRepository.DeleteLabelLinesByItem(id, ContentType);
             ContentRepository.Delete(content);
             ContentRepository.Save();
 

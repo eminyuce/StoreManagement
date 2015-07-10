@@ -17,15 +17,32 @@ $(document).ready(function () {
 
     });
 
+    if ($("#CategoryId").length) {
+        GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
+    }
 
-    GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
-    GetProductCategoryTree($("#StoreId").val(), $("#categoryType").val());
+    if ($("#ProductCategoryId").length) {
+        GetProductCategoryTree($("#StoreId").val(), $("#categoryType").val());
+    }
+    
     populateStoreLabelsDropDown($("#StoreId").val());
 
 
     $('select#StoreDropDownId').select2({}).change(function (event) {
-        GetCategoryTree($(this).val(), $("#categoryType").val());
-        GetProductCategoryTree($(this).val(), $("#categoryType").val());
+
+
+        if ($("#CategoryId").length) {
+            GetCategoryTree($(this).val(), $("#categoryType").val());
+        }
+
+
+        if ($("#ProductCategoryId").length) {
+            GetProductCategoryTree($(this).val(), $("#categoryType").val());
+        }
+
+
+
+
         populateStoreLabelsDropDown($(this).val());
 
         console.log("deneme");
@@ -72,6 +89,7 @@ function GetCategoryTree(id, categoryType) {
             bindcategoryTree();
             var categoryId = $("#CategoryId").val();
             var selectedCategory = $('[data-category=' + categoryId + ']').text();
+            $('[data-category=' + categoryId + ']').attr("class", "btn btn-danger");
             console.log(selectedCategory);
             $("#SelectedCategory").text(selectedCategory);
         },
@@ -96,20 +114,20 @@ function handleCategoryTree(e) {
     var caller = e.target;
     var categoryId = $(caller).attr('data-category');
     var category = $(caller).text();
-    
-    
+
+
     $('[data-category]').each(function () {
         $(this).attr("class", "btn btn-link");
     });
 
     $(caller).attr("class", "btn btn-danger");
 
-    
+
 
     if ($("#SelectedCategory").length) {
         $("#SelectedCategory").text(category);
     }
-    
+
     if ($("#CategoryId").length) {
         $("#CategoryId").val(categoryId);
     }
@@ -117,7 +135,7 @@ function handleCategoryTree(e) {
     if ($("#ProductSelectedCategory").length) {
         $("#ProductSelectedCategory").text(category);
     }
-    
+
     if ($("#ProductCategoryId").length) {
         $("#ProductCategoryId").val(categoryId);
     }

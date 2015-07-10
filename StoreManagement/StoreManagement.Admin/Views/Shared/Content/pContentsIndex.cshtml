@@ -7,14 +7,35 @@
 @using StoreManagement.Data.Constants;
 
 @{
+    
+    int selectedCategoryId = Request.QueryString["categoryId"].ToInt();
+    int storeId = Request.QueryString["storeId"].ToInt();
+    
+    
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
     var controllerName = ViewData["ContentControllerName"].ToStr();
     var title = ViewData["ContentPageTitle"].ToStr();
     var gridName = ViewData["ContentGridName"].ToStr();
-    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
     var contents = Model.Contents;
     var categories = new List<BaseCategory>(Model.Categories);
+
+
+    var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
+
+
+    bool isSuperAdmin = false;
+
+    try
+    {
+        isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    }
+    catch (Exception ex)
+    {
+
+    }
+    
+    
 }
 
 
@@ -52,7 +73,21 @@
 
                                 <div class="row">
                                     <span class="col-md-3">
-                                        @Html.ActionLink("Create", "SaveOrEdit", controllerName, new { id = 0 }, new { @class = "btn btn-primary btn-block glyphicon glyphicon-plus" })
+                                      
+                                        
+                                           @using (Html.BeginForm("SaveOrEdit", controllerName, FormMethod.Get))
+                                        {
+                                            if (isSuperAdmin)
+                                            {
+                                            <input type="hidden" name="selectedStoreId" value="@storeId" />
+                                            }
+                                            <input type="hidden" name="selectedCategoryId" value="@selectedCategoryId"/>
+                                            <input type="hidden" name="id" value="0" />
+                                            <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-plus">Create</button>
+                                        }
+
+                                        
+
                                     </span>
                                     <span class="col-md-9">
                                         @Html.Partial("pSearchForm")

@@ -53,9 +53,12 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Content/Create
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0, int selectedCategoryId = 0)
         {
             var content = new Content();
+            content.CategoryId = selectedCategoryId;
+            content.StoreId = GetStoreId(selectedStoreId);
+
             var labels = new List<LabelLine>();
             var fileManagers = new List<FileManager>();
             if (id == 0)

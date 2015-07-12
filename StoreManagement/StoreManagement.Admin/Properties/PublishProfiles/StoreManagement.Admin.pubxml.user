@@ -109,7 +109,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:32</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>07/10/2015 15:09:30</publishTime>
+      <publishTime>07/11/2015 19:32:59</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>06/26/2015 11:43:33</publishTime>
@@ -214,16 +214,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>07/10/2015 15:13:00</publishTime>
+      <publishTime>07/11/2015 19:33:05</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/10/2015 15:09:30</publishTime>
+      <publishTime>07/11/2015 19:30:59</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/10/2015 15:09:33</publishTime>
+      <publishTime>07/11/2015 19:31:01</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/26/2015 11:33:39</publishTime>
@@ -4615,7 +4615,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:20</publishTime>
     </File>
     <File Include="Scripts/storeContent.js">
-      <publishTime>07/03/2015 11:12:35</publishTime>
+      <publishTime>07/10/2015 15:24:03</publishTime>
     </File>
     <File Include="Scripts/storeManagement.js">
       <publishTime>07/03/2015 11:12:35</publishTime>
@@ -5350,7 +5350,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/10/2015 15:10:12</publishTime>
+      <publishTime>07/11/2015 19:33:11</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using NLog;
+using Newtonsoft.Json;
 using RestSharp;
-using ServiceStack.Text;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.HelpersModel;
@@ -211,11 +211,11 @@ namespace StoreManagement.Data.GeneralHelper
 
         public string ConvertObjectToJason<T>(T arg)
         {
-            // return JsonConvert.SerializeObject(arg);
+           return JsonConvert.SerializeObject(arg);
 
-            var jsonSer = new JsonSerializer<T>();
-            var result = jsonSer.SerializeToString(arg);
-            return result;
+            //var jsonSer = new JsonSerializer<T>();
+            //var result = jsonSer.SerializeToString(arg);
+            //return result;
 
 
         }
@@ -239,9 +239,9 @@ namespace StoreManagement.Data.GeneralHelper
                 if (!String.IsNullOrEmpty(responseContent))
                 {
                     String jsonString = responseContent;
-                    //var result = JsonConvert.DeserializeObject<StorePagedList<T>>(jsonString);
-                    var jsonSer = new JsonSerializer<StorePagedList<T>>();
-                    var result = jsonSer.DeserializeFromString(jsonString);
+                    var result = JsonConvert.DeserializeObject<StorePagedList<T>>(jsonString);
+                    //var jsonSer = new JsonSerializer<StorePagedList<T>>();
+                    //var result = jsonSer.DeserializeFromString(jsonString);
                     return result;
                 }
                 else
@@ -272,8 +272,9 @@ namespace StoreManagement.Data.GeneralHelper
                 if (!String.IsNullOrEmpty(responseContent))
                 {
                     String jsonString = responseContent;
-                    var jsonSer = new JsonSerializer<List<T>>();
-                    var result = jsonSer.DeserializeFromString(jsonString);
+                    var result = JsonConvert.DeserializeObject<List<T>>(jsonString);
+                    //var jsonSer = new JsonSerializer<List<T>>();
+                    //var result = jsonSer.DeserializeFromString(jsonString);
                     return result;
                 }
                 else
@@ -304,8 +305,9 @@ namespace StoreManagement.Data.GeneralHelper
                 if (!String.IsNullOrEmpty(responseContent))
                 {
                     String jsonString = responseContent;
-                    var jsonSer = new JsonSerializer<T>();
-                    var result = jsonSer.DeserializeFromString(jsonString);
+                    var result = JsonConvert.DeserializeObject<T>(jsonString);
+                    //var jsonSer = new JsonSerializer<T>();
+                    //var result = jsonSer.DeserializeFromString(jsonString);
                     return result;
                 }
 

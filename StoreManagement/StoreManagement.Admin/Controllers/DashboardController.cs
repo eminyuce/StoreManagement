@@ -33,17 +33,21 @@ namespace StoreManagement.Admin.Controllers
             var storeUsers = new List<StoreUser>();
             if (IsSuperAdmin)
             {
-                storeUsers = StoreUserRepository.GetAllIncluding(r => r.UserProfile).OrderByDescending(r=>r.Id).Take(5).ToList();
+                storeUsers = StoreUserRepository.GetAllIncluding(r => r.UserProfile).OrderByDescending(r => r.Id).Take(5).ToList();
             }
             else
             {
-                storeUsers = StoreUserRepository.GetAllIncluding(r => r.UserProfile).Where(r => r.StoreId == LoginStore.Id).OrderByDescending(r => r.Id).Take(5).ToList();
+                if (LoginStore != null)
+                {
+                    storeUsers = StoreUserRepository.GetAllIncluding(r => r.UserProfile).Where(r => r.StoreId == LoginStore.Id).OrderByDescending(r => r.Id).Take(5).ToList();
+                }
             }
+
             foreach (var storeUser in storeUsers)
             {
-                data.Clients.Add(new Tuple<int, string, string, string>(storeUser.Id, storeUser.UserProfile.UserName, storeUser.UserProfile.FirstName,storeUser.UserProfile.LastName));
+                data.Clients.Add(new Tuple<int, string, string, string>(storeUser.Id, storeUser.UserProfile.UserName, storeUser.UserProfile.FirstName, storeUser.UserProfile.LastName));
             }
-            
+
 
 
             data.Invoices = new List<Tuple<int, DateTime, double>>();

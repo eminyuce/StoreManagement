@@ -71,7 +71,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                content = ContentRepository.GetSingle(id);
+                content = ContentRepository.GetContentWithFiles(id);
                 content.UpdatedDate = DateTime.Now;
                 labels = LabelLineRepository.GetLabelLinesByItem(id, ContentType);
                 fileManagers = content.ContentFiles.Select(r => r.FileManager).ToList();
@@ -103,6 +103,7 @@ namespace StoreManagement.Admin.Controllers
                     var fileManagers = new List<FileManager>();
                     if (content.Id > 0)
                     {
+                        content = ContentRepository.GetContentWithFiles(content.Id);
                         labels = LabelLineRepository.GetLabelLinesByItem(content.Id, ContentType);
                         fileManagers = content.ContentFiles.Select(r => r.FileManager).ToList();
                     }

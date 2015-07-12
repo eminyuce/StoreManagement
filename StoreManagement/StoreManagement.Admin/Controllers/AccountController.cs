@@ -83,8 +83,9 @@ namespace StoreManagement.Admin.Controllers
             string userData = "";
             if (!isSuper)
             {
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
+               
                 var s = StoreRepository.GetStoreByUserName(userName);
+                var serializer = new JavaScriptSerializer();
                 userData = serializer.Serialize(s);
             }
             else
@@ -92,24 +93,32 @@ namespace StoreManagement.Admin.Controllers
                 userData = isSuper.ToString();
             }
 
-            FormsAuthenticationTicket ticket;
-            String cookiestr;
-            HttpCookie ck;
-            ticket = new FormsAuthenticationTicket(1, userName, DateTime.Now,
-                DateTime.Now.AddMinutes(30), rememberMe, userData);
-
-            cookiestr = FormsAuthentication.Encrypt(ticket);
-            ck = new HttpCookie(FormsAuthentication.FormsCookieName.ToString(), cookiestr);
-
-            if (rememberMe)
-            {
-                ck.Expires = ticket.Expiration;
-            }
-            ck.Path = FormsAuthentication.FormsCookiePath;
-
-            Response.Cookies.Add(ck);
+            SetAuthCookie(userName, rememberMe, userData);
         }
+        public int SetAuthCookie(string name, bool rememberMe, String userData)
+        {
+            /// In order to pickup the settings from config, we create a default cookie and use its values to create a 
+            /// new one.
+            var cookie = FormsAuthentication.GetAuthCookie(name, rememberMe);
+            var ticket = FormsAuthentication.Decrypt(cookie.Value);
+          
+            var newTicket = new FormsAuthenticationTicket(
+                ticket.Version,
+                ticket.Name, 
+                ticket.IssueDate, 
+                ticket.Expiration,
+                ticket.IsPersistent, 
+                userData, ticket.CookiePath);
 
+            var encTicket = FormsAuthentication.Encrypt(newTicket);
+
+            /// Use existing cookie. Could create new one but would have to copy settings over...
+            cookie.Value = encTicket;
+
+            Response.Cookies.Add(cookie);
+
+            return encTicket.Length;
+        }
         public ActionResult NoStoreFound()
         {
 

@@ -137,8 +137,7 @@ div .roleradio {
     max-width: 120px;
     max-height: 120px;
 }
-
-.gridCheckboxes {
+input[name='checkboxGrid'] {
     width: 34px;
     height: 30px;
     padding: 5em;

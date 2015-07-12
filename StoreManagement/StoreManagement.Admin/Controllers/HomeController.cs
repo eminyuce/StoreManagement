@@ -49,7 +49,15 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                return PartialView("StoreName", this.LoginStore.Name);
+                if (LoginStore == null)
+                {
+                    return PartialView("StoreName", "Store is null");
+                }
+                else
+                {
+                    return PartialView("StoreName", this.LoginStore.Name);
+                }
+
             }
         }
       //  [OutputCache(CacheProfile = "Cache20Minutes")]
@@ -72,7 +80,16 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                return PartialView("ReturnFrontEndUrl", this.LoginStore);
+
+                if (LoginStore == null)
+                {
+                    return PartialView("ReturnFrontEndUrl", "");
+                }
+                else
+                {
+                    return PartialView("ReturnFrontEndUrl", this.LoginStore);
+                }
+        
             }
         }
 

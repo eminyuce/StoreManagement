@@ -81,7 +81,7 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public IEmailListRepository EmailListRepository { set; get; }
 
-  
+
 
         [Inject]
         public IContactRepository ContactRepository { set; get; }
@@ -107,6 +107,7 @@ namespace StoreManagement.Admin.Controllers
                 var formsIdentity = HttpContext.User.Identity as FormsIdentity;
                 if (formsIdentity != null)
                 {
+                
                     FormsAuthenticationTicket ticket = formsIdentity.Ticket;
                     string userData = ticket.UserData;
 
@@ -152,10 +153,18 @@ namespace StoreManagement.Admin.Controllers
                 {
                     FormsAuthenticationTicket ticket = formsIdentity.Ticket;
                     string userData = ticket.UserData;
-                    var serializer = new JavaScriptSerializer();
-                    var s = serializer.Deserialize<Store>(userData);
+                    if (!string.IsNullOrEmpty(userData))
+                    {
+                        var serializer = new JavaScriptSerializer();
+                        var s = serializer.Deserialize<Store>(userData);
 
-                    return s;
+                        return s;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+               
                 }
                 else
                 {
@@ -186,12 +195,12 @@ namespace StoreManagement.Admin.Controllers
                 {
                     Logger.Trace("HttpNotFoundResult exception for Store " + statusDescription + " Store:" + LoginStore);
                 }
-            
+
             }
             catch (Exception ex)
             {
-                    
-             
+
+
             }
             return new HttpNotFoundResult(statusDescription);
         }
@@ -240,11 +249,11 @@ namespace StoreManagement.Admin.Controllers
                 GoogleDriveFolder = selectedStore.GoogleDriveFolder;
                 GoogleDriveServiceAccountEmail = selectedStore.GoogleDriveServiceAccountEmail;
                 GoogleDrivePassword = selectedStore.GoogleDrivePassword;
-                
-               // String serviceAccountPkCs12FilePath = HostingEnvironment.MapPath(String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName));
-               // var rawData = System.IO.File.ReadAllBytes(serviceAccountPkCs12FilePath);
+
+                // String serviceAccountPkCs12FilePath = HostingEnvironment.MapPath(String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName));
+                // var rawData = System.IO.File.ReadAllBytes(serviceAccountPkCs12FilePath);
                 //X509Certificate2 Certificate2 = GeneralHelper.CreateCert(serviceAccountPkCs12FilePath, selectedStore.GoogleDrivePassword);
-         
+
                 Certificate = GeneralHelper.ImportCert(selectedStore.GoogleDriveCertificateP12RawData,
                                                        selectedStore.GoogleDrivePassword);
 

@@ -135,5 +135,7 @@ namespace StoreManagement.Service.Repositories
             var res =  Task.FromResult(GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
             return res;
         }
+
+       
     }
 }

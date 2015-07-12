@@ -27,7 +27,8 @@ namespace StoreManagement.Helper
             }
             else
             {
-               return storeService.GetStoreByDomain("login.seatechnologyjobs.com");
+                String defaultSiteDomain = ProjectAppSettings.GetWebConfigString("DefaultSiteDomain", "login.seatechnologyjobs.com");
+                return storeService.GetStoreByDomain(defaultSiteDomain);
             }
            
         }

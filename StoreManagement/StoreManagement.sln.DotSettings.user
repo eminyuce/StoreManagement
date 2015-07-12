@@ -2,6 +2,7 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\emin\Documents\GitHub\StoreManagement\StoreManagement\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\EMIN\Documents\GitHub\StoreManagement\StoreManagement\packages\GenericRepository.EntityFramework.0.3.1-pre01\lib\net40\GenericRepository.EntityFramework.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\EMIN\Documents\GitHub\StoreManagement\StoreManagement\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	
 	

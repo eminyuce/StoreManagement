@@ -76,11 +76,11 @@
     </div>
     <div class="col-md-9">
         <div class="well np">
-             
-        @Html.Partial("pStoreCarouselImages", Model.CarouselImages)
+
+            @Html.Partial("pStoreCarouselImages", Model.CarouselImages)
         </div>
         <div class="well well-small">
-            <h3>  Products </h3>
+            <h3>Products </h3>
             <hr class="soften" />
             <div class="well well-small">
                 <div class="row">
@@ -89,11 +89,21 @@
                     {
                         foreach (var product in Model.Products.Take(8))
                         {
-                        <div class="col-md-3">
-                            @Html.DisplayFor(model => product, "ProductThumbnail")
-                        </div>
+
+                            var cat = Model.ProductCategories.FirstOrDefault(r => r.Id == product.ProductCategoryId);
+                             if (cat != null)
+                             {
+                                <div class="col-md-3">
+
+                                    @Html.Partial("DisplayTemplates/ProductThumbnail", product, new ViewDataDictionary(ViewData)
+                                    {
+                                        {"ProductCategoryName", cat.Name}
+                                    })
+
+                                </div>
+                             }
                         }
-                     
+
                     }
 
                 </div>
@@ -172,17 +182,17 @@
 </div>
 @section scripts
 {
-    
-    
-<script>
-     
 
-    $(document).ready(function () {
-        console.log("jquery is working");
 
-    });
+    <script>
 
-</script>
+
+        $(document).ready(function () {
+            console.log("jquery is working");
+
+        });
+
+    </script>
 
 
 }

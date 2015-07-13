@@ -155,10 +155,16 @@ namespace StoreManagement.Admin.Controllers
                     string userData = ticket.UserData;
                     if (!string.IsNullOrEmpty(userData))
                     {
-                        var serializer = new JavaScriptSerializer();
-                        var s = serializer.Deserialize<Store>(userData);
-
-                        return s;
+                        int storeId = userData.ToInt();
+                        String key = String.Format("GetLoginUserStore-{0}", storeId);
+                        Store site = null;
+                        UserStoreCache.TryGet(key, out site);
+                        if (site == null)
+                        {
+                            site = StoreRepository.GetStore(storeId);
+                            UserStoreCache.Set(key, site, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("TooMuchTime_CacheAbsoluteExpiration_Minute", 100000)));
+                        }
+                        return site;
                     }
                     else
                     {

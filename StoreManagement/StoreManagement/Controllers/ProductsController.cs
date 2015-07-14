@@ -15,12 +15,10 @@ namespace StoreManagement.Controllers
 {
     public class ProductsController : BaseController
     {
-        
-
         public ActionResult Index()
         {
             var returnModel = new ProductsViewModel();
-            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(Store.Id, StoreConstants.ProductType);
+          //  returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(Store.Id, StoreConstants.ProductType);
             returnModel.Store = Store;
             return View(returnModel);
         }

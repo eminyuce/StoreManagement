@@ -13,8 +13,12 @@ namespace StoreManagement.Data.RequestModel
         public Store Store { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<FileManager> CarouselImages { get; set; }
-        public PagedList<Content> Blogs { get; set; }
-        public PagedList<Content> News { get; set; }
+
+
         public PagedList<Product> Products { get; set; }
+
+        public PagedList<Content> News { get; set; }
+
+        public PagedList<Content> Blogs { get; set; }
     }
 }

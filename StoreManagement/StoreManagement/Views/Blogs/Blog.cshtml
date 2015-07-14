@@ -84,7 +84,7 @@
             <hr class="softn clr" />
             <h3>Related Blogs</h3>
            <div class="tab-pane fade" id="profile">
-                      <div id="RelatedBlogs"></div>
+                      <div id="RelatedContents"></div>
                 </div>
                  
 
@@ -99,17 +99,9 @@
     <script>
 
         $(document).ready(function () {
-            GetRelatedContents();
+            GetRelatedContents($("#CategoryId").val(),"blog");
         });
-        function GetRelatedContents() {
-            var postData = JSON.stringify({ "categoryId": $("#CategoryId").val() });
-            ajaxMethodCall(postData, "/Ajax/GetRelatedContents", DisplayRelatedContents);
-            
-        }
-        function DisplayRelatedContents(data) {
-            $("#RelatedBlogs").empty();
-            $("#RelatedBlogs").html(data).animate({ 'height': '150px' }, 'slow');
-        }
+      
 
 
 

@@ -27,7 +27,15 @@ namespace StoreManagement.Data.CacheHelper
             policy = policy ?? defaultCacheItemPolicy;
             if (true /* Ektron.Com.Helpers.Constants.IsCachingEnabled */ )
             {
-                base.Set(cacheKey, cacheItem, policy);
+                var isCount = 0;
+                if (cacheItem is IList)
+                {
+                    isCount = (cacheItem as IList).Count;
+                }
+                if (isCount != 0)  // No need to cache it
+                {
+                    base.Set(cacheKey, cacheItem, policy);
+                }
             }
         }
 
@@ -52,7 +60,7 @@ namespace StoreManagement.Data.CacheHelper
             returnItem = (T)this[cacheKey];
             return returnItem != null;
         }
-        public  void ClearCache(String cacheKeyPrefix)
+        public void ClearCache(String cacheKeyPrefix)
         {
             var cacheEnumerator = (IDictionaryEnumerator)((IEnumerable)Default).GetEnumerator();
             while (cacheEnumerator.MoveNext())

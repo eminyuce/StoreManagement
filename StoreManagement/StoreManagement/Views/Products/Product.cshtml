@@ -127,18 +127,9 @@
     <script>
 
         $(document).ready(function () {
-            GetRelatedProducts();
+            GetRelatedProducts($("#ProductCategoryId").val());
+            GetProductCategories();
         });
-        function GetRelatedProducts() {
-            var postData = JSON.stringify({ "categoryId": $("#ProductCategoryId").val() });
-            ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", DisplayRelatedProducts);
-            
-        }
-        function DisplayRelatedProducts(data) {
-            $("#RelatedProducts").empty();
-            $("#RelatedProducts").html(data).animate({ 'height': '150px' }, 'slow');
-        }
-
 
 
     </script>

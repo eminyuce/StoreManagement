@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -42,6 +43,11 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             Product content = ProductRepository.GetSingle(id);
             if (content == null)
             {
@@ -98,63 +104,73 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveOrEdit(Product product, int[] selectedFileId = null, int[] selectedLabelId = null)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (!CheckRequest(product))
+
+
+                if (ModelState.IsValid)
                 {
-                    return new HttpNotFoundResult("Not Found");
-                }
-
-
-
-
-                if (product.ProductCategoryId == 0)
-                {
-                    List<FileManager> fileManagers = new List<FileManager>();
-                    var labelList = new List<LabelLine>();
-                    if (product.Id > 0)
+                    if (!CheckRequest(product))
                     {
-                        var content = ProductRepository.GetSingleIncluding(product.Id, r => r.ProductFiles.Select(r1 => r1.FileManager));
-                        fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
-                        labelList = LabelLineRepository.GetLabelLinesByItem(product.Id, StoreConstants.ProductType);
-
+                        return new HttpNotFoundResult("Not Found");
                     }
-                    ViewBag.FileManagers = fileManagers;
-                    ViewBag.LabelLines = labelList;
-                    ModelState.AddModelError("ProductCategoryId", "You should select category from category tree.");
-                    return View(product);
+
+
+                    if (product.ProductCategoryId == 0)
+                    {
+                        List<FileManager> fileManagers = new List<FileManager>();
+                        var labelList = new List<LabelLine>();
+                        if (product.Id > 0)
+                        {
+                            var content = ProductRepository.GetSingleIncluding(product.Id, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                            fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
+                            labelList = LabelLineRepository.GetLabelLinesByItem(product.Id, StoreConstants.ProductType);
+
+                        }
+                        ViewBag.FileManagers = fileManagers;
+                        ViewBag.LabelLines = labelList;
+                        ModelState.AddModelError("ProductCategoryId", "You should select category from category tree.");
+                        return View(product);
+                    }
+
+
+                    product.Description = GetCleanHtml(product.Description);
+                    if (product.Id == 0)
+                    {
+                        ProductRepository.Add(product);
+                    }
+                    else
+                    {
+                        ProductRepository.Edit(product);
+                    }
+
+                    ProductRepository.Save();
+                    int contentId = product.Id;
+                    if (selectedFileId != null)
+                    {
+                        ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
+                    }
+
+
+                    LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
+
+
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = product.StoreId, categoryId = product.ProductCategoryId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", new { categoryId = product.ProductCategoryId });
+                    }
                 }
 
-
-                product.Description = GetCleanHtml(product.Description);
-                if (product.Id == 0)
-                {
-                    ProductRepository.Add(product);
-                }
-                else
-                {
-                    ProductRepository.Edit(product);
-                }
-
-                ProductRepository.Save();
-                int contentId = product.Id;
-                if (selectedFileId != null)
-                {
-                    ProductFileRepository.SaveProductFiles(selectedFileId, contentId);
-                }
-
-
-                LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
-
-
-                if (IsSuperAdmin)
-                {
-                    return RedirectToAction("Index", new { storeId = product.StoreId, categoryId = product.ProductCategoryId });
-                }
-                else
-                {
-                    return RedirectToAction("Index", new { categoryId = product.ProductCategoryId });
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + product, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             return View(product);
@@ -167,15 +183,21 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult Delete(int id = 0)
         {
-            Product content = ProductRepository.GetSingle(id);
-            if (!CheckRequest(content))
+            if (id == 0)
             {
-                return new HttpNotFoundResult("Not Found");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            Product content = ProductRepository.GetSingle(id);
             if (content == null)
             {
                 return HttpNotFound();
             }
+            if (!CheckRequest(content))
+            {
+                return new HttpNotFoundResult("Not Found");
+            }
+            
             return View(content);
         }
         public ActionResult StoreDetails(int id = 0)
@@ -197,24 +219,41 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product content = ProductRepository.GetSingle(id);
-            if (!CheckRequest(content))
+            Product product = ProductRepository.GetSingle(id);
+            if (product == null)
             {
-                return new HttpNotFoundResult("Not Found");
+                return HttpNotFound();
+            }
+            try
+            {
+                if (!CheckRequest(product))
+                {
+                    return new HttpNotFoundResult("Not Found");
+                }
+
+                ProductRepository.Delete(product);
+                ProductRepository.Save();
+                LabelLineRepository.DeleteLabelLinesByItem(product.Id, StoreConstants.ProductType);
+                ProductFileRepository.DeleteProductFileByProductId(product.Id);
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = product.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to delete product:" + product, ex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
-            ProductRepository.Delete(content);
-            ProductRepository.Save();
-            LabelLineRepository.DeleteLabelLinesByItem(content.Id, StoreConstants.ProductType);
-            ProductFileRepository.DeleteProductFileByProductId(content.Id);
-            if (IsSuperAdmin)
-            {
-                return RedirectToAction("Index", new { storeId = content.StoreId });
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            return View(product);
+
+
+
         }
 
 

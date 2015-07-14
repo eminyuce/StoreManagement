@@ -6,6 +6,7 @@
 
 @foreach (var e in relatedContents)
 {
-     @Html.Partial("DisplayTemplates/ProductThumbnail", e, new ViewDataDictionary(ViewData){
-                                {"ProductCategoryName",Model.Category.Name}})
+    <div>
+        @e.Name  
+    </div>
 }

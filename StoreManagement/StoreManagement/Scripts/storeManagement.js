@@ -3,11 +3,41 @@
 }
 
 $(document).ready(function () {
-  
+    //var mm = $("[data-view-contact-resume-contact=" + encodedResumeId + "]");
+    //mm.fadeOut('slow', function () {
+    //    mm.html(data);
+    //    mm.fadeIn('slow');
+    //});
     
 
 });
+function GetRelatedContents(categoryId, contentType) {
+    var postData = JSON.stringify({ "categoryId": categoryId, "contentType": contentType });
+    ajaxMethodCall(postData, "/Ajax/GetRelatedContents", DisplayRelatedContents);
 
+}
+function DisplayRelatedContents(data) {
+    $("#RelatedContents").empty();
+    $("#RelatedContents").html(data).animate({ 'height': '150px' }, 'slow');
+}
+function GetRelatedProducts(productCategoryId) {
+    var postData = JSON.stringify({ "categoryId": productCategoryId });
+    ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", DisplayRelatedProducts);
+
+}
+function DisplayRelatedProducts(data) {
+    $("#RelatedProducts").empty();
+    $("#RelatedProducts").html(data).animate({ 'height': '150px' }, 'slow');
+}
+function GetProductCategories() {
+    var postData = JSON.stringify({});
+    ajaxMethodCall(postData, "/Ajax/GetProductCategories", DisplayProductCategories);
+
+}
+function DisplayProductCategories(data) {
+    $("#ProductCategories").empty();
+    $("#ProductCategories").html(data).animate({ 'height': '150px' }, 'slow');
+}
 function ajaxMethodCall(postData,ajaxUrl, successFunction) {
 
     $.ajax({
@@ -15,7 +45,10 @@ function ajaxMethodCall(postData,ajaxUrl, successFunction) {
         url: ajaxUrl,
         data: postData,
         success: successFunction,
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
+            console.error("parameters :" + postData);
+            console.error("ajaxUrl :" + ajaxUrl);
+            console.error("responseText :" + jqXHR.responseText);
             if (jqXHR.status === 0) {
                 console.error('Not connect.\n Verify Network.');
             } else if (jqXHR.status == 404) {

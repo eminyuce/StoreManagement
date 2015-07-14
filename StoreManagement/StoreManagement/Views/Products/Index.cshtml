@@ -7,30 +7,25 @@
 
 <div class="row">
     <div class="col-md-12">
-        @if (Model.Categories.Any())
-        {
-            foreach (var cat in Model.Categories)
-            {
-            <div class="row">
-                <div class="page-header">
-                    <h2>
-                        @Html.ActionLink(cat.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(cat.Name), cat.Id) }, new { @class = "btn btn-lg btn-link" })
-                    </h2>
-                </div>
-                @foreach (var product in cat.Products.Take(8))
-                {
-                    <div class="col-md-3">
-                        @Html.Partial("DisplayTemplates/ProductThumbnail", product, new ViewDataDictionary(ViewData){
-                                {"ProductCategoryName",cat.Name}})
-                    </div>
-                }
-            </div>
-            }
-
-
-
-
-        }
+        <div id="ProductCategories">
+            
+        </div>
     </div>
 </div>
 
+
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            GetProductCategories();
+        });
+
+
+    </script>
+    
+
+    
+}

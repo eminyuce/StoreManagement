@@ -24,5 +24,11 @@ namespace StoreManagement.Data.Entities
 
         public virtual ICollection<ProductFile> ProductFiles { get; set; }
 
+
+        public override string ToString()
+        {
+            return "id:" + this.Id + " Name:" + Name + " StoreId:" + this.StoreId;
+        } 
+
     }
 }

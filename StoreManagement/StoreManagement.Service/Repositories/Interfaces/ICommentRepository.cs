@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ICommentRepository : IEntityRepository<Comment, int>, ICommentService
+    public interface ICommentRepository : IBaseRepository<Comment, int>, ICommentService
     {
 
     }

@@ -4,7 +4,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IStoreUserRepository : IEntityRepository<StoreUser, int>, IStoreUserService
+    public interface IStoreUserRepository : IBaseRepository<StoreUser, int>, IStoreUserService
     {
 
     }

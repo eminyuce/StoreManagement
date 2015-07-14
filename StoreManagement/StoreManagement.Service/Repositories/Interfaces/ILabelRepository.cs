@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ILabelRepository : IEntityRepository<Label, int>, ILabelService
+    public interface ILabelRepository : IBaseRepository<Label, int>, ILabelService
     {
         List<Label> GetLabelsCategoryAndSearch(int storeId, string search);
         List<Label> GetActiveLabels(int storeId);

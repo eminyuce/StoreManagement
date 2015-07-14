@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IProductFileRepository : IEntityRepository<ProductFile, int>, IProductFileService
+    public interface IProductFileRepository : IBaseRepository<ProductFile, int>, IProductFileService
     {
         void DeleteProductFileByProductId(int productId);
         void SaveProductFiles(int[] selectedFileId, int productId);

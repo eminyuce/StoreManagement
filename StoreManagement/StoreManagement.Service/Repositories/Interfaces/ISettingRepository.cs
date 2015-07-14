@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ISettingRepository : IEntityRepository<Setting>, ISettingService
+    public interface ISettingRepository : IBaseRepository<Setting, int>, ISettingService
     {
         List<Setting> GetStoreSettingsByType(int storeid, string type, String search);
     }

@@ -8,7 +8,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ICategoryRepository : IEntityRepository<Category, int>, ICategoryService
+    public interface ICategoryRepository : IBaseRepository<Category, int>, ICategoryService
     {
       
     }

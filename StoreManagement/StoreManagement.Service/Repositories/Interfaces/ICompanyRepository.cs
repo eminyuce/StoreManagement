@@ -7,7 +7,7 @@ using Filter = StoreManagement.Data.HelpersModel.Filter;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ICompanyRepository : IEntityRepository<Company, int>, ICompanyService
+    public interface ICompanyRepository : IBaseRepository<Company, int>, ICompanyService
     {
 
     }

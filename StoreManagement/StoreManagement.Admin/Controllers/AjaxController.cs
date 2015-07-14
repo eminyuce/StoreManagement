@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using GenericRepository;
 using Newtonsoft.Json.Linq;
 using Ninject;
 using StoreManagement.Data.Constants;
@@ -491,190 +494,232 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult ChangeCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
+            try
             {
-                var nav = CategoryRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
-                {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
 
-                CategoryRepository.Edit(nav);
+                foreach (OrderingItem item in values)
+                {
+                    var nav = CategoryRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
+
+                    CategoryRepository.Edit(nav);
+                }
+                CategoryRepository.Save();
             }
-            CategoryRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeCategoryGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeBrandGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
+            try
             {
-                var nav = BrandRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
+                foreach (OrderingItem item in values)
                 {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
+                    var nav = BrandRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
 
-                BrandRepository.Edit(nav);
+                    BrandRepository.Edit(nav);
+                }
+                BrandRepository.Save();
             }
-            BrandRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeBrandGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeLocationsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
+            try
             {
-                var nav = LocationRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
+                foreach (OrderingItem item in values)
                 {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
+                    var nav = LocationRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
 
-                LocationRepository.Edit(nav);
+                    LocationRepository.Edit(nav);
+                }
+                LocationRepository.Save();
             }
-            LocationRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeLocationsGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeContactsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
+            try
             {
-                var nav = ContactRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
+                foreach (OrderingItem item in values)
                 {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
+                    var nav = ContactRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
 
-                ContactRepository.Edit(nav);
+                    ContactRepository.Edit(nav);
+                }
+                ContactRepository.Save();
             }
-            ContactRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeContactsGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeNavigationGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
+            try
             {
-                var nav = NavigationRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
+                foreach (OrderingItem item in values)
                 {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
+                    var nav = NavigationRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
 
-                NavigationRepository.Edit(nav);
+                    NavigationRepository.Edit(nav);
+                }
+                NavigationRepository.Save();
             }
-            NavigationRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeNavigationGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeFileManagerGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
+            try
             {
-                var content = FileManagerRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
+                foreach (OrderingItem item in values)
                 {
-                    content.Ordering = item.Ordering;
-                }
-                else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    content.State = item.State;
-                }
-                else if (checkbox.Equals("Carousel", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    content.IsCarousel = item.State;
-                }
+                    var content = FileManagerRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        content.Ordering = item.Ordering;
+                    }
+                    else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        content.State = item.State;
+                    }
+                    else if (checkbox.Equals("Carousel", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        content.IsCarousel = item.State;
+                    }
 
-                FileManagerRepository.Edit(content);
+                    FileManagerRepository.Edit(content);
+                }
+                FileManagerRepository.Save();
             }
-            FileManagerRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeFileManagerGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeContentGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
-            {
-                var content = ContentRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
-                {
-                    content.Ordering = item.Ordering;
-                }
-                else if (checkbox.Equals("imagestate", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    content.ImageState = item.State;
-                }
-                else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    content.State = item.State;
-                }
-                else if (checkbox.Equals("mainpage", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    content.MainPage = item.State;
-                }
-
-
-                ContentRepository.Edit(content);
-            }
-            ContentRepository.Save();
+            ChangeGridOrderingOrState(ContentRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public void ChangeGridOrderingOrState<T>(IBaseRepository<T, int> repository, List<OrderingItem> values, String checkbox = "") where T : class, IEntity<int>
+        {
+            try
+            {
+                foreach (OrderingItem item in values)
+                {
+                    var t = repository.GetSingle(item.Id);
+                    var baseContent = t as BaseContent;
+                    if (baseContent != null)
+                    {
+                        if (String.IsNullOrEmpty(checkbox))
+                        {
+                            baseContent.Ordering = item.Ordering;
+                        }
+                        else if (checkbox.Equals("imagestate", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            baseContent.ImageState = item.State;
+                        }
+                        else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            baseContent.State = item.State;
+                        }
+                        else if (checkbox.Equals("mainpage", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            baseContent.MainPage = item.State;
+                        }
+                    }
+                    repository.Edit(t);
+                }
+                repository.Save();
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeGridOrderingOrState<T> :" + String.Join(",", values), exception);
+            }
         }
         public ActionResult ChangeProductGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
-            {
-                var product = ProductRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
-                {
-                    product.Ordering = item.Ordering;
-                }
-                else if (checkbox.Equals("imagestate", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    product.ImageState = item.State;
-                }
-                else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    product.State = item.State;
-                }
-                else if (checkbox.Equals("mainpage", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    product.MainPage = item.State;
-                }
-
-
-                ProductRepository.Edit(product);
-            }
-            ProductRepository.Save();
+            ChangeGridOrderingOrState(ProductRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveStyles(int storeId = 0, String styleArray = "")
         {
-            JObject results = JObject.Parse(styleArray);
-            foreach (var result in results["styleArray"])
+            try
             {
-                string id = (string)result["Id"];
-                string style = (string)result["Style"];
-                var s = this.SettingRepository.GetSingle(id.ToInt());
-                s.SettingValue = style;
-                SettingRepository.Edit(s);
+
+                JObject results = JObject.Parse(styleArray);
+                foreach (var result in results["styleArray"])
+                {
+                    string id = (string)result["Id"];
+                    string style = (string)result["Style"];
+                    var s = this.SettingRepository.GetSingle(id.ToInt());
+                    s.SettingValue = style;
+                    SettingRepository.Edit(s);
+                }
+                SettingRepository.Save();
+
             }
-            SettingRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("SaveStyles :" + storeId + " styleArray:" + styleArray, exception);
+            }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IProductCategoryRepository : IEntityRepository<ProductCategory, int>, IProductCategoryService
+    public interface IProductCategoryRepository : IBaseRepository<ProductCategory, int>, IProductCategoryService
     {
 
     }

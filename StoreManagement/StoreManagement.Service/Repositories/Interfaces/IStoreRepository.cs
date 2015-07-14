@@ -6,7 +6,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IStoreRepository : IEntityRepository<Store, int>, IStoreService
+    public interface IStoreRepository : IBaseRepository<Store, int>, IStoreService
     {
         void DeleteStore(int storeId);
         List<Store> GetAllStores();

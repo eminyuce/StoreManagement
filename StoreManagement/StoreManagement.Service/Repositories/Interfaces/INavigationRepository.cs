@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface INavigationRepository : IEntityRepository<Navigation, int>, INavigationService
+    public interface INavigationRepository : IBaseRepository<Navigation, int>, INavigationService
     {
 
 

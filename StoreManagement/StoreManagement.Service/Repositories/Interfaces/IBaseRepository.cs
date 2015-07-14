@@ -8,7 +8,8 @@ using GenericRepository.EntityFramework;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IBaseRepository<TEntity, TId> : IEntityRepository<TEntity, TId> where TEntity : class, IEntity<TId> where TId : IComparable
+     
+    public interface IBaseRepository<T, TId> : IEntityRepository<T, TId> where T : class, IEntity<TId> where TId : IComparable
     {
 
     }

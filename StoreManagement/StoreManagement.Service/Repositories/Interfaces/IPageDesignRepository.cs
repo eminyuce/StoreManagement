@@ -10,7 +10,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IPageDesignRepository : IEntityRepository<PageDesign, int>, IPageDesignService
+    public interface IPageDesignRepository : IBaseRepository<PageDesign, int>, IPageDesignService
     {
 
     }

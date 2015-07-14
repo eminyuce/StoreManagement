@@ -11,5 +11,12 @@ namespace StoreManagement.Data.Entities
     public class Category : BaseCategory
     {
         public virtual ICollection<Content> Contents { get; set; }
+
+
+
+        public override string ToString()
+        {
+            return "id:" + this.Id + " Name:" + Name + " StoreId:" + this.StoreId;
+        } 
     }
 }

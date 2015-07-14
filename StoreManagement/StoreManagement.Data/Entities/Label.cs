@@ -12,5 +12,11 @@ namespace StoreManagement.Data.Entities
         [Required(ErrorMessage = "Please enter name")]
         public String Name { get; set; }
         public int ParentId { get; set; }
+
+
+        public override string ToString()
+        {
+            return "id:" + this.Id + " Name:" + Name + " StoreId:" + this.StoreId;
+        }
     }
 }

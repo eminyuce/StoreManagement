@@ -145,6 +145,7 @@
     <Compile Include="GeneralHelper\HtmlCleanHelper.cs" />
     <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
     <Compile Include="GeneralHelper\ImageHelper.cs" />
+    <Compile Include="GeneralHelper\LatitudeAndLongitudeParser.cs" />
     <Compile Include="GeneralHelper\LinkHelper.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\PartialViewToString.cs" />

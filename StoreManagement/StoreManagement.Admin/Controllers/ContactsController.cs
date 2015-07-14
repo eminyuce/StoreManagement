@@ -32,13 +32,13 @@ namespace StoreManagement.Admin.Controllers
             return View(contact);
         }
 
-         
+
         //
         // GET: /Contacts/Edit/5
 
         public ActionResult SaveOrEdit(int id = 0)
         {
-            Contact contact =new Contact();
+            Contact contact = new Contact();
             if (id != 0)
             {
                 contact = ContactRepository.GetSingle(id);
@@ -52,31 +52,43 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Contact contact)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (contact.Id == 0)
+
+                if (ModelState.IsValid)
                 {
-                    contact.State = true;
-                    contact.UpdatedDate = DateTime.Now;
-                    contact.CreatedDate = DateTime.Now;
-                    ContactRepository.Add(contact);
-                }
-                else
-                {
-                    contact.UpdatedDate = DateTime.Now;
-                    ContactRepository.Edit(contact);
+                    if (contact.Id == 0)
+                    {
+                        contact.State = true;
+                        contact.UpdatedDate = DateTime.Now;
+                        contact.CreatedDate = DateTime.Now;
+                        ContactRepository.Add(contact);
+                    }
+                    else
+                    {
+                        contact.UpdatedDate = DateTime.Now;
+                        ContactRepository.Edit(contact);
+                    }
+
+                    ContactRepository.Save();
+
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = contact.StoreId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
 
-                ContactRepository.Save();
 
-                if (IsSuperAdmin)
-                {
-                    return RedirectToAction("Index", new { storeId = contact.StoreId });
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + contact, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             return View(contact);
         }
@@ -97,17 +109,28 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Contact contact = ContactRepository.GetSingle(id);
-            ContactRepository.Delete(contact);
-            ContactRepository.Save();
 
-            if (IsSuperAdmin)
+            try
             {
-                return RedirectToAction("Index", new { storeId = contact.StoreId });
+                ContactRepository.Delete(contact);
+                ContactRepository.Save();
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = contact.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete:" + contact, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+            return View(contact);
         }
 
 

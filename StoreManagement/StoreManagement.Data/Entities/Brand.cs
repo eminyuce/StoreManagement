@@ -15,5 +15,11 @@ namespace StoreManagement.Data.Entities
         [AllowHtml]
         public string Description { get; set; }
 
+
+        public override string ToString()
+        {
+            return "id:" + this.Id + " Name:" + Name + " StoreId:" + this.StoreId;
+        }
+
     }
 }

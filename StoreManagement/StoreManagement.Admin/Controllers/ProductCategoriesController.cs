@@ -104,17 +104,30 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ProductCategory category = ProductCategoryRepository.GetProductCategory(id);
-            ProductCategoryRepository.Delete(category);
-            ProductCategoryRepository.Save();
 
-            if (IsSuperAdmin)
+            try
             {
-                return RedirectToAction("Index", new { storeId = category.StoreId });
+
+                ProductCategoryRepository.Delete(category);
+                ProductCategoryRepository.Save();
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = category.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete:" + category, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+            return View(category);
         }
 
     }

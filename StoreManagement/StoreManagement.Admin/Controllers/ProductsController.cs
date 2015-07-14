@@ -219,6 +219,7 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteConfirmed(int id)
         {
+
             Product product = ProductRepository.GetSingle(id);
             if (product == null)
             {

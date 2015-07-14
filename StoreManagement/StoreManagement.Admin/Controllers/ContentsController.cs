@@ -94,55 +94,67 @@ namespace StoreManagement.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveOrEdit(Content content, int[] selectedFileId = null, int[] selectedLabelId = null)
         {
-            if (ModelState.IsValid)
-            {
-                if (content.CategoryId == 0)
-                {
 
-                    var labels = new List<LabelLine>();
-                    var fileManagers = new List<FileManager>();
-                    if (content.Id > 0)
+            try
+            {
+
+
+                if (ModelState.IsValid)
+                {
+                    if (content.CategoryId == 0)
                     {
-                        content = ContentRepository.GetContentWithFiles(content.Id);
-                        labels = LabelLineRepository.GetLabelLinesByItem(content.Id, ContentType);
-                        fileManagers = content.ContentFiles.Select(r => r.FileManager).ToList();
+
+                        var labels = new List<LabelLine>();
+                        var fileManagers = new List<FileManager>();
+                        if (content.Id > 0)
+                        {
+                            content = ContentRepository.GetContentWithFiles(content.Id);
+                            labels = LabelLineRepository.GetLabelLinesByItem(content.Id, ContentType);
+                            fileManagers = content.ContentFiles.Select(r => r.FileManager).ToList();
+                        }
+
+                        ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
+                        ViewBag.FileManagers = fileManagers;
+
+                        ModelState.AddModelError("CategoryId", "You should select category from category tree.");
+                        return View(content);
                     }
 
-                    ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
-                    ViewBag.FileManagers = fileManagers;
+                    if (content.Id == 0)
+                    {
+                        ContentRepository.Add(content);
+                    }
+                    else
+                    {
+                        ContentRepository.Edit(content);
+                    }
+                    ContentRepository.Save();
+                    int contentId = content.Id;
+                    if (selectedFileId != null)
+                    {
+                        ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
+                    }
+                    LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, ContentType);
 
-                    ModelState.AddModelError("CategoryId", "You should select category from category tree.");
-                    return View(content);
-                }
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = content.StoreId, categoryId = content.CategoryId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", new { categoryId = content.CategoryId });
+                    }
 
-                if (content.Id == 0)
-                {
-                    ContentRepository.Add(content);
-                }
-                else
-                {
-                    ContentRepository.Edit(content);
-                }
-                ContentRepository.Save();
-                int contentId = content.Id;
-                if (selectedFileId != null)
-                {
-                    ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
-                }
-                LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, ContentType);
 
-                if (IsSuperAdmin)
-                {
-                    return RedirectToAction("Index", new { storeId = content.StoreId, categoryId = content.CategoryId });
                 }
-                else
-                {
-                    return RedirectToAction("Index", new { categoryId = content.CategoryId });
-                }
-
 
             }
-
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + content, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
             return View(content);
         }
 
@@ -171,19 +183,33 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Content content = ContentRepository.GetSingle(id);
-            LabelLineRepository.DeleteLabelLinesByItem(id, ContentType);
-            ContentRepository.Delete(content);
-            ContentRepository.Save();
+
+            try
+            {
+
+                LabelLineRepository.DeleteLabelLinesByItem(id, ContentType);
+                ContentRepository.Delete(content);
+                ContentRepository.Save();
 
 
-            if (IsSuperAdmin)
-            {
-                return RedirectToAction("Index", new { storeId = content.StoreId });
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = content.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete it:" + content, ex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+
+
+            return View(content);
         }
 
 

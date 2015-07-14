@@ -10,5 +10,7 @@ namespace StoreManagement.Data.Entities
     public class ProductCategory : BaseCategory
     {
         public virtual ICollection<Product> Products { get; set; }
+
+
     }
 }

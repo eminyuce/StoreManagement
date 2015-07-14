@@ -28,6 +28,11 @@ namespace StoreManagement.Admin.Controllers
             public int Ordering { get; set; }
             public bool State { get; set; }
 
+            public override string ToString()
+            {
+                return "Id:" + Id + " Ordering:" + Ordering + " State:" + State;
+            }
+
         }
         public ActionResult GetStoreLabels(int storeId)
         {
@@ -46,6 +51,7 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult CreatingNewLabel(String labelName)
         {
+
             Label label = new Label();
             label.Name = labelName;
             label.ParentId = 1;
@@ -53,6 +59,8 @@ namespace StoreManagement.Admin.Controllers
             LabelRepository.Add(label);
             int labelId = LabelRepository.Save();
             label = LabelRepository.GetSingle(labelId);
+
+
             return Json(label, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -99,23 +107,44 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult ChangeIsCarouselState(int fileId = 0, bool isCarousel = false)
         {
-            var s = FileManagerRepository.GetSingle(fileId);
-            s.IsCarousel = isCarousel;
-            FileManagerRepository.Edit(s);
-            FileManagerRepository.Save();
+            try
+            {
+
+
+                var s = FileManagerRepository.GetSingle(fileId);
+                s.IsCarousel = isCarousel;
+                FileManagerRepository.Edit(s);
+                FileManagerRepository.Save();
+
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeIsCarouselState  fileId" + fileId + " isCarousel:" + isCarousel, exception);
+            }
+
             return Json(new { fileId, isCarousel }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteEmailListGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = EmailListRepository.GetSingle(id);
-                EmailListRepository.Delete(item);
+
+
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = EmailListRepository.GetSingle(id);
+                    EmailListRepository.Delete(item);
+                }
+                EmailListRepository.Save();
+
             }
-            EmailListRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteEmailListGridItem :" + String.Join(",", values), exception);
+            }
 
             return Json(values, JsonRequestBehavior.AllowGet);
         }
@@ -124,118 +153,169 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteSettingGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = SettingRepository.GetSingle(id);
-                SettingRepository.Delete(item);
-            }
-            SettingRepository.Save();
 
+
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = SettingRepository.GetSingle(id);
+                    SettingRepository.Delete(item);
+                }
+                SettingRepository.Save();
+
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteSettingGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteNavigationGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = NavigationRepository.GetSingle(id);
-                NavigationRepository.Delete(item);
-            }
-            NavigationRepository.Save();
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = NavigationRepository.GetSingle(id);
+                    NavigationRepository.Delete(item);
+                }
+                NavigationRepository.Save();
 
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteNavigationGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = ProductRepository.GetSingle(id);
-                ProductRepository.Delete(item);
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = ProductRepository.GetSingle(id);
+                    ProductRepository.Delete(item);
+                }
+                ProductRepository.Save();
             }
-            ProductRepository.Save();
-
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteProductGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteLocationsGridItem(List<String> values)
         {
-            foreach (String v in values)
-            {
-                var id = v.ToInt();
-                var item = LocationRepository.GetSingle(id);
-                LocationRepository.Delete(item);
-            }
-            LocationRepository.Save();
 
+            try
+            {
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = LocationRepository.GetSingle(id);
+                    LocationRepository.Delete(item);
+                }
+                LocationRepository.Save();
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteLocationsGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteContactsGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = ContactRepository.GetSingle(id);
-                ContactRepository.Delete(item);
-            }
-            ContactRepository.Save();
 
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = ContactRepository.GetSingle(id);
+                    ContactRepository.Delete(item);
+                }
+                ContactRepository.Save();
+
+            }
+            catch (Exception exception)
+            {
+
+                Logger.ErrorException("DeleteContactsGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteFileManagerGridItem(List<String> values)
         {
-            List<String> googleIdList = new List<string>();
-            List<int> idList = new List<int>();
-            foreach (var value in values)
+            try
             {
-                String googleId = value.Split("-".ToCharArray())[0];
-                String id = value.Split("-".ToCharArray())[1];
+                List<String> googleIdList = new List<string>();
+                List<int> idList = new List<int>();
+                foreach (var value in values)
+                {
+                    String googleId = value.Split("-".ToCharArray())[0];
+                    String id = value.Split("-".ToCharArray())[1];
 
-                googleIdList.Add(googleId);
-                idList.Add(id.ToInt());
+                    googleIdList.Add(googleId);
+                    idList.Add(id.ToInt());
+                }
+                var item = FileManagerRepository.GetSingle(idList.FirstOrDefault());
+                ConnectToStoreGoogleDrive(item.StoreId);
+
+                foreach (String v in values)
+                {
+                    string googledriveFileId = v;
+                    Task.Run(() => DeleteFile(googledriveFileId));
+                    Thread.Sleep(50);
+                }
             }
-            var item = FileManagerRepository.GetSingle(idList.FirstOrDefault());
-            ConnectToStoreGoogleDrive(item.StoreId);
-
-            foreach (String v in values)
+            catch (Exception exception)
             {
-                string googledriveFileId = v;
-                Task.Run(() => DeleteFile(googledriveFileId));
-                Thread.Sleep(50);
+                Logger.ErrorException("DeleteFileManagerGridItem :" + String.Join(",", values), exception);
             }
-   
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
         private void DeleteFile(string googledriveFileId)
         {
-
-            String googleId = googledriveFileId.Split("-".ToCharArray())[0];
-            String id = googledriveFileId.Split("-".ToCharArray())[1];
- 
-            if (!String.IsNullOrEmpty(googleId))
+            String id = "";
+            try
             {
-                try
-                {
+                String googleId = googledriveFileId.Split("-".ToCharArray())[0];
+                id = googledriveFileId.Split("-".ToCharArray())[1];
 
-                    UploadHelper.deleteFile(googleId);
-                }
-                catch (Exception ex)
+                if (!String.IsNullOrEmpty(googleId))
                 {
-                    Logger.ErrorException(String.Format("GoogleId={0} file could not deleted from google drive", googledriveFileId), ex);
+                    try
+                    {
+
+                        UploadHelper.deleteFile(googleId);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.ErrorException(String.Format("GoogleId={0} file could not deleted from google drive", googledriveFileId), ex);
+                    }
                 }
             }
-           
+            catch (Exception ex)
+            {
+                Logger.ErrorException(String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId), ex);
+            }
 
             try
             {
@@ -252,40 +332,60 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteBrandGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = BrandRepository.GetSingle(id);
-                BrandRepository.Delete(item);
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = BrandRepository.GetSingle(id);
+                    BrandRepository.Delete(item);
+                }
+                BrandRepository.Save();
             }
-            BrandRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteBrandGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteCategoryGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = CategoryRepository.GetSingle(id);
-                CategoryRepository.Delete(item);
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = CategoryRepository.GetSingle(id);
+                    CategoryRepository.Delete(item);
+                }
+                CategoryRepository.Save();
             }
-            CategoryRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteCategoryGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductCategoryGridItem(List<String> values)
         {
-            foreach (String v in values)
+            try
             {
-                var id = v.ToInt();
-                var item = ProductCategoryRepository.GetProductCategory(id);
-                ProductCategoryRepository.Delete(item);
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = ProductCategoryRepository.GetProductCategory(id);
+                    ProductCategoryRepository.Delete(item);
+                }
+                ProductCategoryRepository.Save();
             }
-            ProductCategoryRepository.Save();
-
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteProductCategoryGridItem :" + String.Join(",", values), exception);
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -304,60 +404,89 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult ChangeEmailListGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
+            try
             {
-                var nav = EmailListRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
-                {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
 
-                EmailListRepository.Edit(nav);
+                foreach (OrderingItem item in values)
+                {
+                    var nav = EmailListRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox != null && checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
+
+                    EmailListRepository.Edit(nav);
+                }
+                EmailListRepository.Save();
+
             }
-            EmailListRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeEmailListGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
-            {
-                var nav = ProductCategoryRepository.GetProductCategory(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
-                {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
 
-                ProductCategoryRepository.Edit(nav);
+            try
+            {
+
+                foreach (OrderingItem item in values)
+                {
+                    var nav = ProductCategoryRepository.GetProductCategory(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox != null && checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
+
+                    ProductCategoryRepository.Edit(nav);
+                }
+                ProductCategoryRepository.Save();
+
             }
-            ProductCategoryRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeProductCategoryGridOrderingOrState :" + String.Join(",", values), exception);
+            }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeLabelGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            foreach (OrderingItem item in values)
-            {
-                var nav = LabelRepository.GetSingle(item.Id);
-                if (String.IsNullOrEmpty(checkbox))
-                {
-                    nav.Ordering = item.Ordering;
-                }
-                if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nav.State = item.State;
-                }
 
-                LabelRepository.Edit(nav);
+            try
+            {
+                foreach (OrderingItem item in values)
+                {
+                    var nav = LabelRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox != null && checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
+
+                    LabelRepository.Edit(nav);
+                }
+                LabelRepository.Save();
+
             }
-            LabelRepository.Save();
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeLabelGridOrderingOrState :" + String.Join(",", values), exception);
+            }
+
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")

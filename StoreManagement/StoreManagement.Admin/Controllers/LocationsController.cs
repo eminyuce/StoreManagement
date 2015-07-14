@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Admin.Controllers
 {
@@ -55,33 +56,58 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Location location)
         {
-            if (ModelState.IsValid)
+            try
             {
-                location.Latitude = 1;
-                location.Longitude = 1;
-                if (location.Id > 0)
+                if (ModelState.IsValid)
                 {
-                    location.UpdatedDate = DateTime.Now;
-                    LocationRepository.Edit(location);
-                }
-                else
-                {
-                    location.State = true;
-                    location.UpdatedDate = DateTime.Now;
-                    location.CreatedDate = DateTime.Now;
-                    LocationRepository.Add(location);
-                }
 
-                LocationRepository.Save();
+                    String address = location.Address.ToStr() + " "
+                  + location.City.ToStr() + " "
+                  + location.State.ToStr() + " "
+                  + location.Postal.ToStr() + " "
+                  + location.Country.ToStr() + " ";
+                    address = address.Trim();
+                    if (!String.IsNullOrEmpty(address))
+                    {
+                        var result = LatitudeAndLongitudeParser.GetLatitudeAndLongitude(address);
+                        if (result.Count > 0)
+                        {
+                            location.Longitude = result[1];
+                            location.Latitude = result[0];
+                        }
+                    }
 
-                if (IsSuperAdmin)
-                {
-                    return RedirectToAction("Index", new { storeId = location.StoreId });
+
+                    if (location.Id > 0)
+                    {
+                        location.UpdatedDate = DateTime.Now;
+                        LocationRepository.Edit(location);
+                    }
+                    else
+                    {
+                        location.State = true;
+                        location.UpdatedDate = DateTime.Now;
+                        location.CreatedDate = DateTime.Now;
+                        LocationRepository.Add(location);
+                    }
+
+                    LocationRepository.Save();
+
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = location.StoreId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + location, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             return View(location);
         }
@@ -102,17 +128,29 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Location location = LocationRepository.GetSingle(id);
-            LocationRepository.Delete(location);
-            LocationRepository.Save();
 
-            if (IsSuperAdmin)
+            try
             {
-                return RedirectToAction("Index", new { storeId = location.StoreId });
+                LocationRepository.Delete(location);
+                LocationRepository.Save();
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = location.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete:" + location, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+            return View(location);
+
         }
 
     }

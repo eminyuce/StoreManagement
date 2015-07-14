@@ -1,6 +1,8 @@
 ﻿@model Content
 @using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
+
+
 @{
     var image = Model.ContentFiles.FirstOrDefault();
     var desc = GeneralHelper.GetDescription(Model.Description, 300);

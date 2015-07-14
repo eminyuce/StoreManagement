@@ -97,6 +97,7 @@
     <Compile Include="Repositories\ContentFileRepository.cs" />
     <Compile Include="Repositories\EmailListRepository.cs" />
     <Compile Include="Repositories\FileManagerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IBaseRepository.cs" />
     <Compile Include="Repositories\Interfaces\IBrandRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICategoryRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICommentRepository.cs" />

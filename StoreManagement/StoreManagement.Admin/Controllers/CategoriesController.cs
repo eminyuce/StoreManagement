@@ -23,7 +23,7 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Categories/
 
-        public virtual  ActionResult Index(int storeId = 0, String search = "")
+        public virtual ActionResult Index(int storeId = 0, String search = "")
         {
             List<Category> resultList = new List<Category>();
             storeId = GetStoreId(storeId);
@@ -70,30 +70,41 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Category category)
         {
-            if (ModelState.IsValid)
+            try
             {
-                category.CategoryType = CategoryType;
-                if (category.Id == 0)
+                if (ModelState.IsValid)
                 {
-                    CategoryRepository.Add(category);
-                }
-                else
-                {
-                    CategoryRepository.Edit(category);
-                }
-                category.CreatedDate = DateTime.Now;
-                CategoryRepository.Save();
+                    category.CategoryType = CategoryType;
+                    if (category.Id == 0)
+                    {
+                        CategoryRepository.Add(category);
+                    }
+                    else
+                    {
+                        CategoryRepository.Edit(category);
+                    }
+                    category.CreatedDate = DateTime.Now;
+                    CategoryRepository.Save();
 
 
-                if (IsSuperAdmin)
-                {
-                    return RedirectToAction("Index", new { storeId = category.StoreId });
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = category.StoreId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+
             }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + category, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
             return View(category);
         }
 
@@ -114,18 +125,28 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = CategoryRepository.GetCategory(id);
-            CategoryRepository.Delete(category);
-            CategoryRepository.Save();
-
-
-            if (IsSuperAdmin)
+            try
             {
-                return RedirectToAction("Index", new { storeId = category.StoreId });
+                CategoryRepository.Delete(category);
+                CategoryRepository.Save();
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = category.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete category:" + category, ex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+
+            return View(category);
         }
 
 

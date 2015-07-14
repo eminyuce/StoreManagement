@@ -19,5 +19,11 @@ namespace StoreManagement.Data.Entities
 
         public string PhoneWork { get; set; }
         public string PhoneCell { get; set; }
+
+
+        public override string ToString()
+        {
+            return "id:" + this.Id + " Name:" + Name + " StoreId:" + this.StoreId;
+        }
     }
 }

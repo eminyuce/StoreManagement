@@ -23,5 +23,8 @@ namespace StoreManagement.Data.Entities
 
         public virtual ICollection<ContentFile> ContentFiles { get; set; }
 
+
+
+
     }
 }

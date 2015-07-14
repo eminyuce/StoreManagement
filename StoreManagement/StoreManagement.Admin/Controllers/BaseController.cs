@@ -107,7 +107,7 @@ namespace StoreManagement.Admin.Controllers
                 var formsIdentity = HttpContext.User.Identity as FormsIdentity;
                 if (formsIdentity != null)
                 {
-                
+
                     FormsAuthenticationTicket ticket = formsIdentity.Ticket;
                     string userData = ticket.UserData;
 
@@ -170,7 +170,7 @@ namespace StoreManagement.Admin.Controllers
                     {
                         return null;
                     }
-               
+
                 }
                 else
                 {
@@ -294,67 +294,78 @@ namespace StoreManagement.Admin.Controllers
         protected bool SaveImagesLabels(string[] labels, List<string> selectedFiles, int storeId)
         {
             Boolean isNewLabelExists = false;
-            foreach (var label in labels)
+
+            try
             {
-                if (label.ToInt() > 0)
+
+
+                foreach (var label in labels)
                 {
-                    foreach (var m in selectedFiles)
+                    if (label.ToInt() > 0)
                     {
-                        LabelLine labelLine = new LabelLine();
-                        labelLine.ItemId = m.ToInt();
-                        labelLine.ItemType = StoreConstants.Files;
-                        labelLine.LabelId = label.ToInt();
-                        LabelLineRepository.Add(labelLine);
-                    }
-                }
-                else
-                {
-                    var existingLabel = LabelRepository.GetLabelByName(label, storeId);
-                    int labelId = 0;
-                    if (existingLabel == null)
-                    {
-                        if (!String.IsNullOrEmpty(label))
+                        foreach (var m in selectedFiles)
                         {
-                            var newLabel = new Label();
-                            newLabel.StoreId = storeId;
-                            newLabel.Name = label;
-                            newLabel.ParentId = 1;
-                            newLabel.State = true;
-                            newLabel.Ordering = 1;
-                            newLabel.CreatedDate = DateTime.Now;
-                            newLabel.UpdatedDate = DateTime.Now;
-                            LabelRepository.Add(newLabel);
-                            LabelRepository.Save();
-                            labelId = newLabel.Id;
+                            LabelLine labelLine = new LabelLine();
+                            labelLine.ItemId = m.ToInt();
+                            labelLine.ItemType = StoreConstants.Files;
+                            labelLine.LabelId = label.ToInt();
+                            LabelLineRepository.Add(labelLine);
                         }
                     }
                     else
                     {
-                        labelId = existingLabel.Id;
-                    }
-
-                    if (labelId > 0)
-                    {
-                        isNewLabelExists = true;
-                        foreach (var m in selectedFiles)
+                        var existingLabel = LabelRepository.GetLabelByName(label, storeId);
+                        int labelId = 0;
+                        if (existingLabel == null)
                         {
-                            var labelLine = new LabelLine();
-                            labelLine.ItemId = m.ToInt();
-                            labelLine.ItemType = StoreConstants.Files;
-                            labelLine.LabelId = labelId;
-                            LabelLineRepository.Add(labelLine);
+                            if (!String.IsNullOrEmpty(label))
+                            {
+                                var newLabel = new Label();
+                                newLabel.StoreId = storeId;
+                                newLabel.Name = label;
+                                newLabel.ParentId = 1;
+                                newLabel.State = true;
+                                newLabel.Ordering = 1;
+                                newLabel.CreatedDate = DateTime.Now;
+                                newLabel.UpdatedDate = DateTime.Now;
+                                LabelRepository.Add(newLabel);
+                                LabelRepository.Save();
+                                labelId = newLabel.Id;
+                            }
+                        }
+                        else
+                        {
+                            labelId = existingLabel.Id;
+                        }
+
+                        if (labelId > 0)
+                        {
+                            isNewLabelExists = true;
+                            foreach (var m in selectedFiles)
+                            {
+                                var labelLine = new LabelLine();
+                                labelLine.ItemId = m.ToInt();
+                                labelLine.ItemType = StoreConstants.Files;
+                                labelLine.LabelId = labelId;
+                                LabelLineRepository.Add(labelLine);
+                            }
                         }
                     }
                 }
-            }
 
-            try
-            {
-                LabelLineRepository.Save();
+                try
+                {
+                    LabelLineRepository.Save();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error is " + ex.Message, ex);
+                }
+
             }
             catch (Exception ex)
             {
-                Logger.Error("Error is " + ex.Message, ex);
+                Logger.ErrorException("Unable to save labels:", ex);
             }
             return isNewLabelExists;
         }

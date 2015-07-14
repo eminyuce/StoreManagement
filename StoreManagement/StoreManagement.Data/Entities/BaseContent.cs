@@ -23,5 +23,11 @@ namespace StoreManagement.Data.Entities
         public Boolean MainPage { get; set; }
         [IgnoreDataMember]
         public Boolean ImageState { get; set; }
+
+
+        public override string ToString()
+        {
+            return "id:" + this.Id + " Name:" + Name + " StoreId:" + this.StoreId;
+        }
     }
 }

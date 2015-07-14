@@ -64,29 +64,40 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Brand brand)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (ModelState.IsValid)
+                {
 
-                if (brand.Id == 0)
-                {
-                    BrandRepository.Add(brand);
-                }
-                else
-                {
-                    BrandRepository.Edit(brand);
-                }
-                BrandRepository.Save();
+                    if (brand.Id == 0)
+                    {
+                        BrandRepository.Add(brand);
+                    }
+                    else
+                    {
+                        BrandRepository.Edit(brand);
+                    }
+                    BrandRepository.Save();
 
 
-                if (IsSuperAdmin)
-                {
-                    return RedirectToAction("Index", new { storeId = brand.StoreId });
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = brand.StoreId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+
             }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save:" + brand, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
             return View(brand);
         }
 
@@ -106,16 +117,29 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Brand brand = BrandRepository.GetSingle(id);
-            BrandRepository.Delete(brand);
-            BrandRepository.Save();
-            if (IsSuperAdmin)
+            
+            try
             {
-                return RedirectToAction("Index", new { storeId = brand.StoreId });
+
+                BrandRepository.Delete(brand);
+                BrandRepository.Save();
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = brand.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete:" + brand, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+
+            return View(brand);
         }
 
     }

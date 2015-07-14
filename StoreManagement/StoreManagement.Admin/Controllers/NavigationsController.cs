@@ -24,9 +24,9 @@ namespace StoreManagement.Admin.Controllers
             List<Navigation> resultList = new List<Navigation>();
             if (storeId != 0)
             {
-                resultList = NavigationRepository.GetStoreNavigations(storeId,search);
+                resultList = NavigationRepository.GetStoreNavigations(storeId, search);
             }
-           
+
             ViewBag.Search = search;
             return View(resultList);
         }
@@ -68,31 +68,42 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Navigation navigation)
         {
-            // if (ModelState.IsValid)
+            try
             {
-                var c = navigation.Modul.Split("-".ToCharArray());
-                navigation.ControllerName = c[0];
-                navigation.ActionName = c[1];
-                if (navigation.Id == 0)
-                {
-                    NavigationRepository.Add(navigation);
-                }
-                else
-                {
-                    NavigationRepository.Edit(navigation);
-                    
-                }
-                NavigationRepository.Save();
-                if (IsSuperAdmin)
-                {
-                    return RedirectToAction("Index", new { storeId = navigation.StoreId });
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
 
+                // if (ModelState.IsValid)
+                {
+                    var c = navigation.Modul.Split("-".ToCharArray());
+                    navigation.ControllerName = c[0];
+                    navigation.ActionName = c[1];
+                    if (navigation.Id == 0)
+                    {
+                        NavigationRepository.Add(navigation);
+                    }
+                    else
+                    {
+                        NavigationRepository.Edit(navigation);
+
+                    }
+                    NavigationRepository.Save();
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = navigation.StoreId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + navigation, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            return View(navigation);
         }
 
 
@@ -113,19 +124,32 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Navigation navigation = NavigationRepository.GetSingle(id);
-            NavigationRepository.Delete(navigation);
-            NavigationRepository.Save();
-            if (IsSuperAdmin)
+
+            try
             {
-                return RedirectToAction("Index", new { storeId = navigation.StoreId });
+                NavigationRepository.Delete(navigation);
+                NavigationRepository.Save();
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = navigation.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete:" + navigation, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+            return View(navigation);
+
         }
 
 
-    
+
     }
 }

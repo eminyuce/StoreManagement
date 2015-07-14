@@ -17,7 +17,7 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = LabelRepository.GetLabelsCategoryAndSearch(storeId,search);
+                resultList = LabelRepository.GetLabelsCategoryAndSearch(storeId, search);
             }
 
             return View(resultList);
@@ -53,27 +53,41 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Label label)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (label.Id == 0)
-                {
-                    LabelRepository.Add(label);
-                }
-                else
-                {
-                    LabelRepository.Edit(label);
-                }
-                LabelRepository.Save();
 
-                if (IsSuperAdmin)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index", new { storeId = label.StoreId });
+                    if (label.Id == 0)
+                    {
+                        LabelRepository.Add(label);
+                    }
+                    else
+                    {
+                        LabelRepository.Edit(label);
+                    }
+                    LabelRepository.Save();
+
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = label.StoreId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+
+
             }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + label, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+
             return View(label);
         }
 
@@ -94,20 +108,30 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Label label = LabelRepository.GetSingle(id);
-            LabelRepository.Delete(label);
-            LabelRepository.Save();
+            try
+            {
+                LabelRepository.Delete(label);
+                LabelRepository.Save();
 
-            if (IsSuperAdmin)
-            {
-                return RedirectToAction("Index", new { storeId = label.StoreId });
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = label.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.ErrorException("Unable to delete it:" + label, ex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+
+            return View(label);
         }
 
 
-    
+
     }
 }

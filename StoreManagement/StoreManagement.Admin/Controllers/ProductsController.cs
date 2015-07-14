@@ -106,8 +106,6 @@ namespace StoreManagement.Admin.Controllers
         {
             try
             {
-
-
                 if (ModelState.IsValid)
                 {
                     if (!CheckRequest(product))

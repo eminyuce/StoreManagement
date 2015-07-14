@@ -161,6 +161,7 @@ namespace StoreManagement.Service.Repositories
 
         public void DeleteLogs(string application = "")
         {
+            storeContext.Database.Connection.Open();
             // Create a SQL command to execute the sproc 
             using (SqlCommand command = (SqlCommand)storeContext.Database.Connection.CreateCommand())
             {
@@ -178,7 +179,7 @@ namespace StoreManagement.Service.Repositories
                 command.CommandTimeout = 200000;
                 command.ExecuteNonQuery();
             }//command
-
+             storeContext.Database.Connection.Close();
         }
     }
 }

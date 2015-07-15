@@ -12,15 +12,17 @@ namespace StoreManagement.Service.Services
     public class PageDesignService : BaseService, IPageDesignService
     {
         private const String ApiControllerName = "PageDesigns";
-        public PageDesignService(string webServiceAddress) : base(webServiceAddress)
+        public PageDesignService(string webServiceAddress)
+            : base(webServiceAddress)
         {
-        }
 
-        public List<PageDesign> GetPageDesignByStoreId(int storeId)
+        }
+        
+        public List<PageDesign> GetPageDesignByStoreId(int storeId, string search)
         {
             try
             {
-                string url = string.Format("http://{0}/api/{1}/GetPageDesignByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+                string url = string.Format("http://{0}/api/{1}/GetPageDesignByStoreId?storeId={2}&search={3}", WebServiceAddress, ApiControllerName, storeId, search);
                 return HttpRequestHelper.GetUrlResults<PageDesign>(url);
             }
             catch (Exception ex)

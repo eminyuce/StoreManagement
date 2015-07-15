@@ -1,0 +1,133 @@
+@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.PageDesign
+
+@{
+    ViewBag.Title = "Edit";
+ 
+    
+    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    int storeId = Model != null ? Model.StoreId : requestStoreId;
+    
+}
+
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Alerts</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+ 
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>PageDesign</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+
+
+
+                        <div class="editor-label control-group">
+                            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                        </div>
+
+                        
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Type)
+
+                            @Html.TextBoxFor(model => model.Type, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Type)
+                        </div>
+                        
+
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.PageRazorTemplate)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(model => model.PageRazorTemplate)
+                            @Html.ValidationMessageFor(model => model.PageRazorTemplate)
+                        </div>
+
+
+
+
+                        <p>
+                            <input class="btn btn-success btn-block btn-lg" type="submit" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@section scripts
+{
+       <script src="~/Scripts/jstree/jstree.js"></script>
+    <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
+    <script src="~/Scripts/storeContent.js"></script>
+
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            // CKEditor Full
+            $('textarea#PageRazorTemplate').ckeditor({
+                height: '800px'
+            });
+
+            // TinyMCE Full
+            tinymce.init({
+                selector: "#PageRazorTemplate",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "emoticons template paste textcolor"
+                ],
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                toolbar2: "print preview media | forecolor backcolor emoticons",
+                image_advtab: true,
+                templates: [
+                    { title: 'Test template 1', content: 'Test 1' },
+                    { title: 'Test template 2', content: 'Test 2' }
+                ]
+            });
+        });
+
+
+
+
+    </script>
+}

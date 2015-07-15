@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title 
-        
+    <title>@ViewBag.Title
+
         API is @(StoreManagement.Data.ProjectAppSettings.GetWebConfigBool("IsApiService") ? "" : "NOT") working
 
     </title>
@@ -11,12 +11,12 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-      @Styles.Render("~/Content/bootstrap")
-    
+    @Styles.Render("~/Content/bootstrap")
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryui")
 
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/shop-cart/assets/css/bootstrap.css" rel="stylesheet" />
@@ -25,7 +25,7 @@
 
     <a href="~/Content/shop-cart/assets/ico/favicon.ico">~/Content/shop-cart/assets/ico/favicon.ico</a>
     <script src="~/Scripts/storeManagement.js"></script>
-    
+
 
     @* <link href="@Url.RouteUrl(new { controller = "Css", action = "GetTheme" })" rel="stylesheet" type="text/css" />*@
 
@@ -34,8 +34,8 @@
 <body>
 
     <span id="MetaKeywords">
-        @ViewBag.MetaKeywords 
-    </span> 
+        @ViewBag.MetaKeywords
+    </span>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="topNav">
             <div class="container">
@@ -60,7 +60,7 @@
         <header id="header">
             <div class="row">
                 <div class="span4">
-                    <h1> 
+                    <h1>
                         <a class="logo" href="index.html"><span>Twitter Bootstrap ecommerce template</span>
                             <img src="../../Content/shop-cart/assets/img/logo-bootstrap-shoping-cart.png" alt="bootstrap sexy shop">
                         </a>
@@ -102,7 +102,7 @@ Navigation Bar Section
                     </a>
                     <div class="nav-collapse">
                         <ul class="nav">
-                          @Html.Action("MainMenu","Home")
+                            @Html.Action("MainMenu", "Home")
                         </ul>
                         <form action="#" class="navbar-search pull-left">
                             <input type="text" placeholder="Search" class="search-query span2">
@@ -146,7 +146,7 @@ Navigation Bar Section
     </div>
 
 
- 
+
 
 
 

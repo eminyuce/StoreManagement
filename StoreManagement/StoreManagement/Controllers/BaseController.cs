@@ -41,8 +41,6 @@ namespace StoreManagement.Controllers
         [Inject]
         public ICategoryService CategoryService { set; get; }
 
-
-
         [Inject]
         public INavigationService NavigationService { set; get; }
 
@@ -51,8 +49,6 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public IStoreUserService StoreUserService { set; get; }
-
-
 
         [Inject]
         public IEmailSender EmailSender { set; get; }

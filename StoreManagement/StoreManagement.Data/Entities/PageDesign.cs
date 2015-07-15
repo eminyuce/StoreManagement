@@ -13,9 +13,7 @@ namespace StoreManagement.Data.Entities
         public string Type { get; set; }
         [AllowHtml]
         public string PageRazorTemplate { get; set; }
- 
-      
-
+        public string Name { get; set; }
 
         public override string ToString()
         {

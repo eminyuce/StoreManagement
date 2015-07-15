@@ -78,6 +78,7 @@ namespace StoreManagement.Admin.Controllers
                 content.Type = StoreConstants.ProductType;
                 content.CreatedDate = DateTime.Now;
                 content.State = true;
+                content.UpdatedDate = DateTime.Now;
             }
             else
             {

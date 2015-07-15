@@ -6,12 +6,13 @@
     var desc = GeneralHelper.GetDescription(Model.Description, 300);
 
     var detailActionName = "Blog";
+    var detailLink = Url.Action(detailActionName, new {id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id)});
 }
 
 <div class="four columns">
     <article class="from-the-blog">
         <figure class="from-the-blog-image">
-            <a href="@Url.Action(detailActionName, new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) })">
+            <a href="@detailLink">
                 @if (image != null)
                 {
                     <img src="@Url.Action("FetchImage", "Images", new { id = image.FileManager.GoogleImageId, size = "", contentType = image.FileManager.ContentType })" style="width: 120px; height: 120px;" alt="">
@@ -20,7 +21,7 @@
             <div class="hover-icon"></div>
         </figure>
         <section class="from-the-blog-content">
-            <a href="@Url.Action(detailActionName, new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(Model.Name), Model.Id) })">
+            <a href="@detailLink">
                 <h5>@Model.Name </h5>
             </a>
             <span>

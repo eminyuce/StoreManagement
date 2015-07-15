@@ -16,11 +16,6 @@ namespace StoreManagement.API.Controllers
 {
     public class PageDesignsController : BaseApiController<PageDesign>, IPageDesignService
     {
-        // GET api/PageDesigns
-        public IEnumerable<PageDesign> GetPageDesigns(int storeId)
-        {
-            return this.PageDesignRepository.GetPageDesignByStoreId(storeId);
-        }
 
         // GET api/PageDesigns/5
         public override IEnumerable<PageDesign> GetAll()
@@ -107,9 +102,9 @@ namespace StoreManagement.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, pagedesign);
         }
 
-        public List<PageDesign> GetPageDesignByStoreId(int storeId)
+        public List<PageDesign> GetPageDesignByStoreId(int storeId, string search)
         {
-            return PageDesignRepository.GetPageDesignByStoreId(storeId);
+            return PageDesignRepository.GetPageDesignByStoreId(storeId, search);
         }
     }
 }

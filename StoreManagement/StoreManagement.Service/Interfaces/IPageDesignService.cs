@@ -9,6 +9,6 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IPageDesignService : IService
     {
-        List<PageDesign> GetPageDesignByStoreId(int storeId);
+        List<PageDesign> GetPageDesignByStoreId(int storeId, string search);
     }
 }

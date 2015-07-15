@@ -13,23 +13,14 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class PageDesignsController : BaseController
     {
-        
-        
+
         //
         // GET: /PageDesigns/
-
-        public ViewResult Index(int storeId=0)
+        public ViewResult Index(int storeId = 0, String search = "")
         {
             storeId = GetStoreId(storeId);
-            List<PageDesign> resultList = new List<PageDesign>();
-            if (storeId == 0)
-            {
-                resultList = PageDesignRepository.GetAll().ToList();
-            }
-            else
-            {
-                resultList = PageDesignRepository.GetPageDesignByStoreId(storeId);
-            }
+            var resultList = new List<PageDesign>();
+            resultList = PageDesignRepository.GetPageDesignByStoreId(storeId, search);
             return View(resultList);
         }
 
@@ -42,37 +33,27 @@ namespace StoreManagement.Admin.Controllers
             return View(pagedesign);
         }
 
-        //
-        // GET: /PageDesigns/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /PageDesigns/Create
-
-        [HttpPost]
-        public ActionResult Create(PageDesign pagedesign)
-        {
-            if (ModelState.IsValid)
-            {
-                PageDesignRepository.Add(pagedesign);
-                PageDesignRepository.Save();
-               
-                return RedirectToAction("Index");
-            }
-
-            return View(pagedesign);
-        }
 
         //
         // GET: /PageDesigns/Edit/5
 
-        public ActionResult Edit(int id)
+        public ActionResult SaveOrEdit(int id = 0)
         {
-            PageDesign pagedesign = PageDesignRepository.GetSingle(id);
+            var pagedesign = new PageDesign();
+            if (id == 0)
+            {
+                pagedesign.CreatedDate = DateTime.Now;
+                pagedesign.State = true;
+                pagedesign.UpdatedDate = DateTime.Now;
+
+            }
+            else
+            {
+                pagedesign = PageDesignRepository.GetSingle(id);
+                pagedesign.State = true;
+                pagedesign.UpdatedDate = DateTime.Now;
+            }
+
             return View(pagedesign);
         }
 
@@ -80,14 +61,41 @@ namespace StoreManagement.Admin.Controllers
         // POST: /PageDesigns/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(PageDesign pagedesign)
+        public ActionResult SaveOrEdit(PageDesign pagedesign)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                PageDesignRepository.Edit(pagedesign);
-                PageDesignRepository.Save();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (pagedesign.Id > 0)
+                    {
+                        PageDesignRepository.Edit(pagedesign);
+                    }
+                    else
+                    {
+                        PageDesignRepository.Add(pagedesign);
+                    }
+
+                    PageDesignRepository.Save();
+
+                    if (IsSuperAdmin)
+                    {
+                        return RedirectToAction("Index", new { storeId = pagedesign.StoreId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + pagedesign, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
             return View(pagedesign);
         }
 
@@ -106,11 +114,29 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+
             PageDesign pagedesign = PageDesignRepository.GetSingle(id);
-            PageDesignRepository.Delete(pagedesign);
-            PageDesignRepository.Save();
-            return RedirectToAction("Index");
+            try
+            {
+                PageDesignRepository.Delete(pagedesign);
+                PageDesignRepository.Save();
+
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = pagedesign.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorException("Unable to save changes:" + pagedesign, ex);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
         }
 
-	}
+    }
 }

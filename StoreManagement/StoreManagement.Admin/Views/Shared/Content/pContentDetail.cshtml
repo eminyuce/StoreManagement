@@ -1,5 +1,5 @@
 ﻿@model StoreManagement.Data.Entities.Content
- 
+
 
 
 
@@ -10,83 +10,90 @@
                 <div class="text-muted bootstrap-admin-box-title">Alerts</div>
             </div>
             <div class="bootstrap-admin-panel-content">
-                
-<h2>Details</h2>
 
-<fieldset>
-    <legend>Content</legend>
+                <h2>Details</h2>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.StoreId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.StoreId)
-    </div>
+                <fieldset>
+                    <legend>Content</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CategoryId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CategoryId)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.StoreId)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.StoreId)
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.CategoryId)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.CategoryId)
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Name)
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Type)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Type)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Author)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Author)
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MainPage)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MainPage)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.State)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.State)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Type)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Type)
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Ordering)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Ordering)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.MainPage)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.MainPage)
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CreatedDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CreatedDate)
-    </div>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.State)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.State)
+                    </div>
 
-   
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "SaveOrEdit", new { id=Model.Id },new{@class="btn btn-success btn-lg btn-block"})
-                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
-</p>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Ordering)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Ordering)
+                    </div>
 
-                 
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.CreatedDate)
+                    </div>
+
+
+                </fieldset>
+                <p>
+                    @Html.ActionLink("Edit", "SaveOrEdit", new { id = Model.Id }, new { @class = "btn btn-success btn-lg btn-block" })
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
+                </p>
+
+
             </div>
         </div>
     </div>

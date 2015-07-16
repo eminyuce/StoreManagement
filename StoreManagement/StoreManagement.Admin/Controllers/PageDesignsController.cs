@@ -37,7 +37,7 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /PageDesigns/Edit/5
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0)
         {
             var pagedesign = new PageDesign();
             if (id == 0)
@@ -45,7 +45,7 @@ namespace StoreManagement.Admin.Controllers
                 pagedesign.CreatedDate = DateTime.Now;
                 pagedesign.State = true;
                 pagedesign.UpdatedDate = DateTime.Now;
-
+                pagedesign.StoreId = selectedStoreId;
             }
             else
             {

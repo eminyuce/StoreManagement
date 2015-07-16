@@ -24,6 +24,8 @@ namespace StoreManagement.Controllers
             newsContents.Store = Store;
             var m = ContentService.GetContentsCategoryId(Store.Id, null, "blog", true, page, 24);
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+            var blogsIndex = PageDesignService.GetPageDesignByName(Store.Id, "BlogsIndex");
+
             return View(newsContents);
         }
         public ActionResult Blog(String id)

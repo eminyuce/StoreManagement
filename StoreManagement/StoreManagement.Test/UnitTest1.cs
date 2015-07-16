@@ -14,9 +14,11 @@ using Google.Apis.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
+using RazorEngine;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.EntitiesWrapper;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
@@ -25,6 +27,8 @@ using StoreManagement.Service.Repositories.Interfaces;
 using Newtonsoft.Json.Linq;
 using StoreManagement.Service.Services;
 using File = System.IO.File;
+using RazorEngine;
+using RazorEngine.Templating;
 
 namespace StoreManagement.Test
 {
@@ -39,6 +43,32 @@ namespace StoreManagement.Test
             dbContext = new StoreContext(ConnectionString);
 
         }
+
+        [TestMethod]
+        public void TestEngineRunCompile()
+        {
+
+            int productId = 160;
+
+            var rr = new ProductRepository(dbContext);
+            var pc = new CategoryRepository(dbContext);
+            var pds = new PageDesignRepository(dbContext);
+
+            var product = rr.GetProductsById(productId);
+            var category = pc.GetCategory(product.ProductCategoryId);
+            var productWrapper = new ProductWrapper(product, category);
+            var pageTemplate = pds.GetPageDesignByName(9, "ProductDetailPage");
+            string template = pageTemplate.PageRazorTemplate;
+            var result = Engine.Razor.RunCompile(template, "templateKey", null, productWrapper);
+
+
+
+            Console.WriteLine(result);
+
+
+
+        }
+
         public static string GetImportPath()
         {
             string[] importPaths =
@@ -53,8 +83,8 @@ namespace StoreManagement.Test
         {
             var s = new StoreRepository(dbContext);
             var laptopBilgisayar = s.GetSingle(5); var store = laptopBilgisayar;
-           // var loginSeaTechnology = s.GetSingle(9); var store = loginSeaTechnology;
-   
+            // var loginSeaTechnology = s.GetSingle(9); var store = loginSeaTechnology;
+
 
             try
             {

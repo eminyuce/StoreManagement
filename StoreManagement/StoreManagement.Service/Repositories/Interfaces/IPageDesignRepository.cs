@@ -12,6 +12,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface IPageDesignRepository : IBaseRepository<PageDesign, int>, IPageDesignService
     {
-
+        List<PageDesign> GetPageDesignByStoreId(int storeId, string search);
     }
 }

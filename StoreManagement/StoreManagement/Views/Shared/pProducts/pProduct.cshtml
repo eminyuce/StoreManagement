@@ -2,7 +2,7 @@
 @model StoreManagement.Data.Entities.Product
 
 @{
-    var image =Model.ProductFiles != null ? Model.ProductFiles.FirstOrDefault();
+    var image =Model.ProductFiles != null ? Model.ProductFiles.FirstOrDefault() : null;
     var desc = GeneralHelper.GetDescription(Model.Description, 200);
     var categoryName = ViewData["ProductCategoryName"].ToStr();
     var productDetailLink = LinkHelper.GetProductLink(Model, categoryName);

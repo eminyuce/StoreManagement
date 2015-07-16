@@ -21,6 +21,18 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
+        public static string GetMd5Hash(string input)
+        {
+            var md5 = MD5.Create();
+            var inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            var hash = md5.ComputeHash(inputBytes);
+            var sb = new StringBuilder();
+            foreach (byte t in hash)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+            return sb.ToString();
+        }
         public static string NofollowExternalLinks(string html, string externalClassName = "external")
         {
             var doc = new HtmlDocument();
@@ -815,6 +827,8 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public static string ConvertTurkishChars(string text)
         {
+            if (String.IsNullOrEmpty(text))
+                return "";
             String[] olds = { "Ğ", "ğ", "Ü", "ü", "Ş", "ş", "İ", "ı", "Ö", "ö", "Ç", "ç" };
            // String[] news = { "G", "g", "U", "u", "S", "s", "I", "i", "O", "o", "C", "c" };
             String[] news = { "G", "g", "U", "u", "S", "s", "i", "i", "O", "o", "C", "c" };

@@ -17,18 +17,18 @@ namespace StoreManagement.Service.Services
         {
 
         }
-        
-        public List<PageDesign> GetPageDesignByStoreId(int storeId, string search)
+
+        public PageDesign GetPageDesignByName(int storeId, string name)
         {
             try
             {
-                string url = string.Format("http://{0}/api/{1}/GetPageDesignByStoreId?storeId={2}&search={3}", WebServiceAddress, ApiControllerName, storeId, search);
-                return HttpRequestHelper.GetUrlResults<PageDesign>(url);
+                string url = string.Format("http://{0}/api/{1}/GetPageDesignByName?storeId={2}&name={3}", WebServiceAddress, ApiControllerName, storeId, name);
+                return HttpRequestHelper.GetUrlResult<PageDesign>(url);
             }
             catch (Exception ex)
             {
                 Logger.ErrorException("Error:" + ex.Message, ex);
-                return new List<PageDesign>();
+                return new PageDesign();
             }
         }
     }

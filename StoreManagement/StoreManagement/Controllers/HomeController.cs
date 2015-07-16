@@ -6,8 +6,11 @@ using System.Web.Mvc;
 using MvcPaging;
 using NLog;
 using Ninject;
+using RazorEngine;
+using RazorEngine.Templating;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.EntitiesWrapper;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
@@ -18,7 +21,7 @@ namespace StoreManagement.Controllers
 {
     public class HomeController : BaseController
     {
-         
+
 
         public ActionResult Index()
         {
@@ -53,13 +56,13 @@ namespace StoreManagement.Controllers
         }
         public ActionResult Contact()
         {
-           
-            return View( );
+
+            return View();
         }
         public ActionResult Locations()
         {
-       
-            return View( );
+
+            return View();
         }
         public ActionResult TermsAndCondition()
         {
@@ -80,10 +83,29 @@ namespace StoreManagement.Controllers
             var mainMenu = NavigationService.GetStoreActiveNavigations(Store.Id);
             return View(mainMenu);
         }
-       
+
         public ActionResult Test()
         {
             return View();
         }
+
+        public ActionResult PageDesignTest()
+        {
+            int productId = 160;
+            var product = ProductService.GetProductsById(productId);
+            var category = CategoryService.GetCategory(product.ProductCategoryId);
+            var productWrapper = new ProductWrapper(product,category);
+            var pageTemplate = PageDesignService.GetPageDesignByName(Store.Id, "ProductDetailPage");
+            string template = pageTemplate.PageRazorTemplate;
+            var result = Engine.Razor.RunCompile(template, GeneralHelper.GetMd5Hash(template), typeof(ProductWrapper), productWrapper);
+ 
+            var r = new RazorEngineOutput();
+            r.TemplateOutput = result;
+
+
+            return View(r);
+        }
+
+
     }
 }

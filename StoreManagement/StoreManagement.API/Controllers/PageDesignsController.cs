@@ -101,10 +101,11 @@ namespace StoreManagement.API.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, pagedesign);
         }
+ 
 
-        public List<PageDesign> GetPageDesignByStoreId(int storeId, string search)
+        public PageDesign GetPageDesignByName(int storeId, string name)
         {
-            return PageDesignRepository.GetPageDesignByStoreId(storeId, search);
+            return PageDesignRepository.GetPageDesignByName(storeId, name);
         }
     }
 }

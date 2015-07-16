@@ -20,21 +20,27 @@ namespace StoreManagement.Service.Repositories
         {
 
         }
-       
+
         public List<PageDesign> GetPageDesignByStoreId(int storeId, string search)
         {
-            var products = this.FindBy(r => r.StoreId == storeId);
+            var pages = this.FindBy(r => r.StoreId == storeId);
 
 
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
-                products = products.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+                pages = pages.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
 
-            return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+            return pages.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 
         }
 
+        public PageDesign GetPageDesignByName(int storeId, string name)
+        {
+          return this.FindBy(r => r.StoreId == storeId && 
+                r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+
+        }
     }
 }
 

@@ -6,8 +6,6 @@ using System.Web.Mvc;
 using MvcPaging;
 using NLog;
 using Ninject;
-using RazorEngine;
-using RazorEngine.Templating;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.EntitiesWrapper;
@@ -97,10 +95,9 @@ namespace StoreManagement.Controllers
             var productWrapper = new ProductWrapper(product,category);
             var pageTemplate = PageDesignService.GetPageDesignByName(Store.Id, "ProductDetailPage");
             string template = pageTemplate.PageRazorTemplate;
-            var result = Engine.Razor.RunCompile(template, GeneralHelper.GetMd5Hash(template), typeof(ProductWrapper), productWrapper);
  
             var r = new RazorEngineOutput();
-            r.TemplateOutput = result;
+            r.TemplateOutput = "";
 
 
             return View(r);

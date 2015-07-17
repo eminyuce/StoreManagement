@@ -45,6 +45,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/de/System.Spatial.resources.dll">
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
+    <File Include="bin/DotLiquid.dll">
+      <publishTime>07/17/2015 11:52:23</publishTime>
+    </File>
+    <File Include="bin/DotLiquid.ViewEngine.dll">
+      <publishTime>07/17/2015 11:52:34</publishTime>
+    </File>
     <File Include="bin/DotNetOpenAuth.AspNet.dll">
       <publishTime>06/26/2015 11:33:26</publishTime>
     </File>
@@ -109,7 +115,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:32</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>07/16/2015 16:13:37</publishTime>
+      <publishTime>07/17/2015 11:55:00</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>06/26/2015 11:43:33</publishTime>
@@ -214,16 +220,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>07/16/2015 16:28:03</publishTime>
+      <publishTime>07/17/2015 11:55:06</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/16/2015 16:13:37</publishTime>
+      <publishTime>07/17/2015 11:54:21</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/16/2015 16:13:39</publishTime>
+      <publishTime>07/17/2015 11:54:23</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/26/2015 11:33:39</publishTime>
@@ -266,6 +272,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>06/26/2015 11:33:35</publishTime>
+    </File>
+    <File Include="bin/WebActivator.dll">
+      <publishTime>07/17/2015 11:52:33</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>06/26/2015 11:33:47</publishTime>
@@ -4447,7 +4456,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2015 15:02:11</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/29/2015 11:19:22</publishTime>
+      <publishTime>07/17/2015 11:53:04</publishTime>
     </File>
     <File Include="Scripts/bootstrap-image-gallery.min.js">
       <publishTime>06/26/2015 11:33:19</publishTime>
@@ -5017,7 +5026,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2015 16:27:01</publishTime>
     </File>
     <File Include="Views/PageDesigns/SaveOrEdit.cshtml">
-      <publishTime>07/16/2015 16:50:57</publishTime>
+      <publishTime>07/17/2015 11:58:37</publishTime>
     </File>
     <File Include="Views/PageDesigns/_CreateOrEdit.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5353,7 +5362,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/16/2015 16:28:17</publishTime>
+      <publishTime>07/17/2015 11:59:03</publishTime>
     </File>
   </ItemGroup>
 </Project>

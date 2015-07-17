@@ -21,6 +21,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/de/System.Spatial.resources.dll">
       <publishTime>05/04/2015 09:17:20</publishTime>
     </File>
+    <File Include="bin/DotLiquid.dll">
+      <publishTime>07/17/2015 11:52:23</publishTime>
+    </File>
+    <File Include="bin/DotLiquid.ViewEngine.dll">
+      <publishTime>07/17/2015 11:52:34</publishTime>
+    </File>
     <File Include="bin/DotNetOpenAuth.AspNet.dll">
       <publishTime>06/26/2015 11:33:26</publishTime>
     </File>
@@ -154,13 +160,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/16/2015 16:13:37</publishTime>
+      <publishTime>07/17/2015 11:54:21</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>07/16/2015 16:14:26</publishTime>
+      <publishTime>07/17/2015 11:55:02</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/16/2015 16:13:39</publishTime>
+      <publishTime>07/17/2015 11:54:23</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -206,6 +212,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>06/26/2015 11:33:35</publishTime>
+    </File>
+    <File Include="bin/WebActivator.dll">
+      <publishTime>07/17/2015 11:52:33</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>06/26/2015 11:33:47</publishTime>
@@ -856,7 +865,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2015 19:37:34</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/16/2015 10:23:50</publishTime>
+      <publishTime>07/17/2015 11:54:07</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>06/26/2015 11:33:24</publishTime>
@@ -958,7 +967,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/13/2015 14:49:10</publishTime>
     </File>
     <File Include="Views/Blogs/Index.cshtml">
-      <publishTime>06/26/2015 11:33:25</publishTime>
+      <publishTime>07/16/2015 16:30:10</publishTime>
     </File>
     <File Include="Views/Categories/Category.cshtml">
       <publishTime>06/26/2015 11:33:25</publishTime>
@@ -1024,7 +1033,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/04/2015 14:25:14</publishTime>
     </File>
     <File Include="Views/News/Detail.cshtml">
-      <publishTime>07/16/2015 16:07:24</publishTime>
+      <publishTime>07/16/2015 16:15:41</publishTime>
     </File>
     <File Include="Views/News/Index.cshtml">
       <publishTime>06/26/2015 11:33:25</publishTime>
@@ -1144,7 +1153,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/16/2015 16:14:56</publishTime>
+      <publishTime>07/17/2015 11:55:48</publishTime>
     </File>
   </ItemGroup>
 </Project>

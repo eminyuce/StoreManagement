@@ -39,20 +39,20 @@ namespace StoreManagement.Controllers
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult GetProductCategories()
+        {
+            var categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(Store.Id, StoreConstants.ProductType);
+            String partialViewName = @"pProducts\pProductCategories";
+            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(categories));
+            return Json(html, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Refresh(String domain)
         {
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetProductCategories()
-        { 
-            var categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(Store.Id, StoreConstants.ProductType);
-            String partialViewName = @"pProducts\pProductCategories";
-            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(categories));
-            return Json(html, JsonRequestBehavior.AllowGet);
-        }
+       
 
 	}
 }

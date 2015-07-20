@@ -11,6 +11,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="App_Readme/readme.txt">
       <publishTime>06/26/2015 11:33:05</publishTime>
     </File>
+    <File Include="bin/DotLiquid.ViewEngine.dll">
+      <publishTime>07/17/2015 11:52:34</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/26/2015 11:33:31</publishTime>
     </File>
@@ -51,7 +54,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
     <File Include="bin/NLog.dll">
-      <publishTime>06/26/2015 11:33:40</publishTime>
+      <publishTime>07/20/2015 16:21:33</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>06/26/2015 11:33:46</publishTime>
@@ -60,13 +63,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>07/16/2015 10:43:58</publishTime>
+      <publishTime>07/20/2015 16:34:40</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/16/2015 10:42:15</publishTime>
+      <publishTime>07/20/2015 16:34:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/16/2015 10:42:16</publishTime>
+      <publishTime>07/20/2015 16:34:37</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>06/26/2015 11:33:34</publishTime>
@@ -92,6 +95,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>06/26/2015 11:33:35</publishTime>
     </File>
+    <File Include="bin/WebActivator.dll">
+      <publishTime>07/17/2015 11:52:33</publishTime>
+    </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>06/26/2015 11:33:47</publishTime>
     </File>
@@ -99,13 +105,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:05</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/26/2015 11:33:05</publishTime>
+      <publishTime>07/20/2015 16:22:30</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/16/2015 10:43:59</publishTime>
+      <publishTime>07/20/2015 16:34:42</publishTime>
     </File>
   </ItemGroup>
 </Project>

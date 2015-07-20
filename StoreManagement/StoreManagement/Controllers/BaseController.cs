@@ -120,11 +120,12 @@ namespace StoreManagement.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Store= " + Store.Domain + " Key=" + key, ex);
+                if (Store != null)
+                {
+                    Logger.ErrorException(string.Format("Store= {0} Key={1}", Store.Domain, key), ex);
+                }
                 return "";
             }
-
-
         }
 
 

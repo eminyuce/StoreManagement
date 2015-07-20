@@ -115,7 +115,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:32</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>07/17/2015 11:55:00</publishTime>
+      <publishTime>07/20/2015 16:35:07</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>06/26/2015 11:43:33</publishTime>
@@ -196,7 +196,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2015 15:02:11</publishTime>
     </File>
     <File Include="bin/NLog.dll">
-      <publishTime>06/26/2015 11:33:40</publishTime>
+      <publishTime>07/20/2015 16:21:33</publishTime>
     </File>
     <File Include="bin/NLog.Web.dll">
       <publishTime>06/26/2015 11:33:41</publishTime>
@@ -220,16 +220,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>07/17/2015 11:55:06</publishTime>
+      <publishTime>07/20/2015 16:35:16</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/17/2015 11:54:21</publishTime>
+      <publishTime>07/20/2015 16:34:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/17/2015 11:54:23</publishTime>
+      <publishTime>07/20/2015 16:34:37</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/26/2015 11:33:39</publishTime>
@@ -4456,7 +4456,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2015 15:02:11</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/17/2015 11:53:04</publishTime>
+      <publishTime>07/20/2015 16:21:52</publishTime>
     </File>
     <File Include="Scripts/bootstrap-image-gallery.min.js">
       <publishTime>06/26/2015 11:33:19</publishTime>
@@ -5362,7 +5362,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/17/2015 11:59:03</publishTime>
+      <publishTime>07/20/2015 16:35:38</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1,13 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Service", "StoreManagement.Service\StoreManagement.Service.csproj", "{257AD197-B5E1-4C9C-B9BE-5B559828C57C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Data", "StoreManagement.Data\StoreManagement.Data.csproj", "{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleDriveUploader", "..\..\GoogleDriveUploader\GoogleDriveUploader\GoogleDriveUploader.csproj", "{B652AE97-342E-4309-82CD-860614F5746F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Test", "StoreManagement.Test\StoreManagement.Test.csproj", "{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Liquid", "StoreManagement.Liquid\StoreManagement.Liquid.csproj", "{B02F9B20-4717-46D5-9082-923AB0EEF539}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement", "StoreManagement\StoreManagement.csproj", "{5CF16371-171A-4C36-810F-C1D491D79362}"
 EndProject
@@ -15,28 +9,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Admin", "St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.API", "StoreManagement.API\StoreManagement.API.csproj", "{364C6068-B8EF-4054-AA25-3BCF3A70B400}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Data", "StoreManagement.Data\StoreManagement.Data.csproj", "{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Service", "StoreManagement.Service\StoreManagement.Service.csproj", "{257AD197-B5E1-4C9C-B9BE-5B559828C57C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Test", "StoreManagement.Test\StoreManagement.Test.csproj", "{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleDriveUploader", "..\..\GoogleDriveUploader\GoogleDriveUploader\GoogleDriveUploader.csproj", "{B652AE97-342E-4309-82CD-860614F5746F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B652AE97-342E-4309-82CD-860614F5746F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02F9B20-4717-46D5-9082-923AB0EEF539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02F9B20-4717-46D5-9082-923AB0EEF539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02F9B20-4717-46D5-9082-923AB0EEF539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02F9B20-4717-46D5-9082-923AB0EEF539}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5CF16371-171A-4C36-810F-C1D491D79362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5CF16371-171A-4C36-810F-C1D491D79362}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CF16371-171A-4C36-810F-C1D491D79362}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,6 +39,22 @@ Global
 		{364C6068-B8EF-4054-AA25-3BCF3A70B400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364C6068-B8EF-4054-AA25-3BCF3A70B400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364C6068-B8EF-4054-AA25-3BCF3A70B400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553854D8-A688-4A50-AB74-4CCF3B1AFE9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257AD197-B5E1-4C9C-B9BE-5B559828C57C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B652AE97-342E-4309-82CD-860614F5746F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B652AE97-342E-4309-82CD-860614F5746F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B652AE97-342E-4309-82CD-860614F5746F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B652AE97-342E-4309-82CD-860614F5746F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

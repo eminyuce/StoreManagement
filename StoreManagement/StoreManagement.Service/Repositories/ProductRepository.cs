@@ -126,5 +126,15 @@ namespace StoreManagement.Service.Repositories
         {
             return this.GetAllIncluding(r2 => r2.ProductFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
+
+        public List<Product> GetProductsByStoreId(int storeId, String searchKey)
+        {
+            var products = this.FindBy(r => r.StoreId == storeId );
+            if (!String.IsNullOrEmpty(searchKey))
+            {
+                products = products.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
+            }
+            return products.ToList();
+        }
     }
 }

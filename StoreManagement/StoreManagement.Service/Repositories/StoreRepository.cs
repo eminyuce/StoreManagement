@@ -68,6 +68,16 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public List<Store> GetStoresByStoreId(int storeId, string searchKey)
+        {
+            var items = this.FindBy(r => r.Id == storeId);
+            if (!String.IsNullOrEmpty(searchKey))
+            {
+                items = items.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
+            }
+            return items.ToList();
+        }
+
         public List<Store> GetAllStores()
         {
             String key = String.Format("GetAllStores");

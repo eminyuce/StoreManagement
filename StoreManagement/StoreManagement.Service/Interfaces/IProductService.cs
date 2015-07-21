@@ -12,7 +12,6 @@ namespace StoreManagement.Service.Interfaces
     {
         Product GetProductsById(int productId);
         List<Product> GetProductByType(String typeName);
-        List<Product> GetProductByType(int storeId, String typeName);
         List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId);
         List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId, String search);
         List<Product> GetProductByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);

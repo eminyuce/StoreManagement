@@ -1765,6 +1765,7 @@
     <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\reports.js" />
     <Content Include="Scripts\storeContent.js" />
+    <Content Include="Scripts\storeHelper.js" />
     <Content Include="Scripts\storeManagement.js" />
     <Content Include="Scripts\storesStyleChanger.js" />
     <Content Include="Scripts\TextFile1.txt" />

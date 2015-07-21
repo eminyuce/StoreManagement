@@ -136,6 +136,14 @@ namespace StoreManagement.Service.Repositories
             return res;
         }
 
-       
+        public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)
+        {
+            var contents = this.FindBy(r => r.StoreId == storeId &&  r.Type.Equals(typeName));
+            if (!String.IsNullOrEmpty(searchKey))
+            {
+                contents = contents.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
+            }
+            return contents.ToList();
+        }
     }
 }

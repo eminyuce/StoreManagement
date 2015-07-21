@@ -8,15 +8,17 @@
     string storeId = @Request.QueryString["storeId"].ToStr();
     int selectedCategoryId = @Request.QueryString["categoryId"].ToInt();
 }
+<input type="hidden" id="action"  value="@action" />
+<input type="hidden" id="controller"  value="@controller" />
 
 @using (Html.BeginForm(action, controller, FormMethod.Get))
 {
-    <input type="hidden" name="storeId"  value="@storeId" />
+    <input type="hidden" name="storeId" id="storeId"  value="@storeId" />
     <input type="hidden" name="categoryId"  value="@selectedCategoryId" />
     <div class="row">
         <div class="col-md-7 col-xs-6">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" name="search" value="@search"/>
+                <input type="text" class="form-control" placeholder="Search" id="search" name="search" value="@search"/>
             </div>
         </div>
         @if (!String.IsNullOrEmpty(search))
@@ -31,10 +33,11 @@
         else
         {
             <div class="col-md-5 col-xs-6">
-                <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
+                <button type="submit" id="SearchButton" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
             </div>
         }
 
     </div>
     
 }
+ 

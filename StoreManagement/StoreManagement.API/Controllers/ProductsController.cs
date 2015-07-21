@@ -47,10 +47,7 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductByType(typeName);
         }
 
-        public List<Product> GetProductByType(int storeId, string typeName)
-        {
-            return ProductRepository.GetProductByType(storeId, typeName);
-        }
+     
 
         public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {

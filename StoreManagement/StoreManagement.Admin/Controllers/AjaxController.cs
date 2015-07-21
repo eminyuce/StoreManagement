@@ -37,6 +37,40 @@ namespace StoreManagement.Admin.Controllers
             }
 
         }
+
+        public ActionResult SearchAutoComplete(String term, String action, String controller, int id=0)
+        {
+            int storeId = GetStoreId(id);
+            var list = new List<String>();
+            String searchKey = term;
+            if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                    controller.Equals("Products", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = ProductRepository.GetProductsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                    controller.Equals("News", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = ContentRepository.GetContentsByStoreId(storeId, searchKey, StoreConstants.NewsType).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                    controller.Equals("Blogs", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = ContentRepository.GetContentsByStoreId(storeId, searchKey, StoreConstants.BlogsType).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                    controller.Equals("Navigations", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = NavigationRepository.GetNavigationsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                    controller.Equals("Stores", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = StoreRepository.GetStoresByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+            }
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetStoreLabels(int storeId)
         {
             var labels = LabelRepository.GetActiveLabels(storeId);

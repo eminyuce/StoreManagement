@@ -12,5 +12,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface IEmailListRepository : IBaseRepository<EmailList, int>, IEmailListService
     {
         List<EmailList> GetStoreEmailList(int storeId, String search);
+
+ 
     }
 }

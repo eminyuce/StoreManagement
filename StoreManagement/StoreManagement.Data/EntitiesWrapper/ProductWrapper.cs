@@ -10,9 +10,9 @@ namespace StoreManagement.Data.EntitiesWrapper
 {
     public class ProductWrapper : BaseWrapper
     {
-        public Category Category { set; get; }
+        public ProductCategory Category { set; get; }
         public Product Product { set; get; }
-        public ProductWrapper(Product product, Category categoryName)
+        public ProductWrapper(Product product, ProductCategory categoryName)
         {
             this.Product = product;
             this.Category = categoryName;
@@ -25,4 +25,5 @@ namespace StoreManagement.Data.EntitiesWrapper
 
 
     }
+ 
 }

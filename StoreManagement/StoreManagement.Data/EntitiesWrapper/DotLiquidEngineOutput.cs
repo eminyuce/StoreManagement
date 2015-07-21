@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Data.EntitiesWrapper
 {
-    public class RazorEngineOutput
+    public class DotLiquidEngineOutput
     {
         public String TemplateOutput { set; get; }
         public String Layout { set; get; }

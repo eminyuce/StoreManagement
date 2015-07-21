@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotLiquid">
+      <HintPath>..\packages\DotLiquid.1.8.0\lib\NET45\DotLiquid.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -118,8 +121,9 @@
     <Compile Include="EmailHelper\EmailSender.cs" />
     <Compile Include="EmailHelper\IEmailSender.cs" />
     <Compile Include="EntitiesWrapper\BaseWrapper.cs" />
+    <Compile Include="EntitiesWrapper\ContentWrapper.cs" />
     <Compile Include="EntitiesWrapper\ProductWrapper.cs" />
-    <Compile Include="EntitiesWrapper\RazorEngineOutput.cs" />
+    <Compile Include="EntitiesWrapper\DotLiquidEngineOutput.cs" />
     <Compile Include="Entities\AdminProjectUsersModel.cs" />
     <Compile Include="Entities\BaseCategory.cs" />
     <Compile Include="Entities\BaseContent.cs" />

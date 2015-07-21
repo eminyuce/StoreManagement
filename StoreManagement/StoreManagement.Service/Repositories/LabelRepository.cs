@@ -52,5 +52,15 @@ namespace StoreManagement.Service.Repositories
             var items = this.FindBy(r => r.StoreId == storeId);
             return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
         }
+
+        public List<Label> GetLabelsByStoreId(int storeId, string searchKey)
+        {
+            var items = this.FindBy(r => r.StoreId == storeId);
+            if (!String.IsNullOrEmpty(searchKey))
+            {
+                items = items.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
+            }
+            return items.ToList();
+        }
     }
 }

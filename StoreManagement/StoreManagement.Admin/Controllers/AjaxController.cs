@@ -66,7 +66,32 @@ namespace StoreManagement.Admin.Controllers
             else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
                     controller.Equals("Stores", StringComparison.InvariantCultureIgnoreCase))
             {
-                list = StoreRepository.GetStoresByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+                list = StoreRepository.GetStoresByStoreId(searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                  controller.Equals("Labels", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = LabelRepository.GetLabelsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                 controller.Equals("EmailLists", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = EmailListRepository.GetStoreEmailList(storeId, searchKey).Select(r => r.Email).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+               controller.Equals("Contacts", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = ContactRepository.GetContactsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+            } 
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+               controller.Equals("Locations", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = LocationRepository.GetLocationsByStoreId(storeId, searchKey).Select(r => r.Address).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+               controller.Equals("Brands", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = BrandRepository.GetBrandsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
             }
 
             return Json(list, JsonRequestBehavior.AllowGet);

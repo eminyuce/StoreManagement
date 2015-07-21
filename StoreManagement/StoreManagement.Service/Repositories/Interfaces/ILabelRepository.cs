@@ -15,5 +15,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
         List<Label> GetActiveLabels(int storeId);
         Label GetLabelByName(string label, int storeId);
         List<Label> GetStoreLabels(int storeId);
+        List<Label> GetLabelsByStoreId(int storeId, string searchKey);
     }
 }

@@ -45,30 +45,25 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
-        public void TestEngineRunCompile()
+        public void TestDotLiquidEngineOutput()
         {
-
             int productId = 160;
-
             var rr = new ProductRepository(dbContext);
-            var pc = new CategoryRepository(dbContext);
+            var pc = new ProductCategoryRepository(dbContext);
             var pds = new PageDesignRepository(dbContext);
 
             var product = rr.GetProductsById(productId);
-            var category = pc.GetCategory(product.ProductCategoryId);
+            var category = pc.GetProductCategory(product.ProductCategoryId);
             var productWrapper = new ProductWrapper(product, category);
-            var pageTemplate = pds.GetPageDesignByName(9, "ProductDetailPage");
+            int storeId = 9;
+            var pageTemplate = pds.GetPageDesignByName(storeId, "ProductDetailPage");
             string template = pageTemplate.PageRazorTemplate;
-            var result = Engine.Razor.RunCompile(template, "templateKey", null, productWrapper);
 
-
-
-            Console.WriteLine(result);
-
-
+           
 
         }
 
+   
         public static string GetImportPath()
         {
             string[] importPaths =

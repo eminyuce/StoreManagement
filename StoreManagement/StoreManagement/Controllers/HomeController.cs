@@ -89,18 +89,9 @@ namespace StoreManagement.Controllers
 
         public ActionResult PageDesignTest()
         {
-            int productId = 160;
-            var product = ProductService.GetProductsById(productId);
-            var category = CategoryService.GetCategory(product.ProductCategoryId);
-            var productWrapper = new ProductWrapper(product,category);
-            var pageTemplate = PageDesignService.GetPageDesignByName(Store.Id, "ProductDetailPage");
-            string template = pageTemplate.PageRazorTemplate;
- 
-            var r = new RazorEngineOutput();
-            r.TemplateOutput = "";
+            
 
-
-            return View(r);
+            return View();
         }
 
 

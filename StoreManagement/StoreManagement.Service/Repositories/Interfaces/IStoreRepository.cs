@@ -12,5 +12,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
         List<Store> GetAllStores();
         int SaveStore();
         void CopyStore(int copyStoreId, string name, string domain, string layout);
+        List<Store> GetStoresByStoreId(int storeId, string searchKey);
     }
 }

@@ -54,6 +54,16 @@ namespace StoreManagement.Service.Repositories
 
             return navigations.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
+
+        public List<Navigation> GetNavigationsByStoreId(int storeId, string searchKey)
+        {
+            var items = this.FindBy(r => r.StoreId == storeId);
+            if (!String.IsNullOrEmpty(searchKey))
+            {
+                items = items.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
+            }
+            return items.ToList();
+        }
     }
 
 

@@ -1,10 +1,11 @@
 ﻿function isEmpty(str) {
     return (!str || 0 === str.length);
 }
- 
-$(document).ready(function () {
-    
 
+$(document).ready(function () {
+
+    searchAutoComplete();
+    
     $('.tooltip').tooltip();
     $('.tooltip-left').tooltip({ placement: 'left' });
     $('.tooltip-right').tooltip({ placement: 'right' });
@@ -32,12 +33,12 @@ $(document).ready(function () {
                 break;
         }
     });
-    
+
 
     $('#MyDeleteSubmit').click(function () {
         $('#DeleteItemButton').click();
     });
-    
+
     bindCarouselImage();
     var originalURL = window.location.href;
     var q = getQueryStringParameter(originalURL, "GridPageSize");
@@ -71,7 +72,7 @@ $(document).ready(function () {
             var m = $(this).prop('checked', true);
         });
     });
-   
+
     function OrderingItem() {
         var item = this;
         item.Id = "";
@@ -354,6 +355,49 @@ function populateStoreLabelsDropDown(storeId) {
         },
         beforeSend: function () {
 
+        }
+    });
+
+}
+function searchAutoComplete() {
+
+
+    $("#search").autocomplete({
+        source: function (request, response) {
+            console.log("auto complate");
+            var items = new Array();
+            var jsonRequest = { "term": request.term, "action": $("#action").val(), "controller": $("#controller").val(), "id": $("#storeId").val() };
+            console.log(jsonRequest);
+            if (request.term.length > 2) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Ajax/SearchAutoComplete",
+                    data: jsonRequest,
+                    success: function (data) {
+                        for (var i = 0; i < data.length ; i++) {
+                            items[i] = { label: data[i], Id: data[i] };
+                        }
+                        console.log(items);
+                        response(items);
+                    }
+                });
+            }
+          
+        },
+        select: function (event, ui) {
+            //fill selected customer details on form
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Ajax/SearchAutoCompleteDetail",
+            //    data: { "id": ui.item.Id },
+
+            //    success: function (data) {
+                    
+            //    },
+            //    error: function (xhr, ajaxOptions, thrownError) {
+            //        alert('Failed to retrieve states.');
+            //    }
+            //});
         }
     });
 

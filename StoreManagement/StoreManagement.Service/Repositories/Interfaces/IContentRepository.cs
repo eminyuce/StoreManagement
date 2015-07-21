@@ -11,6 +11,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface IContentRepository : IBaseRepository<Content, int>, IContentService
     {
-   
+        List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName);
     }
 }

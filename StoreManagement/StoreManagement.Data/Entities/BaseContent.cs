@@ -6,12 +6,15 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using DotLiquid;
 
 namespace StoreManagement.Data.Entities
 {
+ 
     public abstract class BaseContent : BaseEntity 
     {
          [Required]
+ 
         public string Name { get; set; }
 
         [AllowHtml]

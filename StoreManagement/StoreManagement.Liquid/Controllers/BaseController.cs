@@ -8,6 +8,7 @@ using Ninject;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.Interfaces;
 using NLog;
@@ -100,7 +101,29 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-
+        protected bool GetSettingValueBool(String key, bool defaultValue)
+        {
+            String d = defaultValue ? bool.TrueString : bool.FalseString;
+            return GetSettingValue(key, d).ToBool();
+        }
+        protected int GetSettingValueInt(String key, int defaultValue)
+        {
+            String d = defaultValue + "";
+            return GetSettingValue(key, d).ToInt();
+        }
+        protected String GetSettingValue(String key, String defaultValue)
+        {
+            var value = GetSettingValue(key);
+            if (String.IsNullOrEmpty(value))
+            {
+                Logger.Trace("Store Default Setting= " + Store.Domain + " Key=" + key + " defaultValue=" + defaultValue);
+                return defaultValue;
+            }
+            else
+            {
+                return value;
+            }
+        }
         protected String GetSettingValue(String key)
         {
             try

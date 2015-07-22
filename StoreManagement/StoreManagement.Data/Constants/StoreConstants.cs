@@ -47,5 +47,7 @@ namespace StoreManagement.Data.Constants
 
 
         public static String Files = "Files";
+
+        public static int DefaultPageSize = 20;
     }
 }

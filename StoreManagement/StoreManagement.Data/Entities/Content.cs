@@ -7,10 +7,12 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using DotLiquid;
 using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
+ 
     public class Content : BaseContent
     {
         public Content()

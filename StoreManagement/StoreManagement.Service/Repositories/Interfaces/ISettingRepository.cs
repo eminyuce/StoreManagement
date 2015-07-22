@@ -12,6 +12,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface ISettingRepository : IBaseRepository<Setting, int>, ISettingService
     {
         List<Setting> GetStoreSettingsByType(int storeid, string type, String search);
+        void SaveSetting();
     }
 
 

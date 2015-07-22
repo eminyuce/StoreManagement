@@ -12,5 +12,7 @@ namespace StoreManagement.Data.RequestModel
     {
         public Store Store { get; set; }
         public PagedList<Content> Contents { get; set; }
+        public PageDesign BlogsPageDesign { get; set; }
+
     }
 }

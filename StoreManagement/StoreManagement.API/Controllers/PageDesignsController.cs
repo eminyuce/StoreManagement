@@ -1,4 +1,5 @@
-﻿using StoreManagement.API.Controllers;
+﻿using System.Threading.Tasks;
+using StoreManagement.API.Controllers;
 using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -103,9 +104,9 @@ namespace StoreManagement.API.Controllers
         }
  
 
-        public PageDesign GetPageDesignByName(int storeId, string name)
+        public Task<PageDesign> GetPageDesignByName(int storeId, string name)
         {
-            return PageDesignRepository.GetPageDesignByName(storeId, name);
+           return  PageDesignRepository.GetPageDesignByName(storeId, name);
         }
     }
 }

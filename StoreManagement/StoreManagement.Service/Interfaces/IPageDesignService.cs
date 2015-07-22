@@ -9,7 +9,6 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IPageDesignService : IService
     {
-
-        PageDesign GetPageDesignByName(int storeId, string name);
+        Task<PageDesign> GetPageDesignByName(int storeId, string name);
     }
 }

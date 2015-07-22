@@ -7,6 +7,7 @@ using StoreManagement.Data.Entities;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 
@@ -35,11 +36,14 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public PageDesign GetPageDesignByName(int storeId, string name)
+        public Task<PageDesign> GetPageDesignByName(int storeId, string name)
         {
-          return this.FindBy(r => r.StoreId == storeId && 
-                r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            var task = new Task<PageDesign>(() =>
+                this.FindBy(r => r.StoreId == storeId &&
+                      r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault());
+            task.Start();
 
+            return task;
         }
     }
 }

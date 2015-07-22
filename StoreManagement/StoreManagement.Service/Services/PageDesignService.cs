@@ -18,17 +18,17 @@ namespace StoreManagement.Service.Services
 
         }
 
-        public PageDesign GetPageDesignByName(int storeId, string name)
+        public Task<PageDesign> GetPageDesignByName(int storeId, string name)
         {
             try
             {
                 string url = string.Format("http://{0}/api/{1}/GetPageDesignByName?storeId={2}&name={3}", WebServiceAddress, ApiControllerName, storeId, name);
-                return HttpRequestHelper.GetUrlResult<PageDesign>(url);
+                return HttpRequestHelper.GetUrlResultAsync<PageDesign>(url);
             }
             catch (Exception ex)
             {
                 Logger.ErrorException("Error:" + ex.Message, ex);
-                return new PageDesign();
+                return null;
             }
         }
     }

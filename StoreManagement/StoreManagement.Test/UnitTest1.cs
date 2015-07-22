@@ -13,6 +13,7 @@ using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using MvcPaging;
 using Newtonsoft.Json;
 using RazorEngine;
 using StoreManagement.Data.Constants;
@@ -20,6 +21,8 @@ using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.EntitiesWrapper;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.LiquidEngineHelpers;
+using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
@@ -45,6 +48,43 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestDotLiquidEngineOutput33()
+        {
+            int storeId = 9;
+            var rr = new ContentRepository(dbContext);
+            var pds = new PageDesignRepository(dbContext);
+
+
+            var contentsTask = rr.GetContentsCategoryIdAsync(storeId, null, "blog", true, 1, 24);
+            var blogsPageDesignTask = pds.GetPageDesignByName(storeId, "BlogsIndex");
+            Task.WaitAll(blogsPageDesignTask, contentsTask);
+
+            var contents = contentsTask.Result;
+            var blogsPageDesign = blogsPageDesignTask.Result;
+            var blogs = contents.items.Select(c => new Blog(c)).ToList();
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageRazorTemplate, new
+                {
+                    blogs = from s in blogs
+                            select new
+                            {
+                                s.Content.Name,
+                                s.Content.Description
+                            }
+                }
+                  );
+
+
+            var dic = new Dictionary<String, String>();
+            dic.Add("BlogsIndex", indexPageOutput);
+            dic.Add("Page", (contents.page - 1).ToStr());
+            dic.Add("PageSize", contents.pageSize.ToStr());
+            dic.Add("TotalItemCount", contents.totalItemCount.ToStr());
+
+            Console.WriteLine(dic["BlogsIndex"]);
+        }
+
+        [TestMethod]
         public void TestDotLiquidEngineOutput()
         {
             int productId = 160;
@@ -57,13 +97,12 @@ namespace StoreManagement.Test
             var productWrapper = new ProductWrapper(product, category);
             int storeId = 9;
             var pageTemplate = pds.GetPageDesignByName(storeId, "ProductDetailPage");
-            string template = pageTemplate.PageRazorTemplate;
 
-           
+
 
         }
 
-   
+
         public static string GetImportPath()
         {
             string[] importPaths =

@@ -25,16 +25,22 @@ namespace StoreManagement.Service.Repositories
 
         }
 
+        
+
         public List<Setting> GetStoreSettings(int storeid)
         {
             var items = StoreDbContext.Settings.Where(r => r.StoreId == storeid).ToList();
 
             return items;
         }
-
+        public void SaveSetting()
+        {
+            ClearCache("GetStoreSettingsFromCache-");
+            this.Save();
+        }
         public List<Setting> GetStoreSettingsFromCache(int storeid)
         {
-            String key = String.Format("Content-{0}", storeid);
+            String key = String.Format("GetStoreSettingsFromCache-{0}", storeid);
             List<Setting> items = null;
             SettingStoreCache.TryGet(key, out items);
             if (items == null)
@@ -64,6 +70,8 @@ namespace StoreManagement.Service.Repositories
 
             return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
+
+       
     }
 
 

@@ -18,13 +18,6 @@ namespace StoreManagement.Data.EntitiesWrapper
         public int ImageId { get; set; }
         public String ImageLink { get; set; }
 
-        public virtual DotLiquidEngineOutput RenderPage(string templateCode)
-        {
-            var liquidEngineOutput  = new DotLiquidEngineOutput();
-            Template template = Template.Parse(templateCode);
-            liquidEngineOutput.TemplateOutput =  template.Render(Hash.FromAnonymousObject(this));
-            liquidEngineOutput.Layout = Layout;
-            return liquidEngineOutput;
-        }
+      
     }
 }

@@ -225,7 +225,7 @@ namespace StoreManagement.Admin.Controllers
             if (ModelState.IsValid)
             {
                 this.SettingRepository.Add(setting);
-                this.SettingRepository.Save();
+                this.SettingRepository.SaveSetting();
             }
             return RedirectToAction("Settings", new { id = setting.StoreId });
         }
@@ -288,7 +288,7 @@ namespace StoreManagement.Admin.Controllers
                 }
 
 
-                SettingRepository.Save();
+                SettingRepository.SaveSetting();
                 return RedirectToAction("Settings", new { storeId = setting.StoreId });
             }
             return View(setting);
@@ -301,7 +301,7 @@ namespace StoreManagement.Admin.Controllers
         {
             Setting setting = SettingRepository.GetSingle(settingId);
             SettingRepository.Delete(setting);
-            SettingRepository.Save();
+            SettingRepository.SaveSetting();
             return RedirectToAction("Settings", new { storeId = setting.StoreId });
         }
         //
@@ -312,7 +312,7 @@ namespace StoreManagement.Admin.Controllers
         {
             Setting setting = SettingRepository.GetSingle(id);
             SettingRepository.Delete(setting);
-            SettingRepository.Save();
+            SettingRepository.SaveSetting();
             return RedirectToAction("Index");
         }
 

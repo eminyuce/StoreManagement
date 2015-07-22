@@ -58,11 +58,11 @@
                         @Html.HiddenFor(model => model.CreatedDate)
                         @Html.HiddenFor(model => model.UpdatedDate)
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.PageRazorTemplate)
+                            @Html.LabelFor(model => model.PageTemplate)
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(model => model.PageRazorTemplate)
-                            @Html.ValidationMessageFor(model => model.PageRazorTemplate)
+                            @Html.TextAreaFor(model => model.PageTemplate)
+                            @Html.ValidationMessageFor(model => model.PageTemplate)
                         </div>
 
 
@@ -103,13 +103,13 @@
         $(function () {
 
             // CKEditor Full
-            $('textarea#PageRazorTemplate').ckeditor({
+            $('textarea#PageTemplate').ckeditor({
                 height: '800px'
             });
 
             // TinyMCE Full
             tinymce.init({
-                selector: "#PageRazorTemplate",
+                selector: "#PageTemplate",
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars code fullscreen",

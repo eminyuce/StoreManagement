@@ -19,7 +19,7 @@ namespace StoreManagement.Liquid.Helper
             var blogsPageDesign = blogsPageDesignTask.Result;
             var blogs = contents.items.Select(c => new Blog(c)).ToList();
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageRazorTemplate, new
+            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, new
             {
                 blogs = from s in blogs
                         select new

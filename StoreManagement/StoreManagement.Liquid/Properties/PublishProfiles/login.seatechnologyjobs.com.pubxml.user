@@ -6,14 +6,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\ProjectsEY\Thinktecture.IdentityServer.v2\WebSites\Thinktecture.IdentityModel.marinelink.org</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\ProjectsEY\Thinktecture.IdentityServer.v2\WebSites\login.seatechnologyjobs.com</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/DotLiquid.dll">
       <publishTime>07/17/2015 11:52:23</publishTime>
-    </File>
-    <File Include="bin/DotLiquid.ViewEngine.dll">
-      <publishTime>07/17/2015 11:52:34</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/26/2015 11:33:31</publishTime>
@@ -58,7 +55,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2015 16:36:03</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>07/22/2015 16:36:08</publishTime>
+      <publishTime>07/22/2015 16:48:45</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
       <publishTime>07/22/2015 16:36:04</publishTime>
@@ -72,17 +69,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>06/26/2015 11:33:33</publishTime>
     </File>
-    <File Include="bin/System.Web.Webpages.Deployment.dll">
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
       <publishTime>06/26/2015 11:33:35</publishTime>
     </File>
-    <File Include="bin/System.Web.Webpages.dll">
+    <File Include="bin/System.Web.WebPages.dll">
       <publishTime>06/26/2015 11:33:35</publishTime>
     </File>
-    <File Include="bin/System.Web.Webpages.Razor.dll">
+    <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>06/26/2015 11:33:35</publishTime>
-    </File>
-    <File Include="bin/WebActivator.dll">
-      <publishTime>07/17/2015 11:52:33</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>06/26/2015 11:33:47</publishTime>
@@ -937,7 +931,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/20/2015 11:56:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/22/2015 16:38:14</publishTime>
+      <publishTime>07/22/2015 16:48:48</publishTime>
     </File>
   </ItemGroup>
 </Project>

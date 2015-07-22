@@ -167,6 +167,7 @@
     <Content Include="fonts\fontello.ttf" />
     <Content Include="fonts\fontello.woff" />
     <None Include="Properties\PublishProfiles\Liquid.pubxml" />
+    <None Include="Properties\PublishProfiles\login.seatechnologyjobs.com.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\alert_boxes_close_ico.png" />
     <Content Include="Images\bg\bedge_grunge.png" />

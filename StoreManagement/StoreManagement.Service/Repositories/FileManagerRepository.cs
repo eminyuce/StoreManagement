@@ -99,6 +99,18 @@ namespace StoreManagement.Service.Repositories
 
             return result;
         }
+
+        public List<FileManager> GetFilesBySearchKey(int storeId, string search)
+        {
+            var items = FindBy(r => r.StoreId == storeId);
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                items = items.Where(r => r.OriginalFilename.ToLower().Contains(search.ToLower()));
+            }
+
+            return items.OrderBy(r => r.Ordering).ToList();
+        }
     }
 
 

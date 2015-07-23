@@ -31,7 +31,7 @@ namespace StoreManagement.Admin.Controllers
             get { return Session["storeId"].ToString().ToInt(); }
             set { Session["storeId"] = value; }
         }
-     
+
 
         public ActionResult Index()
         {
@@ -41,12 +41,9 @@ namespace StoreManagement.Admin.Controllers
         {
             storeId = GetStoreId(storeId);
             ViewBag.Store = StoreRepository.GetSingle(storeId);
-            var images = FileManagerRepository.GetFilesByStoreId(storeId);
+            var images = FileManagerRepository.GetFilesBySearchKey(storeId, search);
 
-            if (!String.IsNullOrEmpty(search))
-            {
-                images = images.Where(r => r.Title.ToLower().Contains(search.ToLower())).ToList();
-            }
+
 
             return View(images);
         }
@@ -162,7 +159,7 @@ namespace StoreManagement.Admin.Controllers
             var fileManager = ConvertToFileManager(file, storeId);
             try
             {
-                var imageBype =  ImageHelper.CreateGoogleImage(file);
+                var imageBype = ImageHelper.CreateGoogleImage(file);
                 ConnectToStoreGoogleDrive(SessionStoreId);
                 var googleFile = this.UploadHelper.InsertFile(file.FileName, "File Desc", imageBype);
                 ConvertToFileManager(fileManager, googleFile);
@@ -196,7 +193,7 @@ namespace StoreManagement.Admin.Controllers
             fileManager.Height = googleFile.Height.HasValue ? googleFile.Height.Value : 0;
         }
 
-     
+
 
         //DONT USE THIS IF YOU NEED TO ALLOW LARGE FILES UPLOADS
         //Credit to i-e-b and his ASP.Net uploader for the bulk of the upload helper methods - https://github.com/i-e-b/jQueryFileUpload.Net
@@ -252,7 +249,7 @@ namespace StoreManagement.Admin.Controllers
                 // var fullPath = Path.Combine(StorageRoot, Path.GetFileName(file.FileName));
 
                 // file.SaveAs(fullPath);
-                int storeId =SessionStoreId;
+                int storeId = SessionStoreId;
                 var fileManager = SaveFiles(file, storeId);
 
 

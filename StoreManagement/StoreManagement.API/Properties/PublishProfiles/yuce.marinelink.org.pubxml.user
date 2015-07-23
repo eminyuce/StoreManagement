@@ -39,7 +39,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:40</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>06/26/2015 11:33:42</publishTime>
+      <publishTime>07/23/2015 14:02:05</publishTime>
     </File>
     <File Include="bin/Ninject.dll">
       <publishTime>06/26/2015 11:33:44</publishTime>
@@ -66,13 +66,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>07/22/2015 16:36:08</publishTime>
+      <publishTime>07/23/2015 14:04:38</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/22/2015 16:36:03</publishTime>
+      <publishTime>07/23/2015 14:04:31</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/22/2015 16:36:04</publishTime>
+      <publishTime>07/23/2015 14:04:32</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>06/26/2015 11:33:34</publishTime>
@@ -108,13 +108,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:05</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/20/2015 16:22:30</publishTime>
+      <publishTime>07/23/2015 14:03:10</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/22/2015 16:39:35</publishTime>
+      <publishTime>07/23/2015 14:06:27</publishTime>
     </File>
   </ItemGroup>
 </Project>

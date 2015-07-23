@@ -12,6 +12,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface IFileManagerRepository : IBaseRepository<FileManager, int>, IFileManagerService
     {
         List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels);
+        List<FileManager> GetFilesBySearchKey(int storeId, String search);
     }
 
 }

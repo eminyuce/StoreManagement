@@ -38,7 +38,7 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
-        public ActionResult SearchAutoComplete(String term, String action, String controller, int id=0)
+        public ActionResult SearchAutoComplete(String term, String action, String controller, int id = 0)
         {
             int storeId = GetStoreId(id);
             var list = new List<String>();
@@ -82,7 +82,7 @@ namespace StoreManagement.Admin.Controllers
                controller.Equals("Contacts", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = ContactRepository.GetContactsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
-            } 
+            }
             else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
                controller.Equals("Locations", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -92,6 +92,31 @@ namespace StoreManagement.Admin.Controllers
                controller.Equals("Brands", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = BrandRepository.GetBrandsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+             controller.Equals("ProductCategories", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, StoreConstants.ProductType, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                controller.Equals("BlogsCategories", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = CategoryRepository.GetCategoriesByStoreId(storeId, StoreConstants.BlogsType, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                    controller.Equals("NewsCategories", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = CategoryRepository.GetCategoriesByStoreId(storeId, StoreConstants.NewsType, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                controller.Equals("PageDesigns", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = PageDesignRepository.GetPageDesignByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("DisplayImages", StringComparison.InvariantCultureIgnoreCase) &&
+              controller.Equals("FileManager", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = FileManagerRepository.GetFilesBySearchKey(storeId, searchKey).Select(r => r.OriginalFilename).ToList();
             }
 
             return Json(list, JsonRequestBehavior.AllowGet);

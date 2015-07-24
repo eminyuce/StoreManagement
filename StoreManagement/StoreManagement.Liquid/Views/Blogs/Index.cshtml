@@ -9,65 +9,22 @@
     var totalItemCount = outputDic["TotalItemCount"].ToInt();
             
 }
- 
-<!-- Titlebar
-================================================== -->
-<section class="titlebar">
-<div class="container">
-	<div class="sixteen columns">
-		<h2>Blog Masonry</h2>
-		
-		<nav id="breadcrumbs">
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Blog</a></li>
-				<li>Masonry</li>
-			</ul>
-		</nav>
-	</div>
-</div>
-</section>
-
 
 <!-- Content
 ================================================== -->
-@pageSize
 
 <!-- Container -->
 <div class="container">
 
-	<!-- Masonry Wrapper-->
-            @Html.Raw(outputDic["BlogsIndex"])
-    
+    <!-- Masonry Wrapper-->
+    @Html.Raw(outputDic["BlogsIndex"])
+
     <div class="pager">
-        @Html.Pager(pageSize, pageNumber,totalItemCount).Options(o => o .DisplayTemplate("BootstrapPagination")
+        @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination")
                                                                                                                             .MaxNrOfPages(7)
                                                                                                                             .AlwaysAddFirstPageNumber()
                                                                                                                             .SetPreviousPageText("←")
                                                                                                                             .SetNextPageText("→"))
-       
-        
-
     </div>
-    
-
-    <!-- Pagination -->
-		<div class="pagination-container masonry">
-			<nav class="pagination">
-				<ul>
-					<li><a href="#" class="current-page">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-				</ul>
-			</nav>
-
-			<nav class="pagination-next-prev full-width">
-				<ul>
-					<li><a href="#" class="prev"></a></li>
-					<li><a href="#" class="next"></a></li>
-				</ul>
-			</nav>
-		</div>
-
 </div>
 <!-- Container / End -->

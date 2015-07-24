@@ -19,5 +19,6 @@ namespace StoreManagement.Service.Interfaces
         List<FileManager> GetStoreCarousels(int storeId);
         StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize);
 
+
     }
 }

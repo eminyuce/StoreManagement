@@ -109,6 +109,11 @@ namespace StoreManagement.Admin.Controllers
                 list = CategoryRepository.GetCategoriesByStoreId(storeId, StoreConstants.NewsType, searchKey).Select(r => r.Name).ToList();
             }
             else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                   controller.Equals("StoreCategories", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = CategoryRepository.GetCategoriesByStoreId(0, StoreConstants.StoreType, searchKey).Select(r => r.Name).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
                 controller.Equals("PageDesigns", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = PageDesignRepository.GetPageDesignByStoreId(storeId, searchKey).Select(r => r.Name).ToList();

@@ -160,7 +160,9 @@
                     RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='input-xs' type='type'>", o.Id, o.Title));
 
         columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
-
+        columns.Add(c => c.Width).Titled("Width").Filterable(true);
+        columns.Add(c => c.Height).Titled("Height").Filterable(true);
+        
         columns.Add(o => o.Ordering).Encoded(false).
                     Sanitized(false).
                     SetWidth(10).

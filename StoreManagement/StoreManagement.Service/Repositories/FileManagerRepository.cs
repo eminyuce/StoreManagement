@@ -90,7 +90,7 @@ namespace StoreManagement.Service.Repositories
         {
             var labelIds = labels.Select(r => r.ToInt());
             var res = from s in this.StoreDbContext.FileManagers
-                      join c in this.StoreDbContext.LabelLines on s.Id equals c.ItemId 
+                      join c in this.StoreDbContext.LabelLines on s.Id equals c.ItemId
                       join u in this.StoreDbContext.Labels on c.LabelId equals u.Id
                       where s.StoreId == storeId && u.StoreId == storeId && c.ItemType.Equals(StoreConstants.Files) && labelIds.Contains(u.Id)
                       select s;
@@ -110,6 +110,13 @@ namespace StoreManagement.Service.Repositories
             }
 
             return items.OrderBy(r => r.Ordering).ToList();
+        }
+
+        public List<FileManager> GetFilesByFileStatus(string fileStatus)
+        {
+            var items = FindBy(r => r.FileStatus.Equals(fileStatus, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+            return items;
         }
     }
 

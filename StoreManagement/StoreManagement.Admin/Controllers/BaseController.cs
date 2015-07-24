@@ -237,52 +237,40 @@ namespace StoreManagement.Admin.Controllers
             }
         }
 
-        protected String GoogleDriveClientId { set; get; }
-        protected String GoogleDriveUserEmail { set; get; }
-        protected String GoogleDriveFolder { set; get; }
-        protected String GoogleDriveServiceAccountEmail { set; get; }
-        protected X509Certificate2 Certificate { set; get; }
-        protected String GoogleDrivePassword { set; get; }
+        private String GoogleDriveClientId { set; get; }
+        private String GoogleDriveUserEmail { set; get; }
+        private String GoogleDriveFolder { set; get; }
+        private String GoogleDriveServiceAccountEmail { set; get; }
+        private X509Certificate2 Certificate { set; get; }
+        private String GoogleDrivePassword { set; get; }
         protected void ConnectToStoreGoogleDrive(int storeId)
         {
-
+            Store googleStore = LoginStore;
             if (IsSuperAdmin)
             {
-
                 var selectedStore = StoreRepository.GetStore(storeId);
-                GoogleDriveClientId = selectedStore.GoogleDriveClientId;
-                GoogleDriveUserEmail = selectedStore.GoogleDriveUserEmail;
-                GoogleDriveFolder = selectedStore.GoogleDriveFolder;
-                GoogleDriveServiceAccountEmail = selectedStore.GoogleDriveServiceAccountEmail;
-                GoogleDrivePassword = selectedStore.GoogleDrivePassword;
+                googleStore = selectedStore;
+            }
+            if (googleStore != null)
+            {
+                GoogleDriveClientId = googleStore.GoogleDriveClientId;
+                GoogleDriveUserEmail = googleStore.GoogleDriveUserEmail;
+                GoogleDriveFolder = googleStore.GoogleDriveFolder;
+                GoogleDriveServiceAccountEmail = googleStore.GoogleDriveServiceAccountEmail;
+                GoogleDrivePassword = googleStore.GoogleDrivePassword;
+                Certificate = GeneralHelper.ImportCert(googleStore.GoogleDriveCertificateP12RawData,
+                                                       googleStore.GoogleDrivePassword);
 
-                // String serviceAccountPkCs12FilePath = HostingEnvironment.MapPath(String.Format(@"~\App_Data\GoogleDrive\{0}", selectedStore.GoogleDriveCertificateP12FileName));
-                // var rawData = System.IO.File.ReadAllBytes(serviceAccountPkCs12FilePath);
-                //X509Certificate2 Certificate2 = GeneralHelper.CreateCert(serviceAccountPkCs12FilePath, selectedStore.GoogleDrivePassword);
-
-                Certificate = GeneralHelper.ImportCert(selectedStore.GoogleDriveCertificateP12RawData,
-                                                       selectedStore.GoogleDrivePassword);
-
-                //  Certificate = GeneralHelper.CreateCert(rawData, selectedStore.GoogleDrivePassword);
-
-
+                this.UploadHelper.Connect(GoogleDriveClientId,
+                                          GoogleDriveUserEmail,
+                                          GoogleDriveServiceAccountEmail,
+                                          Certificate,
+                                          GoogleDriveFolder, GoogleDrivePassword);
             }
             else
             {
-                GoogleDriveClientId = LoginStore.GoogleDriveClientId;
-                GoogleDriveUserEmail = LoginStore.GoogleDriveUserEmail;
-                GoogleDriveFolder = LoginStore.GoogleDriveFolder;
-                GoogleDriveServiceAccountEmail = LoginStore.GoogleDriveServiceAccountEmail;
-                GoogleDrivePassword = LoginStore.GoogleDrivePassword;
-                Certificate = GeneralHelper.ImportCert(LoginStore.GoogleDriveCertificateP12RawData,
-                                                       LoginStore.GoogleDrivePassword);
+                Logger.Error("Store cannot be NULL to Connect To GoogleDrive");
             }
-            this.UploadHelper.Connect(GoogleDriveClientId,
-                   GoogleDriveUserEmail,
-                   GoogleDriveServiceAccountEmail,
-                   Certificate,
-                   GoogleDriveFolder, GoogleDrivePassword);
-
 
         }
 

@@ -13,6 +13,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
     {
         List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels);
         List<FileManager> GetFilesBySearchKey(int storeId, String search);
+        List<FileManager> GetFilesByFileStatus(String fileStatus);
     }
 
 }

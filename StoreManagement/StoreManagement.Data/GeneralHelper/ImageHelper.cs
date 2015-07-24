@@ -149,6 +149,7 @@ namespace StoreManagement.Data.GeneralHelper
         {
             return (bytes / 1024f) / 1024f;
         }
+
         public static byte[] CropImage(byte[] content, int x, int y, int width, int height)
         {
             using (MemoryStream stream = new MemoryStream(content))

@@ -1,5 +1,7 @@
 using GenericRepository;
 using GenericRepository.EntityFramework;
+using Quartz;
+using StoreManagement.Admin.ScheduledTasks;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Service.DbContext;
@@ -85,7 +87,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
             kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
-            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>(); 
+            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>();
             kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>();
             kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>();
             kernel.Bind<ILabelRepository>().To<LabelRepository>();
@@ -96,6 +98,12 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IContactRepository>().To<ContactRepository>();
             kernel.Bind<ILocationRepository>().To<LocationRepository>();
             kernel.Bind<IBrandRepository>().To<BrandRepository>();
+            kernel.Bind<ISchedulerFactory>().To<NinjectSchedulerFactory>();
+            kernel.Bind<IScheduler>().ToMethod(ctx => ctx.Kernel.Get<ISchedulerFactory>().GetScheduler()).InSingletonScope();
+            kernel.Bind<IBaseTasksScheduler>().To<StoreTasksScheduler>().WithConstructorArgument("scheduler", kernel.Get<IScheduler>());
+           // kernel.Get<IBaseTasksScheduler>().Start();
+
+
         }
     }
 }

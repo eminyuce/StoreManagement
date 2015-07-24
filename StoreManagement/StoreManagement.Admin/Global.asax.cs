@@ -12,6 +12,7 @@ using System.Web.Routing;
 using GoogleDriveUploader;
 using Ninject;
 using StoreManagement.Admin.Models;
+using StoreManagement.Admin.ScheduledTasks;
 using StoreManagement.Service.DbContext;
 using WebMatrix.WebData;
 
@@ -37,6 +38,8 @@ namespace StoreManagement.Admin
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
+
+           
             LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
 
 

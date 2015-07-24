@@ -106,6 +106,8 @@ namespace StoreManagement.Service.Repositories
                                 stats.RecordLast = dr["RecordLast"].ToInt();
                                 stats.RecordsTotal = dr["RecordsTotal"].ToInt();
                                 stats.RecordCount = dr["recordCount"].ToInt();
+
+
                             }
                         }
                         result.RecordsStats = stats;

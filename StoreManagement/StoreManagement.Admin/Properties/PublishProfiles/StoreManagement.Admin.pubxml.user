@@ -36,6 +36,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/ClientDependency.Core.Mvc.dll">
       <publishTime>05/09/2012 10:29:38</publishTime>
     </File>
+    <File Include="bin/Common.Logging.Core.dll">
+      <publishTime>07/23/2015 15:57:30</publishTime>
+    </File>
+    <File Include="bin/Common.Logging.dll">
+      <publishTime>07/23/2015 15:57:30</publishTime>
+    </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>06/26/2015 11:33:37</publishTime>
     </File>
@@ -115,7 +121,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:32</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>07/23/2015 14:04:31</publishTime>
+      <publishTime>07/23/2015 16:25:13</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>06/26/2015 11:43:33</publishTime>
@@ -201,6 +207,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/NLog.Web.dll">
       <publishTime>06/26/2015 11:33:41</publishTime>
     </File>
+    <File Include="bin/Quartz.dll">
+      <publishTime>07/23/2015 15:57:30</publishTime>
+    </File>
     <File Include="bin/RazorEngine.dll">
       <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
@@ -220,16 +229,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>07/23/2015 14:04:42</publishTime>
+      <publishTime>07/24/2015 12:16:24</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/23/2015 14:04:31</publishTime>
+      <publishTime>07/23/2015 16:25:13</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/23/2015 14:04:32</publishTime>
+      <publishTime>07/24/2015 12:05:56</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/26/2015 11:33:39</publishTime>
@@ -4456,7 +4465,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2015 15:02:11</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/23/2015 14:02:49</publishTime>
+      <publishTime>07/23/2015 15:57:38</publishTime>
     </File>
     <File Include="Scripts/bootstrap-image-gallery.min.js">
       <publishTime>06/26/2015 11:33:19</publishTime>
@@ -4948,7 +4957,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2015 13:28:00</publishTime>
     </File>
     <File Include="Views/Logs/AppLogDetail.cshtml">
-      <publishTime>07/14/2015 15:49:10</publishTime>
+      <publishTime>07/24/2015 12:15:45</publishTime>
     </File>
     <File Include="Views/Logs/Index.cshtml">
       <publishTime>07/14/2015 15:47:13</publishTime>
@@ -5365,7 +5374,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/23/2015 14:05:52</publishTime>
+      <publishTime>07/23/2015 16:56:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -423,6 +423,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\ContentHelper.cs" />
+    <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="Helper\StoreHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

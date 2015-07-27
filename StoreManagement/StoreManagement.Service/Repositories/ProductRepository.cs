@@ -21,7 +21,8 @@ namespace StoreManagement.Service.Repositories
         private static readonly TypedObjectCache<StorePagedList<Product>> ProductCacheStorePagedList = new TypedObjectCache<StorePagedList<Product>>("StorePagedListProduct");
 
 
-        public ProductRepository(IStoreContext dbContext) : base(dbContext)
+        public ProductRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
         }
@@ -71,7 +72,7 @@ namespace StoreManagement.Service.Repositories
                 products = products.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
 
-            return products.OrderBy(r => r.Ordering).ThenByDescending(r=>r.Id).ToList();
+            return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 
         }
 
@@ -100,9 +101,7 @@ namespace StoreManagement.Service.Repositories
             if (items == null)
             {
                 var returnList =
-                        this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager))
-                            .Where(r2 => r2.StoreId == storeId &&
-                                 r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
+                        this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
                 if (categoryId.HasValue)
                 {
                     returnList = returnList.Where(r => r.ProductCategoryId == categoryId.Value);
@@ -127,9 +126,15 @@ namespace StoreManagement.Service.Repositories
             return this.GetAllIncluding(r2 => r2.ProductFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
 
+        public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        {
+            var res = Task.FromResult(GetProductsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
+            return res;
+        }
+
         public List<Product> GetProductsByStoreId(int storeId, String searchKey)
         {
-            var products = this.FindBy(r => r.StoreId == storeId );
+            var products = this.FindBy(r => r.StoreId == storeId);
             if (!String.IsNullOrEmpty(searchKey))
             {
                 products = products.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);

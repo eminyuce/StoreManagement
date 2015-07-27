@@ -11,23 +11,21 @@ using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class ContentHelper
+    public class ProductHelper
     {
-        public static Dictionary<string, string> GetContentsIndexPage(HttpRequestBase httpRequestBase,
-            Task<StorePagedList<Content>> contentsTask,
-            Task<PageDesign> pageDesignTask,
-                 Task<List<Category>> categoriesTask)
+        public static Dictionary<string, string> GetProductsIndexPage(HttpRequestBase httpRequestBase, Task<StorePagedList<Product>> productsTask,
+            Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
         {
-            var contents = contentsTask.Result;
+            var products = productsTask.Result;
             var blogsPageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
-            var items = new List<ContentLiquid>();
-            foreach (var item in contents.items)
+            var items = new List<ProductLiquid>();
+            foreach (var item in products.items)
             {
-                var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
+                var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                 if (category != null)
                 {
-                    var blog = new ContentLiquid(httpRequestBase, item, category, blogsPageDesign);
+                    var blog = new ProductLiquid(httpRequestBase, item, category, blogsPageDesign);
                     items.Add(blog);
                 }
             }
@@ -37,8 +35,8 @@ namespace StoreManagement.Liquid.Helper
                 items = from s in items
                         select new
                         {
-                            s.Content.Name,
-                            s.Content.Description,
+                            s.Product.Name,
+                            s.Product.Description,
                             s.DetailLink,
                             s.ImageHas,
                             s.ImageSource
@@ -49,16 +47,15 @@ namespace StoreManagement.Liquid.Helper
 
             var dic = new Dictionary<String, String>();
             dic.Add("PageOutput", indexPageOutput);
-            dic.Add("PageSize", contents.pageSize.ToStr());
-            dic.Add("PageNumber", (contents.page - 1).ToStr());
-            dic.Add("TotalItemCount", contents.totalItemCount.ToStr());
+            dic.Add("PageSize", products.pageSize.ToStr());
+            dic.Add("PageNumber", (products.page - 1).ToStr());
+            dic.Add("TotalItemCount", products.totalItemCount.ToStr());
             dic.Add("IsPagingUp", blogsPageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
             dic.Add("IsPagingDown", blogsPageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
             return dic;
         }
-
 
     }
 }

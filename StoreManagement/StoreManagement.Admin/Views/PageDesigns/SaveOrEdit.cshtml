@@ -3,8 +3,8 @@
 
 @{
     ViewBag.Title = "Edit";
- 
-    
+
+
     var requestStoreId = @Request.QueryString["storeId"].ToInt();
     int storeId = Model != null ? Model.StoreId : requestStoreId;
     
@@ -21,7 +21,7 @@
             </div>
             <div class="bootstrap-admin-panel-content">
 
- 
+
                 @using (Html.BeginForm())
                 {
                     @Html.ValidationSummary(true)
@@ -39,7 +39,7 @@
                             @Html.Action("StoresDropDown", "Stores", new { storeId })
                         </div>
 
-                        
+
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)
 
@@ -53,8 +53,24 @@
                             @Html.TextBoxFor(model => model.Type, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Type)
                         </div>
-                        
-                                     
+
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ImageWidth)
+                            <div slider="ImageWidth"></div>
+                            @Html.TextBoxFor(model => model.ImageWidth, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ImageWidth)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ImageHeight)
+                            <div slider="ImageHeight"></div>
+                            @Html.TextBoxFor(model => model.ImageHeight, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ImageHeight)
+                        </div>
+
+
+
                         <div class="editor-label">
                             @Html.LabelFor(model => model.IsPagingDown)
                             @Html.CheckBoxFor(model => model.IsPagingDown, new { @class = "form-control" })
@@ -66,20 +82,7 @@
                             @Html.CheckBoxFor(model => model.IsPagingUp, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.IsPagingUp)
                         </div>
-                        
-                                 <div class="editor-label">
-                            @Html.LabelFor(model => model.ImageWidth)
 
-                            @Html.TextBoxFor(model => model.ImageWidth, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ImageWidth)
-                        </div>
-                        
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.ImageHeight)
-
-                            @Html.TextBoxFor(model => model.ImageHeight, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ImageHeight)
-                        </div>
 
 
                         @Html.HiddenFor(model => model.CreatedDate)
@@ -118,7 +121,7 @@
 
 @section scripts
 {
-       <script src="~/Scripts/jstree/jstree.js"></script>
+    <script src="~/Scripts/jstree/jstree.js"></script>
     <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
     <script src="~/Scripts/storeContent.js"></script>
 
@@ -128,6 +131,24 @@
     <script type="text/javascript">
 
         $(function () {
+                 
+            $('[slider]').each(function () {
+                $(this).slider({
+                    range: "max",
+                    min: 1,
+                    max: 1000,
+                    value: 2,
+                    slide: function (e, ui) {
+                        var caller = e.target;
+                        var sliderType = $(caller).attr('slider');
+                        $("#" + sliderType).val(ui.value);
+                    }
+                });
+            });
+
+            $('[slider=ImageHeight]').slider("value", $("#ImageHeight").val());
+            $('[slider=ImageWidth]').slider("value", $("#ImageWidth").val());
+            
 
             // CKEditor Full
             $('textarea#PageTemplate').ckeditor({

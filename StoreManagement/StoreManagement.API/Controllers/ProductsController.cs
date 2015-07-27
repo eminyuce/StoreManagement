@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
@@ -73,6 +74,11 @@ namespace StoreManagement.API.Controllers
         public Product GetProductWithFiles(int id)
         {
             return ProductRepository.GetProductWithFiles(id);
+        }
+
+        public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        {
+            return ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize);
         }
     }
 }

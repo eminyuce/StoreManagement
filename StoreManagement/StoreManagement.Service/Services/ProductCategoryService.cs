@@ -56,5 +56,11 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetProductCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
             return HttpRequestHelper.GetUrlPagedResults<ProductCategory>(url);
         }
+
+        public Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdAsync?storeId={2}&type={3}&isActive={4}", WebServiceAddress, ApiControllerName, storeId, type, isActive);
+            return HttpRequestHelper.GetUrlResultsAsync<ProductCategory>(url);
+        }
     }
 }

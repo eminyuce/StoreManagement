@@ -24,7 +24,8 @@ namespace StoreManagement.Service.Repositories
         private static readonly TypedObjectCache<StorePagedList<ProductCategory>> PagingProductCategoryCache
          = new TypedObjectCache<StorePagedList<ProductCategory>>("PagingProductCategoryCache");
 
-        public ProductCategoryRepository(IStoreContext dbContext) : base(dbContext)
+        public ProductCategoryRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
         }
 
@@ -71,7 +72,7 @@ namespace StoreManagement.Service.Repositories
 
             if (items == null)
             {
-                 
+
                 var cats = this.FindBy(r => r.StoreId == storeId &&
                          r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase))
                          .OrderBy(r => r.Ordering)
@@ -87,7 +88,7 @@ namespace StoreManagement.Service.Repositories
                     }
                 }
 
-               
+
                 ProductCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("ProductCategories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
@@ -114,13 +115,31 @@ namespace StoreManagement.Service.Repositories
                                                                   r1 => r1.ProductFiles.Select(m => m.FileManager)))
                                                           .OrderByDescending(r => r.Ordering);
 
-              
+
                 var c = cats.ToList();
                 items = new StorePagedList<ProductCategory>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
                 PagingProductCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("ProductCategories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;
+        }
+
+        public Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
+        {
+            var res = Task.Factory.StartNew(() =>
+            {
+                var items = this.FindBy(r => r.StoreId == storeId && r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+                if (isActive.HasValue)
+                {
+                    items = items.Where(r => r.State == isActive.Value);
+                }
+
+                return items.OrderBy(r => r.Ordering).ToList();
+
+            });
+
+            return res;
         }
     }
 }

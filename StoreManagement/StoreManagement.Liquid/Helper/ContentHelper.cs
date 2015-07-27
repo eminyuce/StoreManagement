@@ -13,13 +13,13 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ContentHelper
     {
-        public static Dictionary<string, string> GetBlogsIndexPage(HttpRequestBase httpRequestBase,
+        public static Dictionary<string, string> GetContentsIndexPage(HttpRequestBase httpRequestBase,
             Task<StorePagedList<Content>> contentsTask,
-            Task<PageDesign> blogsPageDesignTask,
+            Task<PageDesign> pageDesignTask,
                  Task<List<Category>> categoriesTask)
         {
             var contents = contentsTask.Result;
-            var blogsPageDesign = blogsPageDesignTask.Result;
+            var blogsPageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
             var items = new List<ContentLiquid>();
             foreach (var item in contents.items)
@@ -27,7 +27,7 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
                 if (category != null)
                 {
-                    var blog = new ContentLiquid(httpRequestBase, item, category);
+                    var blog = new ContentLiquid(httpRequestBase, item, category, blogsPageDesign);
                     items.Add(blog);
                 }
             }
@@ -48,7 +48,7 @@ namespace StoreManagement.Liquid.Helper
 
 
             var dic = new Dictionary<String, String>();
-            dic.Add("BlogsIndex", indexPageOutput);
+            dic.Add("PageOutput", indexPageOutput);
             dic.Add("PageSize", contents.pageSize.ToStr());
             dic.Add("PageNumber", (contents.page - 1).ToStr());
             dic.Add("TotalItemCount", contents.totalItemCount.ToStr());

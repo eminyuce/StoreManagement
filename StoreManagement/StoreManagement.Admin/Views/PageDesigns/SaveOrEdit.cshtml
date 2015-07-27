@@ -67,6 +67,19 @@
                             @Html.ValidationMessageFor(model => model.IsPagingUp)
                         </div>
                         
+                                 <div class="editor-label">
+                            @Html.LabelFor(model => model.ImageWidth)
+
+                            @Html.TextBoxFor(model => model.ImageWidth, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ImageWidth)
+                        </div>
+                        
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ImageHeight)
+
+                            @Html.TextBoxFor(model => model.ImageHeight, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ImageHeight)
+                        </div>
 
 
                         @Html.HiddenFor(model => model.CreatedDate)

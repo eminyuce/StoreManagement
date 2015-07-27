@@ -13,17 +13,20 @@ using StoreManagement.Data.GeneralHelper;
 namespace StoreManagement.Data.LiquidEntities
 {
     [LiquidType]
-    public class ContentLiquid  
+    public class ContentLiquid
     {
         public Content Content { get; set; }
         public Category Category { get; set; }
-        private HttpRequestBase HttpRequestBase  { get; set; }
+        public PageDesign PageDesign { get; set; }
 
-        public ContentLiquid(HttpRequestBase httpRequestBase,Content content, Category category)
+        private HttpRequestBase HttpRequestBase { get; set; }
+
+        public ContentLiquid(HttpRequestBase httpRequestBase, Content content, Category category, PageDesign pageDesign)
         {
             this.HttpRequestBase = httpRequestBase;
             this.Content = content;
             this.Category = category;
+            this.PageDesign = pageDesign;
         }
 
 
@@ -34,7 +37,7 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetBlogLink(this.Content, Category.Name);
             }
         }
-
+        //int width = 60, int height = 60
         public String ImageSource
         {
             get
@@ -43,13 +46,13 @@ namespace StoreManagement.Data.LiquidEntities
                 {
                     var urlHelper = new UrlHelper(HttpRequestBase.RequestContext);
                     var firstOrDefault = this.Content.ContentFiles.FirstOrDefault();
-                    return urlHelper.AbsoluteAction("FetchImage", "Images", new
+                    return urlHelper.AbsoluteAction("Thumbnail", "Images", new
                             {
                                 id = firstOrDefault.FileManager.GoogleImageId,
-                                size = "",
-                                contentType = firstOrDefault.FileManager.ContentType
+                                width = this.PageDesign.ImageWidth,
+                                height = this.PageDesign.ImageHeight
                             });
-                       
+
                 }
                 else
                 {
@@ -63,7 +66,7 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-               return this.Content.ContentFiles.Any();
+                return this.Content.ContentFiles.Any();
             }
         }
     }

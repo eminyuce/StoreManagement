@@ -51,10 +51,11 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-        public void ThumbnailWithGoogleId(String googleId, int width = 60, int height = 60)
+        public void Thumbnail(String id, int width = 60, int height = 60)
         {
             String url = "";
             var dic = new Dictionary<String, String>();
+            String googleId = id;
             url = String.Format("https://docs.google.com/uc?id={0}", googleId);
             byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
 
@@ -64,7 +65,7 @@ namespace StoreManagement.Liquid.Controllers
                     .Write();
         }
 
-        public void Thumbnail(int id, int storeId, int width = 60, int height = 60)
+        public void ThumbnailById(int id, int storeId, int width = 60, int height = 60)
         {
             var dic = new Dictionary<String, String>();
             // Loading photos’ info from database for specific image...

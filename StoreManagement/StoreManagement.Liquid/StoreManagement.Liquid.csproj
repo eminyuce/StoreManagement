@@ -449,6 +449,7 @@
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Views\Blogs\Copy of Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -463,7 +464,6 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Images\" />
-    <Folder Include="Views\News\" />
     <Folder Include="Views\Robots\" />
   </ItemGroup>
   <ItemGroup>

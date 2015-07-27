@@ -166,6 +166,8 @@
     <Compile Include="GeneralHelper\RegexUtilities.cs" />
     <Compile Include="GeneralHelper\RequestHelper.cs" />
     <Compile Include="GeneralHelper\SimpleAES.cs" />
+    <Compile Include="GeneralHelper\SyndicationFeedExtensions.cs" />
+    <Compile Include="GeneralHelper\UrlHelperExtensions.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
     <Compile Include="Grid\CompanyGrid.cs" />
     <Compile Include="HelpersModel\ErrorModel.cs" />
@@ -175,7 +177,7 @@
     <Compile Include="HelpersModel\RecordsStats.cs" />
     <Compile Include="LiquidEngineHelpers\LiquidEngineHelper.cs" />
     <Compile Include="LiquidEngineHelpers\TemplateManager.cs" />
-    <Compile Include="LiquidEntities\Blog.cs" />
+    <Compile Include="LiquidEntities\ContentLiquid.cs" />
     <Compile Include="LogEntities\AppNames.cs" />
     <Compile Include="LogEntities\LoggingModel.cs" />
     <Compile Include="LogEntities\LogLevels.cs" />

@@ -54,6 +54,20 @@
                             @Html.ValidationMessageFor(model => model.Type)
                         </div>
                         
+                                     
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.IsPagingDown)
+                            @Html.CheckBoxFor(model => model.IsPagingDown, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IsPagingDown)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.IsPagingUp)
+                            @Html.CheckBoxFor(model => model.IsPagingUp, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IsPagingUp)
+                        </div>
+                        
+
 
                         @Html.HiddenFor(model => model.CreatedDate)
                         @Html.HiddenFor(model => model.UpdatedDate)

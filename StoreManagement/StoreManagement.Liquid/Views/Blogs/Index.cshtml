@@ -7,6 +7,8 @@
     var pageSize = outputDic["PageSize"].ToInt();
     var pageNumber = outputDic["PageNumber"].ToInt();
     var totalItemCount = outputDic["TotalItemCount"].ToInt();
+    var isPagingUp = outputDic["IsPagingUp"].ToBool();
+    var isPagingDown = outputDic["IsPagingDown"].ToBool();
             
 }
 
@@ -16,13 +18,33 @@
 <!-- Container -->
 <div class="container">
 
+
+    @if (isPagingUp)
+    {
+        <div class="pager">
+            @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination").MaxNrOfPages(7).AlwaysAddFirstPageNumber()
+                                                                        .SetPreviousPageText("←")
+                                                                        .SetNextPageText("→"))
+        </div>
+    
+    }
+
+
     <!-- Masonry Wrapper-->
     @Html.Raw(outputDic["BlogsIndex"])
 
-    <div class="pager">
-        @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination").MaxNrOfPages(7).AlwaysAddFirstPageNumber()
-                                                                                                                            .SetPreviousPageText("←")
-                                                                                                                            .SetNextPageText("→"))
-    </div>
+
+    @if (isPagingDown)
+    {
+        <div class="pager">
+            @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination").MaxNrOfPages(7).AlwaysAddFirstPageNumber()
+                                                                        .SetPreviousPageText("←")
+                                                                        .SetNextPageText("→"))
+        </div>
+    
+    }
+
+
+
 </div>
 <!-- Container / End -->

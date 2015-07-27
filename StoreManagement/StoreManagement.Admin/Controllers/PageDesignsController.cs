@@ -46,6 +46,8 @@ namespace StoreManagement.Admin.Controllers
                 pagedesign.State = true;
                 pagedesign.UpdatedDate = DateTime.Now;
                 pagedesign.StoreId = selectedStoreId;
+                pagedesign.IsPagingUp = true;
+                pagedesign.IsPagingDown = true;
             }
             else
             {

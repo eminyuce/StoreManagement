@@ -14,6 +14,8 @@ namespace StoreManagement.Data.Entities
         [AllowHtml]
         public string PageTemplate { get; set; }
         public string Name { get; set; }
+        public bool IsPagingUp { get; set; }
+        public bool IsPagingDown { get; set; }
 
         public override string ToString()
         {

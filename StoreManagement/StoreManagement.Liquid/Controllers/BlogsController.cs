@@ -33,7 +33,7 @@ namespace StoreManagement.Liquid.Controllers
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType, true);
                 Task.WaitAll(blogsPageDesignTask, contentsTask, categories);
-                var dic = BlogHelper.GetBlogsIndexPage(this.HttpContext.Request, contentsTask, blogsPageDesignTask, categories);
+                var dic = ContentHelper.GetBlogsIndexPage(this.HttpContext.Request, contentsTask, blogsPageDesignTask, categories);
 
                 return View(dic);
 

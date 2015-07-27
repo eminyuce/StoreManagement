@@ -13,13 +13,13 @@ using StoreManagement.Data.GeneralHelper;
 namespace StoreManagement.Data.LiquidEntities
 {
     [LiquidType]
-    public class Blog  
+    public class ContentLiquid  
     {
         public Content Content { get; set; }
         public Category Category { get; set; }
         private HttpRequestBase HttpRequestBase  { get; set; }
 
-        public Blog(HttpRequestBase httpRequestBase,Content content, Category category)
+        public ContentLiquid(HttpRequestBase httpRequestBase,Content content, Category category)
         {
             this.HttpRequestBase = httpRequestBase;
             this.Content = content;
@@ -43,12 +43,13 @@ namespace StoreManagement.Data.LiquidEntities
                 {
                     var urlHelper = new UrlHelper(HttpRequestBase.RequestContext);
                     var firstOrDefault = this.Content.ContentFiles.FirstOrDefault();
-                    return urlHelper.Action("FetchImage", "Images", new
-                        {
-                            id = firstOrDefault.FileManager.GoogleImageId,
-                            size = "",
-                            contentType = firstOrDefault.FileManager.ContentType
-                        });
+                    return urlHelper.AbsoluteAction("FetchImage", "Images", new
+                            {
+                                id = firstOrDefault.FileManager.GoogleImageId,
+                                size = "",
+                                contentType = firstOrDefault.FileManager.ContentType
+                            });
+                       
                 }
                 else
                 {

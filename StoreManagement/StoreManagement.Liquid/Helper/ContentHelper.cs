@@ -11,7 +11,7 @@ using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class BlogHelper
+    public class ContentHelper
     {
         public static Dictionary<string, string> GetBlogsIndexPage(HttpRequestBase httpRequestBase,
             Task<StorePagedList<Content>> contentsTask,
@@ -21,20 +21,20 @@ namespace StoreManagement.Liquid.Helper
             var contents = contentsTask.Result;
             var blogsPageDesign = blogsPageDesignTask.Result;
             var categories = categoriesTask.Result;
-            var blogs = new List<Blog>();
+            var items = new List<ContentLiquid>();
             foreach (var item in contents.items)
             {
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
                 if (category != null)
                 {
-                    var blog = new Blog(httpRequestBase, item, category);
-                    blogs.Add(blog);
+                    var blog = new ContentLiquid(httpRequestBase, item, category);
+                    items.Add(blog);
                 }
             }
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, new
             {
-                blogs = from s in blogs
+                items = from s in items
                         select new
                         {
                             s.Content.Name,
@@ -52,6 +52,10 @@ namespace StoreManagement.Liquid.Helper
             dic.Add("PageSize", contents.pageSize.ToStr());
             dic.Add("PageNumber", (contents.page - 1).ToStr());
             dic.Add("TotalItemCount", contents.totalItemCount.ToStr());
+            dic.Add("IsPagingUp", blogsPageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+            dic.Add("IsPagingDown", blogsPageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+
+
             return dic;
         }
 

@@ -20,9 +20,7 @@
     @Html.Raw(outputDic["BlogsIndex"])
 
     <div class="pager">
-        @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination")
-                                                                                                                            .MaxNrOfPages(7)
-                                                                                                                            .AlwaysAddFirstPageNumber()
+        @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination").MaxNrOfPages(7).AlwaysAddFirstPageNumber()
                                                                                                                             .SetPreviousPageText("←")
                                                                                                                             .SetNextPageText("→"))
     </div>

@@ -39,7 +39,7 @@ namespace StoreManagement.Controllers
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
 
-            Task<List<Category>> task1 = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType);
+            Task<List<Category>> task1 = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType,null);
             var task2 = ContentService.GetContentsCategoryIdAsync(Store.Id, categoryId, StoreConstants.BlogsType, true, page, 600);
             var task3 = CategoryService.GetCategoryAsync(categoryId);
             await Task.WhenAll(task1, task2, task3);

@@ -35,10 +35,12 @@ namespace StoreManagement.Service.Services
 
         }
 
-        public List<Category> GetCategoriesByStoreId(int storeId, string type)
+
+
+        public List<Category> GetCategoriesByStoreId(int storeId, string type, bool? isActive)
         {
 
-            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}&type={3}&isActive={4}", WebServiceAddress, ApiControllerName, storeId, type, isActive);
             return HttpRequestHelper.GetUrlResults<Category>(url);
 
         }
@@ -86,9 +88,15 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResultsAsync<Category>(url);
         }
 
-        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type)
+
+        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
-            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdAsync?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdAsync?storeId={2}&type={3}&isActive={4}",
+                WebServiceAddress,
+                ApiControllerName,
+                storeId,
+                type,
+                isActive.HasValue ? isActive.Value.ToStr() : "");
             return HttpRequestHelper.GetUrlResultsAsync<Category>(url);
         }
 

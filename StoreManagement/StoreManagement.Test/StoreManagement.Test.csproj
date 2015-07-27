@@ -130,6 +130,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
@@ -163,6 +164,10 @@
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">
       <Project>{553854d8-a688-4a50-ab74-4ccf3b1afe9a}</Project>
       <Name>StoreManagement.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoreManagement.Liquid\StoreManagement.Liquid.csproj">
+      <Project>{B02F9B20-4717-46D5-9082-923AB0EEF539}</Project>
+      <Name>StoreManagement.Liquid</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoreManagement.Service\StoreManagement.Service.csproj">
       <Project>{257ad197-b5e1-4c9c-b9be-5b559828c57c}</Project>

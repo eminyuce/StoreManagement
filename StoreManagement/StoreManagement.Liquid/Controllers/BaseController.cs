@@ -85,10 +85,13 @@ namespace StoreManagement.Liquid.Controllers
             }
         }
 
+
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
         {
+            Logger.Trace("Store:" + Store.Name + " HttpNotFoundResult:" + statusDescription + " ");
             return new HttpNotFoundResult(statusDescription);
         }
+
         protected bool IsModulActive(String controllerName)
         {
             var navigations = NavigationService.GetStoreActiveNavigations(Store.Id);

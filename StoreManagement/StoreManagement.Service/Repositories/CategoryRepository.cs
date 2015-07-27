@@ -44,7 +44,7 @@ namespace StoreManagement.Service.Repositories
                 .OrderByDescending(r => r.Ordering).Take(10).ToList();
         }
 
-
+  
         private static Expression<Func<Category, object>> IncludeProperties()
         {
             var param = Expression.Parameter(typeof(Category));
@@ -53,10 +53,17 @@ namespace StoreManagement.Service.Repositories
             return exp;
         }
 
-        public List<Category> GetCategoriesByStoreId(int storeId, String type)
+        public List<Category> GetCategoriesByStoreId(int storeId, String type, bool? isActive)
         {
-            return this.FindBy(r => r.StoreId == storeId &&
-               r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            var items = this.FindBy(r => r.StoreId == storeId &&
+               r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+            if (isActive.HasValue)
+            {
+                items = items.Where(r => r.State == isActive.Value);
+            }
+
+            return items.OrderBy(r => r.Ordering).ToList();
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId, string type, string search)
@@ -138,7 +145,7 @@ namespace StoreManagement.Service.Repositories
             String key = String.Format("GetCategoryWithContents-{0}-{1}", categoryId, page);
             StorePagedList<Category> items = null;
             PagingCategoryCache.TryGet(key, out items);
-            
+
             if (items == null)
             {
                 IQueryable<Category> cats = StoreDbContext.Categories.Where(r => r.Id == categoryId && r.Contents.Any())
@@ -163,25 +170,26 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public  Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25)
+        public Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25)
         {
-            var res =  Task.FromResult(GetCategoryWithContents(categoryId, page, pageSize));
+            var res = Task.FromResult(GetCategoryWithContents(categoryId, page, pageSize));
             return res;
         }
 
-        public  Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
+        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
         {
-            var res =  Task.FromResult(GetCategoriesByStoreId(storeId));
+            var res = Task.FromResult(GetCategoriesByStoreId(storeId));
             return res;
         }
 
-        public  Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type)
+
+        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
-            var res =  Task.FromResult(GetCategoriesByStoreId(storeId, type));
+            var res = Task.FromResult(GetCategoriesByStoreId(storeId, type, isActive));
             return res;
         }
 
-        public  Task<Category> GetCategoryAsync(int id)
+        public Task<Category> GetCategoryAsync(int id)
         {
             var res = Task.FromResult(GetCategory(id));
             return res;
@@ -190,7 +198,7 @@ namespace StoreManagement.Service.Repositories
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
             // return this.StoreDbContext.Categories.Where(r => r.StoreId == storeId).ToList();
-   
+
             var categories = from entry in this.FindBy(r => r.StoreId == storeId) select entry;
             return categories.ToList();
         }

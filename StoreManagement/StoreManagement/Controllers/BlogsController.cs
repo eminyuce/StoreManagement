@@ -13,12 +13,12 @@ namespace StoreManagement.Controllers
 {
     public class BlogsController : BaseController
     {
-         
+
 
         public ActionResult Index(int page = 1)
         {
 
-           
+
 
             var newsContents = new ContentsViewModel();
             newsContents.Store = Store;
@@ -35,8 +35,8 @@ namespace StoreManagement.Controllers
             returnModel.Content = ContentService.GetContentsContentId(blogId);
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "blog");
-          
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "blog", true);
+
 
 
             return View(returnModel);

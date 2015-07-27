@@ -170,6 +170,12 @@
     <Content Include="fonts\fontello.eot" />
     <Content Include="fonts\fontello.ttf" />
     <Content Include="fonts\fontello.woff" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\Liquid.pubxml" />
     <None Include="Properties\PublishProfiles\login.seatechnologyjobs.com.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

@@ -13,11 +13,24 @@ namespace StoreManagement.Liquid.Helper
 {
     public class BlogHelper
     {
-        public static Dictionary<string, string> GetBlogsIndexPage(Task<StorePagedList<Content>> contentsTask, Task<PageDesign> blogsPageDesignTask)
+        public static Dictionary<string, string> GetBlogsIndexPage(HttpRequestBase httpRequestBase,
+            Task<StorePagedList<Content>> contentsTask,
+            Task<PageDesign> blogsPageDesignTask,
+                 Task<List<Category>> categoriesTask)
         {
             var contents = contentsTask.Result;
             var blogsPageDesign = blogsPageDesignTask.Result;
-            var blogs = contents.items.Select(c => new Blog(c)).ToList();
+            var categories = categoriesTask.Result;
+            var blogs = new List<Blog>();
+            foreach (var item in contents.items)
+            {
+                var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
+                if (category != null)
+                {
+                    var blog = new Blog(httpRequestBase, item, category);
+                    blogs.Add(blog);
+                }
+            }
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, new
             {
@@ -25,7 +38,10 @@ namespace StoreManagement.Liquid.Helper
                         select new
                         {
                             s.Content.Name,
-                            s.Content.Description
+                            s.Content.Description,
+                            s.DetailLink,
+                            s.ImageHas,
+                            s.ImageSource
                         }
             }
                 );

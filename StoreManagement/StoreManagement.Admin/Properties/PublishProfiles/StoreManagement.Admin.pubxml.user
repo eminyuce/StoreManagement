@@ -121,7 +121,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:32</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>07/24/2015 16:34:49</publishTime>
+      <publishTime>07/25/2015 12:59:02</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>06/26/2015 11:43:33</publishTime>
@@ -229,16 +229,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>07/24/2015 17:11:31</publishTime>
+      <publishTime>07/25/2015 12:59:08</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/24/2015 16:17:12</publishTime>
+      <publishTime>07/25/2015 12:59:02</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/24/2015 16:54:49</publishTime>
+      <publishTime>07/25/2015 12:59:04</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>06/26/2015 11:33:39</publishTime>
@@ -5374,7 +5374,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/24/2015 16:35:11</publishTime>
+      <publishTime>07/25/2015 12:59:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

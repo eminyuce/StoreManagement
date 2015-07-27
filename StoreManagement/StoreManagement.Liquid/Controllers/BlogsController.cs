@@ -22,12 +22,27 @@ namespace StoreManagement.Liquid.Controllers
         // GET: /Blogs/
         public ActionResult Index(int page = 1)
         {
-            var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "BlogsIndex");
-            var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
-            Task.WaitAll(blogsPageDesignTask, contentsTask);
-            var dic = BlogHelper.GetBlogsIndexPage(contentsTask, blogsPageDesignTask);
+            try
+            {
+                if (!IsModulActive(StoreConstants.BlogsType))
+                {
+                    return HttpNotFound("Not Found");
+                }
 
-            return View(dic);
+                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "BlogsIndex");
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
+                var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType, true);
+                Task.WaitAll(blogsPageDesignTask, contentsTask, categories);
+                var dic = BlogHelper.GetBlogsIndexPage(this.HttpContext.Request, contentsTask, blogsPageDesignTask, categories);
+
+                return View(dic);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "");
+                return new HttpStatusCodeResult(500);
+            }
         }
 
 

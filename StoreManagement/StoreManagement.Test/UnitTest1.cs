@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
 using Google.Apis.Drive.v2.Data;
@@ -24,6 +25,7 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -53,35 +55,19 @@ namespace StoreManagement.Test
             int storeId = 9;
             var rr = new ContentRepository(dbContext);
             var pds = new PageDesignRepository(dbContext);
+            var cat = new CategoryRepository(dbContext);
 
 
             var contentsTask = rr.GetContentsCategoryIdAsync(storeId, null, "blog", true, 1, 24);
             var blogsPageDesignTask = pds.GetPageDesignByName(storeId, "BlogsIndex");
-            Task.WaitAll(blogsPageDesignTask, contentsTask);
+            var categories = cat.GetCategoriesByStoreIdAsync(storeId, StoreConstants.BlogsType, true);
+            Task.WaitAll(blogsPageDesignTask, contentsTask, categories);
 
             var contents = contentsTask.Result;
             var blogsPageDesign = blogsPageDesignTask.Result;
-            var blogs = contents.items.Select(c => new Blog(c)).ToList();
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, new
-                {
-                    blogs = from s in blogs
-                            select new
-                            {
-                                s.Content.Name,
-                                s.Content.Description
-                            }
-                }
-                  );
+            var dic = BlogHelper.GetBlogsIndexPage(null, contentsTask, blogsPageDesignTask, categories);
 
-
-            var dic = new Dictionary<String, String>();
-            dic.Add("BlogsIndex", indexPageOutput);
-            dic.Add("Page", (contents.page - 1).ToStr());
-            dic.Add("PageSize", contents.pageSize.ToStr());
-            dic.Add("TotalItemCount", contents.totalItemCount.ToStr());
-
-            Console.WriteLine(dic["BlogsIndex"]);
         }
 
         [TestMethod]

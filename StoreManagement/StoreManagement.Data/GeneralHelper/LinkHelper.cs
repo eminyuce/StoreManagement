@@ -19,5 +19,10 @@ namespace StoreManagement.Data.GeneralHelper
             String productDetailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
             return productDetailLink;
         }
+        public static String GetBlogLink(Content c, String categoryName)
+        {
+            String productDetailLink = String.Format("/Blogs/Blog/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
+            return productDetailLink;
+        }
     }
 }

@@ -119,7 +119,7 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IProductService>().To<ProductRepository>();
                 kernel.Bind<IProductFileService>().To<ProductFileRepository>();
                 kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>();
-
+                kernel.Bind<ILocationService>().To<LocationRepository>();
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();
 

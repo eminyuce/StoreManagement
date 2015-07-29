@@ -10,6 +10,8 @@ namespace StoreManagement.Data.LiquidEngineHelpers
 {
     public class LiquidEngineHelper
     {
+
+
         public static String RenderPage(string templateCode, object anonymousObject)
         {
             Template template = Template.Parse(templateCode);

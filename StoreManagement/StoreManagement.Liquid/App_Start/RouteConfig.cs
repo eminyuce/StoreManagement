@@ -11,7 +11,25 @@ namespace StoreManagement.Liquid
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.LowercaseUrls = true;
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+
+
+         routes.MapRoute(
+             name: "robots",
+             url: "robots.txt",
+                     defaults: new { controller = "Robots", action = "RobotsText" }
+          );
+
+
+            routes.MapRoute(
+                      name: "ProductsDetail",
+                      url: "Products/Product/{categoryName}/{id}",
+                      defaults: new { controller = "Products", action = "Product", id = UrlParameter.Optional }
+                  );
+
 
             routes.MapRoute(
                 name: "Default",

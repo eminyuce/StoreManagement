@@ -25,6 +25,7 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Liquid.Controllers;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
@@ -50,25 +51,32 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestGetProductsCategoryIdAsync()
+        {
+            int storeId = 9;
+            var rr = new ProductRepository(dbContext);
+
+            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
+            Task.WaitAll(productsTask);
+            Console.WriteLine(productsTask.Result.totalItemCount);
+
+        }
+
+        [TestMethod]
         public void TestDotLiquidEngineOutput335555()
         {
             int storeId = 9;
             var rr = new ProductRepository(dbContext);
             var pds = new PageDesignRepository(dbContext);
             var cat = new ProductCategoryRepository(dbContext);
+            var controller = new ProductsController();
 
- 
 
-           //  var productsPageDesignTask = pds.GetPageDesignByName(storeId, "ProductsIndex");
-           var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
-            //var categories1 = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true);
-           // Task.WaitAll(productsPageDesignTask, productsTask, categories1);
-          //  var dic = ProductHelper.GetProductsIndexPage(this.HttpContext.Request, productsTask, productsPageDesignTask, categories);
-           // var blogsPageDesign = productsPageDesignTask.Result;
-
-           Task.WaitAll(productsTask);
-           // var categories = categories1.Result;
-           var products = productsTask.Result;
+            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
+            var productsPageDesignTask =  pds.GetPageDesignByName(storeId, "ProductsIndex");
+            var categories1 = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true);
+            var dic = ProductHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories1);
+        
 
 
         }

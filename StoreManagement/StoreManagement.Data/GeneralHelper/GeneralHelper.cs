@@ -79,7 +79,7 @@ namespace StoreManagement.Data.GeneralHelper
             x509.Import(rawData, password, X509KeyStorageFlags.Exportable);
             return x509;
         }
-        public static X509Certificate2 CreateCert(Byte [] serviceAccountPkCs12FilePath, String password)
+        public static X509Certificate2 CreateCert(Byte[] serviceAccountPkCs12FilePath, String password)
         {
             X509Certificate2 cert = new X509Certificate2(serviceAccountPkCs12FilePath, password, X509KeyStorageFlags.Exportable);
             return cert;
@@ -329,7 +329,7 @@ namespace StoreManagement.Data.GeneralHelper
 
             return description.Trim();
         }
-        
+
         public static byte[] GetImageFromUrl(string url, Dictionary<String, String> dictionary)
         {
             System.Net.HttpWebRequest request = null;
@@ -337,29 +337,38 @@ namespace StoreManagement.Data.GeneralHelper
             byte[] b = null;
 
 
-
-            request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
-            response = (System.Net.HttpWebResponse)request.GetResponse();
-
-            if (request.HaveResponse)
+            try
             {
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+
+
+                request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
+                response = (System.Net.HttpWebResponse)request.GetResponse();
+
+                if (request.HaveResponse)
                 {
-                    Stream receiveStream = response.GetResponseStream();
-                    using (BinaryReader br = new BinaryReader(receiveStream))
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        b = br.ReadBytes(500000);
-                        br.Close();
-                    }
+                        Stream receiveStream = response.GetResponseStream();
+                        using (BinaryReader br = new BinaryReader(receiveStream))
+                        {
+                            b = br.ReadBytes(500000);
+                            br.Close();
+                        }
 
-                    foreach (var h in response.Headers.AllKeys)
-                    {
-                        dictionary.Add(h, response.Headers[h]);
+                        foreach (var h in response.Headers.AllKeys)
+                        {
+                            dictionary.Add(h, response.Headers[h]);
+                        }
+                        dictionary.Add("ContentType", response.ContentType);
                     }
-                    dictionary.Add("ContentType", response.ContentType);
                 }
-            }
 
+            }
+            catch (Exception)
+            {
+
+              
+            }
             return b;
         }
 
@@ -830,7 +839,7 @@ namespace StoreManagement.Data.GeneralHelper
             if (String.IsNullOrEmpty(text))
                 return "";
             String[] olds = { "Ğ", "ğ", "Ü", "ü", "Ş", "ş", "İ", "ı", "Ö", "ö", "Ç", "ç" };
-           // String[] news = { "G", "g", "U", "u", "S", "s", "I", "i", "O", "o", "C", "c" };
+            // String[] news = { "G", "g", "U", "u", "S", "s", "I", "i", "O", "o", "C", "c" };
             String[] news = { "G", "g", "U", "u", "S", "s", "i", "i", "O", "o", "C", "c" };
 
             for (int i = 0; i < olds.Length; i++)
@@ -995,6 +1004,6 @@ namespace StoreManagement.Data.GeneralHelper
 
         }
 
-       
+
     }
 }

@@ -20,14 +20,11 @@ namespace StoreManagement.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
-
-
-
         public ActionResult Index(int storeId = 0, String search = "", int categoryId = 0)
         {
-            List<Product> resultList = new List<Product>();
+            var resultList = new List<Product>();
             storeId = GetStoreId(storeId);
-            if (storeId != 0)
+            if (storeId != 0 && (categoryId != 0 || !String.IsNullOrEmpty(search)))
             {
                 resultList = ProductRepository.GetProductByTypeAndCategoryId(storeId, StoreConstants.ProductType, categoryId, search);
             }
@@ -235,13 +232,14 @@ namespace StoreManagement.Admin.Controllers
                 ProductRepository.Save();
                 LabelLineRepository.DeleteLabelLinesByItem(product.Id, StoreConstants.ProductType);
                 ProductFileRepository.DeleteProductFileByProductId(product.Id);
+
                 if (IsSuperAdmin)
                 {
-                    return RedirectToAction("Index", new { storeId = product.StoreId });
+                    return RedirectToAction("Index", new { storeId = product.StoreId, categoryId = product.ProductCategoryId });
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { categoryId = product.ProductCategoryId });
                 }
             }
             catch (Exception ex)

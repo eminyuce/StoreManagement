@@ -24,7 +24,7 @@ namespace StoreManagement.Admin.Controllers
         {
             List<Content> resultList = new List<Content>();
             storeId = GetStoreId(storeId);
-            if (storeId != 0)
+            if (storeId != 0 && (categoryId != 0 || !String.IsNullOrEmpty(search)))
             {
                 resultList = ContentRepository.GetContentByTypeAndCategoryId(storeId, ContentType, categoryId, search);
             }
@@ -192,13 +192,14 @@ namespace StoreManagement.Admin.Controllers
                 ContentRepository.Save();
 
 
+
                 if (IsSuperAdmin)
                 {
-                    return RedirectToAction("Index", new { storeId = content.StoreId });
+                    return RedirectToAction("Index", new { storeId = content.StoreId, categoryId = content.CategoryId });
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { categoryId = content.CategoryId });
                 }
 
             }

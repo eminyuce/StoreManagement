@@ -61,12 +61,11 @@ namespace StoreManagement.Service.Repositories
             var products = this.FindBy(
                 r => r.StoreId == storeId &&
                      r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
-
             if (categoryId > 0)
             {
                 products = products.Where(r => r.ProductCategoryId == categoryId);
             }
-
+            
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
                 products = products.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
@@ -102,6 +101,8 @@ namespace StoreManagement.Service.Repositories
             {
                 var returnList =
                         this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
+
+
                 if (categoryId.HasValue)
                 {
                     returnList = returnList.Where(r => r.ProductCategoryId == categoryId.Value);

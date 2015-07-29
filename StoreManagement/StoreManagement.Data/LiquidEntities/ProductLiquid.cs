@@ -18,15 +18,18 @@ namespace StoreManagement.Data.LiquidEntities
         public Product Product { get; set; }
         public ProductCategory Category { get; set; }
         public PageDesign PageDesign { get; set; }
+        public ImageLiquid ImageLiquid { get; set; }
 
-        private HttpRequestBase HttpRequestBase { get; set; }
 
-        public ProductLiquid(HttpRequestBase httpRequestBase, Product product, ProductCategory category, PageDesign pageDesign)
+        public ProductLiquid(Product product, ProductCategory category, PageDesign pageDesign)
         {
-            this.HttpRequestBase = httpRequestBase;
+     
             this.Product = product;
             this.Category = category;
             this.PageDesign = pageDesign;
+            List<FileManager> fileManagers = product.ProductFiles.Any() ? product.ProductFiles.Select(r => r.FileManager).ToList() : new List<FileManager>();
+            this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign);
+
         }
 
 
@@ -37,37 +40,9 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetProductLink(this.Product, Category.Name);
             }
         }
-        //int width = 60, int height = 60
-        public String ImageSource
-        {
-            get
-            {
-                if (ImageHas)
-                {
-                    var urlHelper = new UrlHelper(HttpRequestBase.RequestContext);
-                    var firstOrDefault = this.Product.ProductFiles.FirstOrDefault();
-                    return urlHelper.AbsoluteAction("Thumbnail", "Images", new
-                            {
-                                id = firstOrDefault.FileManager.GoogleImageId,
-                                width = this.PageDesign.ImageWidth,
-                                height = this.PageDesign.ImageHeight
-                            });
 
-                }
-                else
-                {
 
-                    return "";
-                }
-            }
-        }
 
-        public bool ImageHas
-        {
-            get
-            {
-                return this.Product.ProductFiles.Any();
-            }
-        }
+
     }
 }

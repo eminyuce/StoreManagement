@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ProductHelper
     {
-        public static Dictionary<string, string> GetProductsIndexPage(HttpRequestBase httpRequestBase, Task<StorePagedList<Product>> productsTask,
+        public static Dictionary<string, string> GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
             Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
         {
 
@@ -27,24 +27,24 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                 if (category != null)
                 {
-                    var blog = new ProductLiquid(httpRequestBase, item, category, blogsPageDesign);
+                    var blog = new ProductLiquid(item, category, blogsPageDesign);
                     items.Add(blog);
                 }
             }
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, new
-            {
-                items = from s in items
-                        select new
-                        {
-                            s.Product.Name,
-                            s.Product.Description,
-                            s.DetailLink,
-                            s.ImageHas,
-                            s.ImageSource
-                        }
-            }
-                );
+            object anonymousObject = new
+                {
+                    items = from s in items
+                            select new
+                                {
+                                    s.Product.Name,
+                                    s.Product.Description,
+                                    s.DetailLink,
+                                    Images = s.ImageLiquid
+                                }
+                };
+            
+            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate,anonymousObject);
 
 
             var dic = new Dictionary<String, String>();

@@ -451,6 +451,12 @@
     <Content Include="Views\Blogs\Copy of Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\MethodNotAllowed.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -463,7 +469,6 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Ajax\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Error\" />
     <Folder Include="Views\Images\" />
     <Folder Include="Views\Robots\" />
   </ItemGroup>

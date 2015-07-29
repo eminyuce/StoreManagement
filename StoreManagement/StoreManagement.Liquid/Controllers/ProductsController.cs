@@ -24,7 +24,6 @@ namespace StoreManagement.Liquid.Controllers
                 var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductsIndex");
                 var productsTask = ProductService.GetProductsCategoryIdAsync(Store.Id, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true);
-                Task.WaitAll(productsPageDesignTask, productsTask, categories);
                 var dic = ProductHelper.GetProductsIndexPage(this.HttpContext.Request, productsTask, productsPageDesignTask, categories);
 
                 return View(dic);
@@ -32,7 +31,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "");
+                Logger.Error(ex, "ProductsController:Index:" + ex.StackTrace, page);
                 return new HttpStatusCodeResult(500);
             }
         }
@@ -49,11 +48,11 @@ namespace StoreManagement.Liquid.Controllers
         }
         public ActionResult Product2()
         {
-           
+
 
 
             return View();
         }
-        
-	}
+
+    }
 }

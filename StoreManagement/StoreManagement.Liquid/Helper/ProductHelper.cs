@@ -16,6 +16,8 @@ namespace StoreManagement.Liquid.Helper
         public static Dictionary<string, string> GetProductsIndexPage(HttpRequestBase httpRequestBase, Task<StorePagedList<Product>> productsTask,
             Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
         {
+
+            Task.WaitAll(pageDesignTask, productsTask, categoriesTask);
             var products = productsTask.Result;
             var blogsPageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;

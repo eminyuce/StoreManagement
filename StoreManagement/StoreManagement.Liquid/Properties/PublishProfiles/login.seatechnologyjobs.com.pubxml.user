@@ -46,7 +46,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2015 22:48:22</publishTime>
     </File>
     <File Include="bin/NLog.config">
-      <publishTime>07/28/2015 22:49:57</publishTime>
+      <publishTime>07/29/2015 10:05:32</publishTime>
     </File>
     <File Include="bin/NLog.dll">
       <publishTime>07/28/2015 22:48:18</publishTime>
@@ -55,13 +55,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2015 22:48:24</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/28/2015 22:52:56</publishTime>
+      <publishTime>07/29/2015 09:32:51</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>07/28/2015 22:55:30</publishTime>
+      <publishTime>07/29/2015 10:27:23</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/28/2015 22:52:59</publishTime>
+      <publishTime>07/29/2015 09:32:52</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/28/2015 22:48:10</publishTime>
@@ -757,7 +757,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/17/2014 19:37:56</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>07/28/2015 22:49:57</publishTime>
+      <publishTime>07/29/2015 10:05:32</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>07/28/2015 22:47:57</publishTime>
@@ -891,6 +891,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Categories/Index.cshtml">
       <publishTime>07/28/2015 22:47:56</publishTime>
     </File>
+    <File Include="Views/Error/BadRequest.cshtml">
+      <publishTime>07/28/2015 22:48:00</publishTime>
+    </File>
+    <File Include="Views/Error/Forbidden.cshtml">
+      <publishTime>07/28/2015 22:48:00</publishTime>
+    </File>
+    <File Include="Views/Error/InternalServerError.cshtml">
+      <publishTime>07/28/2015 22:48:00</publishTime>
+    </File>
+    <File Include="Views/Error/MethodNotAllowed.cshtml">
+      <publishTime>07/28/2015 22:48:00</publishTime>
+    </File>
+    <File Include="Views/Error/NotFound.cshtml">
+      <publishTime>07/28/2015 22:48:00</publishTime>
+    </File>
+    <File Include="Views/Error/Unauthorized.cshtml">
+      <publishTime>07/28/2015 22:48:00</publishTime>
+    </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>07/28/2015 22:47:56</publishTime>
     </File>
@@ -940,7 +958,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/20/2015 11:56:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/28/2015 22:53:41</publishTime>
+      <publishTime>07/29/2015 10:30:53</publishTime>
     </File>
   </ItemGroup>
 </Project>

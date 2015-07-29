@@ -25,7 +25,6 @@ namespace StoreManagement.Liquid.Controllers
                 var newsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "NewsIndex");
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.NewsType, true);
-                Task.WaitAll(newsPageDesignTask, contentsTask, categories);
                 var dic = ContentHelper.GetContentsIndexPage(this.HttpContext.Request, contentsTask, newsPageDesignTask, categories);
 
                 return View(dic);
@@ -33,7 +32,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "");
+                Logger.Error(ex, "NewsController:Index:" + ex.StackTrace, page);
                 return new HttpStatusCodeResult(500);
             }
         }

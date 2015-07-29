@@ -18,6 +18,7 @@ namespace StoreManagement.Liquid.Helper
             Task<PageDesign> pageDesignTask,
                  Task<List<Category>> categoriesTask)
         {
+            Task.WaitAll(pageDesignTask, contentsTask, categoriesTask);
             var contents = contentsTask.Result;
             var blogsPageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;

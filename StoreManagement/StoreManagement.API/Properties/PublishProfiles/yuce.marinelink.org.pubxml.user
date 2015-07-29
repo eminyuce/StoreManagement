@@ -32,6 +32,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/HtmlAgilityPack.dll">
       <publishTime>07/28/2015 22:48:08</publishTime>
     </File>
+    <File Include="bin/Microsoft.AspNet.WebApi.MessageHandlers.Compression.dll">
+      <publishTime>07/29/2015 09:38:57</publishTime>
+    </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/28/2015 22:48:17</publishTime>
     </File>
@@ -56,6 +59,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Ninject.WebApi.DependencyResolver.dll">
       <publishTime>07/28/2015 22:48:23</publishTime>
     </File>
+    <File Include="bin/NLog.config">
+      <publishTime>07/29/2015 09:57:28</publishTime>
+    </File>
     <File Include="bin/NLog.dll">
       <publishTime>07/28/2015 22:48:18</publishTime>
     </File>
@@ -66,16 +72,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>07/28/2015 22:53:01</publishTime>
+      <publishTime>07/29/2015 09:58:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/28/2015 22:52:56</publishTime>
+      <publishTime>07/29/2015 09:32:51</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/28/2015 22:52:59</publishTime>
+      <publishTime>07/29/2015 09:32:52</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Extensions.dll">
+      <publishTime>07/29/2015 09:38:55</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>07/28/2015 22:48:09</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Primitives.dll">
+      <publishTime>07/29/2015 09:38:55</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>07/28/2015 22:48:09</publishTime>
@@ -107,14 +119,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Global.asax">
       <publishTime>07/28/2015 22:47:36</publishTime>
     </File>
+    <File Include="NLog.config">
+      <publishTime>07/29/2015 09:57:28</publishTime>
+    </File>
     <File Include="packages.config">
-      <publishTime>07/28/2015 22:49:57</publishTime>
+      <publishTime>07/29/2015 09:57:04</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/28/2015 22:53:03</publishTime>
+      <publishTime>07/29/2015 09:58:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

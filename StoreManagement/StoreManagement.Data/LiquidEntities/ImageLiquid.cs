@@ -41,11 +41,13 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                if (ImageHas)
+                if (HasImage)
                 {
                     var firstOrDefault = FileManagers.FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth,
-                                                   this.ImageHeight);
+                    return LinkHelper.GetImageLink("Thumbnail", 
+                        firstOrDefault.GoogleImageId, 
+                        this.ImageWidth,
+                        this.ImageHeight);
                 }
                 else
                 {
@@ -60,7 +62,7 @@ namespace StoreManagement.Data.LiquidEntities
 
             get
             {
-                if (ImageHas)
+                if (HasImage)
                 {
                     var imageList = new List<String>();
                     foreach (var image in this.FileManagers)
@@ -80,7 +82,7 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
-        public bool ImageHas
+        public bool HasImage
         {
             get
             {

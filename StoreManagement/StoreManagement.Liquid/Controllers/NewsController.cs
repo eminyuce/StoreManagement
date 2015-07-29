@@ -25,7 +25,7 @@ namespace StoreManagement.Liquid.Controllers
                 var newsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "NewsIndex");
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.NewsType, true);
-                var dic = ContentHelper.GetContentsIndexPage(this.HttpContext.Request, contentsTask, newsPageDesignTask, categories);
+                var dic = ContentHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories);
 
                 return View(dic);
 

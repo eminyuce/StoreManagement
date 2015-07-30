@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using NLog;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
@@ -14,8 +13,6 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ProductHelper
     {
-        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         public static Dictionary<string, string> GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
             Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
         {
@@ -43,7 +40,7 @@ namespace StoreManagement.Liquid.Helper
                                     s.Product.Name,
                                     s.Product.Description,
                                     s.DetailLink,
-                                    HasImage = s.ImageLiquid.HasImage
+                                    Images = s.ImageLiquid
                                 }
                 };
             

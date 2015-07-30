@@ -19,10 +19,11 @@ namespace StoreManagement.Data.LiquidEntities
         public Category Category { get; set; }
         public PageDesign PageDesign { get; set; }
 
+        private HttpRequestBase HttpRequestBase { get; set; }
 
-
-        public ContentLiquid(Content content, Category category, PageDesign pageDesign)
+        public ContentLiquid(HttpRequestBase httpRequestBase, Content content, Category category, PageDesign pageDesign)
         {
+            this.HttpRequestBase = httpRequestBase;
             this.Content = content;
             this.Category = category;
             this.PageDesign = pageDesign;
@@ -43,12 +44,14 @@ namespace StoreManagement.Data.LiquidEntities
             {
                 if (ImageHas)
                 {
-
+                    var urlHelper = new UrlHelper(HttpRequestBase.RequestContext);
                     var firstOrDefault = this.Content.ContentFiles.FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail",  
-                                firstOrDefault.FileManager.GoogleImageId,
-                                 this.PageDesign.ImageWidth,
-                                this.PageDesign.ImageHeight);
+                    return urlHelper.AbsoluteAction("Thumbnail", "Images", new
+                            {
+                                id = firstOrDefault.FileManager.GoogleImageId,
+                                width = this.PageDesign.ImageWidth,
+                                height = this.PageDesign.ImageHeight
+                            });
 
                 }
                 else

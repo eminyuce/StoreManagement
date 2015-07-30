@@ -65,14 +65,16 @@ namespace StoreManagement.Service.Repositories
                 r => r.StoreId == storeId &&
                      r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
 
-            if (categoryId > 0)
-            {
-                contents = contents.Where(r => r.CategoryId == categoryId);
-            }
+
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
                 contents = contents.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
+            else if (categoryId > 0)
+            {
+                contents = contents.Where(r => r.CategoryId == categoryId);
+            }
+           
 
             return contents.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 

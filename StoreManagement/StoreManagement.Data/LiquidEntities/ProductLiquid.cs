@@ -11,8 +11,8 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    [LiquidType]
-    public class ProductLiquid
+
+    public class ProductLiquid : Drop
     {
 
         public Product Product { get; set; }

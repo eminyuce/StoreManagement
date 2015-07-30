@@ -12,7 +12,8 @@ namespace StoreManagement.Data.Entities
     {
         public int ParentId { get; set; }
         [Required(ErrorMessage = "Please enter name")]
-        public string Name { get; set; }
+        public string Name { get; set; }        
+        public string Description { get; set; }
         [IgnoreDataMember]
         public string CategoryType { get; set; }
        

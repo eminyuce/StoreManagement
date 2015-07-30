@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ContentHelper
     {
-        public static Dictionary<string, string> GetContentsIndexPage(HttpRequestBase httpRequestBase,
+        public static Dictionary<string, string> GetContentsIndexPage(
             Task<StorePagedList<Content>> contentsTask,
             Task<PageDesign> pageDesignTask,
                  Task<List<Category>> categoriesTask)
@@ -28,7 +28,7 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
                 if (category != null)
                 {
-                    var blog = new ContentLiquid(httpRequestBase, item, category, blogsPageDesign);
+                    var blog = new ContentLiquid(item, category, blogsPageDesign);
                     items.Add(blog);
                 }
             }

@@ -11,8 +11,7 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    [LiquidType]
-    public class ImageLiquid
+    public class ImageLiquid : Drop
     {
 
 
@@ -44,8 +43,7 @@ namespace StoreManagement.Data.LiquidEntities
                 if (ImageHas)
                 {
                     var firstOrDefault = FileManagers.FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth,
-                                                   this.ImageHeight);
+                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth,this.ImageHeight);
                 }
                 else
                 {

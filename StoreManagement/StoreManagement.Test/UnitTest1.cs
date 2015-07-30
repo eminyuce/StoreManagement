@@ -98,7 +98,7 @@ namespace StoreManagement.Test
             var contents = contentsTask.Result;
             var blogsPageDesign = blogsPageDesignTask.Result;
 
-            var dic = ContentHelper.GetContentsIndexPage(null, contentsTask, blogsPageDesignTask, categories);
+            var dic = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories);
 
         }
 

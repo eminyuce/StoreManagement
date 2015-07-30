@@ -61,15 +61,18 @@ namespace StoreManagement.Service.Repositories
             var products = this.FindBy(
                 r => r.StoreId == storeId &&
                      r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
-            if (categoryId > 0)
-            {
-                products = products.Where(r => r.ProductCategoryId == categoryId);
-            }
-            
+
+
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
                 products = products.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
+            else if (categoryId > 0)
+            {
+                products = products.Where(r => r.ProductCategoryId == categoryId);
+            }
+            
+          
 
             return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 

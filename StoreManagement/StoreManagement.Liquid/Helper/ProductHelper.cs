@@ -22,6 +22,7 @@ namespace StoreManagement.Liquid.Helper
             var blogsPageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
             var items = new List<ProductLiquid>();
+            var cats = new List<CategoryLiquid>();
             foreach (var item in products.items)
             {
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
@@ -30,6 +31,9 @@ namespace StoreManagement.Liquid.Helper
                     var blog = new ProductLiquid(item, category, blogsPageDesign);
                     items.Add(blog);
                 }
+                var catLiquid = new CategoryLiquid(category, blogsPageDesign);
+                cats.Add(catLiquid);
+
             }
 
             object anonymousObject = new
@@ -40,11 +44,18 @@ namespace StoreManagement.Liquid.Helper
                                     s.Product.Name,
                                     s.Product.Description,
                                     s.DetailLink,
-                                    Images = s.ImageLiquid
-                                }
+                                    images = s.ImageLiquid 
+                                },
+                    categories = from s in cats
+                                 select new
+                                     {
+                                         s.Category.Name,
+                                         s.Category.Description,
+                                         s.DetailLink,
+                                     }
                 };
-            
-            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate,anonymousObject);
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, anonymousObject);
 
 
             var dic = new Dictionary<String, String>();

@@ -90,8 +90,6 @@ namespace StoreManagement.Liquid.App_Start
                 service7.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service8 = kernel.Bind<IStoreUserService>().To<StoreUserService>();
                 service8.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service9 = kernel.Bind<ICompanyService>().To<CompanyService>();
-                service9.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service10 = kernel.Bind<INavigationService>().To<NavigationService>();
                 service10.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service11 = kernel.Bind<IProductService>().To<ProductService>();
@@ -114,7 +112,7 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IPageDesignService>().To<PageDesignRepository>();
                 kernel.Bind<IContentFileService>().To<ContentFileRepository>();
                 kernel.Bind<IStoreUserService>().To<StoreUserRepository>();
-                kernel.Bind<ICompanyService>().To<CompanyRepository>();
+ 
                 kernel.Bind<INavigationService>().To<NavigationRepository>();
                 kernel.Bind<IProductService>().To<ProductRepository>();
                 kernel.Bind<IProductFileService>().To<ProductFileRepository>();

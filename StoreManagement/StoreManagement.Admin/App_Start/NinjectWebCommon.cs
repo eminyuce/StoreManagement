@@ -85,7 +85,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>();
             kernel.Bind<IContentFileRepository>().To<ContentFileRepository>();
             kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
-            kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
+ 
             kernel.Bind<IProductRepository>().To<ProductRepository>();
             kernel.Bind<IProductFileRepository>().To<ProductFileRepository>();
             kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>();

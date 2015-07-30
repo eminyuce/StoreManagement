@@ -314,7 +314,6 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -1847,17 +1846,13 @@
     <Content Include="Views\FileManager\UploadImages.cshtml" />
     <Content Include="Views\Shared\_LayoutFileUpload.cshtml" />
     <Content Include="Views\FileManager\DisplayImages.cshtml" />
-    <Content Include="Views\Companies\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Company.cshtml" />
-    <Content Include="Views\Companies\CompaniesSearch.cshtml" />
     <Content Include="Views\Shared\Pager.cshtml" />
     <Content Include="Views\Shared\pFilter.cshtml" />
     <Content Include="Views\Shared\pFiltersGroups.cshtml" />
     <Content Include="Views\Shared\pPager.cshtml" />
     <Content Include="Views\Shared\pSearchForm.cshtml" />
-    <Content Include="Views\Companies\Company.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RecordsStats.cshtml" />
-    <Content Include="Views\Companies\SaveOrUpdate.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
     <Content Include="Views\Settings\Delete.cshtml" />
     <Content Include="Views\Settings\Details.cshtml" />
@@ -1871,7 +1866,6 @@
     <Content Include="Views\Shared\Themes\_Layout2.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
-    <Content Include="Views\Companies\GetCompanies.cshtml" />
     <Content Include="Views\Shared\_MyCustomGrid.cshtml" />
     <Content Include="Views\Stores\_StoresDropDown.cshtml" />
     <Content Include="Views\Stores\_StoresFilter.cshtml" />

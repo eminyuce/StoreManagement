@@ -76,7 +76,6 @@ namespace StoreManagement.API.App_Start
             kernel.Bind<IContentFileRepository>().To<ContentFileRepository>();
 
             kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
-            kernel.Bind<ICompanyRepository>().To<CompanyRepository>(); 
 
             kernel.Bind<ILabelRepository>().To<LabelRepository>();
             kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>();

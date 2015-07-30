@@ -132,7 +132,6 @@
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />
-    <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Content.cs" />
     <Compile Include="Entities\ContentFile.cs" />
@@ -169,7 +168,6 @@
     <Compile Include="GeneralHelper\SyndicationFeedExtensions.cs" />
     <Compile Include="GeneralHelper\UrlHelperExtensions.cs" />
     <Compile Include="GeneralHelper\YuceConvert.cs" />
-    <Compile Include="Grid\CompanyGrid.cs" />
     <Compile Include="HelpersModel\ErrorModel.cs" />
     <Compile Include="HelpersModel\Filter.cs" />
     <Compile Include="HelpersModel\FilterGroup.cs" />
@@ -192,7 +190,6 @@
     <Compile Include="ProjectAppSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestModel\CategoryViewModel.cs" />
-    <Compile Include="RequestModel\CompanySearchResult.cs" />
     <Compile Include="RequestModel\ContentDetailViewModel.cs" />
     <Compile Include="RequestModel\ContentsAdminViewModel.cs" />
     <Compile Include="RequestModel\ContentsViewModel.cs" />

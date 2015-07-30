@@ -10,955 +10,955 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/DotLiquid.dll">
-      <publishTime>07/28/2015 22:48:01</publishTime>
+      <publishTime>07/30/2015 09:18:07</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>07/28/2015 22:48:06</publishTime>
+      <publishTime>07/30/2015 09:18:12</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>07/28/2015 22:48:06</publishTime>
+      <publishTime>07/30/2015 09:18:13</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>07/28/2015 22:48:06</publishTime>
+      <publishTime>07/30/2015 09:18:13</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
-      <publishTime>07/28/2015 22:48:08</publishTime>
+      <publishTime>07/30/2015 09:18:15</publishTime>
     </File>
     <File Include="bin/HtmlAgilityPack.dll">
-      <publishTime>07/28/2015 22:48:08</publishTime>
+      <publishTime>07/30/2015 09:18:15</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>07/28/2015 22:48:17</publishTime>
+      <publishTime>07/30/2015 09:18:25</publishTime>
     </File>
     <File Include="bin/MvcPaging.dll">
-      <publishTime>07/28/2015 22:48:18</publishTime>
+      <publishTime>07/30/2015 09:18:26</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>07/28/2015 22:48:21</publishTime>
+      <publishTime>07/30/2015 09:18:29</publishTime>
     </File>
     <File Include="bin/Ninject.dll">
-      <publishTime>07/28/2015 22:48:21</publishTime>
+      <publishTime>07/30/2015 09:18:29</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.dll">
-      <publishTime>07/28/2015 22:48:22</publishTime>
+      <publishTime>07/30/2015 09:18:31</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Mvc.dll">
-      <publishTime>07/28/2015 22:48:22</publishTime>
+      <publishTime>07/30/2015 09:18:30</publishTime>
     </File>
     <File Include="bin/NLog.config">
-      <publishTime>07/29/2015 10:05:32</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="bin/NLog.dll">
-      <publishTime>07/28/2015 22:48:18</publishTime>
+      <publishTime>07/30/2015 09:18:26</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
-      <publishTime>07/28/2015 22:48:24</publishTime>
+      <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/29/2015 14:40:59</publishTime>
+      <publishTime>07/30/2015 09:25:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>07/29/2015 14:41:02</publishTime>
+      <publishTime>07/30/2015 09:26:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/29/2015 14:41:01</publishTime>
+      <publishTime>07/30/2015 09:25:35</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>07/28/2015 22:48:10</publishTime>
+      <publishTime>07/30/2015 09:18:17</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>07/28/2015 22:48:08</publishTime>
+      <publishTime>07/30/2015 09:18:16</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>07/28/2015 22:48:09</publishTime>
+      <publishTime>07/30/2015 09:18:16</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>07/28/2015 22:48:10</publishTime>
+      <publishTime>07/30/2015 09:18:17</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>07/28/2015 22:48:10</publishTime>
+      <publishTime>07/30/2015 09:18:17</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>07/28/2015 22:48:10</publishTime>
+      <publishTime>07/30/2015 09:18:17</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
-      <publishTime>07/28/2015 22:48:25</publishTime>
+      <publishTime>07/30/2015 09:18:35</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>07/20/2015 11:56:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/base.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/beige.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/blue.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/brown.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/celadon.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/cherry.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/cyan.css">
-      <publishTime>06/25/2014 16:08:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/dark.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/gray.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/green.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/navy.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/olive.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/orange.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/peach.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/pink.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/purple.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/red.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/colors/yellow.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/font-awesome.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/responsive.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/style.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Content/trizzy/switcher.css">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.eot">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.svg">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.ttf">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.woff">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/FontAwesome.otf">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/fontello.eot">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/fontello.svg">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/fontello.ttf">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/fontello.woff">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>07/28/2015 22:47:54</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/alert_boxes_close_ico.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/bedge_grunge.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/brushed_alu.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/crisp_paper_ruffles.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/diamond_upholstery.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/light_toast.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/linedpaper.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/navy_blue.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/noise_pattern_with_crosslines.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/purty_wood.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/retina_wood.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/sativa.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/shattered.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/squared_metal.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/stardust.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/subtle_stripes.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/textured_stripes.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/tileable_wood_texture.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/vichy.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/bg/washi.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-01-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-02-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-02a-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-02a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-widget-01.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-widget-02.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-widget-03.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-widget-04.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-widget-05.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/blog-widget-06.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/caption-hover-effect_01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/caption-hover-effect_02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/caption-hover-effect_03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/comments-divider.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/contact-loader.gif">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/down_arrow_select.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/featured_img_1.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/featured_img_2.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/featured_img_3.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/from_the_blog_01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/from_the_blog_02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/from_the_blog_03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/from_the_blog_04.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/happy-clients-01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/happy-clients-02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/happy-clients-03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/home%402x.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/home.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-01a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-01b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-02a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-02b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-03a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-03b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-04a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/lightbox-sample-04b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/loader.gif">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/loading.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo%402x.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-01.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-02.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-03.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-04.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-05.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-06.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-07.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo-footer.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/logo.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/mastercard.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/menu-banner-01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:58</publishTime>
     </File>
     <File Include="Images/menu-banner-02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/moneybookers.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/parallax.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/parallax_02.jpg">
-      <publishTime>06/07/2014 18:17:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/parallax_03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/paypal.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-01a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-02a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-03a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-03b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-04.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-04a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-05.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-05a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-06.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-06a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-06b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-07.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-07a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-08.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-08a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-08b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-09.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-09a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-09b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-10.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-10a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-11.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-11a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-12.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/portfolio-12a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/single-project-half-01-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/single-project-half-01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/single-project-half-02-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/portfolio/single-project-half-02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_category_01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_category_02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_category_03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_category_04.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_category_05.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_category_06.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_01a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_01b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_01c.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_02a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_02b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_02c.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_03a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_03b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_03c.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_04a-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_04a.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_04b-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_04b.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_04c-big.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_04c.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_01a.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_01b.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_01c.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_02a.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_02b.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_02c.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_03a.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_03b.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_03c.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_04a.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_04b.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/product_item_thumb_04c.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/service.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_01_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_02_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_03_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_04.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_04_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_05.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_05_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_06.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_06_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_07.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_07_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_08.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_08_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_09.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/shop_item_09_hover.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/skrill.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/slider.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/slider2.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/slider3.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/slider4.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/slider5.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_02.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_03.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_04.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_05.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_06.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_07.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_08.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/small_product_list_09.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/switcher.png">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/team-01.jpg">
-      <publishTime>07/28/2015 22:47:55</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/team-02.jpg">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/team-03.jpg">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/titlebar_bg_01.jpg">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/titlebar_bg_02.jpg">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Images/visa.png">
-      <publishTime>04/17/2014 19:37:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>07/29/2015 10:05:32</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>07/20/2015 11:56:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/storeHelper.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/storeManagement.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/custom.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/hoverIntent.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery-2.1.0.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.appear.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.counterup.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.flexslider-min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.gmaps.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.isotope.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.jpanelmenu.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.magnific-popup.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.pricefilter.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.pureparallax.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.royalslider.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.selectric.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.themepunch.plugins.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.themepunch.revolution.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.themepunch.showbizpro.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.tooltips.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/jquery.uniform.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/modernizr.custom.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/puregrid.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/SelectBox.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="Scripts/Trizzy/stacktable.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/superfish.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/switcher.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/Trizzy/waypoints.min.js">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Views/Blogs/Blog.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Views/Blogs/Copy of Index.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Views/Blogs/Index.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Views/Blogs/Index2.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Views/Categories/Index.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Views/Error/BadRequest.cshtml">
-      <publishTime>07/28/2015 22:48:00</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Error/Forbidden.cshtml">
-      <publishTime>07/28/2015 22:48:00</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Error/InternalServerError.cshtml">
-      <publishTime>07/28/2015 22:48:00</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Error/MethodNotAllowed.cshtml">
-      <publishTime>07/28/2015 22:48:00</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Error/NotFound.cshtml">
-      <publishTime>07/28/2015 22:48:00</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Error/Unauthorized.cshtml">
-      <publishTime>07/28/2015 22:48:00</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Home/Faq.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Home/Services.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/News/Index.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>07/28/2015 22:49:58</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Products/Index2.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Products/Product2.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BootstrapPagination.cshtml">
-      <publishTime>07/28/2015 22:47:56</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Shopping/CheckOut.cshtml">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Shopping/Index.cshtml">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/web.config">
-      <publishTime>07/28/2015 22:47:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>07/20/2015 11:56:57</publishTime>
+      <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/29/2015 10:40:07</publishTime>
+      <publishTime>07/30/2015 09:26:35</publishTime>
     </File>
   </ItemGroup>
 </Project>

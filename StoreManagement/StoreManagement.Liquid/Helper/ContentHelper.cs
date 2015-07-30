@@ -20,7 +20,7 @@ namespace StoreManagement.Liquid.Helper
         {
             Task.WaitAll(pageDesignTask, contentsTask, categoriesTask);
             var contents = contentsTask.Result;
-            var blogsPageDesign = pageDesignTask.Result;
+            var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
             var items = new List<ContentLiquid>();
             foreach (var item in contents.items)
@@ -28,12 +28,12 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
                 if (category != null)
                 {
-                    var blog = new ContentLiquid(item, category, blogsPageDesign);
+                    var blog = new ContentLiquid(item, category, pageDesign);
                     items.Add(blog);
                 }
             }
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, new
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
             {
                 items = from s in items
                         select new
@@ -53,8 +53,8 @@ namespace StoreManagement.Liquid.Helper
             dic.Add("PageSize", contents.pageSize.ToStr());
             dic.Add("PageNumber", (contents.page - 1).ToStr());
             dic.Add("TotalItemCount", contents.totalItemCount.ToStr());
-            dic.Add("IsPagingUp", blogsPageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-            dic.Add("IsPagingDown", blogsPageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+            dic.Add("IsPagingUp", pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+            dic.Add("IsPagingDown", pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
             return dic;

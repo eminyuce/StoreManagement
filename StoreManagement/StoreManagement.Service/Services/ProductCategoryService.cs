@@ -12,7 +12,8 @@ namespace StoreManagement.Service.Services
     public class ProductCategoryService : BaseService, IProductCategoryService
     {
         private const String ApiControllerName = "ProductCategories";
-        public ProductCategoryService(string webServiceAddress) : base(webServiceAddress)
+        public ProductCategoryService(string webServiceAddress)
+            : base(webServiceAddress)
         {
         }
 
@@ -61,6 +62,21 @@ namespace StoreManagement.Service.Services
         {
             string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdAsync?storeId={2}&type={3}&isActive={4}", WebServiceAddress, ApiControllerName, storeId, type, isActive);
             return HttpRequestHelper.GetUrlResultsAsync<ProductCategory>(url);
+        }
+
+        public Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
+        {
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdAsync?storeId={2}&type={3}&isActive={4}&page={5}&pageSize={6}",
+                    WebServiceAddress, ApiControllerName, storeId, type, isActive, page, pageSize);
+                return HttpRequestHelper.GetUrlPagedResultsAsync<ProductCategory>(url);
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
         }
     }
 }

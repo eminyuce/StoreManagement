@@ -146,5 +146,10 @@ namespace StoreManagement.API.Controllers
         {
             return ProductCategoryRepository.GetProductCategoriesByStoreIdAsync(storeId, type, isActive);
         }
+
+        public Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
+        {
+            return ProductCategoryRepository.GetProductCategoriesByStoreIdAsync(storeId, type, isActive, page, pageSize);
+        }
     }
 }

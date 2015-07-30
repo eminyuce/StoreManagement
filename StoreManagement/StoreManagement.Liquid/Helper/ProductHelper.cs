@@ -19,7 +19,7 @@ namespace StoreManagement.Liquid.Helper
 
             Task.WaitAll(pageDesignTask, productsTask, categoriesTask);
             var products = productsTask.Result;
-            var blogsPageDesign = pageDesignTask.Result;
+            var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
             var items = new List<ProductLiquid>();
             var cats = new List<CategoryLiquid>();
@@ -28,10 +28,10 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                 if (category != null)
                 {
-                    var blog = new ProductLiquid(item, category, blogsPageDesign);
+                    var blog = new ProductLiquid(item, category, pageDesign);
                     items.Add(blog);
                 }
-                var catLiquid = new CategoryLiquid(category, blogsPageDesign);
+                var catLiquid = new CategoryLiquid(category, pageDesign);
                 cats.Add(catLiquid);
 
             }
@@ -55,7 +55,7 @@ namespace StoreManagement.Liquid.Helper
                                      }
                 };
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(blogsPageDesign.PageTemplate, anonymousObject);
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
 
             var dic = new Dictionary<String, String>();
@@ -63,8 +63,8 @@ namespace StoreManagement.Liquid.Helper
             dic.Add("PageSize", products.pageSize.ToStr());
             dic.Add("PageNumber", (products.page - 1).ToStr());
             dic.Add("TotalItemCount", products.totalItemCount.ToStr());
-            dic.Add("IsPagingUp", blogsPageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-            dic.Add("IsPagingDown", blogsPageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+            dic.Add("IsPagingUp", pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+            dic.Add("IsPagingDown", pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
             return dic;

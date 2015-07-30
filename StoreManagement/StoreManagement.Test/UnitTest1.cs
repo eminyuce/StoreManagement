@@ -61,6 +61,21 @@ namespace StoreManagement.Test
             Console.WriteLine(productsTask.Result.totalItemCount);
 
         }
+        [TestMethod]
+        public void TestDotLiquidEngineOutput335555555()
+        {
+            int storeId = 9;
+            var pds = new PageDesignRepository(new StoreContext(ConnectionString));
+            var cat = new ProductCategoryRepository(new StoreContext(ConnectionString));
+
+            var pageDesignTask = pds.GetPageDesignByName(storeId, "ProductCategoriesIndex");
+            var pageSize = 25;
+            var categories = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true, 1, pageSize);
+            var dic = CategoryHelper.GetCategoriesIndexPage(pageDesignTask, categories);
+
+
+
+        }
 
         [TestMethod]
         public void TestDotLiquidEngineOutput335555()

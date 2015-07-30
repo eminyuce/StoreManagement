@@ -141,5 +141,29 @@ namespace StoreManagement.Service.Repositories
 
             return res;
         }
+
+        public Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
+        {
+            var res = Task.Factory.StartNew(() =>
+            {
+                StorePagedList<ProductCategory> items = null;
+
+
+                IQueryable<ProductCategory> cats = this.FindBy(r => r.StoreId == storeId && r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+                if (isActive.HasValue)
+                {
+                    cats = cats.Where(r => r.State == isActive.Value);
+                }
+                var c = cats.OrderBy(r => r.Ordering).ToList();
+
+                items = new StorePagedList<ProductCategory>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
+                return items;
+
+
+            });
+
+            return res;
+        }
     }
 }

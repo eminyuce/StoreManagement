@@ -17,7 +17,7 @@ namespace StoreManagement.Service.Interfaces
         ProductCategory GetProductCategory(int id);
         StorePagedList<ProductCategory> GetProductCategoryWithContents(int categoryId, int page, int pageSize = 25);
         Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool ? isActive);
-     
+        Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25);
     }
 
 }

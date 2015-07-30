@@ -38,12 +38,15 @@ namespace StoreManagement.Service.Repositories
 
         public Task<PageDesign> GetPageDesignByName(int storeId, string name)
         {
-            var task = new Task<PageDesign>(() =>
-                this.FindBy(r => r.StoreId == storeId &&
-                      r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault());
-            task.Start();
+            var res = Task.Factory.StartNew(() =>
+                {
+                    return this.FindBy(r => r.StoreId == storeId &&
+                          r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                          .FirstOrDefault();
 
-            return task;
+                });
+            return res;
+
         }
     }
 }

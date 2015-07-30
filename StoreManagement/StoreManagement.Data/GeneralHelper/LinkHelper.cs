@@ -32,7 +32,7 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static string GetCategoryLink(BaseCategory productCategory)
         {
-            String productDetailLink = String.Format("/Categories/{0}", 
+            String productDetailLink = String.Format("/ProductCategories/Category/{0}", 
                 String.Format("{0}-{1}",GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
             return productDetailLink.ToLower();

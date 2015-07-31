@@ -9,6 +9,7 @@ using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
@@ -42,6 +43,12 @@ namespace StoreManagement.Service.Repositories
             }
 
             return items;
+        }
+
+        public Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
+        {
+            var res = Task.FromResult(GetStoreActiveNavigations(storeId));
+            return res;
         }
 
         public List<Navigation> GetStoreNavigations(int storeId, string search)

@@ -425,6 +425,7 @@
     </Compile>
     <Compile Include="Helper\CategoryHelper.cs" />
     <Compile Include="Helper\ContentHelper.cs" />
+    <Compile Include="Helper\NavigationHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="Helper\StoreHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -460,6 +461,11 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\ProductCategories\Index.cshtml" />
+    <Content Include="Views\Home\MainLayout.cshtml" />
+    <Content Include="Views\Home\TermsAndCondition.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
+    <Content Include="Views\Home\MainLayoutFooter.cshtml" />
+    <Content Include="Views\Home\MainLayoutJavaScriptFiles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -471,7 +477,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Ajax\" />
-    <Folder Include="Views\Base\" />
     <Folder Include="Views\Images\" />
     <Folder Include="Views\Product\" />
     <Folder Include="Views\Robots\" />

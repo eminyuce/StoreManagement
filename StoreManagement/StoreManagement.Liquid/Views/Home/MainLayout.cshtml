@@ -1,0 +1,10 @@
+﻿@model Dictionary<String, String>
+@{
+    Layout = null;
+    Dictionary<String, String> outputDic = Model;
+            
+}
+
+
+@Html.Raw(outputDic["PageOutput"])
+

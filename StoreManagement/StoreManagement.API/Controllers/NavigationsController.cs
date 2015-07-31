@@ -1,4 +1,5 @@
-﻿using StoreManagement.Data.Entities;
+﻿using System.Threading.Tasks;
+using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -115,6 +116,11 @@ namespace StoreManagement.API.Controllers
         public List<Navigation> GetStoreActiveNavigations(int storeId)
         {
             return this.NavigationRepository.GetStoreActiveNavigations(storeId);
+        }
+
+        public Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
+        {
+            return this.NavigationRepository.GetStoreActiveNavigationsAsync(storeId);
         }
     }
 }

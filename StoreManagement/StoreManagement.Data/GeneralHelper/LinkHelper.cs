@@ -9,7 +9,7 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class LinkHelper
     {
-        public static String GetProductLink(Product c, String categoryName )
+        public static String GetProductLink(Product c, String categoryName)
         {
             String productDetailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
             return productDetailLink.ToLower();
@@ -32,10 +32,33 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static string GetCategoryLink(BaseCategory productCategory)
         {
-            String productDetailLink = String.Format("/ProductCategories/Category/{0}", 
-                String.Format("{0}-{1}",GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
+            String productDetailLink = String.Format("/ProductCategories/Category/{0}",
+                String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
             return productDetailLink.ToLower();
+        }
+
+        public static string GetNavigationLink(Navigation navigation)
+        {
+            if (!navigation.Static)
+            {
+                String productDetailLink = String.Format("/{0}/{1}", navigation.ControllerName, navigation.ActionName);
+                return productDetailLink.ToLower();
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(navigation.Link))
+                {
+                    return navigation.Link.ToLower();
+                }
+                else
+                {
+                    return "";
+                }
+            
+            }
+      
+
         }
     }
 }

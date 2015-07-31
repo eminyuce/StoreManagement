@@ -62,6 +62,28 @@ namespace StoreManagement.Test
 
         }
         [TestMethod]
+        public void TestGetPageDesignByName()
+        {
+            int storeId = 9;
+            var pds = new PageDesignRepository(new StoreContext(ConnectionString));
+            var pageDesignTask = pds.GetPageDesignByName(storeId, "MainLayoutJavaScriptFiles");
+            String m = pageDesignTask.
+        }
+        [TestMethod]
+        public void TestGetStoreActiveNavigationsAsync()
+        {
+            int storeId = 9;
+            var nav = new NavigationRepository(new StoreContext(ConnectionString));
+            var pds = new PageDesignRepository(new StoreContext(ConnectionString));
+
+
+            var mainMenu = nav.GetStoreActiveNavigationsAsync(storeId);
+            var pageDesignTask = pds.GetPageDesignByName(storeId, "MainLayout");
+
+
+        }
+
+        [TestMethod]
         public void TestDotLiquidEngineOutput335555555()
         {
             int storeId = 9;
@@ -88,10 +110,10 @@ namespace StoreManagement.Test
 
 
             var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
-            var productsPageDesignTask =  pds.GetPageDesignByName(storeId, "ProductsIndex");
+            var productsPageDesignTask = pds.GetPageDesignByName(storeId, "ProductsIndex");
             var categories1 = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true);
             var dic = ProductHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories1);
-        
+
 
 
         }

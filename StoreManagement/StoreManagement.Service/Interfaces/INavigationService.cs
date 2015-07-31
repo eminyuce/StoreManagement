@@ -11,5 +11,7 @@ namespace StoreManagement.Service.Interfaces
     {
         List<Navigation> GetStoreNavigations(int storeId);
         List<Navigation> GetStoreActiveNavigations(int storeId);
+        Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId);
     }
+
 }

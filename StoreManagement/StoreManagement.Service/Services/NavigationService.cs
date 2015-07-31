@@ -36,13 +36,19 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResults<Navigation>(url);
 
         }
-
+        
         public List<Navigation> GetStoreActiveNavigations(int storeId)
         {
             string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
             HttpRequestHelper.CacheMinute = ProjectAppSettings.GetWebConfigInt("RequestHelperCacheLongMinute", 600);
             return HttpRequestHelper.GetUrlResults<Navigation>(url);
 
+        }
+        public Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigationsAsync?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            HttpRequestHelper.CacheMinute = ProjectAppSettings.GetWebConfigInt("RequestHelperCacheLongMinute", 600);
+            return HttpRequestHelper.GetUrlResultsAsync<Navigation>(url);
         }
     }
 }

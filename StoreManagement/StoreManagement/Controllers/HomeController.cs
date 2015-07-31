@@ -76,9 +76,10 @@ namespace StoreManagement.Controllers
         {
             return View();
         }
+
         public ActionResult MainMenu()
         {
-            var mainMenu = NavigationService.GetStoreActiveNavigations(Store.Id);
+            var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(Store.Id);
             return View(mainMenu);
         }
 

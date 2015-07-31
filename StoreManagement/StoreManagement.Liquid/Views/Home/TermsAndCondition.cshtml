@@ -1,0 +1,16 @@
+﻿@model StoreManagement.Data.Entities.Setting 
+
+@{
+    ViewBag.Title = "TermsAndCondition";
+}
+
+
+@if (Model != null)
+{
+
+    <h2>Terms And Condition</h2>
+    @Html.Raw(Model.SettingValue)
+
+
+}
+

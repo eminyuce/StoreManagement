@@ -67,7 +67,7 @@ namespace StoreManagement.Test
             int storeId = 9;
             var pds = new PageDesignRepository(new StoreContext(ConnectionString));
             var pageDesignTask = pds.GetPageDesignByName(storeId, "MainLayoutJavaScriptFiles");
-            String m = pageDesignTask.
+         
         }
         [TestMethod]
         public void TestGetStoreActiveNavigationsAsync()

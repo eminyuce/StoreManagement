@@ -74,5 +74,14 @@ namespace StoreManagement.Liquid.Controllers
             return View(pageDesignTask.Result);
 
         }
+        public ActionResult MainLayoutCssFiles()
+        {
+            int storeId = Store.Id;
+            var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutCssFiles");
+            Task.WaitAll(pageDesignTask);
+            return View(pageDesignTask.Result);
+
+        }
+
     }
 }

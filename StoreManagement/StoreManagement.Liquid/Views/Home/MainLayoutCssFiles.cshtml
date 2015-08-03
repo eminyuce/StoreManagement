@@ -1,0 +1,7 @@
+﻿@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.PageDesign
+@{
+    Layout = null;
+}
+@Html.Raw(Model.PageTemplate.HtmlDecode())
+

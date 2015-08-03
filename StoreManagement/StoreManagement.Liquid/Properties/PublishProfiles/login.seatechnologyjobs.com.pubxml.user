@@ -55,13 +55,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>07/31/2015 11:22:09</publishTime>
+      <publishTime>08/03/2015 15:38:39</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>07/31/2015 14:43:19</publishTime>
+      <publishTime>08/03/2015 15:49:49</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>07/31/2015 11:15:10</publishTime>
+      <publishTime>08/03/2015 15:38:40</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -927,6 +927,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/MainLayout.cshtml">
       <publishTime>07/31/2015 12:04:55</publishTime>
     </File>
+    <File Include="Views/Home/MainLayoutCssFiles.cshtml">
+      <publishTime>08/03/2015 10:59:02</publishTime>
+    </File>
     <File Include="Views/Home/MainLayoutFooter.cshtml">
       <publishTime>07/31/2015 14:22:18</publishTime>
     </File>
@@ -944,6 +947,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/News/Index.cshtml">
       <publishTime>07/30/2015 09:18:01</publishTime>
+    </File>
+    <File Include="Views/PhotoGallery/Index.cshtml">
+      <publishTime>08/03/2015 15:32:17</publishTime>
     </File>
     <File Include="Views/ProductCategories/Index.cshtml">
       <publishTime>07/30/2015 16:00:34</publishTime>
@@ -964,7 +970,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/31/2015 14:45:04</publishTime>
+      <publishTime>08/03/2015 10:57:39</publishTime>
     </File>
     <File Include="Views/Shopping/CheckOut.cshtml">
       <publishTime>07/30/2015 09:18:01</publishTime>
@@ -979,7 +985,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/31/2015 11:15:16</publishTime>
+      <publishTime>08/03/2015 10:59:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

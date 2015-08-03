@@ -416,6 +416,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
@@ -423,9 +424,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\BaseLiquidHelper.cs" />
     <Compile Include="Helper\CategoryHelper.cs" />
     <Compile Include="Helper\ContentHelper.cs" />
     <Compile Include="Helper\NavigationHelper.cs" />
+    <Compile Include="Helper\PhotoGalleryHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="Helper\StoreHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -466,6 +469,8 @@
     <Content Include="Views\Home\Footer.cshtml" />
     <Content Include="Views\Home\MainLayoutFooter.cshtml" />
     <Content Include="Views\Home\MainLayoutJavaScriptFiles.cshtml" />
+    <Content Include="Views\Home\MainLayoutCssFiles.cshtml" />
+    <Content Include="Views\PhotoGallery\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

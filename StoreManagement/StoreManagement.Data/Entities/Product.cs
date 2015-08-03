@@ -20,6 +20,8 @@ namespace StoreManagement.Data.Entities
         public double ? Discount { get; set; }
         public int BrandId { get; set; }
         public String ProductCode { get; set; }
+        public int UnitsInStock { get; set; }
+        public int TotalRating { get; set; }
 
 
         public virtual ICollection<ProductFile> ProductFiles { get; set; }

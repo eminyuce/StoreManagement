@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using NLog;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
@@ -18,6 +19,8 @@ namespace StoreManagement.Liquid.Helper
             Task.WaitAll(pageDesignTask, categoriesTask);
             var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
+
+          
             var cats = new List<CategoryLiquid>();
             foreach (var item in categories.items)
             {

@@ -1,0 +1,12 @@
+﻿@using MvcPaging
+@using StoreManagement.Data.GeneralHelper
+@model Dictionary<String, String>
+@{
+    ViewBag.Title = "Index";
+    Dictionary<String, String> outputDic = Model;
+            
+}
+<div class="container">
+    @Html.Raw(outputDic["PageOutput"])
+</div>
+

@@ -86,6 +86,12 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
+        public Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive)
+        {
+            var res = Task.FromResult(GetFilesByStoreId(storeId).Where(r => r.State == isActive).ToList());
+            return res;
+        }
+
         public List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels)
         {
             var labelIds = labels.Select(r => r.ToInt());

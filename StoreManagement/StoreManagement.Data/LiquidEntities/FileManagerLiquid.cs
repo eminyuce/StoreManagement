@@ -9,31 +9,24 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class NavigationLiquid : Drop
+    public class FileManagerLiquid : Drop
     {
-        public Navigation Navigation;
+        public FileManager FileManager;
         public PageDesign PageDesign;
 
-        public NavigationLiquid()
+        public FileManagerLiquid(FileManager fileManager, PageDesign pageDesign)
         {
-            
-        }
-        
-        public NavigationLiquid(Navigation nav, PageDesign pageDesign)
-        {
-            this.Navigation = nav;
+            this.FileManager = fileManager;
             this.PageDesign = pageDesign;
+
         }
-
-
-
-
-        public string Link
+        public String ImageSource
         {
             get
             {
-                return LinkHelper.GetNavigationLink(this.Navigation);
+                return LinkHelper.GetImageLink("Thumbnail", this.FileManager.GoogleImageId, this.PageDesign.ImageWidth, this.PageDesign.ImageHeight);
             }
         }
+
     }
 }

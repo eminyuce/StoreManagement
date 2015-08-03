@@ -177,6 +177,7 @@
     <Compile Include="LiquidEngineHelpers\TemplateManager.cs" />
     <Compile Include="LiquidEntities\CategoryLiquid.cs" />
     <Compile Include="LiquidEntities\ContentLiquid.cs" />
+    <Compile Include="LiquidEntities\FileManagerLiquid.cs" />
     <Compile Include="LiquidEntities\ImageLiquid.cs" />
     <Compile Include="LiquidEntities\NavigationLiquid.cs" />
     <Compile Include="LiquidEntities\ProductLiquid.cs" />

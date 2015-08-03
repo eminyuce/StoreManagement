@@ -1,4 +1,5 @@
-﻿using MvcPaging;
+﻿using System.Threading.Tasks;
+using MvcPaging;
 using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -142,6 +143,11 @@ namespace StoreManagement.API.Controllers
         public StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize)
         {
             return FileManagerRepository.GetImagesByStoreId(storeId, page, pageSize);
+        }
+
+        public Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive)
+        {
+            return FileManagerRepository.GetImagesByStoreIdAsync(storeId, isActive);
         }
     }
 }

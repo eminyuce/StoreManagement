@@ -83,6 +83,7 @@ namespace StoreManagement.Liquid.Helper
             {
                 CategoryName = productLiquid.Category.Name,
                 CategoryDescription = productLiquid.Category.Description,
+                ProductId = productLiquid.Product.Id,
                 Name = productLiquid.Product.Name,
                 Description = productLiquid.Product.Description,
                 ImageSource = productLiquid.ImageLiquid.ImageSource,

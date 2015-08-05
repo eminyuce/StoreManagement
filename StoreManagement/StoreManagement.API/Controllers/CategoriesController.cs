@@ -170,5 +170,10 @@ namespace StoreManagement.API.Controllers
         {
             return await CategoryRepository.GetCategoryAsync(id);
         }
+
+        public async Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
+        {
+            return await CategoryRepository.GetCategoryByContentIdAsync(storeId, contentId);
+        }
     }
 }

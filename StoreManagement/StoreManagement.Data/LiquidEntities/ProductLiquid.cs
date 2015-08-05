@@ -27,7 +27,7 @@ namespace StoreManagement.Data.LiquidEntities
             this.Product = product;
             this.Category = category;
             this.PageDesign = pageDesign;
-            List<FileManager> fileManagers = product.ProductFiles.Any() ? product.ProductFiles.Select(r => r.FileManager).ToList() : new List<FileManager>();
+            List<FileManager> fileManagers = product.ProductFiles !=null && product.ProductFiles.Any() ? product.ProductFiles.Select(r => r.FileManager).ToList() : new List<FileManager>();
             this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign);
 
         }

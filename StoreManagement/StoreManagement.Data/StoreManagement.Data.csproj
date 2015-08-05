@@ -121,10 +121,6 @@
     <Compile Include="EmailHelper\EmailAccount.cs" />
     <Compile Include="EmailHelper\EmailSender.cs" />
     <Compile Include="EmailHelper\IEmailSender.cs" />
-    <Compile Include="EntitiesWrapper\BaseWrapper.cs" />
-    <Compile Include="EntitiesWrapper\ContentWrapper.cs" />
-    <Compile Include="EntitiesWrapper\ProductWrapper.cs" />
-    <Compile Include="EntitiesWrapper\DotLiquidEngineOutput.cs" />
     <Compile Include="Entities\AdminProjectUsersModel.cs" />
     <Compile Include="Entities\BaseCategory.cs" />
     <Compile Include="Entities\BaseContent.cs" />

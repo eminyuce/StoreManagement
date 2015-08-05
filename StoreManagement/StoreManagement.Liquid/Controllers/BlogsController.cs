@@ -32,7 +32,7 @@ namespace StoreManagement.Liquid.Controllers
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "BlogsIndex");
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType, true);
-                var dic = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories);
+                var dic = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
 
                 return View(dic);
 
@@ -54,9 +54,28 @@ namespace StoreManagement.Liquid.Controllers
 
         //
         // GET: /Blogs/
-        public ActionResult Blog()
+        public ActionResult Blog(String id = "")
         {
-            return View();
+            try
+            {
+                if (!IsModulActive(StoreConstants.BlogsType))
+                {
+                    return HttpNotFound("Not Found");
+                }
+                int blogId = id.Split("-".ToCharArray()).Last().ToInt();
+                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "BlogDetailPage");
+                var contentsTask = ContentService.GetContentByIdAsync(blogId);
+                var categoryTask = CategoryService.GetCategoryByContentIdAsync(Store.Id, blogId);
+                var dic = ContentHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.BlogsType);
+
+                return View(dic);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "BlogsController:Blog:" + ex.StackTrace);
+                return new HttpStatusCodeResult(500);
+            }
         }
     }
 }

@@ -20,21 +20,15 @@ using RazorEngine;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
-using StoreManagement.Data.EntitiesWrapper;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Data.LiquidEngineHelpers;
-using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Liquid.Controllers;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
-using StoreManagement.Service.Repositories.Interfaces;
 using Newtonsoft.Json.Linq;
 using StoreManagement.Service.Services;
 using File = System.IO.File;
-using RazorEngine;
-using RazorEngine.Templating;
 
 namespace StoreManagement.Test
 {
@@ -135,27 +129,11 @@ namespace StoreManagement.Test
             var contents = contentsTask.Result;
             var blogsPageDesign = blogsPageDesignTask.Result;
 
-            var dic = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories);
+            var dic = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories,StoreConstants.BlogsType);
 
         }
 
-        [TestMethod]
-        public void TestDotLiquidEngineOutput()
-        {
-            int productId = 160;
-            var rr = new ProductRepository(dbContext);
-            var pc = new ProductCategoryRepository(dbContext);
-            var pds = new PageDesignRepository(dbContext);
-
-            var product = rr.GetProductsById(productId);
-            var category = pc.GetProductCategory(product.ProductCategoryId);
-            var productWrapper = new ProductWrapper(product, category);
-            int storeId = 9;
-            var pageTemplate = pds.GetPageDesignByName(storeId, "ProductDetailPage");
-
-
-
-        }
+      
 
 
         public static string GetImportPath()

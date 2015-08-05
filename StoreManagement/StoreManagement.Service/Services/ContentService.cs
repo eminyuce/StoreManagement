@@ -109,5 +109,11 @@ namespace StoreManagement.Service.Services
                                        "&isActive={5}&page={6}&pageSize={7}", WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive, page, pageSize);
             return HttpRequestHelper.GetUrlPagedResultsAsync<Content>(url);
         }
+
+        public Task<Content> GetContentByIdAsync(int id)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetContentByIdAsync?id={2}", WebServiceAddress, ApiControllerName, id);
+            return HttpRequestHelper.GetUrlResultAsync<Content>(url);
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace StoreManagement.Liquid.Helper
         public static Dictionary<string, string> GetContentsIndexPage(
             Task<StorePagedList<Content>> contentsTask,
             Task<PageDesign> pageDesignTask,
-                 Task<List<Category>> categoriesTask)
+                 Task<List<Category>> categoriesTask, String type)
         {
             Task.WaitAll(pageDesignTask, contentsTask, categoriesTask);
             var contents = contentsTask.Result;
@@ -28,7 +28,7 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
                 if (category != null)
                 {
-                    var blog = new ContentLiquid(item, category, pageDesign);
+                    var blog = new ContentLiquid(item, category, pageDesign, type);
                     items.Add(blog);
                 }
             }
@@ -61,5 +61,35 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
+        public static Dictionary<string, string> GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type)
+        {
+            Task.WaitAll(pageDesignTask, contentTask, categoryTask);
+            var content = contentTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var category = categoryTask.Result;
+            var items = new List<ContentLiquid>();
+            var contentLiquid = new ContentLiquid(content, category, pageDesign, type);
+
+            object anonymousObject = new
+            {
+                CategoryName = contentLiquid.Category.Name,
+                CategoryDescription = contentLiquid.Category.Description,
+                ContentId = contentLiquid.Content.Id,
+                Name = contentLiquid.Content.Name,
+                Description = contentLiquid.Content.Description,
+                ImageSource = contentLiquid.ImageLiquid.ImageSource,
+                Images = contentLiquid.ImageLiquid.ImageLinks
+            };
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+
+
+
+            var dic = new Dictionary<String, String>();
+            dic.Add("PageOutput", indexPageOutput);
+
+
+            return dic;
+        }
     }
 }

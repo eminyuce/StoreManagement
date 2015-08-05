@@ -21,6 +21,6 @@ namespace StoreManagement.Service.Interfaces
         StorePagedList<Content> GetContentsCategoryId(int storeId, int ? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Content GetContentWithFiles(int id);
         Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize);
- 
+        Task<Content> GetContentByIdAsync(int id);
     }
 }

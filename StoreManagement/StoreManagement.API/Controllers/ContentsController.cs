@@ -172,5 +172,10 @@ namespace StoreManagement.API.Controllers
 
             return items;
         }
+
+        public async Task<Content> GetContentByIdAsync(int id)
+        {
+            return await this.ContentRepository.GetContentByIdAsync(id);
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace StoreManagement.Service.Repositories
             {
                 contents = contents.Where(r => r.CategoryId == categoryId);
             }
-           
+
 
             return contents.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 
@@ -132,15 +132,21 @@ namespace StoreManagement.Service.Repositories
             return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
 
-        public  Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            var res =  Task.FromResult(GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
+            var res = Task.FromResult(GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
+            return res;
+        }
+
+        public Task<Content> GetContentByIdAsync(int blogId)
+        {
+            var res = Task.FromResult(this.GetContentWithFiles(blogId));
             return res;
         }
 
         public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)
         {
-            var contents = this.FindBy(r => r.StoreId == storeId &&  r.Type.Equals(typeName));
+            var contents = this.FindBy(r => r.StoreId == storeId && r.Type.Equals(typeName));
             if (!String.IsNullOrEmpty(searchKey))
             {
                 contents = contents.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);

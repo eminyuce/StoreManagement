@@ -195,6 +195,24 @@ namespace StoreManagement.Service.Repositories
             return res;
         }
 
+        public Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
+        {
+            var res = Task.Factory.StartNew(() =>
+            {
+                Content category = this.FindBy(r => r.StoreId == storeId).Select(r => r.Contents.FirstOrDefault(t => t.Id == contentId)).FirstOrDefault();
+                if (category != null)
+                {
+                    return this.GetSingle(category.CategoryId);
+                }
+                else
+                {
+                    return new Category();
+                }
+            });
+
+            return res;
+        }
+
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
             // return this.StoreDbContext.Categories.Where(r => r.StoreId == storeId).ToList();

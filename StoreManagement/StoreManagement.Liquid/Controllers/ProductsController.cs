@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Constants;
-using StoreManagement.Data.EntitiesWrapper;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
 
@@ -56,9 +55,9 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
                 int productId = id.Split("-".ToCharArray()).Last().ToInt();
+                var categoryTask = ProductCategoryService.GetProductCategoryAsync(Store.Id, productId);
                 var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductDetailPage");
                 var productsTask = ProductService.GetProductsByIdAsync(productId);
-                var categoryTask = ProductCategoryService.GetProductCategoryAsync(Store.Id, productId);
                 var dic = ProductHelper.GetProductsDetailPage(productsTask, productsPageDesignTask, categoryTask);
 
                 return View(dic);

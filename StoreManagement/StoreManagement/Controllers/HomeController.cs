@@ -8,7 +8,6 @@ using NLog;
 using Ninject;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
-using StoreManagement.Data.EntitiesWrapper;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;

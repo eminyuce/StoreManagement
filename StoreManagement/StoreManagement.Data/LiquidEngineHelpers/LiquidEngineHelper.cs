@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DotLiquid;
-using StoreManagement.Data.EntitiesWrapper;
 
 namespace StoreManagement.Data.LiquidEngineHelpers
 {

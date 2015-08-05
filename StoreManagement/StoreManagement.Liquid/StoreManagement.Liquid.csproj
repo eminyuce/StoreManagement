@@ -483,7 +483,6 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Ajax\" />
     <Folder Include="Views\Images\" />
-    <Folder Include="Views\Product\" />
     <Folder Include="Views\Robots\" />
   </ItemGroup>
   <ItemGroup>

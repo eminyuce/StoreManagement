@@ -80,5 +80,10 @@ namespace StoreManagement.API.Controllers
         {
             return ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize);
         }
+
+        public Task<Product> GetProductsByIdAsync(int productId)
+        {
+            return ProductRepository.GetProductsByIdAsync(productId);
+        }
     }
 }

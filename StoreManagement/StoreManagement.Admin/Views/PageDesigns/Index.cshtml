@@ -189,7 +189,7 @@
                             .Titled("Type");
 
                             columns.Add(c => c.Name)
-                                   .Titled("Title");
+                                   .Titled("Name");
 
 
                
@@ -214,7 +214,7 @@
 
 
                             columns.Add(o => o.UpdatedDate)
-                                   .Titled("Date")
+                                   .Titled("UpdatedDate")
                                    .Sortable(true)
                                    .Css("gridDateClass")
                                     .RenderValueAs(o => o.UpdatedDate != null ? String.Format("{0}", o.UpdatedDate.Value.ToShortDateString()) : null)
@@ -222,7 +222,7 @@
 
 
                             columns.Add(o => o.CreatedDate)
-                                   .Titled("Date")
+                                   .Titled("CreatedDate")
                                    .Sortable(true)
                                    .Css("gridDateClass")
                                     .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)

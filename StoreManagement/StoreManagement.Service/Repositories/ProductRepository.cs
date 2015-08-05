@@ -71,8 +71,8 @@ namespace StoreManagement.Service.Repositories
             {
                 products = products.Where(r => r.ProductCategoryId == categoryId);
             }
-            
-          
+
+
 
             return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 
@@ -133,6 +133,12 @@ namespace StoreManagement.Service.Repositories
         public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
             var res = Task.FromResult(GetProductsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
+            return res;
+        }
+
+        public Task<Product> GetProductsByIdAsync(int productId)
+        {
+            var res = Task.FromResult(GetProductsById(productId));
             return res;
         }
 

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.EntitiesWrapper;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
 
 namespace StoreManagement.Liquid.Controllers
@@ -39,12 +40,35 @@ namespace StoreManagement.Liquid.Controllers
 
         public ActionResult Index2()
         {
+
+
             return View();
         }
 
-        public ActionResult Product()
+        public ActionResult Product(String id = "")
         {
-            return View();
+
+            try
+            {
+
+                if (!IsModulActive(StoreConstants.ProductType))
+                {
+                    return HttpNotFound("Not Found");
+                }
+                int productId = id.Split("-".ToCharArray()).Last().ToInt();
+                var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductDetailPage");
+                var productsTask = ProductService.GetProductsByIdAsync(productId);
+                var categoryTask = ProductCategoryService.GetProductCategoryAsync(Store.Id, productId);
+                var dic = ProductHelper.GetProductsDetailPage(productsTask, productsPageDesignTask, categoryTask);
+
+                return View(dic);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "ProductsController:Product:" + ex.StackTrace);
+                return new HttpStatusCodeResult(500);
+            }
         }
         public ActionResult Product2()
         {

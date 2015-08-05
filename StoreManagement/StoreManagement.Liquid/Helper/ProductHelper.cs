@@ -44,7 +44,7 @@ namespace StoreManagement.Liquid.Helper
                                     s.Product.Name,
                                     s.Product.Description,
                                     s.DetailLink,
-                                    images = s.ImageLiquid 
+                                    images = s.ImageLiquid
                                 },
                     categories = from s in cats
                                  select new
@@ -70,5 +70,34 @@ namespace StoreManagement.Liquid.Helper
             return dic;
         }
 
+        public static Dictionary<String, String> GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask)
+        {
+            Task.WaitAll(productsPageDesignTask, productsTask, categoryTask);
+            var product = productsTask.Result;
+            var pageDesign = productsPageDesignTask.Result;
+            var category = categoryTask.Result;
+
+            var productLiquid = new ProductLiquid(product, category, pageDesign);
+
+            object anonymousObject = new
+            {
+                CategoryName = productLiquid.Category.Name,
+                CategoryDescription = productLiquid.Category.Description,
+                Name = productLiquid.Product.Name,
+                Description = productLiquid.Product.Description,
+                ImageSource = productLiquid.ImageLiquid.ImageSource,
+                Images = productLiquid.ImageLiquid.ImageLinks
+            };
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+
+
+
+            var dic = new Dictionary<String, String>();
+            dic.Add("PageOutput", indexPageOutput);
+
+
+            return dic;
+        }
     }
 }

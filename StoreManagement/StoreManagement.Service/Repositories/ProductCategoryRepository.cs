@@ -165,5 +165,23 @@ namespace StoreManagement.Service.Repositories
 
             return res;
         }
+
+        public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
+        {
+            var res = Task.Factory.StartNew(() =>
+                {
+                    Product product = this.FindBy(r => r.StoreId == storeId).Select(r => r.Products.FirstOrDefault(t => t.Id == productId)).FirstOrDefault();
+                    if (product != null)
+                    {
+                        return this.GetSingle(product.ProductCategoryId);
+                    }
+                    else
+                    {
+                        return new ProductCategory();
+                    }
+                });
+
+            return res;
+        }
     }
 }

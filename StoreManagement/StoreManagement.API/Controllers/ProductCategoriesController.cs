@@ -151,5 +151,10 @@ namespace StoreManagement.API.Controllers
         {
             return ProductCategoryRepository.GetProductCategoriesByStoreIdAsync(storeId, type, isActive, page, pageSize);
         }
+
+        public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

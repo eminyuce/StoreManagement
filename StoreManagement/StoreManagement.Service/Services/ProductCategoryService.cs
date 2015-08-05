@@ -74,7 +74,21 @@ namespace StoreManagement.Service.Services
             }
             catch (Exception ex)
             {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
 
+        public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
+        {
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetProductCategoryAsync?storeId={2}&productId={3}", WebServiceAddress, ApiControllerName, storeId, productId);
+                return HttpRequestHelper.GetUrlResultAsync<ProductCategory>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
                 return null;
             }
         }

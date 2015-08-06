@@ -9,32 +9,38 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class HomePageHelper
+    public class HomePageHelper : BaseLiquidHelper
     {
 
-        public static Dictionary<string, string> GetHomePageDesign(
+        public Dictionary<string, string> GetHomePageDesign(
          Task<List<Product>> productsTask,
          Task<List<Content>> blogsTask,
          Task<List<Content>> newsTask,
-         Task<List<FileManager>> slider,
-         Task<PageDesign> pageDesignTask)
+         Task<List<FileManager>> sliderTask,
+         Task<PageDesign> pageDesignTask,
+         Task<List<Category>> categoriesTask,
+         Task<List<ProductCategory>> productCategoriesTask)
         {
-            Task.WaitAll(pageDesignTask, productsTask);
+            Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask, productCategoriesTask);
             var products = productsTask.Result;
             var blogs = blogsTask.Result;
             var news = newsTask.Result;
             var pageDesing = pageDesignTask.Result;
-            var sliderImages = slider.Result;
+            var sliderImages = sliderTask.Result;
+            var categories = categoriesTask.Result;
+            var productCategories = productCategoriesTask.Result;
+
 
             var home = new HomePageLiquid(pageDesing, sliderImages);
             home.Products = products;
             home.Blogs = blogs;
             home.News = news;
-
+            home.Categories = categories;
+            home.ProductCategories = productCategories;
 
             object anonymousObject = new
             {
-                
+
 
             };
 

@@ -11,9 +11,15 @@ using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class ProductHelper
+    public class ProductHelper : BaseLiquidHelper
     {
-        public static Dictionary<string, string> GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
+
+
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
+
+
+        public Dictionary<string, string> GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
             Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
         {
 
@@ -22,16 +28,16 @@ namespace StoreManagement.Liquid.Helper
             var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
             var items = new List<ProductLiquid>();
-            var cats = new List<CategoryLiquid>();
+            var cats = new List<ProductCategoryLiquid>();
             foreach (var item in products.items)
             {
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                 if (category != null)
                 {
-                    var blog = new ProductLiquid(item, category, pageDesign);
+                    var blog = new ProductLiquid(item, category, pageDesign, ImageWidth, ImageHeight);
                     items.Add(blog);
                 }
-                var catLiquid = new CategoryLiquid(category, pageDesign);
+                var catLiquid = new ProductCategoryLiquid(category, pageDesign);
                 cats.Add(catLiquid);
 
             }
@@ -49,8 +55,8 @@ namespace StoreManagement.Liquid.Helper
                     categories = from s in cats
                                  select new
                                      {
-                                         s.Category.Name,
-                                         s.Category.Description,
+                                         s.ProductCategory.Name,
+                                         s.ProductCategory.Description,
                                          s.DetailLink,
                                      }
                 };
@@ -70,14 +76,14 @@ namespace StoreManagement.Liquid.Helper
             return dic;
         }
 
-        public static Dictionary<String, String> GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask)
+        public Dictionary<String, String> GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask)
         {
             Task.WaitAll(productsPageDesignTask, productsTask, categoryTask);
             var product = productsTask.Result;
             var pageDesign = productsPageDesignTask.Result;
             var category = categoryTask.Result;
 
-            var productLiquid = new ProductLiquid(product, category, pageDesign);
+            var productLiquid = new ProductLiquid(product, category, pageDesign, ImageWidth, ImageHeight);
 
             object anonymousObject = new
             {

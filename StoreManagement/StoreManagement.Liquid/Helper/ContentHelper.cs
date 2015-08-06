@@ -11,9 +11,14 @@ using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class ContentHelper
+    public class ContentHelper : BaseLiquidHelper
     {
-        public static Dictionary<string, string> GetContentsIndexPage(
+
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
+
+
+        public Dictionary<string, string> GetContentsIndexPage(
             Task<StorePagedList<Content>> contentsTask,
             Task<PageDesign> pageDesignTask,
                  Task<List<Category>> categoriesTask, String type)
@@ -28,7 +33,7 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
                 if (category != null)
                 {
-                    var blog = new ContentLiquid(item, category, pageDesign, type);
+                    var blog = new ContentLiquid(item, category, pageDesign, type, ImageWidth, ImageHeight);
                     items.Add(blog);
                 }
             }
@@ -61,14 +66,14 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        public static Dictionary<string, string> GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type)
+        public Dictionary<string, string> GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type)
         {
             Task.WaitAll(pageDesignTask, contentTask, categoryTask);
             var content = contentTask.Result;
             var pageDesign = pageDesignTask.Result;
             var category = categoryTask.Result;
             var items = new List<ContentLiquid>();
-            var contentLiquid = new ContentLiquid(content, category, pageDesign, type);
+            var contentLiquid = new ContentLiquid(content, category, pageDesign, type, ImageWidth, ImageHeight);
 
             object anonymousObject = new
             {
@@ -93,7 +98,7 @@ namespace StoreManagement.Liquid.Helper
             return dic;
         }
 
-        public static Dictionary<string, string> GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type)
+        public Dictionary<string, string> GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type)
         {
             Task.WaitAll(pageDesignTask, relatedContentsTask, categoryTask);
             var contents = relatedContentsTask.Result;
@@ -103,7 +108,7 @@ namespace StoreManagement.Liquid.Helper
             var items = new List<ContentLiquid>();
             foreach (var item in contents)
             {
-                var blog = new ContentLiquid(item, category, pageDesign, type);
+                var blog = new ContentLiquid(item, category, pageDesign, type, ImageWidth, ImageHeight);
                 items.Add(blog);
 
             }

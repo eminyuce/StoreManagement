@@ -20,15 +20,17 @@ namespace StoreManagement.Data.LiquidEntities
         public PageDesign PageDesign { get; set; }
         public ImageLiquid ImageLiquid { get; set; }
         private String Type { get; set; }
-        public ContentLiquid(Content content, Category category, PageDesign pageDesign, String type)
+        public ContentLiquid(Content content, Category category, PageDesign pageDesign, String type, int imageWidth, int imageHeight)
         {
             this.Content = content;
             this.Category = category;
             this.PageDesign = pageDesign;
             List<FileManager> fileManagers = content.ContentFiles != null && content.ContentFiles.Any() ? content.ContentFiles.Select(r => r.FileManager).ToList() : new List<FileManager>();
-            this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign);
+            this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign, imageWidth, imageHeight);
             this.Type = type;
         }
+
+
 
 
         public String DetailLink

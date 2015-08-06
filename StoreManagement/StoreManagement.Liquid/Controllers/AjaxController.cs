@@ -24,7 +24,9 @@ namespace StoreManagement.Liquid.Controllers
                 int take = GetSettingValueInt("RelatedContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("RelatedContents_ItemsNumber", 5));
                 var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(Store.Id, contentType, categoryId, take);
                 var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "RelatedContentsPartial");
-                Dictionary<String, String> dic = ContentHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
+                var liquidHelper = new ContentHelper();
+                liquidHelper.StoreSettings = StoreSettings;
+                Dictionary<String, String> dic = liquidHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
                 String html = dic["PageOutput"];
                 return html;
 

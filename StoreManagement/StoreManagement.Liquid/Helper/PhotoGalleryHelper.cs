@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class PhotoGalleryHelper : BaseLiquidHelper
     {
-        public static Dictionary<String, String> GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)
+        public Dictionary<String, String> GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)
         {
             Task.WaitAll(pageDesignTask, fileManagersTask);
             var pageDesign = pageDesignTask.Result;

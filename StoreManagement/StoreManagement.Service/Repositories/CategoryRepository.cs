@@ -44,7 +44,7 @@ namespace StoreManagement.Service.Repositories
                 .OrderByDescending(r => r.Ordering).Take(10).ToList();
         }
 
-  
+
         private static Expression<Func<Category, object>> IncludeProperties()
         {
             var param = Expression.Parameter(typeof(Category));
@@ -218,7 +218,7 @@ namespace StoreManagement.Service.Repositories
             // return this.StoreDbContext.Categories.Where(r => r.StoreId == storeId).ToList();
 
             var categories = from entry in this.FindBy(r => r.StoreId == storeId) select entry;
-            return categories.ToList();
+            return categories.Where(r => r.State).OrderBy(r => r.Ordering).ToList();
         }
 
     }

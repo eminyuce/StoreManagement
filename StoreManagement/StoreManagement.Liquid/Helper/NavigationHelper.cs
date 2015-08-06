@@ -10,11 +10,11 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class NavigationHelper
+    public class NavigationHelper : BaseLiquidHelper
     {
 
 
-        public static Dictionary<string, string> GetMainLayoutLink(
+        public Dictionary<string, string> GetMainLayoutLink(
            Task<List<Navigation>> navigationsTask,
            Task<PageDesign> pageDesignTask)
         {

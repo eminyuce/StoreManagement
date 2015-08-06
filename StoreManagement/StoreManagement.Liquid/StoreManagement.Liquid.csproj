@@ -425,7 +425,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\BaseLiquidHelper.cs" />
-    <Compile Include="Helper\CategoryHelper.cs" />
+    <Compile Include="Helper\ProductCategoryHelper.cs" />
     <Compile Include="Helper\ContentHelper.cs" />
     <Compile Include="Helper\HomePageHelper.cs" />
     <Compile Include="Helper\NavigationHelper.cs" />

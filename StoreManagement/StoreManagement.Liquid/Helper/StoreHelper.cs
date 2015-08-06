@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class StoreHelper
+    public class StoreHelper 
     {
         public Store GetStoreByDomain(IStoreService storeService, HttpRequestBase request)
         {

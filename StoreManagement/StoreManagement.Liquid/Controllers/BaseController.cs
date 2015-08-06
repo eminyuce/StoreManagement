@@ -135,7 +135,7 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return "";
                 }
-                var item = SettingService.GetStoreSettingsFromCache(Store.Id).FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                var item = StoreSettings.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
 
                 return item != null ? item.SettingValue : "";
             }
@@ -149,6 +149,11 @@ namespace StoreManagement.Liquid.Controllers
             }
         }
 
+
+        protected List<Setting> StoreSettings
+        {
+            get { return SettingService.GetStoreSettingsFromCache(Store.Id); }
+        } 
 
     }
 }

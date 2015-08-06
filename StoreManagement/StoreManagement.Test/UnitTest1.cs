@@ -58,10 +58,8 @@ namespace StoreManagement.Test
             int take = 5;
             var relatedContentsTask = rr.GetContentByTypeAndCategoryIdAsync(9, contentType, categoryId, take);
             var pageDesignTask = pds.GetPageDesignByName(9, "RelatedContentsPartial");
-            Dictionary<String, String> dic = ContentHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
-            String html = dic["PageOutput"];
 
-            Console.Write(html);
+          
         }
 
         [TestMethod]
@@ -107,7 +105,10 @@ namespace StoreManagement.Test
             var pageDesignTask = pds.GetPageDesignByName(storeId, "ProductCategoriesIndex");
             var pageSize = 25;
             var categories = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true, 1, pageSize);
-            var dic = CategoryHelper.GetCategoriesIndexPage(pageDesignTask, categories);
+            var liquidHelper = new ProductCategoryHelper();
+            //   liquidHelper.StoreSettings = StoreSettings;
+
+            var dic = liquidHelper.GetCategoriesIndexPage(pageDesignTask, categories);
 
 
 
@@ -126,7 +127,9 @@ namespace StoreManagement.Test
             var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
             var productsPageDesignTask = pds.GetPageDesignByName(storeId, "ProductsIndex");
             var categories1 = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true);
-            var dic = ProductHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories1);
+            var liquidHelper = new ProductHelper();
+         //   liquidHelper.StoreSettings = StoreSettings;
+            var dic = liquidHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories1);
 
 
 
@@ -148,8 +151,9 @@ namespace StoreManagement.Test
 
             var contents = contentsTask.Result;
             var blogsPageDesign = blogsPageDesignTask.Result;
-
-            var dic = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories,StoreConstants.BlogsType);
+            var liquidHelper = new ContentHelper();
+            //   liquidHelper.StoreSettings = StoreSettings;
+            var dic = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
 
         }
 

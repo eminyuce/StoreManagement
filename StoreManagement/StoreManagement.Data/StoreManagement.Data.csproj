@@ -171,7 +171,7 @@
     <Compile Include="HelpersModel\RecordsStats.cs" />
     <Compile Include="LiquidEngineHelpers\LiquidEngineHelper.cs" />
     <Compile Include="LiquidEngineHelpers\TemplateManager.cs" />
-    <Compile Include="LiquidEntities\CategoryLiquid.cs" />
+    <Compile Include="LiquidEntities\ProductCategoryLiquid.cs" />
     <Compile Include="LiquidEntities\ContentLiquid.cs" />
     <Compile Include="LiquidEntities\FileManagerLiquid.cs" />
     <Compile Include="LiquidEntities\HomePageLiquid.cs" />

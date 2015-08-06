@@ -23,14 +23,14 @@ namespace StoreManagement.Data.LiquidEntities
         public int ImageHeight { get; set; }
 
 
-        public ImageLiquid(List<FileManager>  fileManagers, PageDesign pageDesign)
+        public ImageLiquid(List<FileManager>  fileManagers, PageDesign pageDesign, int width, int height)
         {
 
             this.FileManagers = fileManagers;
             this.PageDesign = pageDesign;
 
-            this.ImageWidth = this.PageDesign.ImageWidth;
-            this.ImageHeight = this.PageDesign.ImageHeight;
+            this.ImageWidth = width;
+            this.ImageHeight = height;
 
         }
 

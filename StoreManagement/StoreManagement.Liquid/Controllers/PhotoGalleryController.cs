@@ -19,7 +19,9 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "PhotoGalleryIndex");
                 var fileManagers = FileManagerService.GetImagesByStoreIdAsync(Store.Id, true);
-                var dic = PhotoGalleryHelper.GetPhotoGalleryIndexPage(pageDesignTask, fileManagers);
+                var liquidHelper = new PhotoGalleryHelper();
+                liquidHelper.StoreSettings = StoreSettings;
+                var dic = liquidHelper.GetPhotoGalleryIndexPage(pageDesignTask, fileManagers);
 
                 return View(dic);
 

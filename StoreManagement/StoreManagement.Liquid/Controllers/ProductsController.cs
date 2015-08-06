@@ -24,7 +24,10 @@ namespace StoreManagement.Liquid.Controllers
                 var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductsIndex");
                 var productsTask = ProductService.GetProductsCategoryIdAsync(Store.Id, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true);
-                var dic = ProductHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories);
+
+                var liquidHelper = new ProductHelper();
+                liquidHelper.StoreSettings = StoreSettings;
+                var dic = liquidHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories);
 
                 return View(dic);
 
@@ -58,7 +61,9 @@ namespace StoreManagement.Liquid.Controllers
                 var categoryTask = ProductCategoryService.GetProductCategoryAsync(Store.Id, productId);
                 var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductDetailPage");
                 var productsTask = ProductService.GetProductsByIdAsync(productId);
-                var dic = ProductHelper.GetProductsDetailPage(productsTask, productsPageDesignTask, categoryTask);
+                var liquidHelper = new ProductHelper();
+                liquidHelper.StoreSettings = StoreSettings;
+                var dic = liquidHelper.GetProductsDetailPage(productsTask, productsPageDesignTask, categoryTask);
 
                 return View(dic);
 

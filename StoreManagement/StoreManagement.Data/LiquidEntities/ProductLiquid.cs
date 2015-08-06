@@ -21,14 +21,14 @@ namespace StoreManagement.Data.LiquidEntities
         public ImageLiquid ImageLiquid { get; set; }
 
 
-        public ProductLiquid(Product product, ProductCategory category, PageDesign pageDesign)
+        public ProductLiquid(Product product, ProductCategory category, PageDesign pageDesign, int imageWidth, int imageHeight)
         {
      
             this.Product = product;
             this.Category = category;
             this.PageDesign = pageDesign;
             List<FileManager> fileManagers = product.ProductFiles !=null && product.ProductFiles.Any() ? product.ProductFiles.Select(r => r.FileManager).ToList() : new List<FileManager>();
-            this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign);
+            this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign, imageWidth, imageHeight);
 
         }
 

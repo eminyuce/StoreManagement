@@ -12,19 +12,19 @@ using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class CategoryHelper
+    public class ProductCategoryHelper : BaseLiquidHelper
     {
-        public static Dictionary<String, String> GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask)
+        public Dictionary<String, String> GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask)
         {
             Task.WaitAll(pageDesignTask, categoriesTask);
             var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
 
           
-            var cats = new List<CategoryLiquid>();
+            var cats = new List<ProductCategoryLiquid>();
             foreach (var item in categories.items)
             {
-                cats.Add(new CategoryLiquid(item, pageDesign));
+                cats.Add(new ProductCategoryLiquid(item, pageDesign));
             }
 
             object anonymousObject = new
@@ -32,8 +32,8 @@ namespace StoreManagement.Liquid.Helper
                 categories = from s in cats
                              select new
                              {
-                                 s.Category.Name,
-                                 s.Category.Description,
+                                 s.ProductCategory.Name,
+                                 s.ProductCategory.Description,
                                  s.DetailLink,
                              }
             };

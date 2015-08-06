@@ -9,15 +9,15 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class CategoryLiquid : Drop
+    public class ProductCategoryLiquid : Drop
     {
-        public ProductCategory Category { get; set; }
+        public ProductCategory ProductCategory { get; set; }
         public PageDesign PageDesign { get; set; }
 
 
-        public CategoryLiquid(ProductCategory category, PageDesign pageDesign)
+        public ProductCategoryLiquid(ProductCategory productCategory, PageDesign pageDesign)
         {
-            this.Category = category;
+            this.ProductCategory = productCategory;
             this.PageDesign = pageDesign;
         }
 
@@ -26,7 +26,7 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                return LinkHelper.GetCategoryLink(this.Category);
+                return LinkHelper.GetCategoryLink(this.ProductCategory);
             }
         }
 

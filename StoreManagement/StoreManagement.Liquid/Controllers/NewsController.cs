@@ -26,7 +26,9 @@ namespace StoreManagement.Liquid.Controllers
                 var newsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "NewsIndex");
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.NewsType, true);
-                var dic = ContentHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
+                var liquidHelper = new ContentHelper();
+                liquidHelper.StoreSettings = StoreSettings;
+                var dic = liquidHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
 
                 return View(dic);
 
@@ -51,7 +53,9 @@ namespace StoreManagement.Liquid.Controllers
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "NewsDetailPage");
                 var contentsTask = ContentService.GetContentByIdAsync(newsId);
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(Store.Id, newsId);
-                var dic = ContentHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
+                var liquidHelper = new ContentHelper();
+                liquidHelper.StoreSettings = StoreSettings;
+                var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
 
                 return View(dic);
 

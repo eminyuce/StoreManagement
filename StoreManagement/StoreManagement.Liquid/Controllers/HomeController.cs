@@ -28,7 +28,11 @@ namespace StoreManagement.Liquid.Controllers
                 var productsTask = ProductService.GetMainPageProductsAsync(Store.Id, take);
                 take = GetSettingValueInt("HomePageSliderImages_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageSliderImages_ItemsNumber", 5));
                 var sliderTask = FileManagerService.GetStoreCarouselsAsync(Store.Id, take);
-                var dic = HomePageHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask);
+                var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(Store.Id);
+                var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true);
+                var liquidHelper = new HomePageHelper();
+                liquidHelper.StoreSettings = StoreSettings;
+                var dic = liquidHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
                 return View(dic);
 
             }
@@ -73,7 +77,9 @@ namespace StoreManagement.Liquid.Controllers
 
             var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayout");
-            var dic = NavigationHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
+            var liquidHelper = new NavigationHelper();
+            liquidHelper.StoreSettings = StoreSettings;
+            var dic = liquidHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
             return View(dic);
 
         }

@@ -23,12 +23,9 @@
             <div class="bootstrap-admin-panel-content">
 
 
-
-
-
-                <h2>@Model.ApplicationName</h2>
+                <h2>@Model.ApplicationName     </h2>
                 <br />
-
+                @Html.ActionLink("Back to List", "Index", null,new { @class = "btn btn-default" })
                 <div class="pager">
                     @Html.Pager(ProjectAppSettings.RecordPerPage, page, Model.RecordsStats.RecordsTotal).Options(o => o
                                                                                                                           .DisplayTemplate("BootstrapPagination")

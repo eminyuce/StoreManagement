@@ -47,7 +47,7 @@ namespace StoreManagement.Admin.ScheduledTasks
             {
                 if (Logger.IsDebugEnabled)
                 {
-                    Logger.Debug(string.Format(CultureInfo.InvariantCulture, "Producing instance of Job '{0}', class={1}", jobDetail.Key, jobType.FullName));
+                    // Logger.Debug(string.Format(CultureInfo.InvariantCulture, "Producing instance of Job '{0}', class={1}", jobDetail.Key, jobType.FullName));
                 }
 
                 return _kernel.Get(jobType) as IJob;
@@ -55,9 +55,9 @@ namespace StoreManagement.Admin.ScheduledTasks
             catch (Exception e)
             {
                 var se = new SchedulerException(string.Format(CultureInfo.InvariantCulture, "Problem instantiating class '{0}'", jobDetail.JobType.FullName), e);
-                Logger.Error(e, "");
+                Logger.Error(e, "", se.Message);
 
-                 throw e;
+                throw e;
             }
         }
 

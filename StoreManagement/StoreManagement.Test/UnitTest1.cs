@@ -45,6 +45,26 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestGetRelatedContentsPartial()
+        {
+
+            var rr = new ContentRepository(new StoreContext(ConnectionString));
+            var pds = new PageDesignRepository(new StoreContext(ConnectionString));
+            var cat = new CategoryRepository(new StoreContext(ConnectionString));
+
+            int categoryId = 77;
+            var contentType = "news";
+            var categoryTask = cat.GetCategoryAsync(categoryId);
+            int take = 5;
+            var relatedContentsTask = rr.GetContentByTypeAndCategoryIdAsync(9, contentType, categoryId, take);
+            var pageDesignTask = pds.GetPageDesignByName(9, "RelatedContentsPartial");
+            Dictionary<String, String> dic = ContentHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
+            String html = dic["PageOutput"];
+
+            Console.Write(html);
+        }
+
+        [TestMethod]
         public void TestGetProductsCategoryIdAsync()
         {
             int storeId = 9;

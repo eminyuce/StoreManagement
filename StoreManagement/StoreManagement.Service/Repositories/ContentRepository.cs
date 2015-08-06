@@ -144,6 +144,12 @@ namespace StoreManagement.Service.Repositories
             return res;
         }
 
+        public Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take)
+        {
+            var res = Task.FromResult(this.GetContentByTypeAndCategoryId(storeId, typeName, categoryId).Take(take).ToList());
+            return res;
+        }
+
         public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)
         {
             var contents = this.FindBy(r => r.StoreId == storeId && r.Type.Equals(typeName));

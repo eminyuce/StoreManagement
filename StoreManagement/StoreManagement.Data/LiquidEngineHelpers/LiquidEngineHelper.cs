@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DotLiquid;
+using StoreManagement.Data.LiquidFilters;
 
 namespace StoreManagement.Data.LiquidEngineHelpers
 {
@@ -13,8 +14,10 @@ namespace StoreManagement.Data.LiquidEngineHelpers
 
         public static String RenderPage(string templateCode, object anonymousObject)
         {
+            Template.RegisterFilter(typeof(TextFilter));
             Template template = Template.Parse(templateCode);
             return template.Render(Hash.FromAnonymousObject(anonymousObject));
+
         }
     }
 }

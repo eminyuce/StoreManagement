@@ -8,8 +8,47 @@ $(document).ready(function () {
     //    mm.fadeIn('slow');
     //});
 
-
+    if ($("#RelatedBlogs").length > 0) {
+        GetRelatedBlogs($("#CategoryId").val());
+    }
+    if ($("#RelatedNews").length > 0) {
+        GetRelatedBlogs($("#CategoryId").val());
+    }
 });
+
+function GetRelatedBlogs(categoryId) {
+    var postData = JSON.stringify({ "categoryId": categoryId, "contentType": "blog" });
+    ajaxMethodCall(postData, "/Ajax/GetRelatedContents", function (data) {
+        $("#RelatedBlogs").empty();
+        $("#RelatedBlogs").html(data).animate({ 'height': '150px' }, 'slow');
+    });
+}
+function GetRelatedNews(categoryId) {
+    var postData = JSON.stringify({ "categoryId": categoryId, "contentType": "news" });
+    ajaxMethodCall(postData, "/Ajax/GetRelatedContents", function(data) {
+        $("#RelatedNews").empty();
+        $("#RelatedNews").html(data).animate({ 'height': '150px' }, 'slow');
+    });
+}
+
+function GetRelatedProducts(productCategoryId) {
+    var postData = JSON.stringify({ "categoryId": productCategoryId });
+    ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", DisplayRelatedProducts);
+
+}
+function DisplayRelatedProducts(data) {
+    $("#RelatedProducts").empty();
+    $("#RelatedProducts").html(data).animate({ 'height': '150px' }, 'slow');
+}
+function GetProductCategories() {
+    var postData = JSON.stringify({});
+    ajaxMethodCall(postData, "/Ajax/GetProductCategories", DisplayProductCategories);
+
+}
+function DisplayProductCategories(data) {
+    $("#ProductCategories").empty();
+    $("#ProductCategories").html(data).animate({ 'height': '150px' }, 'slow');
+}
 function ajaxMethodCall(postData, ajaxUrl, successFunction) {
 
     $.ajax({

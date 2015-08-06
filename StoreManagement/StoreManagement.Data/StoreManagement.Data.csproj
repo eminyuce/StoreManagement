@@ -177,6 +177,7 @@
     <Compile Include="LiquidEntities\ImageLiquid.cs" />
     <Compile Include="LiquidEntities\NavigationLiquid.cs" />
     <Compile Include="LiquidEntities\ProductLiquid.cs" />
+    <Compile Include="LiquidFilters\TextFilter.cs" />
     <Compile Include="LogEntities\AppNames.cs" />
     <Compile Include="LogEntities\LoggingModel.cs" />
     <Compile Include="LogEntities\LogLevels.cs" />

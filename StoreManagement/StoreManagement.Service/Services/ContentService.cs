@@ -115,5 +115,11 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetContentByIdAsync?id={2}", WebServiceAddress, ApiControllerName, id);
             return HttpRequestHelper.GetUrlResultAsync<Content>(url);
         }
+
+        public Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryIdAsync?storeId={2}&typeName={3}&categoryId={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, typeName, categoryId, take);
+            return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
+        }
     }
 }

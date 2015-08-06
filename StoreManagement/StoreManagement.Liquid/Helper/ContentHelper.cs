@@ -72,6 +72,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
+                CategoryId = contentLiquid.Content.CategoryId,
                 CategoryName = contentLiquid.Category.Name,
                 CategoryDescription = contentLiquid.Category.Description,
                 ContentId = contentLiquid.Content.Id,
@@ -90,6 +91,44 @@ namespace StoreManagement.Liquid.Helper
 
 
             return dic;
+        }
+
+        public static Dictionary<string, string> GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type)
+        {
+            Task.WaitAll(pageDesignTask, relatedContentsTask, categoryTask);
+            var contents = relatedContentsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var category = categoryTask.Result;
+
+            var items = new List<ContentLiquid>();
+            foreach (var item in contents)
+            {
+                var blog = new ContentLiquid(item, category, pageDesign, type);
+                items.Add(blog);
+
+            }
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
+            {
+                items = from s in items
+                        select new
+                        {
+                            s.Content.Name,
+                            s.Content.Description,
+                            s.DetailLink,
+                            s.ImageHas,
+                            s.ImageSource
+                        }
+            }
+                );
+
+
+            var dic = new Dictionary<String, String>();
+            dic.Add("PageOutput", indexPageOutput);
+
+
+            return dic;
+
         }
     }
 }

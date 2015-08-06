@@ -126,7 +126,7 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentByType(storeId, typeName);
         }
 
-       
+
 
 
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
@@ -144,13 +144,13 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentByTypeAndCategoryIdFromCache(storeId, typeName, categoryId);
         }
 
-        public StorePagedList<Content> GetContentsCategoryId(int storeId, int ?  categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public StorePagedList<Content> GetContentsCategoryId(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            var items =  this.ContentRepository.GetContentsCategoryId(storeId,
+            var items = this.ContentRepository.GetContentsCategoryId(storeId,
                 categoryId,
-                typeName, 
-                isActive, 
-                page, 
+                typeName,
+                isActive,
+                page,
                 pageSize);
 
             return items;
@@ -176,6 +176,11 @@ namespace StoreManagement.API.Controllers
         public async Task<Content> GetContentByIdAsync(int id)
         {
             return await this.ContentRepository.GetContentByIdAsync(id);
+        }
+
+        public async Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take)
+        {
+            return await this.ContentRepository.GetContentByTypeAndCategoryIdAsync(storeId, typeName, categoryId, take);
         }
     }
 }

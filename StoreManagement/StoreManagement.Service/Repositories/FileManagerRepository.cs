@@ -92,6 +92,22 @@ namespace StoreManagement.Service.Repositories
             return res;
         }
 
+        public Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
+        {
+            var task = Task.Factory.StartNew(() =>
+                 {
+                     var items = GetFilesByStoreId(storeId).Where(r => r.IsCarousel == true);
+                     if (take.HasValue)
+                     {
+                         items = items.Take(take.Value);
+                     }
+
+                     return items.ToList();
+
+                 });
+            return task;
+        }
+
         public List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels)
         {
             var labelIds = labels.Select(r => r.ToInt());

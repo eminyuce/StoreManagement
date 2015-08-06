@@ -121,5 +121,10 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryIdAsync?storeId={2}&typeName={3}&categoryId={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, typeName, categoryId, take);
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
+
+        public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

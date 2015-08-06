@@ -23,6 +23,6 @@ namespace StoreManagement.Service.Interfaces
         Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Task<Content> GetContentByIdAsync(int id);
         Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, String typeName, int categoryId, int take);
-   
+        Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int ? take);
     }
 }

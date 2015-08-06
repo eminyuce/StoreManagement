@@ -117,5 +117,10 @@ namespace StoreManagement.Service.Services
 
 
         }
+
+        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

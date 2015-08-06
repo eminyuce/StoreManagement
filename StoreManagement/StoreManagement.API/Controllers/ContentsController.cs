@@ -182,5 +182,10 @@ namespace StoreManagement.API.Controllers
         {
             return await this.ContentRepository.GetContentByTypeAndCategoryIdAsync(storeId, typeName, categoryId, take);
         }
+
+        public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

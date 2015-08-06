@@ -150,6 +150,11 @@ namespace StoreManagement.Service.Repositories
             return res;
         }
 
+        public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)
         {
             var contents = this.FindBy(r => r.StoreId == storeId && r.Type.Equals(typeName));

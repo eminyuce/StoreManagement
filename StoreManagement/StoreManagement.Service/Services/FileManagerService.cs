@@ -77,5 +77,11 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetImagesByStoreIdAsync?storeId={2}&isActive={3}", WebServiceAddress, ApiControllerName, storeId, isActive);
             return HttpRequestHelper.GetUrlResultsAsync<FileManager>(url);
         }
+
+        public Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetStoreCarouselsAsync?storeId={2}&take={3}", WebServiceAddress, ApiControllerName, storeId, take);
+            return HttpRequestHelper.GetUrlResultsAsync<FileManager>(url);
+        }
     }
 }

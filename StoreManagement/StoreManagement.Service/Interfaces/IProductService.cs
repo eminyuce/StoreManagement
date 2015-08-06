@@ -19,7 +19,6 @@ namespace StoreManagement.Service.Interfaces
         Product GetProductWithFiles(int id);
         Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Task<Product> GetProductsByIdAsync(int productId);
-
-
+        Task<List<Product>> GetMainPageProductsAsync(int storeId,  int? take);
     }
 }

@@ -145,9 +145,14 @@ namespace StoreManagement.API.Controllers
             return FileManagerRepository.GetImagesByStoreId(storeId, page, pageSize);
         }
 
-        public Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive)
+        public async Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive)
         {
-            return FileManagerRepository.GetImagesByStoreIdAsync(storeId, isActive);
+            return  await FileManagerRepository.GetImagesByStoreIdAsync(storeId, isActive);
+        }
+
+        public async Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
+        {
+            return await FileManagerRepository.GetStoreCarouselsAsync(storeId, take);
         }
     }
 }

@@ -85,5 +85,10 @@ namespace StoreManagement.API.Controllers
         {
             return ProductRepository.GetProductsByIdAsync(productId);
         }
+
+        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

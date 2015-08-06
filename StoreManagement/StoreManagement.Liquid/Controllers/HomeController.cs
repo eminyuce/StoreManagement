@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Liquid.Helper;
 
@@ -15,7 +16,27 @@ namespace StoreManagement.Liquid.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                int? categoryId = null;
+                var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "HomePage");
+                int take = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageMainBlogsContents_ItemsNumber", 5));
+                var blogsTask = ContentService.GetMainPageContentsAsync(Store.Id, categoryId, StoreConstants.BlogsType, take);
+                take = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageMainNewsContents_ItemsNumber", 5));
+                var newsTask = ContentService.GetMainPageContentsAsync(Store.Id, categoryId, StoreConstants.NewsType, take);
+                take = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageMainNewsContents_ItemsNumber", 5));
+                var productsTask = ProductService.GetMainPageProductsAsync(Store.Id, take);
+                take = GetSettingValueInt("HomePageSliderImages_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageSliderImages_ItemsNumber", 5));
+                var sliderTask = FileManagerService.GetStoreCarouselsAsync(Store.Id, take);
+                var dic = HomePageHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask);
+                return View(dic);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "HomeController:Index:" + ex.StackTrace);
+                return new HttpStatusCodeResult(500);
+            }
         }
         public ActionResult Contact()
         {

@@ -142,6 +142,11 @@ namespace StoreManagement.Service.Repositories
             return res;
         }
 
+        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Product> GetProductsByStoreId(int storeId, String searchKey)
         {
             var products = this.FindBy(r => r.StoreId == storeId);

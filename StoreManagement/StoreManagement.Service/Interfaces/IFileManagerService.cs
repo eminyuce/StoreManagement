@@ -19,6 +19,6 @@ namespace StoreManagement.Service.Interfaces
         List<FileManager> GetStoreCarousels(int storeId);
         StorePagedList<FileManager> GetImagesByStoreId(int storeId, int page, int pageSize);
         Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive);
-
+        Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int ? take);
     }
 }

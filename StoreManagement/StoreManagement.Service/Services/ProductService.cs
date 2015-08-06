@@ -120,7 +120,26 @@ namespace StoreManagement.Service.Services
 
         public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                string url = string.Format("http://{0}/api/{1}/GetMainPageProductsAsync?" +
+                                                 "storeId={2}" +
+                                                 "&take={3}",
+                                                 WebServiceAddress,
+                                                 ApiControllerName,
+                                                 storeId,
+                                                 take);
+
+                return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
         }
     }
 }

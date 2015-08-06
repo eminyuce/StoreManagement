@@ -149,10 +149,39 @@ namespace StoreManagement.Service.Repositories
             var res = Task.FromResult(this.GetContentByTypeAndCategoryId(storeId, typeName, categoryId).Take(take).ToList());
             return res;
         }
+        public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
+        {
+            var returnList =
+                    this.GetAllIncluding(r => r.ContentFiles.Select(r1 => r1.FileManager))
+                        .Where(r2 => r2.StoreId == storeId &&
+                             r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+            if (categoryId.HasValue)
+            {
+                returnList = returnList.Where(r => r.CategoryId == categoryId.Value);
+            }
+            returnList = returnList.Where(r => r.State && r.MainPage);
+
+            if (take.HasValue)
+            {
+                returnList = returnList.Take(take.Value);
+            }
+
+            return returnList.OrderBy(r => r.Ordering).ToList();
+
+
+        }
 
         public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
-            throw new NotImplementedException();
+
+            var task = Task.Factory.StartNew(() =>
+                {
+                    var returnList = GetMainPageContents(storeId, categoryId, type, take);
+
+                    return returnList;
+
+                });
+            return task;
         }
 
         public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)

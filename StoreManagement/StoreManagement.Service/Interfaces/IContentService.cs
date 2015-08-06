@@ -24,5 +24,6 @@ namespace StoreManagement.Service.Interfaces
         Task<Content> GetContentByIdAsync(int id);
         Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, String typeName, int categoryId, int take);
         Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int ? take);
+        List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take);
     }
 }

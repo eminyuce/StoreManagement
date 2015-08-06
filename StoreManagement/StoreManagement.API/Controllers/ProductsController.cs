@@ -48,7 +48,7 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductByType(typeName);
         }
 
-     
+
 
         public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {
@@ -81,14 +81,14 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize);
         }
 
-        public Task<Product> GetProductsByIdAsync(int productId)
+        public   Task<Product> GetProductsByIdAsync(int productId)
         {
-            return ProductRepository.GetProductsByIdAsync(productId);
+            return   ProductRepository.GetProductsByIdAsync(productId);
         }
 
-        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
+        public   Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
         {
-            throw new NotImplementedException();
+            return   ProductRepository.GetMainPageProductsAsync(storeId, take);
         }
     }
 }

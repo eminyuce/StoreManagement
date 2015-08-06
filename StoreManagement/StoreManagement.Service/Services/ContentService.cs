@@ -124,6 +124,12 @@ namespace StoreManagement.Service.Services
 
         public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
+            string url = string.Format("http://{0}/api/{1}/GetMainPageContentsAsync?storeId={2}&type={3}&categoryId={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, type, categoryId, take);
+            return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
+        }
+
+        public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
+        {
             throw new NotImplementedException();
         }
     }

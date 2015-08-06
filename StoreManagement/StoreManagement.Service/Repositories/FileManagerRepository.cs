@@ -96,13 +96,13 @@ namespace StoreManagement.Service.Repositories
         {
             var task = Task.Factory.StartNew(() =>
                  {
-                     var items = GetFilesByStoreId(storeId).Where(r => r.IsCarousel == true);
+                     var items = GetFilesByStoreId(storeId).Where(r => r.IsCarousel);
                      if (take.HasValue)
                      {
                          items = items.Take(take.Value);
                      }
 
-                     return items.ToList();
+                     return items.OrderBy(r => r.Ordering).ToList();
 
                  });
             return task;

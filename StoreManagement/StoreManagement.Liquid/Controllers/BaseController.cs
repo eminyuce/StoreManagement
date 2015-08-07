@@ -62,7 +62,10 @@ namespace StoreManagement.Liquid.Controllers
 
         protected Store Store { set; get; }
 
-
+        protected BaseController()
+        {
+   
+        }
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -70,7 +73,7 @@ namespace StoreManagement.Liquid.Controllers
 
             GetStoreByDomain(requestContext);
 
-            
+
             ViewBag.MetaDescription = GetSettingValue(StoreConstants.MetaTagDescription);
             ViewBag.MetaKeywords = GetSettingValue(StoreConstants.MetaTagKeywords);
 
@@ -80,10 +83,31 @@ namespace StoreManagement.Liquid.Controllers
             var sh = new StoreHelper();
             var store = sh.GetStoreByDomain(StoreService, requestContext.HttpContext.Request);
             this.Store = store;
+            SetStoreCache();
             if (store == null)
             {
                 throw new Exception("Store cannot be NULL");
             }
+        }
+        private void SetStoreCache()
+        {
+            NavigationService.IsCacheEnable = Store.IsCacheEnable;
+            ProductCategoryService.IsCacheEnable = Store.IsCacheEnable;
+            ProductFileService.IsCacheEnable = Store.IsCacheEnable;
+            ProductService.IsCacheEnable = Store.IsCacheEnable;
+            StoreUserService.IsCacheEnable = Store.IsCacheEnable;
+            PageDesignService.IsCacheEnable = Store.IsCacheEnable;
+            CategoryService.IsCacheEnable = Store.IsCacheEnable;
+
+            ContentService.IsCacheEnable = Store.IsCacheEnable;
+            ContentService.CacheMinute = ProjectAppSettings.GetWebConfigInt("ContentService_CacheMinute", 200);
+
+
+            ContentFileService.IsCacheEnable = Store.IsCacheEnable;
+            FileManagerService.IsCacheEnable = Store.IsCacheEnable;
+            SettingService.IsCacheEnable = Store.IsCacheEnable;
+            SettingService.CacheMinute = ProjectAppSettings.GetWebConfigInt("SettingService_CacheMinute", 200);
+            StoreService.IsCacheEnable = Store.IsCacheEnable;
         }
 
 
@@ -103,8 +127,8 @@ namespace StoreManagement.Liquid.Controllers
         {
             return entity.StoreId == Store.Id;
         }
-     
-     
+
+
 
         protected bool GetSettingValueBool(String key, bool defaultValue)
         {
@@ -154,8 +178,12 @@ namespace StoreManagement.Liquid.Controllers
 
         protected List<Setting> StoreSettings
         {
-            get { return SettingService.GetStoreSettings(Store.Id); }
-        } 
+            get
+            {
+                var items = SettingService.GetStoreSettingsFromCache(Store.Id);
+                return items;
+            }
+        }
 
     }
 }

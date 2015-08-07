@@ -63,6 +63,17 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestGetMainPageProductsAsync()
+        {
+            int storeId = 9;
+            var rr = new ProductRepository(new StoreContext(ConnectionString));
+
+            var productsTask = rr.GetMainPageProductsAsync(storeId,5);
+            Task.WaitAll(productsTask);
+            Console.WriteLine(productsTask.Result.Count);
+
+        }
+        [TestMethod]
         public void TestGetProductsCategoryIdAsync()
         {
             int storeId = 9;

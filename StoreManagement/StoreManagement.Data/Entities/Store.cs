@@ -45,6 +45,8 @@ namespace StoreManagement.Data.Entities
         [IgnoreDataMember]
         public byte[] GoogleDriveCertificateP12RawData { set; get; }
 
+        public bool IsCacheEnable { get; set; }
+
         public override string ToString()
         {
             return Id + " " + Name;

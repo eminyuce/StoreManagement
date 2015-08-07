@@ -132,32 +132,51 @@ namespace StoreManagement.Service.Repositories
 
         public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            var res = Task.FromResult(GetProductsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
-            return res;
+            var task = Task.Factory.StartNew(() =>
+            {
+                return GetProductsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize);
+            });
+            return task;
         }
 
         public Task<Product> GetProductsByIdAsync(int productId)
         {
-            var res = Task.FromResult(GetProductsById(productId));
-            return res;
+            var task = Task.Factory.StartNew(() =>
+                {
+                    return GetProductsById(productId);
+
+                });
+            return task;
         }
 
         public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
         {
             var task = Task.Factory.StartNew(() =>
+                {
+                    return GetMainPageProducts(storeId, take);
+
+                });
+            return task;
+        }
+        public List<Product> GetMainPageProducts(int storeId, int? take)
+        {
+            try
             {
                 var items = this.FindBy(r => r.StoreId == storeId).Where(r => r.MainPage);
                 if (take.HasValue)
                 {
                     items = items.Take(take.Value);
                 }
-
                 return items.OrderBy(r => r.Ordering).ToList();
 
-            });
-            return task;
-        }
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return new List<Product>();
+            }
 
+        }
         public List<Product> GetProductsByStoreId(int storeId, String searchKey)
         {
             var products = this.FindBy(r => r.StoreId == storeId);

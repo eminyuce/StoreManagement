@@ -30,11 +30,17 @@ namespace StoreManagement.Service.Repositories
             get { return _cacheMinute; }
             set { _cacheMinute = value; }
         }
-
-        protected StoreContext StoreDbContext;
+        protected IStoreContext DbContext;
+        protected StoreContext StoreDbContext
+        {
+            get
+            {
+                return (StoreContext)DbContext;
+            }
+        }
         protected BaseRepository(IStoreContext dbContext) : base(dbContext)
         {
-            StoreDbContext =   (StoreContext) dbContext;
+            DbContext = dbContext;
             StoreDbContext.Configuration.LazyLoadingEnabled = false; 
         }
 
@@ -49,5 +55,6 @@ namespace StoreManagement.Service.Repositories
                 }
             }
         }
+
     }
 }

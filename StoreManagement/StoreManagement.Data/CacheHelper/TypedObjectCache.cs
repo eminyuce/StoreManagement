@@ -9,6 +9,12 @@ namespace StoreManagement.Data.CacheHelper
 
     public class TypedObjectCache<T> : MemoryCache where T : class
     {
+        private bool _isCacheEnable = true;
+        public bool IsCacheEnable
+        {
+            get { return _isCacheEnable; }
+            set { _isCacheEnable = value; }
+        }
         private CacheItemPolicy HardDefaultCacheItemPolicy = new CacheItemPolicy()
         {
             SlidingExpiration = new TimeSpan(0, 15, 0)
@@ -24,24 +30,31 @@ namespace StoreManagement.Data.CacheHelper
 
         public void Set(string cacheKey, T cacheItem, CacheItemPolicy policy = null)
         {
-            policy = policy ?? defaultCacheItemPolicy;
-            if (true /* Ektron.Com.Helpers.Constants.IsCachingEnabled */ )
+            if (IsCacheEnable)
             {
-                var isCount = 0;
-                if (cacheItem is IList)
+                policy = policy ?? defaultCacheItemPolicy;
+                if (true /* Ektron.Com.Helpers.Constants.IsCachingEnabled */ )
                 {
-                    isCount = (cacheItem as IList).Count;
-                }
-                if (isCount != 0)  // No need to cache it
-                {
-                    base.Set(cacheKey, cacheItem, policy);
+                    var isCount = 0;
+                    if (cacheItem is IList)
+                    {
+                        isCount = (cacheItem as IList).Count;
+                    }
+                    if (isCount != 0)  // No need to cache it
+                    {
+
+                        base.Set(cacheKey, cacheItem, policy);
+                    }
                 }
             }
         }
 
         public void Set(string cacheKey, Func<T> getData, CacheItemPolicy policy = null)
         {
-            this.Set(cacheKey, getData(), policy);
+            if (IsCacheEnable)
+            {
+                this.Set(cacheKey, getData(), policy);
+            }
         }
 
         public bool TryGetAndSet(string cacheKey, Func<T> getData, out T returnData, CacheItemPolicy policy = null)
@@ -57,8 +70,16 @@ namespace StoreManagement.Data.CacheHelper
 
         public bool TryGet(string cacheKey, out T returnItem)
         {
-            returnItem = (T)this[cacheKey];
-            return returnItem != null;
+            if (IsCacheEnable)
+            {
+                returnItem = (T) this[cacheKey];
+                return returnItem != null;
+            }
+            else
+            {
+                returnItem = null;
+                return false;
+            }
         }
         public void ClearCache(String cacheKeyPrefix)
         {

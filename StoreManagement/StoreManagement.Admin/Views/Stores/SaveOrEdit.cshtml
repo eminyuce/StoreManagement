@@ -96,7 +96,12 @@
                             @Html.TextBoxFor(model => model.GoogleDriveFolder, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GoogleDriveFolder)
                         </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.IsCacheEnable)
 
+                            @Html.CheckBoxFor(model => model.IsCacheEnable, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IsCacheEnable)
+                        </div>
                         <div class="editor-label">
                             <label for="Certificate">Google Drive  Certificate P12 File </label>
                             <input type="file" name="CertUpload" />

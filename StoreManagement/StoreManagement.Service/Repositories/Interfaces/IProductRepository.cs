@@ -12,5 +12,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface IProductRepository : IBaseRepository<Product, int>, IProductService
     {
         List<Product> GetProductsByStoreId(int storeId, String searchKey);
+        List<Product> GetMainPageProducts(int storeId, int? take);
     }
 }

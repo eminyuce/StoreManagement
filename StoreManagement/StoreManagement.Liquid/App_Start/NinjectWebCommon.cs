@@ -103,7 +103,7 @@ namespace StoreManagement.Liquid.App_Start
             else
             {
 
-                kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+                kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
                 kernel.Bind<IContentService>().To<ContentRepository>();
                 var m = kernel.Bind<IStoreService>().To<StoreRepository>();
                 kernel.Bind<ISettingService>().To<SettingRepository>();
@@ -112,7 +112,7 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IPageDesignService>().To<PageDesignRepository>();
                 kernel.Bind<IContentFileService>().To<ContentFileRepository>();
                 kernel.Bind<IStoreUserService>().To<StoreUserRepository>();
- 
+
                 kernel.Bind<INavigationService>().To<NavigationRepository>();
                 kernel.Bind<IProductService>().To<ProductRepository>();
                 kernel.Bind<IProductFileService>().To<ProductFileRepository>();

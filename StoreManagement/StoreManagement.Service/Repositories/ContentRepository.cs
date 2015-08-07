@@ -19,8 +19,8 @@ namespace StoreManagement.Service.Repositories
     public class ContentRepository : BaseRepository<Content, int>, IContentRepository
     {
 
-        private static readonly TypedObjectCache<List<Content>> ContentCache = new TypedObjectCache<List<Content>>("GetContentByTypeAndCategoryIdFromCache");
-        private static readonly TypedObjectCache<StorePagedList<Content>> ContentCacheStorePagedList = new TypedObjectCache<StorePagedList<Content>>("StorePagedListContent");
+        private readonly TypedObjectCache<List<Content>> _contentCache = new TypedObjectCache<List<Content>>("GetContentByTypeAndCategoryIdFromCache");
+        private readonly TypedObjectCache<StorePagedList<Content>> _contentCacheStorePagedList = new TypedObjectCache<StorePagedList<Content>>("StorePagedListContent");
 
         public ContentRepository(IStoreContext dbContext)
             : base(dbContext)
@@ -84,12 +84,14 @@ namespace StoreManagement.Service.Repositories
         {
             String key = String.Format("Store-{0}-GetContentByTypeAndCategoryIdFromCache-{1}-{2}", storeId, typeName, categoryId);
             List<Content> items = null;
-            ContentCache.TryGet(key, out items);
+
+            _contentCache.IsCacheEnable = this.IsCacheEnable;
+            _contentCache.TryGet(key, out items);
 
             if (items == null)
             {
                 items = GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
-                ContentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
+                _contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;
@@ -99,7 +101,8 @@ namespace StoreManagement.Service.Repositories
         {
             String key = String.Format("Store-{0}-GetContentsCategoryId-{1}-{2}-{3}-{4}-{5}", storeId, typeName, categoryId, isActive.HasValue ? isActive.Value.ToStr() : "", page, pageSize);
             StorePagedList<Content> items = null;
-            ContentCacheStorePagedList.TryGet(key, out items);
+            _contentCacheStorePagedList.IsCacheEnable = this.IsCacheEnable;
+            _contentCacheStorePagedList.TryGet(key, out items);
 
             if (items == null)
             {
@@ -120,7 +123,7 @@ namespace StoreManagement.Service.Repositories
                 items = new StorePagedList<Content>(cat.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, cat.Count());
                 //  items = new PagedList<Content>(cat, page, cat.Count());
                 //  items = (PagedList<Content>) cat.ToPagedList(page, pageSize);
-                ContentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
+                _contentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
             }
 
             return items;
@@ -151,23 +154,33 @@ namespace StoreManagement.Service.Repositories
         }
         public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
         {
-            var returnList =
-                    this.GetAllIncluding(r => r.ContentFiles.Select(r1 => r1.FileManager))
-                        .Where(r2 => r2.StoreId == storeId &&
-                             r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-            if (categoryId.HasValue)
+            try
             {
-                returnList = returnList.Where(r => r.CategoryId == categoryId.Value);
-            }
-            returnList = returnList.Where(r => r.State && r.MainPage);
+                IQueryable<Content> returnList =
+                  this.GetAllIncluding(r => r.ContentFiles.Select(r1 => r1.FileManager))
+                      .Where(r2 => r2.StoreId == storeId &&
+                           r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+                if (categoryId.HasValue)
+                {
+                    returnList = returnList.Where(r => r.CategoryId == categoryId.Value);
+                }
+                returnList = returnList.Where(r => r.State && r.MainPage);
 
-            if (take.HasValue)
+                if (take.HasValue)
+                {
+                    returnList = returnList.Take(take.Value);
+                }
+
+                returnList = returnList.OrderBy(r => r.Ordering);
+                return returnList.ToList();
+            }
+            catch (Exception ex)
             {
-                returnList = returnList.Take(take.Value);
+
+                Logger.Error(ex);
+
+                return new List<Content>();
             }
-
-            return returnList.OrderBy(r => r.Ordering).ToList();
-
 
         }
 

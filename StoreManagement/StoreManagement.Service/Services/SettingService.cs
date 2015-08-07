@@ -16,32 +16,37 @@ namespace StoreManagement.Service.Services
         public SettingService(string webServiceAddress)
             : base(webServiceAddress)
         {
+
         }
 
         public List<Setting> GetStoreSettings(int storeid)
         {
-            
-                string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
-                return HttpRequestHelper.GetUrlResults<Setting>(url);
-            
+            string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+            return HttpRequestHelper.GetUrlResults<Setting>(url);
         }
 
         public List<Setting> GetStoreSettingsFromCache(int storeid)
         {
-             
-                string url = string.Format("http://{0}/api/{1}/GetStoreSettingsFromCache?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
-                return HttpRequestHelper.GetUrlResults<Setting>(url);
-             
+
+            string url = string.Format("http://{0}/api/{1}/GetStoreSettingsFromCache?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+            var items =  HttpRequestHelper.GetUrlResults<Setting>(url);
+            return items;
         }
 
         public List<Setting> GetStoreSettingsByType(int storeid, string type)
         {
-             
-                string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}&type={3}", WebServiceAddress, ApiControllerName, storeid, type);
-                return HttpRequestHelper.GetUrlResults<Setting>(url);
-            
+            string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}&type={3}", WebServiceAddress, ApiControllerName, storeid, type);
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+            var items =  HttpRequestHelper.GetUrlResults<Setting>(url);
+
+            return items;
         }
 
-        
+
     }
 }

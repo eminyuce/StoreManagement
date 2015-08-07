@@ -77,12 +77,23 @@ namespace StoreManagement.Data.LiquidEntities
                 return cats;
             }
         }
+
+        public int ImageWidth { get; set; }
+        public int ImageHeight { get; set; }
+
+
         public HomePageLiquid(PageDesign pageDesing, List<FileManager> sliderImages)
         {
             // TODO: Complete member initialization
             this.PageDesing = pageDesing;
             this.SliderImages = sliderImages;
         }
+
+
+        
+
+
+ 
 
 
 

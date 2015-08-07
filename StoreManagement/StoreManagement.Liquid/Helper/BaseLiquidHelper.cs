@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using NLog;
+using StoreManagement.Data;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 
@@ -30,7 +31,7 @@ namespace StoreManagement.Liquid.Helper
             if (String.IsNullOrEmpty(value))
             {
                 Logger.Trace("Store Default Setting= " + Store.Domain + " Key=" + key + " defaultValue=" + defaultValue);
-                return defaultValue;
+                return ProjectAppSettings.GetWebConfigString(key, defaultValue);
             }
             else
             {

@@ -9,6 +9,8 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IService
     {
-        
+        bool IsCacheEnable { get; set; }
+        int CacheMinute { get; set; }
+       
     }
 }

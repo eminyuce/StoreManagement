@@ -15,10 +15,25 @@ namespace StoreManagement.Service.Services
 
         protected RequestHelper HttpRequestHelper;
 
+        private bool _isCacheEnable = true;
+        public bool IsCacheEnable
+        {
+            get { return _isCacheEnable; }
+            set { _isCacheEnable = value; }
+        }
+        private int _cacheMinute = 30;
+        public int CacheMinute
+        {
+            get { return _cacheMinute; }
+            set { _cacheMinute = value; }
+        }
+
         protected BaseService(String webServiceAddress)
         {
             WebServiceAddress = webServiceAddress;
             HttpRequestHelper = new RequestHelper();
+            HttpRequestHelper.CacheMinute = this.CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
 
        

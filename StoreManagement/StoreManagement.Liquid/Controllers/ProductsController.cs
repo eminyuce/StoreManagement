@@ -22,7 +22,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
                 var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductsIndex");
-                var productsTask = ProductService.GetProductsCategoryIdAsync(Store.Id, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndexPageSize", StoreConstants.DefaultPageSize));
+                var productsTask = ProductService.GetProductsCategoryIdAsync(Store.Id, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize));
                 var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true);
 
                 var liquidHelper = new ProductHelper();

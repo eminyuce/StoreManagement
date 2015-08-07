@@ -14,6 +14,9 @@ namespace StoreManagement.Data.LiquidEntities
         public Navigation Navigation;
         public PageDesign PageDesign;
 
+        public int ImageWidth { get; set; }
+        public int ImageHeight { get; set; }
+
         public NavigationLiquid()
         {
             

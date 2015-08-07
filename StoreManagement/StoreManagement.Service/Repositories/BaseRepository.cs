@@ -17,13 +17,20 @@ namespace StoreManagement.Service.Repositories
     {
 
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        //protected bool IsCacheActive
-        //{
-        //    get
-        //    {
-        //        return ProjectAppSettings.GetWebConfigBool("IsCacheActive", true);
-        //    }
-        //}
+
+        private bool _isCacheEnable = true;
+        public bool IsCacheEnable
+        {
+            get { return _isCacheEnable; }
+            set { _isCacheEnable = value; }
+        }
+        private int _cacheMinute = 30;
+        public int CacheMinute
+        {
+            get { return _cacheMinute; }
+            set { _cacheMinute = value; }
+        }
+
         protected StoreContext StoreDbContext;
         protected BaseRepository(IStoreContext dbContext) : base(dbContext)
         {

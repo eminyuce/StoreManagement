@@ -36,6 +36,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 var liquidHelper = new ContentHelper();
                 liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.ImageWidth = GetSettingValueInt("BlogsIndex_ImageWidth", 50);
+                liquidHelper.ImageHeight = GetSettingValueInt("BlogsIndex_ImageHeight", 50);
                 var dic = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
 
                 return View(dic);
@@ -72,6 +74,8 @@ namespace StoreManagement.Liquid.Controllers
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(Store.Id, blogId);
                 var liquidHelper = new ContentHelper();
                 liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.ImageWidth = GetSettingValueInt("BlogsBlog_ImageWidth", 50);
+                liquidHelper.ImageHeight = GetSettingValueInt("BlogsBlog_ImageHeight", 50);
                 var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.BlogsType);
 
                 return View(dic);

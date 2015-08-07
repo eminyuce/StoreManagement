@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
+using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
@@ -69,7 +70,7 @@ namespace StoreManagement.Liquid.Controllers
 
             GetStoreByDomain(requestContext);
 
-
+            
             ViewBag.MetaDescription = GetSettingValue(StoreConstants.MetaTagDescription);
             ViewBag.MetaKeywords = GetSettingValue(StoreConstants.MetaTagKeywords);
 
@@ -102,7 +103,8 @@ namespace StoreManagement.Liquid.Controllers
         {
             return entity.StoreId == Store.Id;
         }
-
+     
+     
 
         protected bool GetSettingValueBool(String key, bool defaultValue)
         {
@@ -120,7 +122,7 @@ namespace StoreManagement.Liquid.Controllers
             if (String.IsNullOrEmpty(value))
             {
                 Logger.Trace("Store Default Setting= " + Store.Domain + " Key=" + key + " defaultValue=" + defaultValue);
-                return defaultValue;
+                return ProjectAppSettings.GetWebConfigString(key, defaultValue);
             }
             else
             {
@@ -152,7 +154,7 @@ namespace StoreManagement.Liquid.Controllers
 
         protected List<Setting> StoreSettings
         {
-            get { return SettingService.GetStoreSettingsFromCache(Store.Id); }
+            get { return SettingService.GetStoreSettings(Store.Id); }
         } 
 
     }

@@ -7,8 +7,11 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
 {
-    public class BrandService : IBrandService
+    public class BrandService : BaseService, IBrandService
     {
+        public BrandService(string webServiceAddress) : base(webServiceAddress)
+        {
 
+        }
     }
 }

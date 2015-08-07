@@ -13,6 +13,8 @@ namespace StoreManagement.Service.Repositories
 {
     public class ContactRepository : BaseRepository<Contact, int>, IContactRepository
     {
+       
+
         public ContactRepository(IStoreContext dbContext)
             : base(dbContext)
         {
@@ -27,10 +29,9 @@ namespace StoreManagement.Service.Repositories
             {
                 contacts = contacts.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
-
+           
             return contacts.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
-
 
 
     }

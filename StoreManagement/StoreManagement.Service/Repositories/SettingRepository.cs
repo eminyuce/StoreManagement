@@ -16,8 +16,9 @@ namespace StoreManagement.Service.Repositories
     public class SettingRepository : BaseRepository<Setting, int>, ISettingRepository
     {
         private static readonly TypedObjectCache<List<Setting>> SettingStoreCache
-            = new TypedObjectCache<List<Setting>>("categoryCache");
+            = new TypedObjectCache<List<Setting>>("SettingsCache");
 
+        
 
         public SettingRepository(IStoreContext dbContext)
             : base(dbContext)

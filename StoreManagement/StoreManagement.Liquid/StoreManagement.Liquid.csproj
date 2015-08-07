@@ -420,6 +420,7 @@
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
+    <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -486,6 +487,7 @@
     <Folder Include="Views\Ajax\" />
     <Folder Include="Views\Images\" />
     <Folder Include="Views\Robots\" />
+    <Folder Include="Views\Rss\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

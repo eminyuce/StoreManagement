@@ -21,7 +21,7 @@ namespace StoreManagement.Liquid.Controllers
             {
 
                 var categoryTask = CategoryService.GetCategoryAsync(categoryId);
-                int take = GetSettingValueInt("RelatedContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("RelatedContents_ItemsNumber", 5));
+                int take = GetSettingValueInt("RelatedContents_ItemsNumber", 5);
                 var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(Store.Id, contentType, categoryId, take);
                 var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "RelatedContentsPartial");
                 var liquidHelper = new ContentHelper();

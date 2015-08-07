@@ -21,15 +21,21 @@ namespace StoreManagement.Data.GeneralHelper
 
         private static readonly TypedObjectCache<String> RequestHelperCache = new TypedObjectCache<String>("RequestHelperCache");
 
-
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private static CacheEntryUpdateCallback _callbackU = null;
-        private int _cacheMinute = 10;
+        private bool _isCacheEnable = true;
+        public bool IsCacheEnable
+        {
+            get { return _isCacheEnable; }
+            set { _isCacheEnable = value; }
+        }
+        private int _cacheMinute = 30;
         public int CacheMinute
         {
             get { return _cacheMinute; }
             set { _cacheMinute = value; }
         }
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+      
         readonly string _accountSid = "";
         readonly string _secretKey = "";
 
@@ -98,15 +104,8 @@ namespace StoreManagement.Data.GeneralHelper
             if (statusCode == HttpStatusCode.OK)
             {
                 returnJson = response.Content;
-                var cacheControl = response.Headers.FirstOrDefault(r => r.Name.Equals("Cache-Control"));
-                if (cacheControl != null)
-                {
-                    String cacheValue = cacheControl.Value.ToStr();
-                    if (cacheValue.StartsWith("public"))
-                    {
-                        CacheMinute = cacheValue.Substring(cacheValue.IndexOf("=") + 1).ToInt();
-                    }
-                }
+                //var cacheControl = response.Headers.FirstOrDefault(r => r.Name.Equals("Cache-Control"));
+              
             }
             else
             {
@@ -123,47 +122,16 @@ namespace StoreManagement.Data.GeneralHelper
                 jsonOutput = responseContent;
                 if (!String.IsNullOrEmpty(jsonOutput))
                 {
-                    RequestHelperCache.Set(key, jsonOutput,
-                        MemoryCacheHelper.CacheAbsoluteExpirationPolicy(
-                        ProjectAppSettings.GetWebConfigInt("RequestHelperCache_CacheAbsoluteExpiration_Minute", 30)));
+                    if (IsCacheEnable)
+                    {
+                        RequestHelperCache.Set(key, jsonOutput, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(_cacheMinute));
+                    }
                 }
             }
             return jsonOutput;
         }
 
-        private void ContentCacheUpdateCallback(CacheEntryUpdateArguments arguments)
-        {
-            if (arguments.RemovedReason == CacheEntryRemovedReason.Expired)
-            {
-                var expiredCacheItem = MemoryCache.Default.GetCacheItem(arguments.Key);
-
-                if (expiredCacheItem != null)
-                {
-                    String url = expiredCacheItem.Key;
-                    Logger.Info(String.Format("Return From ContentCacheUpdateCallback {0}", url));
-                    var ret = GetJsonFromCacheOrWebservice(url);
-
-                    expiredCacheItem.Value = ret;
-
-                    arguments.UpdatedCacheItem = expiredCacheItem;
-
-                    var policy = new CacheItemPolicy();
-                    policy.Priority = CacheItemPriority.Default;
-
-                    _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
-                    policy.UpdateCallback = _callbackU;
-                    policy.AbsoluteExpiration = DateTime.Now.AddSeconds(CacheMinute);
-
-
-                    arguments.UpdatedCacheItemPolicy = policy;
-                }
-                else
-                {
-                    arguments.UpdatedCacheItem = null;
-                }
-            }
-
-        }
+ 
 
         public IRestResponse PostBasicAuthenication(string baseUrl, string resourceUrl, string userName, string password, string json)
         {

@@ -55,9 +55,20 @@ namespace StoreManagement.API.Controllers
 
         [Inject]
         public ILabelRepository LabelRepository { set; get; }
-        
- 
 
+
+        private bool _isCacheEnable = true;
+        public bool IsCacheEnable
+        {
+            get { return _isCacheEnable; }
+            set { _isCacheEnable = value; }
+        }
+        private int _cacheMinute = 30;
+        public int CacheMinute
+        {
+            get { return _cacheMinute; }
+            set { _cacheMinute = value; }
+        }
 
 
         // GET api/<controller>

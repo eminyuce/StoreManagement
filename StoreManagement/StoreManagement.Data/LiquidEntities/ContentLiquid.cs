@@ -20,6 +20,12 @@ namespace StoreManagement.Data.LiquidEntities
         public PageDesign PageDesign { get; set; }
         public ImageLiquid ImageLiquid { get; set; }
         private String Type { get; set; }
+
+
+        public int ImageWidth { get; set; }
+        public int ImageHeight { get; set; }
+
+
         public ContentLiquid(Content content, Category category, PageDesign pageDesign, String type, int imageWidth, int imageHeight)
         {
             this.Content = content;
@@ -27,6 +33,8 @@ namespace StoreManagement.Data.LiquidEntities
             this.PageDesign = pageDesign;
             List<FileManager> fileManagers = content.ContentFiles != null && content.ContentFiles.Any() ? content.ContentFiles.Select(r => r.FileManager).ToList() : new List<FileManager>();
             this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign, imageWidth, imageHeight);
+            ImageWidth = imageWidth;
+            ImageHeight = imageHeight;
             this.Type = type;
         }
 
@@ -48,7 +56,7 @@ namespace StoreManagement.Data.LiquidEntities
                 if (ImageHas)
                 {
                     var firstOrDefault = this.Content.ContentFiles.FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.FileManager.GoogleImageId, this.PageDesign.ImageWidth, this.PageDesign.ImageHeight);
+                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.FileManager.GoogleImageId, this.ImageWidth, this.ImageHeight);
                 }
                 else
                 {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
@@ -28,6 +29,9 @@ namespace StoreManagement.Liquid.Controllers
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.NewsType, true);
                 var liquidHelper = new ContentHelper();
                 liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.ImageWidth = GetSettingValueInt("NewsIndex_ImageWidth", 50);
+                liquidHelper.ImageHeight = GetSettingValueInt("NewsIndex_ImageHeight", 50);
+
                 var dic = liquidHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
 
                 return View(dic);
@@ -56,6 +60,8 @@ namespace StoreManagement.Liquid.Controllers
                 var liquidHelper = new ContentHelper();
                 liquidHelper.StoreSettings = StoreSettings;
                 var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
+                liquidHelper.ImageWidth = GetSettingValueInt("NewsDetail_ImageWidth", 50);
+                liquidHelper.ImageHeight = GetSettingValueInt("NewsDetail_ImageHeight", 50);
 
                 return View(dic);
 
@@ -66,5 +72,5 @@ namespace StoreManagement.Liquid.Controllers
                 return new HttpStatusCodeResult(500);
             }
         }
-	}
+    }
 }

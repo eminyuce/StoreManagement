@@ -20,13 +20,13 @@ namespace StoreManagement.Liquid.Controllers
             {
                 int? categoryId = null;
                 var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "HomePage");
-                int take = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageMainBlogsContents_ItemsNumber", 5));
+                int take = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", 5);
                 var blogsTask = ContentService.GetMainPageContentsAsync(Store.Id, categoryId, StoreConstants.BlogsType, take);
-                take = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageMainNewsContents_ItemsNumber", 5));
+                take = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", 5);
                 var newsTask = ContentService.GetMainPageContentsAsync(Store.Id, categoryId, StoreConstants.NewsType, take);
-                take = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageMainNewsContents_ItemsNumber", 5));
+                take = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", 5);
                 var productsTask = ProductService.GetMainPageProductsAsync(Store.Id, take);
-                take = GetSettingValueInt("HomePageSliderImages_ItemsNumber", ProjectAppSettings.GetWebConfigInt("HomePageSliderImages_ItemsNumber", 5));
+                take = GetSettingValueInt("HomePageSliderImages_ItemsNumber", 5);
                 var sliderTask = FileManagerService.GetStoreCarouselsAsync(Store.Id, take);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(Store.Id);
                 var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true);

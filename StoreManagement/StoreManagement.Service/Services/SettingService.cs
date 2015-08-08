@@ -22,8 +22,7 @@ namespace StoreManagement.Service.Services
         public List<Setting> GetStoreSettings(int storeid)
         {
             string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
-            HttpRequestHelper.CacheMinute = CacheMinute;
-            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+            SetCache();
             return HttpRequestHelper.GetUrlResults<Setting>(url);
         }
 
@@ -31,22 +30,26 @@ namespace StoreManagement.Service.Services
         {
 
             string url = string.Format("http://{0}/api/{1}/GetStoreSettingsFromCache?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
-            HttpRequestHelper.CacheMinute = CacheMinute;
-            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
-            var items =  HttpRequestHelper.GetUrlResults<Setting>(url);
+            SetCache();
+            Logger.Trace(String.Format("GetStoreSettingsFromCache {0} {1}", CacheMinute, IsCacheEnable));
+            var items = HttpRequestHelper.GetUrlResults<Setting>(url);
             return items;
         }
 
         public List<Setting> GetStoreSettingsByType(int storeid, string type)
         {
             string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}&type={3}", WebServiceAddress, ApiControllerName, storeid, type);
-            HttpRequestHelper.CacheMinute = CacheMinute;
-            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
-            var items =  HttpRequestHelper.GetUrlResults<Setting>(url);
+            SetCache();
+            var items = HttpRequestHelper.GetUrlResults<Setting>(url);
 
             return items;
         }
 
 
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+        }
     }
 }

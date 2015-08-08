@@ -22,30 +22,35 @@ namespace StoreManagement.Service.Services
 
         public Product GetProductsById(int productId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductsById?productId={2}", WebServiceAddress, ApiControllerName, productId);
             return HttpRequestHelper.GetUrlResult<Product>(url);
         }
 
         public List<Product> GetProductByType(string typeName)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductByType?typeName={2}", WebServiceAddress, ApiControllerName, typeName);
             return HttpRequestHelper.GetUrlResults<Product>(url);
         }
 
         public List<Product> GetProductByType(int storeId, string typeName)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductByType?storeId={2}&typeName={3}", WebServiceAddress, ApiControllerName, storeId, typeName);
             return HttpRequestHelper.GetUrlResults<Product>(url);
         }
 
         public Product GetProductByUrl(int storeId, string url)
         {
+            SetCache();
             string url2 = string.Format("http://{0}/api/{1}/GetProductByUrl?storeId={2}&url={3}", WebServiceAddress, ApiControllerName, storeId, url);
             return HttpRequestHelper.GetUrlResult<Product>(url2);
         }
 
         public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductByTypeAndCategoryId?" +
                                           "storeId={2}" +
                                           "&typeName={3}&categoryId={4}",
@@ -66,6 +71,7 @@ namespace StoreManagement.Service.Services
 
         public List<Product> GetProductByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductByTypeAndCategoryIdFromCache" +
                                        "?storeId={2}" +
                                        "&typeName={3}" +
@@ -76,7 +82,7 @@ namespace StoreManagement.Service.Services
 
         public StorePagedList<Product> GetProductsCategoryId(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductsCategoryId?storeId={2}" +
                                        "&categoryId={3}" +
                                        "&typeName={4}" +
@@ -87,7 +93,7 @@ namespace StoreManagement.Service.Services
 
         public Product GetProductWithFiles(int id)
         {
-
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductWithFiles?id={2}", WebServiceAddress, ApiControllerName, id);
             return HttpRequestHelper.GetUrlResult<Product>(url);
 
@@ -95,6 +101,7 @@ namespace StoreManagement.Service.Services
 
         public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductsCategoryIdAsync?storeId={2}" +
                               "&categoryId={3}" +
                               "&typeName={4}" +
@@ -106,6 +113,7 @@ namespace StoreManagement.Service.Services
         {
             try
             {
+                SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetProductsByIdAsync?productId={2}", WebServiceAddress, ApiControllerName, productId);
                 return HttpRequestHelper.GetUrlResultAsync<Product>(url);
             }
@@ -123,6 +131,7 @@ namespace StoreManagement.Service.Services
 
             try
             {
+                SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetMainPageProductsAsync?" +
                                                  "storeId={2}" +
                                                  "&take={3}",
@@ -140,6 +149,12 @@ namespace StoreManagement.Service.Services
                 Logger.Error(ex, ex.Message);
                 return null;
             }
+        }
+
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
     }
 }

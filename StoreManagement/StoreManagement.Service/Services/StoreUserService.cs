@@ -21,5 +21,11 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetStoreUserByUserId?userId={2}", WebServiceAddress, ApiControllerName, userId);
             return HttpRequestHelper.GetUrlResult<StoreUser>(url);
         }
+
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+        }
     }
 }

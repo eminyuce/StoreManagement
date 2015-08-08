@@ -20,7 +20,7 @@ namespace StoreManagement.Data.GeneralHelper
     {
 
         private static readonly TypedObjectCache<String> RequestHelperCache = new TypedObjectCache<String>("RequestHelperCache");
-
+        private static CacheEntryUpdateCallback _callbackU = null;
         private bool _isCacheEnable = true;
         public bool IsCacheEnable
         {
@@ -41,7 +41,7 @@ namespace StoreManagement.Data.GeneralHelper
 
         public RequestHelper()
         {
-
+            RequestHelperCache.IsCacheEnable = this.IsCacheEnable;
         }
 
         public RequestHelper(string accountSid, string secretKey)
@@ -51,22 +51,73 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public String GetJsonFromCacheOrWebservice(string url)
         {
-
-            String returnJson = String.Empty;
-            returnJson = CacheResponseOutput(url, String.Empty);
-            if (!String.IsNullOrEmpty(returnJson))
+            String key = url;
+            String ret = "";
+            Logger.Trace("key=" + url + " IsCacheEnable=" + IsCacheEnable);
+            if (IsCacheEnable)
             {
-                Logger.Info(String.Format("Return JSON RESPONSE ----> CACHE {0}", url));
-                return returnJson;
+                ret = (String)MemoryCache.Default.Get(key);
+                if (String.IsNullOrEmpty(ret))
+                {
+                    ret = MakeJsonRequest(url);
+
+                    CacheItemPolicy policy = null;
+                    CacheEntryRemovedCallback callback = null;
+                    policy = new CacheItemPolicy();
+                    policy.Priority = CacheItemPriority.Default;
+                    _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
+                    policy.UpdateCallback = _callbackU;
+                    policy.AbsoluteExpiration = DateTime.Now.AddMinutes(_cacheMinute);
+
+                    MemoryCache.Default.Set(key, ret, policy);
+
+                }
+                else
+                {
+                    Logger.Trace("Get data from Cache=" + url);
+                }
+              
             }
             else
             {
-                var responseJson = MakeJsonRequest(url);
-                returnJson = CacheResponseOutput(url, responseJson);
-                Logger.Info(String.Format("Return JSON RESPONSE ----> WEB SERVICE API {0}", url));
+                ret = MakeJsonRequest(url);
+                Logger.Trace("Get data from API=" + url);
+            }
+            return ret;
+
+        }
+        private void ContentCacheUpdateCallback(CacheEntryUpdateArguments arguments)
+        {
+            if (arguments.RemovedReason == CacheEntryRemovedReason.Expired)
+            {
+                var expiredCacheItem = MemoryCache.Default.GetCacheItem(arguments.Key);
+
+                if (expiredCacheItem != null)
+                {
+                    String url = expiredCacheItem.Key;
+                    Logger.Info(String.Format("Return From ContentCacheUpdateCallback {0}", url));
+                    var ret = GetJsonFromCacheOrWebservice(url);
+
+                    expiredCacheItem.Value = ret;
+
+                    arguments.UpdatedCacheItem = expiredCacheItem;
+
+                    var policy = new CacheItemPolicy();
+                    policy.Priority = CacheItemPriority.Default;
+
+                    _callbackU = new CacheEntryUpdateCallback(ContentCacheUpdateCallback);
+                    policy.UpdateCallback = _callbackU;
+                    policy.AbsoluteExpiration = DateTime.Now.AddMinutes(_cacheMinute);
+
+
+                    arguments.UpdatedCacheItemPolicy = policy;
+                }
+                else
+                {
+                    arguments.UpdatedCacheItem = null;
+                }
             }
 
-            return returnJson;
         }
         //public Task<T> ExecuteAsync<T>(RestRequest request, String url) where T : new()
         //{
@@ -113,30 +164,31 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return returnJson;
         }
-        private string CacheResponseOutput(string key, String responseContent)
-        {
-            if (IsCacheEnable)
-            {
-                String jsonOutput = "";
-                RequestHelperCache.TryGet(key, out jsonOutput);
-                if (String.IsNullOrEmpty(jsonOutput))
-                {
-                    jsonOutput = responseContent;
-                    if (!String.IsNullOrEmpty(jsonOutput))
-                    {
+        //private string CacheResponseOutput(string key, String responseContent)
+        //{
 
-                        RequestHelperCache.Set(key, jsonOutput,
-                                               MemoryCacheHelper.CacheAbsoluteExpirationPolicy(_cacheMinute));
+        //    String jsonOutput = "";
+        //    RequestHelperCache.TryGet(key, out jsonOutput);
+        //    if (String.IsNullOrEmpty(jsonOutput))
+        //    {
+        //        jsonOutput = responseContent;
+        //        if (!String.IsNullOrEmpty(jsonOutput))
+        //        {
+        //            if (IsCacheEnable)
+        //            {
 
-                    }
-                }
-                return jsonOutput;
-            }
-            else
-            {
-                return responseContent;
-            }
-        }
+        //                RequestHelperCache.Set(key, jsonOutput,
+        //                                       MemoryCacheHelper.CacheAbsoluteExpirationPolicy(_cacheMinute));
+
+        //            }
+        //        }
+        //        return jsonOutput;
+        //    }
+        //    else
+        //    {
+        //        return responseContent;
+        //    }
+        //}
 
 
 
@@ -155,8 +207,8 @@ namespace StoreManagement.Data.GeneralHelper
         {
             String url = String.Format("Post:{0}/{1}", baseUrl, apiAddress);
             String returnJson = String.Empty;
-            returnJson = CacheResponseOutput(url, String.Empty);
-            if (!String.IsNullOrEmpty(returnJson))
+
+            if (RequestHelperCache.TryGet(url, out returnJson))
             {
                 Logger.Info(String.Format("Return Categories From Cache {0}", url));
                 return returnJson;
@@ -167,9 +219,15 @@ namespace StoreManagement.Data.GeneralHelper
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     returnJson = response.Content;
-                    CacheResponseOutput(url, response.Content);
+                    //    if (IsCacheEnable)
+                    {
+
+                        RequestHelperCache.Set(url, returnJson,
+                                               MemoryCacheHelper.CacheAbsoluteExpirationPolicy(_cacheMinute));
+
+                    }
                 }
-                Logger.Info(String.Format("Return Categories From Webservise {0}", url));
+                Logger.Trace(String.Format("Return Categories From Webservise {0}", url));
 
             }
 

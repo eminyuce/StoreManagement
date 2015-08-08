@@ -22,7 +22,7 @@ namespace StoreManagement.Service.Services
 
         public Content GetContentsContentId(int contentId)
         {
-
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentsContentId?contentId={2}", WebServiceAddress, ApiControllerName, contentId);
             return HttpRequestHelper.GetUrlResult<Content>(url);
 
@@ -30,6 +30,7 @@ namespace StoreManagement.Service.Services
 
         public List<Content> GetContentByType(string typeName)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentByType?typeName={2}", WebServiceAddress, ApiControllerName, typeName);
             return HttpRequestHelper.GetUrlResults<Content>(url);
 
@@ -37,6 +38,7 @@ namespace StoreManagement.Service.Services
 
         public List<Content> GetContentByType(int storeId, string typeName)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentByType?storeId={2}&typeName={3}", WebServiceAddress, ApiControllerName, storeId, typeName);
             return HttpRequestHelper.GetUrlResults<Content>(url);
 
@@ -44,7 +46,7 @@ namespace StoreManagement.Service.Services
 
         public Content GetContentByUrl(int storeId, string url)
         {
-
+            SetCache();
             string url2 = string.Format("http://{0}/api/{1}/GetContentByUrl?storeId={2}&url={3}", WebServiceAddress, ApiControllerName, storeId, url);
             return HttpRequestHelper.GetUrlResult<Content>(url2);
 
@@ -52,6 +54,7 @@ namespace StoreManagement.Service.Services
 
         public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryId?" +
                                         "storeId={2}" +
                                         "&typeName={3}&categoryId={4}",
@@ -72,7 +75,7 @@ namespace StoreManagement.Service.Services
 
         public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
         {
-
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryIdFromCache" +
                                        "?storeId={2}" +
                                        "&typeName={3}" +
@@ -83,6 +86,7 @@ namespace StoreManagement.Service.Services
 
         public StorePagedList<Content> GetContentsCategoryId(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
+            SetCache();
 
             string url = string.Format("http://{0}/api/{1}/GetContentsCategoryId?storeId={2}" +
                                        "&categoryId={3}" +
@@ -103,6 +107,7 @@ namespace StoreManagement.Service.Services
 
         public Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentsCategoryIdAsync?storeId={2}" +
                                        "&categoryId={3}" +
                                        "&typeName={4}" +
@@ -118,12 +123,14 @@ namespace StoreManagement.Service.Services
 
         public Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryIdAsync?storeId={2}&typeName={3}&categoryId={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, typeName, categoryId, take);
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
 
         public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetMainPageContentsAsync?storeId={2}&type={3}&categoryId={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, type, categoryId, take);
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
@@ -131,6 +138,12 @@ namespace StoreManagement.Service.Services
         public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
         {
             throw new NotImplementedException();
+        }
+
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
     }
 }

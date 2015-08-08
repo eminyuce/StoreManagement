@@ -7,31 +7,31 @@ using System.Web.Mvc;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class HomeController : BaseController
     {
-        //
-        // GET: /Home/
+       
         public ActionResult Index()
         {
             try
             {
                 int? categoryId = null;
-                var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "HomePage");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePage");
                 int take = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", 5);
-                var blogsTask = ContentService.GetMainPageContentsAsync(Store.Id, categoryId, StoreConstants.BlogsType, take);
+                var blogsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, take);
                 take = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", 5);
-                var newsTask = ContentService.GetMainPageContentsAsync(Store.Id, categoryId, StoreConstants.NewsType, take);
+                var newsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, take);
                 take = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", 5);
-                var productsTask = ProductService.GetMainPageProductsAsync(Store.Id, take);
+                var productsTask = ProductService.GetMainPageProductsAsync(StoreId, take);
                 take = GetSettingValueInt("HomePageSliderImages_ItemsNumber", 5);
-                var sliderTask = FileManagerService.GetStoreCarouselsAsync(Store.Id, take);
-                var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(Store.Id);
-                var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true);
+                var sliderTask = FileManagerService.GetStoreCarouselsAsync(StoreId, take);
+                var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId);
+                var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
                 var liquidHelper = new HomePageHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
                 return View(dic);
 
@@ -73,19 +73,19 @@ namespace StoreManagement.Liquid.Controllers
 
         public ActionResult MainLayout()
         {
-            int storeId = Store.Id;
+            int storeId = StoreId;
 
             var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayout");
             var liquidHelper = new NavigationHelper();
-            liquidHelper.StoreSettings = StoreSettings;
+            liquidHelper.StoreSettings = GetStoreSettings();
             var dic = liquidHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
             return View(dic);
 
         }
         public ActionResult MainLayoutFooter()
         {
-            int storeId = Store.Id;
+            int storeId = StoreId;
 
             var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutFooter");
@@ -95,7 +95,7 @@ namespace StoreManagement.Liquid.Controllers
         }
         public ActionResult MainLayoutJavaScriptFiles()
         {
-            int storeId = Store.Id;
+            int storeId = StoreId;
             var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutJavaScriptFiles");
             Task.WaitAll(pageDesignTask);
             return View(pageDesignTask.Result);
@@ -103,12 +103,13 @@ namespace StoreManagement.Liquid.Controllers
         }
         public ActionResult MainLayoutCssFiles()
         {
-            int storeId = Store.Id;
+            int storeId = StoreId;
             var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutCssFiles");
             Task.WaitAll(pageDesignTask);
             return View(pageDesignTask.Result);
 
         }
 
+       
     }
 }

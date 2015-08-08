@@ -13,13 +13,14 @@ using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class BlogsController : BaseController
     {
-        //
-        // GET: /Blogs/
+
+        
         public ActionResult Index(int page = 1)
         {
             try
@@ -29,13 +30,13 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
 
-                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "BlogsIndex");
-                var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
-                var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType, true);
+                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndex");
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
+                var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
 
 
                 var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 liquidHelper.ImageWidth = GetSettingValueInt("BlogsIndex_ImageWidth", 50);
                 liquidHelper.ImageHeight = GetSettingValueInt("BlogsIndex_ImageHeight", 50);
                 var dic = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
@@ -69,11 +70,11 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
                 int blogId = id.Split("-".ToCharArray()).Last().ToInt();
-                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "BlogDetailPage");
+                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogDetailPage");
                 var contentsTask = ContentService.GetContentByIdAsync(blogId);
-                var categoryTask = CategoryService.GetCategoryByContentIdAsync(Store.Id, blogId);
+                var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, blogId);
                 var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 liquidHelper.ImageWidth = GetSettingValueInt("BlogsBlog_ImageWidth", 50);
                 liquidHelper.ImageHeight = GetSettingValueInt("BlogsBlog_ImageHeight", 50);
                 var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.BlogsType);
@@ -87,5 +88,6 @@ namespace StoreManagement.Liquid.Controllers
                 return new HttpStatusCodeResult(500);
             }
         }
+ 
     }
 }

@@ -22,6 +22,7 @@ namespace StoreManagement.Service.Services
         {
             try
             {
+                SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetPageDesignByName?storeId={2}&name={3}", WebServiceAddress, ApiControllerName, storeId, name);
                 return HttpRequestHelper.GetUrlResultAsync<PageDesign>(url);
             }
@@ -30,6 +31,12 @@ namespace StoreManagement.Service.Services
                 Logger.ErrorException("Error:" + ex.Message, ex);
                 return null;
             }
+        }
+
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
     }
 }

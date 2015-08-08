@@ -5,22 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Constants;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class PhotoGalleryController : BaseController
     {
-        //
-        // GET: /PhotoGallery/
+        
+
         public ActionResult Index()
         {
             try
             {
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "PhotoGalleryIndex");
-                var fileManagers = FileManagerService.GetImagesByStoreIdAsync(Store.Id, true);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "PhotoGalleryIndex");
+                var fileManagers = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
                 var liquidHelper = new PhotoGalleryHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetPhotoGalleryIndexPage(pageDesignTask, fileManagers);
 
                 return View(dic);
@@ -32,5 +33,7 @@ namespace StoreManagement.Liquid.Controllers
                 return new HttpStatusCodeResult(500);
             }
         }
-	}
+
+      
+    }
 }

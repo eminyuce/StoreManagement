@@ -19,18 +19,21 @@ namespace StoreManagement.Service.Services
 
         public List<ProductCategory> GetProductCategoriesByStoreId(int storeId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
             return HttpRequestHelper.GetUrlResults<ProductCategory>(url);
         }
 
         public List<ProductCategory> GetProductCategoriesByStoreIdWithContent(int storeId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdWithContent?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
             return HttpRequestHelper.GetUrlResults<ProductCategory>(url);
         }
 
         public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreId?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
             return HttpRequestHelper.GetUrlResults<ProductCategory>(url);
         }
@@ -42,24 +45,28 @@ namespace StoreManagement.Service.Services
 
         public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdFromCache?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
             return HttpRequestHelper.GetUrlResults<ProductCategory>(url);
         }
 
         public ProductCategory GetProductCategory(int id)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductCategory?id={2}", WebServiceAddress, ApiControllerName, id);
             return HttpRequestHelper.GetUrlResult<ProductCategory>(url);
         }
 
         public StorePagedList<ProductCategory> GetProductCategoryWithContents(int categoryId, int page, int pageSize = 25)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
             return HttpRequestHelper.GetUrlPagedResults<ProductCategory>(url);
         }
 
         public Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdAsync?storeId={2}&type={3}&isActive={4}", WebServiceAddress, ApiControllerName, storeId, type, isActive);
             return HttpRequestHelper.GetUrlResultsAsync<ProductCategory>(url);
         }
@@ -68,6 +75,7 @@ namespace StoreManagement.Service.Services
         {
             try
             {
+                SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetProductCategoriesByStoreIdAsync?storeId={2}&type={3}&isActive={4}&page={5}&pageSize={6}",
                     WebServiceAddress, ApiControllerName, storeId, type, isActive, page, pageSize);
                 return HttpRequestHelper.GetUrlPagedResultsAsync<ProductCategory>(url);
@@ -83,6 +91,7 @@ namespace StoreManagement.Service.Services
         {
             try
             {
+                SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetProductCategoryAsync?storeId={2}&productId={3}", WebServiceAddress, ApiControllerName, storeId, productId);
                 return HttpRequestHelper.GetUrlResultAsync<ProductCategory>(url);
             }
@@ -91,6 +100,12 @@ namespace StoreManagement.Service.Services
                 Logger.Error(ex, ex.Message);
                 return null;
             }
+        }
+
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
     }
 }

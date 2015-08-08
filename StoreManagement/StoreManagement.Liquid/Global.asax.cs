@@ -16,7 +16,7 @@ namespace StoreManagement.Liquid
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-
+        
         }
     }
 }

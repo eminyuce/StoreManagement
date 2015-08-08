@@ -7,11 +7,14 @@ using System.Web.Mvc;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class ProductsController : BaseController
     {
+       
+
         public ActionResult Index(int page = 1)
         {
             try
@@ -21,12 +24,12 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
 
-                var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductsIndex");
-                var productsTask = ProductService.GetProductsCategoryIdAsync(Store.Id, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize));
-                var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true);
+                var productsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductsIndex");
+                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize));
+                var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
 
                 var liquidHelper = new ProductHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories);
 
                 return View(dic);
@@ -58,11 +61,11 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
                 int productId = id.Split("-".ToCharArray()).Last().ToInt();
-                var categoryTask = ProductCategoryService.GetProductCategoryAsync(Store.Id, productId);
-                var productsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "ProductDetailPage");
+                var categoryTask = ProductCategoryService.GetProductCategoryAsync(StoreId, productId);
+                var productsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductDetailPage");
                 var productsTask = ProductService.GetProductsByIdAsync(productId);
                 var liquidHelper = new ProductHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetProductsDetailPage(productsTask, productsPageDesignTask, categoryTask);
 
                 return View(dic);
@@ -81,6 +84,6 @@ namespace StoreManagement.Liquid.Controllers
 
             return View();
         }
-
+ 
     }
 }

@@ -140,6 +140,16 @@ namespace StoreManagement.Service.Repositories
             return result.FirstOrDefault();
         }
 
+        public bool GetStoreCacheStatus(int id)
+        {
+            return GetSingle(id).IsCacheEnable;
+        }
+
+        public int GetStoreIdByDomain(string domainName)
+        {
+            return GetStoreByDomain(domainName).Id;
+        }
+
         public void DeleteStore(int storeId)
         {
 

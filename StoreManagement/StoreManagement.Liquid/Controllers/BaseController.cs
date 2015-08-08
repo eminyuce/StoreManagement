@@ -22,9 +22,9 @@ namespace StoreManagement.Liquid.Controllers
 
         [Inject]
         public IStoreService StoreService { set; get; }
+
         [Inject]
         public ISettingService SettingService { set; get; }
-
 
         [Inject]
         public IFileManagerService FileManagerService { get; set; }
@@ -60,13 +60,9 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public IProductCategoryService ProductCategoryService { set; get; }
 
-        protected Store Store { set; get; }
-
-        protected BaseController()
-        {
-   
-        }
-
+        // protected Store Store { set; get; }
+        protected int StoreId { get; set; }
+       
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
@@ -78,54 +74,90 @@ namespace StoreManagement.Liquid.Controllers
             ViewBag.MetaKeywords = GetSettingValue(StoreConstants.MetaTagKeywords);
 
         }
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+        
+        }
+       
         private void GetStoreByDomain(RequestContext requestContext)
         {
             var sh = new StoreHelper();
-            var store = sh.GetStoreByDomain(StoreService, requestContext.HttpContext.Request);
-            this.Store = store;
-            SetStoreCache();
-            if (store == null)
+            var store = sh.GetStoreIdByDomain(StoreService, requestContext.HttpContext.Request);
+            this.StoreId = store;
+           
+   
+            if (StoreId  == 0)
             {
                 throw new Exception("Store cannot be NULL");
             }
         }
-        private void SetStoreCache()
+
+   
+        protected void SetStoreCache()
         {
-            NavigationService.IsCacheEnable = Store.IsCacheEnable;
-            ProductCategoryService.IsCacheEnable = Store.IsCacheEnable;
-            ProductFileService.IsCacheEnable = Store.IsCacheEnable;
-            ProductService.IsCacheEnable = Store.IsCacheEnable;
-            StoreUserService.IsCacheEnable = Store.IsCacheEnable;
-            PageDesignService.IsCacheEnable = Store.IsCacheEnable;
-            CategoryService.IsCacheEnable = Store.IsCacheEnable;
+            if (StoreService == null)
+            {
+                Logger.Trace("StoreService is null");
+                return;
+            }
+            var isCacheEnable = StoreService.GetStoreCacheStatus(StoreId);
+            Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
+            SettingService.IsCacheEnable = isCacheEnable;
+            SettingService.CacheMinute = GetSettingValueInt("SettingService_CacheMinute", 200);
 
-            ContentService.IsCacheEnable = Store.IsCacheEnable;
-            ContentService.CacheMinute = ProjectAppSettings.GetWebConfigInt("ContentService_CacheMinute", 200);
+
+            NavigationService.IsCacheEnable = isCacheEnable;
+            NavigationService.CacheMinute = GetSettingValueInt("NavigationService_CacheMinute", 200);
+
+            ProductCategoryService.IsCacheEnable = isCacheEnable;
+            ProductCategoryService.CacheMinute = GetSettingValueInt("ProductCategoryService_CacheMinute", 200);
+
+            ProductFileService.IsCacheEnable = isCacheEnable;
+            ProductFileService.CacheMinute = GetSettingValueInt("ProductFileService_CacheMinute", 200);
+
+            ProductService.IsCacheEnable = isCacheEnable;
+            ProductService.CacheMinute = GetSettingValueInt("ProductService_CacheMinute", 200);
 
 
-            ContentFileService.IsCacheEnable = Store.IsCacheEnable;
-            FileManagerService.IsCacheEnable = Store.IsCacheEnable;
-            SettingService.IsCacheEnable = Store.IsCacheEnable;
-            SettingService.CacheMinute = ProjectAppSettings.GetWebConfigInt("SettingService_CacheMinute", 200);
-            StoreService.IsCacheEnable = Store.IsCacheEnable;
+            StoreUserService.IsCacheEnable = isCacheEnable;
+            StoreUserService.CacheMinute = GetSettingValueInt("StoreUserService_CacheMinute", 200);
+
+            PageDesignService.IsCacheEnable = isCacheEnable;
+            PageDesignService.CacheMinute = GetSettingValueInt("PageDesignService_CacheMinute", 200);
+
+            CategoryService.IsCacheEnable = isCacheEnable;
+            CategoryService.CacheMinute = GetSettingValueInt("CategoryService_CacheMinute", 200);
+
+            ContentService.IsCacheEnable = isCacheEnable;
+            ContentService.CacheMinute = GetSettingValueInt("ContentService_CacheMinute", 200);
+
+            ContentFileService.IsCacheEnable = isCacheEnable;
+            ContentFileService.CacheMinute = GetSettingValueInt("ContentFileService_CacheMinute", 200);
+
+            FileManagerService.IsCacheEnable = isCacheEnable;
+            FileManagerService.CacheMinute = GetSettingValueInt("FileManagerService_CacheMinute", 200);
+
+            StoreService.IsCacheEnable = isCacheEnable;
+            StoreService.CacheMinute = GetSettingValueInt("StoreService_CacheMinute", 200);
         }
 
 
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
         {
-            Logger.Trace("Store:" + Store.Name + " HttpNotFoundResult:" + statusDescription + " ");
+            Logger.Trace("Store:" + StoreId + " HttpNotFoundResult:" + statusDescription + " ");
             return new HttpNotFoundResult(statusDescription);
         }
 
         protected bool IsModulActive(String controllerName)
         {
-            var navigations = NavigationService.GetStoreActiveNavigations(Store.Id);
+            var navigations = NavigationService.GetStoreActiveNavigations(StoreId);
             var item = navigations.Any(r => r.ControllerName.ToLower().StartsWith(controllerName.ToLower()));
             return item;
         }
         protected bool CheckRequest(BaseEntity entity)
         {
-            return entity.StoreId == Store.Id;
+            return entity.StoreId == StoreId;
         }
 
 
@@ -145,7 +177,7 @@ namespace StoreManagement.Liquid.Controllers
             var value = GetSettingValue(key);
             if (String.IsNullOrEmpty(value))
             {
-                Logger.Trace("Store Default Setting= " + Store.Domain + " Key=" + key + " defaultValue=" + defaultValue);
+                Logger.Trace("Store Default Setting= " + StoreId + " Key=" + key + " defaultValue=" + defaultValue);
                 return ProjectAppSettings.GetWebConfigString(key, defaultValue);
             }
             else
@@ -157,32 +189,30 @@ namespace StoreManagement.Liquid.Controllers
         {
             try
             {
-                if (Store == null)
+                if (StoreId > 0)
                 {
                     return "";
                 }
-                var item = StoreSettings.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                var item = GetStoreSettings().FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
 
                 return item != null ? item.SettingValue : "";
             }
             catch (Exception ex)
             {
-                if (Store != null)
-                {
-                    Logger.Error("Store= " + Store.Domain + " Key=" + key, ex);
-                }
+                
+                    Logger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
+                
                 return "";
             }
         }
 
 
-        protected List<Setting> StoreSettings
+        protected List<Setting> GetStoreSettings()
         {
-            get
-            {
-                var items = SettingService.GetStoreSettingsFromCache(Store.Id);
-                return items;
-            }
+
+            var items = SettingService.GetStoreSettingsFromCache(StoreId);
+            return items;
+
         }
 
     }

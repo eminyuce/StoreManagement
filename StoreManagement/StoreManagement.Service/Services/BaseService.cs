@@ -36,6 +36,8 @@ namespace StoreManagement.Service.Services
             HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
 
-       
+        protected abstract void SetCache();
+  
+
     }
 }

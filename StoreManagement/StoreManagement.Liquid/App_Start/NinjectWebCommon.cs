@@ -1,3 +1,4 @@
+using System.Web.Mvc;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Liquid.Constants;
@@ -31,6 +32,7 @@ namespace StoreManagement.Liquid.App_Start
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
+        
         }
         
         /// <summary>
@@ -122,6 +124,7 @@ namespace StoreManagement.Liquid.App_Start
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();
 
-        }        
+        }
     }
+    
 }

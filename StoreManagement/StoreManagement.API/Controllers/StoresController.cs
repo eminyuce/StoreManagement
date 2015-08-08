@@ -48,6 +48,16 @@ namespace StoreManagement.API.Controllers
             return this.StoreRepository.GetStoreByUserName(userName);
         }
 
+        public bool GetStoreCacheStatus(int id)
+        {
+            return this.StoreRepository.GetStoreCacheStatus(id);
+        }
+
+        public int GetStoreIdByDomain(string domainName)
+        {
+            return this.StoreRepository.GetStoreIdByDomain(domainName);
+        }
+
         public override IEnumerable<Store> GetAll()
         {
             throw new NotImplementedException();

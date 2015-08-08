@@ -20,9 +20,11 @@ namespace StoreManagement.Service.Services
 
         }
 
+        
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
             string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            SetCache();
             return HttpRequestHelper.GetUrlResults<Category>(url);
 
         }
@@ -31,6 +33,7 @@ namespace StoreManagement.Service.Services
         {
 
             string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            SetCache();
             return HttpRequestHelper.GetUrlResults<Category>(url);
 
         }
@@ -41,6 +44,7 @@ namespace StoreManagement.Service.Services
         {
 
             string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}&type={3}&isActive={4}", WebServiceAddress, ApiControllerName, storeId, type, isActive);
+            SetCache();
             return HttpRequestHelper.GetUrlResults<Category>(url);
 
         }
@@ -59,6 +63,7 @@ namespace StoreManagement.Service.Services
         {
 
             string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdFromCache?storeId={2}&type={3}", WebServiceAddress, ApiControllerName, storeId, type);
+            SetCache();
             return HttpRequestHelper.GetUrlResults<Category>(url);
         }
 
@@ -66,18 +71,21 @@ namespace StoreManagement.Service.Services
         public Category GetCategory(int id)
         {
             string url = string.Format("http://{0}/api/{1}/GetCategory?id={2}", WebServiceAddress, ApiControllerName, id);
+            SetCache();
             return HttpRequestHelper.GetUrlResult<Category>(url);
         }
 
         public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize = 25)
         {
             string url = string.Format("http://{0}/api/{1}/GetCategoryWithContents?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
+            SetCache();
             return HttpRequestHelper.GetUrlPagedResults<Category>(url);
         }
 
         public Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25)
         {
             string url = string.Format("http://{0}/api/{1}/GetCategoryWithContentsAsync?categoryId={2}&page={3}&pageSize={4}", WebServiceAddress, ApiControllerName, categoryId, page, pageSize);
+            SetCache();
             return HttpRequestHelper.GetUrlPagedResultsAsync<Category>(url);
         }
 
@@ -85,6 +93,7 @@ namespace StoreManagement.Service.Services
         {
 
             string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdAsync?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            SetCache();
             return HttpRequestHelper.GetUrlResultsAsync<Category>(url);
         }
 
@@ -97,19 +106,28 @@ namespace StoreManagement.Service.Services
                 storeId,
                 type,
                 isActive.HasValue ? isActive.Value.ToStr() : "");
+            SetCache();
             return HttpRequestHelper.GetUrlResultsAsync<Category>(url);
         }
 
         public Task<Category> GetCategoryAsync(int id)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetCategoryAsync?id={2}", WebServiceAddress, ApiControllerName, id);
             return HttpRequestHelper.GetUrlResultAsync<Category>(url);
         }
 
         public Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetCategoryByContentIdAsync?storeId={2}&contentId={3}", WebServiceAddress, ApiControllerName, storeId, contentId);
             return HttpRequestHelper.GetUrlResultAsync<Category>(url);
+        }
+
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
     }
 }

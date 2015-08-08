@@ -5,14 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Constants;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class ProductCategoriesController : BaseController
     {
         private const String PageDesingName = "ProductCategoriesIndex";
-        //
-        // GET: /Product/
+        
+
         public ActionResult Index(int page = 1)
         {
             try
@@ -22,12 +23,12 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, PageDesingName);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingName);
                 var pageSize = GetSettingValueInt(PageDesingName, StoreConstants.DefaultPageSize);
-                var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(Store.Id, StoreConstants.ProductType, true, page, pageSize);
+                var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
 
                 var liquidHelper = new ProductCategoryHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetCategoriesIndexPage(pageDesignTask, categories);
 
                 return View(dic);
@@ -55,5 +56,6 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-	}
+       
+    }
 }

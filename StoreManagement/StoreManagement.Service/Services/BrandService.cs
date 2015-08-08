@@ -13,5 +13,11 @@ namespace StoreManagement.Service.Services
         {
 
         }
+
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+        }
     }
 }

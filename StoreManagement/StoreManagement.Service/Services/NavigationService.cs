@@ -21,7 +21,11 @@ namespace StoreManagement.Service.Services
         {
 
         }
-
+        protected override void SetCache()
+        {
+            HttpRequestHelper.CacheMinute = CacheMinute;
+            HttpRequestHelper.IsCacheEnable = IsCacheEnable;
+        }
         public String IsConnectionOk(String webServiceAddress)
         {
             string url = string.Format("http://{0}//api/home/testconnection", webServiceAddress);
@@ -32,13 +36,15 @@ namespace StoreManagement.Service.Services
         }
         public List<Navigation> GetStoreNavigations(int storeId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
             return HttpRequestHelper.GetUrlResults<Navigation>(url);
 
         }
-        
+
         public List<Navigation> GetStoreActiveNavigations(int storeId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigations?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
             HttpRequestHelper.CacheMinute = ProjectAppSettings.GetWebConfigInt("RequestHelperCacheLongMinute", 600);
             return HttpRequestHelper.GetUrlResults<Navigation>(url);
@@ -46,9 +52,12 @@ namespace StoreManagement.Service.Services
         }
         public Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
         {
+            SetCache();
             string url = string.Format("http://{0}/api/{1}/GetStoreActiveNavigationsAsync?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
             HttpRequestHelper.CacheMinute = ProjectAppSettings.GetWebConfigInt("RequestHelperCacheLongMinute", 600);
             return HttpRequestHelper.GetUrlResultsAsync<Navigation>(url);
         }
+
+       
     }
 }

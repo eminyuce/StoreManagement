@@ -8,13 +8,14 @@ using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class NewsController : BaseController
     {
-        //
-        // GET: /Blogs/
+         
+
         public ActionResult Index(int page = 1)
         {
             try
@@ -24,11 +25,11 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
 
-                var newsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "NewsIndex");
-                var contentsTask = ContentService.GetContentsCategoryIdAsync(Store.Id, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize));
-                var categories = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.NewsType, true);
+                var newsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsIndex");
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize));
+                var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
                 var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 liquidHelper.ImageWidth = GetSettingValueInt("NewsIndex_ImageWidth", 50);
                 liquidHelper.ImageHeight = GetSettingValueInt("NewsIndex_ImageHeight", 50);
 
@@ -54,11 +55,11 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
                 int newsId = id.Split("-".ToCharArray()).Last().ToInt();
-                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(Store.Id, "NewsDetailPage");
+                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsDetailPage");
                 var contentsTask = ContentService.GetContentByIdAsync(newsId);
-                var categoryTask = CategoryService.GetCategoryByContentIdAsync(Store.Id, newsId);
+                var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, newsId);
                 var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = StoreSettings;
+                liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
                 liquidHelper.ImageWidth = GetSettingValueInt("NewsDetail_ImageWidth", 50);
                 liquidHelper.ImageHeight = GetSettingValueInt("NewsDetail_ImageHeight", 50);
@@ -72,5 +73,7 @@ namespace StoreManagement.Liquid.Controllers
                 return new HttpStatusCodeResult(500);
             }
         }
+
+        
     }
 }

@@ -14,6 +14,7 @@ namespace StoreManagement.Service.Interfaces
         Store GetStore(String domain);
         Store GetStore(int id);
         Store GetStoreByUserName(String userName);
-
+        Boolean GetStoreCacheStatus(int id);
+        int GetStoreIdByDomain(string domainName);
     }
 }

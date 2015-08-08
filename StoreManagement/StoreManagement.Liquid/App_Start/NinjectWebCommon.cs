@@ -100,7 +100,10 @@ namespace StoreManagement.Liquid.App_Start
                 service12.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service13 = kernel.Bind<IProductCategoryService>().To<ProductCategoryService>();
                 service13.WithConstructorArgument("webServiceAddress", webServiceAddress);
-
+                var service14 = kernel.Bind<IBrandService>().To<BrandService>();
+                service14.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service15 = kernel.Bind<ILocationService>().To<LocationService>();
+                service15.WithConstructorArgument("webServiceAddress", webServiceAddress);
             }
             else
             {

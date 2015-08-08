@@ -60,6 +60,12 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public IProductCategoryService ProductCategoryService { set; get; }
 
+        [Inject]
+        public IBrandService BrandService { set; get; }
+
+        [Inject]
+        public ILocationService LocationService { set; get; }
+
         // protected Store Store { set; get; }
         protected int StoreId { get; set; }
        
@@ -137,6 +143,14 @@ namespace StoreManagement.Liquid.Controllers
 
             FileManagerService.IsCacheEnable = isCacheEnable;
             FileManagerService.CacheMinute = GetSettingValueInt("FileManagerService_CacheMinute", 200);
+
+
+            BrandService.IsCacheEnable = isCacheEnable;
+            BrandService.CacheMinute = GetSettingValueInt("BrandService_CacheMinute", 200);
+
+            LocationService.IsCacheEnable = isCacheEnable;
+            LocationService.CacheMinute = GetSettingValueInt("LocationService_CacheMinute", 200);
+
 
             StoreService.IsCacheEnable = isCacheEnable;
             StoreService.CacheMinute = GetSettingValueInt("StoreService_CacheMinute", 200);

@@ -91,7 +91,7 @@ namespace StoreManagement.Service.Repositories
             if (items == null)
             {
                 items = GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
-                _contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
+                _contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(this.CacheMinute));
             }
 
             return items;
@@ -123,7 +123,7 @@ namespace StoreManagement.Service.Repositories
                 items = new StorePagedList<Content>(cat.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, cat.Count());
                 //  items = new PagedList<Content>(cat, page, cat.Count());
                 //  items = (PagedList<Content>) cat.ToPagedList(page, pageSize);
-                _contentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Contents_CacheAbsoluteExpiration_Minute", 10)));
+                _contentCacheStorePagedList.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(this.CacheMinute));
             }
 
             return items;

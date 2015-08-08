@@ -142,6 +142,7 @@
     <Compile Include="Services\EmailListService.cs" />
     <Compile Include="Services\FileManagerService.cs" />
     <Compile Include="Services\LabelService.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PageDesignService.cs" />
     <Compile Include="Services\ProductCategoryService.cs" />

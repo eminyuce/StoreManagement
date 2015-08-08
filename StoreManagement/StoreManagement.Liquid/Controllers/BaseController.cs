@@ -76,8 +76,8 @@ namespace StoreManagement.Liquid.Controllers
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            SetStoreCache();
             base.OnActionExecuting(filterContext);
-        
         }
        
         private void GetStoreByDomain(RequestContext requestContext)

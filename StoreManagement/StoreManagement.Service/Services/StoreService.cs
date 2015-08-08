@@ -58,6 +58,7 @@ namespace StoreManagement.Service.Services
         public bool GetStoreCacheStatus(int id)
         {
             string url = string.Format("http://{0}/api/{1}/GetStoreCacheStatus?id={2}", WebServiceAddress, ApiControllerName, id);
+            HttpRequestHelper.IsCacheEnable = false;
             return HttpRequestHelper.GetUrlResult<bool>(url);
         }
 

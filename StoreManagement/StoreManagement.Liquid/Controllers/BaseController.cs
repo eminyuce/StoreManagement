@@ -209,7 +209,16 @@ namespace StoreManagement.Liquid.Controllers
                 }
                 var item = GetStoreSettings().FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
 
-                return item != null ? item.SettingValue : "";
+                if (item != null)
+                {
+                    return item.SettingValue;
+                }
+                else
+                {
+                    return "";
+                }
+
+                
             }
             catch (Exception ex)
             {

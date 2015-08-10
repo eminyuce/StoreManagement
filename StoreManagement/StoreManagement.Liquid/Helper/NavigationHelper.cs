@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
@@ -48,8 +49,9 @@ namespace StoreManagement.Liquid.Helper
 
 
             var dic = new Dictionary<String, String>();
-            dic.Add("PageOutput", indexPageOutput);
-
+ 
+            dic.Add(StoreConstants.PageOutput, indexPageOutput);
+ 
 
             return dic;
         }
@@ -87,8 +89,9 @@ namespace StoreManagement.Liquid.Helper
 
 
             var dic = new Dictionary<String, String>();
-            dic.Add("PageOutput", indexPageOutput);
-
+ 
+            dic.Add(StoreConstants.PageOutput, indexPageOutput);
+           
 
             return dic;
         }

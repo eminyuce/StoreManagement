@@ -11,7 +11,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class StoreHelper 
     {
-        public Store GetStoreByDomain(IStoreService storeService, HttpRequestBase request)
+        public Store GetStoreByDomain(IStoreService storeService, HttpContextBase request)
         {
             String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
 
@@ -19,9 +19,7 @@ namespace StoreManagement.Liquid.Helper
             {
 
                 String domainName = "FUELTECHNOLOGYAGE.COM";
-                domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host +
-                             (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
-                domainName = GeneralHelper.GetDomainPart(domainName);
+                domainName = GeneralHelper.GetSiteDomain(request);
                 return storeService.GetStore(domainName);
             }
             else
@@ -31,7 +29,7 @@ namespace StoreManagement.Liquid.Helper
             }
 
         }
-        public int GetStoreIdByDomain(IStoreService storeService, HttpRequestBase request)
+        public int GetStoreIdByDomain(IStoreService storeService, HttpContextBase request)
         {
             String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
 
@@ -39,9 +37,7 @@ namespace StoreManagement.Liquid.Helper
             {
 
                 String domainName = "FUELTECHNOLOGYAGE.COM";
-                domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host +
-                             (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
-                domainName = GeneralHelper.GetDomainPart(domainName);
+                domainName = GeneralHelper.GetSiteDomain(request);
                 return storeService.GetStoreIdByDomain(domainName);
             }
             else

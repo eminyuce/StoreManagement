@@ -49,5 +49,12 @@ namespace StoreManagement.Data.Constants
         public static String Files = "Files";
 
         public static int DefaultPageSize = 20;
+        public static string PagingOutput = "PagingOutput";
+        public static string PageOutput = "PageOutput";
+        public static string PageSize = "PageSize";
+        public static string PageNumber = "PageNumber";
+        public static string TotalItemCount = "TotalItemCount";
+        public static string IsPagingUp = "IsPagingUp";
+        public static string IsPagingDown = "IsPagingDown";
     }
 }

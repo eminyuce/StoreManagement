@@ -1,56 +1,11 @@
 ﻿@using MvcPaging
+@using StoreManagement.Data.Constants
 @using StoreManagement.Data.GeneralHelper
 @model Dictionary<String, String>
 @{
     ViewBag.Title = "Index";
     Dictionary<String, String> outputDic = Model;
-    var pageSize = outputDic["PageSize"].ToInt();
-    var pageNumber = outputDic["PageNumber"].ToInt();
-    var totalItemCount = outputDic["TotalItemCount"].ToInt();
-    var isPagingUp = outputDic["IsPagingUp"].ToBool();
-    var isPagingDown = outputDic["IsPagingDown"].ToBool();
             
 }
 
-<!-- Content
-================================================== -->
-
-<!-- Container -->
-<div class="container">
-
-
-    @if (isPagingUp)
-    {
-        @GetPaging(pageSize, pageNumber, totalItemCount);    
-    }
-
-
-    <!-- Masonry Wrapper-->
-    @Html.Raw(outputDic["PageOutput"])
-
-
-    @if (isPagingDown)
-    {
-        @GetPaging(pageSize, pageNumber, totalItemCount);    
-    }
-
-
-
-</div>
-<!-- Container / End -->
-
-@helper GetPaging(int pageSize, int pageNumber, int totalItemCount)
-{
-    <div class="pager">
-        @{
-            var p = @Html.Pager(pageSize, pageNumber, totalItemCount);
-            p.Options(o => o.DisplayTemplate("BootstrapPagination"));
-            p.Options(o => o.MaxNrOfPages(7));
-            p.Options(o => o.AlwaysAddFirstPageNumber());
-            p.Options(o => o.SetPreviousPageText("←"));
-            p.Options(o => o.SetNextPageText("→")); 
-        }
-                          
-    </div>                      
-    
-}
+@Html.Raw(outputDic[StoreConstants.PageOutput])

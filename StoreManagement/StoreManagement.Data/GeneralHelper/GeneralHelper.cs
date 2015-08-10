@@ -1005,5 +1005,15 @@ namespace StoreManagement.Data.GeneralHelper
         }
 
 
+
+        public static String GetSiteDomain(HttpContextBase httpContextBase)
+        {
+            HttpRequestBase request = httpContextBase.Request;
+            String domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host +
+                                     (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
+            domainName = GeneralHelper.GetDomainPart(domainName);
+
+            return domainName;
+        }
     }
 }

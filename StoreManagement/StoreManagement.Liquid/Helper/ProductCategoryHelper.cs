@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using NLog;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
@@ -42,12 +43,12 @@ namespace StoreManagement.Liquid.Helper
 
 
             var dic = new Dictionary<String, String>();
-            dic.Add("PageOutput", indexPageOutput);
-            dic.Add("PageSize", categories.pageSize.ToStr());
-            dic.Add("PageNumber", (categories.page - 1).ToStr());
-            dic.Add("TotalItemCount", categories.totalItemCount.ToStr());
-            dic.Add("IsPagingUp", pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-            dic.Add("IsPagingDown", pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+            dic.Add(StoreConstants.PageOutput, indexPageOutput);
+            dic.Add(StoreConstants.PageSize, categories.pageSize.ToStr());
+            dic.Add(StoreConstants.PageNumber, categories.page.ToStr());
+            dic.Add(StoreConstants.TotalItemCount, categories.totalItemCount.ToStr());
+            dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+            dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
             return dic;

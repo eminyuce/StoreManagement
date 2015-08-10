@@ -1,4 +1,5 @@
 ﻿@using MvcPaging
+@using StoreManagement.Data.Constants
 @using StoreManagement.Data.GeneralHelper
 @model Dictionary<String, String>
 @{
@@ -6,22 +7,9 @@
     Dictionary<String, String> outputDic = Model;
             
 }
-
-<!-- Content
-================================================== -->
-
-<!-- Container -->
-<div class="container">
-
-
-    
-    <!-- Masonry Wrapper-->
-    @Html.Raw(outputDic["PageOutput"])
+  
+@Html.Raw(outputDic[StoreConstants.PageOutput])
 
 
    
-
-
-</div>
-<!-- Container / End -->
  

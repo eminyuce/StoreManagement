@@ -1,50 +1,27 @@
 ﻿@using MvcPaging
+@using StoreManagement.Data.Constants
 @using StoreManagement.Data.GeneralHelper
 @model Dictionary<String, String>
 @{
-    ViewBag.Title = "Index";
     Dictionary<String, String> outputDic = Model;
-    var pageSize = outputDic["PageSize"].ToInt();
-    var pageNumber = outputDic["PageNumber"].ToInt();
-    var totalItemCount = outputDic["TotalItemCount"].ToInt();
-    var isPagingUp = outputDic["IsPagingUp"].ToBool();
-    var isPagingDown = outputDic["IsPagingDown"].ToBool();
-            
+    ViewBag.Title = "Index";
+    var isPagingUp = outputDic[StoreConstants.IsPagingUp].ToBool();
+    var isPagingDown = outputDic[StoreConstants.IsPagingDown].ToBool();
 }
 
-<!-- Content
-================================================== -->
 
-<!-- Container -->
-<div class="container">
-
-
-    @if (isPagingUp)
-    {
-        <div class="pager">
-            @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination").MaxNrOfPages(7).AlwaysAddFirstPageNumber()
-                                                                        .SetPreviousPageText("←")
-                                                                        .SetNextPageText("→"))
-        </div>
-    
-    }
+@if (isPagingUp)
+{
+ @Html.Raw(outputDic[StoreConstants.PagingOutput])
+}
 
 
-    <!-- Masonry Wrapper-->
-    @Html.Raw(outputDic["PageOutput"])
-
-
-    @if (isPagingDown)
-    {
-        <div class="pager">
-            @Html.Pager(pageSize, pageNumber, totalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination").MaxNrOfPages(7).AlwaysAddFirstPageNumber()
-                                                                        .SetPreviousPageText("←")
-                                                                        .SetNextPageText("→"))
-        </div>
-    
-    }
+@Html.Raw(outputDic[StoreConstants.PageOutput])
 
 
 
-</div>
-<!-- Container / End -->
+
+@if (isPagingDown)
+{
+ @Html.Raw(outputDic[StoreConstants.PagingOutput])
+}

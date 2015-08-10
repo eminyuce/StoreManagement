@@ -13,7 +13,8 @@ namespace StoreManagement.Liquid.Helper
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public List<Setting> StoreSettings { get; set; }
-        public Store Store { get; set; }
+
+        public int StoreId { get; set; }
 
         protected bool GetSettingValueBool(String key, bool defaultValue)
         {
@@ -30,7 +31,7 @@ namespace StoreManagement.Liquid.Helper
             var value = GetSettingValue(key);
             if (String.IsNullOrEmpty(value))
             {
-                Logger.Trace("Store Default Setting= " + Store.Domain + " Key=" + key + " defaultValue=" + defaultValue);
+                Logger.Trace("Store Default Setting= " + StoreId + " Key=" + key + " defaultValue=" + defaultValue);
                 return ProjectAppSettings.GetWebConfigString(key, defaultValue);
             }
             else
@@ -42,7 +43,7 @@ namespace StoreManagement.Liquid.Helper
         {
             try
             {
-                if (Store == null)
+                if (StoreId == null)
                 {
                     return "";
                 }
@@ -52,9 +53,9 @@ namespace StoreManagement.Liquid.Helper
             }
             catch (Exception ex)
             {
-                if (Store != null)
+                if (StoreId != null)
                 {
-                    Logger.Error("Store= " + Store.Domain + " Key=" + key, ex);
+                    Logger.Error("Store= " + StoreId + " Key=" + key, ex);
                 }
                 return "";
             }

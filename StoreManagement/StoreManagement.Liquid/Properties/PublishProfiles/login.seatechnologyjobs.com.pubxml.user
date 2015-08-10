@@ -58,7 +58,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/10/2015 12:50:05</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>08/10/2015 13:24:44</publishTime>
+      <publishTime>08/10/2015 14:42:31</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
       <publishTime>08/10/2015 12:50:07</publishTime>
@@ -991,7 +991,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/10/2015 12:50:10</publishTime>
+      <publishTime>08/10/2015 14:42:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

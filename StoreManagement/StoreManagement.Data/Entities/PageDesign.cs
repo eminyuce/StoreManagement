@@ -16,8 +16,6 @@ namespace StoreManagement.Data.Entities
         public string Name { get; set; }
         public bool IsPagingUp { get; set; }
         public bool IsPagingDown { get; set; }
-        public int ImageWidth { get; set; }
-        public int ImageHeight { get; set; }
 
         public override string ToString()
         {

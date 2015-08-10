@@ -13,7 +13,8 @@ namespace StoreManagement.Data.LiquidEntities
     {
         public FileManager FileManager;
         public PageDesign PageDesign;
-
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
         public FileManagerLiquid(FileManager fileManager, PageDesign pageDesign)
         {
             this.FileManager = fileManager;
@@ -24,7 +25,7 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                return LinkHelper.GetImageLink("Thumbnail", this.FileManager.GoogleImageId, this.PageDesign.ImageWidth, this.PageDesign.ImageHeight);
+                return LinkHelper.GetImageLink("Thumbnail", this.FileManager.GoogleImageId, this.ImageWidth, this.ImageHeight);
             }
         }
 

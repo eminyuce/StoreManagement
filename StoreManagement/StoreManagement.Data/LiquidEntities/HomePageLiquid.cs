@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DotLiquid;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class HomePageLiquid
+    public class HomePageLiquid : Drop
     {
         public PageDesign PageDesing;
         public List<FileManager> SliderImages;
@@ -19,9 +20,32 @@ namespace StoreManagement.Data.LiquidEntities
         public List<ProductCategory> ProductCategories { get; set; }
 
 
+
+        public int ImageHeightProduct { get; set; }
+        public int ImageWidthProduct { get; set; }
+        public List<ProductLiquid> ProductLiquidList
+        {
+            get
+            {
+                var list = new List<ProductLiquid>();
+
+                foreach (var item in Products)
+                {
+                    var category = ProductCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
+                    if (category != null)
+                    {
+                        var blog = new ProductLiquid(item, category, PageDesing, ImageWidthBlog, ImageHeightBlog);
+                        list.Add(blog);
+                    }
+                }
+
+                return list;
+            }
+        }
+
         public int ImageHeightBlog { get; set; }
         public int ImageWidthBlog { get; set; }
-        public List<ContentLiquid> BlogsLiquid
+        public List<ContentLiquid> BlogsLiquidList
         {
             get
             {
@@ -43,7 +67,7 @@ namespace StoreManagement.Data.LiquidEntities
 
         public int ImageHeightNews { get; set; }
         public int ImageWidthNews { get; set; }
-        public List<ContentLiquid> NewsLiquid
+        public List<ContentLiquid> NewsLiquidList
         {
             get
             {

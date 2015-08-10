@@ -12,8 +12,7 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    [LiquidType]
-    public class ContentLiquid
+    public class ContentLiquid : Drop
     {
         public Content Content { get; set; }
         public Category Category { get; set; }
@@ -48,30 +47,30 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetContentLink(this.Content, Category.Name, this.Type);
             }
         }
-        //int width = 60, int height = 60
-        public String ImageSource
-        {
-            get
-            {
-                if (ImageHas)
-                {
-                    var firstOrDefault = this.Content.ContentFiles.FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.FileManager.GoogleImageId, this.ImageWidth, this.ImageHeight);
-                }
-                else
-                {
+        ////int width = 60, int height = 60
+        //public String ImageSource
+        //{
+        //    get
+        //    {
+        //        if (ImageHas)
+        //        {
+        //            var firstOrDefault = this.Content.ContentFiles.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+        //            return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.FileManager.GoogleImageId, this.ImageWidth, this.ImageHeight);
+        //        }
+        //        else
+        //        {
 
-                    return "";
-                }
-            }
-        }
-
-        public bool ImageHas
-        {
-            get
-            {
-                return this.Content.ContentFiles.Any();
-            }
-        }
+        //            return "";
+        //        }
+        //    }
+        //}
+        
+        //public bool ImageHas
+        //{
+        //    get
+        //    {
+        //        return this.Content.ContentFiles.Any();
+        //    }
+        //}
     }
 }

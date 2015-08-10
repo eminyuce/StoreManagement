@@ -37,8 +37,7 @@ namespace StoreManagement.Data.LiquidEntities
 
 
         }
-
-
+       
         public String DetailLink
         {
             get

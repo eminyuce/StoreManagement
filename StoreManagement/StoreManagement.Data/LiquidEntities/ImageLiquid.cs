@@ -42,7 +42,7 @@ namespace StoreManagement.Data.LiquidEntities
             {
                 if (ImageHas)
                 {
-                    var firstOrDefault = FileManagers.FirstOrDefault();
+                    var firstOrDefault = FileManagers.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
                     return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth,this.ImageHeight);
                 }
                 else

@@ -41,8 +41,33 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-
-
+                blogs = from s in home.BlogsLiquidList
+                        select new
+                        {
+                            s.Content.Name,
+                            s.Content.Description,
+                            s.DetailLink,
+                            s.ImageLiquid.ImageHas,
+                            s.ImageLiquid.ImageSource
+                        },
+                products = from s in home.ProductLiquidList
+                           select new
+                           {
+                               s.Product.Name,
+                               s.Product.Description,
+                               s.DetailLink,
+                               s.ImageLiquid.ImageHas,
+                               s.ImageLiquid.ImageSource
+                           },
+                news = from s in home.NewsLiquidList
+                       select new
+                       {
+                           s.Content.Name,
+                           s.Content.Description,
+                           s.DetailLink,
+                           s.ImageLiquid.ImageHas,
+                           s.ImageLiquid.ImageSource
+                       }
             };
 
 

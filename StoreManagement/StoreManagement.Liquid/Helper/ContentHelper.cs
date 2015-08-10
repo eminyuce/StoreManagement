@@ -47,8 +47,8 @@ namespace StoreManagement.Liquid.Helper
                             s.Content.Name,
                             s.Content.Description,
                             s.DetailLink,
-                            s.ImageHas,
-                            s.ImageSource
+                            s.ImageLiquid.ImageHas,
+                            s.ImageLiquid.ImageSource
                         }
             }
                 );
@@ -121,8 +121,8 @@ namespace StoreManagement.Liquid.Helper
                             s.Content.Name,
                             s.Content.Description,
                             s.DetailLink,
-                            s.ImageHas,
-                            s.ImageSource
+                            s.ImageLiquid.ImageHas,
+                            s.ImageLiquid.ImageSource
                         }
             }
                 );

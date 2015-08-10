@@ -26,11 +26,11 @@ namespace StoreManagement.Liquid.Helper
             {
                 if (ActionName.Equals("Index", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    return String.Format("{0}?page=:num", ControllerName);
+                    return String.Format("?page=:num");
                 }
                 else
                 {
-                    return String.Format("{0}/{1}?page=:num", ControllerName, ActionName);
+                    return String.Format("{0}?page=:num", ActionName);
                 }
             }
         }

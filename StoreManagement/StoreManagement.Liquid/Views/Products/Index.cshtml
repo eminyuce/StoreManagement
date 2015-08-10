@@ -3,9 +3,25 @@
 @using StoreManagement.Data.GeneralHelper
 @model Dictionary<String, String>
 @{
-    ViewBag.Title = "Index";
     Dictionary<String, String> outputDic = Model;
-            
+    ViewBag.Title = "Index";
+    var isPagingUp = outputDic[StoreConstants.IsPagingUp].ToBool();
+    var isPagingDown = outputDic[StoreConstants.IsPagingDown].ToBool();
 }
 
+
+@if (isPagingUp)
+{
+ @Html.Raw(outputDic[StoreConstants.PagingOutput])
+}
+
+
 @Html.Raw(outputDic[StoreConstants.PageOutput])
+
+
+
+
+@if (isPagingDown)
+{
+ @Html.Raw(outputDic[StoreConstants.PagingOutput])
+}

@@ -29,7 +29,7 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
-
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndex");
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
@@ -41,7 +41,18 @@ namespace StoreManagement.Liquid.Controllers
                 liquidHelper.ImageHeight = GetSettingValueInt("BlogsIndex_ImageHeight", 50);
                 var dic = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
 
-                return View(dic);
+
+                var pagingHelper = new PagingHelper();
+                pagingHelper.StoreSettings = GetStoreSettings();
+                pagingHelper.StoreId = StoreId;
+                pagingHelper.PageOutputDictionary = dic;
+
+                pagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                pagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+                var pagingDic = pagingHelper.GetPaging(pagingPageDesignTask);
+
+                return View(pagingDic);
 
             }
             catch (Exception ex)

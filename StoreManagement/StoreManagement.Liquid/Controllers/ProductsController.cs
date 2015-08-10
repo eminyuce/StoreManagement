@@ -30,6 +30,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 var liquidHelper = new ProductHelper();
                 liquidHelper.StoreSettings = GetStoreSettings();
+                liquidHelper.ImageWidth = GetSettingValueInt("ProductsIndex_ImageWidth", 50);
+                liquidHelper.ImageHeight = GetSettingValueInt("ProductsIndex_ImageHeight", 50);
                 var dic = liquidHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories);
 
 
@@ -75,6 +77,8 @@ namespace StoreManagement.Liquid.Controllers
                 var productsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductDetailPage");
                 var productsTask = ProductService.GetProductsByIdAsync(productId);
                 var liquidHelper = new ProductHelper();
+                liquidHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
+                liquidHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
                 liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetProductsDetailPage(productsTask, productsPageDesignTask, categoryTask);
 

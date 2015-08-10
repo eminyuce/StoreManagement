@@ -34,8 +34,19 @@ namespace StoreManagement.Liquid.Helper
 
             var home = new HomePageLiquid(pageDesing, sliderImages);
             home.Products = products;
+            home.ImageWidthProduct = GetSettingValueInt("ProductsHomePage_ImageWidth", 50);
+            home.ImageHeightProduct = GetSettingValueInt("ProductsHomePage_ImageHeight", 50);
+
             home.Blogs = blogs;
+            home.ImageWidthBlog = GetSettingValueInt("BlogsHomePage_ImageWidth", 50);
+            home.ImageHeightBlog = GetSettingValueInt("BlogsHomePage_ImageHeight", 50);
+
+
             home.News = news;
+            home.ImageWidthNews = GetSettingValueInt("NewsHomePage_ImageWidth", 50);
+            home.ImageHeightNews = GetSettingValueInt("NewsHomePage_ImageHeight", 50);
+
+
             home.Categories = categories;
             home.ProductCategories = productCategories;
 
@@ -47,8 +58,7 @@ namespace StoreManagement.Liquid.Helper
                             s.Content.Name,
                             s.Content.Description,
                             s.DetailLink,
-                            s.ImageLiquid.ImageHas,
-                            s.ImageLiquid.ImageSource
+                            images = s.ImageLiquid
                         },
                 products = from s in home.ProductLiquidList
                            select new
@@ -56,8 +66,7 @@ namespace StoreManagement.Liquid.Helper
                                s.Product.Name,
                                s.Product.Description,
                                s.DetailLink,
-                               s.ImageLiquid.ImageHas,
-                               s.ImageLiquid.ImageSource
+                               images = s.ImageLiquid
                            },
                 news = from s in home.NewsLiquidList
                        select new
@@ -65,8 +74,7 @@ namespace StoreManagement.Liquid.Helper
                            s.Content.Name,
                            s.Content.Description,
                            s.DetailLink,
-                           s.ImageLiquid.ImageHas,
-                           s.ImageLiquid.ImageSource
+                           images = s.ImageLiquid
                        }
             };
 

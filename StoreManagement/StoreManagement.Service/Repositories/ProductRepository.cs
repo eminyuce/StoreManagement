@@ -162,7 +162,9 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                var items = this.FindBy(r => r.StoreId == storeId).Where(r => r.MainPage);
+                var items =
+                   this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(r2 => r2.StoreId == storeId && r2.MainPage);
+
                 if (take.HasValue)
                 {
                     items = items.Take(take.Value);

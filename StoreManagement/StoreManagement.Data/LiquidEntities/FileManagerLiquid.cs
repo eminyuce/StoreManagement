@@ -13,12 +13,20 @@ namespace StoreManagement.Data.LiquidEntities
     {
         public FileManager FileManager;
         public PageDesign PageDesign;
+        private FileManager item;
         public int ImageHeight { get; set; }
         public int ImageWidth { get; set; }
-        public FileManagerLiquid(FileManager fileManager, PageDesign pageDesign)
+        public FileManagerLiquid(FileManager fileManager)
         {
             this.FileManager = fileManager;
-            this.PageDesign = pageDesign;
+
+        }
+
+        public FileManagerLiquid(Entities.FileManager item, int imageWidth, int imageHeight)
+        {
+            this.item = item;
+            this.ImageWidth = imageWidth;
+            this.ImageHeight = imageHeight;
 
         }
         public String ImageSource

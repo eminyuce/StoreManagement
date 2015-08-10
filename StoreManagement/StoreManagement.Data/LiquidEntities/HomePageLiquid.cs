@@ -42,6 +42,16 @@ namespace StoreManagement.Data.LiquidEntities
                 return list;
             }
         }
+        public int ImageHeightSlider { get; set; }
+        public int ImageWidthSlider { get; set; }
+        public ImageLiquid SliderLiquid
+        {
+            get
+            {
+                var sliderLiquid = new ImageLiquid(SliderImages, PageDesing, ImageWidthSlider, ImageHeightSlider);
+                return sliderLiquid;
+            }
+        }
 
         public int ImageHeightBlog { get; set; }
         public int ImageWidthBlog { get; set; }

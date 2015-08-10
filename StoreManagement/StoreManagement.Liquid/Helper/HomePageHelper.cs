@@ -47,6 +47,11 @@ namespace StoreManagement.Liquid.Helper
             home.ImageHeightNews = GetSettingValueInt("NewsHomePage_ImageHeight", 50);
 
 
+
+            home.ImageWidthSlider = GetSettingValueInt("SliderHomePage_ImageWidth", 500);
+            home.ImageHeightSlider = GetSettingValueInt("SliderHomePage_ImageHeight", 500);
+
+
             home.Categories = categories;
             home.ProductCategories = productCategories;
 
@@ -75,7 +80,9 @@ namespace StoreManagement.Liquid.Helper
                            s.Content.Description,
                            s.DetailLink,
                            images = s.ImageLiquid
-                       }
+                       },
+                slider = home.SliderLiquid
+
             };
 
 

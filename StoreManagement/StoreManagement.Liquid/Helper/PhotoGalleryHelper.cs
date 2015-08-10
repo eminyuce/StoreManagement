@@ -19,37 +19,39 @@ namespace StoreManagement.Liquid.Helper
             Task.WaitAll(pageDesignTask, fileManagersTask);
             var pageDesign = pageDesignTask.Result;
             var fileManagers = fileManagersTask.Result;
-            Logger.Trace("FileManagers :"+fileManagers.Count);
+            Logger.Trace("FileManagers :" + fileManagers.Count);
 
             var cats = new List<FileManagerLiquid>();
+            var imageWidthSlider = GetSettingValueInt("PhotoGallery_ImageWidth", 500);
+            var imageHeightSlider = GetSettingValueInt("PhotoGallery_ImageHeight", 500);
             foreach (var item in fileManagers)
             {
-                cats.Add(new FileManagerLiquid(item, pageDesign));
+                cats.Add(new FileManagerLiquid(item, imageWidthSlider, imageHeightSlider));
             }
 
             object anonymousObject = new
             {
                 items = from s in cats
-                             select new
-                             {
-                                 Name= s.FileManager.OriginalFilename,
-                                 s.ImageSource 
-                             }
+                        select new
+                        {
+                            Name = s.FileManager.OriginalFilename,
+                            s.ImageSource
+                        }
             };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
 
             var dic = new Dictionary<String, String>();
- 
+
             dic.Add(StoreConstants.PageOutput, indexPageOutput);
- 
+
 
 
             return dic;
 
         }
 
-      
+
     }
 }

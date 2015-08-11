@@ -26,10 +26,10 @@ namespace StoreManagement.Data.GeneralHelper
             {
                 url = "/Blogs/Blog/";
             }
-            String productDetailLink = url + String.Format("{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
+            String productDetailLink = url + String.Format("{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id));
             return productDetailLink.ToLower();
         }
-        
+
         public static String GetImageLink(String imageActionName, String googleId, int width, int height)
         {
             String imageLink = String.Format("/Images/{0}/{1}?width={2}&height={3}", imageActionName, googleId, width, height);
@@ -61,9 +61,9 @@ namespace StoreManagement.Data.GeneralHelper
                 {
                     return "";
                 }
-            
+
             }
-      
+
 
         }
     }

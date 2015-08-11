@@ -65,7 +65,7 @@ namespace StoreManagement.Admin.Controllers
             String url = "";
             var dic = new Dictionary<String, String>();
             url = String.Format("https://docs.google.com/uc?id={0}", googleId);
-            byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
+            byte[] imageData = GeneralHelper.GetImageFromUrlFromCache(url, dic);
 
             new WebImage(imageData)
                     .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
@@ -81,7 +81,7 @@ namespace StoreManagement.Admin.Controllers
 
 
             String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);
-            byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
+            byte[] imageData = GeneralHelper.GetImageFromUrlFromCache(url, dic);
 
             new WebImage(imageData)
                     .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
@@ -107,7 +107,7 @@ namespace StoreManagement.Admin.Controllers
                 // Create WebImage from photo data.
                 // Should have 'using System.Web.Helpers' but just to make it clear...
                 String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);
-                byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
+                byte[] imageData = GeneralHelper.GetImageFromUrlFromCache(url, dic);
                 var wi = new System.Web.Helpers.WebImage(imageData);
 
                 // Apply the watermark.

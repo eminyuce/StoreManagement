@@ -63,6 +63,20 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestGetImageFromUrlFromCache()
+        {
+
+            String url = String.Format("https://docs.google.com/uc?id={0}", "0B9lWnliAZuUdaEFkemRzV05yUWs");
+            var mmm = GeneralHelper.GetImageFromUrlFromCache(url, new Dictionary<string, string>(), 100);
+            mmm = GeneralHelper.GetImageFromUrlFromCache(url, new Dictionary<string, string>(), 100);
+            mmm = GeneralHelper.GetImageFromUrlFromCache(url, new Dictionary<string, string>(), 100);
+            mmm = GeneralHelper.GetImageFromUrlFromCache(url, new Dictionary<string, string>(), 100);
+            mmm = GeneralHelper.GetImageFromUrlFromCache(url, new Dictionary<string, string>(), 100);
+            mmm = GeneralHelper.GetImageFromUrlFromCache(url, new Dictionary<string, string>(), 100);
+
+        }
+
+        [TestMethod]
         public void TestGetMainPageProductsAsync()
         {
             int storeId = 9;

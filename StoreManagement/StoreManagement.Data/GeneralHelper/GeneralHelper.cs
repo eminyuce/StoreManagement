@@ -347,8 +347,12 @@ namespace StoreManagement.Data.GeneralHelper
                     policy.AbsoluteExpiration = DateTime.Now.AddMinutes(minute);
                     MemoryCache.Default.Set(key, ret, policy);
                 }
-            }
 
+            }
+            else
+            {
+
+            }
             return ret;
 
         }

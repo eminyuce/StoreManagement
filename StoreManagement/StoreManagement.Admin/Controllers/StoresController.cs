@@ -275,14 +275,14 @@ namespace StoreManagement.Admin.Controllers
                 setting.Type = "SuperSettings";
                 if (setting.Id == 0)
                 {
-                    setting.SettingKey = setting.SettingKey.ToLower();
+
                     setting.CreatedDate = DateTime.Now;
                     setting.UpdatedDate = DateTime.Now;
                     SettingRepository.Add(setting);
                 }
                 else
                 {
-                    setting.SettingKey = setting.SettingKey.ToLower();
+       
                     setting.UpdatedDate = DateTime.Now;
                     SettingRepository.Edit(setting);
                 }

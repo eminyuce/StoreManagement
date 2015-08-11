@@ -1,10 +1,14 @@
 ﻿@using GridMvc.Html
+@using GridMvc.Sorting
+@using StoreManagement.Data
 @using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper
 @model List<Setting>
 @{
     ViewBag.Title = "Settings";
     Store s = ViewBag.Store;
-     
+    int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
+    pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
  
 }
 
@@ -113,11 +117,40 @@
 
 
         columns.Add(o => o.Id, true);
+        columns.Add(c => c.Name);
+        columns.Add(c => c.Description);
         columns.Add(c => c.SettingKey);
-        columns.Add(c => c.SettingValue);
+
+        columns.Add(o => o.SettingValue).Encoded(false).
+                Sanitized(false).
+                SetWidth(10).
+                RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'   class='GridOrderingTextbox input-xs' name='gridTextBox' type='type'>", o.Id, o.SettingValue));
 
 
-    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+        columns.Add(o => o.State)
+               .Titled("State")
+               .Sortable(true)
+               .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                Sanitized(false)
+               .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
+                                                 o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
+
+
+        columns.Add(o => o.CreatedDate)
+              .Titled("CreatedDate")
+              .Sortable(true).
+              RenderValueAs(o => String.Format("{0}", o.CreatedDate.Value.ToShortDateString()))
+              .SortInitialDirection(GridSortDirection.Descending);
+
+
+        columns.Add(o => o.UpdatedDate)
+              .Titled("UpdatedDate")
+              .Sortable(true).
+              RenderValueAs(o => String.Format("{0}", o.UpdatedDate.Value.ToShortDateString()))
+              .SortInitialDirection(GridSortDirection.Descending);
+              
+              
+    }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters()
 
 
                 </div>

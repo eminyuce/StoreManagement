@@ -125,6 +125,11 @@ namespace StoreManagement.Admin.Controllers
             {
                 list = FileManagerRepository.GetFilesBySearchKey(storeId, searchKey).Select(r => r.OriginalFilename).ToList();
             }
+            else if (action.Equals("Settings", StringComparison.InvariantCultureIgnoreCase) &&
+                  controller.Equals("Stores", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = SettingRepository.GetStoreSettingsByType(storeId, "", searchKey).Select(r => String.Format("{0}", r.SettingKey)).ToList();
+            }
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

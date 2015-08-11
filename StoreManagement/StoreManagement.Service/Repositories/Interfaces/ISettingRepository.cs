@@ -15,6 +15,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
 
         List<Setting> GetStoreSettingsByType(int storeid, string type, String search);
         void SaveSetting();
+ 
     }
 
 

@@ -63,6 +63,14 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestSettingRepository1()
+        {
+            var cat = new SettingRepository(new StoreContext(ConnectionString));
+            var m =  cat.GetStoreSettingsByType(9, "", "blogs");
+            Console.WriteLine(m.Count);
+        }
+
+        [TestMethod]
         public void TestGetImageFromUrlFromCache()
         {
 

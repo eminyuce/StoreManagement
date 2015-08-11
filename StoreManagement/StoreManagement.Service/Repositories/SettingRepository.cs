@@ -15,7 +15,7 @@ namespace StoreManagement.Service.Repositories
 {
     public class SettingRepository : BaseRepository<Setting, int>, ISettingRepository
     {
-        private readonly TypedObjectCache<List<Setting>> _settingStoreCache= new TypedObjectCache<List<Setting>>("SettingsCache");
+        private readonly TypedObjectCache<List<Setting>> _settingStoreCache = new TypedObjectCache<List<Setting>>("SettingsCache");
 
 
 
@@ -38,6 +38,8 @@ namespace StoreManagement.Service.Repositories
             ClearCache("GetStoreSettingsFromCache-");
             this.Save();
         }
+
+
         public List<Setting> GetStoreSettingsFromCache(int storeid)
         {
             String key = String.Format("GetStoreSettingsFromCache-{0}", storeid);
@@ -46,7 +48,7 @@ namespace StoreManagement.Service.Repositories
             _settingStoreCache.TryGet(key, out items);
             if (items == null)
             {
-                items = GetStoreSettings(storeid);
+                items = GetStoreSettings(storeid).Where(r => r.State).OrderBy(r => r.Ordering).ToList();
                 _settingStoreCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Setting_CacheAbsoluteExpiration_Minute", 10)));
 
             }
@@ -62,15 +64,21 @@ namespace StoreManagement.Service.Repositories
 
         public List<Setting> GetStoreSettingsByType(int storeid, string type, string search)
         {
-            var items = this.FindBy(r => r.StoreId == storeid
-                                         && r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+            var items = this.FindBy(r => r.StoreId == storeid);
+
+            if (!String.IsNullOrEmpty(type))
+            {
+                items = items.Where(r => r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+            }
 
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
-                items = items.Where(r => r.SettingKey.ToLower().Contains(search.ToLower().Trim()));
+                search = search.ToLower();
+                items = items.Where(r => r.SettingKey.ToLower().Contains(search) || r.SettingValue.ToLower().Contains(search));
+       
             }
 
-            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
         }
 
 

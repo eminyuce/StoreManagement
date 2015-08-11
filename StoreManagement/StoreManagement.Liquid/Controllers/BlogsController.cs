@@ -31,7 +31,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndex");
-                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndexPageSize", StoreConstants.DefaultPageSize));
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.BlogsType, true, page, GetSettingValueInt("BlogsIndex_PageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
 
 

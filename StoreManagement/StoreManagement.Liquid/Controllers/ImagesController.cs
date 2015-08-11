@@ -12,7 +12,7 @@ namespace StoreManagement.Liquid.Controllers
 
     public class ImagesController : BaseController
     {
-       
+
 
         public ActionResult FetchImage(String id = "", string size = "", string contentType = "")
         {
@@ -56,16 +56,26 @@ namespace StoreManagement.Liquid.Controllers
 
         public void Thumbnail(String id, int width = 60, int height = 60)
         {
-            String url = "";
-            var dic = new Dictionary<String, String>();
-            String googleId = id;
-            url = String.Format("https://docs.google.com/uc?id={0}", googleId);
-            byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
 
-            new WebImage(imageData)
-                    .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
-                    .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
-                    .Write();
+            try
+            {
+                String url = "";
+                var dic = new Dictionary<String, String>();
+                String googleId = id;
+                url = String.Format("https://docs.google.com/uc?id={0}", googleId);
+                byte[] imageData = GeneralHelper.GetImageFromUrlFromCache(url, dic);
+
+
+                new WebImage(imageData)
+                        .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
+                        .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                        .Write();
+            }
+            catch (Exception)
+            {
+                
+            }
+           
         }
 
         public void ThumbnailById(int id, int storeId, int width = 60, int height = 60)
@@ -74,7 +84,7 @@ namespace StoreManagement.Liquid.Controllers
             // Loading photos’ info from database for specific image...
             var file = FileManagerService.GetFilesByStoreIdFromCache(storeId).FirstOrDefault(r => r.Id == id);
             String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);
-            byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
+            byte[] imageData = GeneralHelper.GetImageFromUrlFromCache(url, dic);
 
             new WebImage(imageData)
                     .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
@@ -167,6 +177,6 @@ namespace StoreManagement.Liquid.Controllers
             return img;
         }
 
-        
+
     }
 }

@@ -12,9 +12,9 @@ namespace StoreManagement.Data.Entities
     public class Setting : BaseEntity
     {
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please key name")]
+       // [Required(ErrorMessage = "Please key name")]
         public string SettingKey { get; set; }
-        [Required(ErrorMessage = "Please value name")]
+       // [Required(ErrorMessage = "Please value name")]
         public string SettingValue { get; set; }
 
 

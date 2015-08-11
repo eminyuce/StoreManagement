@@ -51,8 +51,8 @@ else
                     <li><a href="#Footer" data-toggle="tab">Footer</a></li>
                     <li><a href="#TermsAndCondition" data-toggle="tab">Terms And Cond.</a></li>
                     <li><a href="#StoreMailAddress" data-toggle="tab">Store Mail Address and Password</a></li>
-                    <li><a href="#Contacts" data-toggle="tab">Contacts and Location</a></li>
-                    <li><a href="#SocialMediaLinks" data-toggle="tab">Social Media </a></li>
+                    <li><a href="#SocialMediaLinks" data-toggle="tab">Social Media </a></li>                  
+                    <li><a href="#RobotsTxt" data-toggle="tab">Robots.txt </a></li>
                 </ul>
                 <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane active" id="StoreMetaKey">
@@ -65,6 +65,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             } 
                     
                             @Html.Partial("pSettingTextBox",
@@ -84,6 +85,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             }
                 
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) { { "StoreSettingTitle", "MetaTag Keywords" }, { "IsHtmlEditor", false } });
@@ -119,6 +121,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             }
                 
                             @Html.Partial("pSettingTextBox",
@@ -142,6 +145,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             } 
                     
                             @Html.Partial("pSettingTextBox",
@@ -164,6 +168,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             }
                 
                             @Html.Partial("pSettingTextBox",
@@ -190,6 +195,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             } 
                     
                             @Html.Partial("pSettingTextBox",
@@ -217,6 +223,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             } 
                     
                             @Html.Partial("pSettingTextBox",
@@ -240,6 +247,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             } 
                     
                             @Html.Partial("pSettingTextBox",
@@ -265,6 +273,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             } 
                     
                             @Html.Partial("pSettingTextBox",
@@ -278,7 +287,7 @@ else
                         }
                     </div>
 
-                    <div class="tab-pane" id="Contacts">
+                    <div class="tab-pane" id="AboutUs">
 
 
                         @{
@@ -291,6 +300,7 @@ else
                                 item = new Setting();
                                 item.SettingKey = key;
                                 item.Id = 0;
+                                item.SettingValue = "";
                             } 
                     
                             @Html.Partial("pSettingTextBox",
@@ -318,12 +328,13 @@ else
                             {
                                 item = new Setting();
                                 item.SettingKey = key;
+                                item.SettingValue = "";
                                 item.Id = 0;
                             } 
                     
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) {
-	                                {"StoreSettingTitle", key}
-                                    ,{"IsHtmlEditor", false} });
+                                {"StoreSettingTitle", key}
+                                ,{"IsHtmlEditor", false} });
                         }
                         <hr />
                         @{
@@ -333,93 +344,137 @@ else
                             {
                                 item = new Setting();
                                 item.SettingKey = key;
+                                item.SettingValue = "";
                                 item.Id = 0;
                             } 
                     
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) {
-	                                {"StoreSettingTitle", "Google+"}
-                                    ,{"IsHtmlEditor", false} });
+                                {"StoreSettingTitle", "Google+"}
+                                ,{"IsHtmlEditor", false} });
                         }
-                              <hr />
-                         @{
+                        <hr />
+                        @{
                             key = "Linkedin";
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
                                 item = new Setting();
                                 item.SettingKey = key;
+                                item.SettingValue = "";
                                 item.Id = 0;
                             } 
                     
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) {
-	                                {"StoreSettingTitle", key}
-                                    ,{"IsHtmlEditor", false} });
-                         }
-                         <hr />
-                         @{
+                                {"StoreSettingTitle", key}
+                                ,{"IsHtmlEditor", false} });
+                        }
+                        <hr />
+                        @{
                             key = "Twitter";
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
                                 item = new Setting();
                                 item.SettingKey = key;
+                                item.SettingValue = "";
                                 item.Id = 0;
                             } 
                     
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) {
-	                                {"StoreSettingTitle", key}
-                                    ,{"IsHtmlEditor", false} });
-                         }
-                          <hr />
-                         @{
+                                {"StoreSettingTitle", key}
+                                ,{"IsHtmlEditor", false} });
+                        }
+                        <hr />
+                        @{
                             key = "Youtube";
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
                                 item = new Setting();
                                 item.SettingKey = key;
+                                item.SettingValue = "";
                                 item.Id = 0;
                             } 
                     
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) {
-	                                {"StoreSettingTitle", key}
-                                    ,{"IsHtmlEditor", false} });
-                         }
+                                {"StoreSettingTitle", key}
+                                ,{"IsHtmlEditor", false} });
+                        }
                         
-                          <hr />
-                         @{
-                             key = "Pinterest";
+                        <hr />
+                        @{
+                            key = "Pinterest";
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
                                 item = new Setting();
                                 item.SettingKey = key;
+                                item.SettingValue = "";
                                 item.Id = 0;
                             } 
                     
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) {
-	                                {"StoreSettingTitle", key}
-                                    ,{"IsHtmlEditor", false} });
-                         }
+                                {"StoreSettingTitle", key}
+                                ,{"IsHtmlEditor", false} });
+                        }
                         
                         
-                          <hr />
-                         @{
-                             key = "Instagram";
+                        <hr />
+                        @{
+                            key = "Instagram";
                             item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (item == null)
                             {
                                 item = new Setting();
                                 item.SettingKey = key;
+                                item.SettingValue = "";
                                 item.Id = 0;
                             } 
                     
                             @Html.Partial("pSettingTextBox", item, new ViewDataDictionary(ViewData) {
-	                                {"StoreSettingTitle", key}
-                                    ,{"IsHtmlEditor", false} });
-                         }
+                                {"StoreSettingTitle", key}
+                                ,{"IsHtmlEditor", false} });
+                        }
 
                         <hr />
+                    </div>
+                    
+                    
+                    
+                    <div class="tab-pane" id="RobotsTxt">
+
+
+                        @{
+                            
+                              
+                            key = StoreConstants.RobotsTxt;
+                            item = Model.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (item == null)
+                            {
+                                item = new Setting();
+                                item.SettingKey = key;
+                                item.SettingValue = "";
+                                item.Id = 0;
+                                item.CreatedDate = DateTime.Now;
+                                item.UpdatedDate = DateTime.Now;
+                            } 
+                    
+                            @Html.Partial("pSettingTextBox",
+                                                                                                          item,
+                                                                                                          new ViewDataDictionary(ViewData)
+	                                                                                                          {
+	                                                                                                              {"StoreSettingTitle", "Robots.txt"}
+                                                                                                                                 ,{"IsHtmlEditor", false}
+	                                                                                                          })
+
+                    
+                  
+                    
+                            
+                            
+                        }
+
+
                     </div>
 
                 </div>

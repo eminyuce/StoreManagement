@@ -56,5 +56,7 @@ namespace StoreManagement.Data.Constants
         public static string TotalItemCount = "TotalItemCount";
         public static string IsPagingUp = "IsPagingUp";
         public static string IsPagingDown = "IsPagingDown";
+
+        public static string RobotsTxt = "RobotsTxt";
     }
 }

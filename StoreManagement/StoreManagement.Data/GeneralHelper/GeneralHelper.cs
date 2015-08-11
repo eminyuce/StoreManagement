@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -329,6 +330,28 @@ namespace StoreManagement.Data.GeneralHelper
 
             return description.Trim();
         }
+        public static byte[] GetImageFromUrlFromCache(string url, Dictionary<String, String> dictionary, int minute = 100)
+        {
+            String key = url;
+            byte[] ret = null;
+
+            ret = (byte[])MemoryCache.Default.Get(key);
+            if (ret == null)
+            {
+                ret = GetImageFromUrl(url, dictionary);
+                if (ret != null)
+                {
+                    CacheItemPolicy policy = null;
+                    policy = new CacheItemPolicy();
+                    policy.Priority = CacheItemPriority.Default;
+                    policy.AbsoluteExpiration = DateTime.Now.AddMinutes(minute);
+                    MemoryCache.Default.Set(key, ret, policy);
+                }
+            }
+
+            return ret;
+
+        }
 
         public static byte[] GetImageFromUrl(string url, Dictionary<String, String> dictionary)
         {
@@ -367,7 +390,7 @@ namespace StoreManagement.Data.GeneralHelper
             catch (Exception)
             {
 
-              
+
             }
             return b;
         }

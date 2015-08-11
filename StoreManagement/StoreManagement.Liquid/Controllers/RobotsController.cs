@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data;
+using StoreManagement.Data.Constants;
 
 namespace StoreManagement.Liquid.Controllers
 {
@@ -23,7 +24,7 @@ namespace StoreManagement.Liquid.Controllers
         {
             var defaultContent = "User-agent: *" + Environment.NewLine;
             defaultContent += "Disallow: /" + Environment.NewLine;
-            var content = GetSettingValue("Robots.txt", defaultContent);
+            var content = GetSettingValue(StoreConstants.RobotsTxt, defaultContent);
             return File(Encoding.UTF8.GetBytes(content), "text/plain");
         }
 	}

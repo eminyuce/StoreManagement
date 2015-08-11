@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -168,27 +170,44 @@ namespace StoreManagement.Admin.Controllers
                     if (v.Id == 0)
                     {
                         item.SettingKey = v.SettingKey;
+                        item.SettingValue = v.SettingValue;
                         item.CreatedDate = DateTime.Now;
+                        item.State = true;
+                        item.StoreId = storeId;
+                        item.UpdatedDate = DateTime.Now;
+                        item.Name = "";
+                        item.Description = "";
+                        item.Type = "StoreSettings";
+                        item.Ordering = 1;
                         SettingRepository.Add(item);
+                        SettingRepository.Save();
                     }
                     else
                     {
                         item = SettingRepository.GetSingle(v.Id);
+                        item.SettingValue = v.SettingValue;
+                        item.State = true;
+                        item.StoreId = storeId;
+                        item.UpdatedDate = DateTime.Now;
+                        item.Name = "";
+                        item.Description = "";
+                        item.Type = "StoreSettings";
+                        item.Ordering = 1;
                         SettingRepository.Edit(item);
+                        SettingRepository.Save();
                     }
-                    item.SettingValue = v.SettingValue;
-                    item.State = true;
-                    item.StoreId = storeId;
-                    item.UpdatedDate = DateTime.Now;
-                    item.Name = "";
-                    item.Description = "";
-                    item.Type = "StoreSettings";
-                    SettingRepository.Save();
-
+               
+  
+     
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    var message = GetDbEntityValidationExceptionDetail(ex);
+                    Logger.Error(ex, "DbEntityValidationException:" + message, v);
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorException("Exception is occured while saving settings:" + v, ex);
+                    Logger.Error(ex, "Exception is occured while saving settings:", v);
 
                 }
 
@@ -197,6 +216,9 @@ namespace StoreManagement.Admin.Controllers
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
+
+
+
         public ActionResult ChangeIsCarouselState(int fileId = 0, bool isCarousel = false)
         {
             try
@@ -208,6 +230,11 @@ namespace StoreManagement.Admin.Controllers
                 FileManagerRepository.Edit(s);
                 FileManagerRepository.Save();
 
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
             }
             catch (Exception exception)
             {
@@ -232,6 +259,11 @@ namespace StoreManagement.Admin.Controllers
                 }
                 EmailListRepository.Save();
 
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
             }
             catch (Exception exception)
             {
@@ -258,6 +290,11 @@ namespace StoreManagement.Admin.Controllers
                 SettingRepository.Save();
 
             }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
+            }
             catch (Exception exception)
             {
                 Logger.ErrorException("DeleteSettingGridItem :" + String.Join(",", values), exception);
@@ -279,6 +316,11 @@ namespace StoreManagement.Admin.Controllers
                 NavigationRepository.Save();
 
             }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
+            }
             catch (Exception exception)
             {
                 Logger.ErrorException("DeleteNavigationGridItem :" + String.Join(",", values), exception);
@@ -298,6 +340,11 @@ namespace StoreManagement.Admin.Controllers
                     ProductRepository.Delete(item);
                 }
                 ProductRepository.Save();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
             }
             catch (Exception exception)
             {
@@ -320,6 +367,11 @@ namespace StoreManagement.Admin.Controllers
                 }
                 LocationRepository.Save();
             }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
+            }
             catch (Exception exception)
             {
                 Logger.ErrorException("DeleteLocationsGridItem :" + String.Join(",", values), exception);
@@ -341,6 +393,11 @@ namespace StoreManagement.Admin.Controllers
                 }
                 ContactRepository.Save();
 
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
             }
             catch (Exception exception)
             {
@@ -375,6 +432,11 @@ namespace StoreManagement.Admin.Controllers
                     Task.Run(() => DeleteFile(googledriveFileId));
                     Thread.Sleep(50);
                 }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
             }
             catch (Exception exception)
             {
@@ -415,6 +477,11 @@ namespace StoreManagement.Admin.Controllers
                 FileManagerRepository.Delete(item);
                 FileManagerRepository.Save();
             }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
+            }
             catch (Exception ex)
             {
                 Logger.ErrorException(String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId), ex);
@@ -433,6 +500,11 @@ namespace StoreManagement.Admin.Controllers
                     BrandRepository.Delete(item);
                 }
                 BrandRepository.Save();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
             }
             catch (Exception exception)
             {

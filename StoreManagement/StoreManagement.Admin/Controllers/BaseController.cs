@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -357,6 +359,25 @@ namespace StoreManagement.Admin.Controllers
             }
             return isNewLabelExists;
         }
+        protected static String GetDbEntityValidationExceptionDetail(DbEntityValidationException ex)
+        {
+ 
+            var errorMessages = (from eve in ex.EntityValidationErrors
+                                 let entity = eve.Entry.Entity.GetType().Name
+                                 from ev in eve.ValidationErrors
+                                 select new
+                                 {
+                                     Entity = entity,
+                                     PropertyName = ev.PropertyName,
+                                     ErrorMessage = ev.ErrorMessage
+                                 });
 
+            var fullErrorMessage = string.Join("; ", errorMessages.Select(e => string.Format("[Entity: {0}, Property: {1}] {2}", e.Entity, e.PropertyName, e.ErrorMessage)));
+
+            var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+
+            return exceptionMessage;
+        }
     }
 }

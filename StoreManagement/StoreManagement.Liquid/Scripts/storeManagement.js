@@ -14,8 +14,11 @@ $(document).ready(function () {
     if ($("#RelatedNews").length > 0) {
         GetRelatedBlogs($("#CategoryId").val());
     }
+    if ($("#RelatedProducts").length > 0) {
+        GetRelatedProducts($("#ProductCategoryId").val());
+    }
 });
-
+ 
 function GetRelatedBlogs(categoryId) {
     var postData = JSON.stringify({ "categoryId": categoryId, "contentType": "blog" });
     ajaxMethodCall(postData, "/Ajax/GetRelatedContents", function (data) {
@@ -33,22 +36,20 @@ function GetRelatedNews(categoryId) {
 
 function GetRelatedProducts(productCategoryId) {
     var postData = JSON.stringify({ "categoryId": productCategoryId });
-    ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", DisplayRelatedProducts);
+    ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", function (data) {
+        $("#RelatedProducts").empty();
+        $("#RelatedProducts").html(data).animate({ 'height': '150px' }, 'slow');
+    });
+}
 
-}
-function DisplayRelatedProducts(data) {
-    $("#RelatedProducts").empty();
-    $("#RelatedProducts").html(data).animate({ 'height': '150px' }, 'slow');
-}
 function GetProductCategories() {
     var postData = JSON.stringify({});
-    ajaxMethodCall(postData, "/Ajax/GetProductCategories", DisplayProductCategories);
+    ajaxMethodCall(postData, "/Ajax/GetProductCategories", function (data) {
+        $("#ProductCategories").empty();
+        $("#ProductCategories").html(data).animate({ 'height': '150px' }, 'slow');
+    });
+}
 
-}
-function DisplayProductCategories(data) {
-    $("#ProductCategories").empty();
-    $("#ProductCategories").html(data).animate({ 'height': '150px' }, 'slow');
-}
 function ajaxMethodCall(postData, ajaxUrl, successFunction) {
 
     $.ajax({

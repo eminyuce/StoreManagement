@@ -66,7 +66,20 @@ namespace StoreManagement.Service.Services
 
         public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
         {
-            throw new NotImplementedException();
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetProductByTypeAndCategoryId" +
+                                           "?storeId={2}" +
+                                           "&typeName={3}" +
+                                           "&categoryId={4}&search={5}", WebServiceAddress, ApiControllerName, storeId, typeName, categoryId, search);
+                return HttpRequestHelper.GetUrlResults<Product>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "API:GetProductByTypeAndCategoryId",storeId, typeName, categoryId, search);
+                return new List<Product>();
+            }
         }
 
         public List<Product> GetProductByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
@@ -150,6 +163,31 @@ namespace StoreManagement.Service.Services
                 return null;
             }
         }
+
+        public Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetProductByTypeAndCategoryIdAsync?" +
+                                                 "storeId={2}&categoryId={3}" +
+                                                 "&take={4}&excludedProductId={5}",
+                                                 WebServiceAddress,
+                                                 ApiControllerName,
+                                                 storeId, categoryId,
+                                                 take, excludedProductId);
+
+                return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+ 
 
         protected override void SetCache()
         {

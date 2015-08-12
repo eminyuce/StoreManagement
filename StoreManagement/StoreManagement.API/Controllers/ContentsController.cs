@@ -178,19 +178,17 @@ namespace StoreManagement.API.Controllers
             return await this.ContentRepository.GetContentByIdAsync(id);
         }
 
-        public async Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take)
+
+
+        public async Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take, int? excludedContentId)
         {
-            return await this.ContentRepository.GetContentByTypeAndCategoryIdAsync(storeId, typeName, categoryId, take);
+            return await this.ContentRepository.GetContentByTypeAndCategoryIdAsync(storeId, typeName, categoryId, take, excludedContentId);
         }
 
         public async Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
             return await this.ContentRepository.GetMainPageContentsAsync(storeId, categoryId, type, take);
         }
-
-        public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
-        {
-            throw new NotImplementedException();
-        }
+ 
     }
 }

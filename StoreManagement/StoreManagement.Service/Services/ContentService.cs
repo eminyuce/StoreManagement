@@ -128,16 +128,18 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
 
-        public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        public Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take, int? excludedContentId)
         {
             SetCache();
-            string url = string.Format("http://{0}/api/{1}/GetMainPageContentsAsync?storeId={2}&type={3}&categoryId={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, type, categoryId, take);
+            string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryIdAsync?storeId={2}&typeName={3}&categoryId={4}&take={5}&excludedContentId={6}", WebServiceAddress, ApiControllerName, storeId, typeName, categoryId, take, excludedContentId);
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
 
-        public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
+        public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
-            throw new NotImplementedException();
+            SetCache();
+            string url = string.Format("http://{0}/api/{1}/GetMainPageContentsAsync?storeId={2}&categoryId={3}&type={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, categoryId,type, take);
+            return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
 
         protected override void SetCache()

@@ -102,6 +102,21 @@ namespace StoreManagement.Service.Services
             }
         }
 
+        public Task<ProductCategory> GetProductCategoryAsync(int categoryId)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetProductCategoryAsync?categoryId={2}", WebServiceAddress, ApiControllerName, categoryId);
+                return HttpRequestHelper.GetUrlResultAsync<ProductCategory>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+
         protected override void SetCache()
         {
             HttpRequestHelper.CacheMinute = CacheMinute;

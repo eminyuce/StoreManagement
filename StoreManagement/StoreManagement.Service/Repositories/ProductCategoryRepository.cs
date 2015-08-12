@@ -183,5 +183,16 @@ namespace StoreManagement.Service.Repositories
 
             return res;
         }
+
+        public Task<ProductCategory> GetProductCategoryAsync(int categoryId)
+        {
+            var res = Task.Factory.StartNew(() =>
+            {
+                ProductCategory productCategory = this.GetSingle(categoryId);
+                return productCategory;
+            });
+
+            return res;
+        }
     }
 }

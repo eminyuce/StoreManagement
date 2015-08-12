@@ -81,14 +81,20 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize);
         }
 
-        public   Task<Product> GetProductsByIdAsync(int productId)
+        public Task<Product> GetProductsByIdAsync(int productId)
         {
-            return   ProductRepository.GetProductsByIdAsync(productId);
+            return ProductRepository.GetProductsByIdAsync(productId);
         }
 
-        public   Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
+        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
         {
-            return   ProductRepository.GetMainPageProductsAsync(storeId, take);
+            return ProductRepository.GetMainPageProductsAsync(storeId, take);
         }
+
+        public async Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
+        {
+            return await ProductRepository.GetProductByTypeAndCategoryIdAsync(storeId, categoryId, take, excludedProductId);
+        }
+ 
     }
 }

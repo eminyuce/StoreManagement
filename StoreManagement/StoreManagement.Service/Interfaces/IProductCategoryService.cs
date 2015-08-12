@@ -19,6 +19,7 @@ namespace StoreManagement.Service.Interfaces
         Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool ? isActive);
         Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25);
         Task<ProductCategory> GetProductCategoryAsync(int storeId,int productId);
+        Task<ProductCategory> GetProductCategoryAsync(int categoryId);
     }
 
 }

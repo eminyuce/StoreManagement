@@ -147,11 +147,26 @@ namespace StoreManagement.Service.Repositories
             return res;
         }
 
-        public Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take)
+      
+        public Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take, int? excludedContentId)
         {
-            var res = Task.FromResult(this.GetContentByTypeAndCategoryId(storeId, typeName, categoryId).Take(take).ToList());
-            return res;
+           
+            var task = Task.Factory.StartNew(() =>
+            {
+                var returnList = this.GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
+
+                if (excludedContentId.HasValue)
+                {
+                    returnList = returnList.Where(r => r.Id != excludedContentId).ToList();
+                }
+
+                return returnList.Take(take).ToList();
+
+
+            });
+            return task;
         }
+
         public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
         {
             try

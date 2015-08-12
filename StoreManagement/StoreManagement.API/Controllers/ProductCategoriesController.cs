@@ -154,7 +154,12 @@ namespace StoreManagement.API.Controllers
 
         public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
         {
-            throw new NotImplementedException();
+            return ProductCategoryRepository.GetProductCategoryAsync(storeId,productId);
+        }
+
+        public Task<ProductCategory> GetProductCategoryAsync(int categoryId)
+        {
+            return ProductCategoryRepository.GetProductCategoryAsync(categoryId);
         }
     }
 }

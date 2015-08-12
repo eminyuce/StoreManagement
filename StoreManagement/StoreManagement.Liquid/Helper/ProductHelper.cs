@@ -90,6 +90,7 @@ namespace StoreManagement.Liquid.Helper
             object anonymousObject = new
             {
                 CategoryName = productLiquid.Category.Name,
+                ProductCategoryId = productLiquid.Product.ProductCategoryId,
                 CategoryDescription = productLiquid.Category.Description,
                 ProductId = productLiquid.Product.Id,
                 Name = productLiquid.Product.Name,
@@ -107,6 +108,54 @@ namespace StoreManagement.Liquid.Helper
 
 
             return dic;
+        }
+
+        public Dictionary<string, string> GetRelatedProductsPartial(Task<ProductCategory> categoryTask, Task<List<Product>> relatedProductsTask, Task<PageDesign> pageDesignTask)
+        {
+            Task.WaitAll(pageDesignTask, relatedProductsTask, categoryTask);
+            var products = relatedProductsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var category = categoryTask.Result;
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            try
+            {
+
+
+                var items = new List<ProductLiquid>();
+                foreach (var item in products)
+                {
+                    var blog = new ProductLiquid(item, category, pageDesign, ImageWidth, ImageHeight);
+                    items.Add(blog);
+
+                }
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
+                {
+                    items = from s in items
+                            select new
+                            {
+                                s.Product.Name,
+                                s.Product.Description,
+                                s.DetailLink,
+                                s.ImageLiquid.ImageHas,
+                                s.ImageLiquid.ImageSource
+                            }
+                }
+                    );
+
+
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+
+
+                return dic;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GetRelatedProductsPartial");
+                return dic;
+            }
         }
     }
 }

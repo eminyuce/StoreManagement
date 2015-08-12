@@ -15,6 +15,13 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ProductCategoryHelper : BaseLiquidHelper
     {
+
+
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
+
+
+
         public Dictionary<String, String> GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask)
         {
             Task.WaitAll(pageDesignTask, categoriesTask);
@@ -53,6 +60,47 @@ namespace StoreManagement.Liquid.Helper
 
             return dic;
 
+        }
+
+        public Dictionary<string, string> GetProductCategoriesPartial(Task<List<ProductCategory>> categoriesTask, Task<PageDesign> pageDesignTask)
+        {
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            try
+            {
+                Task.WaitAll(pageDesignTask, categoriesTask);
+                var pageDesign = pageDesignTask.Result;
+                var categories = categoriesTask.Result;
+
+
+                var cats = new List<ProductCategoryLiquid>();
+                foreach (var item in categories)
+                {
+                    cats.Add(new ProductCategoryLiquid(item, pageDesign));
+                }
+
+                object anonymousObject = new
+                {
+                    categories = from s in cats
+                                 select new
+                                 {
+                                     s.ProductCategory.Name,
+                                     s.ProductCategory.Description,
+                                     s.DetailLink,
+                                 }
+                };
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+        
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GetProductCategoriesPartial");
+            }
+
+            return dic;
         }
     }
 }

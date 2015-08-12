@@ -22,6 +22,8 @@ namespace StoreManagement.Liquid.Controllers
                 var fileManagers = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
                 var liquidHelper = new PhotoGalleryHelper();
                 liquidHelper.StoreSettings = GetStoreSettings();
+                liquidHelper.ImageWidth = GetSettingValueInt("PhotoGallery_ImageWidth", 500);
+                liquidHelper.ImageHeight = GetSettingValueInt("PhotoGallery_ImageHeight", 500);
                 var dic = liquidHelper.GetPhotoGalleryIndexPage(pageDesignTask, fileManagers);
 
                 return View(dic);

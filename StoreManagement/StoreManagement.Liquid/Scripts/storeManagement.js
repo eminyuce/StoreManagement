@@ -8,6 +8,10 @@ $(document).ready(function () {
     //    mm.fadeIn('slow');
     //});
 
+    callAjaxMethod();
+});
+function callAjaxMethod() {
+    
     if ($("#RelatedBlogs").length > 0) {
         GetRelatedBlogs($("#CategoryId").val());
     }
@@ -17,8 +21,18 @@ $(document).ready(function () {
     if ($("#RelatedProducts").length > 0) {
         GetRelatedProducts($("#ProductCategoryId").val());
     }
-});
- 
+    if ($("#ProductCategories").length > 0) {
+        GetProductCategories();
+    }
+
+}
+function GetProductCategories() {
+    var postData = JSON.stringify({  });
+    ajaxMethodCall(postData, "/Ajax/GetProductCategories", function (data) {
+        $("#ProductCategories").empty();
+        $("#ProductCategories").html(data).animate({ 'height': '150px' }, 'slow');
+    });
+}
 function GetRelatedBlogs(categoryId) {
     var postData = JSON.stringify({ "categoryId": categoryId, "contentType": "blog" });
     ajaxMethodCall(postData, "/Ajax/GetRelatedContents", function (data) {

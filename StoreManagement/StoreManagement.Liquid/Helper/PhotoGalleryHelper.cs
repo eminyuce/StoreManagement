@@ -14,6 +14,10 @@ namespace StoreManagement.Liquid.Helper
 {
     public class PhotoGalleryHelper : BaseLiquidHelper
     {
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
+
+
         public Dictionary<String, String> GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)
         {
             Task.WaitAll(pageDesignTask, fileManagersTask);
@@ -22,11 +26,10 @@ namespace StoreManagement.Liquid.Helper
             Logger.Trace("FileManagers :" + fileManagers.Count);
 
             var cats = new List<FileManagerLiquid>();
-            var imageWidthSlider = GetSettingValueInt("PhotoGallery_ImageWidth", 500);
-            var imageHeightSlider = GetSettingValueInt("PhotoGallery_ImageHeight", 500);
+    
             foreach (var item in fileManagers)
             {
-                cats.Add(new FileManagerLiquid(item, imageWidthSlider, imageHeightSlider));
+                cats.Add(new FileManagerLiquid(item, ImageWidth,ImageHeight));
             }
 
             object anonymousObject = new

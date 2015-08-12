@@ -17,7 +17,7 @@ namespace StoreManagement.Liquid.Controllers
     {
 
 
-        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId=0)
+        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0)
         {
             var res = Task.Factory.StartNew(() =>
             {
@@ -27,7 +27,7 @@ namespace StoreManagement.Liquid.Controllers
 
                     var categoryTask = CategoryService.GetCategoryAsync(categoryId);
 
-                    int take = 0; 
+                    int take = 0;
                     if (contentType.Equals(StoreConstants.NewsType))
                     {
                         take = GetSettingValueInt("RelatedNews_ItemsNumber", 5);
@@ -42,7 +42,7 @@ namespace StoreManagement.Liquid.Controllers
                     var liquidHelper = new ContentHelper();
                     liquidHelper.StoreSettings = GetStoreSettings();
 
-                   
+
 
                     if (contentType.Equals(StoreConstants.NewsType))
                     {
@@ -63,7 +63,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                     Dictionary<String, String> dic = liquidHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
-                    String html = dic["PageOutput"];
+                    String html = dic[StoreConstants.PageOutput];
                     return html;
 
                 }
@@ -95,7 +95,7 @@ namespace StoreManagement.Liquid.Controllers
                     liquidHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartial_ImageWidth", 50);
                     liquidHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartial_ImageHeight", 50);
                     Dictionary<String, String> dic = liquidHelper.GetRelatedProductsPartial(categoryTask, relatedProductsTask, pageDesignTask);
-                    String html = dic["PageOutput"];
+                    String html = dic[StoreConstants.PageOutput];
                     return html;
                 }
                 catch (Exception ex)
@@ -108,12 +108,31 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(await res, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetProductCategories()
+        public async Task<JsonResult> GetProductCategories()
         {
-            var categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(StoreId, StoreConstants.ProductType);
-            String partialViewName = @"pProducts\pProductCategories";
-            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(categories));
-            return Json(html, JsonRequestBehavior.AllowGet);
+            var res = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductCategoriesPartial");
+                    var liquidHelper = new ProductCategoryHelper();
+                    liquidHelper.StoreSettings = GetStoreSettings();
+                    liquidHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
+                    liquidHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
+                    Dictionary<String, String> dic = liquidHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
+                    String html = dic[StoreConstants.PageOutput];
+                    return html;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "GetProductCategories");
+                    return "";
+                }
+
+            });
+
+            return Json(await res, JsonRequestBehavior.AllowGet);
         }
 
 

@@ -20,14 +20,12 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult Index()
         {
-
             var item = LogRepository.GetApplicationNames();
             return View(item);
         }
         [HttpGet]
         public ActionResult AppLogDetail(String appName = "", String logLevel = "", String page = "", String search = "")
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             int iPage = page.ToInt(); if (iPage == 0) iPage = 1;
 

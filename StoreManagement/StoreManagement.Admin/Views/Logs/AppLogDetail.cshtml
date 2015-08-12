@@ -38,7 +38,7 @@
                                                                                                                           .SetNextPageText("→"))
                 </div>
 
-                @Html.ActionLink("Delete Logs Except the last 3 days", "DeleteLogs", "Logs", new { id = Model.ApplicationName }, new { onclick = "return confirm('Are you sure you wish to delete these logs?');", @class = "btn btn-warning" })
+                @Html.ActionLink("Delete Logs", "DeleteLogs", "Logs", new { id = Model.ApplicationName }, new { onclick = "return confirm('Are you sure you wish to delete these logs?');", @class = "btn btn-warning" })
                 <br />
 
                 @using (Html.BeginForm("AppLogDetail", "Logs", FormMethod.Get))

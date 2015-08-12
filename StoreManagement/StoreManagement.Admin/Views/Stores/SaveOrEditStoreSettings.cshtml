@@ -40,34 +40,30 @@
                     
                         <div class="editor-label">
                             @Html.LabelFor(model => model.Name)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Name)
+           
+                            @Html.TextBoxFor(model => model.Name,new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Name)
                         </div>
 
                                     <div class="editor-label">
                             @Html.LabelFor(model => model.Description)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Description)
+                  
+                            @Html.TextBoxFor(model => model.Description,new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Description)
                         </div>
 
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.SettingKey)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.SettingKey)
+                      
+                            @Html.TextBoxFor(model => model.SettingKey,new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.SettingKey)
                         </div>
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.SettingValue)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.SettingValue)
+                   
+                            @Html.TextBoxFor(model => model.SettingValue,new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.SettingValue)
                         </div>
 

@@ -26,14 +26,23 @@ namespace StoreManagement.Liquid.Controllers
 
 
                     var categoryTask = CategoryService.GetCategoryAsync(categoryId);
-                    int take = GetSettingValueInt("RelatedContents_ItemsNumber", 5);
+
+                    int take = 0; 
+                    if (contentType.Equals(StoreConstants.NewsType))
+                    {
+                        take = GetSettingValueInt("RelatedNews_ItemsNumber", 5);
+                    }
+                    else if (contentType.Equals(StoreConstants.BlogsType))
+                    {
+                        take = GetSettingValueInt("RelatedBlogs_ItemsNumber", 5);
+                    }
+
                     var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take, excludedContentId);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "RelatedContentsPartial");
                     var liquidHelper = new ContentHelper();
                     liquidHelper.StoreSettings = GetStoreSettings();
 
-                    liquidHelper.ImageWidth = GetSettingValueInt("NewsIndex_ImageWidth", 50);
-                    liquidHelper.ImageHeight = GetSettingValueInt("NewsIndex_ImageHeight", 50);
+                   
 
                     if (contentType.Equals(StoreConstants.NewsType))
                     {
@@ -47,6 +56,8 @@ namespace StoreManagement.Liquid.Controllers
                     }
                     else
                     {
+                        liquidHelper.ImageWidth = 0;
+                        liquidHelper.ImageHeight = 0;
                         Logger.Trace("No ContentType is defined like that " + contentType);
                     }
 

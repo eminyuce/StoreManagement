@@ -17,14 +17,19 @@ namespace StoreManagement.Liquid.Controllers
     {
 
 
-        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0)
+        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String desingName = "")
         {
+
+            if (String.IsNullOrEmpty(desingName))
+            {
+                desingName = "RelatedContentsPartial";
+            }
+
+
             var res = Task.Factory.StartNew(() =>
             {
                 try
                 {
-
-
                     var categoryTask = CategoryService.GetCategoryAsync(categoryId);
 
                     int take = 0;
@@ -38,7 +43,7 @@ namespace StoreManagement.Liquid.Controllers
                     }
 
                     var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take, excludedContentId);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "RelatedContentsPartial");
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
                     var liquidHelper = new ContentHelper();
                     liquidHelper.StoreSettings = GetStoreSettings();
 
@@ -79,9 +84,12 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-        public async Task<JsonResult> GetRelatedProducts(int categoryId, int excludedProductId = 0)
+        public async Task<JsonResult> GetRelatedProducts(int categoryId, int excludedProductId = 0, String desingName = "")
         {
-
+            if (String.IsNullOrEmpty(desingName))
+            {
+                desingName = "RelatedProductsPartial";
+            }
             var res = Task.Factory.StartNew(() =>
             {
                 try
@@ -89,7 +97,7 @@ namespace StoreManagement.Liquid.Controllers
                     var categoryTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
                     int take = GetSettingValueInt("RelatedProducts_ItemsNumber", 5);
                     var relatedProductsTask = ProductService.GetProductByTypeAndCategoryIdAsync(StoreId, categoryId, take, excludedProductId);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "RelatedProductsPartial");
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
                     var liquidHelper = new ProductHelper();
                     liquidHelper.StoreSettings = GetStoreSettings();
                     liquidHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartial_ImageWidth", 50);
@@ -108,14 +116,19 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(await res, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetProductCategories()
+        public async Task<JsonResult> GetProductCategories(String desingName="")
         {
+
+            if (String.IsNullOrEmpty(desingName))
+            {
+                desingName = GetSettingValue("ProductCategoriesPartial_DefaultPageDesign", "ProductCategoriesPartial");
+            }
             var res = Task.Factory.StartNew(() =>
             {
                 try
                 {
                     var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductCategoriesPartial");
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
                     var liquidHelper = new ProductCategoryHelper();
                     liquidHelper.StoreSettings = GetStoreSettings();
                     liquidHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);

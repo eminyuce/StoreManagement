@@ -29,10 +29,10 @@ namespace StoreManagement.Service.Repositories
 
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
-                pages = pages.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+                pages = pages.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()) || r.PageTemplate.ToLower().Contains(search.ToLower().Trim()) || r.Type.ToLower().Contains(search.ToLower().Trim()));
             }
 
-            return pages.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+            return pages.OrderByDescending(r => r.UpdatedDate).ToList();
 
         }
 

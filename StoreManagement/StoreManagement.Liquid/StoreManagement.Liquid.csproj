@@ -408,7 +408,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants\AppConstants.cs" />
-    <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\AjaxContentsController.cs" />
+    <Compile Include="Controllers\AjaxProductsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -486,8 +487,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AjaxProducts\" />
     <Folder Include="Views\Ajax\" />
     <Folder Include="Views\Images\" />
+    <Folder Include="Views\ProductAjax\" />
     <Folder Include="Views\Robots\" />
     <Folder Include="Views\Rss\" />
   </ItemGroup>

@@ -40,5 +40,21 @@ namespace StoreManagement.Service.Services
                 return null;
             }
         }
+
+        public Task<Brand> GetBrandAsync(int brandId)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetBrandAsync" +
+                                           "?brandId={2}", WebServiceAddress, ApiControllerName, brandId);
+                return HttpRequestHelper.GetUrlResultAsync<Brand>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "API:GetBrandAsync", brandId);
+                return null;
+            }
+        }
     }
 }

@@ -17,8 +17,9 @@ namespace StoreManagement.Data.LiquidEntities
 
         public Product Product { get; set; }
         public ProductCategory Category { get; set; }
-        public PageDesign PageDesign { get; set; }
         public ImageLiquid ImageLiquid { get; set; }
+        public Brand Brand { get; set; }
+
 
         public ProductLiquid(Product product, ProductCategory category, PageDesign pageDesign, int imageWidth, int imageHeight)
         {
@@ -28,11 +29,8 @@ namespace StoreManagement.Data.LiquidEntities
             this.PageDesign = pageDesign;
             List<FileManager> fileManagers = product.ProductFiles !=null && product.ProductFiles.Any() ? product.ProductFiles.Select(r => r.FileManager).ToList() : new List<FileManager>();
             this.ImageLiquid = new ImageLiquid(fileManagers, pageDesign, imageWidth, imageHeight);
-
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;
-
-
 
         }
        

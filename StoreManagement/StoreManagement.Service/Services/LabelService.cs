@@ -33,11 +33,7 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResults<Label>(url);
         }
 
-        public List<Label> GetLabelsByTypeAndCategoryAndSearch(int storeId, string labelType, int categoryId, string search)
-        {
-            throw new NotImplementedException();
-        }
-
+         
         protected override void SetCache()
         {
             HttpRequestHelper.CacheMinute = CacheMinute;

@@ -86,6 +86,7 @@ namespace StoreManagement.Liquid.Helper
             {
                 CategoryName = productLiquid.Category.Name,
                 ProductCategoryId = productLiquid.Product.ProductCategoryId,
+                BrandId = productLiquid.Product.BrandId,
                 CategoryDescription = productLiquid.Category.Description,
                 ProductId = productLiquid.Product.Id,
                 Name = productLiquid.Product.Name,
@@ -105,7 +106,10 @@ namespace StoreManagement.Liquid.Helper
             return dic;
         }
 
-        public Dictionary<string, string> GetRelatedProductsPartial(Task<ProductCategory> categoryTask, Task<List<Product>> relatedProductsTask, Task<PageDesign> pageDesignTask)
+        public Dictionary<string, string> GetRelatedProductsPartialByCategory(Task<ProductCategory> categoryTask,
+            Task<List<Product>> relatedProductsTask,
+            Task<PageDesign> pageDesignTask
+          )
         {
             Task.WaitAll(pageDesignTask, relatedProductsTask, categoryTask);
             var products = relatedProductsTask.Result;
@@ -138,6 +142,72 @@ namespace StoreManagement.Liquid.Helper
                             }
                 }
                     );
+
+
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+
+
+                return dic;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GetRelatedProductsPartial");
+                return dic;
+            }
+        }
+
+        public Dictionary<string, string> GetRelatedProductsPartialByBrand(Task<Brand> brandTask,
+            Task<List<Product>> relatedProductsTask,
+            Task<PageDesign> pageDesignTask,
+            Task<List<ProductCategory>> productCategoriesTask)
+        {
+
+            Task.WaitAll(pageDesignTask, relatedProductsTask, brandTask, productCategoriesTask);
+            var products = relatedProductsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var brand = brandTask.Result;
+            var productCategories = productCategoriesTask.Result;
+
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            try
+            {
+
+                var brandLiquid = new BrandLiquid(brand, pageDesign, ImageWidth, ImageHeight);
+
+                var items = new List<ProductLiquid>();
+                foreach (var item in products)
+                {
+                    var imageWidth = GetSettingValueInt("BrandProduct_ImageWidth", 50);
+                    var imageHeight = GetSettingValueInt("BrandProduct_ImageHeight", 50);
+                    var cat = productCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
+                    var product = new ProductLiquid(item, cat, pageDesign, imageWidth, imageHeight);
+                    product.Brand = brand;
+                    items.Add(product);
+
+                }
+
+                object anonymousObject = new
+                    {
+                        items = from s in items
+                                select new
+                                    {
+                                        s.Product.Name,
+                                        s.Product.Description,
+                                        s.DetailLink,
+                                        s.ImageLiquid.ImageHas,
+                                        s.ImageLiquid.ImageSource
+                                    },
+                        brand = new
+                            {
+                                brandLiquid,
+                                Name = brandLiquid.Brand.Name,
+                                Description = brandLiquid.Brand.Description
+                            }
+                    };
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;

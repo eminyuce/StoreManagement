@@ -15,9 +15,11 @@ function callAjaxMethod() {
     if ($('[data-related-contents]').length > 0) {
         GetRelatedContents();
     }
- 
-    if ($('[data-related-products]').length > 0) {
-        GetRelatedProducts();
+    if ($('[data-related-products-by-brand]').length > 0) {
+        GetRelatedProductsPartialByBrand();
+    }
+    if ($('[data-related-products-by-category]').length > 0) {
+        GetRelatedProductsPartialByCategory();
     }
     if ($('[data-product-categories]').length > 0) {
         GetProductCategories();
@@ -32,7 +34,7 @@ function GetBrands() {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
         var postData = JSON.stringify({ "designName": designName });
-        ajaxMethodCall(postData, "/Ajax/GetBrands", function (data) {
+        ajaxMethodCall(postData, "/AjaxProducts/GetBrands", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
         });
@@ -44,7 +46,7 @@ function GetProductCategories() {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
         var postData = JSON.stringify({ "designName": designName });
-        ajaxMethodCall(postData, "/Ajax/GetProductCategories", function (data) {
+        ajaxMethodCall(postData, "/AjaxProducts/GetProductCategories", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
         });
@@ -57,26 +59,40 @@ function GetRelatedContents() {
         var contentType = $(this).attr('data-related-contents-type');
         var categoryId = $(this).attr('data-related-contents');
         var postData = JSON.stringify({ "categoryId": categoryId, "contentType": contentType, "designName": designName });
-        ajaxMethodCall(postData, "/Ajax/GetRelatedContents", function (data) {
+        ajaxMethodCall(postData, "/AjaxContents/GetRelatedContents", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
         });
     });
 }
 
-function GetRelatedProducts() {
-    $('[data-related-products]').each(function () {
+function GetRelatedProductsPartialByCategory() {
+    $('[data-related-products-by-category]').each(function () {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
-        var productCategoryId = $(this).attr('data-related-products');
-        var postData = JSON.stringify({ "categoryId": productCategoryId, "designName": designName });
-        ajaxMethodCall(postData, "/Ajax/GetRelatedProducts", function (data) {
+        var productCategoryId = $(this).attr('data-related-products-by-category');
+        var excludedProductId = $(this).attr('data-excluded-product-id');
+        var postData = JSON.stringify({ "categoryId": productCategoryId, "excludedProductId" : excludedProductId, "designName": designName });
+        ajaxMethodCall(postData, "/AjaxProducts/GetRelatedProductsPartialByCategory", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
         });
     });
 }
- 
+function GetRelatedProductsPartialByBrand() {
+    $('[data-related-products-by-brand]').each(function () {
+        var truethis = this;
+        var designName = $(this).attr('data-template-design-name');
+        var brandId = $(this).attr('data-related-products-by-brand');
+        var excludedProductId = $(this).attr('data-excluded-product-id');
+        var postData = JSON.stringify({ "brandId": brandId, "excludedProductId": excludedProductId, "designName": designName });
+        ajaxMethodCall(postData, "/AjaxProducts/GetRelatedProductsPartialByBrand", function (data) {
+            $(truethis).empty();
+            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+        });
+    });
+}
+
 
 function ajaxMethodCall(postData, ajaxUrl, successFunction) {
 

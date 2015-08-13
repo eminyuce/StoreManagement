@@ -190,8 +190,41 @@ namespace StoreManagement.Service.Repositories
             });
             return task;
         }
+ 
+        public Task<List<Product>> GetProductByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        {
+            var task = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var items =
+                       this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId);
 
-       
+
+
+                    if (excludedProductId.HasValue)
+                    {
+                        items = items.Where(r => r.Id != excludedProductId.Value);
+                    }
+
+                    if (take.HasValue)
+                    {
+                        items = items.Take(take.Value);
+                    }
+
+                    return items.OrderBy(r => r.Ordering).ToList();
+
+                }
+                catch (Exception exception)
+                {
+                    Logger.Error(exception);
+                    return null;
+                }
+
+            });
+            return task;
+        }
+
 
         public List<Product> GetMainPageProducts(int storeId, int? take)
         {

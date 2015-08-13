@@ -95,6 +95,12 @@ namespace StoreManagement.API.Controllers
         {
             return await ProductRepository.GetProductByTypeAndCategoryIdAsync(storeId, categoryId, take, excludedProductId);
         }
- 
+
+        public async Task<List<Product>> GetProductByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        {
+            return await ProductRepository.GetProductByBrandAsync(storeId, brandId, take, excludedProductId);
+        }
+
+       
     }
 }

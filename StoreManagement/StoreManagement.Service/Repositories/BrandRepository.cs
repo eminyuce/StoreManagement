@@ -59,5 +59,24 @@ namespace StoreManagement.Service.Repositories
             });
             return task;
         }
+
+        public Task<Brand> GetBrandAsync(int brandId)
+        {
+
+            var task = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    return  this.GetSingle(brandId);
+
+                }
+                catch (Exception exception)
+                {
+                    Logger.Error(exception);
+                    return null;
+                }
+            });
+            return task;
+        }
     }
 }

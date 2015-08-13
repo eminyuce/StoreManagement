@@ -187,7 +187,32 @@ namespace StoreManagement.Service.Services
                 return null;
             }
         }
- 
+
+        public Task<List<Product>> GetProductByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetProductByBrandAsync?" +
+                                                 "storeId={2}&brandId={3}" +
+                                                 "&take={4}&excludedProductId={5}",
+                                                 WebServiceAddress,
+                                                 ApiControllerName,
+                                                 storeId, brandId,
+                                                 take, excludedProductId);
+
+                return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+
+       
 
         protected override void SetCache()
         {

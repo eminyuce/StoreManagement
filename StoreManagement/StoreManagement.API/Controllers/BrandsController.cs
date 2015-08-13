@@ -41,6 +41,10 @@ namespace StoreManagement.API.Controllers
         {
             return await BrandRepository.GetBrandsAsync(storeId, take, isActive);
         }
-       
+
+        public async Task<Brand> GetBrandAsync(int brandId)
+        {
+            return await BrandRepository.GetBrandAsync(brandId);
+        }
     }
 }

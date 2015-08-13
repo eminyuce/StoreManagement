@@ -15,8 +15,7 @@ namespace StoreManagement.Liquid.Helper
     public class ContentHelper : BaseLiquidHelper
     {
 
-        public int ImageHeight { get; set; }
-        public int ImageWidth { get; set; }
+  
 
 
         public Dictionary<string, string> GetContentsIndexPage(

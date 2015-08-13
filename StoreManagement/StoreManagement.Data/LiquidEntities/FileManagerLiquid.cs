@@ -9,22 +9,18 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class FileManagerLiquid : Drop
+    public class FileManagerLiquid : BaseDrop
     {
         public FileManager FileManager;
-        public PageDesign PageDesign;
-        private FileManager item;
-        public int ImageHeight { get; set; }
-        public int ImageWidth { get; set; }
         public FileManagerLiquid(FileManager fileManager)
         {
             this.FileManager = fileManager;
 
         }
 
-        public FileManagerLiquid(Entities.FileManager item, int imageWidth, int imageHeight)
+        public FileManagerLiquid(FileManager fileManager, int imageWidth, int imageHeight)
         {
-            this.item = item;
+            this.FileManager = fileManager;
             this.ImageWidth = imageWidth;
             this.ImageHeight = imageHeight;
 

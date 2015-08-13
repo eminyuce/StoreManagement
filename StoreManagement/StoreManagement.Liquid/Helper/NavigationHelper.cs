@@ -14,10 +14,6 @@ namespace StoreManagement.Liquid.Helper
     public class NavigationHelper : BaseLiquidHelper
     {
 
-
-        public int ImageHeight { get; set; }
-        public int ImageWidth { get; set; }
-
         public Dictionary<string, string> GetMainLayoutLink(
            Task<List<Navigation>> navigationsTask,
            Task<PageDesign> pageDesignTask)

@@ -11,16 +11,11 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class ImageLiquid : Drop
+    public class ImageLiquid : BaseDrop
     {
 
-
         private List<FileManager> FileManagers { get; set; }
-        private PageDesign PageDesign { get; set; }
 
-
-        public int ImageWidth { get; set; }
-        public int ImageHeight { get; set; }
 
 
         public ImageLiquid(List<FileManager>  fileManagers, PageDesign pageDesign, int width, int height)

@@ -9,13 +9,12 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class ProductCategoryLiquid : Drop
+    public class ProductCategoryLiquid : BaseDrop
     {
         public ProductCategory ProductCategory { get; set; }
         public PageDesign PageDesign { get; set; }
 
-        public int ImageWidth { get; set; }
-        public int ImageHeight { get; set; }
+
 
         public ProductCategoryLiquid(ProductCategory productCategory, PageDesign pageDesign)
         {

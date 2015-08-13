@@ -9,31 +9,22 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class NavigationLiquid : BaseDrop
+    public class BrandLiquid : BaseDrop
     {
-        public Navigation Navigation;
-        public PageDesign PageDesign;
-
-
-        public NavigationLiquid()
+        public Brand Brand;
+        public BrandLiquid(Brand brand, PageDesign pageDesign, int imageWidth, int imageHeight)
         {
-            
-        }
-        
-        public NavigationLiquid(Navigation nav, PageDesign pageDesign)
-        {
-            this.Navigation = nav;
+            this.Brand = brand;
             this.PageDesign = pageDesign;
+            this.ImageWidth = imageWidth;
+            this.ImageHeight = imageHeight;
         }
 
-
-
-
-        public string Link
+        public String DetailLink
         {
             get
             {
-                return LinkHelper.GetNavigationLink(this.Navigation);
+                return LinkHelper.GetBrandDetailLink(this.Brand);
             }
         }
     }

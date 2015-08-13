@@ -12,14 +12,15 @@ namespace StoreManagement.Service.Repositories
 {
     public class BrandRepository : BaseRepository<Brand, int>, IBrandRepository
     {
-        public BrandRepository(IStoreContext dbContext) : base(dbContext)
+        public BrandRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
         }
 
         public List<Brand> GetBrandsByStoreId(int storeId, string search)
         {
-            var products = this.FindBy(r => r.StoreId == storeId );
+            var products = this.FindBy(r => r.StoreId == storeId);
 
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
@@ -27,6 +28,36 @@ namespace StoreManagement.Service.Repositories
             }
 
             return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+        }
+
+        public Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
+        {
+            var task = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var items = this.FindBy(r2 => r2.StoreId == storeId);
+
+                    if (isActive.HasValue)
+                    {
+                        items = items.Where(r => r.State == isActive.Value);
+                    }
+
+                    if (take.HasValue)
+                    {
+                        items = items.Take(take.Value);
+                    }
+
+                    return items.OrderBy(r => r.Ordering).ToList();
+
+                }
+                catch (Exception exception)
+                {
+                    Logger.Error(exception);
+                    return null;
+                }
+            });
+            return task;
         }
     }
 }

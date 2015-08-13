@@ -66,5 +66,12 @@ namespace StoreManagement.Data.GeneralHelper
 
 
         }
+
+        public static string GetBrandDetailLink(Brand brand)
+        {
+            String link = String.Format("/Brands/Detail/{0}",String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name), brand.Id));
+
+            return link.ToLower();
+        }
     }
 }

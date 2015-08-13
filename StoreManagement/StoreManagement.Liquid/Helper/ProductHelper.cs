@@ -15,11 +15,6 @@ namespace StoreManagement.Liquid.Helper
     public class ProductHelper : BaseLiquidHelper
     {
 
-
-        public int ImageHeight { get; set; }
-        public int ImageWidth { get; set; }
-
-
         public Dictionary<string, string> GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
             Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
         {

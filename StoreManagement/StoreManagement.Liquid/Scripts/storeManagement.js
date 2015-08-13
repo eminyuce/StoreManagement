@@ -22,7 +22,21 @@ function callAjaxMethod() {
     if ($('[data-product-categories]').length > 0) {
         GetProductCategories();
     }
+    if ($('[data-brands]').length > 0) {
+        GetBrands();
+    }
+}
+function GetBrands() {
 
+    $('[data-brands]').each(function () {
+        var truethis = this;
+        var designName = $(this).attr('data-template-design-name');
+        var postData = JSON.stringify({ "designName": designName });
+        ajaxMethodCall(postData, "/Ajax/GetBrands", function (data) {
+            $(truethis).empty();
+            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+        });
+    });
 }
 function GetProductCategories() {
 

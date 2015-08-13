@@ -14,9 +14,6 @@ namespace StoreManagement.Liquid.Helper
 {
     public class PhotoGalleryHelper : BaseLiquidHelper
     {
-        public int ImageHeight { get; set; }
-        public int ImageWidth { get; set; }
-
 
         public Dictionary<String, String> GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)
         {

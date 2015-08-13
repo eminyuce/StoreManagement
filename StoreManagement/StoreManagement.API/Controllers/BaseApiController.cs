@@ -56,6 +56,8 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public ILabelRepository LabelRepository { set; get; }
 
+        [Inject]
+        public IBrandRepository BrandRepository { set; get; }
 
         private bool _isCacheEnable = true;
         public bool IsCacheEnable

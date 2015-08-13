@@ -12,17 +12,14 @@ using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class ContentLiquid : Drop
+    public class ContentLiquid : BaseDrop
     {
         public Content Content { get; set; }
         public Category Category { get; set; }
-        public PageDesign PageDesign { get; set; }
         public ImageLiquid ImageLiquid { get; set; }
         private String Type { get; set; }
 
 
-        public int ImageWidth { get; set; }
-        public int ImageHeight { get; set; }
 
 
         public ContentLiquid(Content content, Category category, PageDesign pageDesign, String type, int imageWidth, int imageHeight)
@@ -47,30 +44,6 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetContentLink(this.Content, Category.Name, this.Type);
             }
         }
-        ////int width = 60, int height = 60
-        //public String ImageSource
-        //{
-        //    get
-        //    {
-        //        if (ImageHas)
-        //        {
-        //            var firstOrDefault = this.Content.ContentFiles.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
-        //            return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.FileManager.GoogleImageId, this.ImageWidth, this.ImageHeight);
-        //        }
-        //        else
-        //        {
-
-        //            return "";
-        //        }
-        //    }
-        //}
-        
-        //public bool ImageHas
-        //{
-        //    get
-        //    {
-        //        return this.Content.ContentFiles.Any();
-        //    }
-        //}
+       
     }
 }

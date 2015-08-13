@@ -17,11 +17,6 @@ namespace StoreManagement.Liquid.Helper
     {
 
 
-        public int ImageHeight { get; set; }
-        public int ImageWidth { get; set; }
-
-
-
         public Dictionary<String, String> GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask)
         {
             Task.WaitAll(pageDesignTask, categoriesTask);

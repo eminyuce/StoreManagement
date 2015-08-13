@@ -116,7 +116,7 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(await res, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetProductCategories(String desingName="")
+        public async Task<JsonResult> GetProductCategories(String desingName = "")
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -148,6 +148,37 @@ namespace StoreManagement.Liquid.Controllers
             return Json(await res, JsonRequestBehavior.AllowGet);
         }
 
+        public async Task<JsonResult> GetBrands(String desingName = "")
+        {
+
+            if (String.IsNullOrEmpty(desingName))
+            {
+                desingName = GetSettingValue("BrandsPartial_DefaultPageDesign", "BrandsPartial");
+            }
+            var res = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+                    var brandsTask = BrandService.GetBrandsAsync(StoreId, null, true);
+                    var liquidHelper = new BrandHelper();
+                    liquidHelper.StoreSettings = GetStoreSettings();
+                    liquidHelper.ImageWidth = GetSettingValueInt("BrandsPartial_ImageWidth", 50);
+                    liquidHelper.ImageHeight = GetSettingValueInt("BrandsPartial_ImageHeight", 50);
+                    Dictionary<String, String> dic = liquidHelper.GetBrandsPartial(brandsTask, pageDesignTask);
+                    String html = dic[StoreConstants.PageOutput];
+                    return html;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "GetBrands", desingName);
+                    return "";
+                }
+
+            });
+
+            return Json(await res, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

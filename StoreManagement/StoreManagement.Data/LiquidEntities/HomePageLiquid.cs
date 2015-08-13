@@ -9,9 +9,8 @@ using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class HomePageLiquid : Drop
+    public class HomePageLiquid : BaseDrop
     {
-        public PageDesign PageDesing;
         public List<FileManager> SliderImages;
         public List<Content> Blogs { get; set; }
         public List<Product> Products { get; set; }
@@ -34,7 +33,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = ProductCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                     if (category != null)
                     {
-                        var blog = new ProductLiquid(item, category, PageDesing, ImageWidthBlog, ImageHeightBlog);
+                        var blog = new ProductLiquid(item, category, this.PageDesign, ImageWidthBlog, ImageHeightBlog);
                         list.Add(blog);
                     }
                 }
@@ -48,7 +47,7 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                var sliderLiquid = new ImageLiquid(SliderImages, PageDesing, ImageWidthSlider, ImageHeightSlider);
+                var sliderLiquid = new ImageLiquid(SliderImages, this.PageDesign, ImageWidthSlider, ImageHeightSlider);
                 return sliderLiquid;
             }
         }
@@ -66,7 +65,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = Categories.FirstOrDefault(r => r.Id == item.CategoryId);
                     if (category != null)
                     {
-                        var blog = new ContentLiquid(item, category, PageDesing, StoreConstants.BlogsType, ImageWidthBlog, ImageHeightBlog);
+                        var blog = new ContentLiquid(item, category, this.PageDesign, StoreConstants.BlogsType, ImageWidthBlog, ImageHeightBlog);
                         list.Add(blog);
                     }
                 }
@@ -88,7 +87,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = Categories.FirstOrDefault(r => r.Id == item.CategoryId);
                     if (category != null)
                     {
-                        var blog = new ContentLiquid(item, category, PageDesing, StoreConstants.NewsType, ImageWidthNews, ImageHeightNews);
+                        var blog = new ContentLiquid(item, category, this.PageDesign, StoreConstants.NewsType, ImageWidthNews, ImageHeightNews);
                         list.Add(blog);
                     }
                 }
@@ -105,21 +104,19 @@ namespace StoreManagement.Data.LiquidEntities
                 var cats = new List<ProductCategoryLiquid>();
                 foreach (var item in ProductCategories)
                 {
-                    cats.Add(new ProductCategoryLiquid(item, PageDesing));
+                    cats.Add(new ProductCategoryLiquid(item, this.PageDesign));
                 }
 
                 return cats;
             }
         }
 
-        public int ImageWidth { get; set; }
-        public int ImageHeight { get; set; }
 
 
         public HomePageLiquid(PageDesign pageDesing, List<FileManager> sliderImages)
         {
             // TODO: Complete member initialization
-            this.PageDesing = pageDesing;
+            this.PageDesign = pageDesing;
             this.SliderImages = sliderImages;
         }
 

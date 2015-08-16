@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Data.Entities
 {
+        [Serializable]
     public class Brand : BaseEntity
     {
         [Required(ErrorMessage = "Please enter name")]

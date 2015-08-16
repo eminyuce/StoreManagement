@@ -10,7 +10,8 @@ using DotLiquid;
 
 namespace StoreManagement.Data.Entities
 {
- 
+
+  [Serializable]
     public abstract class BaseContent : BaseEntity 
     {
          [Required]

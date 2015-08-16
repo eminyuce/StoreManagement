@@ -8,6 +8,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class FileManager : BaseEntity
     {
         public string ContentType { get; set; }

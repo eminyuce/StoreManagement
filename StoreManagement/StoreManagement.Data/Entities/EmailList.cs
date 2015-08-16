@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class EmailList : BaseEntity
     {
         [EmailAddress(ErrorMessage = "Invalid Email Address")]

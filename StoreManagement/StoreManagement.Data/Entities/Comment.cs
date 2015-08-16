@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class Comment : BaseEntity
     {
         public int ParentId { set; get; }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Quartz.Util;
 using StoreManagement.Admin.Models;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
@@ -143,29 +144,35 @@ namespace StoreManagement.Admin.Controllers
             String layout = "";
             //StoreRepository.CopyStore(copyStoreId, name, domain, layout);
 
+
             var store = StoreRepository.GetSingle(copyStoreId);
-            store.Id = 0;
-            StoreRepository.Add(store);
+            var storeCopy = store.DeepClone();
+            storeCopy.Id = 0;
+            storeCopy.Name = name;
+            storeCopy.Domain = domain;
+            StoreRepository.Add(storeCopy);
             StoreRepository.Save();
 
-            int newStoreId = store.Id;
+            int newStoreId = storeCopy.Id;
 
             try
             {
                 var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
                 foreach (var settingStore in settingsStore)
                 {
-                    settingStore.Id = 0;
-                    settingStore.StoreId = newStoreId;
-                    SettingRepository.Add(settingStore);
+
+                    var s = settingStore.DeepClone();
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    SettingRepository.Add(s);
 
                 }
                 SettingRepository.Save();
             }
             catch (Exception ex)
             {
-                    
-               Logger.Error(ex,"");
+
+                Logger.Error(ex, "CopyStore",newStoreId);
             }
        
 

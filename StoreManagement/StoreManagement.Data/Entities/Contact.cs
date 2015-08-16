@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class Contact : BaseEntity
     {
         [Required(ErrorMessage = "Please enter name")]

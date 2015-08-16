@@ -8,6 +8,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class Category : BaseCategory
     {
         public virtual ICollection<Content> Contents { get; set; }

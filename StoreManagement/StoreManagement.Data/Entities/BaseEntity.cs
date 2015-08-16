@@ -9,7 +9,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-
+        [Serializable]
     public abstract class BaseEntity : IEntity 
     {
 

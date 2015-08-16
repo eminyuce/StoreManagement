@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StoreManagement.Data.Entities
 {
+       [Serializable]
     public class Store : IEntity
     {
         public int Id { get; set; }

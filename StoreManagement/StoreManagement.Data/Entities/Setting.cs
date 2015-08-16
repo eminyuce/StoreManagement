@@ -9,6 +9,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
+   [Serializable]
     public class Setting : BaseEntity
     {
         public string Name { get; set; }

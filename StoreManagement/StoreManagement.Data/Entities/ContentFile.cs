@@ -7,6 +7,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class ContentFile : IEntity
     {
         public int Id { get; set; }

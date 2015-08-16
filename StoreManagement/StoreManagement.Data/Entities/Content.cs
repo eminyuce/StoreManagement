@@ -12,7 +12,8 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
- 
+
+          [Serializable]
     public class Content : BaseContent
     {
         public Content()

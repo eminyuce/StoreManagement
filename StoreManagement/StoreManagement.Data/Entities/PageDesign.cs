@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class PageDesign : BaseEntity
     {
         public string Type { get; set; }

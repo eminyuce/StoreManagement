@@ -9,6 +9,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
+          [Serializable]
     public class Navigation : BaseEntity
     {
         public int ParentId { get; set; }

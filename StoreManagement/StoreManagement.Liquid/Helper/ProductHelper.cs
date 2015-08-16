@@ -57,6 +57,7 @@ namespace StoreManagement.Liquid.Helper
                                     s.Product.CreatedDate,
                                     s.Product.TotalRating,
                                     s.Product.UnitsInStock,
+                                    s.DetailLink,
                                     images = s.ImageLiquid
                                 },
                     categories = from s in cats
@@ -225,9 +226,21 @@ namespace StoreManagement.Liquid.Helper
                                     {
                                         s.Product.Name,
                                         s.Product.Description,
+                                        s.Product.ProductCode,
+                                        s.Product.Price,
+                                        s.Product.Discount,
+                                        s.Product.UpdatedDate,
+                                        s.Product.CreatedDate,
+                                        s.Product.TotalRating,
+                                        s.Product.UnitsInStock,
                                         s.DetailLink,
-                                        s.ImageLiquid.ImageHas,
-                                        s.ImageLiquid.ImageSource
+                                        CategoryName = s.Category.Name,
+                                        ProductCategoryId = s.Product.ProductCategoryId,
+                                        BrandId = s.Product.BrandId,
+                                        CategoryDescription = s.Category.Description,
+                                        ImageWidth,
+                                        ImageHeight,
+                                        images = s.ImageLiquid
                                     },
                         brand = new
                             {

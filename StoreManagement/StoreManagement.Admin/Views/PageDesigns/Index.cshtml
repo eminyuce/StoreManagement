@@ -212,6 +212,14 @@
 
 
 
+                            columns.Add(o => o.State)
+                                   .Titled("State")
+                                   .Sortable(true)
+                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                    Sanitized(false)
+                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
+                                                                     o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
+
 
                             columns.Add(o => o.UpdatedDate)
                                    .Titled("UpdatedDate")

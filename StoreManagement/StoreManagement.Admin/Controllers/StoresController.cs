@@ -141,8 +141,35 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult CopyStore(int copyStoreId, String name, String domain)
         {
             String layout = "";
-            StoreRepository.CopyStore(copyStoreId, name, domain, layout);
- 
+            //StoreRepository.CopyStore(copyStoreId, name, domain, layout);
+
+            var store = StoreRepository.GetSingle(copyStoreId);
+            store.Id = 0;
+            StoreRepository.Add(store);
+            StoreRepository.Save();
+
+            int newStoreId = store.Id;
+
+            try
+            {
+                var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
+                foreach (var settingStore in settingsStore)
+                {
+                    settingStore.Id = 0;
+                    settingStore.StoreId = newStoreId;
+                    SettingRepository.Add(settingStore);
+
+                }
+                SettingRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                    
+               Logger.Error(ex,"");
+            }
+       
+
+
             return RedirectToAction("Index", new { search = name.ToLower() });
         }
 

@@ -76,7 +76,12 @@
                             @Html.LabelFor(model => model.PageTemplate)
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(model => model.PageTemplate,30,280,null)
+   
+                            
+               
+                          @Html.TextAreaFor(model => model.PageTemplate,30,280,null)
+ 
+
                             @Html.ValidationMessageFor(model => model.PageTemplate)
                         </div>
 
@@ -109,8 +114,13 @@
     <script src="~/Scripts/jstree/jstree.js"></script>
     <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
     <script src="~/Scripts/storeContent.js"></script>
+    
 
-
+    <!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+    <script type="text/javascript">
+        SyntaxHighlighter.all()
+    </script>
+    
 
 
     <script type="text/javascript">

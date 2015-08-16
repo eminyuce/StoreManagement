@@ -83,7 +83,7 @@ namespace StoreManagement.Admin.Controllers
 
                     if (IsSuperAdmin)
                     {
-                        return RedirectToAction("Index", new { storeId = pagedesign.StoreId });
+                        return RedirectToAction("SaveOrEdit", new { id=pagedesign.Id, storeId = pagedesign.StoreId });
                     }
                     else
                     {

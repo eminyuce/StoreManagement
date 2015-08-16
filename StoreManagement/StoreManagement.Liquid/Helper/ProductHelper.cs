@@ -43,9 +43,20 @@ namespace StoreManagement.Liquid.Helper
                     items = from s in items
                             select new
                                 {
+                                    CategoryName = s.Category.Name,
+                                    ProductCategoryId = s.Product.ProductCategoryId,
+                                    BrandId = s.Product.BrandId,
+                                    CategoryDescription = s.Category.Description,
+                                    ProductId = s.Product.Id,
                                     s.Product.Name,
                                     s.Product.Description,
-                                    s.DetailLink,
+                                    s.Product.ProductCode,
+                                    s.Product.Price,
+                                    s.Product.Discount,
+                                    s.Product.UpdatedDate,
+                                    s.Product.CreatedDate,
+                                    s.Product.TotalRating,
+                                    s.Product.UnitsInStock,
                                     images = s.ImageLiquid
                                 },
                     categories = from s in cats
@@ -80,19 +91,25 @@ namespace StoreManagement.Liquid.Helper
             var pageDesign = productsPageDesignTask.Result;
             var category = categoryTask.Result;
 
-            var productLiquid = new ProductLiquid(product, category, pageDesign, ImageWidth, ImageHeight);
+            var s = new ProductLiquid(product, category, pageDesign, ImageWidth, ImageHeight);
 
             object anonymousObject = new
             {
-                CategoryName = productLiquid.Category.Name,
-                ProductCategoryId = productLiquid.Product.ProductCategoryId,
-                BrandId = productLiquid.Product.BrandId,
-                CategoryDescription = productLiquid.Category.Description,
-                ProductId = productLiquid.Product.Id,
-                Name = productLiquid.Product.Name,
-                Description = productLiquid.Product.Description,
-                ImageSource = productLiquid.ImageLiquid.ImageSource,
-                Images = productLiquid.ImageLiquid.ImageLinks
+                CategoryName = s.Category.Name,
+                ProductCategoryId = s.Product.ProductCategoryId,
+                BrandId = s.Product.BrandId,
+                CategoryDescription = s.Category.Description,
+                ProductId = s.Product.Id,
+                s.Product.Name,
+                s.Product.Description,
+                s.Product.ProductCode,
+                s.Product.Price,
+                s.Product.Discount,
+                s.Product.UpdatedDate,
+                s.Product.CreatedDate,
+                s.Product.TotalRating,
+                s.Product.UnitsInStock,
+                images = s.ImageLiquid
             };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
@@ -134,11 +151,24 @@ namespace StoreManagement.Liquid.Helper
                     items = from s in items
                             select new
                             {
+                                ProductId = s.Product.Id,
                                 s.Product.Name,
                                 s.Product.Description,
+                                s.Product.ProductCode,
+                                s.Product.Price,
+                                s.Product.Discount,
+                                s.Product.UpdatedDate,
+                                s.Product.CreatedDate,
+                                s.Product.TotalRating,
+                                s.Product.UnitsInStock,
                                 s.DetailLink,
-                                s.ImageLiquid.ImageHas,
-                                s.ImageLiquid.ImageSource
+                                CategoryName = s.Category.Name,
+                                ProductCategoryId = s.Product.ProductCategoryId,
+                                BrandId = s.Product.BrandId,
+                                CategoryDescription = s.Category.Description,
+                                ImageWidth,
+                                ImageHeight,
+                                images = s.ImageLiquid
                             }
                 }
                     );

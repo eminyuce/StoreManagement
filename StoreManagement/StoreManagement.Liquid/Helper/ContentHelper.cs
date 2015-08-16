@@ -45,6 +45,8 @@ namespace StoreManagement.Liquid.Helper
                         {
                             s.Content.Name,
                             s.Content.Description,
+                            s.Content.Author,
+                            s.Content.UpdatedDate,
                             s.DetailLink,
                             s.ImageLiquid.ImageHas,
                             s.ImageLiquid.ImageSource

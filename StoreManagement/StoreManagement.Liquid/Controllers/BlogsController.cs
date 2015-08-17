@@ -39,13 +39,14 @@ namespace StoreManagement.Liquid.Controllers
                 liquidHelper.StoreSettings = GetStoreSettings();
                 liquidHelper.ImageWidth = GetSettingValueInt("BlogsIndex_ImageWidth", 50);
                 liquidHelper.ImageHeight = GetSettingValueInt("BlogsIndex_ImageHeight", 50);
-                var dic = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
+
+                var pageOutput = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
 
 
                 var pagingHelper = new PagingHelper();
                 pagingHelper.StoreSettings = GetStoreSettings();
                 pagingHelper.StoreId = StoreId;
-                pagingHelper.PageOutputDictionary = dic;
+                pagingHelper.PageOutput = pageOutput;
 
                 pagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 pagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();

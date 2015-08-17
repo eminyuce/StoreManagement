@@ -5,25 +5,26 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-   [Serializable]
+
     public class Setting : BaseEntity
     {
         public string Name { get; set; }
-       // [Required(ErrorMessage = "Please key name")]
+        // [Required(ErrorMessage = "Please key name")]
         public string SettingKey { get; set; }
-       // [Required(ErrorMessage = "Please value name")]
+        // [Required(ErrorMessage = "Please value name")]
         public string SettingValue { get; set; }
 
 
 
 
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public string Type { get; set; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public string Description { get; set; }
 
         public override string ToString()

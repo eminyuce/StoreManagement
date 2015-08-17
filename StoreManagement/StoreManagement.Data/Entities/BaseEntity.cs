@@ -4,12 +4,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using DotLiquid;
 using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-        [Serializable]
+       
     public abstract class BaseEntity : IEntity 
     {
 
@@ -18,9 +19,9 @@ namespace StoreManagement.Data.Entities
         public DateTime ? CreatedDate { get; set; }
         public DateTime ? UpdatedDate { get; set; }
 
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public bool State { get; set; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public int Ordering { get; set; }
 
 

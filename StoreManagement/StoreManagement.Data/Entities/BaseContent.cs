@@ -6,13 +6,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using DotLiquid;
 
 namespace StoreManagement.Data.Entities
 {
 
-  [Serializable]
-    public abstract class BaseContent : BaseEntity 
+     public abstract class BaseContent : BaseEntity 
     {
          [Required]
  
@@ -21,11 +21,11 @@ namespace StoreManagement.Data.Entities
         [AllowHtml]
         public string Description { get; set; }
 
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public string Type { get; set; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public Boolean MainPage { get; set; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public Boolean ImageState { get; set; }
 
 

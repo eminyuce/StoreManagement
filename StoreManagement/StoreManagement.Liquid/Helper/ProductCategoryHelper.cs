@@ -17,7 +17,7 @@ namespace StoreManagement.Liquid.Helper
     {
 
 
-        public Dictionary<String, String> GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask)
+        public StoreLiquidResult GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask)
         {
             Task.WaitAll(pageDesignTask, categoriesTask);
             var pageDesign = pageDesignTask.Result;
@@ -53,11 +53,14 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
-            return dic;
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
 
         }
 
-        public Dictionary<string, string> GetProductCategoriesPartial(Task<List<ProductCategory>> categoriesTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetProductCategoriesPartial(Task<List<ProductCategory>> categoriesTask, Task<PageDesign> pageDesignTask)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -95,7 +98,9 @@ namespace StoreManagement.Liquid.Helper
                 Logger.Error(ex, "GetProductCategoriesPartial");
             }
 
-            return dic;
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
     }
 }

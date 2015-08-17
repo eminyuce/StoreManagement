@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -106,8 +108,8 @@ namespace StoreManagement.Admin.Controllers
                 {
                     if (store.Id != 0)
                     {
-                      //  var oldStore = StoreRepository.GetSingle(store.Id);
-                      //  store.GoogleDriveCertificateP12RawData = oldStore.GoogleDriveCertificateP12RawData;
+                        //  var oldStore = StoreRepository.GetSingle(store.Id);
+                        //  store.GoogleDriveCertificateP12RawData = oldStore.GoogleDriveCertificateP12RawData;
                     }
                 }
 
@@ -120,7 +122,7 @@ namespace StoreManagement.Admin.Controllers
                 }
                 else
                 {
-                
+
                     StoreRepository.Edit(store);
                     store.UpdatedDate = DateTime.Now;
                 }
@@ -146,7 +148,7 @@ namespace StoreManagement.Admin.Controllers
 
 
             var store = StoreRepository.GetSingle(copyStoreId);
-            var storeCopy = store.DeepClone();
+            var storeCopy = DataContractSerialization<Store>(store);
             storeCopy.Id = 0;
             storeCopy.Name = name;
             storeCopy.Domain = domain;
@@ -155,29 +157,66 @@ namespace StoreManagement.Admin.Controllers
 
             int newStoreId = storeCopy.Id;
 
+            var res = Task.Factory.StartNew(() => CopyStoreData(copyStoreId, newStoreId));
+
+
+
+
+            return RedirectToAction("Index", new { search = name.ToLower() });
+        }
+
+
+
+        private static T DataContractSerialization<T>(T obj)
+        {
+            DataContractSerializer dcSer = new DataContractSerializer(obj.GetType());
+            MemoryStream memoryStream = new MemoryStream();
+            dcSer.WriteObject(memoryStream, obj);
+            memoryStream.Position = 0;
+            T newObject = (T)dcSer.ReadObject(memoryStream);
+            return newObject;
+        }
+
+
+
+        private void CopyStoreData(int copyStoreId, int newStoreId)
+        {
             try
             {
                 var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
                 foreach (var settingStore in settingsStore)
                 {
-
-                    var s = settingStore.DeepClone();
+                    var s = DataContractSerialization<Setting>(settingStore);  
                     s.Id = 0;
                     s.StoreId = newStoreId;
                     SettingRepository.Add(s);
-
                 }
                 SettingRepository.Save();
             }
             catch (Exception ex)
             {
-
-                Logger.Error(ex, "CopyStore",newStoreId);
+                Logger.Error(ex, "CopyStore", newStoreId);
             }
-       
 
 
-            return RedirectToAction("Index", new { search = name.ToLower() });
+            try
+            {
+                var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
+                foreach (var pageDesing in pageDesings)
+                {
+                    var s = DataContractSerialization<PageDesign>(pageDesing); 
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    PageDesignRepository.Add(s);
+                }
+                PageDesignRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+
         }
 
         //
@@ -316,7 +355,7 @@ namespace StoreManagement.Admin.Controllers
                 }
                 else
                 {
-       
+
                     setting.UpdatedDate = DateTime.Now;
                     SettingRepository.Edit(setting);
                 }

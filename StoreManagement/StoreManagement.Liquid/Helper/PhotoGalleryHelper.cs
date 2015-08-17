@@ -15,7 +15,7 @@ namespace StoreManagement.Liquid.Helper
     public class PhotoGalleryHelper : BaseLiquidHelper
     {
 
-        public Dictionary<String, String> GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)
+        public StoreLiquidResult GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)
         {
             Task.WaitAll(pageDesignTask, fileManagersTask);
             var pageDesign = pageDesignTask.Result;
@@ -48,7 +48,10 @@ namespace StoreManagement.Liquid.Helper
 
 
 
-            return dic;
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
 
         }
 

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace StoreManagement.Data.Entities
 {
-          [Serializable]
+    
     public class Product : BaseContent
     {
 

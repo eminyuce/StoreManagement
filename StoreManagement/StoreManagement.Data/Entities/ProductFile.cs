@@ -7,7 +7,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-          [Serializable]
+    
     public class ProductFile : IEntity
     {
         public int Id { get; set; }

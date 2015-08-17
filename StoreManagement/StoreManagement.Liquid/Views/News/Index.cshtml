@@ -1,9 +1,9 @@
 ﻿@using MvcPaging
 @using StoreManagement.Data.Constants
 @using StoreManagement.Data.GeneralHelper
-@model Dictionary<String, String>
+@model StoreManagement.Data.LiquidEntities.StoreLiquidResult
 @{
-    Dictionary<String, String> outputDic = Model;
+    Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
     ViewBag.Title = "Index";
     var isPagingUp = outputDic[StoreConstants.IsPagingUp].ToBool();
     var isPagingDown = outputDic[StoreConstants.IsPagingDown].ToBool();

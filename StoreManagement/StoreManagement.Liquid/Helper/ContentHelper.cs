@@ -15,10 +15,10 @@ namespace StoreManagement.Liquid.Helper
     public class ContentHelper : BaseLiquidHelper
     {
 
-  
 
 
-        public Dictionary<string, string> GetContentsIndexPage(
+
+        public StoreLiquidResult GetContentsIndexPage(
             Task<StorePagedList<Content>> contentsTask,
             Task<PageDesign> pageDesignTask,
                  Task<List<Category>> categoriesTask, String type)
@@ -63,11 +63,13 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
             dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
-            return dic;
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
 
 
-        public Dictionary<string, string> GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type)
+        public StoreLiquidResult GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type)
         {
             Task.WaitAll(pageDesignTask, contentTask, categoryTask);
             var content = contentTask.Result;
@@ -96,10 +98,12 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.PageOutput, indexPageOutput);
 
 
-            return dic;
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
 
-        public Dictionary<string, string> GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type)
+        public StoreLiquidResult GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type)
         {
             Task.WaitAll(pageDesignTask, relatedContentsTask, categoryTask);
             var contents = relatedContentsTask.Result;
@@ -133,7 +137,9 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.PageOutput, indexPageOutput);
 
 
-            return dic;
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
 
         }
     }

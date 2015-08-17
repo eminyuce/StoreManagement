@@ -14,7 +14,7 @@ namespace StoreManagement.Liquid.Helper
     public class NavigationHelper : BaseLiquidHelper
     {
 
-        public Dictionary<string, string> GetMainLayoutLink(
+        public StoreLiquidResult GetMainLayoutLink(
            Task<List<Navigation>> navigationsTask,
            Task<PageDesign> pageDesignTask)
         {
@@ -50,13 +50,15 @@ namespace StoreManagement.Liquid.Helper
             var dic = new Dictionary<String, String>();
  
             dic.Add(StoreConstants.PageOutput, indexPageOutput);
- 
 
-            return dic;
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
 
 
-        public static Dictionary<String, String> GetMainLayoutFooterLink(Task<List<Navigation>> navigationsTask, Task<PageDesign> pageDesignTask)
+        public static StoreLiquidResult GetMainLayoutFooterLink(Task<List<Navigation>> navigationsTask, Task<PageDesign> pageDesignTask)
         {
             Task.WaitAll(pageDesignTask, navigationsTask);
             var navigations = navigationsTask.Result;
@@ -90,9 +92,12 @@ namespace StoreManagement.Liquid.Helper
             var dic = new Dictionary<String, String>();
  
             dic.Add(StoreConstants.PageOutput, indexPageOutput);
-           
 
-            return dic;
+
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿@using MvcPaging
 @using StoreManagement.Data.GeneralHelper
-@model Dictionary<String, String>
+
+@model StoreManagement.Data.LiquidEntities.StoreLiquidResult  
 @{
     ViewBag.Title = "Index";
-    Dictionary<String, String> outputDic = Model;
+    Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
     var pageSize = outputDic["PageSize"].ToInt();
     var pageNumber = outputDic["PageNumber"].ToInt();
     var totalItemCount = outputDic["TotalItemCount"].ToInt();
@@ -31,7 +32,7 @@
 
 
     <!-- Masonry Wrapper-->
-    @Html.Raw(outputDic["PageOutput"])
+    @Html.Raw(Model.PageOutputText)
 
 
     @if (isPagingDown)

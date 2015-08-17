@@ -67,8 +67,8 @@ namespace StoreManagement.Liquid.Controllers
                     }
 
 
-                    Dictionary<String, String> dic = liquidHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
-                    String html = dic[StoreConstants.PageOutput];
+                    var pageOutput = liquidHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
+                    String html = pageOutput.PageOutputText;
                     return html;
 
                 }

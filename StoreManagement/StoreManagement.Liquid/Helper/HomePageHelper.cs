@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Helper
     public class HomePageHelper : BaseLiquidHelper
     {
 
-        public Dictionary<string, string> GetHomePageDesign(
+        public StoreLiquidResult GetHomePageDesign(
          Task<List<Product>> productsTask,
          Task<List<Content>> blogsTask,
          Task<List<Content>> newsTask,
@@ -93,7 +93,10 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.PageOutput, indexPageOutput);
 
 
-            return dic;
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
 
 

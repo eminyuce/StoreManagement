@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Data.Entities
 {
-          [Serializable]
+ 
     public class ProductCategory : BaseCategory
     {
         public virtual ICollection<Product> Products { get; set; }

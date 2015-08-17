@@ -4,11 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-          [Serializable]
+         
     public class FileManager : BaseEntity
     {
         public string ContentType { get; set; }
@@ -17,28 +18,28 @@ namespace StoreManagement.Data.Entities
         public string WebContentLink { get; set; }       
         public string FileStatus { get; set; }
 
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public string ThumbnailLink { get; set; }
         
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public string OriginalFilename { get; set; }
         
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public DateTime? ModifiedDate { get; set; }
         
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public string IconLink { get; set; }
         
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public int ContentLength { get; set; }
         
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public bool IsCarousel { get; set; }
 
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public int ? Width { get; set; }
         
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public int ?  Height { get; set; }
 
 

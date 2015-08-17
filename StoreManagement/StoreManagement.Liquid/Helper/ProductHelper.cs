@@ -15,7 +15,7 @@ namespace StoreManagement.Liquid.Helper
     public class ProductHelper : BaseLiquidHelper
     {
 
-        public Dictionary<string, string> GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
+        public StoreLiquidResult GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
             Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
         {
 
@@ -82,10 +82,12 @@ namespace StoreManagement.Liquid.Helper
 
 
 
-            return dic;
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
 
-        public Dictionary<String, String> GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask)
+        public StoreLiquidResult GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask)
         {
             Task.WaitAll(productsPageDesignTask, productsTask, categoryTask);
             var product = productsTask.Result;
@@ -121,10 +123,12 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.PageOutput, indexPageOutput);
 
 
-            return dic;
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
         }
 
-        public Dictionary<string, string> GetRelatedProductsPartialByCategory(Task<ProductCategory> categoryTask,
+        public StoreLiquidResult  GetRelatedProductsPartialByCategory(Task<ProductCategory> categoryTask,
             Task<List<Product>> relatedProductsTask,
             Task<PageDesign> pageDesignTask
           )
@@ -133,8 +137,8 @@ namespace StoreManagement.Liquid.Helper
             var products = relatedProductsTask.Result;
             var pageDesign = pageDesignTask.Result;
             var category = categoryTask.Result;
+            var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
-            dic.Add(StoreConstants.PageOutput, "");
             try
             {
 
@@ -178,17 +182,19 @@ namespace StoreManagement.Liquid.Helper
                 dic[StoreConstants.PageOutput] = indexPageOutput;
 
 
-                return dic;
+
+                result.LiquidRenderedResult = dic;
+                return result;
 
             }
             catch (Exception ex)
             {
                 Logger.Error(ex, "GetRelatedProductsPartial");
-                return dic;
+                return result;
             }
         }
 
-        public Dictionary<string, string> GetRelatedProductsPartialByBrand(Task<Brand> brandTask,
+        public StoreLiquidResult GetRelatedProductsPartialByBrand(Task<Brand> brandTask,
             Task<List<Product>> relatedProductsTask,
             Task<PageDesign> pageDesignTask,
             Task<List<ProductCategory>> productCategoriesTask)
@@ -199,7 +205,7 @@ namespace StoreManagement.Liquid.Helper
             var pageDesign = pageDesignTask.Result;
             var brand = brandTask.Result;
             var productCategories = productCategoriesTask.Result;
-
+            var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try
@@ -254,15 +260,15 @@ namespace StoreManagement.Liquid.Helper
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;
+                result.LiquidRenderedResult = dic;
 
-
-                return dic;
+                return result;
 
             }
             catch (Exception ex)
             {
                 Logger.Error(ex, "GetRelatedProductsPartial");
-                return dic;
+                return result;
             }
         }
     }

@@ -33,14 +33,14 @@ namespace StoreManagement.Liquid.Controllers
                 liquidHelper.StoreSettings = GetStoreSettings();
                 liquidHelper.ImageWidth = GetSettingValueInt("NewsIndex_ImageWidth", 50);
                 liquidHelper.ImageHeight = GetSettingValueInt("NewsIndex_ImageHeight", 50);
-                var dic = liquidHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
+                var pageOutput = liquidHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
 
 
 
                 var pagingHelper = new PagingHelper();
                 pagingHelper.StoreSettings = GetStoreSettings();
                 pagingHelper.StoreId = StoreId;
-                pagingHelper.PageOutputDictionary = dic;
+                pagingHelper.PageOutput = pageOutput;
                
                 pagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 pagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
@@ -72,9 +72,10 @@ namespace StoreManagement.Liquid.Controllers
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, newsId);
                 var liquidHelper = new ContentHelper();
                 liquidHelper.StoreSettings = GetStoreSettings();
-                var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
                 liquidHelper.ImageWidth = GetSettingValueInt("NewsDetail_ImageWidth", 50);
                 liquidHelper.ImageHeight = GetSettingValueInt("NewsDetail_ImageHeight", 50);
+                var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
+
 
                 return View(dic);
 

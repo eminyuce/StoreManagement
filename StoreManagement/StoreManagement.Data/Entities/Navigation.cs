@@ -5,11 +5,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-          [Serializable]
+ 
     public class Navigation : BaseEntity
     {
         public int ParentId { get; set; }
@@ -22,9 +23,9 @@ namespace StoreManagement.Data.Entities
 
 
 
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public string Modul { get; set; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public Boolean LinkState { get; set; }
      
     }

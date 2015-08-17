@@ -7,7 +7,7 @@ using GenericRepository;
 
 namespace StoreManagement.Data.Entities
 {
-          [Serializable]
+      
     public class LabelLine : IEntity
     {
         public int Id { get; set; }

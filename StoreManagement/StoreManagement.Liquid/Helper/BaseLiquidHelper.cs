@@ -46,20 +46,19 @@ namespace StoreManagement.Liquid.Helper
         {
             try
             {
-                if (StoreId == null)
+                if (StoreId == 0)
                 {
                     return "";
                 }
+                Logger.Trace("Settings:"+StoreSettings.Count());
                 var item = StoreSettings.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
 
                 return item != null ? item.SettingValue : "";
             }
             catch (Exception ex)
             {
-                if (StoreId != null)
-                {
-                    Logger.Error("Store= " + StoreId + " Key=" + key, ex);
-                }
+
+                Logger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
                 return "";
             }
         }

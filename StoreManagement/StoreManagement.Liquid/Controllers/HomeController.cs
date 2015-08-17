@@ -31,6 +31,7 @@ namespace StoreManagement.Liquid.Controllers
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId);
                 var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
                 var liquidHelper = new HomePageHelper();
+                liquidHelper.StoreId = this.StoreId;
                 liquidHelper.StoreSettings = GetStoreSettings();
                 var dic = liquidHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
                 return View(dic);

@@ -32,8 +32,8 @@ namespace StoreManagement.Liquid.Controllers
                     liquidHelper.StoreSettings = GetStoreSettings();
                     liquidHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
                     liquidHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
-                    Dictionary<String, String> dic = liquidHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
-                    String html = dic[StoreConstants.PageOutput];
+                    var pageOuput = liquidHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
+                    String html = pageOuput.PageOutputText;
                     return html;
                 }
                 catch (Exception ex)
@@ -66,8 +66,8 @@ namespace StoreManagement.Liquid.Controllers
                     liquidHelper.StoreSettings = GetStoreSettings();
                     liquidHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByCategory_ImageWidth", 50);
                     liquidHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByCategory_ImageHeight", 50);
-                    Dictionary<String, String> dic = liquidHelper.GetRelatedProductsPartialByCategory(categoryTask, relatedProductsTask, pageDesignTask);
-                    String html = dic[StoreConstants.PageOutput];
+                    var pageOuput = liquidHelper.GetRelatedProductsPartialByCategory(categoryTask, relatedProductsTask, pageDesignTask);
+                    String html = pageOuput.PageOutputText;
                     return html;
                 }
                 catch (Exception ex)
@@ -102,8 +102,8 @@ namespace StoreManagement.Liquid.Controllers
                     liquidHelper.StoreSettings = GetStoreSettings();
                     liquidHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByBrand_ImageWidth", 50);
                     liquidHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByBrand_ImageHeight", 50);
-                    Dictionary<String, String> dic = liquidHelper.GetRelatedProductsPartialByBrand(brandTask, relatedProductsTask, pageDesignTask, categoriesTask);
-                    String html = dic[StoreConstants.PageOutput];
+                    var pageOuput = liquidHelper.GetRelatedProductsPartialByBrand(brandTask, relatedProductsTask, pageDesignTask, categoriesTask);
+                    String html = pageOuput.PageOutputText;
                     return html;
                 }
                 catch (Exception ex)
@@ -135,8 +135,8 @@ namespace StoreManagement.Liquid.Controllers
                     liquidHelper.StoreSettings = GetStoreSettings();
                     liquidHelper.ImageWidth = GetSettingValueInt("BrandsPartial_ImageWidth", 50);
                     liquidHelper.ImageHeight = GetSettingValueInt("BrandsPartial_ImageHeight", 50);
-                    Dictionary<String, String> dic = liquidHelper.GetBrandsPartial(brandsTask, pageDesignTask);
-                    String html = dic[StoreConstants.PageOutput];
+                    var pageOuput = liquidHelper.GetBrandsPartial(brandsTask, pageDesignTask);
+                    String html = pageOuput.PageOutputText;
                     return html;
                 }
                 catch (Exception ex)

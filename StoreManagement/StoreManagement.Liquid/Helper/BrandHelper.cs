@@ -14,7 +14,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class BrandHelper : BaseLiquidHelper
     {
-        public Dictionary<string, string> GetBrandsPartial(Task<List<Brand>> brandsTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetBrandsPartial(Task<List<Brand>> brandsTask, Task<PageDesign> pageDesignTask)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -54,7 +54,11 @@ namespace StoreManagement.Liquid.Helper
                 Logger.Error(ex);
 
             }
-            return dic;
+
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
 
         }
 

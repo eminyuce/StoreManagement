@@ -1,12 +1,13 @@
 using System;
 using System.Runtime.Serialization;
+using System.Web.Script.Serialization;
 using GenericRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace StoreManagement.Data.Entities
 {
-       [Serializable]
+     
     public class Store : IEntity
     {
         public int Id { get; set; }
@@ -19,9 +20,9 @@ namespace StoreManagement.Data.Entities
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public bool State { get; set; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public int Ordering { get; set; }
 
         public virtual ICollection<FileManager> FileManagers { get; set; }
@@ -31,19 +32,19 @@ namespace StoreManagement.Data.Entities
         public int CategoryId { get; set; }
 
         public String GoogleDriveClientId { set; get; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public String GoogleDriveUserEmail { set; get; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public String GoogleDriveUserEmailPassword { set; get; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public String GoogleDriveFolder { set; get; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public String GoogleDriveServiceAccountEmail { set; get; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public String GoogleDriveCertificateP12FileName { set; get; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public String GoogleDrivePassword { set; get; }
-        [IgnoreDataMember]
+        [ScriptIgnore]
         public byte[] GoogleDriveCertificateP12RawData { set; get; }
 
         public bool IsCacheEnable { get; set; }

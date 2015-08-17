@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Data.Entities
 {
-          [Serializable]
+     
     public class Location : BaseEntity
     {
         [Required(ErrorMessage = "Please enter address")]

@@ -15,7 +15,7 @@ namespace StoreManagement.Liquid.Helper
     public class PagingHelper : BaseLiquidHelper
     {
 
-        public Dictionary<string, string> PageOutputDictionary { get; set; }
+        public StoreLiquidResult PageOutput { get; set; }
 
  
         public String ActionName { get; set; }
@@ -35,17 +35,17 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-        public Dictionary<string, string> GetPaging(Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetPaging(Task<PageDesign> pageDesignTask)
         {
             Task.WaitAll(pageDesignTask);
             var pageDesign = pageDesignTask.Result;
 
             var paginator = new PaginatorLiquid();
             paginator.PaginatePath = this.PaginatePath;
-    
-            paginator.Page = PageOutputDictionary[StoreConstants.PageNumber].ToInt();
-            paginator.TotalRecords = PageOutputDictionary[StoreConstants.TotalItemCount].ToInt();
-            paginator.PageSize = PageOutputDictionary[StoreConstants.PageSize].ToInt();
+            var pageOutputDictionary = PageOutput.LiquidRenderedResult;
+            paginator.Page = pageOutputDictionary[StoreConstants.PageNumber].ToInt();
+            paginator.TotalRecords = pageOutputDictionary[StoreConstants.TotalItemCount].ToInt();
+            paginator.PageSize = pageOutputDictionary[StoreConstants.PageSize].ToInt();
             object anonymousObject = new
                 {
                     paginator = paginator
@@ -56,9 +56,9 @@ namespace StoreManagement.Liquid.Helper
 
             var pagingDic = new Dictionary<String, String>();
             pagingDic.Add(StoreConstants.PagingOutput, indexPageOutput);
-            pagingDic = pagingDic.MergeLeft(PageOutputDictionary);
-
-            return pagingDic;
+            pagingDic = pagingDic.MergeLeft(pageOutputDictionary);
+            PageOutput.LiquidRenderedResult = pagingDic;
+            return PageOutput;
         }
 
 

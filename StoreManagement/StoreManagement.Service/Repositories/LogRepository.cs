@@ -82,7 +82,7 @@ namespace StoreManagement.Service.Repositories
                                 var systemLogging = new system_logging();
                                 systemLogging.entered_date = dr["entered_date"].ToDateTime();
                                 systemLogging.log_application = dr["log_application"].ToStr();
-                                systemLogging.log_date = dr["log_date"].ToDateTime();
+                                systemLogging.log_date = dr["log_date"].ToStr();
                                 systemLogging.log_level = dr["log_level"].ToStr();
                                 systemLogging.log_logger = dr["log_logger"].ToStr();
                                 systemLogging.log_message = dr["log_message"].ToStr();

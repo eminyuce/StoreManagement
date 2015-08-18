@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
+using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.Interfaces;
 
@@ -18,6 +19,7 @@ namespace StoreManagement.Liquid.Controllers
         {
             try
             {
+
                 int? categoryId = null;
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePage");
                 int take = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", 5);
@@ -33,8 +35,10 @@ namespace StoreManagement.Liquid.Controllers
                 var liquidHelper = new HomePageHelper();
                 liquidHelper.StoreId = this.StoreId;
                 liquidHelper.StoreSettings = GetStoreSettings();
-                var dic = liquidHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
-                return View(dic);
+                StoreLiquidResult liquidResult = liquidHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
+                liquidResult.StoreId = this.StoreId;
+
+                return View(liquidResult);
 
             }
             catch (Exception ex)

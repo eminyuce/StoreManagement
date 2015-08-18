@@ -45,6 +45,13 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestLogRepositoryGetSingle()
+        {
+            var log = new LogRepository(new StoreContext(ConnectionString));
+            log.GetSingle(249059);
+        }
+
+        [TestMethod]
         public void TestGetRelatedContentsPartial()
         {
 

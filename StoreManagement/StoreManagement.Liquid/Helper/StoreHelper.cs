@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -9,22 +10,22 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class StoreHelper 
+    public class StoreHelper
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public Store GetStoreByDomain(IStoreService storeService, HttpContextBase request)
         {
             String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
-
+            String domainName = "FUELTECHNOLOGYAGE.COM";
+            domainName = GeneralHelper.GetSiteDomain(request);
             if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
-
-                String domainName = "FUELTECHNOLOGYAGE.COM";
-                domainName = GeneralHelper.GetSiteDomain(request);
                 return storeService.GetStore(domainName);
             }
             else
             {
                 String defaultSiteDomain = ProjectAppSettings.GetWebConfigString("DefaultSiteDomain", "login.seatechnologyjobs.com");
+                Logger.Trace("Default Site Domain is used." + defaultSiteDomain + " for " + domainName);
                 return storeService.GetStoreByDomain(defaultSiteDomain);
             }
 
@@ -32,19 +33,22 @@ namespace StoreManagement.Liquid.Helper
         public int GetStoreIdByDomain(IStoreService storeService, HttpContextBase request)
         {
             String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
+            String domainName = "FUELTECHNOLOGYAGE.COM";
+            domainName = GeneralHelper.GetSiteDomain(request);
 
-            if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            var sId=storeService.GetStoreIdByDomain(domainName);
+            if (sId > 0)
             {
-
-                String domainName = "FUELTECHNOLOGYAGE.COM";
-                domainName = GeneralHelper.GetSiteDomain(request);
-                return storeService.GetStoreIdByDomain(domainName);
+                return sId;
             }
             else
             {
-                String defaultSiteDomain = ProjectAppSettings.GetWebConfigString("DefaultSiteDomain", "login.seatechnologyjobs.com");
+                String defaultSiteDomain = ProjectAppSettings.GetWebConfigString("DefaultSiteDomain",
+                                                                                "login.seatechnologyjobs.com");
+                Logger.Trace("Default Site Domain is used." + defaultSiteDomain + " for " + domainName);
                 return storeService.GetStoreIdByDomain(defaultSiteDomain);
             }
+            
 
         }
     }

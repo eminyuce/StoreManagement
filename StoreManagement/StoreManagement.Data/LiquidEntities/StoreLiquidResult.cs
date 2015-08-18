@@ -9,7 +9,7 @@ namespace StoreManagement.Data.LiquidEntities
 {
     public class StoreLiquidResult
     {
-
+        public int StoreId { get; set; }
         public Dictionary<String, String> LiquidRenderedResult { get; set; }
  
         public String PageOutputText
@@ -19,5 +19,7 @@ namespace StoreManagement.Data.LiquidEntities
                 return LiquidRenderedResult[StoreConstants.PageOutput];
             }
         }
+
+
     }
 }

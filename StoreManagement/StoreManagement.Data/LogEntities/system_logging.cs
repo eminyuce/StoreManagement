@@ -12,7 +12,7 @@ namespace StoreManagement.Data.LogEntities
         public int Id { get; set; }
         public DateTime entered_date { get; set; }
         public string log_application { get; set; }
-        public DateTime log_date { get; set; }
+        public string log_date { get; set; }
         public string log_level { get; set; }
         public string log_logger { get; set; }
         public string log_message { get; set; }

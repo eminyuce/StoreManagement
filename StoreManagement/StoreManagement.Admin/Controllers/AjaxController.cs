@@ -130,6 +130,11 @@ namespace StoreManagement.Admin.Controllers
             {
                 list = SettingRepository.GetStoreSettingsByType(storeId, "", searchKey).Select(r => String.Format("{0}", r.SettingKey)).ToList();
             }
+            if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                  controller.Equals("StoreLanguages", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = StoreLanguageRepository.GetStoreLanguages(storeId, searchKey).Select(r => String.Format("{0}", r.Name)).ToList();
+            }
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -201,9 +206,9 @@ namespace StoreManagement.Admin.Controllers
                         SettingRepository.Edit(item);
                         SettingRepository.Save();
                     }
-               
-  
-     
+
+
+
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -303,6 +308,32 @@ namespace StoreManagement.Admin.Controllers
             catch (Exception exception)
             {
                 Logger.ErrorException("DeleteSettingGridItem :" + String.Join(",", values), exception);
+            }
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteStoreLanguageGridItem(List<String> values)
+        {
+            try
+            {
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = StoreLanguageRepository.GetSingle(id);
+                    StoreLanguageRepository.Delete(item);
+                }
+                StoreLanguageRepository.Save();
+
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeleteNavigationGridItem :" + String.Join(",", values), exception);
             }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
@@ -561,14 +592,21 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteContentGridItem(List<String> values)
         {
-            foreach (String id in values)
+            try
             {
-                var contentId = id.ToInt();
-                var content = ContentRepository.GetSingle(contentId);
-                ContentRepository.Delete(content);
-            }
-            ContentRepository.Save();
 
+                foreach (String id in values)
+                {
+                    var contentId = id.ToInt();
+                    var content = ContentRepository.GetSingle(contentId);
+                    ContentRepository.Delete(content);
+                }
+                ContentRepository.Save();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "DeleteContentGridItem :" + String.Join(",", values));
+            }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeEmailListGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
@@ -760,6 +798,32 @@ namespace StoreManagement.Admin.Controllers
             catch (Exception exception)
             {
                 Logger.ErrorException("ChangeContactsGridOrderingOrState :" + String.Join(",", values), exception);
+            }
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeStoreLanguageGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            try
+            {
+                foreach (OrderingItem item in values)
+                {
+                    var nav = StoreLanguageRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
+
+                    StoreLanguageRepository.Edit(nav);
+                }
+                StoreLanguageRepository.Save();
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeStoreLanguageGridOrderingOrState :" + String.Join(",", values), exception);
             }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }

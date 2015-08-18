@@ -102,6 +102,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IScheduler>().ToMethod(ctx => ctx.Kernel.Get<ISchedulerFactory>().GetScheduler()).InSingletonScope();
             kernel.Bind<IBaseTasksScheduler>().To<StoreTasksScheduler>().WithConstructorArgument("scheduler", kernel.Get<IScheduler>());
             kernel.Get<IBaseTasksScheduler>().Start();
+            kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>();
 
 
         }

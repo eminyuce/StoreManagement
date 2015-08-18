@@ -62,6 +62,9 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public ILogRepository LogRepository { set; get; }
 
+        [Inject]
+        public IStoreLanguageRepository StoreLanguageRepository { set; get; }
+
         private bool _isCacheEnable = true;
         public bool IsCacheEnable
         {

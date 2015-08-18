@@ -333,6 +333,7 @@
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StoreCategoriesController.cs" />
+    <Compile Include="Controllers\StoreLanguagesController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1974,6 +1975,10 @@
     <Content Include="Views\Brands\Index.cshtml" />
     <Content Include="Views\Logs\TotalSpace.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DataTable.cshtml" />
+    <Content Include="Views\StoreLanguages\Delete.cshtml" />
+    <Content Include="Views\StoreLanguages\Details.cshtml" />
+    <Content Include="Views\StoreLanguages\Index.cshtml" />
+    <Content Include="Views\StoreLanguages\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

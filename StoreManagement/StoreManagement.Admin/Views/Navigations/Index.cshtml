@@ -1,7 +1,9 @@
 ﻿@using GridMvc.Html
 @using GridMvc.Sorting
 @using StoreManagement.Data
-@using StoreManagement.Data.Entities
+@using StoreManagement.Data.GeneralHelper;
+@using StoreManagement.Data.Constants;
+@using StoreManagement.Data.Entities;
 @model List<StoreManagement.Data.Entities.Navigation>
 @using StoreManagement.Data.Constants;
 
@@ -9,6 +11,7 @@
     ViewBag.Title = "Index";
     String search = (String)ViewBag.Search;
     var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
+    int storeId = Request.QueryString["storeId"].ToInt();
 }
 
 
@@ -33,7 +36,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <span class="col-md-3">
-                                @Html.ActionLink("Create", "SaveOrEdit", "Navigations", new { id = 0 }, new { @class = "btn btn-primary btn-block" })
+                                @Html.ActionLink("Create", "SaveOrEdit", "Navigations", new { id = 0, selectedStoreId = storeId }, new { @class = "btn btn-primary btn-block" })
                             </span>
                             <span class="col-md-9">
                                 @Html.Partial("pSearchForm")
@@ -135,8 +138,8 @@
             .SetWidth(30)
             .RenderValueAs(d =>
                 @<b>
-                   @Html.ActionLink(" ", "SaveOrEdit", "Navigations", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
-               </b>);
+                    @Html.ActionLink(" ", "SaveOrEdit", "Navigations", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                </b>);
 
         columns.Add()
                    .Encoded(false)

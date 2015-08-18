@@ -88,7 +88,7 @@ namespace StoreManagement.API.App_Start
             kernel.Bind<IContactRepository>().To<ContactRepository>();
             kernel.Bind<ILocationRepository>().To<LocationRepository>();
             kernel.Bind<IBrandRepository>().To<BrandRepository>();
-
+            kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>();
             kernel.Bind<ILogRepository>().To<LogRepository>();
 
 

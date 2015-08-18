@@ -88,6 +88,7 @@
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\ISettingService.cs" />
+    <Compile Include="Interfaces\IStoreLanguageService.cs" />
     <Compile Include="Interfaces\IStoreService.cs" />
     <Compile Include="Interfaces\IStoreUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Repositories\Interfaces\IProductCategoryRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IStoreLanguageRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreUserRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductFileRepository.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Repositories\ProductFileRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
+    <Compile Include="Repositories\StoreLanguageRepository.cs" />
     <Compile Include="Repositories\StoreRepository.cs" />
     <Compile Include="Repositories\StoreUserRepository.cs" />
     <Compile Include="Services\BaseService.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="Services\ProductFileService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\SettingService.cs" />
+    <Compile Include="Services\StoreLanguageService.cs" />
     <Compile Include="Services\StoreService.cs" />
     <Compile Include="Services\StoreUserService.cs" />
   </ItemGroup>

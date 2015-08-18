@@ -37,5 +37,6 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<Location> Locations { get; set; }
         public IDbSet<Contact> Contacts { get; set; }
         public IDbSet<Brand> Brands { get; set; }
+        public IDbSet<StoreLanguage> StoreLanguages { get; set; }
     }
 }

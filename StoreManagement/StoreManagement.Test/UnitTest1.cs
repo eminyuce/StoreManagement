@@ -42,6 +42,21 @@ namespace StoreManagement.Test
         {
             dbContext = new StoreContext(ConnectionString);
 
+        }  
+        [TestMethod]
+        public void TestStoreLanguageRepositoryGetSingle()
+        {
+            var log = new StoreLanguageRepository(new StoreContext(ConnectionString));
+            var storeLanguange = new StoreLanguage();
+            storeLanguange.LanguageCode = "tr-tr";
+            storeLanguange.Name = "Turkce";
+            storeLanguange.UpdatedDate = DateTime.Now;
+            storeLanguange.CreatedDate = DateTime.Now;
+            storeLanguange.State = true;
+            storeLanguange.StoreId = 9;
+            storeLanguange.Ordering = 1;
+            log.Add(storeLanguange);
+            log.Save();
         }
 
         [TestMethod]

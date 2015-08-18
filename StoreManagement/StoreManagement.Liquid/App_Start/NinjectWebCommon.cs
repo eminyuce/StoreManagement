@@ -104,6 +104,9 @@ namespace StoreManagement.Liquid.App_Start
                 service14.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service15 = kernel.Bind<ILocationService>().To<LocationService>();
                 service15.WithConstructorArgument("webServiceAddress", webServiceAddress);
+                var service16 = kernel.Bind<IStoreLanguageService>().To<StoreLanguageService>();
+                service16.WithConstructorArgument("webServiceAddress", webServiceAddress);
+
             }
             else
             {
@@ -124,6 +127,7 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>();
                 kernel.Bind<ILocationService>().To<LocationRepository>();
                 kernel.Bind<IBrandService>().To<BrandRepository>();
+                kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>();
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();
 

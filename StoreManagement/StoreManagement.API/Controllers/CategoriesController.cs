@@ -112,9 +112,9 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetCategoriesByStoreId(storeId);
         }
 
-        public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int ? take)
         {
-            return CategoryRepository.GetCategoriesByStoreIdWithContent(storeId);
+            return CategoryRepository.GetCategoriesByStoreIdWithContent(storeId, take);
         }
 
 

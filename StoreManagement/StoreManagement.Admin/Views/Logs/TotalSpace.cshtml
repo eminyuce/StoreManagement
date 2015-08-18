@@ -1,0 +1,14 @@
+﻿@using System.Data
+@model List<System.Data.DataTable>
+
+@{
+    ViewBag.Title = "TotalSpace";
+}
+
+<h2>Total Space</h2>
+
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item, "DataTable")
+}
+

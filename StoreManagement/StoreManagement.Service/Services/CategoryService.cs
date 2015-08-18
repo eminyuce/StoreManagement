@@ -29,10 +29,10 @@ namespace StoreManagement.Service.Services
 
         }
 
-        public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int? take)
         {
 
-            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreId?storeId={2}&take={3}", WebServiceAddress, ApiControllerName, storeId, take);
             SetCache();
             return HttpRequestHelper.GetUrlResults<Category>(url);
 

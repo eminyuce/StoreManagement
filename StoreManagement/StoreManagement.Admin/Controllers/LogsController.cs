@@ -42,13 +42,18 @@ namespace StoreManagement.Admin.Controllers
 
             return View(item);
         }
-       
- 
+
         public ActionResult DeleteLogs(string id = "")
         {
             var application = id;
             LogRepository.DeleteLogs(application);
             return RedirectToAction("Index");
         }
-	}
+
+        public ActionResult TotalSpace(string id = "")
+        {
+            var list = LogRepository.GetTotalTablesSpace();
+            return View(list);
+        }
+    }
 }

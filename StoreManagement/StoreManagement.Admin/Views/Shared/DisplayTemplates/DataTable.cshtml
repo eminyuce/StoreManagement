@@ -1,0 +1,30 @@
+﻿@using System.Data
+@model System.Data.DataTable
+
+
+<h3>@Model.TableName</h3>
+ 
+<table border="1" cellpadding="5" class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            @foreach (System.Data.DataColumn col in Model.Columns)
+            {
+                <th>&nbsp;&nbsp;&nbsp;@col.Caption&nbsp;&nbsp;&nbsp;</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow row in Model.Rows)
+        {
+            <tr>
+                @foreach (var cell in row.ItemArray)
+                {
+                    <td>&nbsp;&nbsp;&nbsp; @cell.ToString()&nbsp;&nbsp;&nbsp;</td>
+                }
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+

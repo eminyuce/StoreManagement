@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.Caching;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -22,6 +23,18 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
+
+        public static T DataContractSerialization<T>(T obj)
+        {
+            DataContractSerializer dcSer = new DataContractSerializer(obj.GetType());
+            MemoryStream memoryStream = new MemoryStream();
+            dcSer.WriteObject(memoryStream, obj);
+            memoryStream.Position = 0;
+            T newObject = (T)dcSer.ReadObject(memoryStream);
+            return newObject;
+        }
+
+
         public static string GetMd5Hash(string input)
         {
             var md5 = MD5.Create();

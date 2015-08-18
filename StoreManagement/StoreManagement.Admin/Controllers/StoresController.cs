@@ -148,7 +148,7 @@ namespace StoreManagement.Admin.Controllers
 
 
             var store = StoreRepository.GetSingle(copyStoreId);
-            var storeCopy = DataContractSerialization<Store>(store);
+            var storeCopy = GeneralHelper.DataContractSerialization(store);
             storeCopy.Id = 0;
             storeCopy.Name = name;
             storeCopy.Domain = domain;
@@ -167,57 +167,6 @@ namespace StoreManagement.Admin.Controllers
 
 
 
-        private static T DataContractSerialization<T>(T obj)
-        {
-            DataContractSerializer dcSer = new DataContractSerializer(obj.GetType());
-            MemoryStream memoryStream = new MemoryStream();
-            dcSer.WriteObject(memoryStream, obj);
-            memoryStream.Position = 0;
-            T newObject = (T)dcSer.ReadObject(memoryStream);
-            return newObject;
-        }
-
-
-
-        private void CopyStoreData(int copyStoreId, int newStoreId)
-        {
-            try
-            {
-                var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
-                foreach (var settingStore in settingsStore)
-                {
-                    var s = DataContractSerialization<Setting>(settingStore);  
-                    s.Id = 0;
-                    s.StoreId = newStoreId;
-                    SettingRepository.Add(s);
-                }
-                SettingRepository.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "CopyStore", newStoreId);
-            }
-
-
-            try
-            {
-                var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
-                foreach (var pageDesing in pageDesings)
-                {
-                    var s = DataContractSerialization<PageDesign>(pageDesing); 
-                    s.Id = 0;
-                    s.StoreId = newStoreId;
-                    PageDesignRepository.Add(s);
-                }
-                PageDesignRepository.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "CopyStore", newStoreId);
-            }
-
-
-        }
 
         //
         // GET: /Stores/Delete/5
@@ -389,6 +338,162 @@ namespace StoreManagement.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        #region CopyStoreMethod
 
+
+
+
+        private void CopyStoreData(int copyStoreId, int newStoreId)
+        {
+            try
+            {
+                var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
+                foreach (var settingStore in settingsStore)
+                {
+                    var s = GeneralHelper.DataContractSerialization(settingStore);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    SettingRepository.Add(s);
+                }
+                SettingRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+
+            try
+            {
+                var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
+                foreach (var pageDesing in pageDesings)
+                {
+                    var s = GeneralHelper.DataContractSerialization(pageDesing);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    PageDesignRepository.Add(s);
+                }
+                PageDesignRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+            try
+            {
+                var items = NavigationRepository.GetNavigationsByStoreId(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    NavigationRepository.Add(s);
+                }
+                NavigationRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+            try
+            {
+                var items = EmailListRepository.GetStoreEmailList(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    EmailListRepository.Add(s);
+                }
+                EmailListRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+            try
+            {
+                var items = ContactRepository.GetContactsByStoreId(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    ContactRepository.Add(s);
+                }
+                ContactRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+
+            try
+            {
+                var items = CategoryRepository.GetCategoriesByStoreIdWithContent(copyStoreId, null);
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    CategoryRepository.Add(s);
+                    CategoryRepository.Save();
+
+                    var newCategoryId = s.Id;
+                    try
+                    {
+                        foreach (var content in item.Contents)
+                        {
+                            var sContent = GeneralHelper.DataContractSerialization(content);
+                            sContent.Id = 0;
+                            sContent.CategoryId = newCategoryId;
+                            sContent.StoreId = newStoreId;
+                            ContentRepository.Add(sContent);
+                            ContentRepository.Save();
+
+
+                            var newContentId = sContent.Id;
+
+                            try
+                            {
+                                foreach (var contentFile in content.ContentFiles)
+                                {
+
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Error(ex, "ContentRepository:CopyStore", newCategoryId);
+                            }
+                           
+
+                        }
+               
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex, "ContentRepository:CopyStore", newCategoryId);
+                    }
+
+                 
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+
+
+        }
+
+
+
+        #endregion
     }
 }

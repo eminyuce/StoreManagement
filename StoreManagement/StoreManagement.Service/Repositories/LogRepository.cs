@@ -158,9 +158,6 @@ namespace StoreManagement.Service.Repositories
         }
 
 
-
-
-
         public void DeleteLogs(string application = "")
         {
             storeContext.Database.Connection.Open();
@@ -183,5 +180,37 @@ namespace StoreManagement.Service.Repositories
             }//command
              storeContext.Database.Connection.Close();
         }
+
+        public List<DataTable> GetTotalTablesSpace()
+        {
+            var result = new List<DataTable>();
+
+            // Create a SQL command to execute the sproc 
+            using (SqlCommand command = (SqlCommand)storeContext.Database.Connection.CreateCommand())
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandTimeout = 200000;
+                using (SqlDataAdapter adapter = new SqlDataAdapter())
+                {
+                    command.CommandText = "TotalTablesSpace";
+                    adapter.SelectCommand = command;
+
+                    using (DataSet dataset = new DataSet())
+                    {
+                        adapter.Fill(dataset);
+                        
+                        using (DataTable dt = dataset.Tables[0])
+                        {
+                            result.Add(dt);
+                        }
+
+                    }// dataset
+                } //dataAdapter
+            }//command
+
+            return result;
+        }
+
+
     }
 }

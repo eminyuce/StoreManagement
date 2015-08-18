@@ -35,13 +35,17 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public List<Category> GetCategoriesByStoreIdWithContent(int storeId)
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int ? take)
         {
+            var query = StoreDbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
+                                      .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
 
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
 
-            return StoreDbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
-                .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
-                .OrderByDescending(r => r.Ordering).Take(10).ToList();
+            return query.OrderByDescending(r => r.Ordering).ToList();
         }
 
 

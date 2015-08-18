@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,5 +15,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
         LoggingModel GetApplicationLogs(String appName, String logLevel, int top, int skip, String search = "");
         List<AppNames> GetApplicationNames();
         void DeleteLogs(string application = "");
+        List<DataTable> GetTotalTablesSpace();
     }
 }

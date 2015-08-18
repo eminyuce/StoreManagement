@@ -10,7 +10,7 @@ namespace StoreManagement.Service.Interfaces
     public interface ICategoryService : IService
     {
         List<Category> GetCategoriesByStoreId(int storeId);
-        List<Category> GetCategoriesByStoreIdWithContent(int storeId);
+        List<Category> GetCategoriesByStoreIdWithContent(int storeId, int? take);
         List<Category> GetCategoriesByStoreId(int storeId, String type, bool? isActive = false);
         List<Category> GetCategoriesByStoreId(int storeId, String type, String search);
         List<Category> GetCategoriesByType(String type);

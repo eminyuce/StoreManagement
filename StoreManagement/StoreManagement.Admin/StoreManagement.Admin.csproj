@@ -1972,6 +1972,8 @@
     <Content Include="Views\Brands\Details.cshtml" />
     <Content Include="Views\Brands\SaveOrEdit.cshtml" />
     <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Logs\TotalSpace.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

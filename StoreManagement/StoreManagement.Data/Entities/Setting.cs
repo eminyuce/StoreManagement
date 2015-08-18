@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using GenericRepository;
+using Newtonsoft.Json;
 
 namespace StoreManagement.Data.Entities
 {
@@ -22,9 +23,9 @@ namespace StoreManagement.Data.Entities
 
 
 
-        [ScriptIgnore]
+         [JsonIgnore]
         public string Type { get; set; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public string Description { get; set; }
 
         public override string ToString()

@@ -152,6 +152,7 @@ namespace StoreManagement.Admin.Controllers
             storeCopy.Id = 0;
             storeCopy.Name = name;
             storeCopy.Domain = domain;
+            storeCopy.GoogleDriveFolder = domain;
             StoreRepository.Add(storeCopy);
             StoreRepository.Save();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace StoreManagement.Data.GeneralHelper
         public static String GetProductLink(Product c, String categoryName)
         {
             String productDetailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
-            return productDetailLink.ToLower();
+            return productDetailLink.ToLowerInvariant();
         }
         public static String GetContentLink(Content c, String categoryName, String type)
         {
@@ -27,7 +28,7 @@ namespace StoreManagement.Data.GeneralHelper
                 url = "/Blogs/Blog/";
             }
             String productDetailLink = url + String.Format("{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id));
-            return productDetailLink.ToLower();
+            return productDetailLink.ToLowerInvariant();
         }
 
         public static String GetImageLink(String imageActionName, String googleId, int width, int height)
@@ -41,7 +42,7 @@ namespace StoreManagement.Data.GeneralHelper
             String productDetailLink = String.Format("/ProductCategories/Category/{0}",
                 String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
-            return productDetailLink.ToLower();
+            return productDetailLink.ToLowerInvariant();
         }
 
         public static string GetNavigationLink(Navigation navigation)
@@ -49,13 +50,13 @@ namespace StoreManagement.Data.GeneralHelper
             if (!navigation.Static)
             {
                 String productDetailLink = String.Format("/{0}/{1}", navigation.ControllerName, navigation.ActionName);
-                return productDetailLink.ToLower();
+                return productDetailLink.ToLowerInvariant();
             }
             else
             {
                 if (!String.IsNullOrEmpty(navigation.Link))
                 {
-                    return navigation.Link.ToLower();
+                    return navigation.Link.ToLowerInvariant();
                 }
                 else
                 {
@@ -71,7 +72,7 @@ namespace StoreManagement.Data.GeneralHelper
         {
             String link = String.Format("/Brands/Detail/{0}",String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name), brand.Id));
 
-            return link.ToLower();
+            return link.ToLowerInvariant();
         }
     }
 }

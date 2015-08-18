@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using GenericRepository;
+using Newtonsoft.Json;
 
 namespace StoreManagement.Data.Entities
 {
@@ -23,9 +24,9 @@ namespace StoreManagement.Data.Entities
 
 
 
-        [ScriptIgnore]
+         [JsonIgnore]
         public string Modul { get; set; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public Boolean LinkState { get; set; }
      
     }

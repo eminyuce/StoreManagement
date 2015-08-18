@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using DotLiquid;
+using Newtonsoft.Json;
 
 namespace StoreManagement.Data.Entities
 {
@@ -21,11 +22,11 @@ namespace StoreManagement.Data.Entities
         [AllowHtml]
         public string Description { get; set; }
 
-        [ScriptIgnore]
+         [JsonIgnore]
         public string Type { get; set; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public Boolean MainPage { get; set; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public Boolean ImageState { get; set; }
 
 

@@ -4,6 +4,7 @@ using System.Web.Script.Serialization;
 using GenericRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace StoreManagement.Data.Entities
 {
@@ -20,9 +21,9 @@ namespace StoreManagement.Data.Entities
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
-        [ScriptIgnore]
+         [JsonIgnore]
         public bool State { get; set; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public int Ordering { get; set; }
 
         public virtual ICollection<FileManager> FileManagers { get; set; }
@@ -32,19 +33,19 @@ namespace StoreManagement.Data.Entities
         public int CategoryId { get; set; }
 
         public String GoogleDriveClientId { set; get; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public String GoogleDriveUserEmail { set; get; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public String GoogleDriveUserEmailPassword { set; get; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public String GoogleDriveFolder { set; get; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public String GoogleDriveServiceAccountEmail { set; get; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public String GoogleDriveCertificateP12FileName { set; get; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public String GoogleDrivePassword { set; get; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public byte[] GoogleDriveCertificateP12RawData { set; get; }
 
         public bool IsCacheEnable { get; set; }

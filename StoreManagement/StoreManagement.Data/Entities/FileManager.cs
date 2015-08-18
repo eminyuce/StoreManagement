@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using GenericRepository;
+using Newtonsoft.Json;
 
 namespace StoreManagement.Data.Entities
 {
@@ -18,28 +19,28 @@ namespace StoreManagement.Data.Entities
         public string WebContentLink { get; set; }       
         public string FileStatus { get; set; }
 
-        [ScriptIgnore]
+         [JsonIgnore]
         public string ThumbnailLink { get; set; }
         
-        [ScriptIgnore]
+         [JsonIgnore]
         public string OriginalFilename { get; set; }
         
-        [ScriptIgnore]
+         [JsonIgnore]
         public DateTime? ModifiedDate { get; set; }
         
-        [ScriptIgnore]
+         [JsonIgnore]
         public string IconLink { get; set; }
         
-        [ScriptIgnore]
+         [JsonIgnore]
         public int ContentLength { get; set; }
         
-        [ScriptIgnore]
+         [JsonIgnore]
         public bool IsCarousel { get; set; }
 
-        [ScriptIgnore]
+         [JsonIgnore]
         public int ? Width { get; set; }
         
-        [ScriptIgnore]
+         [JsonIgnore]
         public int ?  Height { get; set; }
 
 

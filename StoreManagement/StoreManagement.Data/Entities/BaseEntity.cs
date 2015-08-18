@@ -7,21 +7,22 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using DotLiquid;
 using GenericRepository;
+using Newtonsoft.Json;
 
 namespace StoreManagement.Data.Entities
 {
-       
-    public abstract class BaseEntity : IEntity 
+
+    public abstract class BaseEntity : IEntity
     {
 
         public int Id { get; set; }
         public int StoreId { get; set; }
-        public DateTime ? CreatedDate { get; set; }
-        public DateTime ? UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
 
-        [ScriptIgnore]
+        [JsonIgnore]
         public bool State { get; set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public int Ordering { get; set; }
 
 
@@ -31,6 +32,6 @@ namespace StoreManagement.Data.Entities
             return "id:" + this.Id + " StoreId:" + this.StoreId;
         }
 
-        
+
     }
 }

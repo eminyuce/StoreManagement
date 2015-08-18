@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace StoreManagement.Data.Entities
 {
@@ -16,7 +17,7 @@ namespace StoreManagement.Data.Entities
         [Required(ErrorMessage = "Please enter name")]
         public string Name { get; set; }        
         public string Description { get; set; }
-        [ScriptIgnore]
+         [JsonIgnore]
         public string CategoryType { get; set; }
        
     }

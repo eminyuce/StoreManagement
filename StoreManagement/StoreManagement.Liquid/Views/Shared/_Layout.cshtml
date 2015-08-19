@@ -11,37 +11,28 @@
     </title>
 
 
-    @* 
-    
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <link href="~/Content/trizzy/style.css" rel="stylesheet" />
-    <link href="~/Content/trizzy/colors/green.css" rel="stylesheet" />
-    
-    *@
-
-           @Html.Action("MainLayoutCssFiles", "Home")
 
 </head>
 <body>
 
 
-    @Html.Action("MainLayout", "Home")
+    <div data-main-navigation>
+    </div>
 
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            @Html.Action("MainLayoutFooter", "Home")
+            <div data-main-footer>
+            </div>
         </footer>
     </div>
-    
-    
-    
-    
- 
-       @Html.Action("MainLayoutJavaScriptFiles", "Home")
+
+
+
+
+
+    @Html.Action("MainLayoutJavaScriptFiles", "Home")
     <script src="~/Scripts/storeManagement.js"></script>
     <script src="~/Scripts/storeHelper.js"></script>
 

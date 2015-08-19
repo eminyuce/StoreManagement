@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Liquid.Constants;
+using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -130,7 +131,7 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>();
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();
-
+ 
         }
     }
     

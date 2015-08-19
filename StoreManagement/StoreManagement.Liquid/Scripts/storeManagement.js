@@ -11,7 +11,8 @@ $(document).ready(function () {
     callAjaxMethod();
 });
 function callAjaxMethod() {
-
+    GetMainLayout();
+    GetMainFooter();
     if ($('[data-related-contents]').length > 0) {
         GetRelatedContents();
     }
@@ -28,10 +29,31 @@ function callAjaxMethod() {
         GetBrands();
     }
 }
+function GetMainFooter() {
+    $('[data-main-footer]').each(function () {
+        var truethis = this;
+        var postData = JSON.stringify({});
+        ajaxMethodCall(postData, "/AjaxGenerics/MainLayoutFooter", function (data) {
+            $(truethis).empty();
+            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+        });
+    });
+}
+function GetMainLayout() {
+    $('[data-main-navigation]').each(function () {
+        var truethis = this;
+        var postData = JSON.stringify({  });
+        ajaxMethodCall(postData, "/AjaxGenerics/MainLayout", function (data) {
+            $(truethis).empty();
+            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+        });
+    });
+}
 function GetBrands() {
 
     $('[data-brands]').each(function () {
         var truethis = this;
+        
         var designName = $(this).attr('data-template-design-name');
         var postData = JSON.stringify({ "designName": designName });
         ajaxMethodCall(postData, "/AjaxProducts/GetBrands", function (data) {

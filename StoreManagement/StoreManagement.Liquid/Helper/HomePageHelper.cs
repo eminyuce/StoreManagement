@@ -10,8 +10,11 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class HomePageHelper : BaseLiquidHelper
+    
+    public class HomePageHelper : BaseLiquidHelper 
     {
+
+        
 
         public StoreLiquidResult GetHomePageDesign(
          Task<List<Product>> productsTask,

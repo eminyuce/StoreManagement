@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Ninject;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.Interfaces;
@@ -15,29 +19,49 @@ namespace StoreManagement.Liquid.Controllers
     public class HomeController : BaseController
     {
        
+
         public ActionResult Index()
         {
+
+
+
             try
             {
 
+                int blogsTake = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", 5);
+                int newsTake = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", 5);
+                int productsTake = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", 5);
+                int sliderTake = GetSettingValueInt("HomePageSliderImages_ItemsNumber", 5);
                 int? categoryId = null;
+                String key = String.Format("Home:Index-{0}-{1}-{2}-{3}-{4}", StoreId, blogsTake, newsTake,
+                                           productsTake, sliderTake);
+
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePage");
-                int take = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", 5);
-                var blogsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, take);
-                take = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", 5);
-                var newsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, take);
-                take = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", 5);
-                var productsTask = ProductService.GetMainPageProductsAsync(StoreId, take);
-                take = GetSettingValueInt("HomePageSliderImages_ItemsNumber", 5);
-                var sliderTask = FileManagerService.GetStoreCarouselsAsync(StoreId, take);
+                var blogsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, blogsTake);
+                var newsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, newsTake);
+                var productsTask = ProductService.GetMainPageProductsAsync(StoreId, productsTake);
+                var sliderTask = FileManagerService.GetStoreCarouselsAsync(StoreId, sliderTake);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId);
                 var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+               
+                // Create new stopwatch.
+                Stopwatch stopwatch = new Stopwatch();
+
+                // Begin timing.
+                stopwatch.Start();
+
+               
                 var liquidHelper = new HomePageHelper();
                 liquidHelper.StoreId = this.StoreId;
                 liquidHelper.StoreSettings = GetStoreSettings();
                 StoreLiquidResult liquidResult = liquidHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
                 liquidResult.StoreId = this.StoreId;
 
+
+                // Stop timing.
+                stopwatch.Stop();
+
+                Logger.Info("Home:Index:Time elapsed: {0} elapsed milliseconds", stopwatch.ElapsedMilliseconds);
                 return View(liquidResult);
 
             }
@@ -75,45 +99,19 @@ namespace StoreManagement.Liquid.Controllers
             var item = GetSettingValue(StoreConstants.Footer);
             return View(item);
         }
-
-        public ActionResult MainLayout()
-        {
-            int storeId = StoreId;
-
-            var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-            var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayout");
-            var liquidHelper = new NavigationHelper();
-            liquidHelper.StoreSettings = GetStoreSettings();
-            var dic = liquidHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
-            return View(dic);
-
-        }
-        public ActionResult MainLayoutFooter()
-        {
-            int storeId = StoreId;
-
-            var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-            var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutFooter");
-            var dic = NavigationHelper.GetMainLayoutFooterLink(mainMenu, pageDesignTask);
-            return View(dic);
-
-        }
+      
+        [ChildActionOnly]
         public ActionResult MainLayoutJavaScriptFiles()
         {
             int storeId = StoreId;
-            var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutJavaScriptFiles");
-            Task.WaitAll(pageDesignTask);
-            return View(pageDesignTask.Result);
-
+            var pageDesignTask1 = PageDesignService.GetPageDesignByName(storeId, "MainLayoutJavaScriptFiles");
+            var pageDesignTask2 = PageDesignService.GetPageDesignByName(storeId, "MainLayoutCssFiles");
+            Task.WaitAll(pageDesignTask1, pageDesignTask2);
+            var contentFiles = pageDesignTask1.Result.PageTemplate.HtmlDecode();
+            contentFiles += pageDesignTask2.Result.PageTemplate.HtmlDecode();
+            return Content(contentFiles);
         }
-        public ActionResult MainLayoutCssFiles()
-        {
-            int storeId = StoreId;
-            var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutCssFiles");
-            Task.WaitAll(pageDesignTask);
-            return View(pageDesignTask.Result);
-
-        }
+        
 
        
     }

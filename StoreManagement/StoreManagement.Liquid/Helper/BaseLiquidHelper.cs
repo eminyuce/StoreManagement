@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using NLog;
+using Ninject;
 using StoreManagement.Data;
+using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
     public abstract class BaseLiquidHelper
     {
+
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public List<Setting> StoreSettings { get; set; }
 

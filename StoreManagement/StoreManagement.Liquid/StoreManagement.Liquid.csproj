@@ -409,6 +409,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\AjaxContentsController.cs" />
+    <Compile Include="Controllers\AjaxGenericsController.cs" />
     <Compile Include="Controllers\AjaxProductsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
@@ -436,6 +437,7 @@
     <Compile Include="Helper\PhotoGalleryHelper.cs" />
     <Compile Include="Helper\ProductHelper.cs" />
     <Compile Include="Helper\StoreHelper.cs" />
+    <Compile Include="HtmlHelperExtensions\ExternalFilesExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -487,12 +489,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\AjaxProducts\" />
-    <Folder Include="Views\Ajax\" />
-    <Folder Include="Views\Images\" />
-    <Folder Include="Views\ProductAjax\" />
-    <Folder Include="Views\Robots\" />
-    <Folder Include="Views\Rss\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

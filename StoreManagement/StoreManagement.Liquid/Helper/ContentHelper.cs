@@ -27,6 +27,14 @@ namespace StoreManagement.Liquid.Helper
             var contents = contentsTask.Result;
             var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
+
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null");
+            }
+
+
+
             var items = new List<ContentLiquid>();
             foreach (var item in contents.items)
             {

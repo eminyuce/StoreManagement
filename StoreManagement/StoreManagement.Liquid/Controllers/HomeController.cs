@@ -23,11 +23,7 @@ namespace StoreManagement.Liquid.Controllers
         public ActionResult Index()
         {
 
-
-
-            try
-            {
-
+ 
                 int blogsTake = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", 5);
                 int newsTake = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", 5);
                 int productsTake = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", 5);
@@ -64,12 +60,7 @@ namespace StoreManagement.Liquid.Controllers
                 Logger.Info("Home:Index:Time elapsed: {0} elapsed milliseconds", stopwatch.ElapsedMilliseconds);
                 return View(liquidResult);
 
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "HomeController:Index:" + ex.StackTrace);
-                return new HttpStatusCodeResult(500);
-            }
+            
         }
         public ActionResult Contact()
         {
@@ -107,6 +98,17 @@ namespace StoreManagement.Liquid.Controllers
             var pageDesignTask1 = PageDesignService.GetPageDesignByName(storeId, "MainLayoutJavaScriptFiles");
             var pageDesignTask2 = PageDesignService.GetPageDesignByName(storeId, "MainLayoutCssFiles");
             Task.WaitAll(pageDesignTask1, pageDesignTask2);
+
+            if (pageDesignTask1.Result == null)
+            {
+                return Content("MainLayoutJavaScriptFiles pageDesign is null");
+            }
+            if (pageDesignTask2.Result == null)
+            {
+                return Content("MainLayoutCssFiles pageDesign is null");
+            }
+
+
             var contentFiles = pageDesignTask1.Result.PageTemplate.HtmlDecode();
             contentFiles += pageDesignTask2.Result.PageTemplate.HtmlDecode();
             return Content(contentFiles);

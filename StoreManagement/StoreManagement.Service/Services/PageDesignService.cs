@@ -24,11 +24,12 @@ namespace StoreManagement.Service.Services
             {
                 SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetPageDesignByName?storeId={2}&name={3}", WebServiceAddress, ApiControllerName, storeId, name);
-                return HttpRequestHelper.GetUrlResultAsync<PageDesign>(url);
+                var item = HttpRequestHelper.GetUrlResultAsync<PageDesign>(url);
+                return item;
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Error:" + ex.Message, ex);
+                Logger.Error(ex,"Error:" + ex.StackTrace);
                 return null;
             }
         }

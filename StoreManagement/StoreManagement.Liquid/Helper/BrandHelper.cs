@@ -24,6 +24,12 @@ namespace StoreManagement.Liquid.Helper
                 var pageDesign = pageDesignTask.Result;
                 var brands = brandsTask.Result;
 
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
                 var items = new List<BrandLiquid>();
                 foreach (var item in brands)
                 {

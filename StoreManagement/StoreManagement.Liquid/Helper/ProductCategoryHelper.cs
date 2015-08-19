@@ -23,6 +23,12 @@ namespace StoreManagement.Liquid.Helper
             var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
 
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null");
+            }
+
+
           
             var cats = new List<ProductCategoryLiquid>();
             foreach (var item in categories.items)

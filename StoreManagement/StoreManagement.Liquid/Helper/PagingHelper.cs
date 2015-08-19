@@ -40,6 +40,12 @@ namespace StoreManagement.Liquid.Helper
             Task.WaitAll(pageDesignTask);
             var pageDesign = pageDesignTask.Result;
 
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null");
+            }
+
+
             var paginator = new PaginatorLiquid();
             paginator.PaginatePath = this.PaginatePath;
             var pageOutputDictionary = PageOutput.LiquidRenderedResult;

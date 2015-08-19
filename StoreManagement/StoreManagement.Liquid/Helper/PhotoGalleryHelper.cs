@@ -19,6 +19,13 @@ namespace StoreManagement.Liquid.Helper
         {
             Task.WaitAll(pageDesignTask, fileManagersTask);
             var pageDesign = pageDesignTask.Result;
+
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null");
+            }
+
+
             var fileManagers = fileManagersTask.Result;
             Logger.Trace("FileManagers :" + fileManagers.Count);
 

@@ -10,11 +10,11 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Liquid.Helper
 {
-    
-    public class HomePageHelper : BaseLiquidHelper 
+
+    public class HomePageHelper : BaseLiquidHelper
     {
 
-        
+
 
         public StoreLiquidResult GetHomePageDesign(
          Task<List<Product>> productsTask,
@@ -26,79 +26,91 @@ namespace StoreManagement.Liquid.Helper
          Task<List<ProductCategory>> productCategoriesTask)
         {
             Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask, productCategoriesTask);
-            var products = productsTask.Result;
-            var blogs = blogsTask.Result;
-            var news = newsTask.Result;
-            var pageDesing = pageDesignTask.Result;
-            var sliderImages = sliderTask.Result;
-            var categories = categoriesTask.Result;
-            var productCategories = productCategoriesTask.Result;
 
-
-            var home = new HomePageLiquid(pageDesing, sliderImages);
-            home.Products = products;
-            home.ImageWidthProduct = GetSettingValueInt("ProductsHomePage_ImageWidth", 50);
-            home.ImageHeightProduct = GetSettingValueInt("ProductsHomePage_ImageHeight", 50);
-
-            home.Blogs = blogs;
-            home.ImageWidthBlog = GetSettingValueInt("BlogsHomePage_ImageWidth", 50);
-            home.ImageHeightBlog = GetSettingValueInt("BlogsHomePage_ImageHeight", 50);
-
-
-            home.News = news;
-            home.ImageWidthNews = GetSettingValueInt("NewsHomePage_ImageWidth", 50);
-            home.ImageHeightNews = GetSettingValueInt("NewsHomePage_ImageHeight", 50);
-
-
-
-            home.ImageWidthSlider = GetSettingValueInt("SliderHomePage_ImageWidth", 500);
-            home.ImageHeightSlider = GetSettingValueInt("SliderHomePage_ImageHeight", 500);
-
-
-            home.Categories = categories;
-            home.ProductCategories = productCategories;
-
-            object anonymousObject = new
+            var result = new StoreLiquidResult();
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            result.LiquidRenderedResult = dic;
+            try
             {
-                blogs = from s in home.BlogsLiquidList
-                        select new
-                        {
-                            s.Content.Name,
-                            s.Content.Description,
-                            s.DetailLink,
-                            images = s.ImageLiquid
-                        },
-                products = from s in home.ProductLiquidList
+                var products = productsTask.Result;
+                var blogs = blogsTask.Result;
+                var news = newsTask.Result;
+                var pageDesing = pageDesignTask.Result;
+                var sliderImages = sliderTask.Result;
+                var categories = categoriesTask.Result;
+                var productCategories = productCategoriesTask.Result;
+                
+                if (pageDesing == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
+                var home = new HomePageLiquid(pageDesing, sliderImages);
+                home.Products = products;
+                home.ImageWidthProduct = GetSettingValueInt("ProductsHomePage_ImageWidth", 50);
+                home.ImageHeightProduct = GetSettingValueInt("ProductsHomePage_ImageHeight", 50);
+
+                home.Blogs = blogs;
+                home.ImageWidthBlog = GetSettingValueInt("BlogsHomePage_ImageWidth", 50);
+                home.ImageHeightBlog = GetSettingValueInt("BlogsHomePage_ImageHeight", 50);
+
+
+                home.News = news;
+                home.ImageWidthNews = GetSettingValueInt("NewsHomePage_ImageWidth", 50);
+                home.ImageHeightNews = GetSettingValueInt("NewsHomePage_ImageHeight", 50);
+
+
+
+                home.ImageWidthSlider = GetSettingValueInt("SliderHomePage_ImageWidth", 500);
+                home.ImageHeightSlider = GetSettingValueInt("SliderHomePage_ImageHeight", 500);
+
+
+                home.Categories = categories;
+                home.ProductCategories = productCategories;
+
+                object anonymousObject = new
+                {
+                    blogs = from s in home.BlogsLiquidList
+                            select new
+                            {
+                                s.Content.Name,
+                                s.Content.Description,
+                                s.DetailLink,
+                                images = s.ImageLiquid
+                            },
+                    products = from s in home.ProductLiquidList
+                               select new
+                               {
+                                   s.Product.Name,
+                                   s.Product.Description,
+                                   s.DetailLink,
+                                   images = s.ImageLiquid
+                               },
+                    news = from s in home.NewsLiquidList
                            select new
                            {
-                               s.Product.Name,
-                               s.Product.Description,
+                               s.Content.Name,
+                               s.Content.Description,
                                s.DetailLink,
                                images = s.ImageLiquid
                            },
-                news = from s in home.NewsLiquidList
-                       select new
-                       {
-                           s.Content.Name,
-                           s.Content.Description,
-                           s.DetailLink,
-                           images = s.ImageLiquid
-                       },
-                slider = home.SliderLiquid
+                    slider = home.SliderLiquid
 
-            };
+                };
 
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing.PageTemplate, anonymousObject);
+                dic[StoreConstants.PageOutput] = indexPageOutput;
 
+            }
+            catch (Exception ex)
+            {
+                dic[StoreConstants.PageOutput] = ex.StackTrace;
+                Logger.Error(ex, ex.StackTrace);
+            }
 
-            var dic = new Dictionary<String, String>();
-            dic.Add(StoreConstants.PageOutput, indexPageOutput);
-
-
-
-            var result = new StoreLiquidResult();
-            result.LiquidRenderedResult = dic;
             return result;
         }
 

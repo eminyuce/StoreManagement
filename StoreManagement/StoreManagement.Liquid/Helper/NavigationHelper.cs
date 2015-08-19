@@ -22,6 +22,12 @@ namespace StoreManagement.Liquid.Helper
             var navigations = navigationsTask.Result;
             var pageDesign = pageDesignTask.Result;
 
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null");
+            }
+
+
             var items = new List<NavigationLiquid>();
             foreach (var item in navigations)
             {

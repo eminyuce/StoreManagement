@@ -479,6 +479,7 @@
     <Content Include="Views\Home\MainLayoutCssFiles.cshtml" />
     <Content Include="Views\PhotoGallery\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Shared\MainLayoutExternalFiles2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -76,19 +76,19 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductWithFiles(id);
         }
 
-        public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            return ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize);
+            return await ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize);
         }
 
-        public Task<Product> GetProductsByIdAsync(int productId)
+        public async Task<Product> GetProductsByIdAsync(int productId)
         {
-            return ProductRepository.GetProductsByIdAsync(productId);
+            return await ProductRepository.GetProductsByIdAsync(productId);
         }
 
-        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
+        public async Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
         {
-            return ProductRepository.GetMainPageProductsAsync(storeId, take);
+            return await ProductRepository.GetMainPageProductsAsync(storeId, take);
         }
 
         public async Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)

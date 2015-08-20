@@ -7,6 +7,7 @@ using System.Text;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
 using Ninject;
+using StoreManagement.Data;
 using StoreManagement.Data.LogEntities;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -40,12 +41,17 @@ namespace StoreManagement.API.Controllers
         public override HttpResponseMessage Post(system_logging value)
         {
 
-            Logger.Trace("Log Post is coming :"+value.log_application);
+          //  Logger.Trace("Log Post is coming :"+value.log_application);
             if (ModelState.IsValid)
             {
 
-                this.LogRepository.Add(value);
-                this.LogRepository.Save();
+                var logLevel = (LogLevels) Enum.Parse(typeof(LogLevels), value.log_level);
+                var logLevelConfig = (LogLevels)Enum.Parse(typeof(LogLevels), ProjectAppSettings.GetWebConfigString("LogRepositoryLogLevel"));
+                if (logLevel <= logLevelConfig)
+                {
+                    LogRepository.Add(value);
+                    LogRepository.Save();
+                }
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, value);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = value.Id }));

@@ -114,7 +114,5 @@ namespace StoreManagement.Liquid.Controllers
             return Content(contentFiles);
         }
         
-
-       
     }
 }

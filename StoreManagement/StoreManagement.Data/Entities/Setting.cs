@@ -14,6 +14,23 @@ namespace StoreManagement.Data.Entities
 
     public class Setting : BaseEntity
     {
+
+        //[JsonIgnore]
+        //public new int Id { get; set; }
+        //[JsonIgnore]
+        //public new int StoreId { get; set; }
+        //[JsonIgnore]
+        //public new DateTime? CreatedDate { get; set; }
+        //[JsonIgnore]
+        //public new DateTime? UpdatedDate { get; set; }
+        //[JsonIgnore]
+        //public new bool State { get; set; }
+        //[JsonIgnore]
+        //public new int Ordering { get; set; }
+     
+
+
+        [JsonIgnore]
         public string Name { get; set; }
         // [Required(ErrorMessage = "Please key name")]
         public string SettingKey { get; set; }
@@ -23,9 +40,9 @@ namespace StoreManagement.Data.Entities
 
 
 
-         [JsonIgnore]
+        [JsonIgnore]
         public string Type { get; set; }
-         [JsonIgnore]
+        [JsonIgnore]
         public string Description { get; set; }
 
         public override string ToString()

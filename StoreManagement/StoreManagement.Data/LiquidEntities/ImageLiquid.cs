@@ -15,13 +15,13 @@ namespace StoreManagement.Data.LiquidEntities
     {
 
         private List<FileManager> FileManagers { get; set; }
+        private List<BaseFileEntity> BaseFileEntities { get; set; }
 
 
-
-        public ImageLiquid(List<FileManager>  fileManagers, PageDesign pageDesign, int width, int height)
+        public ImageLiquid(List<BaseFileEntity> baseFileEntities, PageDesign pageDesign, int width, int height)
         {
-
-            this.FileManagers = fileManagers;
+            this.BaseFileEntities = baseFileEntities;
+            this.FileManagers = baseFileEntities.Select(r => r.FileManager).ToList();
             this.PageDesign = pageDesign;
 
             this.ImageWidth = width;
@@ -29,16 +29,19 @@ namespace StoreManagement.Data.LiquidEntities
 
         }
 
+        public String ImageSourceTest
+        {
+            get { return "Test Image"; }
+        }
 
-        //int width = 60, int height = 60
-        public String ImageSource
+        public String mainimagesource
         {
             get
             {
-                if (ImageHas)
+                if (imagehas)
                 {
-                    var firstOrDefault = FileManagers.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth,this.ImageHeight);
+                    var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth, this.ImageHeight);
                 }
                 else
                 {
@@ -48,15 +51,33 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
-        public List<String> ImageLinks
+        //int width = 60, int height = 60
+        public String imagesource
+        {
+            get
+            {
+                if (imagehas)
+                {
+                    var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth, this.ImageHeight);
+                }
+                else
+                {
+
+                    return "";
+                }
+            }
+        }
+
+        public List<String> imagelinks
         {
 
             get
             {
-                if (ImageHas)
+                if (imagehas)
                 {
                     var imageList = new List<String>();
-                    foreach (var image in this.FileManagers)
+                    foreach (var image in this.FileManagers.Where(r => r.State))
                     {
                         var imageLink = LinkHelper.GetImageLink("Thumbnail", image.GoogleImageId,
                                                                 this.ImageWidth,
@@ -73,13 +94,19 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
-        public bool ImageHas
+        public bool imagehas
         {
             get
             {
-                return this.FileManagers.Any();
+                return this.FileManagers.Any(r => r.State);
             }
         }
-
+        public int imagecount
+        {
+            get
+            {
+                return this.FileManagers.Count;
+            }
+        }
     }
 }

@@ -56,8 +56,7 @@ namespace StoreManagement.Liquid.Helper
                             s.Content.Author,
                             s.Content.UpdatedDate,
                             s.DetailLink,
-                            s.ImageLiquid.ImageHas,
-                            s.ImageLiquid.ImageSource
+                            images=s.ImageLiquid
                         }
             }
                 );
@@ -94,8 +93,7 @@ namespace StoreManagement.Liquid.Helper
                 ContentId = contentLiquid.Content.Id,
                 Name = contentLiquid.Content.Name,
                 Description = contentLiquid.Content.Description,
-                ImageSource = contentLiquid.ImageLiquid.ImageSource,
-                Images = contentLiquid.ImageLiquid.ImageLinks
+                images = contentLiquid.ImageLiquid
             };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
@@ -134,8 +132,7 @@ namespace StoreManagement.Liquid.Helper
                             s.Content.Name,
                             s.Content.Description,
                             s.DetailLink,
-                            s.ImageLiquid.ImageHas,
-                            s.ImageLiquid.ImageSource
+                            images = s.ImageLiquid
                         }
             }
                 );

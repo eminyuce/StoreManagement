@@ -96,7 +96,7 @@ namespace StoreManagement.Liquid.Helper
                                s.DetailLink,
                                images = s.ImageLiquid
                            },
-                    slider = home.SliderLiquid
+                    slider = home.SliderImagesLiquid
 
                 };
 

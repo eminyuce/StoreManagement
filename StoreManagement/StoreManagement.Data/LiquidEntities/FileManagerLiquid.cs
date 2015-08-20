@@ -12,6 +12,8 @@ namespace StoreManagement.Data.LiquidEntities
     public class FileManagerLiquid : BaseDrop
     {
         public FileManager FileManager;
+        public String Link { get; set; }
+
         public FileManagerLiquid(FileManager fileManager)
         {
             this.FileManager = fileManager;

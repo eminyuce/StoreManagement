@@ -20,7 +20,7 @@ namespace StoreManagement.Data.Entities
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
-        [JsonIgnore]
+ 
         public bool State { get; set; }
         [JsonIgnore]
         public int Ordering { get; set; }

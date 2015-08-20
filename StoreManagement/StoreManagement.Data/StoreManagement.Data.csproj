@@ -126,6 +126,7 @@
     <Compile Include="Entities\BaseCategory.cs" />
     <Compile Include="Entities\BaseContent.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\BaseFileEntity.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />

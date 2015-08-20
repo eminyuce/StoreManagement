@@ -43,14 +43,22 @@ namespace StoreManagement.Data.LiquidEntities
         }
         public int ImageHeightSlider { get; set; }
         public int ImageWidthSlider { get; set; }
-        public ImageLiquid SliderLiquid
+        public List<FileManagerLiquid> SliderImagesLiquid
         {
             get
             {
-                var sliderLiquid = new ImageLiquid(SliderImages, this.PageDesign, ImageWidthSlider, ImageHeightSlider);
-                return sliderLiquid;
+                var resultList = new List<FileManagerLiquid>();
+                foreach (var sliderImage in SliderImages)
+                {
+                    var sliderLiquid = new FileManagerLiquid(sliderImage,  ImageWidthSlider, ImageHeightSlider);
+                    resultList.Add(sliderLiquid);
+                }
+
+                return resultList;
             }
         }
+
+        
 
         public int ImageHeightBlog { get; set; }
         public int ImageWidthBlog { get; set; }

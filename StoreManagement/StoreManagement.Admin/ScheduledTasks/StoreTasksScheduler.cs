@@ -27,18 +27,25 @@ namespace StoreManagement.Admin.ScheduledTasks
         {
 
             var m = JobBuilder.Create<FilesDeleteJob>();
-           
+
             IJobDetail testJob = m.Build();
 
             //ITrigger runOnce = TriggerBuilder.Create().WithSimpleSchedule(builder => builder.WithRepeatCount(0)).Build();
 
-            ITrigger trigger = TriggerBuilder.Create()
-                            .WithIdentity("trigger7", "group1")
-                            .WithSimpleSchedule(x => x
-                                .WithIntervalInSeconds(5)
-                                .RepeatForever())
-                            .EndAt(DateBuilder.DateOf(22, 0, 0))
-                            .Build();
+            //ITrigger trigger = TriggerBuilder.Create()
+            //                .WithIdentity("trigger7", "group1")
+            //                .WithSimpleSchedule(x => x
+            //                    .WithIntervalInSeconds(5)
+            //                    .RepeatForever())
+            //                .EndAt(DateBuilder.DateOf(22, 0, 0))
+            //                .Build();
+
+            var trigger = TriggerBuilder.Create()
+                .WithIdentity("DeleteGoogleDriveFiles", "DeleteGoogleDriveFiles")
+                .WithCalendarIntervalSchedule(x => x.WithIntervalInWeeks(2))
+                .WithDescription("trigger")
+                .StartNow()
+                .Build();
 
 
             Scheduler.ScheduleJob(testJob, trigger);

@@ -31,7 +31,7 @@ namespace StoreManagement.Admin.ScheduledTasks.Jobs
         {
             try
             {
-               // DeleteFiles("deleted");
+                DeleteFiles("deleted");
             }
             catch (Exception ex)
             {
@@ -41,7 +41,7 @@ namespace StoreManagement.Admin.ScheduledTasks.Jobs
 
             try
             {
-             //   DeleteFiles("error");
+               DeleteFiles("error");
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@ namespace StoreManagement.Admin.ScheduledTasks.Jobs
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex, "DeleteFiles:" + ex.Message, fileStatus);
+                    Logger.Error(ex, "ConnectGoogleDrive:DeleteFiles:" + ex.Message, fileStatus);
                 }
             }
 

@@ -8,4 +8,4 @@
             
 }
 
-@Html.Raw(outputDic[StoreConstants.PageOutput])
+ @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))

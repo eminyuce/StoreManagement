@@ -20,14 +20,15 @@ namespace StoreManagement.Service.Repositories
         private static readonly TypedObjectCache<List<Navigation>> NavigationsCache = new TypedObjectCache<List<Navigation>>("NavigationsCache");
 
 
-        public NavigationRepository(IStoreContext dbContext) : base(dbContext)
+        public NavigationRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
         }
 
         public List<Navigation> GetStoreNavigations(int storeId)
         {
-            return this.FindBy(r => r.StoreId == storeId).OrderBy(r=>r.Ordering).ToList();
+            return this.FindBy(r => r.StoreId == storeId).OrderBy(r => r.Ordering).ToList();
         }
 
         public List<Navigation> GetStoreActiveNavigations(int storeId)

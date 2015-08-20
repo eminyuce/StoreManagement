@@ -313,6 +313,32 @@ namespace StoreManagement.Admin.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeletePageDesignsGridItem(List<String> values)
+        {
+            try
+            {
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = PageDesignRepository.GetSingle(id);
+                    PageDesignRepository.Delete(item);
+                }
+                PageDesignRepository.Save();
+
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("DeletePageDesignsGridItem :" + String.Join(",", values), exception);
+            }
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteStoreLanguageGridItem(List<String> values)
         {
             try

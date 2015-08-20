@@ -1,5 +1,4 @@
-﻿@using MvcPaging
-@using StoreManagement.Data.Constants
+﻿@using StoreManagement.Data.Constants
 @using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.LiquidEntities.StoreLiquidResult
 @{
@@ -7,7 +6,7 @@
     ViewBag.Title = "Index";
 }
   
-@Html.Raw(outputDic[StoreConstants.PageOutput])
+ @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))
 
 
    

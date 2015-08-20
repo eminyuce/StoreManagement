@@ -38,16 +38,17 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                if (imagehas)
+                var mainImage = BaseFileEntities.Where(r => r.IsMainImage).Select(r => r.FileManager).FirstOrDefault(r => r.State);
+                if (mainImage == null)
                 {
-                    var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth, this.ImageHeight);
+                    return LinkHelper.GetImageLink("Thumbnail", mainImage.GoogleImageId, this.ImageWidth,
+                                                   this.ImageHeight);
                 }
                 else
                 {
-
                     return "";
                 }
+
             }
         }
 

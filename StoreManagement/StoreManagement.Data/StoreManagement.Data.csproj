@@ -149,6 +149,7 @@
     <Compile Include="Entities\StoreUser.cs" />
     <Compile Include="Enums\ImageOrientation.cs" />
     <Compile Include="GeneralHelper\CaptchaHelper.cs" />
+    <Compile Include="GeneralHelper\DictionaryExtensions.cs" />
     <Compile Include="GeneralHelper\EnumHelper.cs" />
     <Compile Include="GeneralHelper\FeedResult.cs" />
     <Compile Include="GeneralHelper\FileHelper.cs" />

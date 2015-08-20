@@ -1,27 +1,25 @@
-﻿@using MvcPaging
-@using StoreManagement.Data.Constants
+﻿@using StoreManagement.Data.Constants
 @using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.LiquidEntities.StoreLiquidResult
 @{
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
+
+    
     ViewBag.Title = "Index";
-    var isPagingUp = outputDic[StoreConstants.IsPagingUp].ToBool();
-    var isPagingDown = outputDic[StoreConstants.IsPagingDown].ToBool();
+    var isPagingUp = outputDic.GetOrDefault(StoreConstants.IsPagingUp).ToBool();
+    var isPagingDown = outputDic.GetOrDefault(StoreConstants.IsPagingDown).ToBool(); 
 }
 
 
 @if (isPagingUp)
 {
- @Html.Raw(outputDic[StoreConstants.PagingOutput])
+ @Html.Raw(outputDic.GetOrDefault(StoreConstants.PagingOutput))
 }
 
-
-@Html.Raw(outputDic[StoreConstants.PageOutput])
-
-
+ @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))
 
 
 @if (isPagingDown)
 {
- @Html.Raw(outputDic[StoreConstants.PagingOutput])
+ @Html.Raw(outputDic.GetOrDefault(StoreConstants.PagingOutput))
 }

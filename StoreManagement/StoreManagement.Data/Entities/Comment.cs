@@ -11,8 +11,8 @@ namespace StoreManagement.Data.Entities
     public class Comment : BaseEntity
     {
         public int ParentId { set; get; }
-        [Required(ErrorMessage = "Please enter name")]
-        public int Name { set; get; }
+       // [Required(ErrorMessage = "Please enter name")]
+       // public int Name { set; get; }
         [Required(ErrorMessage = "Please enter email")]
         public int Email { set; get; }
         public int CommentType { set; get; }

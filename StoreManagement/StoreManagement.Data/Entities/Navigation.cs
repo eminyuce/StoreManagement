@@ -16,7 +16,7 @@ namespace StoreManagement.Data.Entities
     {
         public int ParentId { get; set; }
         [Required(ErrorMessage = "Please enter name")]
-        public string Name { get; set; }
+        public new string Name { get; set; }
         public string ActionName { get; set; }
         public string ControllerName { get; set; }
         public Boolean Static { get; set; }

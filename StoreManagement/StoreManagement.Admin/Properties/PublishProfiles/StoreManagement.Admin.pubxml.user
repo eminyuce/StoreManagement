@@ -229,16 +229,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>08/21/2015 15:44:40</publishTime>
+      <publishTime>08/21/2015 17:09:48</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>08/21/2015 15:41:18</publishTime>
+      <publishTime>08/21/2015 16:17:47</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>08/21/2015 15:44:36</publishTime>
+      <publishTime>08/21/2015 16:17:48</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -4831,16 +4831,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/EmailLists/Delete.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>08/21/2015 16:10:16</publishTime>
     </File>
     <File Include="Views/EmailLists/Details.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>08/21/2015 16:10:10</publishTime>
     </File>
     <File Include="Views/EmailLists/Index.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>08/21/2015 16:09:48</publishTime>
     </File>
     <File Include="Views/EmailLists/SaveOrEdit.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>08/21/2015 16:10:02</publishTime>
     </File>
     <File Include="Views/FileManager/DisplayImages.cshtml">
       <publishTime>07/30/2015 09:17:55</publishTime>
@@ -4876,7 +4876,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
     <File Include="Views/Home/AdminSearch.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>08/21/2015 16:22:02</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
@@ -4951,7 +4951,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Views/Locations/SaveOrEdit.cshtml">
-      <publishTime>07/30/2015 09:17:56</publishTime>
+      <publishTime>08/21/2015 16:29:34</publishTime>
     </File>
     <File Include="Views/Locations/_CreateOrEdit.cshtml">
       <publishTime>07/04/2015 13:28:00</publishTime>
@@ -5165,6 +5165,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Shared/DisplayTemplates/BaseContent.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/BaseEntity.cshtml">
+      <publishTime>08/21/2015 16:26:57</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BootstrapPagination.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
@@ -5392,7 +5395,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/21/2015 09:57:16</publishTime>
+      <publishTime>08/21/2015 16:12:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

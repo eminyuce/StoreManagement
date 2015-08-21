@@ -11,8 +11,8 @@ namespace StoreManagement.Data.Entities
       
     public class Brand : BaseEntity
     {
-        [Required(ErrorMessage = "Please enter name")]
-        public string Name { get; set; }
+      //  [Required(ErrorMessage = "Please enter name")]
+       // public string Name { get; set; }
         [AllowHtml]
         public string Description { get; set; }
 

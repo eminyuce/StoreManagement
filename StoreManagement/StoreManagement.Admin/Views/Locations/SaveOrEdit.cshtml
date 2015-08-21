@@ -34,6 +34,7 @@
                         @Html.HiddenFor(model => model.CreatedDate)
                         @Html.HiddenFor(model => model.UpdatedDate)
 
+                        @Html.HiddenFor(model => model.Name)
 
                         <div class="editor-field controls">
                             @Html.Action("StoresDropDown", "Stores", new { storeId })
@@ -79,7 +80,7 @@
                             @Html.ValidationMessageFor(model => model.Country)
                         </div>
 
- 
+
 
                         <p>
                             <input type="submit" value="Save" />

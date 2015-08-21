@@ -10,7 +10,7 @@ namespace StoreManagement.Data.Entities
 {
     public class StoreLanguage : BaseEntity
     {
-        public string Name { get; set; }
+  
         public string LanguageCode { get; set; }
     }
 }

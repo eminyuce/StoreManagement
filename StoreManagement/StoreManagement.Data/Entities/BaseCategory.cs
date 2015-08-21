@@ -14,8 +14,8 @@ namespace StoreManagement.Data.Entities
     public class BaseCategory : BaseEntity
     {
         public int ParentId { get; set; }
-        [Required(ErrorMessage = "Please enter name")]
-        public string Name { get; set; }        
+       // [Required(ErrorMessage = "Please enter name")]
+       // public string Name { get; set; }        
         public string Description { get; set; }
          [JsonIgnore]
         public string CategoryType { get; set; }

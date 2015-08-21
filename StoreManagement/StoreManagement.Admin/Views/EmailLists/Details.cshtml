@@ -42,10 +42,9 @@
     <div class="display-field">@Model.Email</div>
 
     <div class="display-label">FirstName</div>
-    <div class="display-field">@Model.FirstName</div>
+    <div class="display-field">@Model.Name</div>
 
-    <div class="display-label">LastName</div>
-    <div class="display-field">@Model.LastName</div>
+ 
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "SaveOrEdit", new { id=Model.Id },new{@class="btn btn-success btn-lg btn-block"})

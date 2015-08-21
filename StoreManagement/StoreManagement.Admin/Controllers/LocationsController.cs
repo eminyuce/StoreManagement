@@ -67,6 +67,7 @@ namespace StoreManagement.Admin.Controllers
                   + location.Postal.ToStr() + " "
                   + location.Country.ToStr() + " ";
                     address = address.Trim();
+                    location.Name = address;
                     if (!String.IsNullOrEmpty(address))
                     {
                         var result = LatitudeAndLongitudeParser.GetLatitudeAndLongitude(address);

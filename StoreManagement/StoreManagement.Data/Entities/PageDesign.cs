@@ -14,7 +14,7 @@ namespace StoreManagement.Data.Entities
         public string Type { get; set; }
         [AllowHtml]
         public string PageTemplate { get; set; }
-        public string Name { get; set; }
+       // public string Name { get; set; }
         public bool IsPagingUp { get; set; }
         public bool IsPagingDown { get; set; }
 

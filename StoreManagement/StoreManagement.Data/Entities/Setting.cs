@@ -30,8 +30,8 @@ namespace StoreManagement.Data.Entities
      
 
 
-        [JsonIgnore]
-        public string Name { get; set; }
+       // [JsonIgnore]
+        //public string Name { get; set; }
         // [Required(ErrorMessage = "Please key name")]
         public string SettingKey { get; set; }
         // [Required(ErrorMessage = "Please value name")]

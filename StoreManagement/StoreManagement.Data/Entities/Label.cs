@@ -10,8 +10,8 @@ namespace StoreManagement.Data.Entities
       
     public class Label : BaseEntity
     {
-        [Required(ErrorMessage = "Please enter name")]
-        public String Name { get; set; }
+       // [Required(ErrorMessage = "Please enter name")]
+        //public String Name { get; set; }
         public int ParentId { get; set; }
 
 

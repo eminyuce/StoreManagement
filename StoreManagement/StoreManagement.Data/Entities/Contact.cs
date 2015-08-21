@@ -10,8 +10,8 @@ namespace StoreManagement.Data.Entities
        
     public class Contact : BaseEntity
     {
-        [Required(ErrorMessage = "Please enter name")]
-        public string Name { get; set; }
+//[Required(ErrorMessage = "Please enter name")]
+      //  public string Name { get; set; }
         [Required(ErrorMessage = "Please enter title")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Please enter email")]

@@ -13,7 +13,10 @@ namespace StoreManagement.Service.Services
 {
     public class CategoryService : BaseService, ICategoryService
     {
-        private const String ApiControllerName = "Categories";
+
+        protected override string ApiControllerName { get { return "Categories"; } }
+
+
         public CategoryService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -123,6 +126,8 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetCategoryByContentIdAsync?storeId={2}&contentId={3}", WebServiceAddress, ApiControllerName, storeId, contentId);
             return HttpRequestHelper.GetUrlResultAsync<Category>(url);
         }
+
+ 
 
         protected override void SetCache()
         {

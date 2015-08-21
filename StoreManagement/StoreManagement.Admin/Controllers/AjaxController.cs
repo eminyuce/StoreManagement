@@ -827,6 +827,32 @@ namespace StoreManagement.Admin.Controllers
             }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ChangePageDesignsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            try
+            {
+                foreach (OrderingItem item in values)
+                {
+                    var nav = PageDesignRepository.GetSingle(item.Id);
+                    if (String.IsNullOrEmpty(checkbox))
+                    {
+                        nav.Ordering = item.Ordering;
+                    }
+                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        nav.State = item.State;
+                    }
+
+                    PageDesignRepository.Edit(nav);
+                }
+                PageDesignRepository.Save();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "ChangeContactsGridOrderingOrState :" + String.Join(",", values), checkbox);
+            }
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ChangeStoreLanguageGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
             try

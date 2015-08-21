@@ -15,12 +15,15 @@ namespace StoreManagement.Service.Services
 {
     public class NavigationService : BaseService, INavigationService
     {
-        private const String ApiControllerName = "Navigations";
+
+        protected override string ApiControllerName { get { return "Navigations"; } }
+
         public NavigationService(string webServiceAddress)
             : base(webServiceAddress)
         {
 
         }
+
         protected override void SetCache()
         {
             HttpRequestHelper.CacheMinute = CacheMinute;

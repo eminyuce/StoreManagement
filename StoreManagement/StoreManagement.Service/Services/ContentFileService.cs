@@ -11,7 +11,9 @@ namespace StoreManagement.Service.Services
 {
     public class ContentFileService : BaseService, IContentFileService
     {
-        private const String ApiControllerName = "ContentFiles";
+        protected override string ApiControllerName { get { return "ContentFiles"; } }
+
+
         public ContentFileService(string webServiceAddress) : base(webServiceAddress)
         {
 
@@ -42,6 +44,8 @@ namespace StoreManagement.Service.Services
         {
             throw new NotImplementedException();
         }
+
+ 
 
         protected override void SetCache()
         {

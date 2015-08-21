@@ -11,8 +11,8 @@ namespace StoreManagement.Service.Services
 {
     public class ProductService : BaseService, IProductService
     {
-        private const String ApiControllerName = "Products";
-
+ 
+        protected override string ApiControllerName { get { return "Products"; } }
         public ProductService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -212,7 +212,8 @@ namespace StoreManagement.Service.Services
             }
         }
 
-       
+
+  
 
         protected override void SetCache()
         {

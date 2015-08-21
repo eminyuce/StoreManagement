@@ -145,6 +145,7 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\EmailListsController.cs" />
+    <Compile Include="Controllers\ItemFilesController.cs" />
     <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\LogMeController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />

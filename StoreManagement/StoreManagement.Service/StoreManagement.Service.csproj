@@ -74,6 +74,7 @@
     <Compile Include="Interfaces\ICommentService.cs" />
     <Compile Include="Interfaces\IContactService.cs" />
     <Compile Include="Interfaces\IEmailListService.cs" />
+    <Compile Include="Interfaces\IItemFileService.cs" />
     <Compile Include="Interfaces\ILabelLineService.cs" />
     <Compile Include="Interfaces\ILabelService.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Repositories\ContentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IEmailListRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFileManagerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IItemFileRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILabelLineRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILabelRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILocationRepository.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Repositories\Interfaces\IStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreUserRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductFileRepository.cs" />
+    <Compile Include="Repositories\ItemFileRepository.cs" />
     <Compile Include="Repositories\LabelLineRepository.cs" />
     <Compile Include="Repositories\LabelRepository.cs" />
     <Compile Include="Repositories\LocationRepository.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\EmailListService.cs" />
     <Compile Include="Services\FileManagerService.cs" />
+    <Compile Include="Services\ItemFileService.cs" />
     <Compile Include="Services\LabelService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\NavigationService.cs" />

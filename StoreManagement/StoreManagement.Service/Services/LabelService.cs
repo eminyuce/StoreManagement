@@ -11,8 +11,7 @@ namespace StoreManagement.Service.Services
     public class LabelService : BaseService, ILabelService
     {
 
-        private const String ApiControllerName = "Labels";
-
+        protected override string ApiControllerName { get { return "Labels"; } }
         public LabelService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -33,7 +32,8 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResults<Label>(url);
         }
 
-         
+
+
         protected override void SetCache()
         {
             HttpRequestHelper.CacheMinute = CacheMinute;

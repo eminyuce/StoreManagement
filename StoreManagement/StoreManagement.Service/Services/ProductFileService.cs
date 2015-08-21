@@ -10,7 +10,10 @@ namespace StoreManagement.Service.Services
 {
     public class ProductFileService : BaseService, IProductFileService
     {
-        private const String ApiControllerName = "ProductFiles";
+
+        protected override string ApiControllerName { get { return "ProductFiles"; } }
+
+
         public ProductFileService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -36,6 +39,8 @@ namespace StoreManagement.Service.Services
         {
             throw new NotImplementedException();
         }
+
+
 
         protected override void SetCache()
         {

@@ -103,7 +103,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IBaseTasksScheduler>().To<StoreTasksScheduler>().WithConstructorArgument("scheduler", kernel.Get<IScheduler>());
             kernel.Get<IBaseTasksScheduler>().Start();
             kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>();
-
+            kernel.Bind<IItemFileRepository>().To<ItemFileRepository>();
 
         }
     }

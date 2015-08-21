@@ -9,10 +9,16 @@ namespace StoreManagement.Service.Services
 {
     public class LocationService : BaseService, ILocationService
     {
+
+        protected override string ApiControllerName { get { return "Locations"; } }
+
+
         public LocationService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }
+
+
 
         protected override void SetCache()
         {

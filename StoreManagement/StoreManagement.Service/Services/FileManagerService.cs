@@ -13,7 +13,10 @@ namespace StoreManagement.Service.Services
 {
     public class FileManagerService : BaseService, IFileManagerService
     {
-        private const String ApiControllerName = "FileManagers";
+
+
+        protected override string ApiControllerName { get { return "FileManagers"; } }
+
         public FileManagerService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -87,6 +90,8 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetStoreCarouselsAsync?storeId={2}&take={3}", WebServiceAddress, ApiControllerName, storeId, take);
             return HttpRequestHelper.GetUrlResultsAsync<FileManager>(url);
         }
+
+ 
 
         protected override void SetCache()
         {

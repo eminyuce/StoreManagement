@@ -5,8 +5,20 @@
     ViewBag.Title = "Edit";
 
 
-    var requestStoreId = @Request.QueryString["storeId"].ToInt();
+    var requestStoreId = Request.QueryString["storeId"].ToInt();
     int storeId = Model != null ? Model.StoreId : requestStoreId;
+
+
+    bool isSuperAdmin = false;
+
+    try
+    {
+        isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    }
+    catch (Exception ex)
+    {
+
+    }
     
 }
 
@@ -54,7 +66,7 @@
                             @Html.ValidationMessageFor(model => model.Type)
                         </div>
 
- 
+
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.IsPagingDown)
@@ -76,11 +88,11 @@
                             @Html.LabelFor(model => model.PageTemplate)
                         </div>
                         <div class="editor-field">
-   
-                            
-               
-                          @Html.TextAreaFor(model => model.PageTemplate,30,280,null)
- 
+
+
+
+                            @Html.TextAreaFor(model => model.PageTemplate, 30, 280, null)
+
 
                             @Html.ValidationMessageFor(model => model.PageTemplate)
                         </div>
@@ -95,7 +107,7 @@
                 }
 
                 <div>
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
+                    @Html.ActionLink("Back to List", "Index", new { storeId = storeId }, new { @class = "btn btn-default btn-lg btn-block" })
                 </div>
 
 
@@ -114,19 +126,19 @@
     <script src="~/Scripts/jstree/jstree.js"></script>
     <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
     <script src="~/Scripts/storeContent.js"></script>
-    
+
 
     <!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
     <script type="text/javascript">
         SyntaxHighlighter.all()
     </script>
-    
+
 
 
     <script type="text/javascript">
 
         $(function () {
-                 
+
             $('[slider]').each(function () {
                 $(this).slider({
                     range: "max",
@@ -143,7 +155,7 @@
 
             $('[slider=ImageHeight]').slider("value", $("#ImageHeight").val());
             $('[slider=ImageWidth]').slider("value", $("#ImageWidth").val());
-            
+
 
             //// CKEditor Full
             //$('textarea#PageTemplate').ckeditor({
@@ -167,7 +179,7 @@
             //        { title: 'Test template 2', content: 'Test 2' }
             //    ]
             //});
-            
+
 
 
 

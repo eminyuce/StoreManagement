@@ -11,7 +11,10 @@ namespace StoreManagement.Service.Services
 {
     public class ProductCategoryService : BaseService, IProductCategoryService
     {
-        private const String ApiControllerName = "ProductCategories";
+
+        protected override string ApiControllerName { get { return "ProductCategories"; } }
+
+
         public ProductCategoryService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -117,6 +120,7 @@ namespace StoreManagement.Service.Services
             }
         }
 
+     
         protected override void SetCache()
         {
             HttpRequestHelper.CacheMinute = CacheMinute;

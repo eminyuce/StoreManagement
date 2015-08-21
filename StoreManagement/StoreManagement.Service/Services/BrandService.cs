@@ -10,12 +10,12 @@ namespace StoreManagement.Service.Services
 {
     public class BrandService : BaseService, IBrandService
     {
-        private const String ApiControllerName = "Brands";
-
+        protected override string ApiControllerName { get { return "Brands"; } }
         public BrandService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }
+
 
         protected override void SetCache()
         {

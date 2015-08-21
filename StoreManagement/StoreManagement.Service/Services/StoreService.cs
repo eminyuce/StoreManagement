@@ -12,7 +12,7 @@ namespace StoreManagement.Service.Services
 {
     public class StoreService : BaseService, IStoreService
     {
-        private const String ApiControllerName = "Stores";
+        protected override string ApiControllerName { get { return "Stores"; } }
         public StoreService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -68,6 +68,8 @@ namespace StoreManagement.Service.Services
             SetCache();
             return HttpRequestHelper.GetUrlResult<int>(url);
         }
+
+ 
 
         protected override void SetCache()
         {

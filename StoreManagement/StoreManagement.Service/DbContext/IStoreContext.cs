@@ -35,7 +35,7 @@ namespace StoreManagement.Service.DbContext
         IDbSet<Contact> Contacts { get; set; }
         IDbSet<Brand> Brands { get; set; }
         IDbSet<StoreLanguage> StoreLanguages { get; set; }
-
+        IDbSet<ItemFile> ItemFiles { get; set; }
 
     }
 }

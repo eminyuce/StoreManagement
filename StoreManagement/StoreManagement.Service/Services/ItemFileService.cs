@@ -7,14 +7,19 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
 {
-    public class StoreLanguageService : BaseService, IStoreLanguageService
+ 
+    public class ItemFileService : BaseService, IItemFileService
     {
-        public StoreLanguageService(string webServiceAddress) : base(webServiceAddress)
+
+        protected override string ApiControllerName { get { return "ItemFiles"; } }
+
+
+        public ItemFileService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }
 
-        protected override string ApiControllerName { get { return "StoreLanguages"; } }
+ 
 
         protected override void SetCache()
         {

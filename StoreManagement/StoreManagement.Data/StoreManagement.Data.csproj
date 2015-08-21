@@ -135,6 +135,7 @@
     <Compile Include="Entities\ContentFile.cs" />
     <Compile Include="Entities\EmailList.cs" />
     <Compile Include="Entities\FileManager.cs" />
+    <Compile Include="Entities\ItemFile.cs" />
     <Compile Include="Entities\Label.cs" />
     <Compile Include="Entities\LabelLine.cs" />
     <Compile Include="Entities\Location.cs" />

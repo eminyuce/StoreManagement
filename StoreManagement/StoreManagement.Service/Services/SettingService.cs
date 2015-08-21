@@ -12,7 +12,8 @@ namespace StoreManagement.Service.Services
 {
     public class SettingService : BaseService, ISettingService
     {
-        private const String ApiControllerName = "Settings";
+
+        protected override string ApiControllerName { get { return "Settings"; } }
         public SettingService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -44,6 +45,8 @@ namespace StoreManagement.Service.Services
 
             return items;
         }
+
+
 
 
         protected override void SetCache()

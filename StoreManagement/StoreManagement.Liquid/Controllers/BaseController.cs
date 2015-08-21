@@ -24,6 +24,9 @@ namespace StoreManagement.Liquid.Controllers
         public IStoreService StoreService { set; get; }
 
         [Inject]
+        public IItemFileService ItemFileService { set; get; }
+
+        [Inject]
         public ISettingService SettingService { set; get; }
 
         [Inject]

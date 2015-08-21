@@ -13,7 +13,9 @@ namespace StoreManagement.Service.Services
 {
     public class ContentService : BaseService, IContentService
     {
-        private const String ApiControllerName = "Contents";
+
+        protected override string ApiControllerName { get { return "Contents"; } }
+
         public ContentService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -141,6 +143,8 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetMainPageContentsAsync?storeId={2}&categoryId={3}&type={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, categoryId,type, take);
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
+
+ 
 
         protected override void SetCache()
         {

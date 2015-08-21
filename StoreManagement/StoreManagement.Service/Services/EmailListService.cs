@@ -10,6 +10,10 @@ namespace StoreManagement.Service.Services
 {
     public class EmailListService : BaseService, IEmailListService
     {
+
+        protected override string ApiControllerName { get { return "EmailLists"; } }
+
+
         public EmailListService(string webServiceAddress) : base(webServiceAddress)
         {
 
@@ -19,6 +23,8 @@ namespace StoreManagement.Service.Services
         {
             throw new NotImplementedException();
         }
+
+
 
         protected override void SetCache()
         {

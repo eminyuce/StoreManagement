@@ -9,10 +9,16 @@ namespace StoreManagement.Service.Services
 {
     public class CommentService: BaseService, ICommentService
     {
+
+        protected override string ApiControllerName { get { return "Comments"; } }
+
+
         public CommentService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }
+
+
 
         protected override void SetCache()
         {

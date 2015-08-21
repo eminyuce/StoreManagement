@@ -11,7 +11,9 @@ namespace StoreManagement.Service.Services
 {
     public class PageDesignService : BaseService, IPageDesignService
     {
-        private const String ApiControllerName = "PageDesigns";
+        protected override string ApiControllerName { get { return "PageDesigns"; } }
+
+
         public PageDesignService(string webServiceAddress)
             : base(webServiceAddress)
         {
@@ -33,6 +35,7 @@ namespace StoreManagement.Service.Services
                 return null;
             }
         }
+ 
 
         protected override void SetCache()
         {

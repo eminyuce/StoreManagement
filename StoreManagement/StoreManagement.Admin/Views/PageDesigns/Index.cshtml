@@ -14,6 +14,19 @@
     pageSizeNumber = pageSizeNumber == 0 ? 50 : pageSizeNumber;
     var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
     int storeId = Request.QueryString["storeId"].ToInt();
+
+
+
+    bool isSuperAdmin = false;
+
+    try
+    {
+        isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    }
+    catch (Exception ex)
+    {
+
+    }
 }
 
 
@@ -97,8 +110,7 @@
 
                             </span>
                             <span class="col-md-2">
-                                <span class="btn btn-xs btn-default" id="OrderingAll">Ordering All
-                                </span>
+                            
                             </span>
                         </div>
 

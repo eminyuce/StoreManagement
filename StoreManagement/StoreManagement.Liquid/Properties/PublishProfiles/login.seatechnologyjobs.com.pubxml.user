@@ -46,7 +46,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:30</publishTime>
     </File>
     <File Include="bin/NLog.config">
-      <publishTime>08/20/2015 09:41:30</publishTime>
+      <publishTime>08/21/2015 10:22:07</publishTime>
     </File>
     <File Include="bin/NLog.dll">
       <publishTime>07/30/2015 09:18:26</publishTime>
@@ -55,13 +55,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>08/20/2015 15:25:57</publishTime>
+      <publishTime>08/21/2015 15:41:18</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>08/20/2015 15:26:00</publishTime>
+      <publishTime>08/21/2015 15:47:43</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>08/20/2015 15:25:59</publishTime>
+      <publishTime>08/21/2015 15:44:36</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -757,7 +757,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:59</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>08/20/2015 09:41:30</publishTime>
+      <publishTime>08/21/2015 10:22:07</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/20/2015 10:21:47</publishTime>
@@ -994,7 +994,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/20/2015 14:57:06</publishTime>
+      <publishTime>08/20/2015 15:57:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

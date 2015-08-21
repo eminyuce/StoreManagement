@@ -10,6 +10,8 @@ namespace StoreManagement.Service.Services
 {
     public abstract class BaseService
     {
+        protected abstract String ApiControllerName { get; }
+
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected string WebServiceAddress { get; set; }
 

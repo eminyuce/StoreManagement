@@ -10,7 +10,9 @@ namespace StoreManagement.Service.Services
 {
     public class StoreUserService : BaseService, IStoreUserService
     {
-        private const String ApiControllerName = "StoreUsers";
+
+        protected override string ApiControllerName { get { return "StoreUsers"; } }
+
         public StoreUserService(string webServiceAddress) : base(webServiceAddress)
         {
 
@@ -21,6 +23,8 @@ namespace StoreManagement.Service.Services
             string url = string.Format("http://{0}/api/{1}/GetStoreUserByUserId?userId={2}", WebServiceAddress, ApiControllerName, userId);
             return HttpRequestHelper.GetUrlResult<StoreUser>(url);
         }
+
+ 
 
         protected override void SetCache()
         {

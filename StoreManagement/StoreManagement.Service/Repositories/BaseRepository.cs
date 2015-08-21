@@ -42,6 +42,7 @@ namespace StoreManagement.Service.Repositories
         {
             DbContext = dbContext;
             StoreDbContext.Configuration.LazyLoadingEnabled = false; 
+            
         }
 
         public void ClearCache(String cacheKeyPrefix)

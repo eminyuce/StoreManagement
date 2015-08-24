@@ -66,10 +66,12 @@ namespace StoreManagement.Liquid.Controllers
         {
 
             var contactsTask =   ContactService.GetContactsByStoreIdAsync(StoreId, true);
-            Task.WaitAll(contactsTask);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePage");
+            Task.WaitAll(contactsTask, pageDesignTask);
             var contacts =  contactsTask.Result;
             Logger.Trace("Home:Contact contacts"+contacts.Count);
             ViewBag.Count = contacts.Count;
+            ViewBag.PageDesignTask = pageDesignTask.Result;
             return View();
         }
 

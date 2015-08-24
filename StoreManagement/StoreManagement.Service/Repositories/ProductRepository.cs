@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data;
@@ -197,8 +198,14 @@ namespace StoreManagement.Service.Repositories
             {
                 try
                 {
+                    var predicate = PredicateBuilder.False<Product>();
+                    predicate = predicate.Or(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId);
+
+                   // Expression<Func<Product>> myExpression = () => PredicateBuilder.And<Product,true>(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId); 
+           
+
                     var items =
-                       this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId);
+                       this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(predicate);
 
 
 

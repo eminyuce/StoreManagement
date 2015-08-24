@@ -167,6 +167,7 @@
     <Compile Include="GeneralHelper\LinkHelper.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\PartialViewToString.cs" />
+    <Compile Include="GeneralHelper\PredicateBuilder.cs" />
     <Compile Include="GeneralHelper\RegexUtilities.cs" />
     <Compile Include="GeneralHelper\RequestHelper.cs" />
     <Compile Include="GeneralHelper\SimpleAES.cs" />

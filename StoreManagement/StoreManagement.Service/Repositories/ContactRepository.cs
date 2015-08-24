@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,19 @@ namespace StoreManagement.Service.Repositories
             }
            
             return contacts.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+        }
+
+        public Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, bool? isActive)
+        {
+            var contacts = this.FindBy(r => r.StoreId == storeId);
+
+            if (isActive.HasValue)
+            {
+                var active = isActive.Value;
+                contacts = contacts.Where(r => r.State == active);
+            }
+
+            return contacts.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToListAsync();
         }
 
 

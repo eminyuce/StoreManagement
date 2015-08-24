@@ -64,6 +64,12 @@ namespace StoreManagement.Liquid.Controllers
         }
         public ActionResult Contact()
         {
+
+            var contactsTask =   ContactService.GetContactsByStoreIdAsync(StoreId, true);
+            Task.WaitAll(contactsTask);
+            var contacts =  contactsTask.Result;
+            Logger.Trace("Home:Contact contacts"+contacts.Count);
+            ViewBag.Count = contacts.Count;
             return View();
         }
 

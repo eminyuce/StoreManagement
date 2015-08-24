@@ -65,6 +65,10 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public IStoreLanguageRepository StoreLanguageRepository { set; get; }
 
+
+        [Inject]
+        public IContactRepository ContactRepository { set; get; }
+
         private bool _isCacheEnable = true;
         public bool IsCacheEnable
         {

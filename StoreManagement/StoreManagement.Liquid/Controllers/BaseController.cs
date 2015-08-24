@@ -69,6 +69,9 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public ILocationService LocationService { set; get; }
 
+        [Inject]
+        public IContactService ContactService { set; get; }
+
         // protected Store Store { set; get; }
         protected int StoreId { get; set; }
        
@@ -154,6 +157,8 @@ namespace StoreManagement.Liquid.Controllers
             LocationService.IsCacheEnable = isCacheEnable;
             LocationService.CacheMinute = GetSettingValueInt("LocationService_CacheMinute", 200);
 
+            ContactService.IsCacheEnable = isCacheEnable;
+            ContactService.CacheMinute = GetSettingValueInt("ContactService_CacheMinute", 200);
 
             StoreService.IsCacheEnable = isCacheEnable;
             StoreService.CacheMinute = GetSettingValueInt("StoreService_CacheMinute", 200);

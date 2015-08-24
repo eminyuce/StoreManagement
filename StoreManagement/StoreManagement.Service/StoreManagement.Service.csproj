@@ -147,6 +147,7 @@
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CommentService.cs" />
+    <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\ContentFileService.cs" />
     <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\EmailListService.cs" />

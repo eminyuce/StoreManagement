@@ -136,6 +136,7 @@ namespace StoreManagement.Admin.Controllers
                 list = StoreLanguageRepository.GetStoreLanguages(storeId, searchKey).Select(r => String.Format("{0}", r.Name)).ToList();
             }
 
+            
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetStoreLabels(int storeId)

@@ -76,7 +76,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:11</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>07/30/2015 09:18:12</publishTime>
+      <publishTime>08/24/2015 12:04:53</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>08/24/2015 12:04:53</publishTime>
     </File>
     <File Include="bin/es/Microsoft.Data.Edm.resources.dll">
       <publishTime>07/30/2015 09:18:21</publishTime>
@@ -97,10 +100,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>07/30/2015 09:18:13</publishTime>
+      <publishTime>08/24/2015 11:59:47</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>07/30/2015 09:18:13</publishTime>
+      <publishTime>08/24/2015 11:59:50</publishTime>
     </File>
     <File Include="bin/Google.Apis.Auth.dll">
       <publishTime>07/30/2015 09:18:14</publishTime>
@@ -229,16 +232,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>08/24/2015 11:15:15</publishTime>
+      <publishTime>08/24/2015 12:13:05</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>08/24/2015 11:01:00</publishTime>
+      <publishTime>08/24/2015 12:11:51</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>08/24/2015 11:01:02</publishTime>
+      <publishTime>08/24/2015 12:11:53</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -478,22 +481,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
     <File Include="Content/Theme/base/jquery.ui.dialog.css">
-      <publishTime>07/28/2015 22:47:37</publishTime>
+      <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
     <File Include="Content/Theme/base/jquery.ui.progressbar.css">
-      <publishTime>07/28/2015 22:47:37</publishTime>
+      <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
     <File Include="Content/Theme/base/jquery.ui.resizable.css">
-      <publishTime>07/28/2015 22:47:37</publishTime>
+      <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
     <File Include="Content/Theme/base/jquery.ui.selectable.css">
-      <publishTime>07/28/2015 22:47:37</publishTime>
+      <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
     <File Include="Content/Theme/base/jquery.ui.slider.css">
-      <publishTime>07/28/2015 22:47:37</publishTime>
+      <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
     <File Include="Content/Theme/base/jquery.ui.tabs.css">
-      <publishTime>07/28/2015 22:47:37</publishTime>
+      <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
     <File Include="Content/Theme/base/jquery.ui.theme.css">
       <publishTime>07/30/2015 09:17:38</publishTime>
@@ -4465,7 +4468,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:53</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/30/2015 09:17:57</publishTime>
+      <publishTime>08/24/2015 12:05:33</publishTime>
     </File>
     <File Include="Scripts/bootstrap-image-gallery.min.js">
       <publishTime>07/30/2015 09:17:54</publishTime>
@@ -5425,7 +5428,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/24/2015 11:01:13</publishTime>
+      <publishTime>08/24/2015 12:13:12</publishTime>
     </File>
   </ItemGroup>
 </Project>

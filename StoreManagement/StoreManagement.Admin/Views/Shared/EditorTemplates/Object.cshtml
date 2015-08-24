@@ -1,0 +1,12 @@
+﻿@if (ViewData.TemplateInfo.TemplateDepth > 1)
+{
+    @ViewData.ModelMetadata.SimpleDisplayText
+}
+else
+{
+    foreach (var prop in ViewData.ModelMetadata.Properties.Where(pm => pm.ShowForEdit && !ViewData.TemplateInfo.Visited(pm)))
+    {
+         @Html.Editor(prop.PropertyName)
+    }
+    @Html.ValidationSummary(true)
+}

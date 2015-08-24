@@ -58,7 +58,24 @@ namespace StoreManagement.Test
             log.Add(storeLanguange);
             log.Save();
         }
-
+        
+        [TestMethod]
+        public void TestGetFiles()
+        {
+            String path = @"C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Admin\Views";
+            path = @"C:\tttt";
+            var allFiles = Directory.GetFiles(path, "*.cshtml", SearchOption.AllDirectories);
+            foreach (var allFile in allFiles)
+            {
+              
+                if (allFile.Replace(path, "").ToLower().Contains("saveoredit"))
+                {
+      
+                    string readText = File.ReadAllText(allFile);
+                    Console.WriteLine(readText);
+                }
+            }
+        }
         [TestMethod]
         public void TestLogRepositoryGetSingle()
         {

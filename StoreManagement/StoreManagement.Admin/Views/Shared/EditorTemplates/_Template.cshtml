@@ -1,0 +1,15 @@
+﻿@if (ViewData.ModelMetadata.HideSurroundingHtml) {
+	RenderBody();
+} else {
+	<div class="field">
+@*    @Html.Label("")*@
+		@RenderBody()
+        @if (ViewData.ModelMetadata.IsRequired && !ViewData.ModelMetadata.IsReadOnly) {
+			<span title="Required"> *</span>
+		}
+		@Html.ValidationMessage("")
+		@if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("Description")) {
+		<div class="description">@ViewData.ModelMetadata.AdditionalValues["Description"]</div>
+		}
+	</div>
+}

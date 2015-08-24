@@ -229,16 +229,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>08/21/2015 17:09:48</publishTime>
+      <publishTime>08/24/2015 11:15:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>08/21/2015 16:17:47</publishTime>
+      <publishTime>08/24/2015 11:01:00</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>08/21/2015 16:17:48</publishTime>
+      <publishTime>08/24/2015 11:01:02</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -4951,7 +4951,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Views/Locations/SaveOrEdit.cshtml">
-      <publishTime>08/21/2015 16:29:34</publishTime>
+      <publishTime>08/24/2015 11:00:40</publishTime>
     </File>
     <File Include="Views/Locations/_CreateOrEdit.cshtml">
       <publishTime>07/04/2015 13:28:00</publishTime>
@@ -5187,6 +5187,36 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/DisplayTemplates/RecordsStats.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
+    <File Include="Views/Shared/EditorTemplates/Boolean.cshtml">
+      <publishTime>08/24/2015 11:10:19</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Decimal.cshtml">
+      <publishTime>08/24/2015 11:10:14</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/HttpPostedFileBase.cshtml">
+      <publishTime>11/09/2010 10:54:24</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Int32.cshtml">
+      <publishTime>08/24/2015 11:12:48</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Integer.cshtml">
+      <publishTime>08/24/2015 11:12:48</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/MultilineText.cshtml">
+      <publishTime>08/24/2015 11:10:09</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Object.cshtml">
+      <publishTime>11/09/2010 10:54:24</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Password.cshtml">
+      <publishTime>08/24/2015 11:09:45</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/String.cshtml">
+      <publishTime>08/24/2015 11:10:03</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/_Template.cshtml">
+      <publishTime>08/24/2015 11:06:56</publishTime>
+    </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
@@ -5395,7 +5425,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/21/2015 16:12:04</publishTime>
+      <publishTime>08/24/2015 11:01:13</publishTime>
     </File>
   </ItemGroup>
 </Project>

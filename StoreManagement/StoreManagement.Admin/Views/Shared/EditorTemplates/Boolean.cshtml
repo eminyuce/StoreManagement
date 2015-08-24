@@ -1,0 +1,28 @@
+﻿@{
+    if (ViewData.ModelMetadata.IsNullableValueType) {
+        Layout = "_Template.cshtml";
+    }
+    
+    Func<bool?> GetValue = () =>
+    {
+        bool? value = null;
+        if (ViewData.Model != null)
+        {
+            value = Convert.ToBoolean(ViewData.Model, System.Globalization.CultureInfo.InvariantCulture);
+        }
+        return value;
+    };
+}
+@if (ViewData.ModelMetadata.IsNullableValueType) {
+    var value = GetValue();
+    @Html.DropDownList("", new[] {
+            new SelectListItem { Text = "Not Set", Value = String.Empty, Selected = !value.HasValue },
+            new SelectListItem { Text = "True", Value = "true", Selected = value.HasValue && value.Value },
+            new SelectListItem { Text = "False", Value = "false", Selected = value.HasValue && !value.Value }
+        }, new { @class = "list-box tri-state" });
+} else {
+    <div class="field">
+    @Html.CheckBox("", GetValue().GetValueOrDefault(), new { @class = "form-control check-box" })
+@*    @Html.Label("")*@
+    </div>
+}

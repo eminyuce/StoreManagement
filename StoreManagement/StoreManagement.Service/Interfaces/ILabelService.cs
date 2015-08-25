@@ -9,6 +9,7 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface ILabelService : IService
     {
+        Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType);
 
     }
 }

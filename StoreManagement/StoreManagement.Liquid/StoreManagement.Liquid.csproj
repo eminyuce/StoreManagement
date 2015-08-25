@@ -430,6 +430,7 @@
     </Compile>
     <Compile Include="Helper\BaseLiquidHelper.cs" />
     <Compile Include="Helper\BrandHelper.cs" />
+    <Compile Include="Helper\LabelHelper.cs" />
     <Compile Include="Helper\PagingHelper.cs" />
     <Compile Include="Helper\ProductCategoryHelper.cs" />
     <Compile Include="Helper\ContentHelper.cs" />

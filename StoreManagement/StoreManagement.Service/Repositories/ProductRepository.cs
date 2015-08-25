@@ -202,23 +202,22 @@ namespace StoreManagement.Service.Repositories
                     predicate = predicate.Or(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId);
 
                    // Expression<Func<Product>> myExpression = () => PredicateBuilder.And<Product,true>(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId); 
-           
+                    if (excludedProductId.HasValue)
+                    {
+                        predicate = predicate.Or(r => r.Id != excludedProductId.Value);
+                    }
+
 
                     var items =
                        this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(predicate);
 
-
-
-                    if (excludedProductId.HasValue)
-                    {
-                        items = items.Where(r => r.Id != excludedProductId.Value);
-                    }
 
                     if (take.HasValue)
                     {
                         items = items.Take(take.Value);
                     }
 
+                   
                     return items.OrderBy(r => r.Ordering).ToList();
 
                 }

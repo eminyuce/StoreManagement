@@ -11,8 +11,7 @@ namespace StoreManagement.Data.LiquidEntities
 {
     public class NavigationLiquid : BaseDrop
     {
-        public Navigation Navigation;
-        public PageDesign PageDesign;
+        public Navigation Navigation { get; set; }
 
 
         public NavigationLiquid()

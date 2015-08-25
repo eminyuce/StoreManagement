@@ -72,6 +72,10 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public IContactService ContactService { set; get; }
 
+
+        [Inject]
+        public ILabelService LabelService { set; get; }
+
         // protected Store Store { set; get; }
         protected int StoreId { get; set; }
        

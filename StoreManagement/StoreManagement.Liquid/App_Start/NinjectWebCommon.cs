@@ -111,7 +111,8 @@ namespace StoreManagement.Liquid.App_Start
                 service17.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service18 = kernel.Bind<IContactService>().To<ContactService>();
                 service18.WithConstructorArgument("webServiceAddress", webServiceAddress);
-
+                var service19 = kernel.Bind<ILabelService>().To<LabelService>();
+                service19.WithConstructorArgument("webServiceAddress", webServiceAddress);
 
             }
             else
@@ -135,7 +136,7 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IBrandService>().To<BrandRepository>();
                 kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>();
                 kernel.Bind<IItemFileService>().To<ItemFileRepository>();
-
+                kernel.Bind<ILabelService>().To<LabelRepository>();
                 kernel.Bind<IContactService>().To<ContactRepository>();
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();

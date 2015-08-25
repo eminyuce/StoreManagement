@@ -183,6 +183,7 @@
     <Compile Include="LiquidEngineHelpers\TemplateManager.cs" />
     <Compile Include="LiquidEntities\BaseDrop.cs" />
     <Compile Include="LiquidEntities\BrandLiquid.cs" />
+    <Compile Include="LiquidEntities\LabelLiquid.cs" />
     <Compile Include="LiquidEntities\PaginatorLiquid.cs" />
     <Compile Include="LiquidEntities\ProductCategoryLiquid.cs" />
     <Compile Include="LiquidEntities\ContentLiquid.cs" />

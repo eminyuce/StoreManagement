@@ -149,5 +149,38 @@ namespace StoreManagement.Liquid.Controllers
             var returtHtml = await res;
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> GetProductLabels(int id, String designName="")
+        {
+
+            if (String.IsNullOrEmpty(designName))
+            {
+                designName = GetSettingValue("BrandsPartial_DefaultPageDesign", "BrandsPartial");
+            }
+            var res = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
+                    var brandsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
+                    var liquidHelper = new LabelHelper();
+                    liquidHelper.StoreSettings = GetStoreSettings();
+                    liquidHelper.ImageWidth = GetSettingValueInt("BrandsPartial_ImageWidth", 50);
+                    liquidHelper.ImageHeight = GetSettingValueInt("BrandsPartial_ImageHeight", 50);
+                    var pageOuput = liquidHelper.GetProductLabels(brandsTask, pageDesignTask);
+                    String html = pageOuput.PageOutputText;
+                    return html;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "GetProductLabels", designName);
+                    return "";
+                }
+
+            });
+            var returtHtml = await res;
+            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

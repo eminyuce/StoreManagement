@@ -62,5 +62,20 @@ namespace StoreManagement.Service.Repositories
             }
             return items.ToList();
         }
+
+        public Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType)
+        {
+            var labelIds =
+                StoreDbContext.LabelLines.Where(
+                    r => r.ItemId == itemId && itemType.Equals(itemType, StringComparison.InvariantCultureIgnoreCase))
+                              .ToList();
+            var labelidList = labelIds.Select(r1 => r1.LabelId);
+            var items = this.FindAllAsync(r => r.StoreId == storeId && labelidList.Contains(r.Id));
+
+
+            return items;
+
+
+        }
     }
 }

@@ -155,9 +155,18 @@
 
         columns.Add(c => c.OriginalFilename).Titled("OriginalFilename").Filterable(true);
 
+        
         columns.Add(c => c.Title).Titled("Name").Encoded(false).
                     Sanitized(false).
                     RenderValueAs(o => String.Format("<input   gridkey-id='{0}' value='{1}'  class='input-xs' type='type'>", o.Id, o.Title));
+
+
+
+        columns.Add(c => c.GoogleImageId).Titled("ImageSrc").Encoded(false).
+                    Sanitized(false).
+                    RenderValueAs(o => String.Format("<input  value='{0}' />", String.Format("/Images/Thumbnail/{0}?width={1}&height={2}", o.GoogleImageId, o.Width, o.Height).HtmlDecode()));
+                    
+                    
 
         columns.Add(c => c.ContentType).Titled("ContentType").Filterable(true);
         columns.Add(c => c.Width).Titled("Width").Filterable(true);

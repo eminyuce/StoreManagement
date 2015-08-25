@@ -40,15 +40,27 @@ namespace StoreManagement.Test
         [TestInitialize]
         public void MyTestInitialize()
         {
-            dbContext = new StoreContext(ConnectionString);
+            var x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
+          //  dbContext = new StoreContext(ConnectionString);
 
-        }  
+        }
+
+        [TestMethod]
+        public void TestLabelRepository()
+        {
+            var log = new LabelRepository(new StoreContext(ConnectionString));
+            var mm =  log.GetLabelsByItemTypeId(9, 225, "product");
+            Task.WaitAll(mm);
+            var resultLabels = mm.Result;
+        }
+
+
         [TestMethod]
         public void TestStoreLanguageRepositoryGetSingle()
         {
             var log = new StoreLanguageRepository(new StoreContext(ConnectionString));
             var storeLanguange = new StoreLanguage();
-            storeLanguange.LanguageCode = "tr-tr";
+            storeLanguange.LanguageCode = "tr-test";
             storeLanguange.Name = "Turkce";
             storeLanguange.UpdatedDate = DateTime.Now;
             storeLanguange.CreatedDate = DateTime.Now;

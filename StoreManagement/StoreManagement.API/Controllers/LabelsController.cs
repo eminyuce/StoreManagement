@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
@@ -35,7 +36,11 @@ namespace StoreManagement.API.Controllers
         {
             throw new NotImplementedException();
         }
- 
- 
+
+
+        public async Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType)
+        {
+            return await LabelRepository.GetLabelsByItemTypeId(storeId, itemId, itemType);
+        }
     }
 }

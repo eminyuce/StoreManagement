@@ -95,7 +95,7 @@ namespace StoreManagement.Data.GeneralHelper
                 if (expiredCacheItem != null)
                 {
                     String url = expiredCacheItem.Key;
-                    Logger.Info(String.Format("Return From ContentCacheUpdateCallback {0}", url));
+                    Logger.Trace(String.Format("Return From ContentCacheUpdateCallback {0}", url));
                     var ret = GetJsonFromCacheOrWebservice(url);
 
                     expiredCacheItem.Value = ret;
@@ -287,6 +287,14 @@ namespace StoreManagement.Data.GeneralHelper
                 Logger.ErrorException("Error:" + ex.Message, ex);
                 return new StorePagedList<T>();
             }
+        }
+        public Task<ICollection<T>> GetUrlResultsAsync2<T>(string url) where T : new()
+        {
+            var task = new Task<ICollection<T>>(() => GetUrlResults<T>(url));
+            task.Start();
+
+            return task;
+            // return Task<T>.Factory.StartNew(() => { GetUrlResults<T>(url); });
         }
         public Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
         {

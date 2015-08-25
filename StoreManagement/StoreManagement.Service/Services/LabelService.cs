@@ -39,5 +39,21 @@ namespace StoreManagement.Service.Services
             HttpRequestHelper.CacheMinute = CacheMinute;
             HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
+
+        public Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetLabelsByItemTypeId?storeId={2}&itemId={3}&itemType={4}", WebServiceAddress, ApiControllerName, storeId, itemId, itemType);
+                return HttpRequestHelper.GetUrlResultsAsync<Label>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return null;
+
+            }
+        }
     }
 }

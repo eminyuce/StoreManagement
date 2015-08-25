@@ -17,5 +17,10 @@ namespace StoreManagement.Data.LiquidEntities
             this.PageDesign = pageDesign;
         }
 
+
+        public string Link
+        {
+            get { return "Link"; }
+        }
     }
 }

@@ -155,7 +155,7 @@ namespace StoreManagement.Liquid.Controllers
 
             if (String.IsNullOrEmpty(designName))
             {
-                designName = GetSettingValue("BrandsPartial_DefaultPageDesign", "BrandsPartial");
+                designName = GetSettingValue("ProductLabels_DefaultPageDesign", "ProductLabelsPartial");
             }
             var res = Task.Factory.StartNew(() =>
             {
@@ -165,8 +165,8 @@ namespace StoreManagement.Liquid.Controllers
                     var brandsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
                     var liquidHelper = new LabelHelper();
                     liquidHelper.StoreSettings = GetStoreSettings();
-                    liquidHelper.ImageWidth = GetSettingValueInt("BrandsPartial_ImageWidth", 50);
-                    liquidHelper.ImageHeight = GetSettingValueInt("BrandsPartial_ImageHeight", 50);
+                    liquidHelper.ImageWidth = GetSettingValueInt("ProductLabels_ImageWidth", 50);
+                    liquidHelper.ImageHeight = GetSettingValueInt("ProductLabels_ImageHeight", 50);
                     var pageOuput = liquidHelper.GetProductLabels(brandsTask, pageDesignTask);
                     String html = pageOuput.PageOutputText;
                     return html;

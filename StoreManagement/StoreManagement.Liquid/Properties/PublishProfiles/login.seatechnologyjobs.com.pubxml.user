@@ -19,10 +19,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2015 12:04:53</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>08/24/2015 16:44:13</publishTime>
+      <publishTime>08/25/2015 12:26:47</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>08/24/2015 16:44:16</publishTime>
+      <publishTime>08/25/2015 12:26:50</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>07/30/2015 09:18:15</publishTime>
@@ -58,13 +58,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>08/24/2015 17:14:47</publishTime>
+      <publishTime>08/25/2015 14:02:25</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>08/24/2015 17:14:53</publishTime>
+      <publishTime>08/25/2015 14:02:31</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>08/24/2015 17:14:50</publishTime>
+      <publishTime>08/25/2015 14:02:28</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -799,7 +799,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
     <File Include="Scripts/storeManagement.js">
-      <publishTime>08/19/2015 14:17:33</publishTime>
+      <publishTime>08/25/2015 14:18:34</publishTime>
     </File>
     <File Include="Scripts/Trizzy/custom.js">
       <publishTime>07/30/2015 09:17:59</publishTime>
@@ -997,7 +997,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/24/2015 17:14:56</publishTime>
+      <publishTime>08/25/2015 14:02:34</publishTime>
     </File>
   </ItemGroup>
 </Project>

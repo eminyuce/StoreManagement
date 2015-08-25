@@ -39,7 +39,12 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-               
+                items = from s in items
+                        select new
+                        {
+                            s.Label.Name,
+                            s.Link
+                        }
 
 
             };

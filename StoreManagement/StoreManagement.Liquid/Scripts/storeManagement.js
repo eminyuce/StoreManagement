@@ -11,23 +11,89 @@ $(document).ready(function () {
     callAjaxMethod();
 });
 function callAjaxMethod() {
-    GetMainLayout();
-    GetMainFooter();
-    if ($('[data-related-contents]').length > 0) {
-        GetRelatedContents();
+
+    try {
+        GetMainLayout();
     }
-    if ($('[data-related-products-by-brand]').length > 0) {
-        GetRelatedProductsPartialByBrand();
+    catch (err) {
+        console.error(err.message);
     }
-    if ($('[data-related-products-by-category]').length > 0) {
-        GetRelatedProductsPartialByCategory();
+    
+    try {
+        GetMainFooter();
     }
-    if ($('[data-product-categories]').length > 0) {
-        GetProductCategories();
+    catch (err) {
+       console.error(err.message);
     }
-    if ($('[data-brands]').length > 0) {
-        GetBrands();
+
+    try {
+        if ($('[data-related-contents]').length > 0) {
+            GetRelatedContents();
+        }
     }
+    catch (err) {
+        console.error(err.message);
+    }
+    
+    try {
+        if ($('[data-product-labels]').length > 0) {
+            GetProductLabels();
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+    
+    try {
+        if ($('[data-related-products-by-brand]').length > 0) {
+            GetRelatedProductsPartialByBrand();
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+    
+    try {
+        if ($('[data-related-products-by-category]').length > 0) {
+            GetRelatedProductsPartialByCategory();
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+    
+    try {
+        if ($('[data-product-categories]').length > 0) {
+            GetProductCategories();
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+    
+    try {
+        if ($('[data-brands]').length > 0) {
+            GetBrands();
+        }
+
+    }
+    catch (err) {
+       console.error(err.message);
+    }
+    
+}
+function GetProductLabels() {
+    $('[data-product-labels]').each(function () {
+        var truethis = this;
+        var designName = $(this).attr('data-template-design-name');
+        var itemid = $(this).attr('data-product-itemid');
+        var itemtype = 'product';
+        var postData = JSON.stringify({ id: itemid, "designName": designName });
+        ajaxMethodCall(postData, "/AjaxProducts/GetProductLabels", function (data) {
+            $(truethis).empty();
+            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+        });
+    });
 }
 function GetMainFooter() {
     $('[data-main-footer]').each(function () {

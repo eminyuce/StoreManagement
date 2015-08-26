@@ -172,7 +172,7 @@
             .Filterable(true)
             .Sanitized(false)
             .Encoded(false)
-            .RenderValueAs(o => Html.ActionLink(o.Name, "Details", "Products", new { Id = o.Id }, null).ToHtmlString());
+            .RenderValueAs(o => Html.ActionLink(o.Name, "StoreDetails", "Navigations", new { Id = o.Id }, null).ToHtmlString());
 
 
 

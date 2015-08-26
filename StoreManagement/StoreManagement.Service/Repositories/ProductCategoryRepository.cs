@@ -194,5 +194,18 @@ namespace StoreManagement.Service.Repositories
 
             return res;
         }
+
+        public Task<List<ProductCategory>> GetCategoriesByBrandIdAsync(int storeId, int brandId)
+        {
+            var labelIds =
+               StoreDbContext.Products.Where(
+                   r => r.StoreId == storeId  && r.BrandId == brandId).ToList();
+            var productCategories = labelIds.Select(r1 => r1.ProductCategoryId);
+
+            var items = this.FindAllAsync(r => r.StoreId == storeId && productCategories.Contains(r.Id));
+
+            return items;
+
+        }
     }
 }

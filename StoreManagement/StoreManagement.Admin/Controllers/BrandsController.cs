@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Admin.Controllers
 {
@@ -141,6 +142,24 @@ namespace StoreManagement.Admin.Controllers
 
             return View(brand);
         }
+        public ActionResult StoreDetails(int id = 0)
+        {
+            try
+            {
+                Brand item = BrandRepository.GetSingle(id);
+                Store s = StoreRepository.GetSingle(item.StoreId);
+                var productDetailLink = LinkHelper.GetBrandDetailLink(item);
+                String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
 
+                return Redirect(detailPage);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return new EmptyResult();
+            }
+
+
+        }
     }
 }

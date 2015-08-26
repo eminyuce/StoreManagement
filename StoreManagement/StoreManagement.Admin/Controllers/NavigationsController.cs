@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 using StoreManagement.Admin.Filters;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data.Entities;
@@ -148,7 +149,25 @@ namespace StoreManagement.Admin.Controllers
             return View(navigation);
 
         }
+        public ActionResult StoreDetails(int id = 0)
+        {
+            try
+            {
+                Navigation item = NavigationRepository.GetSingle(id);
+                Store s = StoreRepository.GetSingle(item.StoreId);
+                var productDetailLink = LinkHelper.GetNavigationLink(item);
+                String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
 
+                return Redirect(detailPage);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return new EmptyResult();
+            }
+
+
+        }
 
 
     }

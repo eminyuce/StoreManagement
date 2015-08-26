@@ -1,0 +1,11 @@
+﻿@using MvcPaging
+@using StoreManagement.Data.Constants
+@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.LiquidEntities.StoreLiquidResult  
+@{
+    ViewBag.Title = "Index";
+    Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
+            
+}
+
+ @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))

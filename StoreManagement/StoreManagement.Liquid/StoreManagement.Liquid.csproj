@@ -414,6 +414,7 @@
     <Compile Include="Controllers\AjaxProductsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -482,6 +483,7 @@
     <Content Include="Views\PhotoGallery\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
     <Content Include="Views\Shared\MainLayoutExternalFiles2.cshtml" />
+    <Content Include="Views\Brands\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

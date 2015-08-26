@@ -39,17 +39,20 @@ namespace StoreManagement.Liquid.Helper
 
                 }
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
-                {
-                    items = from s in items
-                            select new
-                            {
-                                s.Brand.Name,
-                                s.Brand.Description,
-                                s.DetailLink
-                            }
-                }
-                    );
+
+                object anonymousObject = new
+                    {
+                        items = from s in items
+                                select new
+                                    {
+                                        s.Brand.Name,
+                                        s.Brand.Description,
+                                        s.DetailLink
+                                    }
+
+                    };
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;
@@ -69,5 +72,52 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
+
+        public StoreLiquidResult GetBrandDetailPage(Task<Brand> brandTask, Task<List<Product>> productsTask, Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> productCategoriesTask)
+        {
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            try
+            {
+                Task.WaitAll(brandTask, pageDesignTask, pageDesignTask, productCategoriesTask);
+                var pageDesign = pageDesignTask.Result;
+                var products = productsTask.Result;
+                var productCategories = productCategoriesTask.Result;
+                var brand = brandTask.Result;
+
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
+               
+                var brandLiquid = new BrandLiquid(brand, pageDesign, ImageWidth, ImageHeight);
+                brandLiquid.Products = products;
+                brandLiquid.ProductCategories = productCategories;
+
+                object anonymousObject = new
+                {
+                    brandLiquid.Brand.Name,
+                    brandLiquid.Brand.Description,
+
+                };
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+
+
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+
+            }
+
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
+        }
     }
 }

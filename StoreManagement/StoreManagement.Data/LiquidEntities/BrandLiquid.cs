@@ -12,6 +12,8 @@ namespace StoreManagement.Data.LiquidEntities
     public class BrandLiquid : BaseDrop
     {
         public Brand Brand;
+        public List<Product> Products { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
         public BrandLiquid(Brand brand, PageDesign pageDesign, int imageWidth, int imageHeight)
         {
             this.Brand = brand;
@@ -27,5 +29,7 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetBrandDetailLink(this.Brand);
             }
         }
+
+
     }
 }

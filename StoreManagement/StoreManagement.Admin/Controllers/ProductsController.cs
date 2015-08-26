@@ -198,12 +198,22 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult StoreDetails(int id = 0)
         {
-            Product product = ProductRepository.GetSingle(id);
-            Store s = StoreRepository.GetSingle(product.StoreId);
-            Category cat = CategoryRepository.GetSingle(product.ProductCategoryId);
-            var productDetailLink = LinkHelper.GetProductLink(product, cat.Name);
-            String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
-            return Redirect(detailPage);
+            try
+            {
+                Product product = ProductRepository.GetSingle(id);
+                Store s = StoreRepository.GetSingle(product.StoreId);
+                ProductCategory cat = ProductCategoryRepository.GetSingle(product.ProductCategoryId);
+                var productDetailLink = LinkHelper.GetProductLink(product, cat.Name);
+                String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
+
+                return Redirect(detailPage);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return new EmptyResult();
+            }
+            
 
         }
 

@@ -213,7 +213,26 @@ namespace StoreManagement.Admin.Controllers
             return View(content);
         }
 
+        public ActionResult StoreDetails(int id = 0)
+        {
+            try
+            {
+                Content item = ContentRepository.GetSingle(id);
+                Store s = StoreRepository.GetSingle(item.StoreId);
+                Category cat = CategoryRepository.GetSingle(item.CategoryId);
+                var productDetailLink = LinkHelper.GetContentLink(item, cat.Name, this.ContentType);
+                String detailPage = String.Format("http://{0}{1}", s.Domain, productDetailLink);
 
+                return Redirect(detailPage);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return new EmptyResult();
+            }
+
+
+        }
 
     }
 }

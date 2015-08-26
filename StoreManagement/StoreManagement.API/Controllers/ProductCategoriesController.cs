@@ -154,12 +154,17 @@ namespace StoreManagement.API.Controllers
 
         public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
         {
-            return ProductCategoryRepository.GetProductCategoryAsync(storeId,productId);
+            return ProductCategoryRepository.GetProductCategoryAsync(storeId, productId);
         }
 
         public Task<ProductCategory> GetProductCategoryAsync(int categoryId)
         {
             return ProductCategoryRepository.GetProductCategoryAsync(categoryId);
+        }
+
+        public Task<List<ProductCategory>> GetCategoriesByBrandIdAsync(int storeId, int brandId)
+        {
+            return ProductCategoryRepository.GetCategoriesByBrandIdAsync(storeId, brandId);
         }
     }
 }

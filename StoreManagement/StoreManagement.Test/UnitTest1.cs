@@ -41,15 +41,29 @@ namespace StoreManagement.Test
         public void MyTestInitialize()
         {
             var x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
-          //  dbContext = new StoreContext(ConnectionString);
+            //  dbContext = new StoreContext(ConnectionString);
 
         }
+
+        [TestMethod]
+        public void TestProductCategoryRepository()
+        {
+            var db = new StoreContext(ConnectionString);
+            db.Configuration.LazyLoadingEnabled = false;
+            var log = new ProductCategoryRepository(db);
+            var mm = log.GetCategoriesByBrandIdAsync(9, 5);
+            Task.WaitAll(mm);
+            var resultLabels = mm.Result;
+
+            Console.WriteLine(resultLabels.Count);
+        }
+
 
         [TestMethod]
         public void TestLabelRepository()
         {
             var log = new LabelRepository(new StoreContext(ConnectionString));
-            var mm =  log.GetLabelsByItemTypeId(9, 225, "product");
+            var mm = log.GetLabelsByItemTypeId(9, 225, "product");
             Task.WaitAll(mm);
             var resultLabels = mm.Result;
         }
@@ -70,7 +84,7 @@ namespace StoreManagement.Test
             log.Add(storeLanguange);
             log.Save();
         }
-        
+
         [TestMethod]
         public void TestGetFiles()
         {
@@ -79,10 +93,10 @@ namespace StoreManagement.Test
             var allFiles = Directory.GetFiles(path, "*.cshtml", SearchOption.AllDirectories);
             foreach (var allFile in allFiles)
             {
-              
+
                 if (allFile.Replace(path, "").ToLower().Contains("saveoredit"))
                 {
-      
+
                     string readText = File.ReadAllText(allFile);
                     Console.WriteLine(readText);
                 }
@@ -107,13 +121,13 @@ namespace StoreManagement.Test
             var contentType = "news";
             var categoryTask = cat.GetCategoryAsync(categoryId);
             int take = 5;
-            var relatedContentsTask = rr.GetContentByTypeAndCategoryIdAsync(9, contentType, categoryId, take,0);
+            var relatedContentsTask = rr.GetContentByTypeAndCategoryIdAsync(9, contentType, categoryId, take, 0);
             var pageDesignTask = pds.GetPageDesignByName(9, "RelatedContentsPartial");
 
-          
+
         }
 
-                [TestMethod]
+        [TestMethod]
         public void DovizliAskerlik()
         {
             var dt = new DateTime(2012, 8, 20);
@@ -143,7 +157,7 @@ namespace StoreManagement.Test
         public void TestSettingRepository1()
         {
             var cat = new SettingRepository(new StoreContext(ConnectionString));
-            var m =  cat.GetStoreSettingsByType(9, "", "blogs");
+            var m = cat.GetStoreSettingsByType(9, "", "blogs");
             Console.WriteLine(m.Count);
         }
 
@@ -167,7 +181,7 @@ namespace StoreManagement.Test
             int storeId = 9;
             var rr = new ProductRepository(new StoreContext(ConnectionString));
 
-            var productsTask = rr.GetMainPageProductsAsync(storeId,5);
+            var productsTask = rr.GetMainPageProductsAsync(storeId, 5);
             Task.WaitAll(productsTask);
             Console.WriteLine(productsTask.Result.Count);
 
@@ -189,7 +203,7 @@ namespace StoreManagement.Test
             int storeId = 9;
             var pds = new PageDesignRepository(new StoreContext(ConnectionString));
             var pageDesignTask = pds.GetPageDesignByName(storeId, "MainLayoutJavaScriptFiles");
-         
+
         }
         [TestMethod]
         public void TestGetStoreActiveNavigationsAsync()
@@ -238,7 +252,7 @@ namespace StoreManagement.Test
             var productsPageDesignTask = pds.GetPageDesignByName(storeId, "ProductsIndex");
             var categories1 = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true);
             var liquidHelper = new ProductHelper();
-         //   liquidHelper.StoreSettings = StoreSettings;
+            //   liquidHelper.StoreSettings = StoreSettings;
             var dic = liquidHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories1);
 
 
@@ -267,7 +281,7 @@ namespace StoreManagement.Test
 
         }
 
-      
+
 
 
         public static string GetImportPath()

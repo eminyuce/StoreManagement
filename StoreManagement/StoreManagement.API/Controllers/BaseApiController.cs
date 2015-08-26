@@ -7,13 +7,23 @@ using System.Web.Http;
 using Ninject;
 using NLog;
 using StoreManagement.Data;
+using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
     public abstract class BaseApiController<T> : ApiController where T : class
     {
+
+
+      
+
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        [Inject]
+        public IStoreContext StoreContext { get; set; }
+
+
         [Inject]
         public IFileManagerRepository FileManagerRepository { get; set; }
 
@@ -37,7 +47,7 @@ namespace StoreManagement.API.Controllers
 
         [Inject]
         public IStoreUserRepository StoreUserRepository { set; get; }
-        
+
         [Inject]
         public ISettingRepository SettingRepository { set; get; }
 
@@ -96,7 +106,8 @@ namespace StoreManagement.API.Controllers
 
 
         
-     
+      
+
 
     }
 }

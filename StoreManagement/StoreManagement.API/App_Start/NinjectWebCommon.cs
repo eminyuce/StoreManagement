@@ -65,7 +65,10 @@ namespace StoreManagement.API.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString","Stores");
+            kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", "Stores");
+            var storeContext = (StoreContext)kernel.Get<IStoreContext>();
+            storeContext.Configuration.LazyLoadingEnabled = false;
+
             kernel.Bind<IContentRepository>().To<ContentRepository>();
             kernel.Bind<IStoreRepository>().To<StoreRepository>();
             kernel.Bind<ISettingRepository>().To<SettingRepository>();

@@ -13,8 +13,8 @@ namespace StoreManagement.Data.GeneralHelper
     {
         public static String GetProductLink(Product c, String categoryName)
         {
-            String productDetailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
-            return productDetailLink.ToLowerInvariant();
+            String detailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
+            return detailLink.ToLowerInvariant();
         }
         public static String GetContentLink(Content c, String categoryName, String type)
         {
@@ -27,8 +27,8 @@ namespace StoreManagement.Data.GeneralHelper
             {
                 url = "/Blogs/Blog/";
             }
-            String productDetailLink = url + String.Format("{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id));
-            return productDetailLink.ToLowerInvariant();
+            String detailLink = url + String.Format("{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id));
+            return detailLink.ToLowerInvariant();
         }
 
         public static String GetImageLink(String imageActionName, String googleId, int width, int height)
@@ -39,18 +39,18 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static string GetCategoryLink(BaseCategory productCategory)
         {
-            String productDetailLink = String.Format("/ProductCategories/Category/{0}",
+            String detailLink = String.Format("/ProductCategories/Category/{0}",
                 String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
-            return productDetailLink.ToLowerInvariant();
+            return detailLink.ToLowerInvariant();
         }
 
         public static string GetNavigationLink(Navigation navigation)
         {
             if (!navigation.Static)
             {
-                String productDetailLink = String.Format("/{0}/{1}", navigation.ControllerName, navigation.ActionName);
-                return productDetailLink.ToLowerInvariant();
+                String detailLink = String.Format("/{0}/{1}", navigation.ControllerName, navigation.ActionName);
+                return detailLink.ToLowerInvariant();
             }
             else
             {
@@ -71,6 +71,13 @@ namespace StoreManagement.Data.GeneralHelper
         public static string GetBrandDetailLink(Brand brand)
         {
             String link = String.Format("/Brands/Detail/{0}",String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name), brand.Id));
+
+            return link.ToLowerInvariant();
+        }
+
+        public static string GetLabelLink(Label label)
+        {
+            String link = String.Format("/Tags/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(label.Name), label.Id));
 
             return link.ToLowerInvariant();
         }

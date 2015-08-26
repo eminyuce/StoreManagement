@@ -136,5 +136,55 @@ namespace StoreManagement.Data.GeneralHelper
             file.Close();
             return config;
         }
+
+
+        public static String CleanStyleAttributes(string html = "", List<String> attributes = null)
+        {
+            // string html = @"<span style=""background:lime;Color:Red;"">Contrary to popular belief,.....</span>";
+
+            if (String.IsNullOrEmpty(html))
+                return String.Empty;
+
+            if (attributes == null)
+            {
+                return String.Empty;
+            }
+
+
+            try
+            {
+
+
+                var doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
+                foreach (var span in doc.DocumentNode.DescendantsAndSelf())
+                {
+                    if (span.HasAttributes && span.Attributes["style"] != null)
+                    {
+                        var style = span.Attributes["style"].Value;
+                        foreach (var attribute in attributes)
+                        {
+                            string attribute1 = attribute;
+                            style = String.Join(";", style.Split(';').Where(s => !s.ToLower().Trim().StartsWith(attribute1)));
+                        }
+                        span.Attributes["style"].Value = style;
+                    }
+
+                }
+
+                var newHtml = doc.DocumentNode.InnerHtml;
+
+                return newHtml;
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+
+            return html;
+        }
     }
 }

@@ -230,7 +230,21 @@ namespace StoreManagement.Admin.Controllers
             string myTags = myFile.ReadToEnd();
             var returnHtml = HtmlCleanHelper.SanitizeHtmlSoft(myTags, source);
             returnHtml = GeneralHelper.NofollowExternalLinks(returnHtml);
-            return returnHtml;
+
+            var attributes = new List<String>();
+            attributes.AddRange(ProjectAppSettings.GetWebConfigString("StyleUnWantedAttributes", "background:").Split(",".ToCharArray()).ToList());
+            returnHtml = HtmlCleanHelper.CleanStyleAttributes(returnHtml, attributes);
+
+
+            if (!string.IsNullOrEmpty(source) && string.IsNullOrEmpty(returnHtml))
+            {
+                return source;
+            }
+            else
+            {
+                return returnHtml;
+            }
+
         }
         protected bool CheckRequest(BaseEntity entity)
         {

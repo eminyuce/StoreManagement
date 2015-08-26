@@ -96,7 +96,19 @@ namespace StoreManagement.Liquid.Helper
                                s.DetailLink,
                                images = s.ImageLiquid
                            },
-                    slider = home.SliderImagesLiquid
+                    sliders = from s in home.SliderImagesLiquid
+                             select new
+                             {
+                                 imagesource=s.ImageSource,
+                                 s.FileManager.Title,
+                                 s.FileManager.OriginalFilename,
+                                 s.FileManager.GoogleImageId,
+                                 s.FileManager.Width,
+                                 s.FileManager.Height,
+                                 s.ImageHeight,
+                                 s.ImageWidth
+                             },
+                     
 
                 };
 

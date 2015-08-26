@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
@@ -20,7 +21,7 @@ namespace StoreManagement.Data.LiquidEntities
 
         public string Link
         {
-            get { return "Link"; }
+            get { return LinkHelper.GetLabelLink(this.Label); }
         }
     }
 }

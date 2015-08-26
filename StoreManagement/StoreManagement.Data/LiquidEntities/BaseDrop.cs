@@ -10,8 +10,8 @@ namespace StoreManagement.Data.LiquidEntities
 {
     public abstract class BaseDrop : Drop
     {
-        protected int ImageWidth { get; set; }
-        protected int ImageHeight { get; set; }
-        protected PageDesign PageDesign { get; set; }
+        public int ImageWidth { get; set; }
+        public int ImageHeight { get; set; }
+        public PageDesign PageDesign { get; set; }
     }
 }

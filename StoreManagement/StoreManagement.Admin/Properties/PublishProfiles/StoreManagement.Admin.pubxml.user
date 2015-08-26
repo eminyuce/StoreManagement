@@ -100,10 +100,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>08/24/2015 16:44:13</publishTime>
+      <publishTime>08/25/2015 12:26:47</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>08/24/2015 16:44:16</publishTime>
+      <publishTime>08/25/2015 12:26:50</publishTime>
     </File>
     <File Include="bin/Google.Apis.Auth.dll">
       <publishTime>07/30/2015 09:18:14</publishTime>
@@ -232,16 +232,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>08/25/2015 10:47:59</publishTime>
+      <publishTime>08/26/2015 11:10:22</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>08/24/2015 17:14:47</publishTime>
+      <publishTime>08/26/2015 11:10:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>08/25/2015 10:35:55</publishTime>
+      <publishTime>08/26/2015 11:10:16</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -4846,7 +4846,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2015 16:10:02</publishTime>
     </File>
     <File Include="Views/FileManager/DisplayImages.cshtml">
-      <publishTime>08/25/2015 11:06:53</publishTime>
+      <publishTime>08/25/2015 11:13:14</publishTime>
     </File>
     <File Include="Views/FileManager/Index.cshtml">
       <publishTime>07/30/2015 09:17:55</publishTime>
@@ -5428,7 +5428,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/25/2015 10:48:21</publishTime>
+      <publishTime>08/26/2015 11:10:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

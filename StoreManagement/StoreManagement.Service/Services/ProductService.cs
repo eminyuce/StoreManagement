@@ -188,12 +188,12 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public Task<List<Product>> GetProductByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        public Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
         {
             try
             {
                 SetCache();
-                string url = string.Format("http://{0}/api/{1}/GetProductByBrandAsync?" +
+                string url = string.Format("http://{0}/api/{1}/GetProductsByBrandAsync?" +
                                                  "storeId={2}&brandId={3}" +
                                                  "&take={4}&excludedProductId={5}",
                                                  WebServiceAddress,

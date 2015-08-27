@@ -27,7 +27,7 @@ namespace StoreManagement.Liquid.Controllers
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BrandDetailPage");
                 var brandTask = BrandService.GetBrandAsync(brandId);
                 var take = GetSettingValueInt("BrandProducts_ItemNumber", 20);
-                var productsTask = ProductService.GetProductByBrandAsync(StoreId, brandId, take, 0);
+                var productsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, 0);
                 var productCategoriesTask = ProductCategoryService.GetCategoriesByBrandIdAsync(StoreId, brandId);
                 var liquidHelper = new BrandHelper();
                 liquidHelper.StoreSettings = GetStoreSettings();

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace StoreManagement.Data.GeneralHelper
 {
-    public static class EnumHelper
+
+    public static class YuceEnumHelper
     {
         public static Nullable<T> Parse<T>(String value, Boolean ignoreCase) where T : struct
         {
@@ -27,7 +29,7 @@ namespace StoreManagement.Data.GeneralHelper
         public static T Parse<T>(String value, Boolean ignoreCase, T defaultEnum) where T : struct
         {
             if ((!string.IsNullOrEmpty(value)) && (Enum.IsDefined(typeof(T), value)))
-                return (T)EnumHelper.Parse<T>(value, ignoreCase);
+                return (T)YuceEnumHelper.Parse<T>(value, ignoreCase);
             else
                 return defaultEnum;
         }
@@ -43,6 +45,34 @@ namespace StoreManagement.Data.GeneralHelper
                     return ((DescriptionAttribute)attrs[0]).Description;
             }
             return en.ToString();
+        }
+
+        public static IEnumerable<SelectListItem> ToSelectList(this Enum enumValue)
+        {
+            return from Enum e in Enum.GetValues(enumValue.GetType())
+                   select new SelectListItem
+                   {
+                       Selected = e.Equals(enumValue),
+                       Text = e.ToDescription(),
+                       Value = e.ToString()
+                   };
+        }
+
+        public static string ToDescription(this Enum value)
+        {
+            var attributes = (DescriptionAttribute[])value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+        }
+
+        public static IEnumerable<SelectListItem> ToSelectListWithId(this Enum enumValue)
+        {
+            return from Enum e in Enum.GetValues(enumValue.GetType())
+                   select new SelectListItem
+                   {
+                       Selected = e.Equals(enumValue),
+                       Text = e.ToDescription(),
+                       Value = Convert.ToInt32(e).ToStr()
+                   };
         }
     }
 }

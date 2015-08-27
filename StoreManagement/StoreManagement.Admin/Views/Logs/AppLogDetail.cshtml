@@ -27,7 +27,7 @@
                 <br />
                 @Html.ActionLink("Back to List", "Index", null,new { @class = "btn btn-default" })
                 <div class="pager">
-                    @Html.Pager(ProjectAppSettings.RecordPerPage, page, Model.RecordsStats.RecordsTotal).Options(o => o
+                    @Html.Pager(ProjectAppSettings.RecordPerPage * 15, page, Model.RecordsStats.RecordsTotal).Options(o => o
                                                                                                                           .DisplayTemplate("BootstrapPagination")
                                                                                                                           .MaxNrOfPages(7)
                                                                                                                           .AddRouteValue("appName", appName)
@@ -38,7 +38,8 @@
                                                                                                                           .SetNextPageText("→"))
                 </div>
 
-                @Html.ActionLink("Delete Logs", "DeleteLogs", "Logs", new { id = Model.ApplicationName }, new { onclick = "return confirm('Are you sure you wish to delete these logs?');", @class = "btn btn-warning" })
+                @Html.ActionLink("Delete Logs", "DeleteLogs", "Logs", 
+                new { id = Model.ApplicationName }, new { @class = "btn btn-warning" })
                 <br />
 
                 @using (Html.BeginForm("AppLogDetail", "Logs", FormMethod.Get))
@@ -153,7 +154,7 @@
         </div>
 
         <div class="pager">
-            @Html.Pager(ProjectAppSettings.RecordPerPage, page, Model.RecordsStats.RecordsTotal).Options(o => o
+            @Html.Pager(ProjectAppSettings.RecordPerPage* 15, page, Model.RecordsStats.RecordsTotal).Options(o => o
                                                                                                                             .DisplayTemplate("BootstrapPagination")
                                                                                                                             .MaxNrOfPages(7)
                                                                                                                 .AddRouteValue("appName", appName)

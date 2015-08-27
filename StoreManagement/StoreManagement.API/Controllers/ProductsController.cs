@@ -96,9 +96,9 @@ namespace StoreManagement.API.Controllers
             return await ProductRepository.GetProductByTypeAndCategoryIdAsync(storeId, categoryId, take, excludedProductId);
         }
 
-        public async Task<List<Product>> GetProductByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        public async Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
         {
-            return await ProductRepository.GetProductByBrandAsync(storeId, brandId, take, excludedProductId);
+            return await ProductRepository.GetProductsByBrandAsync(storeId, brandId, take, excludedProductId);
         }
 
        

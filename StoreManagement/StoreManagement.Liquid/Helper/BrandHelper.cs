@@ -14,6 +14,8 @@ namespace StoreManagement.Liquid.Helper
 {
     public class BrandHelper : BaseLiquidHelper
     {
+
+
         public StoreLiquidResult GetBrandsPartial(Task<List<Brand>> brandsTask, Task<PageDesign> pageDesignTask)
         {
             var dic = new Dictionary<String, String>();
@@ -49,6 +51,7 @@ namespace StoreManagement.Liquid.Helper
                                         s.Brand.Description,
                                         s.DetailLink
                                     }
+
 
                     };
 
@@ -91,15 +94,31 @@ namespace StoreManagement.Liquid.Helper
                 }
 
 
-               
+
                 var brandLiquid = new BrandLiquid(brand, pageDesign, ImageWidth, ImageHeight);
                 brandLiquid.Products = products;
                 brandLiquid.ProductCategories = productCategories;
 
                 object anonymousObject = new
                 {
-                    brandLiquid.Brand.Name,
-                    brandLiquid.Brand.Description,
+                    brand=brandLiquid,
+                    name=brandLiquid.Brand.Name,
+                    description = brandLiquid.Brand.Description,
+                    products = from s in brandLiquid.ProductLiquidList
+                               select new
+                               {
+                                   s.Product.Name,
+                                   s.Product.Description,
+                                   s.DetailLink,
+                                   images = s.ImageLiquid
+                               },
+                    productcategories = from s in brandLiquid.ProductCategoriesLiquids
+                                        select new
+                                        {
+                                            s.ProductCategory.Name,
+                                            s.ProductCategory.Description,
+                                            s.DetailLink
+                                        },
 
                 };
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

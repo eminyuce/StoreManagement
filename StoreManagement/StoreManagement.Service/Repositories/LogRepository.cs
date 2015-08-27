@@ -158,7 +158,7 @@ namespace StoreManagement.Service.Repositories
         }
 
 
-        public void DeleteLogs(string application = "")
+        public void DeleteLogs(string application = "", String logLevel="")
         {
             storeContext.Database.Connection.Open();
             // Create a SQL command to execute the sproc 
@@ -172,7 +172,14 @@ namespace StoreManagement.Service.Repositories
                 {
                     command.Parameters.Add("AppName", SqlDbType.NVarChar).Value = application;
                 }
-
+                if (String.IsNullOrEmpty(logLevel))
+                {
+                    command.Parameters.Add("logLevel", SqlDbType.NVarChar).Value = DBNull.Value;
+                }
+                else
+                {
+                    command.Parameters.Add("logLevel", SqlDbType.NVarChar).Value = logLevel;
+                }
                 command.CommandText = "log_DeleteApplicationLogs";
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandTimeout = 200000;

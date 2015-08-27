@@ -96,7 +96,7 @@ namespace StoreManagement.Liquid.Controllers
                                                                                                      .ProductType, true);
                     var brandTask = BrandService.GetBrandAsync(brandId);
                     int take = GetSettingValueInt("RelatedProducts_ItemsNumber", 5);
-                    var relatedProductsTask = ProductService.GetProductByBrandAsync(StoreId, brandId, take, excludedProductId);
+                    var relatedProductsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, excludedProductId);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
                     var liquidHelper = new ProductHelper();
                     liquidHelper.StoreSettings = GetStoreSettings();

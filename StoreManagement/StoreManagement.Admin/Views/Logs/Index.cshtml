@@ -28,6 +28,9 @@
         </th>
         <th>Last Error 
         </th>
+        <th>
+            
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -50,7 +53,7 @@
 
             </td>
             <td>
-                  @Html.ActionLink("Delete Logs Except the last 3 days","DeleteLogs","Logs", new { id= item.Log_application },new { @class="btn btn-warning",onclick = "return confirm('Are you sure you wish to delete these logs?');" })
+                  @Html.ActionLink("Delete Logs","DeleteLogs","Logs", new { id= item.Log_application },new { @class="btn btn-warning" })
             </td>
         </tr>
     }

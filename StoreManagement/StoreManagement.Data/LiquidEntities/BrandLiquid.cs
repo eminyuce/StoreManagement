@@ -30,6 +30,43 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
+        public int ImageHeightProduct { get; set; }
+        public int ImageWidthProduct { get; set; }
+        public List<ProductLiquid> ProductLiquidList
+        {
+            get
+            {
+                var list = new List<ProductLiquid>();
+
+                foreach (var item in Products)
+                {
+                    var category = ProductCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
+                    if (category != null)
+                    {
+                        var productLiquid = new ProductLiquid(item, category, this.PageDesign, ImageWidthProduct, ImageHeightProduct);
+                        list.Add(productLiquid);
+                    }
+                }
+
+                return list;
+            }
+        }
+
+
+        public List<ProductCategoryLiquid> ProductCategoriesLiquids
+        {
+            get
+            {
+
+                var cats = new List<ProductCategoryLiquid>();
+                foreach (var item in ProductCategories)
+                {
+                    cats.Add(new ProductCategoryLiquid(item, this.PageDesign));
+                }
+
+                return cats;
+            }
+        }
 
     }
 }

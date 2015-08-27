@@ -1991,6 +1991,7 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_Template.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
+    <Content Include="Views\Logs\DeleteLogs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

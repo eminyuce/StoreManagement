@@ -24,8 +24,8 @@ namespace StoreManagement.Data.LiquidEntities
             this.FileManagers = baseFileEntities.Select(r => r.FileManager).ToList();
             this.PageDesign = pageDesign;
 
-            this.ImageWidth = width;
-            this.ImageHeight = height;
+            this.ImageWidth = width == 0 ? 99 : width;
+            this.ImageHeight = height == 0 ? 99 : height;
 
         }
 

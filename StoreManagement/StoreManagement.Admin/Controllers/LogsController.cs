@@ -43,11 +43,23 @@ namespace StoreManagement.Admin.Controllers
             return View(item);
         }
 
-        public ActionResult DeleteLogs(string id = "")
+        public ActionResult DeleteLogs(string id = "", String logLevel = "Trace")
         {
             var application = id;
-            LogRepository.DeleteLogs(application);
-            return RedirectToAction("Index");
+            ViewBag.ApplicationName = id;
+            int iPage = 1;
+            int top = ProjectAppSettings.RecordPerPage * 15;
+            int skip = (iPage - 1) * top;
+            var item = LogRepository.GetApplicationLogs(application, logLevel, top, skip, "");
+            return View(item);
+        }
+        public ActionResult RemoveLogs(string id = "", String logLevel = "")
+        {
+            var application = id;
+            String logLevel2 = logLevel.ToInt() > 0 ? ((LogLevels)logLevel.ToInt()).ToString() : logLevel;
+            LogRepository.DeleteLogs(application, logLevel2);
+            Logger.Trace(String.Format("ApplicationName {0} Log Level {1}", id, logLevel));
+            return RedirectToAction("DeleteLogs", new { id = id });
         }
 
         public ActionResult TotalSpace(string id = "")

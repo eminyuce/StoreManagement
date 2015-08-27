@@ -1,0 +1,120 @@
+﻿@using StoreManagement.Data.LogEntities
+@using StoreManagement.Data
+@using StoreManagement.Data.GeneralHelper
+@using StoreManagement.Data.LogEntities
+@model StoreManagement.Data.LogEntities.LoggingModel
+
+@{
+    ViewBag.Title = "DeleteLogs";
+    var applicationName = ViewBag.ApplicationName;
+}
+
+<h2>@applicationName Delete Logs</h2>
+
+@Html.ActionLink("Delete All Logs", "RemoveLogs", "Logs",
+                new { id = applicationName },
+                new { onclick = "return confirm('Are you sure you wish to delete these logs?');", @class = "btn btn-warning" })
+<br />
+
+@using (Html.BeginForm("RemoveLogs", "Logs", FormMethod.Get))
+{
+    <input type="hidden" id="applicationName" name="id" value="@applicationName" />
+    <div class="form-group">
+        @Html.DropDownList("LogLevel", EnumHelper.GetSelectList(typeof(LogLevels)), "Select Log Level To Delete", new { @class = "form-control" })
+    </div>
+    <p>
+        <input type="submit" class="btn btn-success pull-right form-control" value="Delete Selected LogLevel" />
+    </p>
+}
+<div>
+    <input id="search-items" class = "form-control" placeholder="search" />
+</div>
+
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Level</th>
+            <th>Message</th>
+            <th>#</th>
+        </tr>
+    </thead>
+
+    @{
+        // Fatal Error Warn Info Debug Trace
+        //        success	Indicates a successful or positive action.
+        // error	Indicates a dangerous or potentially negative action.
+        // warning	Indicates a warning that might need attention.
+        // info
+        string cssClass = "";
+        foreach (var item in Model.SystemLoggingList)
+        {
+            switch (item.log_level)
+            {
+                case "Fatal":
+                case "Error":
+                    cssClass = "danger";
+                    break;
+                case "Warn":
+                    cssClass = "warning";
+                    break;
+                case "Info":
+                    cssClass = "success";
+                    break;
+                case "Debug":
+                case "Trace":
+                    cssClass = "info";
+                    break;
+
+            }
+        <tr class="@cssClass item">
+            @Html.Partial("LogDetail", item)
+        </tr>            
+        }
+    }
+</table>
+@section scripts
+{
+
+
+    <script type="text/javascript">
+        function escapeRegex(value) {
+            return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
+        }
+
+        $(function () {
+            $("#search-items").bind("keyup paste", function () {
+                var searchText = $("#search-items").val(),
+                    regex = new RegExp(escapeRegex(searchText), "gi"),
+                    $items = $(".item").show();
+                console.log(searchText);
+                $items.each(function () {
+                    $(this).show();
+                });
+                if (searchText) {
+                    $items.each(function() {
+                        var $tds = $("td", this).slice(0, 2),
+                            text = $tds.text();
+                        if (text.search(regex) === -1) {
+                            $(this).hide();
+                        }
+
+                    });
+                } else {
+                    $items.each(function () {
+                        $(this).show();
+                    });
+                    
+                }
+            });
+        });
+
+
+
+
+    </script>
+
+
+
+
+}

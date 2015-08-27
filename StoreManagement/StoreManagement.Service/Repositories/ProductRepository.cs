@@ -192,33 +192,23 @@ namespace StoreManagement.Service.Repositories
             return task;
         }
  
-        public Task<List<Product>> GetProductByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        public async Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
         {
-            var task = Task.Factory.StartNew(() =>
-            {
                 try
                 {
-                    var predicate = PredicateBuilder.False<Product>();
-                    predicate = predicate.Or(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId);
-
-                   // Expression<Func<Product>> myExpression = () => PredicateBuilder.And<Product,true>(r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId); 
-                    if (excludedProductId.HasValue)
-                    {
-                        predicate = predicate.Or(r => r.Id != excludedProductId.Value);
-                    }
+                    int excludedProductId2 = excludedProductId.HasValue ? excludedProductId.Value : 0;
+                   Expression<Func<Product, bool>> match= r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId && r2.Id != excludedProductId2;
+                   var items = this.FindAllIncludingAsync(match, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
 
-                    var items =
-                       this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(predicate);
-
-
+                    var itemsResult = await items;
                     if (take.HasValue)
                     {
-                        items = items.Take(take.Value);
+                        itemsResult = itemsResult.Take(take.Value).ToList();
                     }
 
-                   
-                    return items.OrderBy(r => r.Ordering).ToList();
+                    return itemsResult.OrderBy(r => r.Ordering).ToList();
+                    // return items;
 
                 }
                 catch (Exception exception)
@@ -227,9 +217,10 @@ namespace StoreManagement.Service.Repositories
                     return null;
                 }
 
-            });
-            return task;
+            
         }
+
+     
 
 
         public List<Product> GetMainPageProducts(int storeId, int? take)

@@ -33,7 +33,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = ProductCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                     if (category != null)
                     {
-                        var blog = new ProductLiquid(item, category, this.PageDesign, ImageWidthBlog, ImageHeightBlog);
+                        var blog = new ProductLiquid(item, category, this.PageDesign, ImageWidthProduct, ImageHeightProduct);
                         list.Add(blog);
                     }
                 }

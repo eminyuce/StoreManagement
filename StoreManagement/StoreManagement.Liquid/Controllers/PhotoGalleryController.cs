@@ -20,11 +20,11 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "PhotoGalleryIndex");
                 var fileManagers = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
-                var liquidHelper = new PhotoGalleryHelper();
-                liquidHelper.StoreSettings = GetStoreSettings();
-                liquidHelper.ImageWidth = GetSettingValueInt("PhotoGallery_ImageWidth", 500);
-                liquidHelper.ImageHeight = GetSettingValueInt("PhotoGallery_ImageHeight", 500);
-                var dic = liquidHelper.GetPhotoGalleryIndexPage(pageDesignTask, fileManagers);
+
+                PhotoGalleryHelper.StoreSettings = GetStoreSettings();
+                PhotoGalleryHelper.ImageWidth = GetSettingValueInt("PhotoGallery_ImageWidth", 500);
+                PhotoGalleryHelper.ImageHeight = GetSettingValueInt("PhotoGallery_ImageHeight", 500);
+                var dic = PhotoGalleryHelper.GetPhotoGalleryIndexPage(pageDesignTask, fileManagers);
 
                 return View(dic);
 

@@ -3,6 +3,7 @@ using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Liquid.Constants;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Liquid.Helper.Interfaces;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -140,8 +141,16 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IContactService>().To<ContactRepository>();
             }
             kernel.Bind<IEmailSender>().To<EmailSender>();
- 
-        }
+
+            kernel.Bind<IProductCategoryHelper>().To<ProductCategoryHelper>();
+            kernel.Bind<IProductHelper>().To<ProductHelper>();
+            kernel.Bind<IPhotoGalleryHelper>().To<PhotoGalleryHelper>();
+            kernel.Bind<IBrandHelper>().To<BrandHelper>();
+            kernel.Bind<IContentHelper>().To<ContentHelper>();
+            kernel.Bind<IHomePageHelper>().To<HomePageHelper>();
+            kernel.Bind<ILabelHelper>().To<LabelHelper>(); 
+            kernel.Bind<INavigationHelper>().To<NavigationHelper>();
+        }           
     }
     
 }

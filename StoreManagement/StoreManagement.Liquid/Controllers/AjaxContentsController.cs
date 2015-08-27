@@ -44,30 +44,30 @@ namespace StoreManagement.Liquid.Controllers
 
                     var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take, excludedContentId);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-                    var liquidHelper = new ContentHelper();
-                    liquidHelper.StoreSettings = GetStoreSettings();
+
+                    ContentHelper.StoreSettings = GetStoreSettings();
 
 
 
                     if (contentType.Equals(StoreConstants.NewsType))
                     {
-                        liquidHelper.ImageWidth = GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50);
-                        liquidHelper.ImageHeight = GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50);
+                        ContentHelper.ImageWidth = GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50);
+                        ContentHelper.ImageHeight = GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50);
                     }
                     else if (contentType.Equals(StoreConstants.BlogsType))
                     {
-                        liquidHelper.ImageWidth = GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50);
-                        liquidHelper.ImageHeight = GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50);
+                        ContentHelper.ImageWidth = GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50);
+                        ContentHelper.ImageHeight = GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50);
                     }
                     else
                     {
-                        liquidHelper.ImageWidth = 0;
-                        liquidHelper.ImageHeight = 0;
+                        ContentHelper.ImageWidth = 0;
+                        ContentHelper.ImageHeight = 0;
                         Logger.Trace("No ContentType is defined like that " + contentType);
                     }
 
 
-                    var pageOutput = liquidHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
+                    var pageOutput = ContentHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
                     String html = pageOutput.PageOutputText;
                     return html;
 

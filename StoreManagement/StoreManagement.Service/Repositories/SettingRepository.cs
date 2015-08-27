@@ -33,6 +33,34 @@ namespace StoreManagement.Service.Repositories
 
             return items;
         }
+
+        public void SaveSetting(int storeid, string key, string value, String type)
+        {
+            if (storeid > 0)
+            {
+                return;
+            }
+
+            List<Setting> resultSettings = GetStoreSettingsByType(storeid, "", key);
+            if (!resultSettings.Any())
+            {
+                var setting = new Setting();
+                setting.StoreId = storeid;
+                setting.SettingKey = key;
+                setting.SettingValue = value;
+                setting.Type = type;
+                setting.CreatedDate = DateTime.Now;
+                setting.UpdatedDate = DateTime.Now;
+                setting.State = true;
+                setting.Ordering = -1;
+                setting.Name = "";
+                setting.Description = "";
+                AddAsync(setting);
+
+            }
+
+        }
+
         public void SaveSetting()
         {
             ClearCache("GetStoreSettingsFromCache-");
@@ -75,7 +103,7 @@ namespace StoreManagement.Service.Repositories
             {
                 search = search.ToLower();
                 items = items.Where(r => r.SettingKey.ToLower().Contains(search) || r.SettingValue.ToLower().Contains(search));
-       
+
             }
 
             return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();

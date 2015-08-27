@@ -46,11 +46,11 @@ namespace StoreManagement.Liquid.Controllers
                 // Begin timing.
                 stopwatch.Start();
 
-               
-                var liquidHelper = new HomePageHelper();
-                liquidHelper.StoreId = this.StoreId;
-                liquidHelper.StoreSettings = GetStoreSettings();
-                StoreLiquidResult liquidResult = liquidHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
+
+
+                HomePageHelper.StoreId = this.StoreId;
+                HomePageHelper.StoreSettings = GetStoreSettings();
+                StoreLiquidResult liquidResult = HomePageHelper.GetHomePageDesign(productsTask, blogsTask, newsTask, sliderTask, pageDesignTask, categoriesTask, productCategoriesTask);
                 liquidResult.StoreId = this.StoreId;
 
 

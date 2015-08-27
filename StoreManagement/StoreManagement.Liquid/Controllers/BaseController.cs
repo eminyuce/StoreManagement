@@ -11,6 +11,7 @@ using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Liquid.Helper.Interfaces;
 using StoreManagement.Service.Interfaces;
 using NLog;
 
@@ -19,6 +20,33 @@ namespace StoreManagement.Liquid.Controllers
     public abstract class BaseController : Controller
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+
+        [Inject]
+        public IBrandHelper BrandHelper { set; get; }
+
+        [Inject]
+        public IContentHelper ContentHelper { set; get; }   
+
+        [Inject]
+        public IProductHelper ProductHelper { set; get; }
+
+ 
+
+        [Inject]
+        public ILabelHelper LabelHelper { set; get; }
+
+        [Inject]
+        public IPhotoGalleryHelper PhotoGalleryHelper { set; get; }
+  
+        [Inject]
+        public IProductCategoryHelper ProductCategoryHelper { set; get; }
+       
+        [Inject]
+        public INavigationHelper NavigationHelper { set; get; }
+
+        [Inject]
+        public IHomePageHelper HomePageHelper { set; get; }
 
         [Inject]
         public IStoreService StoreService { set; get; }
@@ -78,7 +106,7 @@ namespace StoreManagement.Liquid.Controllers
 
         // protected Store Store { set; get; }
         protected int StoreId { get; set; }
-       
+
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
@@ -95,21 +123,21 @@ namespace StoreManagement.Liquid.Controllers
             SetStoreCache();
             base.OnActionExecuting(filterContext);
         }
-       
+
         private void GetStoreByDomain(RequestContext requestContext)
         {
             var sh = new StoreHelper();
             var store = sh.GetStoreIdByDomain(StoreService, requestContext.HttpContext);
             this.StoreId = store;
-           
-   
-            if (StoreId  == 0)
+
+
+            if (StoreId == 0)
             {
                 throw new Exception("Store cannot be NULL");
             }
         }
 
-   
+
         protected void SetStoreCache()
         {
             if (StoreService == null)
@@ -230,13 +258,13 @@ namespace StoreManagement.Liquid.Controllers
                     return "";
                 }
 
-                
+
             }
             catch (Exception ex)
             {
-                
-                    Logger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
-                
+
+                Logger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
+
                 return "";
             }
         }

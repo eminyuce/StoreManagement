@@ -16,6 +16,9 @@ namespace StoreManagement.Liquid.Helper
     {
 
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+
+
         public List<Setting> StoreSettings { get; set; }
 
         public int ImageHeight { get; set; }

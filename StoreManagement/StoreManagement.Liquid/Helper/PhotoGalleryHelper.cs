@@ -9,10 +9,12 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Liquid.Helper.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class PhotoGalleryHelper : BaseLiquidHelper
+   
+    public class PhotoGalleryHelper : BaseLiquidHelper, IPhotoGalleryHelper
     {
 
         public StoreLiquidResult GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)

@@ -29,11 +29,11 @@ namespace StoreManagement.Liquid.Controllers
                 var take = GetSettingValueInt("BrandProducts_ItemNumber", 20);
                 var productsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, 0);
                 var productCategoriesTask = ProductCategoryService.GetCategoriesByBrandIdAsync(StoreId, brandId);
-                var liquidHelper = new BrandHelper();
-                liquidHelper.StoreSettings = GetStoreSettings();
-                liquidHelper.ImageWidth = GetSettingValueInt("BrandDetail_ImageWidth", 50);
-                liquidHelper.ImageHeight = GetSettingValueInt("BrandDetail_ImageHeight", 50);
-                var dic = liquidHelper.GetBrandDetailPage(brandTask, productsTask, blogsPageDesignTask, productCategoriesTask);
+
+                BrandHelper.StoreSettings = GetStoreSettings();
+                BrandHelper.ImageWidth = GetSettingValueInt("BrandDetail_ImageWidth", 50);
+                BrandHelper.ImageHeight = GetSettingValueInt("BrandDetail_ImageHeight", 50);
+                var dic = BrandHelper.GetBrandDetailPage(brandTask, productsTask, blogsPageDesignTask, productCategoriesTask);
 
 
                 return View(dic);

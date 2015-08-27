@@ -28,11 +28,11 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-                    var liquidHelper = new ProductCategoryHelper();
-                    liquidHelper.StoreSettings = GetStoreSettings();
-                    liquidHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
-                    liquidHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
-                    var pageOuput = liquidHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
+
+                    ProductCategoryHelper.StoreSettings = GetStoreSettings();
+                    ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
+                    ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
+                    var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
                     String html = pageOuput.PageOutputText;
                     return html;
                 }
@@ -62,11 +62,11 @@ namespace StoreManagement.Liquid.Controllers
                     int take = GetSettingValueInt("RelatedProducts_ItemsNumber", 5);
                     var relatedProductsTask = ProductService.GetProductByTypeAndCategoryIdAsync(StoreId, categoryId, take, excludedProductId);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-                    var liquidHelper = new ProductHelper();
-                    liquidHelper.StoreSettings = GetStoreSettings();
-                    liquidHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByCategory_ImageWidth", 50);
-                    liquidHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByCategory_ImageHeight", 50);
-                    var pageOuput = liquidHelper.GetRelatedProductsPartialByCategory(categoryTask, relatedProductsTask, pageDesignTask);
+
+                    ProductHelper.StoreSettings = GetStoreSettings();
+                    ProductHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByCategory_ImageWidth", 50);
+                    ProductHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByCategory_ImageHeight", 50);
+                    var pageOuput = ProductHelper.GetRelatedProductsPartialByCategory(categoryTask, relatedProductsTask, pageDesignTask);
                     String html = pageOuput.PageOutputText;
                     return html;
                 }
@@ -98,11 +98,11 @@ namespace StoreManagement.Liquid.Controllers
                     int take = GetSettingValueInt("RelatedProducts_ItemsNumber", 5);
                     var relatedProductsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, excludedProductId);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-                    var liquidHelper = new ProductHelper();
-                    liquidHelper.StoreSettings = GetStoreSettings();
-                    liquidHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByBrand_ImageWidth", 50);
-                    liquidHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByBrand_ImageHeight", 50);
-                    var pageOuput = liquidHelper.GetRelatedProductsPartialByBrand(brandTask, relatedProductsTask, pageDesignTask, categoriesTask);
+
+                    ProductHelper.StoreSettings = GetStoreSettings();
+                    ProductHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByBrand_ImageWidth", 50);
+                    ProductHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByBrand_ImageHeight", 50);
+                    var pageOuput = ProductHelper.GetRelatedProductsPartialByBrand(brandTask, relatedProductsTask, pageDesignTask, categoriesTask);
                     String html = pageOuput.PageOutputText;
                     return html;
                 }
@@ -131,11 +131,11 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
                     var brandsTask = BrandService.GetBrandsAsync(StoreId, null, true);
-                    var liquidHelper = new BrandHelper();
-                    liquidHelper.StoreSettings = GetStoreSettings();
-                    liquidHelper.ImageWidth = GetSettingValueInt("BrandsPartial_ImageWidth", 50);
-                    liquidHelper.ImageHeight = GetSettingValueInt("BrandsPartial_ImageHeight", 50);
-                    var pageOuput = liquidHelper.GetBrandsPartial(brandsTask, pageDesignTask);
+
+                    BrandHelper.StoreSettings = GetStoreSettings();
+                    BrandHelper.ImageWidth = GetSettingValueInt("BrandsPartial_ImageWidth", 50);
+                    BrandHelper.ImageHeight = GetSettingValueInt("BrandsPartial_ImageHeight", 50);
+                    var pageOuput = BrandHelper.GetBrandsPartial(brandsTask, pageDesignTask);
                     String html = pageOuput.PageOutputText;
                     return html;
                 }
@@ -163,11 +163,11 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
                     var brandsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
-                    var liquidHelper = new LabelHelper();
-                    liquidHelper.StoreSettings = GetStoreSettings();
-                    liquidHelper.ImageWidth = GetSettingValueInt("ProductLabels_ImageWidth", 50);
-                    liquidHelper.ImageHeight = GetSettingValueInt("ProductLabels_ImageHeight", 50);
-                    var pageOuput = liquidHelper.GetProductLabels(brandsTask, pageDesignTask);
+ 
+                    LabelHelper.StoreSettings = GetStoreSettings();
+                    LabelHelper.ImageWidth = GetSettingValueInt("ProductLabels_ImageWidth", 50);
+                    LabelHelper.ImageHeight = GetSettingValueInt("ProductLabels_ImageHeight", 50);
+                    var pageOuput = LabelHelper.GetProductLabels(brandsTask, pageDesignTask);
                     String html = pageOuput.PageOutputText;
                     return html;
                 }

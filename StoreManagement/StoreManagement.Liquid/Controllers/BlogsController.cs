@@ -35,12 +35,12 @@ namespace StoreManagement.Liquid.Controllers
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
 
 
-                var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = GetStoreSettings();
-                liquidHelper.ImageWidth = GetSettingValueInt("BlogsIndex_ImageWidth", 50);
-                liquidHelper.ImageHeight = GetSettingValueInt("BlogsIndex_ImageHeight", 50);
 
-                var pageOutput = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
+                ContentHelper.StoreSettings = GetStoreSettings();
+                ContentHelper.ImageWidth = GetSettingValueInt("BlogsIndex_ImageWidth", 50);
+                ContentHelper.ImageHeight = GetSettingValueInt("BlogsIndex_ImageHeight", 50);
+
+                var pageOutput = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
 
 
                 var pagingHelper = new PagingHelper();
@@ -85,11 +85,11 @@ namespace StoreManagement.Liquid.Controllers
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogDetailPage");
                 var contentsTask = ContentService.GetContentByIdAsync(blogId);
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, blogId);
-                var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = GetStoreSettings();
-                liquidHelper.ImageWidth = GetSettingValueInt("BlogsBlog_ImageWidth", 50);
-                liquidHelper.ImageHeight = GetSettingValueInt("BlogsBlog_ImageHeight", 50);
-                var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.BlogsType);
+
+                ContentHelper.StoreSettings = GetStoreSettings();
+                ContentHelper.ImageWidth = GetSettingValueInt("BlogsBlog_ImageWidth", 50);
+                ContentHelper.ImageHeight = GetSettingValueInt("BlogsBlog_ImageHeight", 50);
+                var dic = ContentHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.BlogsType);
 
                 return View(dic);
 

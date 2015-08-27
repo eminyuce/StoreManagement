@@ -8,10 +8,13 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
+using StoreManagement.Liquid.Helper.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class NavigationHelper : BaseLiquidHelper
+   
+
+    public class NavigationHelper : BaseLiquidHelper, INavigationHelper
     {
 
         public StoreLiquidResult GetMainLayoutLink(
@@ -64,7 +67,7 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        public static StoreLiquidResult GetMainLayoutFooterLink(Task<List<Navigation>> navigationsTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetMainLayoutFooterLink(Task<List<Navigation>> navigationsTask, Task<PageDesign> pageDesignTask)
         {
             Task.WaitAll(pageDesignTask, navigationsTask);
             var navigations = navigationsTask.Result;

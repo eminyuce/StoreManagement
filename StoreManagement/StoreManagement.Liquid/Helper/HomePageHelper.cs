@@ -7,11 +7,12 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
+using StoreManagement.Liquid.Helper.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-
-    public class HomePageHelper : BaseLiquidHelper
+  
+    public class HomePageHelper : BaseLiquidHelper, IHomePageHelper
     {
 
 

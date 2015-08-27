@@ -29,11 +29,11 @@ namespace StoreManagement.Liquid.Controllers
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize));
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
 
-                var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = GetStoreSettings();
-                liquidHelper.ImageWidth = GetSettingValueInt("NewsIndex_ImageWidth", 50);
-                liquidHelper.ImageHeight = GetSettingValueInt("NewsIndex_ImageHeight", 50);
-                var pageOutput = liquidHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
+
+                ContentHelper.StoreSettings = GetStoreSettings();
+                ContentHelper.ImageWidth = GetSettingValueInt("NewsIndex_ImageWidth", 50);
+                ContentHelper.ImageHeight = GetSettingValueInt("NewsIndex_ImageHeight", 50);
+                var pageOutput = ContentHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
 
 
 
@@ -70,11 +70,11 @@ namespace StoreManagement.Liquid.Controllers
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsDetailPage");
                 var contentsTask = ContentService.GetContentByIdAsync(newsId);
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, newsId);
-                var liquidHelper = new ContentHelper();
-                liquidHelper.StoreSettings = GetStoreSettings();
-                liquidHelper.ImageWidth = GetSettingValueInt("NewsDetail_ImageWidth", 50);
-                liquidHelper.ImageHeight = GetSettingValueInt("NewsDetail_ImageHeight", 50);
-                var dic = liquidHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
+
+                ContentHelper.StoreSettings = GetStoreSettings();
+                ContentHelper.ImageWidth = GetSettingValueInt("NewsDetail_ImageWidth", 50);
+                ContentHelper.ImageHeight = GetSettingValueInt("NewsDetail_ImageHeight", 50);
+                var dic = ContentHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
 
 
                 return View(dic);

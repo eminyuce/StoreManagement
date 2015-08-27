@@ -20,9 +20,9 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayout");
-                    var liquidHelper = new NavigationHelper();
-                    liquidHelper.StoreSettings = GetStoreSettings();
-                    var pageOutput = liquidHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
+
+                    NavigationHelper.StoreSettings = GetStoreSettings();
+                    var pageOutput = NavigationHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
                     String html = pageOutput.PageOutputText;
                     return html;
                 }

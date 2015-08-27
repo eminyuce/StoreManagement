@@ -27,9 +27,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageSize = GetSettingValueInt(PageDesingName, StoreConstants.DefaultPageSize);
                 var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
 
-                var liquidHelper = new ProductCategoryHelper();
-                liquidHelper.StoreSettings = GetStoreSettings();
-                var dic = liquidHelper.GetCategoriesIndexPage(pageDesignTask, categories);
+                ProductCategoryHelper.StoreSettings = GetStoreSettings();
+                var dic = ProductCategoryHelper.GetCategoriesIndexPage(pageDesignTask, categories);
 
                 return View(dic);
 

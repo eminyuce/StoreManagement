@@ -29,7 +29,7 @@ namespace StoreManagement.Admin.Controllers
 
             int iPage = page.ToInt(); if (iPage == 0) iPage = 1;
 
-            int top = 200;
+            int top = ProjectAppSettings.RecordPerPage * 15;
             int skip = (iPage - 1) * top;
 
             var item = LogRepository.GetApplicationLogs(appName, logLevel, top, skip, search);

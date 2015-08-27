@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
@@ -25,7 +27,7 @@ namespace StoreManagement.API.Controllers
         {
             return SettingRepository.GetStoreSettingsByType(storeid, type);
         }
- 
+
 
         public override IEnumerable<Setting> GetAll()
         {
@@ -39,9 +41,22 @@ namespace StoreManagement.API.Controllers
 
         public override HttpResponseMessage Post(Setting value)
         {
-            throw new NotImplementedException();
-        }
+            if (ModelState.IsValid)
+            {
 
+               Task.Factory.StartNew(() => SettingRepository.SaveSetting(value.StoreId, value.SettingKey, value.SettingValue,
+                                                                                     "StoreSettings"));
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, value);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = value.Id }));
+                return response;
+
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
         public override HttpResponseMessage Put(int id, Setting value)
         {
             throw new NotImplementedException();

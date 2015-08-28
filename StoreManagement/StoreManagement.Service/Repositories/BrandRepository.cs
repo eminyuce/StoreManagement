@@ -35,7 +35,7 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<Brand, bool>> match = r2 => r2.StoreId == storeId && r2.State == isActive.HasValue ? isActive.Value : r2.State;
+                Expression<Func<Brand, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
                 var items = this.FindAllAsync(match, take);
 
                 var itemsResult = await items;

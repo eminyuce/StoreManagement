@@ -1,4 +1,5 @@
-﻿using GenericRepository.EntityFramework;
+﻿using System.Linq.Expressions;
+using GenericRepository.EntityFramework;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
@@ -199,17 +200,26 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        public async Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
+            try
+            {
+                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase) 
+                    && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) &&   r2.State && r2.MainPage;
 
-            var task = Task.Factory.StartNew(() =>
-                {
-                    var returnList = GetMainPageContents(storeId, categoryId, type, take);
+                var items = this.FindAllAsync(match, take);
 
-                    return returnList;
+                var itemsResult = await items;
 
-                });
-            return task;
+                return itemsResult.OrderBy(r => r.Ordering).ToList();
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+          
         }
 
         public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)

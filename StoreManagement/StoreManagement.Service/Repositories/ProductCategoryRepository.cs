@@ -129,11 +129,11 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId  && r2.State == isActive.HasValue ? isActive.Value : r2.State && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
-                
+                Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
+
                 var items = this.FindAllAsync(match, null);
                 var itemsResult = await items;
-                return itemsResult.OrderBy(r => r.Ordering).ToList(); 
+                return itemsResult.OrderBy(r => r.Ordering).ToList();
 
             }
             catch (Exception exception)
@@ -145,8 +145,8 @@ namespace StoreManagement.Service.Repositories
 
         public async Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
         {
-            Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId 
-                && r2.State == isActive.HasValue ? isActive.Value : r2.State 
+            Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId
+                && r2.State == isActive.HasValue ? isActive.Value : r2.State
                 && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
             var items = this.FindAllAsync(match, null);
@@ -158,7 +158,7 @@ namespace StoreManagement.Service.Repositories
             {
                 StorePagedList<ProductCategory> result = null;
 
-             
+
                 result = new StorePagedList<ProductCategory>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
                 return result;
 
@@ -168,33 +168,22 @@ namespace StoreManagement.Service.Repositories
             return await res;
         }
 
-        public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
+        public async Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
         {
-            var res = Task.Factory.StartNew(() =>
-                {
-                    Product product = this.FindBy(r => r.StoreId == storeId).Select(r => r.Products.FirstOrDefault(t => t.Id == productId)).FirstOrDefault();
-                    if (product != null)
-                    {
-                        return this.GetSingle(product.ProductCategoryId);
-                    }
-                    else
-                    {
-                        return new ProductCategory();
-                    }
-                });
-
-            return res;
+            Product product = this.FindBy(r => r.StoreId == storeId).Select(r => r.Products.FirstOrDefault(t => t.Id == productId)).FirstOrDefault();
+            if (product != null)
+            {
+                return await this.GetSingleAsync(product.ProductCategoryId);
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Task<ProductCategory> GetProductCategoryAsync(int categoryId)
+        public async Task<ProductCategory> GetProductCategoryAsync(int categoryId)
         {
-            var res = Task.Factory.StartNew(() =>
-            {
-                ProductCategory productCategory = this.GetSingle(categoryId);
-                return productCategory;
-            });
-
-            return res;
+            return await this.GetSingleAsync(categoryId);
         }
 
         public Task<List<ProductCategory>> GetCategoriesByBrandIdAsync(int storeId, int brandId)
@@ -203,7 +192,7 @@ namespace StoreManagement.Service.Repositories
 
             var labelIds =
                StoreDbContext.Products.Where(
-                   r => r.StoreId == storeId  && r.BrandId == brandId).ToList();
+                   r => r.StoreId == storeId && r.BrandId == brandId).ToList();
             var productCategories = labelIds.Select(r1 => r1.ProductCategoryId);
             var items = this.FindBy(r => r.StoreId == storeId && productCategories.Contains(r.Id)).ToListAsync();
 

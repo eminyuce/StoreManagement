@@ -198,15 +198,11 @@ namespace StoreManagement.Service.Repositories
                 {
                     int excludedProductId2 = excludedProductId.HasValue ? excludedProductId.Value : 0;
                    Expression<Func<Product, bool>> match= r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId && r2.Id != excludedProductId2;
-                   var items = this.FindAllIncludingAsync(match, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                   var items = this.FindAllIncludingAsync(match,take, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
 
                     var itemsResult = await items;
-                    if (take.HasValue)
-                    {
-                        itemsResult = itemsResult.Take(take.Value).ToList();
-                    }
-
+                    
                     return itemsResult.OrderBy(r => r.Ordering).ToList();
                     // return items;
 

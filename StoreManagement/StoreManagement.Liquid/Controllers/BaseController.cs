@@ -21,6 +21,8 @@ namespace StoreManagement.Liquid.Controllers
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        [Inject]
+        public IStoreHelper StoreHelper { set; get; }
 
         [Inject]
         public IBrandHelper BrandHelper { set; get; }
@@ -127,8 +129,7 @@ namespace StoreManagement.Liquid.Controllers
 
         private void GetStoreByDomain(RequestContext requestContext)
         {
-            var sh = new StoreHelper();
-            var store = sh.GetStoreIdByDomain(StoreService, requestContext.HttpContext);
+            var store = StoreHelper.GetStoreIdByDomain(StoreService, requestContext.HttpContext);
             this.StoreId = store;
 
 

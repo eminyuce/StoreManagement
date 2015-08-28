@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
@@ -30,53 +31,28 @@ namespace StoreManagement.Service.Repositories
             return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
 
-        public Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
+        public async Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
         {
-            var task = Task.Factory.StartNew(() =>
+            try
             {
-                try
-                {
-                    var items = this.FindBy(r2 => r2.StoreId == storeId);
+                Expression<Func<Brand, bool>> match = r2 => r2.StoreId == storeId && r2.State == isActive.HasValue ? isActive.Value : r2.State;
+                var items = this.FindAllAsync(match, take);
 
-                    if (isActive.HasValue)
-                    {
-                        items = items.Where(r => r.State == isActive.Value);
-                    }
+                var itemsResult = await items;
 
-                    if (take.HasValue)
-                    {
-                        items = items.Take(take.Value);
-                    }
+                return itemsResult.OrderBy(r => r.Ordering).ToList();
 
-                    return items.OrderBy(r => r.Ordering).ToList();
-
-                }
-                catch (Exception exception)
-                {
-                    Logger.Error(exception);
-                    return null;
-                }
-            });
-            return task;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
         public Task<Brand> GetBrandAsync(int brandId)
         {
-
-            var task = Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    return  this.GetSingle(brandId);
-
-                }
-                catch (Exception exception)
-                {
-                    Logger.Error(exception);
-                    return null;
-                }
-            });
-            return task;
+            return this.GetSingleAsync(brandId);
         }
     }
 }

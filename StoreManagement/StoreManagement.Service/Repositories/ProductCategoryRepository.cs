@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data;
@@ -124,46 +125,47 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
+        public async Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
-            var res = Task.Factory.StartNew(() =>
+            try
             {
-                var items = this.FindBy(r => r.StoreId == storeId && r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+                Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId  && r2.State == isActive.HasValue ? isActive.Value : r2.State && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
+                
+                var items = this.FindAllAsync(match, null);
+                var itemsResult = await items;
+                return itemsResult.OrderBy(r => r.Ordering).ToList(); 
 
-                if (isActive.HasValue)
-                {
-                    items = items.Where(r => r.State == isActive.Value);
-                }
-
-                return items.OrderBy(r => r.Ordering).ToList();
-
-            });
-
-            return res;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
-        public Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
+        public async Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
         {
+            Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId 
+                && r2.State == isActive.HasValue ? isActive.Value : r2.State 
+                && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
+
+            var items = this.FindAllAsync(match, null);
+            var itemsResult = await items;
+            var c = itemsResult.OrderBy(r => r.Ordering).ToList();
+
+
             var res = Task.Factory.StartNew(() =>
             {
-                StorePagedList<ProductCategory> items = null;
+                StorePagedList<ProductCategory> result = null;
 
-
-                IQueryable<ProductCategory> cats = this.FindBy(r => r.StoreId == storeId && r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-
-                if (isActive.HasValue)
-                {
-                    cats = cats.Where(r => r.State == isActive.Value);
-                }
-                var c = cats.OrderBy(r => r.Ordering).ToList();
-
-                items = new StorePagedList<ProductCategory>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
-                return items;
+             
+                result = new StorePagedList<ProductCategory>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
+                return result;
 
 
             });
 
-            return res;
+            return await res;
         }
 
         public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)

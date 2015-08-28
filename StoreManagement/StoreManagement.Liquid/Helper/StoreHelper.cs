@@ -6,11 +6,13 @@ using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Liquid.Helper.Interfaces;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public class StoreHelper
+   
+    public class StoreHelper : IStoreHelper
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public Store GetStoreByDomain(IStoreService storeService, HttpContextBase request)

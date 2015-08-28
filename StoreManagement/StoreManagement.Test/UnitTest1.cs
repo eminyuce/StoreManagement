@@ -46,6 +46,15 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void TestGetBrandAsync()
+        {
+            var log = new BrandRepository(new StoreContext(ConnectionString));
+            var mm = log.GetSingleAsync(5);
+            Task.WaitAll(mm);
+            var resultLabels = mm.Result;
+        }
+
+        [TestMethod]
         public void TestProductCategoryRepository()
         {
             var db = new StoreContext(ConnectionString);
@@ -571,6 +580,7 @@ namespace StoreManagement.Test
         public void TestMethod1()
         {
             StoreUserRepository storeRepository = new StoreUserRepository(dbContext);
+ 
             foreach (var s in storeRepository.GetAll())
             {
                 Console.WriteLine(s.StoreId);

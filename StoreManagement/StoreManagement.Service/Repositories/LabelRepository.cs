@@ -70,7 +70,7 @@ namespace StoreManagement.Service.Repositories
                     r => r.ItemId == itemId && itemType.Equals(itemType, StringComparison.InvariantCultureIgnoreCase))
                               .ToList();
             var labelidList = labelIds.Select(r1 => r1.LabelId);
-            var items = this.FindAllAsync(r => r.StoreId == storeId && labelidList.Contains(r.Id));
+            var items = this.FindAllAsync(r => r.StoreId == storeId && labelidList.Contains(r.Id),null);
 
 
             return items;

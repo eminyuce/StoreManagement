@@ -150,7 +150,8 @@ namespace StoreManagement.Liquid.App_Start
             kernel.Bind<IHomePageHelper>().To<HomePageHelper>().InRequestScope();
             kernel.Bind<ILabelHelper>().To<LabelHelper>().InRequestScope();
             kernel.Bind<INavigationHelper>().To<NavigationHelper>().InRequestScope();
-            kernel.Bind<IPagingHelper>().To<PagingHelper>().InRequestScope();
+            kernel.Bind<IPagingHelper>().To<PagingHelper>().InRequestScope(); 
+            kernel.Bind<IStoreHelper>().To<StoreHelper>().InRequestScope();
         }           
     }
     

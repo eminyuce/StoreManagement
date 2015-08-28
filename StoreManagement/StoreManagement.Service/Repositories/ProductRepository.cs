@@ -191,33 +191,25 @@ namespace StoreManagement.Service.Repositories
             });
             return task;
         }
- 
-        public async Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+
+        public Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
         {
-                try
-                {
-                    int excludedProductId2 = excludedProductId.HasValue ? excludedProductId.Value : 0;
-                   Expression<Func<Product, bool>> match= r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId && r2.Id != excludedProductId2;
-                   var items = this.FindAllIncludingAsync(match,take, r => r.ProductFiles.Select(r1 => r1.FileManager));
+            try
+            {
+                int excludedProductId2 = excludedProductId.HasValue ? excludedProductId.Value : 0;
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId && r2.Id != excludedProductId2;
+                var items = this.FindAllIncludingAsync(match, take, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
+                var itemsResult = items;
+                return itemsResult;
 
-                    var itemsResult = await items;
-                    
-                    return itemsResult.OrderBy(r => r.Ordering).ToList();
-                    // return items;
-
-                }
-                catch (Exception exception)
-                {
-                    Logger.Error(exception);
-                    return null;
-                }
-
-            
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
-
-     
-
 
         public List<Product> GetMainPageProducts(int storeId, int? take)
         {

@@ -31,16 +31,16 @@ namespace StoreManagement.Service.Repositories
             return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
 
-        public async Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
+        public  Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
         {
             try
             {
                 Expression<Func<Brand, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
                 var items = this.FindAllAsync(match, take);
 
-                var itemsResult = await items;
+                var itemsResult =  items;
 
-                return itemsResult.OrderBy(r => r.Ordering).ToList();
+                return itemsResult;
 
             }
             catch (Exception exception)

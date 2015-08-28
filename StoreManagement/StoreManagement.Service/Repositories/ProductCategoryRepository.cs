@@ -125,15 +125,14 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public async Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
+        public Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
             try
             {
                 Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
                 var items = this.FindAllAsync(match, null);
-                var itemsResult = await items;
-                return itemsResult.OrderBy(r => r.Ordering).ToList();
+                return items;
 
             }
             catch (Exception exception)
@@ -143,14 +142,15 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
+        public Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
         {
             Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId
                 && r2.State == isActive.HasValue ? isActive.Value : r2.State
                 && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
             var items = this.FindAllAsync(match, null);
-            var itemsResult = await items;
+            Task.WaitAll(items);
+            var itemsResult = items.Result;
             var c = itemsResult.OrderBy(r => r.Ordering).ToList();
 
 
@@ -165,15 +165,15 @@ namespace StoreManagement.Service.Repositories
 
             });
 
-            return await res;
+            return res;
         }
 
-        public async Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
+        public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
         {
             Product product = this.FindBy(r => r.StoreId == storeId).Select(r => r.Products.FirstOrDefault(t => t.Id == productId)).FirstOrDefault();
             if (product != null)
             {
-                return await this.GetSingleAsync(product.ProductCategoryId);
+                return this.GetSingleAsync(product.ProductCategoryId);
             }
             else
             {
@@ -181,20 +181,22 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<ProductCategory> GetProductCategoryAsync(int categoryId)
+        public Task<ProductCategory> GetProductCategoryAsync(int categoryId)
         {
-            return await this.GetSingleAsync(categoryId);
+            var item = this.GetSingleAsync(categoryId);
+            return item;
         }
 
         public Task<List<ProductCategory>> GetCategoriesByBrandIdAsync(int storeId, int brandId)
         {
-            this.StoreDbContext.Configuration.ProxyCreationEnabled = false;
-
             var labelIds =
                StoreDbContext.Products.Where(
                    r => r.StoreId == storeId && r.BrandId == brandId).ToList();
             var productCategories = labelIds.Select(r1 => r1.ProductCategoryId);
-            var items = this.FindBy(r => r.StoreId == storeId && productCategories.Contains(r.Id)).ToListAsync();
+
+            Expression<Func<ProductCategory, bool>> match = r => r.StoreId == storeId && productCategories.Contains(r.Id);
+
+            var items = this.FindAllAsync(match, null);
 
             return items;
 

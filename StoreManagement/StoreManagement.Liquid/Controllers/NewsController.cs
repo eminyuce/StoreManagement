@@ -71,6 +71,8 @@ namespace StoreManagement.Liquid.Controllers
                 var contentsTask = ContentService.GetContentByIdAsync(newsId);
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, newsId);
 
+
+                ContentHelper.StoreId = this.StoreId;
                 ContentHelper.StoreSettings = GetStoreSettings();
                 ContentHelper.ImageWidth = GetSettingValueInt("NewsDetail_ImageWidth", 50);
                 ContentHelper.ImageHeight = GetSettingValueInt("NewsDetail_ImageHeight", 50);

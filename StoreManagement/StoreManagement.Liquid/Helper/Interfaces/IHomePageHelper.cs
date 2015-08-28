@@ -18,8 +18,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
             Task<PageDesign> pageDesignTask,
             Task<List<Category>> categoriesTask,
             Task<List<ProductCategory>> productCategoriesTask);
-
-        int StoreId { get; set; }
+ 
     }
 
 }

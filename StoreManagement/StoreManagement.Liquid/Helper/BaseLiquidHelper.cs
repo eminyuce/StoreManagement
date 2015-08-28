@@ -8,22 +8,19 @@ using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Liquid.Helper.Interfaces;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-    public abstract class BaseLiquidHelper
+    public abstract class BaseLiquidHelper : IHelper
     {
 
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-
-
         public List<Setting> StoreSettings { get; set; }
-
         public int ImageHeight { get; set; }
         public int ImageWidth { get; set; }
-
         public int StoreId { get; set; }
 
         protected bool GetSettingValueBool(String key, bool defaultValue)

@@ -31,7 +31,8 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public IProductHelper ProductHelper { set; get; }
 
- 
+        [Inject]
+        public IPagingHelper PagingHelper { set; get; }
 
         [Inject]
         public ILabelHelper LabelHelper { set; get; }
@@ -258,7 +259,7 @@ namespace StoreManagement.Liquid.Controllers
                     return "";
                 }
 
-
+                
             }
             catch (Exception ex)
             {

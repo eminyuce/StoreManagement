@@ -9,6 +9,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IHelper
     {
+        int StoreId { get; set; }
         int ImageWidth { get; set; }
         int ImageHeight { get; set; }
         List<Setting> StoreSettings { get; set; }

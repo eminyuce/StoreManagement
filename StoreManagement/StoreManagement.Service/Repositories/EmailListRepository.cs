@@ -31,7 +31,7 @@ namespace StoreManagement.Service.Repositories
                 emailList = emailList.Where(r => r.Email.ToLower().Contains(search.ToLower().Trim()) 
                     || r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
-
+           
             return emailList.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
     }

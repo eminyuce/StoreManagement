@@ -43,15 +43,15 @@ namespace StoreManagement.Liquid.Controllers
                 var pageOutput = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
 
 
-                var pagingHelper = new PagingHelper();
-                pagingHelper.StoreSettings = GetStoreSettings();
-                pagingHelper.StoreId = StoreId;
-                pagingHelper.PageOutput = pageOutput;
 
-                pagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
-                pagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                PagingHelper.StoreSettings = GetStoreSettings();
+                PagingHelper.StoreId = StoreId;
+                PagingHelper.PageOutput = pageOutput;
 
-                var pagingDic = pagingHelper.GetPaging(pagingPageDesignTask);
+                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
 
                 return View(pagingDic);
 

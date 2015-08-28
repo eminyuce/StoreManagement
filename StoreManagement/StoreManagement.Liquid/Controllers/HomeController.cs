@@ -64,7 +64,7 @@ namespace StoreManagement.Liquid.Controllers
         }
         public ActionResult Contact()
         {
-
+ 
             var contactsTask =   ContactService.GetContactsByStoreIdAsync(StoreId, true);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePage");
             Task.WaitAll(contactsTask, pageDesignTask);

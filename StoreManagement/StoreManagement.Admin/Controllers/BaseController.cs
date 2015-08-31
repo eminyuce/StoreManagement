@@ -398,5 +398,15 @@ namespace StoreManagement.Admin.Controllers
 
             return exceptionMessage;
         }
+
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            //Log error
+            Logger.Error(filterContext.Controller.ToString());
+            Logger.Error(filterContext.Exception,filterContext.Exception.Message);
+ 
+            base.OnException(filterContext);
+        } 
     }
 }

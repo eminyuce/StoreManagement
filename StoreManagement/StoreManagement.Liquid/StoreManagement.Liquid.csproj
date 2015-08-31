@@ -416,9 +416,11 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
@@ -431,11 +433,14 @@
     </Compile>
     <Compile Include="Helper\BaseLiquidHelper.cs" />
     <Compile Include="Helper\BrandHelper.cs" />
+    <Compile Include="Helper\ContactHelper.cs" />
     <Compile Include="Helper\Interfaces\IBrandHelper.cs" />
+    <Compile Include="Helper\Interfaces\IContactHelper.cs" />
     <Compile Include="Helper\Interfaces\IContentHelper.cs" />
     <Compile Include="Helper\Interfaces\IHelper.cs" />
     <Compile Include="Helper\Interfaces\IHomePageHelper.cs" />
     <Compile Include="Helper\Interfaces\ILabelHelper.cs" />
+    <Compile Include="Helper\Interfaces\ILocationHelper.cs" />
     <Compile Include="Helper\Interfaces\INavigationHelper.cs" />
     <Compile Include="Helper\Interfaces\IPagingHelper.cs" />
     <Compile Include="Helper\Interfaces\IPhotoGalleryHelper.cs" />
@@ -443,6 +448,7 @@
     <Compile Include="Helper\Interfaces\IProductHelper.cs" />
     <Compile Include="Helper\Interfaces\IStoreHelper.cs" />
     <Compile Include="Helper\LabelHelper.cs" />
+    <Compile Include="Helper\LocationHelper.cs" />
     <Compile Include="Helper\PagingHelper.cs" />
     <Compile Include="Helper\ProductCategoryHelper.cs" />
     <Compile Include="Helper\ContentHelper.cs" />
@@ -505,6 +511,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Contacts\" />
+    <Folder Include="Views\Locations\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

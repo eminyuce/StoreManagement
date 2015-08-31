@@ -142,12 +142,7 @@ namespace StoreManagement.Service.Repositories
 
         public Task<Product> GetProductsByIdAsync(int productId)
         {
-            var task = Task.Factory.StartNew(() =>
-                {
-                    return GetProductsById(productId);
-
-                });
-            return task;
+            return this.GetSingleAsync(productId);
         }
 
         public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)

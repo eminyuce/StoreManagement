@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
@@ -48,8 +49,23 @@ namespace StoreManagement.Service.Repositories
 
         public Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
         {
-            var res = Task.FromResult(GetStoreActiveNavigations(storeId));
-            return res;
+            try
+            {
+                Expression<Func<Navigation, bool>> match = r2 => r2.StoreId == storeId && r2.State ;
+                var items = this.FindAllAsync(match, null);
+
+                var itemsResult = items;
+
+                return itemsResult;
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+
+
         }
 
         public List<Navigation> GetStoreNavigations(int storeId, string search)

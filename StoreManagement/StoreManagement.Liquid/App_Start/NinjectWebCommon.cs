@@ -152,6 +152,10 @@ namespace StoreManagement.Liquid.App_Start
             kernel.Bind<INavigationHelper>().To<NavigationHelper>().InRequestScope();
             kernel.Bind<IPagingHelper>().To<PagingHelper>().InRequestScope(); 
             kernel.Bind<IStoreHelper>().To<StoreHelper>().InRequestScope();
+            kernel.Bind<ILocationHelper>().To<LocationHelper>().InRequestScope();
+            kernel.Bind<IContactHelper>().To<ContactHelper>().InRequestScope();
+
+
         }           
     }
     

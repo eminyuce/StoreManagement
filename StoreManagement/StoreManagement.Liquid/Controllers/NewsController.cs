@@ -8,6 +8,7 @@ using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
+using StoreManagement.Liquid.Helper.Interfaces;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
@@ -37,15 +38,15 @@ namespace StoreManagement.Liquid.Controllers
 
 
 
-                var pagingHelper = new PagingHelper();
-                pagingHelper.StoreSettings = GetStoreSettings();
-                pagingHelper.StoreId = StoreId;
-                pagingHelper.PageOutput = pageOutput;
-               
-                pagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
-                pagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-                var pagingDic = pagingHelper.GetPaging(pagingPageDesignTask);
+                PagingHelper.StoreSettings = GetStoreSettings();
+                PagingHelper.StoreId = StoreId;
+                PagingHelper.PageOutput = pageOutput;
+
+                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
  
                 return View(pagingDic);
 

@@ -501,6 +501,8 @@
     <Content Include="Views\News\Detail.cshtml" />
     <Content Include="Views\Shared\MainLayoutExternalFiles2.cshtml" />
     <Content Include="Views\Brands\Detail.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -511,8 +513,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Contacts\" />
-    <Folder Include="Views\Locations\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

@@ -20,7 +20,8 @@ namespace StoreManagement.Liquid.Controllers
     public abstract class BaseController : Controller
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+        
+         
         [Inject]
         public IStoreHelper StoreHelper { set; get; }
 

@@ -1,0 +1,14 @@
+﻿@using StoreManagement.Data.Constants
+@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.LiquidEntities.StoreLiquidResult
+@{
+    Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
+    
+    ViewBag.Title = "Index";
+}
+
+ 
+
+ @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))
+ 
+

@@ -36,6 +36,6 @@ namespace StoreManagement.Service.DbContext
         IDbSet<Brand> Brands { get; set; }
         IDbSet<StoreLanguage> StoreLanguages { get; set; }
         IDbSet<ItemFile> ItemFiles { get; set; }
-
+        IDbSet<Activity> Activities { get; set; }
     }
 }

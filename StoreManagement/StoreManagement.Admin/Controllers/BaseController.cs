@@ -89,6 +89,9 @@ namespace StoreManagement.Admin.Controllers
         public IEmailListRepository EmailListRepository { set; get; }
 
 
+        [Inject]
+        public IActivityRepository ActivityRepository { set; get; }
+
 
         [Inject]
         public IContactRepository ContactRepository { set; get; }

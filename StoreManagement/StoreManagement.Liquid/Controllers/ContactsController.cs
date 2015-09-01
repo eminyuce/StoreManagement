@@ -29,7 +29,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "ProductsController:Index:" + ex.StackTrace);
+                Logger.Error(ex, "Index:" + ex.StackTrace);
                 return new HttpStatusCodeResult(500);
             }
         }

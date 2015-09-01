@@ -1,0 +1,60 @@
+@model StoreManagement.Data.Entities.Activity
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">
+                    <h4>Brand Detail</h4>
+                </div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+
+
+
+
+                <h2>Details</h2>
+
+                <fieldset>
+                    <legend>Brand</legend>
+
+             
+                    <div class="display-label">Name</div>
+                    <div class="display-field">@Model.Name</div>
+
+                    <div class="display-label">Description</div>
+                    <div class="display-field">@Model.Description</div>
+
+                    <div class="display-label">State</div>
+                    <div class="display-field">@Model.State</div>
+
+                    <div class="display-label">Ordering</div>
+                    <div class="display-field">@Model.Ordering</div>
+
+                    <div class="display-label">CreatedDate</div>
+                    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+                    <div class="display-label">UpdatedDate</div>
+                    <div class="display-field">@String.Format("{0:g}", Model.UpdatedDate)</div>
+                </fieldset>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+                </p>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

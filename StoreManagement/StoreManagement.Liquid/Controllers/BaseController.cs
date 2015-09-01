@@ -21,7 +21,9 @@ namespace StoreManagement.Liquid.Controllers
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         
-         
+        [Inject]
+        public IActivityHelper ActivityHelper { set; get; }
+
         [Inject]
         public IStoreHelper StoreHelper { set; get; }
 
@@ -90,6 +92,10 @@ namespace StoreManagement.Liquid.Controllers
 
         [Inject]
         public IEmailSender EmailSender { set; get; }
+
+
+        [Inject]
+        public IActivityService ActivityService { set; get; }
 
 
         [Inject]

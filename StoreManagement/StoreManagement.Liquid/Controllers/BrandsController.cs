@@ -41,7 +41,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "NewsController:News:" + ex.StackTrace);
+                Logger.Error(ex, "Stack Trace:" + ex.StackTrace, id);
                 return new HttpStatusCodeResult(500);
             }
         }

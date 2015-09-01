@@ -76,34 +76,35 @@ namespace StoreManagement.Admin.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", "Stores");
-            kernel.Bind<IContentRepository>().To<ContentRepository>();
-            kernel.Bind<IStoreRepository>().To<StoreRepository>();
-            kernel.Bind<ISettingRepository>().To<SettingRepository>();
-            kernel.Bind<IFileManagerRepository>().To<FileManagerRepository>();
-            kernel.Bind<INavigationRepository>().To<NavigationRepository>();
-            kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
-            kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>();
-            kernel.Bind<IContentFileRepository>().To<ContentFileRepository>();
-            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
- 
-            kernel.Bind<IProductRepository>().To<ProductRepository>();
-            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>();
-            kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>();
-            kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>();
-            kernel.Bind<ILabelRepository>().To<LabelRepository>();
-            kernel.Bind<IEmailListRepository>().To<EmailListRepository>();
-            kernel.Bind<ILogRepository>().To<LogRepository>();
-            var m = kernel.Bind<IUploadHelper>().To<UploadHelper>();
-            kernel.Bind<IEmailSender>().To<EmailSender>();
-            kernel.Bind<IContactRepository>().To<ContactRepository>();
-            kernel.Bind<ILocationRepository>().To<LocationRepository>();
-            kernel.Bind<IBrandRepository>().To<BrandRepository>();
+            kernel.Bind<IContentRepository>().To<ContentRepository>().InRequestScope(); 
+            kernel.Bind<IStoreRepository>().To<StoreRepository>().InRequestScope(); 
+            kernel.Bind<ISettingRepository>().To<SettingRepository>().InRequestScope(); 
+            kernel.Bind<IFileManagerRepository>().To<FileManagerRepository>().InRequestScope(); 
+            kernel.Bind<INavigationRepository>().To<NavigationRepository>().InRequestScope(); 
+            kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope(); 
+            kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>().InRequestScope(); 
+            kernel.Bind<IContentFileRepository>().To<ContentFileRepository>().InRequestScope(); 
+            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>().InRequestScope(); 
+
+            kernel.Bind<IProductRepository>().To<ProductRepository>().InRequestScope();
+            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>().InRequestScope();
+            kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>().InRequestScope(); 
+            kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>().InRequestScope(); 
+            kernel.Bind<ILabelRepository>().To<LabelRepository>().InRequestScope(); 
+            kernel.Bind<IEmailListRepository>().To<EmailListRepository>().InRequestScope(); 
+            kernel.Bind<ILogRepository>().To<LogRepository>().InRequestScope(); 
+            var m = kernel.Bind<IUploadHelper>().To<UploadHelper>().InRequestScope(); 
+            kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope(); 
+            kernel.Bind<IContactRepository>().To<ContactRepository>().InRequestScope(); 
+            kernel.Bind<ILocationRepository>().To<LocationRepository>().InRequestScope(); 
+            kernel.Bind<IBrandRepository>().To<BrandRepository>().InRequestScope(); 
             kernel.Bind<ISchedulerFactory>().To<NinjectSchedulerFactory>();
             kernel.Bind<IScheduler>().ToMethod(ctx => ctx.Kernel.Get<ISchedulerFactory>().GetScheduler()).InSingletonScope();
             kernel.Bind<IBaseTasksScheduler>().To<StoreTasksScheduler>().WithConstructorArgument("scheduler", kernel.Get<IScheduler>());
             kernel.Get<IBaseTasksScheduler>().Start();
-            kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>();
-            kernel.Bind<IItemFileRepository>().To<ItemFileRepository>();
+            kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>().InRequestScope(); 
+            kernel.Bind<IItemFileRepository>().To<ItemFileRepository>().InRequestScope(); 
+            kernel.Bind<IActivityRepository>().To<ActivityRepository>().InRequestScope(); 
 
         }
     }

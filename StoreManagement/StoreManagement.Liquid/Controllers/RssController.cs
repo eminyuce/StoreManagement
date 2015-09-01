@@ -14,7 +14,7 @@ namespace StoreManagement.Liquid.Controllers
     public class RssController : BaseController
     {
 
-
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Products(int take = 15, int description = 300, int imageHeight = 50, int imageWidth = 50)
         {
             var productsTask = ProductService.GetProductsAsync(StoreId, take, true);
@@ -29,6 +29,8 @@ namespace StoreManagement.Liquid.Controllers
             comment.AppendLine("Description=The length of description text.Default value is 300  ");
             return new FeedResult(feed, comment);
         }
+
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult News(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
         {
             var contentsTask = ContentService.GetContentByTypeAsync(StoreId, take, true,StoreConstants.NewsType);
@@ -43,6 +45,8 @@ namespace StoreManagement.Liquid.Controllers
             comment.AppendLine("Description=The length of description text.Default value is 300  ");
             return new FeedResult(feed, comment);
         }
+
+       [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Blogs(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
         {
             var contentsTask = ContentService.GetContentByTypeAsync(StoreId, take, true, StoreConstants.BlogsType);

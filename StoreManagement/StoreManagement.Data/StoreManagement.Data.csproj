@@ -126,6 +126,7 @@
     <Compile Include="EmailHelper\EmailAccount.cs" />
     <Compile Include="EmailHelper\EmailSender.cs" />
     <Compile Include="EmailHelper\IEmailSender.cs" />
+    <Compile Include="Entities\Activity.cs" />
     <Compile Include="Entities\AdminProjectUsersModel.cs" />
     <Compile Include="Entities\BaseCategory.cs" />
     <Compile Include="Entities\BaseContent.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="HelpersModel\RecordsStats.cs" />
     <Compile Include="LiquidEngineHelpers\LiquidEngineHelper.cs" />
     <Compile Include="LiquidEngineHelpers\TemplateManager.cs" />
+    <Compile Include="LiquidEntities\ActivitiesLiquid.cs" />
     <Compile Include="LiquidEntities\BaseDrop.cs" />
     <Compile Include="LiquidEntities\BrandLiquid.cs" />
     <Compile Include="LiquidEntities\ContactLiquid.cs" />

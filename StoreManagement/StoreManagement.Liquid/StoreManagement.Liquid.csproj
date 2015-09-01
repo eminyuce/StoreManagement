@@ -410,6 +410,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants\AppConstants.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AjaxContentsController.cs" />
     <Compile Include="Controllers\AjaxGenericsController.cs" />
     <Compile Include="Controllers\AjaxProductsController.cs" />
@@ -432,9 +433,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ActivityHelper.cs" />
     <Compile Include="Helper\BaseLiquidHelper.cs" />
     <Compile Include="Helper\BrandHelper.cs" />
     <Compile Include="Helper\ContactHelper.cs" />
+    <Compile Include="Helper\Interfaces\IActivityHelper.cs" />
     <Compile Include="Helper\Interfaces\IBrandHelper.cs" />
     <Compile Include="Helper\Interfaces\IContactHelper.cs" />
     <Compile Include="Helper\Interfaces\IContentHelper.cs" />
@@ -504,6 +507,7 @@
     <Content Include="Views\Brands\Detail.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

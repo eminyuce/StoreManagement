@@ -75,6 +75,8 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public IStoreLanguageRepository StoreLanguageRepository { set; get; }
 
+        [Inject]
+        public IActivityRepository ActivityRepository { set; get; }
 
         [Inject]
         public ILocationRepository LocationRepository { set; get; }

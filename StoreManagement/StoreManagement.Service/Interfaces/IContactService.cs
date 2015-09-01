@@ -9,6 +9,7 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IContactService : IService
     {
-        Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, bool ? isActive);
+        Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, int ? take,  bool ? isActive);
+ 
     }
 }

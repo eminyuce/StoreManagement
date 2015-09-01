@@ -11,7 +11,15 @@ namespace StoreManagement.Liquid.Controllers
     {
       
 
-        public ActionResult Index()
+        public ActionResult Products()
+        {
+            return View();
+        }
+        public ActionResult News()
+        {
+            return View();
+        }
+        public ActionResult Blogs()
         {
             return View();
         }

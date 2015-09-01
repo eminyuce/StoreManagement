@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ContactHelper : BaseLiquidHelper, IContactHelper
     {
-        public StoreLiquidResult GetContactIndexPage(Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetContactIndexPage(Task<PageDesign> pageDesignTask, Task<List<Contact>> contactsTask)
         {
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
@@ -24,9 +24,9 @@ namespace StoreManagement.Liquid.Helper
             {
 
 
-                Task.WaitAll(pageDesignTask);
+                Task.WaitAll(pageDesignTask, contactsTask);
                 var pageDesign = pageDesignTask.Result;
-
+                var contacts = contactsTask.Result;
 
                 if (pageDesign == null)
                 {
@@ -34,10 +34,28 @@ namespace StoreManagement.Liquid.Helper
                 }
 
 
+                var items = new List<ContactLiquid>();
+                foreach (var item in contacts)
+                {
+
+                    var i = new ContactLiquid(item, pageDesign, ImageWidth, ImageHeight);
+                    items.Add(i);
+
+                }
+
 
                 object anonymousObject = new
                 {
-
+                    items = from s in items
+                            select new
+                            {
+                                s.Contact.Name,
+                                s.Contact.Title,
+                                s.Contact.PhoneCell,
+                                s.Contact.PhoneWork,
+                                s.Contact.Email
+                            }
+                            
                 };
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

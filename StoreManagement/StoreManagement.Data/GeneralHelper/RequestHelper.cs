@@ -288,14 +288,7 @@ namespace StoreManagement.Data.GeneralHelper
                 return new StorePagedList<T>();
             }
         }
-        public Task<ICollection<T>> GetUrlResultsAsync2<T>(string url) where T : new()
-        {
-            var task = new Task<ICollection<T>>(() => GetUrlResults<T>(url));
-            task.Start();
-
-            return task;
-            // return Task<T>.Factory.StartNew(() => { GetUrlResults<T>(url); });
-        }
+        
         public Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
         {
             var task = new Task<List<T>>(() => GetUrlResults<T>(url));

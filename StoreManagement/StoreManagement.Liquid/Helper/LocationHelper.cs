@@ -15,7 +15,7 @@ namespace StoreManagement.Liquid.Helper
     {
 
 
-        public StoreLiquidResult GetLocationIndexPage(Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetLocationIndexPage(Task<PageDesign> pageDesignTask, Task<List<Location>> locationsTask)
         {
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
@@ -26,9 +26,9 @@ namespace StoreManagement.Liquid.Helper
             {
 
 
-                Task.WaitAll(pageDesignTask);
+                Task.WaitAll(pageDesignTask, locationsTask);
                 var pageDesign = pageDesignTask.Result;
-
+                var locations = locationsTask.Result;
 
                 if (pageDesign == null)
                 {
@@ -36,11 +36,35 @@ namespace StoreManagement.Liquid.Helper
                 }
 
 
+                var items = new List<LocationLiquid>();
+                foreach (var item in locations)
+                {
+
+                    var i = new LocationLiquid(item, pageDesign, ImageWidth, ImageHeight);
+                    items.Add(i);
+
+                }
+
 
                 object anonymousObject = new
                 {
+                    items = from s in items
+                            select new
+                            {
+                                s.Location.Name,
+                                s.Location.Longitude,
+                                s.Location.Latitude,
+                                s.Location.State,
+                                s.Location.City,
+                                s.Location.Country,
+                                s.Location.Address,
+                                s.Location.Postal,
+
+                            }
+
 
                 };
+
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 

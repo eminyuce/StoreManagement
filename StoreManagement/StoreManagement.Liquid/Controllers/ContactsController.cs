@@ -20,8 +20,8 @@ namespace StoreManagement.Liquid.Controllers
                 ContactHelper.StoreSettings = GetStoreSettings();
                 ContactHelper.ImageWidth = GetSettingValueInt("ContactsIndex_ImageWidth", 50);
                 ContactHelper.ImageHeight = GetSettingValueInt("ContactsIndex_ImageHeight", 50);
-
-                var pageOutput = LocationHelper.GetLocationIndexPage(pageDesignTask);
+                var contactsTask = ContactService.GetContactsByStoreIdAsync(StoreId, null, true);
+                var pageOutput = ContactHelper.GetContactIndexPage(pageDesignTask, contactsTask);
 
 
                 return View(pageOutput);

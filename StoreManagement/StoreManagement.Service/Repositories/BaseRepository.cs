@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using GenericRepository;
 using GenericRepository.EntityFramework;
 using NLog;
 using StoreManagement.Data;
+using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
 
 namespace StoreManagement.Service.Repositories
@@ -59,6 +61,8 @@ namespace StoreManagement.Service.Repositories
                 }
             }
         }
+
+       
 
     }
 }

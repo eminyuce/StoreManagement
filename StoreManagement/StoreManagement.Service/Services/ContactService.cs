@@ -26,14 +26,14 @@ namespace StoreManagement.Service.Services
             HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
 
-        public Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, bool? isActive)
+        public Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, int? take, bool? isActive)
         {
             try
             {
                 SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetContactsByStoreIdAsync" +
                                            "?storeId={2}" +
-                                            "&isActive={3}", WebServiceAddress, ApiControllerName, storeId, isActive);
+                                            "&take={3}&isActive={4}", WebServiceAddress, ApiControllerName, storeId, take, isActive);
                 return HttpRequestHelper.GetUrlResultsAsync<Contact>(url);
             }
             catch (Exception ex)

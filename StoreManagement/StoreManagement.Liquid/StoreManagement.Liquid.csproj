@@ -499,7 +499,7 @@
     <Content Include="Views\Home\MainLayoutCssFiles.cshtml" />
     <Content Include="Views\PhotoGallery\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
-    <Content Include="Views\Shared\MainLayoutExternalFiles2.cshtml" />
+    <Content Include="Views\Shared\MainLayoutExternalFiles.cshtml" />
     <Content Include="Views\Brands\Detail.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />

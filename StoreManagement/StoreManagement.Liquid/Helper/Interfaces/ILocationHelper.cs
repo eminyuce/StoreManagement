@@ -10,6 +10,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface ILocationHelper : IHelper
     {
-        StoreLiquidResult GetLocationIndexPage(Task<PageDesign> pageDesignTask);
+
+        StoreLiquidResult GetLocationIndexPage(Task<PageDesign> pageDesignTask, Task<List<Location>> locationsTask);
     }
 }

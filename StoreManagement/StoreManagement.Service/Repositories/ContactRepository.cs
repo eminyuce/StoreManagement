@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
@@ -34,19 +35,24 @@ namespace StoreManagement.Service.Repositories
             return contacts.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
 
-        public Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, bool? isActive)
+        public Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, int? take, bool? isActive)
         {
-            var contacts = this.FindBy(r => r.StoreId == storeId);
-
-            if (isActive.HasValue)
+            try
             {
-                var active = isActive.Value;
-                contacts = contacts.Where(r => r.State == active);
+                Expression<Func<Contact, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+                var items = this.FindAllAsync(match, take);
+
+                var itemsResult = items;
+
+                return itemsResult;
             }
-
-            return contacts.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToListAsync();
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
-
-
+        
+       
     }
 }

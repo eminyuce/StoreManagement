@@ -10,24 +10,24 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class ContactsController : BaseApiController<Contact>, IContactService
+    public class LocationsController : BaseApiController<Location>, ILocationService
     {
-        public override IEnumerable<Contact> GetAll()
+        public override IEnumerable<Location> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public override Contact Get(int id)
+        public override Location Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override HttpResponseMessage Post(Contact value)
+        public override HttpResponseMessage Post(Location value)
         {
             throw new NotImplementedException();
         }
 
-        public override HttpResponseMessage Put(int id, Contact value)
+        public override HttpResponseMessage Put(int id, Location value)
         {
             throw new NotImplementedException();
         }
@@ -37,9 +37,9 @@ namespace StoreManagement.API.Controllers
             throw new NotImplementedException();
         }
 
-        public async Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, int? take, bool? isActive)
+        public Task<List<Location>> GetLocationsAsync(int storeId, int? take, bool? isActive)
         {
-            return await ContactRepository.GetContactsByStoreIdAsync(storeId, take, isActive);
+            return LocationRepository.GetLocationsAsync(storeId, take, isActive);
         }
     }
 }

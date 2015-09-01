@@ -18,12 +18,12 @@ namespace StoreManagement.Liquid.Controllers
             {
                 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "LocationsIndex");
+                var locationsTask = LocationService.GetLocationsAsync(StoreId, null, true);
 
                 LocationHelper.StoreSettings = GetStoreSettings();
                 LocationHelper.ImageWidth = GetSettingValueInt("LocationsIndex_ImageWidth", 50);
                 LocationHelper.ImageHeight = GetSettingValueInt("LocationsIndex_ImageHeight", 50);
-
-                var pageOutput = LocationHelper.GetLocationIndexPage(pageDesignTask);
+                var pageOutput = LocationHelper.GetLocationIndexPage(pageDesignTask, locationsTask);
 
 
                 return View(pageOutput);

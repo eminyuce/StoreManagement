@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
@@ -27,5 +28,26 @@ namespace StoreManagement.Service.Repositories
 
             return locations.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
+
+        public Task<List<Location>> GetLocationsAsync(int storeId, int? take, bool? isActive)
+        {
+            try
+            {
+                Expression<Func<Location, bool>> match =
+                    r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+                var items = this.FindAllAsync(match, take);
+
+                var itemsResult = items;
+
+                return itemsResult;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
+       
     }
 }

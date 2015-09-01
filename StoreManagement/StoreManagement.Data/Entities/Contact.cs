@@ -20,6 +20,7 @@ namespace StoreManagement.Data.Entities
 
         public string PhoneWork { get; set; }
         public string PhoneCell { get; set; }
+        public string Fax { get; set; }
 
 
         public override string ToString()

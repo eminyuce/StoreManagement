@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using GenericRepository.EntityFramework;
 using NLog;
@@ -173,6 +174,11 @@ namespace StoreManagement.Service.Repositories
             {
                 return 0;
             }
+        }
+
+        public Task<Store> GetStoreAsync(int storeId)
+        {
+            return GetSingleAsync(storeId);
         }
 
         public void DeleteStore(int storeId)

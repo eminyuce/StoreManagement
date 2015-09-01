@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Constants;
@@ -281,5 +282,123 @@ namespace StoreManagement.Liquid.Helper
                 return result;
             }
         }
+
+        public Rss20FeedFormatter GetProductsRssFeed( Task<Store> storeTask , Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, int description)
+        {
+            Task.WaitAll(storeTask,productsTask, productCategoriesTask);
+            var store = storeTask.Result;
+            var products = productsTask.Result;
+            var productCategories = productCategoriesTask.Result;
+            try
+            {
+                String url = "http://login.seatechnologyjobs.com/";
+
+                var feed = new SyndicationFeed("Site Name", "", new Uri(url))
+                {
+                    Language = "en-US"
+                };
+
+
+                var feedItemList = new List<SyndicationItem>();
+                foreach (var product in products)
+                {
+                    try
+                    {
+                        var feedItem = GetSyndicationItem(store, product,
+                                                                             productCategories.FirstOrDefault(r => r.Id == product.ProductCategoryId),
+                                                                             description);
+                        if (feedItem != null)
+                        {
+                            feedItemList.Add(feedItem);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex);    
+                    }
+
+                }
+                feed.Items = feedItemList;
+
+
+                feed.AddNamespace("products", "https://www.maritimejobs.com/jobs");
+                var rssFeed = new Rss20FeedFormatter(feed);
+ 
+
+                return rssFeed;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GetRelatedProductsPartial");
+                return null;
+            }
+        }
+        private SyndicationItem GetSyndicationItem(Store store, Product product, ProductCategory productCategory, int description)
+        {
+            if (productCategory == null)
+                return null;
+
+            if (description == 0)
+                description = 300;
+
+            var productDetailLink = LinkHelper.GetProductLink(product, productCategory.Name);
+            String detailPage = String.Format("http://{0}{1}", store.Domain, productDetailLink);
+
+            string desc = "";
+            if (description > 0)
+            {
+                desc = GeneralHelper.GetDescription(product.Description,description);
+            }
+
+            var si = new SyndicationItem(product.Name, desc, new Uri(detailPage));
+            if (product.UpdatedDate != null)
+            {
+                si.PublishDate = product.UpdatedDate.Value.ToUniversalTime();
+            }
+
+
+            if (!String.IsNullOrEmpty(productCategory.Name))
+            {
+                si.ElementExtensions.Add("Category", String.Empty, productCategory.Name);
+            }
+
+            
+
+
+            if (product.ProductFiles.Any())
+            {
+                var mainImage =  product.ProductFiles.FirstOrDefault(r => r.IsMainImage);
+                if (mainImage == null)
+                {
+                    mainImage = product.ProductFiles.FirstOrDefault();
+                } 
+                
+                if (mainImage != null)
+                {
+                    
+            
+                    string imageSrc = LinkHelper.GetImageLink("Thumbnail",mainImage.FileManager.GoogleImageId , this.ImageWidth,this.ImageHeight);
+                    if (!string.IsNullOrEmpty(imageSrc))
+                    {
+                        try
+                        {
+                            SyndicationLink imageLink =
+                                SyndicationLink.CreateMediaEnclosureLink(new Uri(imageSrc), "image/jpeg", 100);
+                            si.Links.Add(imageLink);
+                        }
+                        catch (Exception e)
+                        {
+                        
+                        }
+
+                    }
+                }
+            }
+
+            return si;
+
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Entities;
@@ -25,5 +26,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
                                                                            Task<List<Product>> relatedProductsTask,
                                                                            Task<PageDesign> pageDesignTask,
                                                                            Task<List<ProductCategory>> productCategoriesTask);
+
+        Rss20FeedFormatter GetProductsRssFeed(Task<Store> storeTask,Task<List<Product>> productsTask,    Task<List<ProductCategory>>  productCategoriesTask, int description);
     }
 }

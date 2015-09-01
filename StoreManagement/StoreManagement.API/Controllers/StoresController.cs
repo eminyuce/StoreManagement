@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using StoreManagement.API.Controllers;
@@ -56,6 +57,11 @@ namespace StoreManagement.API.Controllers
         public int GetStoreIdByDomain(string domainName)
         {
             return this.StoreRepository.GetStoreIdByDomain(domainName);
+        }
+
+        public async Task<Store> GetStoreAsync(int storeId)
+        {
+            return await this.StoreRepository.GetStoreAsync(storeId);
         }
 
         public override IEnumerable<Store> GetAll()

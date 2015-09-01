@@ -164,6 +164,30 @@ namespace StoreManagement.Service.Services
             }
         }
 
+        public Task<List<Product>> GetProductsAsync(int storeId, int? take, bool? isActive)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetProductsAsync?" +
+                                                 "storeId={2}" +
+                                                 "&take={3}&isActive={4}",
+                                                 WebServiceAddress,
+                                                 ApiControllerName,
+                                                 storeId,
+                                                 take, isActive);
+
+                return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+
         public Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
         {
             try

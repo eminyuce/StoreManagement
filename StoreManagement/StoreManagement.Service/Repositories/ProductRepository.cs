@@ -155,6 +155,26 @@ namespace StoreManagement.Service.Repositories
             return task;
         }
 
+        public Task<List<Product>> GetProductsAsync(int storeId, int? take, bool? isActive)
+        {
+            try
+            {
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+                var items = this.FindAllIncludingAsync(match, take, includeProperties);
+
+                var itemsResult = items;
+
+                return itemsResult;
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+ 
         public Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
         {
             var task = Task.Factory.StartNew(() =>

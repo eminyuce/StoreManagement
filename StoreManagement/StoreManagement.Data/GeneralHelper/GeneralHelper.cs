@@ -23,7 +23,7 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
-
+         
         public static T DataContractSerialization<T>(T obj)
         {
             DataContractSerializer dcSer = new DataContractSerializer(obj.GetType());

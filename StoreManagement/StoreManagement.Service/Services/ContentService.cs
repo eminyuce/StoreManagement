@@ -144,7 +144,21 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
 
- 
+        public Task<List<Content>> GetContentByTypeAsync(int storeId, int? take, bool? isActive, string typeName)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetContentByTypeAsync?storeId={2}&take={3}&isActive={4}&typeName={5}", WebServiceAddress, ApiControllerName, storeId, take, isActive, typeName);
+                return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return null;
+            }
+        }
+
 
         protected override void SetCache()
         {

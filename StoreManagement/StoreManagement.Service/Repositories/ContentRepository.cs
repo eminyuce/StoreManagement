@@ -222,6 +222,27 @@ namespace StoreManagement.Service.Repositories
           
         }
 
+        public async Task<List<Content>> GetContentByTypeAsync(int storeId, int? take, bool? isActive, string typeName)
+        {
+            try
+            {
+                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
+                    && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+
+                var items = this.FindAllAsync(match, take);
+
+                var itemsResult = await items;
+
+                return itemsResult.OrderBy(r => r.Ordering).ToList();
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
         public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)
         {
             var contents = this.FindBy(r => r.StoreId == storeId && r.Type.Equals(typeName));

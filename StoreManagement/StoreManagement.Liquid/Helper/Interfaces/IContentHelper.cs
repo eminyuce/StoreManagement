@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Entities;
@@ -18,5 +19,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 
         StoreLiquidResult GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type);
         StoreLiquidResult GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type);
+
+        Rss20FeedFormatter GetContentsRssFeed(Task<Store> store, Task<List<Content>> contentsTask, Task<List<Category>> categoriesTask, int description, string type);
     }
 }

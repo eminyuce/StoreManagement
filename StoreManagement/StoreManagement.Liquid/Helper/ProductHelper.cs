@@ -293,7 +293,7 @@ namespace StoreManagement.Liquid.Helper
             {
                 String url = "http://login.seatechnologyjobs.com/";
 
-                var feed = new SyndicationFeed("Site Name", "", new Uri(url))
+                var feed = new SyndicationFeed(store.Name, "", new Uri(url))
                 {
                     Language = "en-US"
                 };

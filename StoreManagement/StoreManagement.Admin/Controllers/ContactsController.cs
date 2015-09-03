@@ -36,9 +36,10 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Contacts/Edit/5
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0)
         {
             Contact contact = new Contact();
+            contact.StoreId = GetStoreId(selectedStoreId);
             if (id != 0)
             {
                 contact = ContactRepository.GetSingle(id);

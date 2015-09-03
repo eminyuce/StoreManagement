@@ -32,9 +32,10 @@ namespace StoreManagement.Admin.Controllers
             return View(label);
         }
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0)
         {
             var label = new Label();
+            label.StoreId = GetStoreId(selectedStoreId);
             if (id != 0)
             {
                 label = LabelRepository.GetSingle(id);

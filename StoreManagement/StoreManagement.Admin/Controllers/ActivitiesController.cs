@@ -36,9 +36,10 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Brands/Edit/5
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0,int selectedStoreId = 0)
         {
             Activity activity = new Activity();
+            activity.StoreId = GetStoreId(selectedStoreId);
             if (id != 0)
             {
                 activity = ActivityRepository.GetSingle(id);
@@ -115,9 +116,32 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Activity activity = ActivityRepository.GetSingle(id);
-            ActivityRepository.Delete(activity);
-            ActivityRepository.Save();
-            return RedirectToAction("Index");
+            if (activity == null)
+            {
+                return HttpNotFound();
+            }
+            try
+            {
+
+                ActivityRepository.Delete(activity);
+                ActivityRepository.Save();
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = activity.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Unable to delete:" + activity, ex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(activity);
         }
 
 

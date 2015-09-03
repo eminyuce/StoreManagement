@@ -38,10 +38,10 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Locations/Edit/5
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0)
         {
             Location location = new Location();
-
+            location.StoreId = GetStoreId(selectedStoreId);
             if (id != 0)
             {
                 location = LocationRepository.GetSingle(id);

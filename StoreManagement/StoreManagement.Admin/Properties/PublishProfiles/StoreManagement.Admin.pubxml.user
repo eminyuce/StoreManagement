@@ -232,16 +232,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>09/01/2015 17:06:55</publishTime>
+      <publishTime>09/03/2015 15:03:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/01/2015 16:58:54</publishTime>
+      <publishTime>09/03/2015 14:40:24</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/01/2015 17:06:49</publishTime>
+      <publishTime>09/03/2015 14:40:25</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -4705,16 +4705,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:55</publishTime>
     </File>
     <File Include="Views/Activities/Delete.cshtml">
-      <publishTime>09/01/2015 16:17:49</publishTime>
+      <publishTime>09/03/2015 14:34:25</publishTime>
     </File>
     <File Include="Views/Activities/Details.cshtml">
       <publishTime>09/01/2015 16:17:44</publishTime>
     </File>
     <File Include="Views/Activities/Index.cshtml">
-      <publishTime>09/01/2015 16:17:31</publishTime>
+      <publishTime>09/03/2015 14:56:34</publishTime>
     </File>
     <File Include="Views/Activities/SaveOrEdit.cshtml">
-      <publishTime>09/01/2015 16:16:59</publishTime>
+      <publishTime>09/03/2015 14:25:53</publishTime>
     </File>
     <File Include="Views/BlogLabels/Delete.cshtml">
       <publishTime>06/26/2015 11:33:20</publishTime>
@@ -4756,16 +4756,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:55</publishTime>
     </File>
     <File Include="Views/Brands/Delete.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 14:34:20</publishTime>
     </File>
     <File Include="Views/Brands/Details.cshtml">
       <publishTime>07/30/2015 09:17:55</publishTime>
     </File>
     <File Include="Views/Brands/Index.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 14:58:16</publishTime>
     </File>
     <File Include="Views/Brands/SaveOrEdit.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 14:25:42</publishTime>
     </File>
     <File Include="Views/Buttons/Index.cshtml">
       <publishTime>06/07/2015 10:44:40</publishTime>
@@ -4819,7 +4819,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2015 13:29:06</publishTime>
     </File>
     <File Include="Views/Contacts/Delete.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 14:31:15</publishTime>
     </File>
     <File Include="Views/Contacts/Details.cshtml">
       <publishTime>07/30/2015 09:17:55</publishTime>
@@ -4828,16 +4828,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2015 13:29:06</publishTime>
     </File>
     <File Include="Views/Contacts/Index.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 14:59:08</publishTime>
     </File>
     <File Include="Views/Contacts/SaveOrEdit.cshtml">
-      <publishTime>09/01/2015 10:16:40</publishTime>
+      <publishTime>09/03/2015 14:27:55</publishTime>
     </File>
     <File Include="Views/Contacts/_CreateOrEdit.cshtml">
       <publishTime>07/04/2015 13:29:06</publishTime>
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 14:15:09</publishTime>
     </File>
     <File Include="Views/Dashboard/Index2.cshtml">
       <publishTime>07/30/2015 09:17:55</publishTime>
@@ -4948,7 +4948,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2015 14:07:23</publishTime>
     </File>
     <File Include="Views/Labels/Index.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 15:02:55</publishTime>
     </File>
     <File Include="Views/Labels/SaveOrEdit.cshtml">
       <publishTime>07/30/2015 09:17:55</publishTime>
@@ -4957,7 +4957,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2015 13:28:00</publishTime>
     </File>
     <File Include="Views/Locations/Delete.cshtml">
-      <publishTime>07/30/2015 09:17:55</publishTime>
+      <publishTime>09/03/2015 14:31:00</publishTime>
     </File>
     <File Include="Views/Locations/Details.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
@@ -4966,10 +4966,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2015 13:28:00</publishTime>
     </File>
     <File Include="Views/Locations/Index.cshtml">
-      <publishTime>07/30/2015 09:17:56</publishTime>
+      <publishTime>09/03/2015 15:01:53</publishTime>
     </File>
     <File Include="Views/Locations/SaveOrEdit.cshtml">
-      <publishTime>08/24/2015 11:00:40</publishTime>
+      <publishTime>09/03/2015 14:28:10</publishTime>
     </File>
     <File Include="Views/Locations/_CreateOrEdit.cshtml">
       <publishTime>07/04/2015 13:28:00</publishTime>
@@ -5095,7 +5095,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/18/2015 10:55:00</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>07/30/2015 09:17:56</publishTime>
+      <publishTime>09/03/2015 14:56:28</publishTime>
     </File>
     <File Include="Views/Products/SaveOrEdit.cshtml">
       <publishTime>08/03/2015 14:03:35</publishTime>
@@ -5446,7 +5446,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/01/2015 16:51:31</publishTime>
+      <publishTime>09/03/2015 13:55:31</publishTime>
     </File>
   </ItemGroup>
 </Project>

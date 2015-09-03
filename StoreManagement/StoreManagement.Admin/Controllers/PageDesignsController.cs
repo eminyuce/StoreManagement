@@ -40,6 +40,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0)
         {
             var pagedesign = new PageDesign();
+
             if (id == 0)
             {
                 pagedesign.CreatedDate = DateTime.Now;

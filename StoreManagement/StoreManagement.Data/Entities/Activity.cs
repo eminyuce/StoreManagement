@@ -11,5 +11,10 @@ namespace StoreManagement.Data.Entities
         public string Description { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime FinishDate { get; set; }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

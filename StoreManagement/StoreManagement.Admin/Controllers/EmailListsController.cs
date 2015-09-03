@@ -20,9 +20,9 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = EmailListRepository.GetStoreEmailList(storeId,search);
+                resultList = EmailListRepository.GetStoreEmailList(storeId, search);
             }
- 
+
             return View(resultList);
         }
 
@@ -103,17 +103,32 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             EmailList emaillist = EmailListRepository.GetSingle(id);
-            EmailListRepository.Delete(emaillist);
-            EmailListRepository.Save();
+            if (emaillist == null)
+            {
+                return HttpNotFound();
+            }
+            try
+            {
+                EmailListRepository.Delete(emaillist);
+                EmailListRepository.Save();
 
-            if (IsSuperAdmin)
-            {
-                return RedirectToAction("Index", new { storeId = emaillist.StoreId });
+                if (IsSuperAdmin)
+                {
+                    return RedirectToAction("Index", new { storeId = emaillist.StoreId });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                Logger.Error(ex,"Unable to delete:" + emaillist, ex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
+
+            return View(emaillist);
         }
 
 

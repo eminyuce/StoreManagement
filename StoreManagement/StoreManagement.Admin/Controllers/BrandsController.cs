@@ -40,9 +40,10 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Brands/Edit/5
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0)
         {
             Brand brand = new Brand();
+            brand.StoreId = GetStoreId(selectedStoreId);
             if (id != 0)
             {
                 brand = BrandRepository.GetSingle(id);
@@ -118,7 +119,10 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Brand brand = BrandRepository.GetSingle(id);
-            
+            if (brand == null)
+            {
+                return HttpNotFound();
+            }
             try
             {
 
@@ -141,6 +145,7 @@ namespace StoreManagement.Admin.Controllers
             }
 
             return View(brand);
+ 
         }
         public ActionResult StoreDetails(int id = 0)
         {

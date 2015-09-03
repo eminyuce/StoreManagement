@@ -179,6 +179,7 @@
     <Compile Include="HelpersModel\Filter.cs" />
     <Compile Include="HelpersModel\FilterGroup.cs" />
     <Compile Include="HelpersModel\ItemType.cs" />
+    <Compile Include="HelpersModel\OrderingItem.cs" />
     <Compile Include="HelpersModel\RecordsStats.cs" />
     <Compile Include="LiquidEngineHelpers\LiquidEngineHelper.cs" />
     <Compile Include="LiquidEngineHelpers\TemplateManager.cs" />

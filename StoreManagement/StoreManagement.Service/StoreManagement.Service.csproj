@@ -107,6 +107,7 @@
     <Compile Include="Repositories\ContentFileRepository.cs" />
     <Compile Include="Repositories\EmailListRepository.cs" />
     <Compile Include="Repositories\FileManagerRepository.cs" />
+    <Compile Include="Repositories\GenericStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IActivityRepository.cs" />
     <Compile Include="Repositories\Interfaces\IBaseRepository.cs" />
     <Compile Include="Repositories\Interfaces\IBrandRepository.cs" />

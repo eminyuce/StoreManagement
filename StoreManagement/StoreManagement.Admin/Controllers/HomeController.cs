@@ -177,6 +177,10 @@ namespace StoreManagement.Admin.Controllers
             var navigationList = NavigationRepository.GetNavigationsByStoreId(storeId, adminsearchkey);
             resultList.AddRange(navigationList);
 
+
+            var activitiesList = ActivityRepository.GetActivitiesByStoreId(storeId, adminsearchkey);
+            resultList.AddRange(activitiesList);
+
             return resultList;
         }
 

@@ -129,11 +129,15 @@ namespace StoreManagement.Admin.Controllers
                   controller.Equals("Stores", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = SettingRepository.GetStoreSettingsByType(storeId, "", searchKey).Select(r => String.Format("{0}", r.SettingKey)).ToList();
-            }
-            if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+            }else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
                   controller.Equals("StoreLanguages", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = StoreLanguageRepository.GetStoreLanguages(storeId, searchKey).Select(r => String.Format("{0}", r.Name)).ToList();
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                 controller.Equals("Activities", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list = ActivityRepository.GetActivitiesByStoreId(storeId, searchKey).Select(r => String.Format("{0}", r.Name)).ToList();
             }
 
             
@@ -258,29 +262,7 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteEmailListGridItem(List<String> values)
         {
-            try
-            {
-
-
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = EmailListRepository.GetSingle(id);
-                    EmailListRepository.Delete(item);
-                }
-                EmailListRepository.Save();
-
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteEmailListGridItem :" + String.Join(",", values), exception);
-            }
-
+            DeleteBaseEntity(EmailListRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
@@ -288,185 +270,52 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteSettingGridItem(List<String> values)
         {
-            try
-            {
-
-
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = SettingRepository.GetSingle(id);
-                    SettingRepository.Delete(item);
-                }
-                SettingRepository.Save();
-
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteSettingGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(SettingRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeletePageDesignsGridItem(List<String> values)
         {
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = PageDesignRepository.GetSingle(id);
-                    PageDesignRepository.Delete(item);
-                }
-                PageDesignRepository.Save();
-
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeletePageDesignsGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(PageDesignRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteStoreLanguageGridItem(List<String> values)
         {
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = StoreLanguageRepository.GetSingle(id);
-                    StoreLanguageRepository.Delete(item);
-                }
-                StoreLanguageRepository.Save();
-
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteNavigationGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(StoreLanguageRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
+
+     
+
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteNavigationGridItem(List<String> values)
         {
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = NavigationRepository.GetSingle(id);
-                    NavigationRepository.Delete(item);
-                }
-                NavigationRepository.Save();
-
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteNavigationGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(NavigationRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductGridItem(List<String> values)
         {
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = ProductRepository.GetSingle(id);
-                    ProductRepository.Delete(item);
-                }
-                ProductRepository.Save();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteProductGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(ProductRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteLocationsGridItem(List<String> values)
         {
-
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = LocationRepository.GetSingle(id);
-                    LocationRepository.Delete(item);
-                }
-                LocationRepository.Save();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteLocationsGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(LocationRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteContactsGridItem(List<String> values)
         {
-            try
-            {
-
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = ContactRepository.GetSingle(id);
-                    ContactRepository.Delete(item);
-                }
-                ContactRepository.Save();
-
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-
-                Logger.ErrorException("DeleteContactsGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(ContactRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
@@ -554,356 +403,86 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteBrandGridItem(List<String> values)
         {
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = BrandRepository.GetSingle(id);
-                    BrandRepository.Delete(item);
-                }
-                BrandRepository.Save();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var message = GetDbEntityValidationExceptionDetail(ex);
-                Logger.Error(ex, "DbEntityValidationException:" + message);
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteBrandGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(BrandRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteCategoryGridItem(List<String> values)
         {
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = CategoryRepository.GetSingle(id);
-                    CategoryRepository.Delete(item);
-                }
-                CategoryRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteCategoryGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(CategoryRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductCategoryGridItem(List<String> values)
+        { 
+            DeleteBaseEntity(ProductCategoryRepository, values);
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }  
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteActivityGridItem(List<String> values)
         {
-            try
-            {
-                foreach (String v in values)
-                {
-                    var id = v.ToInt();
-                    var item = ProductCategoryRepository.GetProductCategory(id);
-                    ProductCategoryRepository.Delete(item);
-                }
-                ProductCategoryRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("DeleteProductCategoryGridItem :" + String.Join(",", values), exception);
-            }
+            DeleteBaseEntity(ActivityRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteContentGridItem(List<String> values)
         {
-            try
-            {
-
-                foreach (String id in values)
-                {
-                    var contentId = id.ToInt();
-                    var content = ContentRepository.GetSingle(contentId);
-                    ContentRepository.Delete(content);
-                }
-                ContentRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception, "DeleteContentGridItem :" + String.Join(",", values));
-            }
+            DeleteBaseEntity(ContentRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeEmailListGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-
-                foreach (OrderingItem item in values)
-                {
-                    var nav = EmailListRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox != null && checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    EmailListRepository.Edit(nav);
-                }
-                EmailListRepository.Save();
-
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeEmailListGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(EmailListRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-
-            try
-            {
-
-                foreach (OrderingItem item in values)
-                {
-                    var nav = ProductCategoryRepository.GetProductCategory(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox != null && checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    ProductCategoryRepository.Edit(nav);
-                }
-                ProductCategoryRepository.Save();
-
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeProductCategoryGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(ProductCategoryRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeLabelGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var nav = LabelRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox != null && checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    LabelRepository.Edit(nav);
-                }
-                LabelRepository.Save();
-
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeLabelGridOrderingOrState :" + String.Join(",", values), exception);
-            }
-
+            ChangeGridBaseEntityOrderingOrState(LabelRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-
-                foreach (OrderingItem item in values)
-                {
-                    var nav = CategoryRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    CategoryRepository.Edit(nav);
-                }
-                CategoryRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeCategoryGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(CategoryRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeBrandGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var nav = BrandRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    BrandRepository.Edit(nav);
-                }
-                BrandRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeBrandGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(BrandRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeLocationsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var nav = LocationRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    LocationRepository.Edit(nav);
-                }
-                LocationRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeLocationsGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(LocationRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeContactsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var nav = ContactRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    ContactRepository.Edit(nav);
-                }
-                ContactRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeContactsGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(ContactRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangePageDesignsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var nav = PageDesignRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    PageDesignRepository.Edit(nav);
-                }
-                PageDesignRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception, "ChangeContactsGridOrderingOrState :" + String.Join(",", values), checkbox);
-            }
+            ChangeGridBaseEntityOrderingOrState(PageDesignRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeStoreLanguageGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var nav = StoreLanguageRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    StoreLanguageRepository.Edit(nav);
-                }
-                StoreLanguageRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeStoreLanguageGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(StoreLanguageRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeNavigationGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var nav = NavigationRepository.GetSingle(item.Id);
-                    if (String.IsNullOrEmpty(checkbox))
-                    {
-                        nav.Ordering = item.Ordering;
-                    }
-                    if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        nav.State = item.State;
-                    }
-
-                    NavigationRepository.Edit(nav);
-                }
-                NavigationRepository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeNavigationGridOrderingOrState :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(NavigationRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeFileManagerGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
@@ -938,48 +517,18 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult ChangeContentGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            ChangeGridOrderingOrState(ContentRepository, values, checkbox);
+            ChangeGridBaseContentOrderingOrState(ContentRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
-        public void ChangeGridOrderingOrState<T>(IBaseRepository<T, int> repository, List<OrderingItem> values, String checkbox = "") where T : class, IEntity<int>
+        public ActionResult ChangeActivityGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            try
-            {
-                foreach (OrderingItem item in values)
-                {
-                    var t = repository.GetSingle(item.Id);
-                    var baseContent = t as BaseContent;
-                    if (baseContent != null)
-                    {
-                        if (String.IsNullOrEmpty(checkbox))
-                        {
-                            baseContent.Ordering = item.Ordering;
-                        }
-                        else if (checkbox.Equals("imagestate", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            baseContent.ImageState = item.State;
-                        }
-                        else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            baseContent.State = item.State;
-                        }
-                        else if (checkbox.Equals("mainpage", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            baseContent.MainPage = item.State;
-                        }
-                    }
-                    repository.Edit(t);
-                }
-                repository.Save();
-            }
-            catch (Exception exception)
-            {
-                Logger.ErrorException("ChangeGridOrderingOrState<T> :" + String.Join(",", values), exception);
-            }
+            ChangeGridBaseEntityOrderingOrState(ActivityRepository, values, checkbox);
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
+       
         public ActionResult ChangeProductGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            ChangeGridOrderingOrState(ProductRepository, values, checkbox);
+            ChangeGridBaseContentOrderingOrState(ProductRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveStyles(int storeId = 0, String styleArray = "")
@@ -1141,6 +690,101 @@ namespace StoreManagement.Admin.Controllers
             var moduls = GetModuls(storeId);
             return Json(moduls, JsonRequestBehavior.AllowGet);
         }
+
+
+        #region GenericMethods
+
+
+        public void ChangeGridBaseContentOrderingOrState<T>(IBaseRepository<T, int> repository, List<OrderingItem> values, String checkbox = "") where T : class, IEntity<int>
+        {
+            try
+            {
+                foreach (OrderingItem item in values)
+                {
+                    var t = repository.GetSingle(item.Id);
+                    var baseContent = t as BaseContent;
+                    if (baseContent != null)
+                    {
+                        if (String.IsNullOrEmpty(checkbox))
+                        {
+                            baseContent.Ordering = item.Ordering;
+                        }
+                        else if (checkbox.Equals("imagestate", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            baseContent.ImageState = item.State;
+                        }
+                        else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            baseContent.State = item.State;
+                        }
+                        else if (checkbox.Equals("mainpage", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            baseContent.MainPage = item.State;
+                        }
+                    }
+                    repository.Edit(t);
+                }
+                repository.Save();
+            }
+            catch (Exception exception)
+            {
+                Logger.ErrorException("ChangeGridOrderingOrState<T> :" + String.Join(",", values), exception);
+            }
+        }
+
+
+        public void ChangeGridBaseEntityOrderingOrState<T>(IBaseRepository<T, int> repository, List<OrderingItem> values, String checkbox = "") where T : class, IEntity<int>
+        {
+            try
+            {
+                foreach (OrderingItem item in values)
+                {
+                    var t = repository.GetSingle(item.Id);
+                    var baseContent = t as BaseEntity;
+                    if (baseContent != null)
+                    {
+                        if (String.IsNullOrEmpty(checkbox))
+                        {
+                            baseContent.Ordering = item.Ordering;
+                        }
+                        else if (checkbox.Equals("state", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            baseContent.State = item.State;
+                        }
+                         
+                    }
+                    repository.Edit(t);
+                }
+                repository.Save();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "ChangeGridOrderingOrState<T> :" + String.Join(",", values), checkbox);
+            }
+        }
+        private void DeleteBaseEntity<T>(IBaseRepository<T, int> repository, List<string> values) where T : class, IEntity<int>
+        {
+            try
+            {
+                foreach (String v in values)
+                {
+                    var id = v.ToInt();
+                    var item = repository.GetSingle(id);
+                    repository.Delete(item);
+                }
+                repository.Save();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var message = GetDbEntityValidationExceptionDetail(ex);
+                Logger.Error(ex, "DbEntityValidationException:" + message);
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception,"DeleteBaseEntity :" + String.Join(",", values));
+            }
+        }
+        #endregion
     }
 
 }

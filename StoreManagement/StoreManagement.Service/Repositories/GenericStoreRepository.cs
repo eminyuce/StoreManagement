@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository;
@@ -15,7 +16,7 @@ namespace StoreManagement.Service.Repositories
 {
     public class GenericStoreRepository
     {
-
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         protected static String GetDbEntityValidationExceptionDetail(DbEntityValidationException ex)
         {
@@ -40,7 +41,7 @@ namespace StoreManagement.Service.Repositories
 
 
 
-        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
 
         #region GenericMethods
 
@@ -133,6 +134,34 @@ namespace StoreManagement.Service.Repositories
             {
                 Logger.Error(exception, "DeleteBaseEntity :" + String.Join(",", values));
             }
+        }
+
+        public static Task<List<T>> GetStoreActiveBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T :   BaseEntity
+        {
+            try
+            {
+                Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+                var items = repository.FindAllAsync(match, take);
+                var itemsResult = items;
+                return itemsResult;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
+        public  static List<T> GetBaseEntitiesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search) where T :   BaseEntity
+        {
+            var items = repository.FindBy(r => r.StoreId == storeId);
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
         #endregion
     }

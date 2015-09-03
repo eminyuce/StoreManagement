@@ -21,33 +21,11 @@ namespace StoreManagement.Service.Repositories
 
         public List<Brand> GetBrandsByStoreId(int storeId, string search)
         {
-            var products = this.FindBy(r => r.StoreId == storeId);
-
-            if (!String.IsNullOrEmpty(search.ToStr()))
-            {
-                products = products.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
-
-            return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, search);
         }
-
-        public  Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
+        public Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
         {
-            try
-            {
-                Expression<Func<Brand, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
-                var items = this.FindAllAsync(match, take);
-
-                var itemsResult =  items;
-
-                return itemsResult;
-
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception);
-                return null;
-            }
+            return GenericStoreRepository.GetStoreActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
 
         public Task<Brand> GetBrandAsync(int brandId)

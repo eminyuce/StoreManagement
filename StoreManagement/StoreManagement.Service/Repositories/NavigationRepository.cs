@@ -10,6 +10,7 @@ using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -70,7 +71,7 @@ namespace StoreManagement.Service.Repositories
        
         public List<Navigation> GetNavigationsByStoreId(int storeId, string searchKey)
         {
-            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
+            return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
     }
 

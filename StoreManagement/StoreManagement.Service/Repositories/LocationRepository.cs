@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
@@ -32,7 +33,7 @@ namespace StoreManagement.Service.Repositories
         public Task<List<Location>> GetLocationsAsync(int storeId, int? take, bool? isActive)
         {
 
-            return GenericStoreRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
+            return BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
 
             
         }

@@ -17,6 +17,7 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -253,7 +254,7 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteEmailListGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(EmailListRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(EmailListRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
@@ -261,21 +262,21 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteSettingGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(SettingRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(SettingRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeletePageDesignsGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(PageDesignRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(PageDesignRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteStoreLanguageGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(StoreLanguageRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(StoreLanguageRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
@@ -285,28 +286,28 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteNavigationGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(NavigationRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(NavigationRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(ProductRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(ProductRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteLocationsGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(LocationRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(LocationRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteContactsGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(ContactRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(ContactRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
@@ -394,86 +395,86 @@ namespace StoreManagement.Admin.Controllers
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteBrandGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(BrandRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(BrandRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteCategoryGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(CategoryRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(CategoryRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteProductCategoryGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(ProductCategoryRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(ProductCategoryRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }  
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteActivityGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(ActivityRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(ActivityRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteContentGridItem(List<String> values)
         {
-            GenericStoreRepository.DeleteBaseEntity(ContentRepository, values);
+            BaseEntityRepository.DeleteBaseEntity(ContentRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeEmailListGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(EmailListRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(EmailListRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(ProductCategoryRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(ProductCategoryRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeLabelGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(LabelRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(LabelRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeCategoryGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(CategoryRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(CategoryRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeBrandGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(BrandRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(BrandRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeLocationsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(LocationRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(LocationRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeContactsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(ContactRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(ContactRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangePageDesignsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(PageDesignRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(PageDesignRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeStoreLanguageGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(StoreLanguageRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(StoreLanguageRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeNavigationGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(NavigationRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(NavigationRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeFileManagerGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
@@ -508,18 +509,18 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult ChangeContentGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseContentOrderingOrState(ContentRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseContentOrderingOrState(ContentRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangeActivityGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseEntityOrderingOrState(ActivityRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(ActivityRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
        
         public ActionResult ChangeProductGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
-            GenericStoreRepository.ChangeGridBaseContentOrderingOrState(ProductRepository, values, checkbox);
+            BaseEntityRepository.ChangeGridBaseContentOrderingOrState(ProductRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveStyles(int storeId = 0, String styleArray = "")

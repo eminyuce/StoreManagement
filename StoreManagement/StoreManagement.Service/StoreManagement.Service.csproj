@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="DbContext\IStoreContext.cs" />
     <Compile Include="DbContext\StoreContext.cs" />
+    <Compile Include="GenericRepositories\BaseCategoryRepository.cs" />
+    <Compile Include="GenericRepositories\BaseEntityRepository.cs" />
     <Compile Include="Interfaces\IActivityService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\ICommentService.cs" />
@@ -107,7 +109,6 @@
     <Compile Include="Repositories\ContentFileRepository.cs" />
     <Compile Include="Repositories\EmailListRepository.cs" />
     <Compile Include="Repositories\FileManagerRepository.cs" />
-    <Compile Include="Repositories\GenericStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IActivityRepository.cs" />
     <Compile Include="Repositories\Interfaces\IBaseRepository.cs" />
     <Compile Include="Repositories\Interfaces\IBrandRepository.cs" />

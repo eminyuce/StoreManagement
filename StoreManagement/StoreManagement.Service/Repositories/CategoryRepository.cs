@@ -13,6 +13,7 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data;
@@ -72,7 +73,7 @@ namespace StoreManagement.Service.Repositories
 
         public List<Category> GetCategoriesByStoreId(int storeId, string type, string search)
         {
-            return GenericStoreRepository.GetBaseCategoriesSearchList(this, storeId, search, type);
+            return BaseCategoryRepository.GetBaseCategoriesSearchList(this, storeId, search, type);
         }
 
         public List<Category> GetCategoriesByType(string type)
@@ -151,11 +152,7 @@ namespace StoreManagement.Service.Repositories
                                                                   r1 => r1.ContentFiles.Select(m => m.FileManager)))
                                                           .OrderByDescending(r => r.Ordering);
 
-                //var paging = this.Paginate(page, pageSize,
-                //        r => r.Id == categoryId,null,r=>r.Contents.Select(
-                //                                                  r1 => r1.ContentFiles.Select(m => m.FileManager)))
-                //        .OrderBy(r => r.Ordering).ToList();
-
+               
                 var c = cats.ToList();
                 items = new StorePagedList<Category>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
                 // items = new PagedList<Category>(cats, page, cats.Count());
@@ -176,7 +173,7 @@ namespace StoreManagement.Service.Repositories
         {
             // var res = Task.FromResult(GetCategoriesByStoreId(storeId));
             // return res;
-            return GenericStoreRepository.GetBaseEnitiesAsync(this, storeId, null);
+            return BaseEntityRepository.GetBaseEnitiesAsync(this, storeId, null);
         }
 
 

@@ -10,6 +10,7 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
@@ -138,6 +139,17 @@ namespace StoreManagement.Service.Repositories
                 return GetProductsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize);
             });
             return task;
+            //int take = page * pageSize;
+            //Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.MainPage;
+            //Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+            //var items = this.FindAllIncludingAsync(match, take, includeProperties);
+            //Task.WaitAll(items);
+            //var cat = items.Result;
+           
+
+            //StorePagedList<Product> resultItems = new StorePagedList<Product>(cat.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, cat.Count());
+
+             
         }
 
         public Task<Product> GetProductsByIdAsync(int productId)
@@ -184,7 +196,7 @@ namespace StoreManagement.Service.Repositories
                 return null;
             }
         }
- 
+
         public Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
         {
             try
@@ -204,7 +216,7 @@ namespace StoreManagement.Service.Repositories
                 Logger.Error(exception);
                 return null;
             }
-             
+
         }
 
         public Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
@@ -230,26 +242,21 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                var items =
-                   this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(r2 => r2.StoreId == storeId && r2.MainPage);
-
-                if (take.HasValue)
-                {
-                    items = items.Take(take.Value);
-                }
-                return items.OrderBy(r => r.Ordering).ToList();
-
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.MainPage;
+                var items = this.FindAllIncludingAsync(match, take, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                Task.WaitAll(items);
+                return items.Result;
             }
             catch (Exception exception)
             {
                 Logger.Error(exception);
-                return new List<Product>();
+                return null;
             }
 
         }
         public List<Product> GetProductsByStoreId(int storeId, String searchKey)
         {
-            return GenericStoreRepository.GetActiveBaseEntitiesSearchList(this, storeId, searchKey);
+            return BaseEntityRepository.GetActiveBaseEntitiesSearchList(this, storeId, searchKey);
         }
     }
 }

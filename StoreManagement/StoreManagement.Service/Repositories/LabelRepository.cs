@@ -7,6 +7,7 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
@@ -24,7 +25,7 @@ namespace StoreManagement.Service.Repositories
 
         public List<Label> GetActiveLabels(int storeId)
         {
-            return GenericStoreRepository.GetActiveBaseEntitiesSearchList(this, storeId, "");
+            return BaseEntityRepository.GetActiveBaseEntitiesSearchList(this, storeId, "");
         }
 
         public Label GetLabelByName(string label, int storeId)
@@ -34,12 +35,12 @@ namespace StoreManagement.Service.Repositories
 
         public List<Label> GetStoreLabels(int storeId)
         {
-            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, "");
+            return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, "");
         }
 
         public List<Label> GetLabelsByStoreId(int storeId, string searchKey)
         {
-            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
+            return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
 
         public Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType)

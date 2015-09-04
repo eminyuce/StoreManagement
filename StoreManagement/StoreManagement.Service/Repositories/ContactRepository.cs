@@ -9,6 +9,7 @@ using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
@@ -25,19 +26,12 @@ namespace StoreManagement.Service.Repositories
 
         public List<Contact> GetContactsByStoreId(int storeId, string search)
         {
-            var contacts = this.FindBy(r => r.StoreId == storeId);
-
-            if (!String.IsNullOrEmpty(search.ToStr()))
-            {
-                contacts = contacts.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
-
-            return contacts.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+            return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, search);
         }
 
         public Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, int? take, bool? isActive)
         {
-            return GenericStoreRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
+            return BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
 
 

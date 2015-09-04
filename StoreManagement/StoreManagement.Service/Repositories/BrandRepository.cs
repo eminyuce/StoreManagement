@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
@@ -21,11 +22,11 @@ namespace StoreManagement.Service.Repositories
 
         public List<Brand> GetBrandsByStoreId(int storeId, string search)
         {
-            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, search);
+            return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, search);
         }
         public Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
         {
-            return GenericStoreRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
+            return BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
 
         public Task<Brand> GetBrandAsync(int brandId)

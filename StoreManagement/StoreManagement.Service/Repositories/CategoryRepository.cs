@@ -35,7 +35,7 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int ? take)
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int? take)
         {
             var query = StoreDbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
                                       .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
@@ -72,15 +72,7 @@ namespace StoreManagement.Service.Repositories
 
         public List<Category> GetCategoriesByStoreId(int storeId, string type, string search)
         {
-            var cats = this.FindBy(r => r.StoreId == storeId &&
-                                    r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-
-            if (!String.IsNullOrEmpty(search.ToStr()))
-            {
-                cats = cats.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
-
-            return cats.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+            return GenericStoreRepository.GetBaseCategoriesSearchList(this, storeId, search, type);
         }
 
         public List<Category> GetCategoriesByType(string type)
@@ -182,8 +174,9 @@ namespace StoreManagement.Service.Repositories
 
         public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
         {
-            var res = Task.FromResult(GetCategoriesByStoreId(storeId));
-            return res;
+            // var res = Task.FromResult(GetCategoriesByStoreId(storeId));
+            // return res;
+            return GenericStoreRepository.GetBaseEnitiesAsync(this, storeId, null);
         }
 
 
@@ -195,8 +188,7 @@ namespace StoreManagement.Service.Repositories
 
         public Task<Category> GetCategoryAsync(int id)
         {
-            var res = Task.FromResult(GetCategory(id));
-            return res;
+            return this.GetSingleAsync(id);
         }
 
         public Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
@@ -219,8 +211,6 @@ namespace StoreManagement.Service.Repositories
 
         public List<Category> GetCategoriesByStoreId(int storeId)
         {
-            // return this.StoreDbContext.Categories.Where(r => r.StoreId == storeId).ToList();
-
             var categories = from entry in this.FindBy(r => r.StoreId == storeId) select entry;
             return categories.Where(r => r.State).OrderBy(r => r.Ordering).ToList();
         }

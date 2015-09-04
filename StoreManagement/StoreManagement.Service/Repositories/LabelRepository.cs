@@ -21,46 +21,25 @@ namespace StoreManagement.Service.Repositories
         {
 
         }
- 
-
-        public List<Label> GetLabelsCategoryAndSearch(int storeId, string search)
-        {
-            var items = this.FindBy(r => r.StoreId == storeId);
-
-            if (!String.IsNullOrEmpty(search.ToStr()))
-            {
-                items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
-
-            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
-        }
 
         public List<Label> GetActiveLabels(int storeId)
         {
-            var items = this.FindBy(r => r.StoreId == storeId && r.State);
-
-            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
+            return GenericStoreRepository.GetActiveBaseEntitiesSearchList(this, storeId, "");
         }
 
         public Label GetLabelByName(string label, int storeId)
         {
-            return this.FindBy(r => r.StoreId == storeId && r.Name.Equals(label,StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            return this.FindBy(r => r.StoreId == storeId && r.Name.Equals(label, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
         }
 
         public List<Label> GetStoreLabels(int storeId)
         {
-            var items = this.FindBy(r => r.StoreId == storeId);
-            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
+            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, "");
         }
 
         public List<Label> GetLabelsByStoreId(int storeId, string searchKey)
         {
-            var items = this.FindBy(r => r.StoreId == storeId);
-            if (!String.IsNullOrEmpty(searchKey))
-            {
-                items = items.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
-            }
-            return items.ToList();
+            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
 
         public Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType)
@@ -70,7 +49,7 @@ namespace StoreManagement.Service.Repositories
                     r => r.ItemId == itemId && itemType.Equals(itemType, StringComparison.InvariantCultureIgnoreCase))
                               .ToList();
             var labelidList = labelIds.Select(r1 => r1.LabelId);
-            var items = this.FindAllAsync(r => r.StoreId == storeId && labelidList.Contains(r.Id),null);
+            var items = this.FindAllAsync(r => r.StoreId == storeId && labelidList.Contains(r.Id), null);
 
 
             return items;

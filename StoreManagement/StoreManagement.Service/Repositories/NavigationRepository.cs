@@ -67,26 +67,10 @@ namespace StoreManagement.Service.Repositories
 
 
         }
-
-        public List<Navigation> GetStoreNavigations(int storeId, string search)
-        {
-            var navigations = this.FindBy(r => r.StoreId == storeId);
-            if (!String.IsNullOrEmpty(search.ToStr()))
-            {
-                navigations = navigations.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
-
-            return navigations.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
-        }
-
+       
         public List<Navigation> GetNavigationsByStoreId(int storeId, string searchKey)
         {
-            var items = this.FindBy(r => r.StoreId == storeId);
-            if (!String.IsNullOrEmpty(searchKey))
-            {
-                items = items.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
-            }
-            return items.ToList();
+            return GenericStoreRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
     }
 

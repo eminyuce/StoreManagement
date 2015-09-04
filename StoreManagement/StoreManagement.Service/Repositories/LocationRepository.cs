@@ -31,21 +31,10 @@ namespace StoreManagement.Service.Repositories
 
         public Task<List<Location>> GetLocationsAsync(int storeId, int? take, bool? isActive)
         {
-            try
-            {
-                Expression<Func<Location, bool>> match =
-                    r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
-                var items = this.FindAllAsync(match, take);
 
-                var itemsResult = items;
+            return GenericStoreRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
 
-                return itemsResult;
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception);
-                return null;
-            }
+            
         }
 
        

@@ -25,7 +25,7 @@ namespace StoreManagement.Service.Repositories
         }
         public Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
         {
-            return GenericStoreRepository.GetStoreActiveBaseEnitiesAsync(this, storeId, take, isActive);
+            return GenericStoreRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
 
         public Task<Brand> GetBrandAsync(int brandId)

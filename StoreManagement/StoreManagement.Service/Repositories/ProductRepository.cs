@@ -147,12 +147,22 @@ namespace StoreManagement.Service.Repositories
 
         public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
         {
-            var task = Task.Factory.StartNew(() =>
-                {
-                    return GetMainPageProducts(storeId, take);
+            try
+            {
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.MainPage;
+                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+                var items = this.FindAllIncludingAsync(match, take, includeProperties);
 
-                });
-            return task;
+                var itemsResult = items;
+
+                return itemsResult;
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
         public Task<List<Product>> GetProductsAsync(int storeId, int? take, bool? isActive)
@@ -177,34 +187,24 @@ namespace StoreManagement.Service.Repositories
  
         public Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
         {
-            var task = Task.Factory.StartNew(() =>
+            try
             {
-                try
-                {
-                    var items =
-                       this.GetAllIncluding(r => r.ProductFiles.Select(r1 => r1.FileManager)).Where(r2 => r2.StoreId == storeId && r2.State && r2.ProductCategoryId == categoryId);
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.ProductCategoryId == categoryId && r2.Id
+                    != (excludedProductId.HasValue ? excludedProductId.Value : r2.Id);
+                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+                var items = this.FindAllIncludingAsync(match, take, includeProperties);
 
-                    if (excludedProductId.HasValue)
-                    {
-                        items = items.Where(r => r.Id != excludedProductId);
-                    }
+                var itemsResult = items;
 
-                    if (take.HasValue)
-                    {
-                        items = items.Take(take.Value);
-                    }
+                return itemsResult;
 
-                    return items.OrderBy(r => r.Ordering).ToList();
-
-                }
-                catch (Exception exception)
-                {
-                    Logger.Error(exception);
-                    return new List<Product>();
-                }
-
-            });
-            return task;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+             
         }
 
         public Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
@@ -249,12 +249,7 @@ namespace StoreManagement.Service.Repositories
         }
         public List<Product> GetProductsByStoreId(int storeId, String searchKey)
         {
-            var products = this.FindBy(r => r.StoreId == storeId);
-            if (!String.IsNullOrEmpty(searchKey))
-            {
-                products = products.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
-            }
-            return products.ToList();
+            return GenericStoreRepository.GetActiveBaseEntitiesSearchList(this, storeId, searchKey);
         }
     }
 }

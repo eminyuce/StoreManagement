@@ -15,7 +15,7 @@ namespace StoreManagement.Service.Repositories
 {
     public class ContactRepository : BaseRepository<Contact, int>, IContactRepository
     {
-       
+
 
         public ContactRepository(IStoreContext dbContext)
             : base(dbContext)
@@ -31,28 +31,15 @@ namespace StoreManagement.Service.Repositories
             {
                 contacts = contacts.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
-           
+
             return contacts.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
 
         public Task<List<Contact>> GetContactsByStoreIdAsync(int storeId, int? take, bool? isActive)
         {
-            try
-            {
-                Expression<Func<Contact, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
-                var items = this.FindAllAsync(match, take);
-
-                var itemsResult = items;
-
-                return itemsResult;
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception);
-                return null;
-            }
+            return GenericStoreRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
-        
-       
+
+
     }
 }

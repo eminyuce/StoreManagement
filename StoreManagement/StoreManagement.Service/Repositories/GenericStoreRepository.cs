@@ -136,7 +136,7 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public static Task<List<T>> GetStoreActiveBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T :   BaseEntity
+        public static Task<List<T>> GetActiveBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T : BaseEntity
         {
             try
             {
@@ -151,8 +151,22 @@ namespace StoreManagement.Service.Repositories
                 return null;
             }
         }
-
-        public  static List<T> GetBaseEntitiesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search) where T :   BaseEntity
+        public static Task<List<T>> GetBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take) where T : BaseEntity
+        {
+            try
+            {
+                Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId;
+                var items = repository.FindAllAsync(match, take);
+                var itemsResult = items;
+                return itemsResult;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+        public static List<T> GetBaseEntitiesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search) where T : BaseEntity
         {
             var items = repository.FindBy(r => r.StoreId == storeId);
 
@@ -162,6 +176,30 @@ namespace StoreManagement.Service.Repositories
             }
 
             return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+        }
+        public static List<T> GetActiveBaseEntitiesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search) where T : BaseEntity
+        {
+            var items = repository.FindBy(r => r.StoreId == storeId && r.State);
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+        }
+
+        public static List<T> GetBaseCategoriesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search, String type) where T : BaseCategory
+        {
+            var cats = repository.FindBy(r => r.StoreId == storeId &&
+                                  r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                cats = cats.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+
+            return cats.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
         #endregion
     }

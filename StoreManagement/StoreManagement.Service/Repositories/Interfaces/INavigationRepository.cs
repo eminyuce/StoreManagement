@@ -11,10 +11,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface INavigationRepository : IBaseRepository<Navigation, int>, INavigationService
     {
-
-
-        List<Navigation> GetStoreNavigations(int storeId, string search);
-
         List<Navigation> GetNavigationsByStoreId(int storeId, string searchKey);
     }
 }

@@ -17,7 +17,7 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0)
             {
-                resultList = LabelRepository.GetLabelsCategoryAndSearch(storeId, search);
+                resultList = LabelRepository.GetLabelsByStoreId(storeId, search);
             }
 
             return View(resultList);

@@ -25,7 +25,7 @@ namespace StoreManagement.Admin.Controllers
             List<Navigation> resultList = new List<Navigation>();
             if (storeId != 0)
             {
-                resultList = NavigationRepository.GetStoreNavigations(storeId, search);
+                resultList = NavigationRepository.GetNavigationsByStoreId(storeId, search);
             }
 
             ViewBag.Search = search;

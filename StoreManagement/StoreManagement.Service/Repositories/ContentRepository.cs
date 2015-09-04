@@ -144,8 +144,7 @@ namespace StoreManagement.Service.Repositories
 
         public Task<Content> GetContentByIdAsync(int blogId)
         {
-            var res = Task.FromResult(this.GetContentWithFiles(blogId));
-            return res;
+            return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefaultAsync(r1 => r1.Id == blogId);
         }
 
       

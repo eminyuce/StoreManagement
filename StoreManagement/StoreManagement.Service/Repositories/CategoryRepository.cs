@@ -38,8 +38,7 @@ namespace StoreManagement.Service.Repositories
 
         public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int? take)
         {
-            var query = StoreDbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any())
-                                      .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
+            var query = StoreDbContext.Categories.Where(r => r.StoreId == storeId && r.Contents.Any()).Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
 
             if (take.HasValue)
             {
@@ -60,15 +59,7 @@ namespace StoreManagement.Service.Repositories
 
         public List<Category> GetCategoriesByStoreId(int storeId, String type, bool? isActive)
         {
-            var items = this.FindBy(r => r.StoreId == storeId &&
-               r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-
-            if (isActive.HasValue)
-            {
-                items = items.Where(r => r.State == isActive.Value);
-            }
-
-            return items.OrderBy(r => r.Ordering).ToList();
+            return BaseCategoryRepository.GetCategoriesByStoreId(this, storeId, type, isActive);
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId, string type, string search)
@@ -152,7 +143,7 @@ namespace StoreManagement.Service.Repositories
                                                                   r1 => r1.ContentFiles.Select(m => m.FileManager)))
                                                           .OrderByDescending(r => r.Ordering);
 
-               
+
                 var c = cats.ToList();
                 items = new StorePagedList<Category>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
                 // items = new PagedList<Category>(cats, page, cats.Count());
@@ -179,8 +170,7 @@ namespace StoreManagement.Service.Repositories
 
         public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
-            var res = Task.FromResult(GetCategoriesByStoreId(storeId, type, isActive));
-            return res;
+            return BaseCategoryRepository.GetCategoriesByStoreIdAsync(this, storeId, type, isActive, null);
         }
 
         public Task<Category> GetCategoryAsync(int id)
@@ -190,20 +180,15 @@ namespace StoreManagement.Service.Repositories
 
         public Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
         {
-            var res = Task.Factory.StartNew(() =>
+            Content category = this.FindBy(r => r.StoreId == storeId).Select(r => r.Contents.FirstOrDefault(t => t.Id == contentId)).FirstOrDefault();
+            if (category != null)
             {
-                Content category = this.FindBy(r => r.StoreId == storeId).Select(r => r.Contents.FirstOrDefault(t => t.Id == contentId)).FirstOrDefault();
-                if (category != null)
-                {
-                    return this.GetSingle(category.CategoryId);
-                }
-                else
-                {
-                    return new Category();
-                }
-            });
-
-            return res;
+                return this.GetSingleAsync(category.CategoryId);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId)

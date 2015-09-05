@@ -19,7 +19,7 @@ namespace StoreManagement.Liquid.Controllers
                 try
                 {
                     var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayout");
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainNavigation");
 
                     NavigationHelper.StoreSettings = GetStoreSettings();
                     var pageOutput = NavigationHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
@@ -47,7 +47,7 @@ namespace StoreManagement.Liquid.Controllers
                 try
                 {
                     var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainLayoutFooter");
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "Footer");
                     var pageOutput = NavigationHelper.GetMainLayoutFooterLink(mainMenu, pageDesignTask);
                     String html = pageOutput.PageOutputText;
                     return html;

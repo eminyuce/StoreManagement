@@ -135,6 +135,20 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\custom-fonts.css" />
+    <Content Include="Content\css\default.css" />
+    <Content Include="Content\css\fancybox\blank.gif" />
+    <Content Include="Content\css\fancybox\fancybox_loading.gif" />
+    <Content Include="Content\css\fancybox\fancybox_overlay.png" />
+    <Content Include="Content\css\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\css\fancybox\jquery.fancybox.css" />
+    <Content Include="Content\css\flexslider.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\jcarousel.css" />
+    <Content Include="Content\css\overwrite.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\trizzy\base.css" />
     <Content Include="Content\trizzy\colors\beige.css" />
@@ -375,6 +389,23 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\animate.js" />
+    <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\custom.js" />
+    <Content Include="Scripts\js\flexslider\jquery.flexslider.js" />
+    <Content Include="Scripts\js\flexslider\setting.js" />
+    <Content Include="Scripts\js\google-code-prettify\prettify.css" />
+    <Content Include="Scripts\js\google-code-prettify\prettify.js" />
+    <Content Include="Scripts\js\jquery.easing.1.3.js" />
+    <Content Include="Scripts\js\jquery.fancybox-media.js" />
+    <Content Include="Scripts\js\jquery.fancybox.pack.js" />
+    <Content Include="Scripts\js\jquery.flexslider.js" />
+    <Content Include="Scripts\js\jquery.js" />
+    <Content Include="Scripts\js\portfolio\jquery.quicksand.js" />
+    <Content Include="Scripts\js\portfolio\setting.js" />
+    <Content Include="Scripts\js\quicksand\jquery.quicksand.js" />
+    <Content Include="Scripts\js\quicksand\setting.js" />
+    <Content Include="Scripts\js\validate.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\storeHelper.js" />
     <Content Include="Scripts\storeManagement.js" />
@@ -503,11 +534,13 @@
     <Content Include="Views\Home\MainLayoutCssFiles.cshtml" />
     <Content Include="Views\PhotoGallery\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
-    <Content Include="Views\Shared\MainLayoutExternalFiles.cshtml" />
+    <Content Include="Views\Shared\JavascriptFiles.cshtml" />
     <Content Include="Views\Brands\Detail.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\ProductCategories\Category.cshtml" />
+    <Content Include="Views\Shared\CssFiles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

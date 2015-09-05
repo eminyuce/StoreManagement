@@ -1,39 +1,35 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@ViewBag.Title
+        <title>@ViewBag.Title
 
-        API is @(StoreManagement.Data.ProjectAppSettings.GetWebConfigBool("IsApiService") ? "" : "NOT") working
+            API is @(StoreManagement.Data.ProjectAppSettings.GetWebConfigBool("IsApiService") ? "" : "NOT") working
 
-    </title>
+        </title>
 
 
 
-</head>
+   
+          @Html.Partial("CssFiles")
+    </head>
+    
 <body>
 
 
-    <div data-main-navigation>
-    </div>
-
-    <div class="container body-content">
+    
+ 
         @RenderBody()
-        <hr />
-        <footer>
-            <div data-main-footer>
-            </div>
-        </footer>
-    </div>
+   
 
 
 
 
 
-    @*    @Html.Action("MainLayoutJavaScriptFiles", "Home")*@
-    @Html.Partial("MainLayoutExternalFiles")
+ 
+     @Html.Partial("JavascriptFiles")
     <script src="~/Scripts/storeManagement.js"></script>
     <script src="~/Scripts/storeHelper.js"></script>
 

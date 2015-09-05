@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Liquid.Helper.Interfaces;
 using StoreManagement.Service.Interfaces;
 
@@ -65,6 +67,46 @@ namespace StoreManagement.Liquid.Helper
                 Logger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
                 return "";
             }
+        }
+
+        protected IEnumerable GetProductsLiquid(List<ProductLiquid> productLiquidList)
+        {
+            return from s in productLiquidList
+                   select new
+                   {
+                       CategoryName = s.Category.Name,
+                       ProductCategoryId = s.Product.ProductCategoryId,
+                       BrandId = s.Product.BrandId,
+                       CategoryDescription = s.Category.Description,
+                       ProductId = s.Product.Id,
+                       s.Product.Name,
+                       s.Product.Description,
+                       s.Product.ProductCode,
+                       s.Product.Price,
+                       s.Product.Discount,
+                       s.Product.UpdatedDate,
+                       s.Product.CreatedDate,
+                       s.Product.TotalRating,
+                       s.Product.UnitsInStock,
+                       s.DetailLink,
+                       images = s.ImageLiquid
+
+                   };
+        }
+
+        protected IEnumerable GetContentLiquid(List<ContentLiquid> blogsLiquidList)
+        {
+            return from s in blogsLiquidList
+                   select new
+                   {
+                       s.Content.Name,
+                       s.Content.Description,
+                       s.Content.Author,
+                       s.Content.UpdatedDate,
+                       s.DetailLink,
+                       images = s.ImageLiquid
+
+                   };
         }
 
     }

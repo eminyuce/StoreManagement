@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -73,30 +74,9 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    blogs = from s in home.BlogsLiquidList
-                            select new
-                            {
-                                s.Content.Name,
-                                s.Content.Description,
-                                s.DetailLink,
-                                images = s.ImageLiquid
-                            },
-                    products = from s in home.ProductLiquidList
-                               select new
-                               {
-                                   s.Product.Name,
-                                   s.Product.Description,
-                                   s.DetailLink,
-                                   images = s.ImageLiquid
-                               },
-                    news = from s in home.NewsLiquidList
-                           select new
-                           {
-                               s.Content.Name,
-                               s.Content.Description,
-                               s.DetailLink,
-                               images = s.ImageLiquid
-                           },
+                    blogs = GetContentLiquid(home.BlogsLiquidList),
+                    products = GetProductsLiquid(home.ProductLiquidList),
+                    news =  GetContentLiquid(home.NewsLiquidList),
                     sliders = from s in home.SliderImagesLiquid
                              select new
                              {
@@ -127,6 +107,44 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
+        public  IEnumerable GetProductsLiquid(List<ProductLiquid> productLiquidList)
+        {
+            return from s in productLiquidList
+                   select new
+                       {
+                           CategoryName = s.Category.Name,
+                           ProductCategoryId = s.Product.ProductCategoryId,
+                           BrandId = s.Product.BrandId,
+                           CategoryDescription = s.Category.Description,
+                           ProductId = s.Product.Id,
+                           s.Product.Name,
+                           s.Product.Description,
+                           s.Product.ProductCode,
+                           s.Product.Price,
+                           s.Product.Discount,
+                           s.Product.UpdatedDate,
+                           s.Product.CreatedDate,
+                           s.Product.TotalRating,
+                           s.Product.UnitsInStock,
+                           s.DetailLink,
+                           images = s.ImageLiquid
 
+                       };
+        }
+
+        public IEnumerable GetContentLiquid(List<ContentLiquid> blogsLiquidList)
+        {
+            return from s in blogsLiquidList
+                   select new
+                       {
+                           s.Content.Name,
+                           s.Content.Description,
+                           s.Content.Author,
+                           s.Content.UpdatedDate,
+                           s.DetailLink,
+                           images = s.ImageLiquid
+
+                       };
+        }
     }
 }

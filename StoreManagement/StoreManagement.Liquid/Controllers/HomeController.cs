@@ -23,11 +23,11 @@ namespace StoreManagement.Liquid.Controllers
         public ActionResult Index()
         {
 
- 
-                int blogsTake = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", 5);
-                int newsTake = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", 5);
-                int productsTake = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", 5);
-                int sliderTake = GetSettingValueInt("HomePageSliderImages_ItemsNumber", 5);
+
+            int blogsTake = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", StoreConstants.DefaultPageSize);
+            int newsTake = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", StoreConstants.DefaultPageSize);
+            int productsTake = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", StoreConstants.DefaultPageSize);
+            int sliderTake = GetSettingValueInt("HomePageSliderImages_ItemsNumber", StoreConstants.DefaultPageSize);
 
                    
                 int? categoryId = null;

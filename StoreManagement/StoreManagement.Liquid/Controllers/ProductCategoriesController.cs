@@ -52,6 +52,15 @@ namespace StoreManagement.Liquid.Controllers
 
 
             return View();
+
+
+
+
+
+
+
+
+
         }
 
 

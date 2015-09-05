@@ -58,13 +58,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/05/2015 14:35:14</publishTime>
+      <publishTime>09/05/2015 15:44:05</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>09/05/2015 15:00:23</publishTime>
+      <publishTime>09/05/2015 19:50:24</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/05/2015 14:35:15</publishTime>
+      <publishTime>09/05/2015 15:44:08</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -92,6 +92,48 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/bootstrap.min.css">
       <publishTime>07/30/2015 09:17:58</publishTime>
+    </File>
+    <File Include="Content/css/animate.css">
+      <publishTime>09/05/2015 17:15:53</publishTime>
+    </File>
+    <File Include="Content/css/bootstrap.min.css">
+      <publishTime>09/05/2015 17:15:53</publishTime>
+    </File>
+    <File Include="Content/css/custom-fonts.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/default.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/fancybox/blank.gif">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/fancybox/fancybox_loading.gif">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/fancybox/fancybox_overlay.png">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/fancybox/fancybox_sprite.png">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/fancybox/jquery.fancybox.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/flexslider.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/font-awesome.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/jcarousel.css">
+      <publishTime>09/05/2015 18:06:24</publishTime>
+    </File>
+    <File Include="Content/css/overwrite.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Content/css/style.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>07/30/2015 09:17:58</publishTime>
@@ -792,6 +834,57 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
       <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
+    <File Include="Scripts/js/animate.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/bootstrap.min.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/custom.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/flexslider/jquery.flexslider.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/flexslider/setting.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/google-code-prettify/prettify.css">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/google-code-prettify/prettify.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/jquery.easing.1.3.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/jquery.fancybox-media.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/jquery.fancybox.pack.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/jquery.flexslider.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/jquery.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/portfolio/jquery.quicksand.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/portfolio/setting.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/quicksand/jquery.quicksand.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/quicksand/setting.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
+    <File Include="Scripts/js/validate.js">
+      <publishTime>09/05/2015 17:15:54</publishTime>
+    </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>07/30/2015 09:18:00</publishTime>
     </File>
@@ -972,6 +1065,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/PhotoGallery/Index.cshtml">
       <publishTime>08/17/2015 10:28:18</publishTime>
     </File>
+    <File Include="Views/ProductCategories/Category.cshtml">
+      <publishTime>09/05/2015 15:36:32</publishTime>
+    </File>
     <File Include="Views/ProductCategories/Index.cshtml">
       <publishTime>08/17/2015 10:28:06</publishTime>
     </File>
@@ -987,17 +1083,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Products/Product2.cshtml">
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
+    <File Include="Views/Shared/CssFiles.cshtml">
+      <publishTime>09/05/2015 18:08:58</publishTime>
+    </File>
     <File Include="Views/Shared/DisplayTemplates/BootstrapPagination.cshtml">
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
+    <File Include="Views/Shared/JavascriptFiles.cshtml">
+      <publishTime>09/05/2015 18:09:49</publishTime>
+    </File>
     <File Include="Views/Shared/MainLayoutExternalFiles.cshtml">
-      <publishTime>08/31/2015 12:09:13</publishTime>
+      <publishTime>09/05/2015 17:11:58</publishTime>
     </File>
     <File Include="Views/Shared/MainLayoutExternalFiles2.cshtml">
       <publishTime>08/20/2015 10:22:44</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/31/2015 12:07:24</publishTime>
+      <publishTime>09/05/2015 17:40:16</publishTime>
     </File>
     <File Include="Views/Shopping/CheckOut.cshtml">
       <publishTime>07/30/2015 09:18:01</publishTime>
@@ -1012,7 +1114,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/05/2015 14:15:09</publishTime>
+      <publishTime>09/05/2015 15:44:13</publishTime>
     </File>
   </ItemGroup>
 </Project>

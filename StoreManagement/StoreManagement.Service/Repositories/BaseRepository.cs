@@ -45,7 +45,7 @@ namespace StoreManagement.Service.Repositories
         protected BaseRepository(IStoreContext dbContext) : base(dbContext)
         {
             DbContext = dbContext;
-            //StoreDbContext.Configuration.LazyLoadingEnabled = false;
+           StoreDbContext.Configuration.LazyLoadingEnabled = false;
            // StoreDbContext.Database.Log = message => File.AppendText("C:\\logs\\StoreDbContext_log.txt").WriteLine(message);
             
         }

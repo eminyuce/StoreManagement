@@ -195,6 +195,8 @@ namespace StoreManagement.Service.Repositories
         {
             var categories = from entry in this.FindBy(r => r.StoreId == storeId) select entry;
             return categories.Where(r => r.State).OrderBy(r => r.Ordering).ToList();
+
+
         }
 
     }

@@ -32,7 +32,6 @@ namespace StoreManagement.Service.Repositories
         public Content GetContentsContentId(int contentId)
         {
             return this.GetSingleIncluding(contentId, r => r.ContentFiles.Select(r1 => r1.FileManager));
-            //return dbContext.Contents.Include(r => r.ContentFiles.Select(t => t.FileManager)).FirstOrDefault(x => x.Id == contentId);
         }
 
         public List<Content> GetContentByType(string typeName)

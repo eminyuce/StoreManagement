@@ -76,6 +76,7 @@ namespace StoreManagement.Admin.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IStoreContext>().To<StoreContext>().WithConstructorArgument("nameOrConnectionString", "Stores");
+           
             kernel.Bind<IContentRepository>().To<ContentRepository>().InRequestScope(); 
             kernel.Bind<IStoreRepository>().To<StoreRepository>().InRequestScope(); 
             kernel.Bind<ISettingRepository>().To<SettingRepository>().InRequestScope(); 

@@ -154,7 +154,8 @@ namespace StoreManagement.Service.Repositories
 
         public Task<Product> GetProductsByIdAsync(int productId)
         {
-            return this.GetSingleAsync(productId);
+            Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+            return this.GetSingleIncludingAsync(productId,includeProperties);
         }
 
         public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)

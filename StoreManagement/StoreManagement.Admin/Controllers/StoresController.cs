@@ -145,25 +145,39 @@ namespace StoreManagement.Admin.Controllers
         {
             String layout = "";
             //StoreRepository.CopyStore(copyStoreId, name, domain, layout);
+            int newStoreId = 0;
+
+            try
+            {
+                var store = StoreRepository.GetStore(copyStoreId);
+                var storeCopy = GeneralHelper.DataContractSerialization(store);
+                storeCopy.Id = 0;
+                storeCopy.Name = name;
+                storeCopy.Domain = domain;
+                storeCopy.GoogleDriveFolder = domain;
+                StoreRepository.Add(storeCopy);
+                StoreRepository.Save();
+
+                newStoreId = storeCopy.Id;
+
+                var res = Task.Factory.StartNew(() => CopyStoreData(copyStoreId, newStoreId));
 
 
-            var store = StoreRepository.GetSingle(copyStoreId);
-            var storeCopy = GeneralHelper.DataContractSerialization(store);
-            storeCopy.Id = 0;
-            storeCopy.Name = name;
-            storeCopy.Domain = domain;
-            storeCopy.GoogleDriveFolder = domain;
-            StoreRepository.Add(storeCopy);
-            StoreRepository.Save();
+                return RedirectToAction("Index", new { search = name.ToLower() });
 
-            int newStoreId = storeCopy.Id;
+            }
+            catch (Exception exc)
+            {
 
-            var res = Task.Factory.StartNew(() => CopyStoreData(copyStoreId, newStoreId));
+                Logger.Error(exc, "CopyStore", copyStoreId, name, domain);
+            }
 
+
+            return RedirectToAction("CopyStore", new { id = copyStoreId });
 
 
 
-            return RedirectToAction("Index", new { search = name.ToLower() });
+
         }
 
 
@@ -470,17 +484,17 @@ namespace StoreManagement.Admin.Controllers
                             {
                                 Logger.Error(ex, "ContentRepository:CopyStore", newCategoryId);
                             }
-                           
+
 
                         }
-               
+
                     }
                     catch (Exception ex)
                     {
                         Logger.Error(ex, "ContentRepository:CopyStore", newCategoryId);
                     }
 
-                 
+
                 }
 
             }

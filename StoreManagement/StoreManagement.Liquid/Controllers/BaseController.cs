@@ -258,11 +258,11 @@ namespace StoreManagement.Liquid.Controllers
         {
             try
             {
-                if (StoreId > 0)
+                if (StoreId == 0)
                 {
                     return "";
                 }
-                var item = GetStoreSettings().FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                var item = GetStoreSettings().FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
 
                 if (item != null)
                 {

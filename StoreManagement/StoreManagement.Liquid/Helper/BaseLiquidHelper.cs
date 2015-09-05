@@ -54,8 +54,8 @@ namespace StoreManagement.Liquid.Helper
                 {
                     return "";
                 }
-                Logger.Trace("Settings:"+StoreSettings.Count());
-                var item = StoreSettings.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+
+                var item = StoreSettings.FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
 
                 return item != null ? item.SettingValue : "";
             }

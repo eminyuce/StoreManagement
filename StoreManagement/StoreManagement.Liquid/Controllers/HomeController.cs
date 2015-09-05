@@ -28,10 +28,12 @@ namespace StoreManagement.Liquid.Controllers
                 int newsTake = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", 5);
                 int productsTake = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", 5);
                 int sliderTake = GetSettingValueInt("HomePageSliderImages_ItemsNumber", 5);
+
+                   
                 int? categoryId = null;
                 String key = String.Format("Home:Index-{0}-{1}-{2}-{3}-{4}", StoreId, blogsTake, newsTake,
                                            productsTake, sliderTake);
-
+             
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePage");
                 var blogsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, blogsTake);
                 var newsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, newsTake);

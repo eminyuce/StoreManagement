@@ -46,6 +46,28 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void RemoveNewLines()
+        {
+            String m = "\n\n\n\tProductCategoryService_CacheMinute \t";
+            Console.Write(m.RemoveTabNewLines());
+        }
+
+
+
+        [TestMethod]
+        public void TestSettingRepository()
+        {
+            String key = "HomePageMainNewsContents_ItemsNumber \t";
+            var log = new SettingRepository(new StoreContext(ConnectionString));
+           var item = log.GetStoreSettingsFromCache(9).FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
+            if (item != null)
+            {
+                Console.Write(item.SettingValue);
+            }
+        }
+
+
+        [TestMethod]
         public void TestGetBrandAsync()
         {
             var log = new BrandRepository(new StoreContext(ConnectionString));

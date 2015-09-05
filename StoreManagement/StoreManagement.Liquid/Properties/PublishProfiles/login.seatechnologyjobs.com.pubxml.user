@@ -58,13 +58,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/05/2015 11:29:22</publishTime>
+      <publishTime>09/05/2015 14:35:14</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>09/05/2015 11:32:39</publishTime>
+      <publishTime>09/05/2015 15:00:23</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/05/2015 11:29:26</publishTime>
+      <publishTime>09/05/2015 14:35:15</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -1012,7 +1012,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/05/2015 11:32:40</publishTime>
+      <publishTime>09/05/2015 14:15:09</publishTime>
     </File>
   </ItemGroup>
 </Project>

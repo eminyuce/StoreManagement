@@ -25,15 +25,15 @@ namespace StoreManagement.Data.GeneralHelper
             return CarriageRegex.Replace(text, string.Empty).Trim();
         }
 
-      
+
 
         public static string ToYesNoString(this bool value)
         {
             return value ? "Yes" : "No";
         }
 
-     
-    
+
+
         public static string ToCssClass(this string str)
         {
             if (String.IsNullOrEmpty(str))
@@ -196,6 +196,10 @@ namespace StoreManagement.Data.GeneralHelper
             return ret;
         }
 
+        public static string RemoveTabNewLines(this object arg)
+        {
+            return Regex.Replace(arg.ToStr(), @"\t|\n|\r", "").ToStr();
+        }
 
         public static string ToStr(this object arg)
         {
@@ -482,7 +486,7 @@ namespace StoreManagement.Data.GeneralHelper
             if (string.IsNullOrEmpty(text))
                 return "";
             //return UrlEncodeCustom(text);
-         //   return HttpUtility.UrlEncode(text.Replace(" ", "_")).ToLower();
+            //   return HttpUtility.UrlEncode(text.Replace(" ", "_")).ToLower();
             return UrlDencode(text, true);
             //char c;
             //((int) c).ToString("X");

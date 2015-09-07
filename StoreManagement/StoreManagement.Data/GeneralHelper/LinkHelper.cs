@@ -36,7 +36,12 @@ namespace StoreManagement.Data.GeneralHelper
             String imageLink = String.Format("/Images/{0}/{1}?width={2}&height={3}", imageActionName, googleId, width, height);
             return imageLink;
         }
-
+        public static String GetImageLinkHtml(String imageActionName, String googleId, int width, int height, String title, String alt)
+        {
+            String imageLink = String.Format("<img class='imageItem' src='/Images/{0}/{1}?width={2}&height={3}' alt='{4}' title='{5}' />",
+                imageActionName, googleId, width, height, alt, title);
+            return imageLink;
+        }
         public static string GetCategoryLink(BaseCategory productCategory)
         {
             String detailLink = String.Format("/ProductCategories/Category/{0}",
@@ -70,7 +75,7 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static string GetBrandDetailLink(Brand brand)
         {
-            String link = String.Format("/Brands/Detail/{0}",String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name), brand.Id));
+            String link = String.Format("/Brands/Detail/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name), brand.Id));
 
             return link.ToLowerInvariant();
         }

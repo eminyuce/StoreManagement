@@ -33,11 +33,11 @@ namespace StoreManagement.Liquid.Helper
         {
             return from s in items
                    select new
-                       {
-                           s.Brand.Name,
-                           s.Brand.Description,
-                           s.DetailLink
-                       };
+                   {
+                       s.Brand.Name,
+                       s.Brand.Description,
+                       s.DetailLink
+                   };
         }
         public static IEnumerable GetContactEnumerable(List<ContactLiquid> items)
         {
@@ -55,10 +55,10 @@ namespace StoreManagement.Liquid.Helper
         {
             return from s in items
                    select new
-                       {
-                           s.Label.Name,
-                           s.Link
-                       };
+                   {
+                       s.Label.Name,
+                       s.Link
+                   };
         }
         public static IEnumerable GetLocationsEnumerable(List<LocationLiquid> items)
         {
@@ -175,8 +175,8 @@ namespace StoreManagement.Liquid.Helper
                        s.Content.Author,
                        s.Content.UpdatedDate,
                        s.DetailLink,
-                       images = s.ImageLiquid
-
+                       images = GetImageLiquidAnonymousObject(s.ImageLiquid)
+                      // images = s.ImageLiquid
                    };
         }
 
@@ -193,6 +193,22 @@ namespace StoreManagement.Liquid.Helper
                 images = contentLiquid.ImageLiquid
             };
             return anonymousObject;
+        }
+
+        public static object GetImageLiquidAnonymousObject(ImageLiquid imageLiquid)
+        {
+
+            return imageLiquid;
+            //object anonymousObject = new ImageLiquid
+            //{
+            //    this.image = imageLiquid.imagelinks,
+            //    imagehas = imageLiquid.imagehas,
+            //    mainimagesource = imageLiquid.mainimagesource,
+            //    imagecount = imageLiquid.imagecount,
+            //    imagesource = imageLiquid.imagesource,
+
+            //};
+            //return anonymousObject;
         }
     }
 }

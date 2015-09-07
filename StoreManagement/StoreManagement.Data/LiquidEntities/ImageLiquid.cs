@@ -28,61 +28,93 @@ namespace StoreManagement.Data.LiquidEntities
             this.ImageHeight = height == 0 ? 99 : height;
 
         }
-
+        public List<FileManagerLiquid> FileManagerLiquids
+        {
+            get { return this.FileManagers.Select(r => new FileManagerLiquid(r, this.ImageWidth, this.ImageHeight)).ToList(); }
+        }
         public String ImageSourceTest
         {
             get { return "Test Image"; }
         }
-
-        public String mainimagesource
+        public bool MainImageHas
         {
             get
             {
                 var mainImage = BaseFileEntities.Where(r => r.IsMainImage).Select(r => r.FileManager).FirstOrDefault(r => r.State);
-                if (mainImage == null)
+                if (mainImage != null)
                 {
-                    return LinkHelper.GetImageLink("Thumbnail", mainImage.GoogleImageId, this.ImageWidth,
-                                                   this.ImageHeight);
+                    return true;
                 }
                 else
                 {
-                    return "";
+                    return false;
+                }
+            }
+        }
+        public String MainImageSource
+        {
+            get
+            {
+                var mainImage = BaseFileEntities.Where(r => r.IsMainImage).Select(r => r.FileManager).FirstOrDefault(r => r.State);
+                if (mainImage != null)
+                {
+
+                    return LinkHelper.GetImageLinkHtml("Thumbnail", mainImage.GoogleImageId, this.ImageWidth,
+                                                       this.ImageHeight, mainImage.Title, mainImage.Title);
+
+                }
+                else
+                {
+                    return FirstImageSource;
                 }
 
             }
         }
+        public String FirstImageSource
+        {
+            get
+            {
+                if (ImageHas)
+                {
+                    var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => x.Id).FirstOrDefault();
+                    if (firstOrDefault != null)
+                        return LinkHelper.GetImageLinkHtml("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth, this.ImageHeight, firstOrDefault.Title, firstOrDefault.Title);
+                }
+                return "";
+            }
+        }
+
 
         //int width = 60, int height = 60
-        public String imagesource
+        public String RandomImageSource
         {
             get
             {
-                if (imagehas)
+                if (ImageHas)
                 {
                     var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
-                    return LinkHelper.GetImageLink("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth, this.ImageHeight);
+                    if (firstOrDefault != null)
+                        return LinkHelper.GetImageLinkHtml("Thumbnail", firstOrDefault.GoogleImageId,
+                            this.ImageWidth,
+                            this.ImageHeight, firstOrDefault.Title, firstOrDefault.Title);
                 }
-                else
-                {
-
-                    return "";
-                }
+                return "";
             }
         }
 
-        public List<String> imagelinks
+        public List<String> ImageLinks
         {
 
             get
             {
-                if (imagehas)
+                if (ImageHas)
                 {
                     var imageList = new List<String>();
                     foreach (var image in this.FileManagers.Where(r => r.State))
                     {
-                        var imageLink = LinkHelper.GetImageLink("Thumbnail", image.GoogleImageId,
+                        var imageLink = LinkHelper.GetImageLinkHtml("Thumbnail", image.GoogleImageId,
                                                                 this.ImageWidth,
-                                                                this.ImageHeight);
+                                                                this.ImageHeight, image.Title, image.Title);
                         imageList.Add(imageLink);
                     }
 
@@ -95,14 +127,14 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
-        public bool imagehas
+        public bool ImageHas
         {
             get
             {
                 return this.FileManagers.Any(r => r.State);
             }
         }
-        public int imagecount
+        public int ImageCount
         {
             get
             {

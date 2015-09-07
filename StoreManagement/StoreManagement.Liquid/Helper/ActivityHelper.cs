@@ -46,12 +46,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    items = from s in items
-                            select new
-                            {
-                                s.Activity.Name 
-
-                            }
+                    items = LiquidAnonymousObject.GetActivitiesEnumerable(items)
 
 
                 };
@@ -70,5 +65,6 @@ namespace StoreManagement.Liquid.Helper
             }
             return result;
         }
+
     }
 }

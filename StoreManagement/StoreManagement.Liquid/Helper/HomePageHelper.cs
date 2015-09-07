@@ -74,21 +74,10 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    blogs = GetContentLiquid(home.BlogsLiquidList),
-                    products = GetProductsLiquid(home.ProductLiquidList),
-                    news =  GetContentLiquid(home.NewsLiquidList),
-                    sliders = from s in home.SliderImagesLiquid
-                             select new
-                             {
-                                 imagesource=s.ImageSource,
-                                 s.FileManager.Title,
-                                 s.FileManager.OriginalFilename,
-                                 s.FileManager.GoogleImageId,
-                                 s.FileManager.Width,
-                                 s.FileManager.Height,
-                                 s.ImageHeight,
-                                 s.ImageWidth
-                             },
+                    blogs = LiquidAnonymousObject.GetContentLiquid(home.BlogsLiquidList),
+                    products = LiquidAnonymousObject.GetProductsLiquid(home.ProductLiquidList),
+                    news = LiquidAnonymousObject.GetContentLiquid(home.NewsLiquidList),
+                    sliders = LiquidAnonymousObject.GetSliderImagesLiquidList(home.SliderImagesLiquid),
                      
 
                 };
@@ -107,44 +96,5 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
-        public  IEnumerable GetProductsLiquid(List<ProductLiquid> productLiquidList)
-        {
-            return from s in productLiquidList
-                   select new
-                       {
-                           CategoryName = s.Category.Name,
-                           ProductCategoryId = s.Product.ProductCategoryId,
-                           BrandId = s.Product.BrandId,
-                           CategoryDescription = s.Category.Description,
-                           ProductId = s.Product.Id,
-                           s.Product.Name,
-                           s.Product.Description,
-                           s.Product.ProductCode,
-                           s.Product.Price,
-                           s.Product.Discount,
-                           s.Product.UpdatedDate,
-                           s.Product.CreatedDate,
-                           s.Product.TotalRating,
-                           s.Product.UnitsInStock,
-                           s.DetailLink,
-                           images = s.ImageLiquid
-
-                       };
-        }
-
-        public IEnumerable GetContentLiquid(List<ContentLiquid> blogsLiquidList)
-        {
-            return from s in blogsLiquidList
-                   select new
-                       {
-                           s.Content.Name,
-                           s.Content.Description,
-                           s.Content.Author,
-                           s.Content.UpdatedDate,
-                           s.DetailLink,
-                           images = s.ImageLiquid
-
-                       };
-        }
     }
 }

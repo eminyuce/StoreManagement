@@ -52,16 +52,7 @@ namespace StoreManagement.Liquid.Helper
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
             {
-                items = from s in items
-                        select new
-                        {
-                            s.Content.Name,
-                            s.Content.Description,
-                            s.Content.Author,
-                            s.Content.UpdatedDate,
-                            s.DetailLink,
-                            images = s.ImageLiquid
-                        }
+                items = LiquidAnonymousObject.GetContentLiquid(items)
             }
                 );
 
@@ -89,16 +80,7 @@ namespace StoreManagement.Liquid.Helper
             var items = new List<ContentLiquid>();
             var contentLiquid = new ContentLiquid(content, category, pageDesign, type, ImageWidth, ImageHeight);
 
-            object anonymousObject = new
-            {
-                CategoryId = contentLiquid.Content.CategoryId,
-                CategoryName = contentLiquid.Category.Name,
-                CategoryDescription = contentLiquid.Category.Description,
-                ContentId = contentLiquid.Content.Id,
-                Name = contentLiquid.Content.Name,
-                Description = contentLiquid.Content.Description,
-                images = contentLiquid.ImageLiquid
-            };
+            var anonymousObject = LiquidAnonymousObject.GetContentAnonymousObject(contentLiquid);
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
@@ -112,6 +94,8 @@ namespace StoreManagement.Liquid.Helper
             result.LiquidRenderedResult = dic;
             return result;
         }
+
+
 
         public StoreLiquidResult GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type)
         {
@@ -130,14 +114,7 @@ namespace StoreManagement.Liquid.Helper
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
             {
-                items = from s in items
-                        select new
-                        {
-                            s.Content.Name,
-                            s.Content.Description,
-                            s.DetailLink,
-                            images = s.ImageLiquid
-                        }
+                items = LiquidAnonymousObject.GetContentLiquid(items)
             }
                 );
 
@@ -177,7 +154,7 @@ namespace StoreManagement.Liquid.Helper
                         var feedItem = GetSyndicationItem(store,
                             product,
                             categories.FirstOrDefault(r => r.Id == product.CategoryId),
-                             description, 
+                             description,
                              type);
 
 

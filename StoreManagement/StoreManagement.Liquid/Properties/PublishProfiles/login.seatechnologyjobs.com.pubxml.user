@@ -58,13 +58,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/05/2015 15:44:05</publishTime>
+      <publishTime>09/06/2015 22:27:03</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>09/05/2015 19:50:24</publishTime>
+      <publishTime>09/07/2015 12:52:50</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/05/2015 15:44:08</publishTime>
+      <publishTime>09/06/2015 22:27:05</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>

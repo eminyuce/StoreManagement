@@ -51,33 +51,9 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
                 {
-                    items = from s in items
-                            select new
-                                {
-                                    CategoryName = s.Category.Name,
-                                    ProductCategoryId = s.Product.ProductCategoryId,
-                                    BrandId = s.Product.BrandId,
-                                    CategoryDescription = s.Category.Description,
-                                    ProductId = s.Product.Id,
-                                    s.Product.Name,
-                                    s.Product.Description,
-                                    s.Product.ProductCode,
-                                    s.Product.Price,
-                                    s.Product.Discount,
-                                    s.Product.UpdatedDate,
-                                    s.Product.CreatedDate,
-                                    s.Product.TotalRating,
-                                    s.Product.UnitsInStock,
-                                    s.DetailLink,
-                                    images = s.ImageLiquid
-                                },
-                    categories = from s in cats
-                                 select new
-                                     {
-                                         s.ProductCategory.Name,
-                                         s.ProductCategory.Description,
-                                         s.DetailLink,
-                                     }
+
+                    items = LiquidAnonymousObject.GetProductsLiquid(items),
+                    categories = LiquidAnonymousObject.GetProductCategories(cats)
                 };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
@@ -107,24 +83,7 @@ namespace StoreManagement.Liquid.Helper
 
             var s = new ProductLiquid(product, category, pageDesign, ImageWidth, ImageHeight);
 
-            object anonymousObject = new
-            {
-                CategoryName = s.Category.Name,
-                ProductCategoryId = s.Product.ProductCategoryId,
-                BrandId = s.Product.BrandId,
-                CategoryDescription = s.Category.Description,
-                ProductId = s.Product.Id,
-                s.Product.Name,
-                s.Product.Description,
-                s.Product.ProductCode,
-                s.Product.Price,
-                s.Product.Discount,
-                s.Product.UpdatedDate,
-                s.Product.CreatedDate,
-                s.Product.TotalRating,
-                s.Product.UnitsInStock,
-                images = s.ImageLiquid
-            };
+            var anonymousObject = LiquidAnonymousObject.GetProductAnonymousObject(s);
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
@@ -138,6 +97,8 @@ namespace StoreManagement.Liquid.Helper
             result.LiquidRenderedResult = dic;
             return result;
         }
+
+     
 
         public StoreLiquidResult  GetRelatedProductsPartialByCategory(Task<ProductCategory> categoryTask,
             Task<List<Product>> relatedProductsTask,
@@ -164,28 +125,7 @@ namespace StoreManagement.Liquid.Helper
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
                 {
-                    items = from s in items
-                            select new
-                            {
-                                ProductId = s.Product.Id,
-                                s.Product.Name,
-                                s.Product.Description,
-                                s.Product.ProductCode,
-                                s.Product.Price,
-                                s.Product.Discount,
-                                s.Product.UpdatedDate,
-                                s.Product.CreatedDate,
-                                s.Product.TotalRating,
-                                s.Product.UnitsInStock,
-                                s.DetailLink,
-                                CategoryName = s.Category.Name,
-                                ProductCategoryId = s.Product.ProductCategoryId,
-                                BrandId = s.Product.BrandId,
-                                CategoryDescription = s.Category.Description,
-                                ImageWidth,
-                                ImageHeight,
-                                images = s.ImageLiquid
-                            }
+                    items = LiquidAnonymousObject.GetProductsLiquid(items)
                 }
                     );
 
@@ -238,33 +178,8 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                     {
-                        items = from s in items
-                                select new
-                                    {
-                                        s.Product.Name,
-                                        s.Product.Description,
-                                        s.Product.ProductCode,
-                                        s.Product.Price,
-                                        s.Product.Discount,
-                                        s.Product.UpdatedDate,
-                                        s.Product.CreatedDate,
-                                        s.Product.TotalRating,
-                                        s.Product.UnitsInStock,
-                                        s.DetailLink,
-                                        CategoryName = s.Category.Name,
-                                        ProductCategoryId = s.Product.ProductCategoryId,
-                                        BrandId = s.Product.BrandId,
-                                        CategoryDescription = s.Category.Description,
-                                        ImageWidth,
-                                        ImageHeight,
-                                        images = s.ImageLiquid
-                                    },
-                        brand = new
-                            {
-                                brandLiquid,
-                                Name = brandLiquid.Brand.Name,
-                                Description = brandLiquid.Brand.Description
-                            }
+                        items = LiquidAnonymousObject.GetProductsLiquid(items),
+                        brand = LiquidAnonymousObject.GetBrandLiquid(brandLiquid)
                     };
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
@@ -282,6 +197,8 @@ namespace StoreManagement.Liquid.Helper
                 return result;
             }
         }
+
+      
 
         public Rss20FeedFormatter GetProductsRssFeed( Task<Store> storeTask , Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, int description)
         {

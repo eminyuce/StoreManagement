@@ -46,13 +46,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                     {
-                        items = from s in items
-                                select new
-                                    {
-                                        s.Brand.Name,
-                                        s.Brand.Description,
-                                        s.DetailLink
-                                    }
+                        items = LiquidAnonymousObject.GetBrandsEnumerable(items)
 
 
                     };
@@ -76,6 +70,7 @@ namespace StoreManagement.Liquid.Helper
 
         }
 
+      
 
 
         public StoreLiquidResult GetBrandDetailPage(Task<Brand> brandTask, Task<List<Product>> productsTask, Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> productCategoriesTask)
@@ -106,21 +101,8 @@ namespace StoreManagement.Liquid.Helper
                     brand=brandLiquid,
                     name=brandLiquid.Brand.Name,
                     description = brandLiquid.Brand.Description,
-                    products = from s in brandLiquid.ProductLiquidList
-                               select new
-                               {
-                                   s.Product.Name,
-                                   s.Product.Description,
-                                   s.DetailLink,
-                                   images = s.ImageLiquid
-                               },
-                    productcategories = from s in brandLiquid.ProductCategoriesLiquids
-                                        select new
-                                        {
-                                            s.ProductCategory.Name,
-                                            s.ProductCategory.Description,
-                                            s.DetailLink
-                                        },
+                    products = LiquidAnonymousObject.GetProductsLiquid(brandLiquid.ProductLiquidList),
+                    productcategories = LiquidAnonymousObject.GetProductCategories(brandLiquid.ProductCategoriesLiquids)
 
                 };
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

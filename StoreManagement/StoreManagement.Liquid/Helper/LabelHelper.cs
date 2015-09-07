@@ -42,12 +42,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-                items = from s in items
-                        select new
-                        {
-                            s.Label.Name,
-                            s.Link
-                        }
+                items = LiquidAnonymousObject.GetLabelsEnumerable(items)
 
 
             };
@@ -65,5 +60,7 @@ namespace StoreManagement.Liquid.Helper
             result.LiquidRenderedResult = dic;
             return result;
         }
+
+       
     }
 }

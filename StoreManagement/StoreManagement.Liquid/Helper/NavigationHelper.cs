@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,12 +43,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
                 {
-                    items = from s in items
-                            select new
-                                {
-                                    s.Navigation.Name,
-                                    s.Link
-                                }
+                    items = LiquidAnonymousObject.GetNavigationsEnumerable(items)
                     
 
                 };
@@ -84,12 +80,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-                items = from s in items
-                        select new
-                        {
-                            s.Navigation.Name,
-                            s.Link
-                        }
+                items = LiquidAnonymousObject.GetNavigationsEnumerable(items)
 
 
             };
@@ -108,5 +99,7 @@ namespace StoreManagement.Liquid.Helper
             result.LiquidRenderedResult = dic;
             return result;
         }
+
+      
     }
 }

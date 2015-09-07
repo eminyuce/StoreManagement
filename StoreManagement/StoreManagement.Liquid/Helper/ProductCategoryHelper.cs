@@ -47,13 +47,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    categories = from s in cats
-                                 select new
-                                 {
-                                     s.ProductCategory.Name,
-                                     s.ProductCategory.Description,
-                                     s.DetailLink,
-                                 }
+                    categories = LiquidAnonymousObject.GetProductCategories(cats)
                 };
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
@@ -98,13 +92,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    categories = from s in cats
-                                 select new
-                                 {
-                                     s.ProductCategory.Name,
-                                     s.ProductCategory.Description,
-                                     s.DetailLink,
-                                 }
+                    categories = LiquidAnonymousObject.GetProductCategories(cats)
                 };
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

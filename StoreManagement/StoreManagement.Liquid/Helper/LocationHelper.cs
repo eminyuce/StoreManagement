@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,19 +49,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    items = from s in items
-                            select new
-                            {
-                                s.Location.Name,
-                                s.Location.Longitude,
-                                s.Location.Latitude,
-                                s.Location.State,
-                                s.Location.City,
-                                s.Location.Country,
-                                s.Location.Address,
-                                s.Location.Postal,
-
-                            }
+                    items = LiquidAnonymousObject.GetLocationsEnumerable(items)
 
 
                 };
@@ -79,5 +68,6 @@ namespace StoreManagement.Liquid.Helper
             }
             return result;
         }
+
     }
 }

@@ -40,12 +40,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-                items = from s in cats
-                        select new
-                        {
-                            Name = s.FileManager.OriginalFilename,
-                            s.ImageSource
-                        }
+                items = LiquidAnonymousObject.GetFileManagerLiquidEnumerable(cats)
             };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
@@ -63,7 +58,6 @@ namespace StoreManagement.Liquid.Helper
             return result;
 
         }
-
 
     }
 }

@@ -483,6 +483,7 @@
     <Compile Include="Helper\Interfaces\IProductHelper.cs" />
     <Compile Include="Helper\Interfaces\IStoreHelper.cs" />
     <Compile Include="Helper\LabelHelper.cs" />
+    <Compile Include="Helper\LiquidAnonymousObject.cs" />
     <Compile Include="Helper\LocationHelper.cs" />
     <Compile Include="Helper\PagingHelper.cs" />
     <Compile Include="Helper\ProductCategoryHelper.cs" />

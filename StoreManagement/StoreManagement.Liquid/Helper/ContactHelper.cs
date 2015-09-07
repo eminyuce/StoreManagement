@@ -46,15 +46,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    items = from s in items
-                            select new
-                            {
-                                s.Contact.Name,
-                                s.Contact.Title,
-                                s.Contact.PhoneCell,
-                                s.Contact.PhoneWork,
-                                s.Contact.Email
-                            }
+                    items = LiquidAnonymousObject.GetContactEnumerable(items)
                             
                 };
 
@@ -71,5 +63,7 @@ namespace StoreManagement.Liquid.Helper
             }
             return result;
         }
+
+      
     }
 }

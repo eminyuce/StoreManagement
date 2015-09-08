@@ -28,5 +28,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
                                                                            Task<List<ProductCategory>> productCategoriesTask);
 
         Rss20FeedFormatter GetProductsRssFeed(Task<Store> storeTask,Task<List<Product>> productsTask,    Task<List<ProductCategory>>  productCategoriesTask, int description);
+
+        StoreLiquidResult GetPopularProducts(Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, Task<PageDesign> pageDesignTask);
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using GenericRepository;
+using GenericRepository.EntityFramework.Enums;
 using NLog;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -140,7 +141,7 @@ namespace StoreManagement.Service.GenericRepositories
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
-                var items = repository.FindAllAsync(match, take);
+                var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
                 var itemsResult = items;
                 return itemsResult;
             }
@@ -155,7 +156,7 @@ namespace StoreManagement.Service.GenericRepositories
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId;
-                var items = repository.FindAllAsync(match, take);
+                var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
                 var itemsResult = items;
                 return itemsResult;
             }

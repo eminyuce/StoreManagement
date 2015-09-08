@@ -106,6 +106,9 @@ namespace StoreManagement.API.Controllers
             return await ProductRepository.GetProductsByBrandAsync(storeId, brandId, take, excludedProductId);
         }
 
-       
+        public async Task<List<Product>> GetPopularProducts(int storeId, string productType, int page, int pageSize)
+        {
+            return await ProductRepository.GetPopularProducts(storeId, productType, page, pageSize);
+        }
     }
 }

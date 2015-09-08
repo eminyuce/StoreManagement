@@ -74,6 +74,51 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
+        public StoreLiquidResult GetPopularProducts(Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, Task<PageDesign> pageDesignTask)
+        {
+            Task.WaitAll(pageDesignTask, productsTask, productCategoriesTask);
+            var products = productsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var productCategories = productCategoriesTask.Result;
+            var result = new StoreLiquidResult();
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            try
+            {
+
+
+                var items = new List<ProductLiquid>();
+                foreach (var item in products)
+                {
+                    var cat = productCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
+                    var product = new ProductLiquid(item, cat, pageDesign, this.ImageWidth, this.ImageHeight);
+                    items.Add(product);
+
+                }
+
+                object anonymousObject = new
+                {
+                    products = LiquidAnonymousObject.GetProductsLiquid(items) 
+                };
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+
+
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+                result.LiquidRenderedResult = dic;
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GetPopularProducts");
+                dic.Add(StoreConstants.PageOutput, ex.Message);
+                return result;
+            }
+        }
+
+
         public StoreLiquidResult GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask)
         {
             Task.WaitAll(productsPageDesignTask, productsTask, categoryTask);
@@ -198,8 +243,7 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-      
-
+ 
         public Rss20FeedFormatter GetProductsRssFeed( Task<Store> storeTask , Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, int description)
         {
             Task.WaitAll(storeTask,productsTask, productCategoriesTask);
@@ -250,6 +294,9 @@ namespace StoreManagement.Liquid.Helper
                 return null;
             }
         }
+
+      
+
         private SyndicationItem GetSyndicationItem(Store store, Product product, ProductCategory productCategory, int description)
         {
             if (productCategory == null)

@@ -236,8 +236,30 @@ namespace StoreManagement.Service.Services
             }
         }
 
+        public Task<List<Product>> GetPopularProducts(int storeId, string productType, int page, int pageSize)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetPopularProducts?" +
+                                                 "storeId={2}&productType={3}" +
+                                                 "&page={4}&pageSize={5}",
+                                                 WebServiceAddress,
+                                                 ApiControllerName,
+                                                 storeId, productType,
+                                                 page, pageSize);
 
-  
+                return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+
 
         protected override void SetCache()
         {

@@ -181,6 +181,109 @@ namespace StoreManagement.Liquid.Controllers
             var returtHtml = await res;
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
+        public async Task<JsonResult> GetPopularProducts(int page=1, String desingName = "")
+        {
+
+            if (String.IsNullOrEmpty(desingName))
+            {
+                desingName = GetSettingValue("PopularProducts_DefaultPageDesign", "PopularProductsPartial");
+            }
+            var res = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    int pageSize = GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize);
+                    var productsTask = ProductService.GetPopularProducts(StoreId, StoreConstants.ProductType, page, pageSize);
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+                    var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
+                                                                                               StoreConstants
+                                                                                                   .ProductType, true);
+
+                    ProductHelper.StoreSettings = GetStoreSettings();
+                    ProductHelper.ImageWidth = GetSettingValueInt("PopularProducts_ImageWidth", 99);
+                    ProductHelper.ImageHeight = GetSettingValueInt("PopularProducts_ImageHeight", 99);
+                    var pageOuput = ProductHelper.GetPopularProducts(productsTask, categoriesTask, pageDesignTask);
+                    String html = pageOuput.PageOutputText;
+                    return html;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "GetProductCategories");
+                    return ex.Message;
+                }
+
+            });
+
+            var returtHtml = await res;
+            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+        }
+        public async Task<JsonResult> GetRecentProducts(String desingName = "")
+        {
+
+            if (String.IsNullOrEmpty(desingName))
+            {
+                desingName = GetSettingValue("RecentProducts_DefaultPageDesign", "RecentProductsPartial");
+            }
+            var res = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+
+                    ProductCategoryHelper.StoreSettings = GetStoreSettings();
+                    ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
+                    ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
+                    var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
+                    String html = pageOuput.PageOutputText;
+                    return html;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "GetRecentProducts");
+                    return "";
+                }
+
+            });
+
+            var returtHtml = await res;
+            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+        }
+        public async Task<JsonResult> GetProductComments(int productId, int page , String desingName = "")
+        {
+
+            if (String.IsNullOrEmpty(desingName))
+            {
+                desingName = GetSettingValue("ProductComments_DefaultPageDesign", "ProductCommentsPartial");
+            }
+
+            int pageSize = GetSettingValueInt("ProductComments_PageSize", ProjectAppSettings.RecordPerPage);
+            var res = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+
+                    ProductCategoryHelper.StoreSettings = GetStoreSettings();
+                    ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
+                    ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
+                    var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
+                    String html = pageOuput.PageOutputText;
+                    return html;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "ProductComments");
+                    return "";
+                }
+
+            });
+
+            var returtHtml = await res;
+            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

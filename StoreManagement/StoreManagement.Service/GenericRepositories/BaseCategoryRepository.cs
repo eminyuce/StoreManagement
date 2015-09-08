@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using GenericRepository.EntityFramework.Enums;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -37,20 +38,20 @@ namespace StoreManagement.Service.GenericRepositories
 
             return items.OrderBy(r => r.Ordering).ToList();
         }
-        public static Task<List<T>> GetCategoriesByStoreIdAsync<T>(IBaseRepository<T, int> repository, int storeId, String type, bool? isActive, int ? take) where T : BaseCategory
+        public static Task<List<T>> GetCategoriesByStoreIdAsync<T>(IBaseRepository<T, int> repository, int storeId, String type, bool? isActive, int? take) where T : BaseCategory
         {
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId
-                    &&   r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)
+                    && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
-                var items = repository.FindAllAsync(match, take);
+                var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
                 var itemsResult = items;
                 return itemsResult;
             }
             catch (Exception exception)
             {
-       
+
                 return null;
             }
         }

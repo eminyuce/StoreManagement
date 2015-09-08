@@ -245,7 +245,8 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State;
-                var items = this.FindAllIncludingAsync(match, page, pageSize, t => t.TotalRating, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                Expression<Func<Product, int>> keySelector = t => t.TotalRating;
+                var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 return items;
             }
             catch (Exception exception)
@@ -260,7 +261,8 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State;
-                var items = this.FindAllIncludingAsync(match, page, pageSize, t => t.Id, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                Expression<Func<Product, int>>  keySelector =  t => t.Id;
+                var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 return items;
             }
             catch (Exception exception)
@@ -269,6 +271,7 @@ namespace StoreManagement.Service.Repositories
                 return null;
             }
         }
+ 
 
         public List<Product> GetMainPageProducts(int storeId, int? take)
         {

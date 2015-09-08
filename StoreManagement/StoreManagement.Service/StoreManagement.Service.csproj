@@ -75,7 +75,9 @@
     <Compile Include="DbContext\IStoreContext.cs" />
     <Compile Include="DbContext\StoreContext.cs" />
     <Compile Include="GenericRepositories\BaseCategoryRepository.cs" />
+    <Compile Include="GenericRepositories\BaseContentRepository.cs" />
     <Compile Include="GenericRepositories\BaseEntityRepository.cs" />
+    <Compile Include="GenericRepositories\GenericBaseRepository.cs" />
     <Compile Include="Interfaces\IActivityService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />
     <Compile Include="Interfaces\ICommentService.cs" />

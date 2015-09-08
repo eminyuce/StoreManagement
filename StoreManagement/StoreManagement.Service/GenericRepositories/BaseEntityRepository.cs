@@ -14,9 +14,9 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.GenericRepositories
 {
-    public class BaseEntityRepository
+    public class BaseEntityRepository : GenericBaseRepository
     {
-        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
 
         protected static String GetDbEntityValidationExceptionDetail(DbEntityValidationException ex)
         {

@@ -11,7 +11,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.GenericRepositories
 {
-    public class BaseCategoryRepository
+    public class BaseCategoryRepository : GenericBaseRepository
     {
         public static List<T> GetBaseCategoriesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search, String type) where T : BaseCategory
         {

@@ -29,6 +29,10 @@ namespace StoreManagement.Data.Entities
         public Boolean ImageState { get; set; }
 
 
+         [AllowHtml]
+         public string VideoUrl { get; set; }
+
+
         public override string ToString()
         {
             return "id:" + this.Id + " Name:" + Name + " StoreId:" + this.StoreId;

@@ -150,7 +150,7 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetProductLabels(int id, String designName="")
+        public async Task<JsonResult> GetProductLabels(int id, String designName = "")
         {
 
             if (String.IsNullOrEmpty(designName))
@@ -163,7 +163,7 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
                     var brandsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
- 
+
                     LabelHelper.StoreSettings = GetStoreSettings();
                     LabelHelper.ImageWidth = GetSettingValueInt("ProductLabels_ImageWidth", 50);
                     LabelHelper.ImageHeight = GetSettingValueInt("ProductLabels_ImageHeight", 50);
@@ -181,7 +181,7 @@ namespace StoreManagement.Liquid.Controllers
             var returtHtml = await res;
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetPopularProducts(int page=1, String desingName = "")
+        public async Task<JsonResult> GetPopularProducts(int page = 1, String desingName = "")
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -208,7 +208,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex, "GetProductCategories");
+                    Logger.Error(ex, "GetPopularProducts");
                     return ex.Message;
                 }
 
@@ -217,7 +217,7 @@ namespace StoreManagement.Liquid.Controllers
             var returtHtml = await res;
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetRecentProducts(String desingName = "")
+        public async Task<JsonResult> GetRecentProducts(int page = 1, String desingName = "")
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -228,13 +228,17 @@ namespace StoreManagement.Liquid.Controllers
             {
                 try
                 {
-                    var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+                    int pageSize = GetSettingValueInt("RecentProducts_PageSize", StoreConstants.DefaultPageSize);
+                    var productsTask = ProductService.GetRecentProducts(StoreId, StoreConstants.ProductType, page, pageSize);
                     var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+                    var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
+                                                                                               StoreConstants
+                                                                                                   .ProductType, true);
 
-                    ProductCategoryHelper.StoreSettings = GetStoreSettings();
-                    ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
-                    ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
-                    var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
+                    ProductHelper.StoreSettings = GetStoreSettings();
+                    ProductHelper.ImageWidth = GetSettingValueInt("RecentProducts_ImageWidth", 99);
+                    ProductHelper.ImageHeight = GetSettingValueInt("RecentProducts_ImageHeight", 99);
+                    var pageOuput = ProductHelper.GetPopularProducts(productsTask, categoriesTask, pageDesignTask);
                     String html = pageOuput.PageOutputText;
                     return html;
                 }
@@ -249,7 +253,7 @@ namespace StoreManagement.Liquid.Controllers
             var returtHtml = await res;
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetProductComments(int productId, int page , String desingName = "")
+        public async Task<JsonResult> GetProductComments(int productId, int page, String desingName = "")
         {
 
             if (String.IsNullOrEmpty(desingName))

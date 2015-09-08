@@ -110,5 +110,10 @@ namespace StoreManagement.API.Controllers
         {
             return await ProductRepository.GetPopularProducts(storeId, productType, page, pageSize);
         }
+
+        public async Task<List<Product>> GetRecentProducts(int storeId, string productType, int page, int pageSize)
+        {
+            return await ProductRepository.GetRecentProducts(storeId, productType, page, pageSize);
+        }
     }
 }

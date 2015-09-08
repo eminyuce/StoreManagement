@@ -255,6 +255,21 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public Task<List<Product>> GetRecentProducts(int storeId, string productType, int page, int pageSize)
+        {
+            try
+            {
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State;
+                var items = this.FindAllIncludingAsync(match, page, pageSize, t => t.Id, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                return items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
         public List<Product> GetMainPageProducts(int storeId, int? take)
         {
             try

@@ -90,7 +90,15 @@ function callAjaxMethod() {
     catch (err) {
         console.error(err.message);
     }
-
+    
+    try {
+        if ($('[data-recent-products]').length > 0) {
+            GetRecentProducts();
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
 }
 function GetPopularProducts() {
 
@@ -102,6 +110,22 @@ function GetPopularProducts() {
         var postData = JSON.stringify({ "page": page, "designName": designName });
 
         ajaxMethodCall(postData, "/AjaxProducts/GetPopularProducts", function (data) {
+            $(truethis).empty();
+            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            $(truethis).attr('data-page', page + 1);
+        });
+    });
+}
+function GetRecentProducts() {
+
+    $('[data-recent-products]').each(function () {
+        var truethis = this;
+
+        var page = parseInt($(this).attr('data-page'));
+        var designName = $(this).attr('data-template-design-name');
+        var postData = JSON.stringify({ "page": page, "designName": designName });
+
+        ajaxMethodCall(postData, "/AjaxProducts/GetRecentProducts", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
             $(truethis).attr('data-page', page + 1);

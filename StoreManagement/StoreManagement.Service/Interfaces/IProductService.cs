@@ -24,5 +24,6 @@ namespace StoreManagement.Service.Interfaces
         Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId);
         Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId);
         Task<List<Product>> GetPopularProducts(int storeId, string productType, int page, int pageSize);
+        Task<List<Product>> GetRecentProducts(int storeId, string productType, int page, int pageSize);
     }
 }

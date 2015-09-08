@@ -253,40 +253,7 @@ namespace StoreManagement.Liquid.Controllers
             var returtHtml = await res;
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetProductComments(int productId, int page, String desingName = "")
-        {
-
-            if (String.IsNullOrEmpty(desingName))
-            {
-                desingName = GetSettingValue("ProductComments_DefaultPageDesign", "ProductCommentsPartial");
-            }
-
-            int pageSize = GetSettingValueInt("ProductComments_PageSize", ProjectAppSettings.RecordPerPage);
-            var res = Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-
-                    ProductCategoryHelper.StoreSettings = GetStoreSettings();
-                    ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
-                    ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
-                    var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categoriesTask, pageDesignTask);
-                    String html = pageOuput.PageOutputText;
-                    return html;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex, "ProductComments");
-                    return "";
-                }
-
-            });
-
-            var returtHtml = await res;
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
-        }
+      
 
 
     }

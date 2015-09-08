@@ -81,6 +81,8 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public ILocationRepository LocationRepository { set; get; }
 
+        [Inject]
+        public ICommentRepository CommentRepository { set; get; }
 
         [Inject]
         public IContactRepository ContactRepository { set; get; }

@@ -29,6 +29,15 @@ namespace StoreManagement.Liquid.Helper
 
                    };
         }
+        public static IEnumerable GetCommentsEnumerable(List<CommentLiquid> items)
+        {
+            return from s in items
+                   select new
+                   {
+                       s.Comment.Name,
+                       s.Comment.Email 
+                   };
+        }
         public static IEnumerable GetBrandsEnumerable(List<BrandLiquid> items)
         {
             return from s in items

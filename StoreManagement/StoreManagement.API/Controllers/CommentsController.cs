@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Entities;
+using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.API.Controllers
 {
-    public class CommentsController:BaseApiController<Comment>
+    public class CommentsController : BaseApiController<Comment>, ICommentService
     {
         public override IEnumerable<Comment> GetAll()
         {
@@ -33,5 +35,12 @@ namespace StoreManagement.API.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Comment>> GetCommentsByItemIdAsync(int storeId, int itemId, string itemType, int page, int pageSize)
+        {
+            return await CommentRepository.GetCommentsByItemIdAsync(storeId, itemId, itemType, page, pageSize);
+        }
+
+
     }
 }

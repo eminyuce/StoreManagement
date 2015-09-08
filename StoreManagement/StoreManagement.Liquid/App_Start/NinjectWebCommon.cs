@@ -116,7 +116,8 @@ namespace StoreManagement.Liquid.App_Start
                 service19.WithConstructorArgument("webServiceAddress", webServiceAddress);
                 var service20 = kernel.Bind<IActivityService>().To<ActivityService>().InRequestScope();
                 service20.WithConstructorArgument("webServiceAddress", webServiceAddress);
-
+                var service21 = kernel.Bind<ICommentService>().To<CommentService>().InRequestScope();
+                service21.WithConstructorArgument("webServiceAddress", webServiceAddress);
             }
             else
             {
@@ -141,7 +142,8 @@ namespace StoreManagement.Liquid.App_Start
                 kernel.Bind<IItemFileService>().To<ItemFileRepository>().InRequestScope();
                 kernel.Bind<ILabelService>().To<LabelRepository>().InRequestScope();
                 kernel.Bind<IContactService>().To<ContactRepository>().InRequestScope();
-                kernel.Bind<IActivityService>().To<ActivityRepository>().InRequestScope(); 
+                kernel.Bind<IActivityService>().To<ActivityRepository>().InRequestScope();
+                kernel.Bind<ICommentService>().To<CommentRepository>().InRequestScope(); 
             }
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();
 
@@ -158,7 +160,7 @@ namespace StoreManagement.Liquid.App_Start
             kernel.Bind<ILocationHelper>().To<LocationHelper>().InRequestScope();
             kernel.Bind<IContactHelper>().To<ContactHelper>().InRequestScope();
             kernel.Bind<IActivityHelper>().To<ActivityHelper>().InRequestScope();
-
+            kernel.Bind<ICommentHelper>().To<CommentHelper>().InRequestScope();
         }           
     }
     

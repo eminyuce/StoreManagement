@@ -467,9 +467,11 @@
     <Compile Include="Helper\ActivityHelper.cs" />
     <Compile Include="Helper\BaseLiquidHelper.cs" />
     <Compile Include="Helper\BrandHelper.cs" />
+    <Compile Include="Helper\CommentHelper.cs" />
     <Compile Include="Helper\ContactHelper.cs" />
     <Compile Include="Helper\Interfaces\IActivityHelper.cs" />
     <Compile Include="Helper\Interfaces\IBrandHelper.cs" />
+    <Compile Include="Helper\Interfaces\ICommentHelper.cs" />
     <Compile Include="Helper\Interfaces\IContactHelper.cs" />
     <Compile Include="Helper\Interfaces\IContentHelper.cs" />
     <Compile Include="Helper\Interfaces\IHelper.cs" />

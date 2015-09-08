@@ -20,9 +20,12 @@ namespace StoreManagement.Liquid.Controllers
     public abstract class BaseController : Controller
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        
+
         [Inject]
         public IActivityHelper ActivityHelper { set; get; }
+
+        [Inject]
+        public ICommentHelper CommentHelper { set; get; }
 
         [Inject]
         public IStoreHelper StoreHelper { set; get; }
@@ -31,13 +34,13 @@ namespace StoreManagement.Liquid.Controllers
         public IContactHelper ContactHelper { set; get; }
 
         [Inject]
-        public ILocationHelper LocationHelper { set; get; }   
+        public ILocationHelper LocationHelper { set; get; }
 
         [Inject]
         public IBrandHelper BrandHelper { set; get; }
 
         [Inject]
-        public IContentHelper ContentHelper { set; get; }   
+        public IContentHelper ContentHelper { set; get; }
 
         [Inject]
         public IProductHelper ProductHelper { set; get; }
@@ -50,10 +53,10 @@ namespace StoreManagement.Liquid.Controllers
 
         [Inject]
         public IPhotoGalleryHelper PhotoGalleryHelper { set; get; }
-  
+
         [Inject]
         public IProductCategoryHelper ProductCategoryHelper { set; get; }
-       
+
         [Inject]
         public INavigationHelper NavigationHelper { set; get; }
 
@@ -89,6 +92,9 @@ namespace StoreManagement.Liquid.Controllers
 
         [Inject]
         public IStoreUserService StoreUserService { set; get; }
+
+        [Inject]
+        public ICommentService CommentService { set; get; }
 
         [Inject]
         public IEmailSender EmailSender { set; get; }
@@ -273,7 +279,7 @@ namespace StoreManagement.Liquid.Controllers
                     return "";
                 }
 
-                
+
             }
             catch (Exception ex)
             {

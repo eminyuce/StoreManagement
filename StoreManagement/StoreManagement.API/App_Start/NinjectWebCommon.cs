@@ -95,7 +95,7 @@ namespace StoreManagement.API.App_Start
             kernel.Bind<ILogRepository>().To<LogRepository>();
             kernel.Bind<IItemFileRepository>().To<ItemFileRepository>();
             kernel.Bind<IActivityRepository>().To<ActivityRepository>();
-
+            kernel.Bind<ICommentRepository>().To<CommentRepository>();
         }        
     }
 }

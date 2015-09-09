@@ -43,7 +43,7 @@ namespace StoreManagement.Service.Repositories
             return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
 
-        public Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType)
+        public async Task<List<Label>> GetLabelsByItemTypeId(int storeId, int itemId, string itemType)
         {
             var labelIds =
                 StoreDbContext.LabelLines.Where(
@@ -53,7 +53,7 @@ namespace StoreManagement.Service.Repositories
             var items = this.FindAllAsync(r => r.StoreId == storeId && labelidList.Contains(r.Id), null);
 
 
-            return items;
+            return await items;
 
 
         }

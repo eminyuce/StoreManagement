@@ -19,13 +19,13 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public Task<List<Comment>> GetCommentsByItemIdAsync(int storeId, int itemId, string itemType, int page, int pageSize)
+        public async Task<List<Comment>> GetCommentsByItemIdAsync(int storeId, int itemId, string itemType, int page, int pageSize)
         {
             try
             {
                 Expression<Func<Comment, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.ItemId == itemId && r2.ItemType.Equals(itemType, StringComparison.InvariantCultureIgnoreCase);
                 Expression<Func<Comment, int>> keySelector = t => t.Id;
-                var items = this.FindAllAsync(match, keySelector, OrderByType.Descending, page, pageSize);
+                var items = await this.FindAllAsync(match, keySelector, OrderByType.Descending, page, pageSize);
                 return items;
             }
             catch (Exception exception)

@@ -118,14 +118,14 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
+        public async Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
             try
             {
                 Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
                 var items = this.FindAllAsync(match, null);
-                return items;
+                return await items;
 
             }
             catch (Exception exception)
@@ -135,7 +135,7 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
+        public async Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25)
         {
             Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId
                 && r2.State == isActive.HasValue ? isActive.Value : r2.State
@@ -158,29 +158,22 @@ namespace StoreManagement.Service.Repositories
 
             });
 
-            return res;
+            return await res;
         }
 
-        public Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
+        public async Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
         {
             Product product = this.FindBy(r => r.StoreId == storeId).Select(r => r.Products.FirstOrDefault(t => t.Id == productId)).FirstOrDefault();
-            if (product != null)
-            {
-                return this.GetSingleAsync(product.ProductCategoryId);
-            }
-            else
-            {
-                return null;
-            }
+            return await this.GetSingleAsync(product.ProductCategoryId);
         }
 
-        public Task<ProductCategory> GetProductCategoryAsync(int categoryId)
+        public async Task<ProductCategory> GetProductCategoryAsync(int categoryId)
         {
             var item = this.GetSingleAsync(categoryId);
-            return item;
+            return await item;
         }
 
-        public Task<List<ProductCategory>> GetCategoriesByBrandIdAsync(int storeId, int brandId)
+        public async Task<List<ProductCategory>> GetCategoriesByBrandIdAsync(int storeId, int brandId)
         {
             var labelIds =
                StoreDbContext.Products.Where(
@@ -191,7 +184,7 @@ namespace StoreManagement.Service.Repositories
 
             var items = this.FindAllAsync(match, null);
 
-            return items;
+            return await items;
 
         }
     }

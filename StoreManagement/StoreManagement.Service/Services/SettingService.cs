@@ -37,6 +37,22 @@ namespace StoreManagement.Service.Services
             return items;
         }
 
+        public Task<List<Setting>> GetStoreSettingsFromCacheAsync(int storeid)
+        {
+
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetStoreSettingsFromCacheAsync?storeid={2}", WebServiceAddress, ApiControllerName, storeid);
+                return HttpRequestHelper.GetUrlResultsAsync<Setting>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+
         public List<Setting> GetStoreSettingsByType(int storeid, string type)
         {
             string url = string.Format("http://{0}/api/{1}/GetStoreSettings?storeid={2}&type={3}", WebServiceAddress, ApiControllerName, storeid, type);

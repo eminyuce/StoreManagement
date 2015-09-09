@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using GenericRepository.EntityFramework.Enums;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
@@ -81,6 +83,25 @@ namespace StoreManagement.Service.Repositories
 
             }
             return items;
+        }
+
+        public async Task<List<Setting>> GetStoreSettingsFromCacheAsync(int storeid)
+        {
+            try
+            {
+                Expression<Func<Setting, bool>> match = r2 => r2.StoreId == storeid && r2.State;
+                var items = this.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, null);
+
+                var itemsResult = items;
+
+                return await itemsResult;
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
         public List<Setting> GetStoreSettingsByType(int storeid, string type)

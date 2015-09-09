@@ -48,7 +48,7 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
+        public async Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace StoreManagement.Service.Repositories
 
                 var itemsResult = items;
 
-                return itemsResult;
+                return await itemsResult;
 
             }
             catch (Exception exception)

@@ -30,6 +30,7 @@ namespace StoreManagement.Liquid.Helper
 
                 if (pageDesign == null)
                 {
+                    Logger.Error("GetActivityIndexPage PageDesing is null.");
                     throw new Exception("PageDesing is null");
                 }
 

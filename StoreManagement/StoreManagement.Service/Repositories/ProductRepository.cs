@@ -135,31 +135,29 @@ namespace StoreManagement.Service.Repositories
 
         public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
+            Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.MainPage;
+            Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+       
+            var items = this.FindAllIncludingAsync(match, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
+            Task.WaitAll(items);
+            var cat = items.Result;
+
             var task = Task.Factory.StartNew(() =>
             {
-                return GetProductsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize);
+                StorePagedList<Product> resultItems = new StorePagedList<Product>(cat, page, pageSize, this.Count(match));
+                return resultItems;
             });
             return task;
-            //int take = page * pageSize;
-            //Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.MainPage;
-            //Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
-            //var items = this.FindAllIncludingAsync(match, take, includeProperties);
-            //Task.WaitAll(items);
-            //var cat = items.Result;
-
-
-            //StorePagedList<Product> resultItems = new StorePagedList<Product>(cat.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, pageSize, cat.Count());
-
 
         }
 
-        public Task<Product> GetProductsByIdAsync(int productId)
+        public async Task<Product> GetProductsByIdAsync(int productId)
         {
             Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
-            return this.GetSingleIncludingAsync(productId, includeProperties);
+            return await this.GetSingleIncludingAsync(productId, includeProperties);
         }
 
-        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
+        public async Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take)
         {
             try
             {
@@ -169,7 +167,7 @@ namespace StoreManagement.Service.Repositories
 
                 var itemsResult = items;
 
-                return itemsResult;
+                return await itemsResult;
 
             }
             catch (Exception exception)
@@ -179,7 +177,7 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public Task<List<Product>> GetProductsAsync(int storeId, int? take, bool? isActive)
+        public async Task<List<Product>> GetProductsAsync(int storeId, int? take, bool? isActive)
         {
             try
             {
@@ -189,7 +187,7 @@ namespace StoreManagement.Service.Repositories
 
                 var itemsResult = items;
 
-                return itemsResult;
+                return await itemsResult;
 
             }
             catch (Exception exception)
@@ -199,7 +197,7 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
+        public async Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId)
         {
             try
             {
@@ -210,7 +208,7 @@ namespace StoreManagement.Service.Repositories
 
                 var itemsResult = items;
 
-                return itemsResult;
+                return await itemsResult;
 
             }
             catch (Exception exception)
@@ -221,7 +219,7 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        public async Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
         {
             try
             {
@@ -230,7 +228,7 @@ namespace StoreManagement.Service.Repositories
                 var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
                 var itemsResult = items;
-                return itemsResult;
+                return await itemsResult;
 
             }
             catch (Exception exception)
@@ -240,14 +238,14 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public Task<List<Product>> GetPopularProducts(int storeId, string productType, int page, int pageSize)
+        public async Task<List<Product>> GetPopularProducts(int storeId, string productType, int page, int pageSize)
         {
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State;
                 Expression<Func<Product, int>> keySelector = t => t.TotalRating;
                 var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
-                return items;
+                return await items;
             }
             catch (Exception exception)
             {
@@ -256,14 +254,14 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public Task<List<Product>> GetRecentProducts(int storeId, string productType, int page, int pageSize)
+        public async Task<List<Product>> GetRecentProducts(int storeId, string productType, int page, int pageSize)
         {
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State;
-                Expression<Func<Product, int>>  keySelector =  t => t.Id;
+                Expression<Func<Product, int>> keySelector = t => t.Id;
                 var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
-                return items;
+                return await items;
             }
             catch (Exception exception)
             {
@@ -271,14 +269,14 @@ namespace StoreManagement.Service.Repositories
                 return null;
             }
         }
- 
+
 
         public List<Product> GetMainPageProducts(int storeId, int? take)
         {
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.MainPage;
-                var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                var items =  this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 Task.WaitAll(items);
                 return items.Result;
             }

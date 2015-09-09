@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
 using StoreManagement.Data;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
@@ -158,7 +160,7 @@ namespace StoreManagement.Liquid.Controllers
             }
         }
 
-
+        protected bool IsCacheEnable { get; set; }
         protected void SetStoreCache()
         {
             if (StoreService == null)
@@ -167,6 +169,7 @@ namespace StoreManagement.Liquid.Controllers
                 return;
             }
             var isCacheEnable = StoreService.GetStoreCacheStatus(StoreId);
+            this.IsCacheEnable = isCacheEnable;
             Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
             SettingService.IsCacheEnable = isCacheEnable;
             SettingService.CacheMinute = GetSettingValueInt("SettingService_CacheMinute", 200);
@@ -290,11 +293,22 @@ namespace StoreManagement.Liquid.Controllers
             }
         }
 
+        private readonly TypedObjectCache<List<Setting>> _settingStoreCache = new TypedObjectCache<List<Setting>>("SettingsCache");
 
         protected List<Setting> GetStoreSettings()
         {
+            String key = String.Format("GetStoreSettingsFromCacheAsync-{0}", StoreId);
+            _settingStoreCache.IsCacheEnable = true;
+            List<Setting> items = null;
+            _settingStoreCache.TryGet(key, out items);
+            if (items == null)
+            {
+                var itemsAsyn = SettingService.GetStoreSettingsFromCache(StoreId);
+      
+                items = itemsAsyn;
+                _settingStoreCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Setting_CacheAbsoluteExpiration_Minute", 10)));
 
-            var items = SettingService.GetStoreSettingsFromCache(StoreId);
+            }
             return items;
 
         }

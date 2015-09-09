@@ -136,14 +136,14 @@ namespace StoreManagement.Service.GenericRepositories
             }
         }
 
-        public static Task<List<T>> GetActiveBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T : BaseEntity
+        public static async Task<List<T>> GetActiveBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T : BaseEntity
         {
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
                 var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
                 var itemsResult = items;
-                return itemsResult;
+                return await itemsResult;
             }
             catch (Exception exception)
             {
@@ -151,14 +151,14 @@ namespace StoreManagement.Service.GenericRepositories
                 return null;
             }
         }
-        public static Task<List<T>> GetBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take) where T : BaseEntity
+        public static async Task<List<T>> GetBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take) where T : BaseEntity
         {
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId;
                 var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
                 var itemsResult = items;
-                return itemsResult;
+                return await itemsResult;
             }
             catch (Exception exception)
             {
@@ -168,28 +168,50 @@ namespace StoreManagement.Service.GenericRepositories
         }
         public static List<T> GetBaseEntitiesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search) where T : BaseEntity
         {
-            var items = repository.FindBy(r => r.StoreId == storeId);
-
-            if (!String.IsNullOrEmpty(search.ToStr()))
+            try
             {
-                items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
 
-            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+                var items = repository.FindBy(r => r.StoreId == storeId);
+
+                if (!String.IsNullOrEmpty(search.ToStr()))
+                {
+                    items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+                }
+
+                return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
         public static List<T> GetActiveBaseEntitiesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search) where T : BaseEntity
         {
-            var items = repository.FindBy(r => r.StoreId == storeId && r.State);
-
-            if (!String.IsNullOrEmpty(search.ToStr()))
+            try
             {
-                items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+
+
+                var items = repository.FindBy(r => r.StoreId == storeId && r.State);
+
+                if (!String.IsNullOrEmpty(search.ToStr()))
+                {
+                    items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+                }
+
+                return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
             }
 
-            return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
 
-       
+
         #endregion
     }
 }

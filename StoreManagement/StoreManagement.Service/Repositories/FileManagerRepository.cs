@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using GenericRepository.EntityFramework.Enums;
 using MvcPaging;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
@@ -86,26 +88,37 @@ namespace StoreManagement.Service.Repositories
             return items;
         }
 
-        public Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive)
+        public async Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive)
         {
-            var res = Task.FromResult(GetFilesByStoreId(storeId).Where(r => r.State == isActive).ToList());
-            return res;
+
+            try
+            {
+                Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId && r2.State;
+                Expression<Func<FileManager, int>> keySelector = t => t.Ordering;
+                var items = this.FindAllIncludingAsync(match, null, keySelector, OrderByType.Descending);
+                return await items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
-        public Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
+        public async Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
         {
-            var task = Task.Factory.StartNew(() =>
-                 {
-                     var items = GetFilesByStoreId(storeId).Where(r => r.IsCarousel);
-                     if (take.HasValue)
-                     {
-                         items = items.Take(take.Value);
-                     }
-
-                     return items.OrderBy(r => r.Ordering).ToList();
-
-                 });
-            return task;
+            try
+            {
+                Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.IsCarousel;
+                Expression<Func<FileManager, int>> keySelector = t => t.Ordering;
+                var items = this.FindAllIncludingAsync(match, take, keySelector, OrderByType.Descending);
+                return await items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
         public List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels)

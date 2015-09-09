@@ -23,6 +23,11 @@ namespace StoreManagement.API.Controllers
             return SettingRepository.GetStoreSettingsFromCache(storeid);
         }
 
+        public async Task<List<Setting>> GetStoreSettingsFromCacheAsync(int storeid)
+        {
+            return await SettingRepository.GetStoreSettingsFromCacheAsync(storeid);
+        }
+
         public List<Setting> GetStoreSettingsByType(int storeid, string type)
         {
             return SettingRepository.GetStoreSettingsByType(storeid, type);

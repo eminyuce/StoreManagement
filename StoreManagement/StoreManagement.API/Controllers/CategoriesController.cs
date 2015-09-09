@@ -144,16 +144,8 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetCategory(id);
         }
 
-        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page, int pageSize)
-        {
-            return CategoryRepository.GetCategoryWithContents(categoryId, page, pageSize);
-        }
-
-        public async Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25)
-        {
-            return await CategoryRepository.GetCategoryWithContentsAsync(categoryId, page, pageSize);
-        }
-
+       
+ 
         public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
         {
             return await CategoryRepository.GetCategoriesByStoreIdAsync(storeId);

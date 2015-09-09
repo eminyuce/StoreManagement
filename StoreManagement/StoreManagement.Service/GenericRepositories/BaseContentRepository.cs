@@ -12,14 +12,14 @@ namespace StoreManagement.Service.GenericRepositories
 {
     public class BaseContentRepository : GenericBaseRepository
     {
-        public static Task<List<T>> GetActiveBaseContentsAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T : BaseContent
+        public static async  Task<List<T>> GetActiveBaseContentsAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T : BaseContent
         {
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
                 var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
                 var itemsResult = items;
-                return itemsResult;
+                return await itemsResult;
             }
             catch (Exception exception)
             {

@@ -53,6 +53,19 @@ namespace StoreManagement.Test
         }
 
 
+        [TestMethod]
+        public void TestSettingRepository2()
+        {
+            String key = "HomePageMainNewsContents_ItemsNumber \t";
+            var log = new SettingRepository(new StoreContext(ConnectionString));
+            var item = log.GetStoreSettingsFromCacheAsync(9);
+            Task.WaitAll(item);
+            var  i = item.Result.FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
+            if (i != null)
+            {
+                Console.Write(i.SettingValue);
+            }
+        }
 
         [TestMethod]
         public void TestSettingRepository()
@@ -542,15 +555,7 @@ namespace StoreManagement.Test
             m.SendEmail(emailAccount, subject, body, fromAddress, fromName, toAddress, toName);
         }
 
-        [TestMethod]
-        public void TestGetCategoriesByStoreIds()
-        {
-            CategoryRepository rep = new CategoryRepository(dbContext);
-            var m = rep.GetCategoryWithContentsAsync(77, 1);
-
-            Console.WriteLine(m.Result.totalItemCount);
-
-        }
+       
         [TestMethod]
         public void DomainName()
         {

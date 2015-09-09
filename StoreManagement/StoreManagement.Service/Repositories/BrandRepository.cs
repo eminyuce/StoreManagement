@@ -24,9 +24,9 @@ namespace StoreManagement.Service.Repositories
         {
             return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, search);
         }
-        public Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
+        public async Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive)
         {
-            return BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
+            return await BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
 
         public Task<Brand> GetBrandAsync(int brandId)

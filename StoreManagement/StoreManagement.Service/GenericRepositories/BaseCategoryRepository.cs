@@ -15,30 +15,49 @@ namespace StoreManagement.Service.GenericRepositories
     {
         public static List<T> GetBaseCategoriesSearchList<T>(IBaseRepository<T, int> repository, int storeId, string search, String type) where T : BaseCategory
         {
-            var cats = repository.FindBy(r => r.StoreId == storeId &&
-                                  r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-
-            if (!String.IsNullOrEmpty(search.ToStr()))
+            try
             {
-                cats = cats.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
 
-            return cats.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+                var cats = repository.FindBy(r => r.StoreId == storeId &&
+                                      r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+                if (!String.IsNullOrEmpty(search.ToStr()))
+                {
+                    cats = cats.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+                }
+
+                return cats.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
         public static List<T> GetCategoriesByStoreId<T>(IBaseRepository<T, int> repository, int storeId, String type, bool? isActive) where T : BaseCategory
         {
-            var items = repository.FindBy(r => r.StoreId == storeId &&
-                     r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-
-            if (isActive.HasValue)
+            try
             {
-                items = items.Where(r => r.State == isActive.Value);
-            }
 
-            return items.OrderBy(r => r.Ordering).ToList();
+                var items = repository.FindBy(r => r.StoreId == storeId &&
+                         r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+
+                if (isActive.HasValue)
+                {
+                    items = items.Where(r => r.State == isActive.Value);
+                }
+
+                return items.OrderBy(r => r.Ordering).ToList();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
-        public static Task<List<T>> GetCategoriesByStoreIdAsync<T>(IBaseRepository<T, int> repository, int storeId, String type, bool? isActive, int? take) where T : BaseCategory
+        public static async Task<List<T>> GetCategoriesByStoreIdAsync<T>(IBaseRepository<T, int> repository, int storeId, String type, bool? isActive, int? take) where T : BaseCategory
         {
             try
             {
@@ -47,11 +66,11 @@ namespace StoreManagement.Service.GenericRepositories
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
                 var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
                 var itemsResult = items;
-                return itemsResult;
+                return await itemsResult;
             }
             catch (Exception exception)
             {
-
+                Logger.Error(exception);
                 return null;
             }
         }

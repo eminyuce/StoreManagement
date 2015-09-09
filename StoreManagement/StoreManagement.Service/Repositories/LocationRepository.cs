@@ -12,9 +12,10 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
 {
-    public class LocationRepository : BaseRepository<Location,int>,ILocationRepository
+    public class LocationRepository : BaseRepository<Location, int>, ILocationRepository
     {
-        public LocationRepository(IStoreContext dbContext) : base(dbContext)
+        public LocationRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
         }
 
@@ -30,14 +31,11 @@ namespace StoreManagement.Service.Repositories
             return locations.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
 
-        public Task<List<Location>> GetLocationsAsync(int storeId, int? take, bool? isActive)
+        public async Task<List<Location>> GetLocationsAsync(int storeId, int? take, bool? isActive)
         {
-
-            return BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
-
-            
+            return await BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
 
-       
+
     }
 }

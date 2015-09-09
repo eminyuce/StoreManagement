@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using GenericRepository.EntityFramework.Enums;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.GeneralHelper;
@@ -128,62 +129,32 @@ namespace StoreManagement.Service.Repositories
             return this.GetSingle(id);
         }
 
-        public StorePagedList<Category> GetCategoryWithContents(int categoryId, int page = 1, int pageSize = 25)
-        {
-            String key = String.Format("GetCategoryWithContents-{0}-{1}", categoryId, page);
-            StorePagedList<Category> items = null;
-            PagingCategoryCache.TryGet(key, out items);
+        
 
-            if (items == null)
-            {
-                IQueryable<Category> cats = StoreDbContext.Categories.Where(r => r.Id == categoryId && r.Contents.Any())
-                                                          .Include(
-                                                              r =>
-                                                              r.Contents.Select(
-                                                                  r1 => r1.ContentFiles.Select(m => m.FileManager)))
-                                                          .OrderByDescending(r => r.Ordering);
-
-
-                var c = cats.ToList();
-                items = new StorePagedList<Category>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
-                // items = new PagedList<Category>(cats, page, cats.Count());
-                // items = new StorePagedList<Category>(paging.FindAll(), page, paging.Capacity);
-                PagingCategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration_Minute", 10)));
-            }
-
-            return items;
-        }
-
-        public Task<StorePagedList<Category>> GetCategoryWithContentsAsync(int categoryId, int page, int pageSize = 25)
-        {
-            var res = Task.FromResult(GetCategoryWithContents(categoryId, page, pageSize));
-            return res;
-        }
-
-        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
+        public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
         {
             // var res = Task.FromResult(GetCategoriesByStoreId(storeId));
             // return res;
-            return BaseEntityRepository.GetBaseEnitiesAsync(this, storeId, null);
+            return await BaseEntityRepository.GetBaseEnitiesAsync(this, storeId, null);
         }
 
 
-        public Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
+        public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
-            return BaseCategoryRepository.GetCategoriesByStoreIdAsync(this, storeId, type, isActive, null);
+            return await BaseCategoryRepository.GetCategoriesByStoreIdAsync(this, storeId, type, isActive, null);
         }
 
-        public Task<Category> GetCategoryAsync(int id)
+        public async Task<Category> GetCategoryAsync(int id)
         {
-            return this.GetSingleAsync(id);
+            return await this.GetSingleAsync(id);
         }
 
-        public Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
+        public async Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
         {
             Content category = this.FindBy(r => r.StoreId == storeId).Select(r => r.Contents.FirstOrDefault(t => t.Id == contentId)).FirstOrDefault();
             if (category != null)
             {
-                return this.GetSingleAsync(category.CategoryId);
+                return await this.GetSingleAsync(category.CategoryId);
             }
             else
             {

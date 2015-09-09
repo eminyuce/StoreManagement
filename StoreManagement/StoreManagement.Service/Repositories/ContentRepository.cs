@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using GenericRepository.EntityFramework;
+using GenericRepository.EntityFramework.Enums;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
@@ -139,31 +140,31 @@ namespace StoreManagement.Service.Repositories
         {
             var res = Task.FromResult(GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
             return res;
+
+
         }
 
-        public Task<Content> GetContentByIdAsync(int blogId)
+        public async Task<Content> GetContentByIdAsync(int blogId)
         {
-            return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefaultAsync(r1 => r1.Id == blogId);
+            return await this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefaultAsync(r1 => r1.Id == blogId);
         }
 
-      
-        public Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take, int? excludedContentId)
+
+        public async Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, string typeName, int categoryId, int take, int? excludedContentId)
         {
-           
-            var task = Task.Factory.StartNew(() =>
+            try
             {
-                var returnList = this.GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
-
-                if (excludedContentId.HasValue)
-                {
-                    returnList = returnList.Where(r => r.Id != excludedContentId).ToList();
-                }
-
-                return returnList.Take(take).ToList();
-
-
-            });
-            return task;
+                Expression<Func<Content, bool>> match = r => r.StoreId == storeId
+                    && r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
+                    && r.CategoryId == categoryId
+                    && r.Id != (excludedContentId.HasValue ? excludedContentId.Value : r.Id);
+                return await this.FindAllIncludingAsync(match, take, r1 => r1.Ordering, OrderByType.Descending, r1 => r1.ContentFiles.Select(r2 => r2.FileManager));
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
         }
 
         public List<Content> GetMainPageContents(int storeId, int? categoryId, string type, int? take)
@@ -202,14 +203,12 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase) 
-                    && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) &&   r2.State && r2.MainPage;
+                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase)
+                    && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) && r2.State && r2.MainPage;
 
-                var items = this.FindAllAsync(match, take);
+                var items = this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take);
 
-                var itemsResult = await items;
-
-                return itemsResult.OrderBy(r => r.Ordering).ToList();
+                return await items;
 
             }
             catch (Exception exception)
@@ -217,7 +216,7 @@ namespace StoreManagement.Service.Repositories
                 Logger.Error(exception);
                 return null;
             }
-          
+
         }
 
         public async Task<List<Content>> GetContentByTypeAsync(int storeId, int? take, bool? isActive, string typeName)
@@ -227,11 +226,9 @@ namespace StoreManagement.Service.Repositories
                 Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
 
-                var items = this.FindAllAsync(match, take);
+                var items = this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take);
 
-                var itemsResult = await items;
-
-                return itemsResult.OrderBy(r => r.Ordering).ToList();
+                return await items;
 
             }
             catch (Exception exception)

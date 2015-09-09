@@ -11,6 +11,7 @@ namespace StoreManagement.Service.Interfaces
     {
         List<Setting> GetStoreSettings(int storeid);
         List<Setting> GetStoreSettingsFromCache(int storeid);
+        Task<List<Setting>> GetStoreSettingsFromCacheAsync(int storeid);
         List<Setting> GetStoreSettingsByType(int storeid, string type);
 
     }

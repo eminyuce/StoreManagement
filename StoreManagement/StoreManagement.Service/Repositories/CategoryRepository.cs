@@ -151,7 +151,7 @@ namespace StoreManagement.Service.Repositories
 
         public async Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
         {
-            Content category = this.FindBy(r => r.StoreId == storeId).Select(r => r.Contents.FirstOrDefault(t => t.Id == contentId)).FirstOrDefault();
+            Content category = this.DbContext.Contents.FirstOrDefault(r=>r.Id == contentId);
             if (category != null)
             {
                 return await this.GetSingleAsync(category.CategoryId);

@@ -30,7 +30,29 @@ namespace StoreManagement.Liquid.Helper
         {
             var isApi = ProjectAppSettings.GetWebConfigBool("IsApiService");
 
-            Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask, productCategoriesTask);
+
+            Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
+                         productCategoriesTask);
+
+            List<Product> products = null;
+            List<Content> blogs = null;
+            List<Content> news = null;
+            PageDesign pageDesing = null;
+            List<FileManager> sliderImages = null;
+            List<Category> categories = null;
+            List<ProductCategory> productCategories = null;
+
+
+
+            products = productsTask.Result;
+            blogs = blogsTask.Result;
+            news = newsTask.Result;
+            pageDesing = pageDesignTask.Result;
+            sliderImages = sliderTask.Result;
+            categories = categoriesTask.Result;
+            productCategories = productCategoriesTask.Result;
+
+
 
 
             var result = new StoreLiquidResult();
@@ -39,13 +61,7 @@ namespace StoreManagement.Liquid.Helper
             result.LiquidRenderedResult = dic;
             try
             {
-                var products = productsTask.Result;
-                var blogs = blogsTask.Result;
-                var news = newsTask.Result;
-                var pageDesing = pageDesignTask.Result;
-                var sliderImages = sliderTask.Result;
-                var categories = categoriesTask.Result;
-                var productCategories = productCategoriesTask.Result;
+
 
                 if (pageDesing == null)
                 {

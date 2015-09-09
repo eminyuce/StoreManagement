@@ -25,6 +25,7 @@ using StoreManagement.Data.Paging;
 using StoreManagement.Liquid.Controllers;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
 using Newtonsoft.Json.Linq;
 using StoreManagement.Service.Services;
@@ -44,7 +45,80 @@ namespace StoreManagement.Test
             //  dbContext = new StoreContext(ConnectionString);
 
         }
+        [TestMethod]
+        public void Test3333()
+        {
+            ProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
+            var m = rep.CountAsync(r => r.StoreId == 9);
+            Task.WaitAll(m);
+            Console.Write(m.Result);
+        }
 
+        [TestMethod]
+        public void TestGetProductsCategoryIdAsync()
+        {
+            int storeId = 9;
+            var rr = new ProductRepository(new StoreContext(ConnectionString));
+
+            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
+            Task.WaitAll(productsTask);
+            Console.WriteLine(productsTask.Result.totalItemCount);
+
+        }
+        [TestMethod]
+        public void TestGetProductsCategoryIdAsync1()
+        {
+            ProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
+            var m = rep.GetProductsCategoryIdAsync(9, null, "product", true, 1, 20);
+            Task.WaitAll(m);
+
+            Console.Write(m.Result.items);
+
+        }
+
+        [TestMethod]
+        public void TestProductRepository2()
+        {
+            IFileManagerService rep3 = new FileManagerRepository(new StoreContext(ConnectionString));
+            var fileManagerTask = rep3.GetImagesByStoreIdAsync(9, true);
+            IProductCategoryService rep2 = new ProductCategoryRepository(new StoreContext(ConnectionString));
+            var categoriesTask = rep2.GetProductCategoriesByStoreIdAsync(9, "products", true);
+            IProductService rep = new ProductRepository(new StoreContext(ConnectionString));
+            var m = rep.GetMainPageProductsAsync(9, 5);
+            Task.WaitAll(m, categoriesTask, fileManagerTask);
+
+            Console.WriteLine(m.Result.Count);
+            Console.WriteLine(categoriesTask.Result.Count);
+            Console.WriteLine(fileManagerTask.Result.Count);
+        }
+
+        [TestMethod]
+        public void TestProductRepository()
+        {
+            var db = dbContext = new StoreContext(ConnectionString);
+            IFileManagerService rep3 = new FileManagerRepository(db);
+            var fileManagerTask = rep3.GetImagesByStoreIdAsync(9, true);
+            IProductCategoryService rep2 = new ProductCategoryRepository(db);
+            var categoriesTask = rep2.GetProductCategoriesByStoreIdAsync(9, "products", true);
+            IProductService rep = new ProductRepository(db);
+            var m = rep.GetMainPageProductsAsync(9, 5);
+            Task.WaitAll(m, categoriesTask, fileManagerTask);
+
+            Console.WriteLine(m.Result.Count);
+            Console.WriteLine(categoriesTask.Result.Count);
+            Console.WriteLine(fileManagerTask.Result.Count);
+        }
+
+        [TestMethod]
+        public void TestNavigationRepositorys()
+        {
+            INavigationService rep = new NavigationRepository(new StoreContext(ConnectionString));
+            var m = rep.GetStoreActiveNavigationsAsync(9);
+            Task.WaitAll(m);
+
+            Console.Write(m.Result.Count);
+
+        }
         [TestMethod]
         public void RemoveNewLines()
         {
@@ -60,7 +134,7 @@ namespace StoreManagement.Test
             var log = new SettingRepository(new StoreContext(ConnectionString));
             var item = log.GetStoreSettingsFromCacheAsync(9);
             Task.WaitAll(item);
-            var  i = item.Result.FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
+            var i = item.Result.FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
             if (i != null)
             {
                 Console.Write(i.SettingValue);
@@ -72,7 +146,7 @@ namespace StoreManagement.Test
         {
             String key = "HomePageMainNewsContents_ItemsNumber \t";
             var log = new SettingRepository(new StoreContext(ConnectionString));
-           var item = log.GetStoreSettingsFromCache(9).FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
+            var item = log.GetStoreSettingsFromCache(9).FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
             if (item != null)
             {
                 Console.Write(item.SettingValue);
@@ -230,17 +304,7 @@ namespace StoreManagement.Test
             Console.WriteLine(productsTask.Result.Count);
 
         }
-        [TestMethod]
-        public void TestGetProductsCategoryIdAsync()
-        {
-            int storeId = 9;
-            var rr = new ProductRepository(dbContext);
-
-            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
-            Task.WaitAll(productsTask);
-            Console.WriteLine(productsTask.Result.totalItemCount);
-
-        }
+      
         [TestMethod]
         public void TestGetPageDesignByName()
         {
@@ -555,7 +619,7 @@ namespace StoreManagement.Test
             m.SendEmail(emailAccount, subject, body, fromAddress, fromName, toAddress, toName);
         }
 
-       
+
         [TestMethod]
         public void DomainName()
         {
@@ -565,16 +629,7 @@ namespace StoreManagement.Test
             Assert.IsNotNull(store);
 
         }
-        [TestMethod]
-        public void TestNavigationRepositorys()
-        {
-            NavigationRepository rep = new NavigationRepository(dbContext);
-            foreach (var s in rep.GetAll())
-            {
-                Console.WriteLine(s.StoreId);
-            }
 
-        }
         [TestMethod]
         public void TestMethod2()
         {
@@ -607,7 +662,7 @@ namespace StoreManagement.Test
         public void TestMethod1()
         {
             StoreUserRepository storeRepository = new StoreUserRepository(dbContext);
- 
+
             foreach (var s in storeRepository.GetAll())
             {
                 Console.WriteLine(s.StoreId);

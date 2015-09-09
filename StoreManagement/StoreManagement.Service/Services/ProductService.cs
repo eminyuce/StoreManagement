@@ -11,7 +11,7 @@ namespace StoreManagement.Service.Services
 {
     public class ProductService : BaseService, IProductService
     {
- 
+
         protected override string ApiControllerName { get { return "Products"; } }
         public ProductService(string webServiceAddress)
             : base(webServiceAddress)
@@ -77,7 +77,7 @@ namespace StoreManagement.Service.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "API:GetProductByTypeAndCategoryId",storeId, typeName, categoryId, search);
+                Logger.Error(ex, "API:GetProductByTypeAndCategoryId", storeId, typeName, categoryId, search);
                 return new List<Product>();
             }
         }
@@ -114,12 +114,24 @@ namespace StoreManagement.Service.Services
 
         public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            SetCache();
-            string url = string.Format("http://{0}/api/{1}/GetProductsCategoryIdAsync?storeId={2}" +
-                              "&categoryId={3}" +
-                              "&typeName={4}" +
-                              "&isActive={5}&page={6}&pageSize={7}", WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive, page, pageSize);
-            return HttpRequestHelper.GetUrlPagedResultsAsync<Product>(url);
+
+            try
+            {
+
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetProductsCategoryIdAsync?storeId={2}" +
+                                  "&categoryId={3}" +
+                                  "&typeName={4}" +
+                                  "&isActive={5}&page={6}&pageSize={7}", WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive, page, pageSize);
+                return HttpRequestHelper.GetUrlPagedResultsAsync<Product>(url);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+
         }
 
         public Task<Product> GetProductsByIdAsync(int productId)

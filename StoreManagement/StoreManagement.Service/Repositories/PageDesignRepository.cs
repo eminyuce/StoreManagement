@@ -38,8 +38,9 @@ namespace StoreManagement.Service.Repositories
 
         public async Task<PageDesign> GetPageDesignByName(int storeId, string name)
         {
-            return await this.FindAsync(r => r.StoreId == storeId &&
-                                       r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            PageDesign item = await this.FindAsync(r => r.StoreId == storeId && r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+
+            return item;
 
         }
     }

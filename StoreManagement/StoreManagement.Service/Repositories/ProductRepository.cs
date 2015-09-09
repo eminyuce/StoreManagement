@@ -133,21 +133,22 @@ namespace StoreManagement.Service.Repositories
             return this.GetAllIncluding(r2 => r2.ProductFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
 
-        public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
             Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.MainPage;
             Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
-       
-            var items = this.FindAllIncludingAsync(match, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
-            Task.WaitAll(items);
-            var cat = items.Result;
+
+            var items =await this.FindAllIncludingAsync(match, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
+            var totalItemNumber = await this.CountAsync(match);
+ 
 
             var task = Task.Factory.StartNew(() =>
-            {
-                StorePagedList<Product> resultItems = new StorePagedList<Product>(cat, page, pageSize, this.Count(match));
-                return resultItems;
-            });
-            return task;
+                {
+
+                    StorePagedList<Product> resultItems = new StorePagedList<Product>(items, page, pageSize, totalItemNumber);
+                    return resultItems;
+                });
+            return  await task;
 
         }
 
@@ -276,7 +277,7 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.MainPage;
-                var items =  this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 Task.WaitAll(items);
                 return items.Result;
             }

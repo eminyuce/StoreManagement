@@ -148,8 +148,9 @@ namespace StoreManagement.Service.Repositories
                     StorePagedList<Product> resultItems = new StorePagedList<Product>(items, page, pageSize, totalItemNumber);
                     return resultItems;
                 });
-            return  await task;
+            var result =  await task;
 
+            return result;
         }
 
         public async Task<Product> GetProductsByIdAsync(int productId)

@@ -25,7 +25,7 @@ namespace StoreManagement.Data.Entities
         public string Type { get; set; }
          [JsonIgnore]
         public Boolean MainPage { get; set; }
-         [JsonIgnore]
+ 
         public Boolean ImageState { get; set; }
 
 

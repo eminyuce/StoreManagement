@@ -136,6 +136,13 @@
                                         @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
                                         @Html.ValidationMessageFor(model => model.Ordering)
                                     </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.VideoUrl)
+                                        @Html.TextBoxFor(model => model.VideoUrl, new { @class = "form-control", @placeholder = "VideoUrl" })
+                                        @Html.ValidationMessageFor(model => model.VideoUrl)
+                                    </div>
+
                                     <div class="form-group">
 
                                         <div class="row">
@@ -202,7 +209,7 @@
                                                         }
                                                         else
                                                         {
-                                                              <div data-image-main-image-link="@file.Id"  class="addLink btn btn-warning btn-block">Main Image</div>
+                                                            <div data-image-main-image-link="@file.Id"  class="addLink btn btn-warning btn-block">Main Image</div>
                                                         }
                                                         <div class="caption">bootstrap-template.png</div>
 

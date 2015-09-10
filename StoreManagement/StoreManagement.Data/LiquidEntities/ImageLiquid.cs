@@ -16,7 +16,8 @@ namespace StoreManagement.Data.LiquidEntities
 
         private List<FileManager> FileManagers { get; set; }
         private List<BaseFileEntity> BaseFileEntities { get; set; }
-
+        //TODO: ImageState will manage visibility.
+        public bool ImageState { get; set; }
 
         public ImageLiquid(List<BaseFileEntity> baseFileEntities, PageDesign pageDesign, int width, int height)
         {
@@ -40,6 +41,11 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
+                if (!ImageState)
+                {
+                    return false;
+                }
+
                 var mainImage = BaseFileEntities.Where(r => r.IsMainImage).Select(r => r.FileManager).FirstOrDefault(r => r.State);
                 if (mainImage != null)
                 {
@@ -55,6 +61,10 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
+                if (!ImageState)
+                {
+                    return "";
+                }
                 var mainImage = BaseFileEntities.Where(r => r.IsMainImage).Select(r => r.FileManager).FirstOrDefault(r => r.State);
                 if (mainImage != null)
                 {
@@ -74,6 +84,10 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
+                if (!ImageState)
+                {
+                    return "";
+                }
                 if (ImageHas)
                 {
                     var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => x.Id).FirstOrDefault();
@@ -90,6 +104,10 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
+                if (!ImageState)
+                {
+                    return "";
+                }
                 if (ImageHas)
                 {
                     var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
@@ -107,6 +125,10 @@ namespace StoreManagement.Data.LiquidEntities
 
             get
             {
+                if (!ImageState)
+                {
+                    return new List<String>();
+                }
                 if (ImageHas)
                 {
                     var imageList = new List<String>();
@@ -131,6 +153,10 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
+                if (!ImageState)
+                {
+                    return false;
+                }
                 return this.FileManagers.Any(r => r.State);
             }
         }
@@ -138,6 +164,10 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
+                if (!ImageState)
+                {
+                    return 0;
+                }
                 return this.FileManagers.Count;
             }
         }

@@ -29,6 +29,7 @@ namespace StoreManagement.Data.LiquidEntities
             this.PageDesign = pageDesign;
             List<BaseFileEntity> baseFileEntities = product.ProductFiles != null && product.ProductFiles.Any() ? product.ProductFiles.Cast<BaseFileEntity>().ToList() : new List<BaseFileEntity>();
             this.ImageLiquid = new ImageLiquid(baseFileEntities, pageDesign, imageWidth, imageHeight);
+            this.ImageLiquid.ImageState = product.ImageState;
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;
 

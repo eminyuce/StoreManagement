@@ -123,6 +123,15 @@
                                         @Html.TextBoxFor(model => model.Ordering, new { @class = "form-control", @placeholder = "Ordering" })
                                         @Html.ValidationMessageFor(model => model.Ordering)
                                     </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.VideoUrl)
+                                        @Html.TextBoxFor(model => model.VideoUrl, new { @class = "form-control", @placeholder = "VideoUrl" })
+                                        @Html.ValidationMessageFor(model => model.VideoUrl)
+                                    </div>
+
+
+
                                     <div class="form-group">
 
                                         <div class="row">

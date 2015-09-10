@@ -232,16 +232,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>09/10/2015 14:49:36</publishTime>
+      <publishTime>09/10/2015 16:29:14</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/10/2015 14:12:08</publishTime>
+      <publishTime>09/10/2015 16:26:47</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/10/2015 14:49:29</publishTime>
+      <publishTime>09/10/2015 16:26:49</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -5098,7 +5098,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/03/2015 14:56:28</publishTime>
     </File>
     <File Include="Views/Products/SaveOrEdit.cshtml">
-      <publishTime>09/10/2015 14:11:58</publishTime>
+      <publishTime>09/10/2015 16:27:39</publishTime>
     </File>
     <File Include="Views/ProductsLabels/Delete.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5179,7 +5179,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Views/Shared/Content/pContentSaveOrEdit.cshtml">
-      <publishTime>09/10/2015 14:11:43</publishTime>
+      <publishTime>09/10/2015 16:28:42</publishTime>
     </File>
     <File Include="Views/Shared/Content/pContentsIndex.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
@@ -5446,7 +5446,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/10/2015 14:12:28</publishTime>
+      <publishTime>09/10/2015 16:29:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

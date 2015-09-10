@@ -1,4 +1,5 @@
-﻿@using StoreManagement.Data.Entities
+﻿@using StoreManagement.Data.Constants
+@using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.Entities.Product
 
@@ -12,7 +13,7 @@
         selectedLabelId = labelLines.Select(r => r.Id).ToArray();
     }
 
-
+    int mainImageFileManagerId = (int)ViewBag.MainImageId;
     List<FileManager> fileManagers = ViewBag.FileManagers;
     var requestStoreId = @Request.QueryString["storeId"].ToInt();
     int storeId = product != null ? product.StoreId : requestStoreId;
@@ -41,6 +42,7 @@
                         </div>
                     </div>
                     <div class="col-md-10">
+                        <input type="text" id="entityType" value="@StoreConstants.ProductType"  />
 
                         @using (Html.BeginForm())
                         {
@@ -100,34 +102,34 @@
                                         @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
                                         @Html.ValidationMessageFor(model => model.Name)
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.ProductCode)
                                         @Html.TextBoxFor(model => model.ProductCode, new { @class = "form-control", @placeholder = "ProductCode" })
                                         @Html.ValidationMessageFor(model => model.ProductCode)
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Price)
                                         @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "Price" })
                                         @Html.ValidationMessageFor(model => model.Price)
                                     </div>
-                                    
-                                    
-                                    
+
+
+
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Discount)
                                         @Html.TextBoxFor(model => model.Discount, new { @class = "form-control", @placeholder = "Discount" })
                                         @Html.ValidationMessageFor(model => model.Discount)
                                     </div>
-                                    
-                                             
+
+
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.UnitsInStock)
                                         @Html.TextBoxFor(model => model.UnitsInStock, new { @class = "form-control", @placeholder = "UnitsInStock" })
                                         @Html.ValidationMessageFor(model => model.UnitsInStock)
                                     </div>
-                              
+
 
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Ordering)
@@ -186,22 +188,36 @@
                                         @if (fileManagers != null)
                                         {    
                                             <div id="existingContentImages">
+                                                <input type="text" id="mainImageFileManagerId" value="@mainImageFileManagerId"  />
                                                 @foreach (var file in fileManagers)
                                                 {
+
+                                                    var isMainImage = mainImageFileManagerId > 0 && mainImageFileManagerId == file.Id;
                                                     <li class="col-md-4 thumbnail" data-file-image="@file.Id"><a href="#">
                                                         <img class="fileManagerImg" src=@String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId) title="bootstrap-template.png" id="@file.Id"></a>
                                                         <div data-image-remove-link="@file.Id" data-image-file-name="bootstrap-template.png" class="addLink btn btn-danger btn-block">Remove</div>
+                                                        @if (isMainImage)
+                                                        {
+                                                            <div data-image-main-image-link="@file.Id"   class="addLink btn btn-success btn-block">Main Image</div>
+                                                        }
+                                                        else
+                                                        {
+                                                              <div data-image-main-image-link="@file.Id"  class="addLink btn btn-warning btn-block">Main Image</div>
+                                                        }
                                                         <div class="caption">bootstrap-template.png</div>
+
                                                     </li>
                                                     <input type="hidden" id="fileId_@file.Id" value="@file.Id" name="selectedFileId" data-selected-file="@file.Id">
+                                                    
+                                                    
                                                 }
 
                                             </div>
                                         
                                         
                                         }
-                                            <div id="SelectedImageGallery" class="row">
-                                            </div>
+                                        <div id="SelectedImageGallery" class="row">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="ImagesGallery">

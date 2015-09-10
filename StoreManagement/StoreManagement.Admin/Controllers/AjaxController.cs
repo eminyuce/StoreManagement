@@ -30,7 +30,7 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Ajax/
 
-       
+
 
         public ActionResult SearchAutoComplete(String term, String action, String controller, int id = 0)
         {
@@ -121,8 +121,9 @@ namespace StoreManagement.Admin.Controllers
                   controller.Equals("Stores", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = SettingRepository.GetStoreSettingsByType(storeId, "", searchKey).Select(r => String.Format("{0}", r.SettingKey)).ToList();
-            }else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
-                  controller.Equals("StoreLanguages", StringComparison.InvariantCultureIgnoreCase))
+            }
+            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                 controller.Equals("StoreLanguages", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = StoreLanguageRepository.GetStoreLanguages(storeId, searchKey).Select(r => String.Format("{0}", r.Name)).ToList();
             }
@@ -132,7 +133,7 @@ namespace StoreManagement.Admin.Controllers
                 list = ActivityRepository.GetActivitiesByStoreId(storeId, searchKey).Select(r => String.Format("{0}", r.Name)).ToList();
             }
 
-            
+
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetStoreLabels(int storeId)
@@ -280,7 +281,7 @@ namespace StoreManagement.Admin.Controllers
             return Json(values, JsonRequestBehavior.AllowGet);
         }
 
-     
+
 
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
@@ -411,7 +412,7 @@ namespace StoreManagement.Admin.Controllers
         {
             BaseEntityRepository.DeleteBaseEntity(ProductCategoryRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
-        }  
+        }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteActivityGridItem(List<String> values)
@@ -517,7 +518,7 @@ namespace StoreManagement.Admin.Controllers
             BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(ActivityRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
-       
+
         public ActionResult ChangeProductGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
             BaseEntityRepository.ChangeGridBaseContentOrderingOrState(ProductRepository, values, checkbox);
@@ -568,11 +569,34 @@ namespace StoreManagement.Admin.Controllers
             return Content(value);
         }
 
-        public ActionResult GetImagesByLabels(int storeId, String[] labels)
+        public ActionResult GetImagesByLabels(int storeId, String[] labels, String entityType, int id)
         {
             var images = FileManagerRepository.GetFilesByStoreIdAndLabels(storeId, labels);
-            return Json(images, JsonRequestBehavior.AllowGet);
+            var list = new List<FileManager>();
+            if (entityType.Equals(StoreConstants.ProductType, StringComparison.InvariantCultureIgnoreCase))
+            {
+                var productFiles = ProductFileRepository.GetProductFilesByProductId(id);
+                list.AddRange(images.Where(r => !productFiles.Select(r1 => r1.FileManagerId).Contains(r.Id)));
+
+            }
+            else
+            {
+
+            }
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult SetMainImage(int fileId, int id, String entityType)
+        {
+
+            if (entityType.Equals(StoreConstants.ProductType, StringComparison.InvariantCultureIgnoreCase))
+            {
+                ProductFileRepository.SetMainImage(id, fileId);
+            }
+
+            return Json(new { fileId, id }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetImages(int storeId)
         {
             var images = FileManagerRepository.GetFilesByStoreId(storeId);
@@ -684,7 +708,7 @@ namespace StoreManagement.Admin.Controllers
         }
 
 
-        
+
     }
 
 }

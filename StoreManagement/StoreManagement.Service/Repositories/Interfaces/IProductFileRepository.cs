@@ -13,6 +13,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
     {
         void DeleteProductFileByProductId(int productId);
         void SaveProductFiles(int[] selectedFileId, int productId);
-
+        void SetMainImage(int id, int fileId);
     }
 }

@@ -158,7 +158,7 @@ $(document).ready(function () {
         var originalURL = window.location.href;
         var q = getQueryStringParameter(originalURL, "GridPageSize");
         if (!isEmpty(q)) {
-            window.location.href = updateUrlParameter(originalURL, 'GridPageSize', $('#GridListItemSize option:selected').val())
+            window.location.href = updateUrlParameter(originalURL, 'GridPageSize', $('#GridListItemSize option:selected').val());
         } else {
             if (hasQueryStringParameter(originalURL)) {
                 window.location.href = window.location.href + "&GridPageSize=" + $('#GridListItemSize option:selected').val();

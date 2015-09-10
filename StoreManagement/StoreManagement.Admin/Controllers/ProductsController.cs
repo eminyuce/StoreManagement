@@ -70,6 +70,7 @@ namespace StoreManagement.Admin.Controllers
 
             var labels = new List<LabelLine>();
             var fileManagers = new List<FileManager>();
+            int mainImageFileManagerId = 0;
             if (id == 0)
             {
                 content.Type = StoreConstants.ProductType;
@@ -89,9 +90,16 @@ namespace StoreManagement.Admin.Controllers
                 labels = LabelLineRepository.GetLabelLinesByItem(id, StoreConstants.ProductType);
 
                 fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
+                var mainImage = content.ProductFiles.FirstOrDefault(r => r.IsMainImage);
+                if (mainImage != null)
+                {
+                    mainImageFileManagerId = mainImage.FileManagerId;
+                }
             }
             ViewBag.LabelLines = labels;
             ViewBag.FileManagers = fileManagers;
+            ViewBag.MainImageId = mainImageFileManagerId;
+
             return View(content);
         }
 
@@ -114,6 +122,7 @@ namespace StoreManagement.Admin.Controllers
 
                     if (product.ProductCategoryId == 0)
                     {
+                        int mainImageFileManagerId = 0;
                         List<FileManager> fileManagers = new List<FileManager>();
                         var labelList = new List<LabelLine>();
                         if (product.Id > 0)
@@ -121,10 +130,15 @@ namespace StoreManagement.Admin.Controllers
                             var content = ProductRepository.GetSingleIncluding(product.Id, r => r.ProductFiles.Select(r1 => r1.FileManager));
                             fileManagers = content.ProductFiles.Select(r => r.FileManager).ToList();
                             labelList = LabelLineRepository.GetLabelLinesByItem(product.Id, StoreConstants.ProductType);
-
+                            var mainImage = content.ProductFiles.FirstOrDefault(r => r.IsMainImage);
+                            if (mainImage != null)
+                            {
+                                mainImageFileManagerId = mainImage.FileManagerId;
+                            }
                         }
                         ViewBag.FileManagers = fileManagers;
                         ViewBag.LabelLines = labelList;
+                        ViewBag.MainImageId = mainImageFileManagerId;
                         ModelState.AddModelError("ProductCategoryId", "You should select category from category tree.");
                         return View(product);
                     }

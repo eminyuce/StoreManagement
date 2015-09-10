@@ -184,8 +184,8 @@ namespace StoreManagement.Liquid.Helper
                        s.Content.Author,
                        s.Content.UpdatedDate,
                        s.DetailLink,
-                       images = GetImageLiquidAnonymousObject(s.ImageLiquid)
-                      // images = s.ImageLiquid
+                      // images = GetImageLiquidAnonymousObject(s.ImageLiquid)
+                        images = s.ImageLiquid
                    };
         }
 

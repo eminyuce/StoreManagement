@@ -124,13 +124,16 @@ namespace StoreManagement.Service.Repositories
         public List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels)
         {
             var labelIds = labels.Select(r => r.ToInt());
+
+
             var res = from s in this.StoreDbContext.FileManagers
                       join c in this.StoreDbContext.LabelLines on s.Id equals c.ItemId
                       join u in this.StoreDbContext.Labels on c.LabelId equals u.Id
                       where s.StoreId == storeId && u.StoreId == storeId && c.ItemType.Equals(StoreConstants.Files) && labelIds.Contains(u.Id)
+                      orderby s.Ordering descending 
                       select s;
 
-            var result = res.ToList();
+            var result = res.Distinct().ToList();
 
             return result;
         }

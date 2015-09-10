@@ -48,5 +48,20 @@ namespace StoreManagement.Service.Repositories
             }
             Save();
         }
+
+        public void SetMainImage(int id, int fileId)
+        {
+            var items = this.FindBy(r => r.ProductId == id).ToList();
+            foreach (var productFile in items)
+            {
+                productFile.IsMainImage = false;
+                Edit(productFile);
+            }
+            Save();
+            var item = this.FindBy(r => r.ProductId == id && r.FileManagerId == fileId).FirstOrDefault();
+            item.IsMainImage = true;
+            Edit(item);
+            Save();
+        }
     }
 }

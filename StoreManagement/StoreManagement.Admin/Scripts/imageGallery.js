@@ -23,11 +23,51 @@ $(document).ready(function () {
     });
     RetrieveContentImages();
     bindRemoveImage();
+    SetMainImage();
 });
 function RetrieveContentImages() {
     $('[data-file-item-id]').each(function () {
         $(this).off("click");
         $(this).on("click", handleRetrieveContentImages);
+    });
+}
+function SetMainImage() {
+    $('[data-image-main-image-link]').each(function () {
+        $(this).off("click");
+        $(this).on("click", handleMainImage);
+    });
+}
+function handleMainImage(e) {
+    e.preventDefault();
+    var caller = e.target;
+    var fileId = $(caller).attr('data-image-main-image-link');
+    var entityType = $("#entityType").val();
+    var id = $("#Id").val();
+
+ 
+    var jsonRequest = JSON.stringify({   "fileId": fileId, "id": id, "entityType": entityType });
+    jQuery.ajax({
+        url: "/Ajax/SetMainImage",
+        type: 'POST',
+        data: jsonRequest,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            console.log(data);
+            $('[data-image-main-image-link]').each(function () {
+                $(this).addClass("addLink btn btn-warning btn-block");
+            });
+            $('[data-image-main-image-link=' + fileId + ']').removeClass("addLink btn btn-warning btn-block");
+            $('[data-image-main-image-link=' + fileId + ']').addClass("addLink btn btn-success btn-block");
+            $("#mainImageFileManagerId").val(fileId);
+
+        },
+        error: function (request, status, error) {
+            console.error('Error ' + status + ' ' + request.responseText);
+        },
+        beforeSend: function () {
+
+        }
     });
 }
 
@@ -82,7 +122,9 @@ function LoadImages(labels) {
     
 
     var storeId = $("#StoreId").val();
-    var jsonRequest = JSON.stringify({ "labels": labels, "storeId": storeId });
+    var entityType = $("#entityType").val();
+    var id = $("#Id").val();
+    var jsonRequest = JSON.stringify({ "labels": labels, "storeId": storeId, "entityType": entityType, "id": id });
     jQuery.ajax({
         url: "/Ajax/GetImagesByLabels",
         type: 'POST',

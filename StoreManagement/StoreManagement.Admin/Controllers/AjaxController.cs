@@ -579,9 +579,10 @@ namespace StoreManagement.Admin.Controllers
                 list.AddRange(images.Where(r => !productFiles.Select(r1 => r1.FileManagerId).Contains(r.Id)));
 
             }
-            else
+            else if (entityType.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase) || entityType.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
             {
-
+                var contentFiles = ContentFileRepository.GetContentFilesByContentId(id);
+                list.AddRange(images.Where(r => !contentFiles.Select(r1 => r1.FileManagerId).Contains(r.Id)));
             }
 
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -592,6 +593,14 @@ namespace StoreManagement.Admin.Controllers
             if (entityType.Equals(StoreConstants.ProductType, StringComparison.InvariantCultureIgnoreCase))
             {
                 ProductFileRepository.SetMainImage(id, fileId);
+            }
+            else if (entityType.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase))
+            {
+                ContentFileRepository.SetMainImage(id, fileId);
+            }
+            else if (entityType.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
+            {
+                ContentFileRepository.SetMainImage(id, fileId);
             }
 
             return Json(new { fileId, id }, JsonRequestBehavior.AllowGet);
@@ -610,7 +619,7 @@ namespace StoreManagement.Admin.Controllers
         }
         public ActionResult GetFiles(int contentId)
         {
-            var files = ContentFileRepository.GetContentByContentId(contentId);
+            var files = ContentFileRepository.GetContentFilesByContentId(contentId);
             return Json(files, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetCategoriesTree(int storeId = 0, String categoryType = "")

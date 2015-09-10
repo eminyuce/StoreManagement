@@ -11,7 +11,7 @@
 @{
     
     List<FileManager> fileManagers = ViewBag.FileManagers;
-
+    int mainImageFileManagerId = (int)ViewBag.MainImageId;
     String categoryType = Model.Type;
     var title = ViewData["ContentSaveOrEditPageTitle"].ToStr();
     var panelTitle = ViewData["ContentSaveOrEditPanelTitle"].ToStr();
@@ -37,7 +37,7 @@
                 <div class="row">
 
                     <div class="col-md-2">
-
+                        <input type="hidden" id="entityType" value="@Model.Type"  />
                         <input type="hidden" value="@categoryType" id="categoryType"/>
 
 
@@ -108,7 +108,7 @@
                                         @Html.ValidationMessageFor(model => model.Name)
                                     </div>
 
-                                    
+
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Author)
                                         @Html.TextBoxFor(model => model.Author, new { @class = "form-control", @placeholder = "Author" })
@@ -173,13 +173,25 @@
                                         <div id="contentImages"></div>
 
                                         @if (fileManagers != null)
-                                        {    
+                                        {
+                  
                                             <div id="existingContentImages">
                                                 @foreach (var file in fileManagers)
                                                 {
+                                                    var isMainImage = mainImageFileManagerId > 0 && mainImageFileManagerId == file.Id;
                                                     <li class="col-md-4 thumbnail" data-file-image="@file.Id"><a href="#">
                                                         <img class="fileManagerImg" src=@String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId) title="bootstrap-template.png" id="@file.Id"></a>
                                                         <div data-image-remove-link="@file.Id" data-image-file-name="bootstrap-template.png" class="addLink btn btn-danger btn-block">Remove</div>
+                                                        @if (isMainImage)
+                                                        {
+                                                            <div data-image-main-image-link="@file.Id"   class="addLink btn btn-success btn-block">Main Image</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div data-image-main-image-link="@file.Id"  class="addLink btn btn-warning btn-block">Main Image</div>
+                                                        }
+
+
                                                         <div class="caption">bootstrap-template.png</div>
                                                     </li>
                                                     <input type="hidden" id="fileId_@file.Id" value="@file.Id" name="selectedFileId" data-selected-file="@file.Id">

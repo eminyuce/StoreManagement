@@ -11,8 +11,12 @@ namespace StoreManagement.Service.Repositories.Interfaces
 {
     public interface IContentFileRepository : IBaseRepository<ContentFile, int>, IContentFileService
     {
+        List<ContentFile> GetContentFilesByContentId(int contentId);
+        List<ContentFile> GetContentFilesByFileManagerId(int fileManagerId);
+        void DeleteContentFileByContentId(int contentId);
+        void SaveContentFiles(int[] selectedFileId, int contentId);
+        void SetMainImage(int id, int fileId);
 
-   
     }
 
 }

@@ -12,23 +12,25 @@ namespace StoreManagement.Service.Repositories
 {
     public class ContentFileRepository : BaseRepository<ContentFile, int>, IContentFileRepository
     {
-        public ContentFileRepository(IStoreContext dbContext) : base(dbContext)
+        public ContentFileRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
 
         }
 
-        public List<ContentFile> GetContentByContentId(int contentId)
+        public List<ContentFile> GetContentFilesByContentId(int contentId)
         {
             return this.GetAllIncluding(r => r.FileManager).Where(r => r.ContentId == contentId).ToList();
         }
-        public List<ContentFile> GetContentByFileManagerId(int fileManagerId)
+
+        public List<ContentFile> GetContentFilesByFileManagerId(int fileManagerId)
         {
             return this.FindBy(r => r.FileManagerId == fileManagerId).ToList();
         }
 
         public void DeleteContentFileByContentId(int contentId)
         {
-            foreach (var c in this.GetContentByContentId(contentId))
+            foreach (var c in this.GetContentFilesByContentId(contentId))
             {
                 this.Delete(c);
             }
@@ -36,15 +38,63 @@ namespace StoreManagement.Service.Repositories
         }
         public void SaveContentFiles(int[] selectedFileId, int contentId)
         {
-            DeleteContentFileByContentId(contentId);
-            var uniqueFileIds = selectedFileId.Distinct();
-            foreach (var i in uniqueFileIds)
+            var selectedFileIdUniqueFileIds = selectedFileId.Distinct();
+            var list = this.FindBy(r => r.ContentId == contentId).ToList();
+            var fileIdUniqueFileIds = list.Select(r => r.FileManagerId).Distinct();
+            
+            // Delete already existing items.
+            foreach (var fileManagerId in fileIdUniqueFileIds)
             {
-                var m = new ContentFile();
-                m.ContentId = contentId;
-                m.FileManagerId = i;
-                Add(m);
+                if (!selectedFileIdUniqueFileIds.Contains(fileManagerId))
+                {
+                    var item = list.FirstOrDefault(r => r.FileManagerId == fileManagerId && r.ContentId == contentId);
+                    this.Delete(item);
+                }
             }
+            this.Save();
+
+
+
+            foreach (var i in selectedFileIdUniqueFileIds)
+            {
+                int fileManagerId = i;
+                var item = list.FirstOrDefault(r => r.FileManagerId == fileManagerId);
+                if (item == null)
+                {
+                    var m = new ContentFile();
+                    m.ContentId = contentId;
+                    m.FileManagerId = i;
+                    m.IsMainImage = false;
+                    Add(m);
+                }
+            }
+            Save();
+        }
+
+        public void SetMainImage(int id, int fileId)
+        {
+            var items = this.FindBy(r => r.ContentId == id).ToList();
+            foreach (var productFile in items)
+            {
+                productFile.IsMainImage = false;
+                Edit(productFile);
+            }
+            Save();
+            var item = this.FindBy(r => r.ContentId == id && r.FileManagerId == fileId).FirstOrDefault();
+            if (item != null)
+            {
+                item.IsMainImage = true;
+                Edit(item);
+            }
+            else
+            {
+                item = new ContentFile();
+                item.FileManagerId = fileId;
+                item.ContentId = id;
+                item.IsMainImage = true;
+                Add(item);
+            }
+
             Save();
         }
     }

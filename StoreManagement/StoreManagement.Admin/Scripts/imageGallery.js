@@ -19,7 +19,7 @@ $(document).ready(function () {
             ShowMessage("Please select labels to get images");
             $("#flickr-photos").empty();
         }
-        
+
     });
     RetrieveContentImages();
     bindRemoveImage();
@@ -44,8 +44,8 @@ function handleMainImage(e) {
     var entityType = $("#entityType").val();
     var id = $("#Id").val();
 
- 
-    var jsonRequest = JSON.stringify({   "fileId": fileId, "id": id, "entityType": entityType });
+
+    var jsonRequest = JSON.stringify({ "fileId": fileId, "id": id, "entityType": entityType });
     jQuery.ajax({
         url: "/Ajax/SetMainImage",
         type: 'POST',
@@ -104,9 +104,9 @@ function handleRetrieveContentImages(e) {
         }
     });
 }
- 
 
-function createImage(googleImageId, fileName, photoId, eventLink) {
+
+function createImage(googleImageId, fileName, photoId, eventLink, mainImageLink) {
     var img = $("<img/>").attr("src", googleLink + googleImageId)
         .attr("title", fileName)
         .attr("id", photoId)
@@ -119,7 +119,7 @@ function createImage(googleImageId, fileName, photoId, eventLink) {
 
 function LoadImages(labels) {
     $("#flickr-photos").empty();
-    
+
 
     var storeId = $("#StoreId").val();
     var entityType = $("#entityType").val();
@@ -138,7 +138,7 @@ function LoadImages(labels) {
             $("#filter-count").text(photos.length);
             $("#flickr-photos").empty();
             var list = $("<ul></ul");
-            $.each(photos, function(i, photo) {
+            $.each(photos, function (i, photo) {
                 var googleImageId = photo.GoogleImageId;
                 var fileName = photo.Title;
                 var photoId = photo.Id;
@@ -161,11 +161,11 @@ function LoadImages(labels) {
 
         }
     });
- 
-        
 
-   
- 
+
+
+
+
 
     $("#filter").keyup(function () {
         var filter = $(this).val(), count = 0;
@@ -196,11 +196,11 @@ function handleRemoveImage(e) {
     var googleImageId = $(caller).attr('data-image-file-googleImageId');
     $("#SelectedImageGallery").find('[data-file-image=' + imageId + ']').remove();
     $("#SelectedImageGallery").find('[data-selected-file=' + imageId + ']').remove();
-    
+
     $("#existingContentImages").find('[data-file-image=' + imageId + ']').remove();
     $("#existingContentImages").find('[data-selected-file=' + imageId + ']').remove();
     $("#existingContentImages").find('[data_selected_file=' + imageId + ']').remove();
-    
+
 
     var addLink = $("<div/>")
         .attr("data-image-add-link", imageId)
@@ -220,30 +220,36 @@ function bindAddImage() {
 
 function handleAddImage(e) {
     console.log("jquery is called");
-    
+
     var caller = e.target;
     var imageId = $(caller).attr('data-image-add-link');
     var fileName = $(caller).attr('data-image-file-name');
     var googleImageId = $(caller).attr('data-image-file-googleImageId');
-    
+
     $(caller).addClass("addedImage");
     var removeLink = $("<div/>")
         .attr("data-image-remove-link", imageId)
         .attr("data-image-file-name", fileName)
         .text("Remove").addClass("addLink btn btn-danger  btn-block");
+
+    var mainImageLink = $("<div/>")
+            .attr("data-image-main-image-link", imageId)
+            .text("Main Image").addClass("addLink btn btn-warning  btn-block");
+    
     var div = createImage(googleImageId, fileName, imageId, removeLink);
+    div.append(mainImageLink);
+    
     var file = $('<input>').attr({
         type: 'hidden',
         id: 'fileId_' + imageId,
-        value:imageId,
+        value: imageId,
         name: 'selectedFileId',
-        data_selected_file : imageId
+        data_selected_file: imageId
     });
     $("#SelectedImageGallery").append(div);
     $("#SelectedImageGallery").append(file);
     $("#flickr-photos").find('[data-file-image=' + imageId + ']').remove();
     bindRemoveImage();
-
+    SetMainImage();
 }
 
- 

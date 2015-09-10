@@ -61,6 +61,7 @@ namespace StoreManagement.Admin.Controllers
 
             var labels = new List<LabelLine>();
             var fileManagers = new List<FileManager>();
+            int mainImageFileManagerId = 0;
             if (id == 0)
             {
                 content.Type = ContentType;
@@ -79,10 +80,16 @@ namespace StoreManagement.Admin.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
+                var mainImage = content.ContentFiles.FirstOrDefault(r => r.IsMainImage);
+                if (mainImage != null)
+                {
+                    mainImageFileManagerId = mainImage.FileManagerId;
+                }
             }
 
             ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
             ViewBag.FileManagers = fileManagers;
+            ViewBag.MainImageId = mainImageFileManagerId;
 
             return View(content);
         }
@@ -106,13 +113,19 @@ namespace StoreManagement.Admin.Controllers
 
                         var labels = new List<LabelLine>();
                         var fileManagers = new List<FileManager>();
+                        int mainImageFileManagerId = 0;
                         if (content.Id > 0)
                         {
                             content = ContentRepository.GetContentWithFiles(content.Id);
                             labels = LabelLineRepository.GetLabelLinesByItem(content.Id, ContentType);
                             fileManagers = content.ContentFiles.Select(r => r.FileManager).ToList();
+                            var mainImage = content.ContentFiles.FirstOrDefault(r => r.IsMainImage);
+                            if (mainImage != null)
+                            {
+                                mainImageFileManagerId = mainImage.FileManagerId;
+                            }
                         }
-
+                        ViewBag.MainImageId = mainImageFileManagerId;
                         ViewBag.SelectedLabels = labels.Select(r => r.LabelId).ToArray();
                         ViewBag.FileManagers = fileManagers;
 

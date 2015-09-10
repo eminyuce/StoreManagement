@@ -9,9 +9,6 @@ namespace StoreManagement.Service.Interfaces
 {
     public interface IContentFileService : IService
     {
-        List<ContentFile> GetContentByContentId(int contentId);
-        List<ContentFile> GetContentByFileManagerId(int fileManagerId);
-        void DeleteContentFileByContentId(int contentId);
-        void SaveContentFiles(int[] selectedFileId, int contentId);
+       
     }
 }

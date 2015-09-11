@@ -40,11 +40,11 @@
                         <input type="hidden" name="categoryId"  value="@node.Id" />
                         if (selectedCategoryId == node.Id)
                         {
-                        <button type="submit" data-product-category-item="@node.Id" class="btn btn-danger">@node.Name</button>
+                        <button type="submit" data-category-item="@node.Id" class="btn btn-danger">@node.Name</button>
                         }
                         else
                         {
-                        <button type="submit" data-product-category-item="@node.Id"  class="btn btn-link ">@node.Name</button>
+                        <button type="submit" data-category-item="@node.Id"  class="btn btn-link ">@node.Name</button>
                         }
 
                     }

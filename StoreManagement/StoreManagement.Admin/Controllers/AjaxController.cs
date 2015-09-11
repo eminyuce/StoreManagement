@@ -31,7 +31,7 @@ namespace StoreManagement.Admin.Controllers
         // GET: /Ajax/
 
 
-        public ActionResult GetCategoriesRelatedItemsCount(int id = 0, int[] categoriesId = null, String type="")
+        public ActionResult GetCategoriesRelatedItemsCount(int id = 0, int[] categoriesId = null, String type = "")
         {
             int storeId = GetStoreId(id);
 
@@ -47,13 +47,22 @@ namespace StoreManagement.Admin.Controllers
                     foreach (var catId in categoriesId)
                     {
                         int categoryId = catId;
-                        var cnt =  this.ProductRepository.Count(r => r.StoreId == id && r.ProductCategoryId == categoryId);
+                        var cnt = this.ProductRepository.Count(r => r.StoreId == id && r.ProductCategoryId == categoryId);
+                        result[categoryId.ToStr()] = cnt.ToStr();
+                    }
+                }
+                else if (type.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase) || type.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    foreach (var catId in categoriesId)
+                    {
+                        int categoryId = catId;
+                        var cnt = this.ContentRepository.Count(r => r.StoreId == id && r.CategoryId == categoryId && r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
                         result[categoryId.ToStr()] = cnt.ToStr();
                     }
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-        
+
         }
 
         public ActionResult SearchAutoComplete(String term, String action, String controller, int id = 0)
@@ -618,11 +627,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 ProductFileRepository.SetMainImage(id, fileId);
             }
-            else if (entityType.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase))
-            {
-                ContentFileRepository.SetMainImage(id, fileId);
-            }
-            else if (entityType.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
+            else if (entityType.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase) || entityType.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
             {
                 ContentFileRepository.SetMainImage(id, fileId);
             }

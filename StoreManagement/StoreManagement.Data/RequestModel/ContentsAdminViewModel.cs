@@ -9,7 +9,7 @@ namespace StoreManagement.Data.RequestModel
 {
     public class ContentsAdminViewModel
     {
-        
+        public String Type { get; set; }
         public List<Category> Categories { get; set; }
         public List<Content> Contents { get; set; }
 

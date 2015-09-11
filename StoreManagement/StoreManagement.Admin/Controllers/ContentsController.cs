@@ -33,6 +33,7 @@ namespace StoreManagement.Admin.Controllers
 
             var contentsAdminViewModel = new ContentsAdminViewModel();
             contentsAdminViewModel.Contents = resultList;
+            contentsAdminViewModel.Type = this.ContentType;
             contentsAdminViewModel.Categories = CategoryRepository.GetCategoriesByStoreIdFromCache(storeId, ContentType);
             return View(contentsAdminViewModel);
         }

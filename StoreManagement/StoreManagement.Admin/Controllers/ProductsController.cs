@@ -256,6 +256,7 @@ namespace StoreManagement.Admin.Controllers
 
                 ProductRepository.Delete(product);
                 ProductRepository.Save();
+                MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
                 LabelLineRepository.DeleteLabelLinesByItem(product.Id, StoreConstants.ProductType);
                 ProductFileRepository.DeleteProductFileByProductId(product.Id);
 

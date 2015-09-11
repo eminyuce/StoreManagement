@@ -403,16 +403,18 @@ function searchAutoComplete() {
     });
 
 }
+
+
 // data-product-category-item
 function bindCategoryRelatedItemsCount(type, categoryItemAttribute) {
 
- 
-    var categoryItemAttributeTag = '['+categoryItemAttribute+']';
+
+    var categoryItemAttributeTag = '[' + categoryItemAttribute + ']';
     var idList = [];
     var id = $("#selectedStoreId").val();
     if ($(categoryItemAttributeTag).length > 0) {
 
-        
+
         $.each($(categoryItemAttributeTag), function (index, value) {
             var categoryId = $(this).attr(categoryItemAttribute);
             idList.push(categoryId);

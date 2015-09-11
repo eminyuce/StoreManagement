@@ -8,8 +8,8 @@ $(document).ready(function () {
 
 
     $("#contentTreeview").bind("select_node.jstree", function (event, data) {
-        var m = $("#" + data.selected[0]).find("[data-category]");
-        var selectedCategoryId = m.first().attr("data-category");
+        var m = $("#" + data.selected[0]).find("[data-category-item]");
+        var selectedCategoryId = m.first().attr("data-category-item");
         console.log(selectedCategoryId);
         $("#CategoryId").val(selectedCategoryId);
 
@@ -88,10 +88,11 @@ function GetCategoryTree(id, categoryType) {
             $("#categoryTree").html(data);
             bindcategoryTree();
             var categoryId = $("#CategoryId").val();
-            var selectedCategory = $('[data-category=' + categoryId + ']').text();
-            $('[data-category=' + categoryId + ']').attr("class", "btn btn-danger");
+            var selectedCategory = $('[data-category-item=' + categoryId + ']').text();
+            $('[data-category-item=' + categoryId + ']').attr("class", "btn btn-danger");
             console.log(selectedCategory);
             $("#SelectedCategory").text(selectedCategory);
+            bindCategoryRelatedItemsCount($("#entityType").val(), 'data-category-item-item');
         },
         error: function (request, status, error) {
             console.error('Error ' + status + ' ' + request.responseText);
@@ -104,7 +105,7 @@ function GetCategoryTree(id, categoryType) {
 }
 
 function bindcategoryTree() {
-    $('[data-category]').each(function () {
+    $('[data-category-item]').each(function () {
         $(this).off("click");
         $(this).on("click", handleCategoryTree);
     });
@@ -112,11 +113,11 @@ function bindcategoryTree() {
 
 function handleCategoryTree(e) {
     var caller = e.target;
-    var categoryId = $(caller).attr('data-category');
+    var categoryId = $(caller).attr('data-category-item');
     var category = $(caller).text();
 
 
-    $('[data-category]').each(function () {
+    $('[data-category-item]').each(function () {
         $(this).attr("class", "btn btn-link");
     });
 
@@ -159,10 +160,11 @@ function GetProductCategoryTree(id, categoryType) {
             $("#productCategoryTree").html(data);
             bindcategoryTree();
             var categoryId = $("#ProductCategoryId").val();
-            $('[data-category=' + categoryId + ']').attr("class", "btn btn-danger");
-            var selectedCategory = $('[data-category=' + categoryId + ']').text();
-            console.log($('[data-category=' + categoryId + ']'));
+            $('[data-category-item=' + categoryId + ']').attr("class", "btn btn-danger");
+            var selectedCategory = $('[data-category-item=' + categoryId + ']').text();
+            console.log($('[data-category-item=' + categoryId + ']'));
             $("#ProductSelectedCategory").text(selectedCategory);
+            bindCategoryRelatedItemsCount($("#entityType").val(), 'data-category-item');
         },
         error: function (request, status, error) {
             console.error('Error ' + status + ' ' + request.responseText);
@@ -174,53 +176,4 @@ function GetProductCategoryTree(id, categoryType) {
 
 }
 
-
-
-//function GetFiles(id) {
-
-//    var jsonRequest = JSON.stringify({ "contentId": id });
-//    console.log(jsonRequest);
-
-//    jQuery.ajax({
-//        url: "/Ajax/GetFiles",
-//        type: 'POST',
-//        data: jsonRequest,
-//        dataType: 'json',
-//        contentType: 'application/json; charset=utf-8',
-//        success: function (data) {
-//            var files = data;
-//            $.each(files, function (i, file) {
-//                var imageId = file.FileManagerId;
-//                var fileName = file.FileManager.FileName;
-//                var thumbnailLink = file.FileManager.ThumbnailLink;
-
-
-//                var removeLink = $("<div/>")
-//                    .attr("data-image-remove-link", imageId)
-//                    .attr("data-image-file-name", fileName)
-//                    .attr("data-image-file-thumnailLink", thumbnailLink)
-//                    .text("Remove").addClass("addLink");
-//                var div = createImage(thumbnailLink, fileName, imageId, removeLink);
-//                var fileHiddenLink = $('<input>').attr({
-//                    type: 'hidden',
-//                    id: 'fileId_' + imageId,
-//                    value: imageId,
-//                    name: 'selectedFileId',
-//                    data_selected_file: imageId
-//                });
-
-//                $("#existingContentImages").append(div);
-//                $("#existingContentImages").append(fileHiddenLink);
-//                bindRemoveImage();
-//            });
-//        },
-//        error: function (request, status, error) {
-//            console.error('Error ' + status + ' ' + request.responseText);
-//        },
-//        beforeSend: function () {
-
-//        }
-//    });
-
-//}
 

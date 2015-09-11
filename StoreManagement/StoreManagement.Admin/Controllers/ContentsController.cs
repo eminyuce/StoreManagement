@@ -206,7 +206,7 @@ namespace StoreManagement.Admin.Controllers
                 LabelLineRepository.DeleteLabelLinesByItem(id, ContentType);
                 ContentRepository.Delete(content);
                 ContentRepository.Save();
-
+                MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
 
 
                 if (IsSuperAdmin)

@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-10">
                         <input type="hidden" id="entityType" value="@StoreConstants.ProductType"  />
-
+                        <input type="hidden" name="selectedStoreId" id="selectedStoreId" value="@storeId" />
                         @using (Html.BeginForm())
                         {
                         
@@ -278,7 +278,7 @@
 
     <script>
         $(function () {
-
+          
 
         });
     </script>

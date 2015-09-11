@@ -5,7 +5,7 @@
 $(document).ready(function () {
 
     searchAutoComplete();
-    
+
     $('.tooltip').tooltip();
     $('.tooltip-left').tooltip({ placement: 'left' });
     $('.tooltip-right').tooltip({ placement: 'right' });
@@ -375,14 +375,14 @@ function searchAutoComplete() {
                     data: jsonRequest,
                     success: function (data) {
                         for (var i = 0; i < data.length ; i++) {
-                            items[i] = { text : data[i], value : data[i] };
+                            items[i] = { text: data[i], value: data[i] };
                         }
                         console.log(items);
                         response(sortInputFirst(request.term, items));
                     }
                 });
             }
-          
+
         },
         select: function (event, ui) {
             $("#SearchButton").click();
@@ -402,4 +402,46 @@ function searchAutoComplete() {
         }
     });
 
+}
+// data-product-category-item
+function bindCategoryRelatedItemsCount(type, categoryItemAttribute) {
+
+ 
+    var categoryItemAttributeTag = '['+categoryItemAttribute+']';
+    var idList = [];
+    var id = $("#selectedStoreId").val();
+    if ($(categoryItemAttributeTag).length > 0) {
+
+        
+        $.each($(categoryItemAttributeTag), function (index, value) {
+            var categoryId = $(this).attr(categoryItemAttribute);
+            idList.push(categoryId);
+        });
+        //console.log(idList);
+        var jsonRequest = JSON.stringify({ "id": id, "categoriesId": idList, "type": type });
+        jQuery.ajax({
+            url: "/Ajax/GetCategoriesRelatedItemsCount",
+            type: 'POST',
+            data: jsonRequest,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                //console.log(data);
+                $.each(idList, function (index, value) {
+                    //console.log(data[idList[index]] + " " + idList[index]);
+
+                    var customCategoryAttribute = $('[' + categoryItemAttribute + '=' + idList[index] + ']');
+                    customCategoryAttribute.text(customCategoryAttribute.text() + ' (' + data[idList[index]] + ')');
+                    //console.log(customCategoryAttribute);
+                });
+            },
+            error: function (request, status, error) {
+                console.error('Error ' + status + ' ' + request.responseText);
+            },
+            beforeSend: function () {
+
+            }
+        });
+
+    }
 }

@@ -51,7 +51,7 @@
             </div>
             <div class="bootstrap-admin-panel-content">
                 <div class="row">
-
+                                            <input type="hidden" id="entityType" value="@StoreConstants.ProductType"  />
                     <div class="col-md-2">
                         @Html.Partial("pCategoryTree", categories, null)
                     </div>
@@ -72,7 +72,7 @@
                                         {
                                             if (isSuperAdmin)
                                             {
-                                            <input type="hidden" name="selectedStoreId" value="@storeId" />
+                                            <input type="hidden" name="selectedStoreId" id="selectedStoreId" value="@storeId" />
                                             }
                                             <input type="hidden" name="selectedCategoryId" value="@selectedCategoryId"/>
                                             <input type="hidden" name="id" value="0" />
@@ -325,7 +325,7 @@
         $(document).ready(function () {
             console.log("jquery is done.");
             RetrieveContentImages();
-
+            bindCategoryRelatedItemsCount($("#entityType").val(), 'data-product-category-item');
 
         });
 

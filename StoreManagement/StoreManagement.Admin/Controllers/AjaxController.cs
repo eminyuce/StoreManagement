@@ -31,6 +31,30 @@ namespace StoreManagement.Admin.Controllers
         // GET: /Ajax/
 
 
+        public ActionResult GetCategoriesRelatedItemsCount(int id = 0, int[] categoriesId = null, String type="")
+        {
+            int storeId = GetStoreId(id);
+
+            if (categoriesId == null)
+            {
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var result = new Dictionary<String, String>();
+                if (type.Equals(StoreConstants.ProductType))
+                {
+                    foreach (var catId in categoriesId)
+                    {
+                        int categoryId = catId;
+                        var cnt =  this.ProductRepository.Count(r => r.StoreId == id && r.ProductCategoryId == categoryId);
+                        result[categoryId.ToStr()] = cnt.ToStr();
+                    }
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+        
+        }
 
         public ActionResult SearchAutoComplete(String term, String action, String controller, int id = 0)
         {

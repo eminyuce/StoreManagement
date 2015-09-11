@@ -40,6 +40,8 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.StoreSettings = GetStoreSettings();
                 PagingHelper.StoreId = StoreId;
                 PagingHelper.PageOutput = pageOutput;
+                PagingHelper.HttpRequestBase = this.Request;
+                PagingHelper.RouteData = this.RouteData;
                 PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);

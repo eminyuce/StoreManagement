@@ -40,7 +40,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-                items = LiquidAnonymousObject.GetFileManagerLiquidEnumerable(cats)
+                photogalleries = LiquidAnonymousObject.GetFileManagerLiquidEnumerable(cats)
             };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

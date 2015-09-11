@@ -46,7 +46,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                     {
-                        items = LiquidAnonymousObject.GetBrandsEnumerable(items)
+                        brands = LiquidAnonymousObject.GetBrandsEnumerable(items)
 
 
                     };

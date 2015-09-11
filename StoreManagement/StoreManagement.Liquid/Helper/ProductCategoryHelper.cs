@@ -109,5 +109,52 @@ namespace StoreManagement.Liquid.Helper
             result.LiquidRenderedResult = dic;
             return result;
         }
+
+        public StoreLiquidResult GetCategoryPage(Task<PageDesign> pageDesignTask, Task<ProductCategory> categoriesTask, Task<StorePagedList<Product>> productsTask)
+        {
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            try
+            {
+                Task.WaitAll(pageDesignTask, categoriesTask, productsTask);
+                var pageDesign = pageDesignTask.Result;
+                var category = categoriesTask.Result;
+                var products = productsTask.Result;
+
+                var productCategories = new ProductCategoryLiquid(category, pageDesign);
+
+                var items = new List<ProductLiquid>();
+                foreach (var item in products.items)
+                {
+                    var blog = new ProductLiquid(item, category, pageDesign, ImageWidth, ImageHeight);
+                    items.Add(blog);
+                }
+
+                object anonymousObject = new
+                {
+                    category = LiquidAnonymousObject.GetProductCategory(productCategories),
+                    products = LiquidAnonymousObject.GetProductsLiquid(items)
+                };
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+                dic.Add(StoreConstants.PageSize, products.pageSize.ToStr());
+                dic.Add(StoreConstants.PageNumber, products.page.ToStr());
+                dic.Add(StoreConstants.TotalItemCount, products.totalItemCount.ToStr());
+                dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+                dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GetProductCategoriesPartial");
+            }
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
+        }
     }
 }

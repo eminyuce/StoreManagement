@@ -219,5 +219,16 @@ namespace StoreManagement.Liquid.Helper
             //};
             //return anonymousObject;
         }
+
+        internal static object GetProductCategory(ProductCategoryLiquid productCategories)
+        {
+            object anonymousObject = new
+            {
+                CategoryId = productCategories.ProductCategory.Id,
+                CategoryName = productCategories.ProductCategory.Name,
+                CategoryDescription = productCategories.ProductCategory.Description 
+            };
+            return anonymousObject;
+        }
     }
 }

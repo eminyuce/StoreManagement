@@ -52,7 +52,7 @@ namespace StoreManagement.Liquid.Helper
             object anonymousObject = new
                 {
 
-                    items = LiquidAnonymousObject.GetProductsLiquid(items),
+                    products = LiquidAnonymousObject.GetProductsLiquid(items),
                     categories = LiquidAnonymousObject.GetProductCategories(cats)
                 };
 
@@ -170,7 +170,7 @@ namespace StoreManagement.Liquid.Helper
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
                 {
-                    items = LiquidAnonymousObject.GetProductsLiquid(items)
+                    products = LiquidAnonymousObject.GetProductsLiquid(items)
                 }
                     );
 
@@ -223,7 +223,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                     {
-                        items = LiquidAnonymousObject.GetProductsLiquid(items),
+                        products = LiquidAnonymousObject.GetProductsLiquid(items),
                         brand = LiquidAnonymousObject.GetBrandLiquid(brandLiquid)
                     };
 

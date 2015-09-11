@@ -49,7 +49,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    items = LiquidAnonymousObject.GetLocationsEnumerable(items)
+                    locations = LiquidAnonymousObject.GetLocationsEnumerable(items)
 
 
                 };

@@ -149,7 +149,7 @@ namespace StoreManagement.Admin.Controllers
                     if (product.Id == 0)
                     {
                         ProductRepository.Add(product);
-                        MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
+                        ClearCache(product.StoreId);
                     }
                     else
                     {
@@ -166,7 +166,7 @@ namespace StoreManagement.Admin.Controllers
 
                     LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
 
-   
+
                     if (IsSuperAdmin)
                     {
                         return RedirectToAction("Index", new { storeId = product.StoreId, categoryId = product.ProductCategoryId });
@@ -209,7 +209,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 return new HttpNotFoundResult("Not Found");
             }
-            
+
             return View(content);
         }
         public ActionResult StoreDetails(int id = 0)
@@ -229,7 +229,7 @@ namespace StoreManagement.Admin.Controllers
                 Logger.Error(ex);
                 return new EmptyResult();
             }
-            
+
 
         }
 
@@ -256,7 +256,7 @@ namespace StoreManagement.Admin.Controllers
 
                 ProductRepository.Delete(product);
                 ProductRepository.Save();
-                MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
+                ClearCache(product.StoreId);
                 LabelLineRepository.DeleteLabelLinesByItem(product.Id, StoreConstants.ProductType);
                 ProductFileRepository.DeleteProductFileByProductId(product.Id);
 
@@ -281,6 +281,11 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
+        private void ClearCache(int storeId)
+        {
+            String key = String.Format("GetCategoriesRelatedItemsCount-StoreId-{0}-Category-{1}", storeId, StoreConstants.ProductType);
+            MemoryCacheHelper.ClearCache(key);
 
+        }
     }
 }

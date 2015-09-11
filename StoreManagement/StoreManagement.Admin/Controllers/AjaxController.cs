@@ -43,7 +43,7 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                String key = String.Format("GetCategoriesRelatedItemsCount-StoreId-{0}-Category-{1}-type-{2}", id, String.Join(",", categoriesId), type);
+                String key = String.Format("GetCategoriesRelatedItemsCount-StoreId-{0}-type-{2}-Category-{1}", id, String.Join(",", categoriesId), type);
 
                 var result = (Dictionary<String, String>)MemoryCache.Default.Get(key);
                 if (result == null)

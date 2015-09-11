@@ -43,7 +43,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
                 {
-                    items = LiquidAnonymousObject.GetNavigationsEnumerable(items)
+                    navigations = LiquidAnonymousObject.GetNavigationsEnumerable(items)
                     
 
                 };

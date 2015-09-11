@@ -42,7 +42,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-                items = LiquidAnonymousObject.GetLabelsEnumerable(items)
+                labels = LiquidAnonymousObject.GetLabelsEnumerable(items)
 
 
             };

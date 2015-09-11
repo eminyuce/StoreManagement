@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.CacheHelper;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
@@ -138,7 +139,7 @@ namespace StoreManagement.Admin.Controllers
                     if (content.Id == 0)
                     {
                         ContentRepository.Add(content);
-                        MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
+                        ClearCache(content.StoreId);
                     }
                     else
                     {
@@ -206,7 +207,7 @@ namespace StoreManagement.Admin.Controllers
                 LabelLineRepository.DeleteLabelLinesByItem(id, ContentType);
                 ContentRepository.Delete(content);
                 ContentRepository.Save();
-                MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
+                ClearCache(content.StoreId);
 
 
                 if (IsSuperAdmin)
@@ -250,5 +251,11 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
+        private void ClearCache(int storeId)
+        {
+            String key = String.Format("GetCategoriesRelatedItemsCount-StoreId-{0}-Category-{1}", storeId, this.ContentType);
+            MemoryCacheHelper.ClearCache(key);
+
+        }
     }
 }

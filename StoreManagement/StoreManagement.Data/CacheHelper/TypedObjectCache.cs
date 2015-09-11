@@ -81,16 +81,6 @@ namespace StoreManagement.Data.CacheHelper
                 return false;
             }
         }
-        public void ClearCache(String cacheKeyPrefix)
-        {
-            var cacheEnumerator = (IDictionaryEnumerator)((IEnumerable)Default).GetEnumerator();
-            while (cacheEnumerator.MoveNext())
-            {
-                if (cacheEnumerator.Key.ToString().StartsWith(cacheKeyPrefix, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    Default.Remove(cacheEnumerator.Key.ToString());
-                }
-            }
-        }
+        
     }
 }

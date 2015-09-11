@@ -50,17 +50,7 @@ namespace StoreManagement.Service.Repositories
             
         }
 
-        public void ClearCache(String cacheKeyPrefix)
-        {
-            var cacheEnumerator = (IDictionaryEnumerator)((IEnumerable)MemoryCache.Default).GetEnumerator();
-            while (cacheEnumerator.MoveNext())
-            {
-                if (cacheEnumerator.Key.ToString().StartsWith(cacheKeyPrefix, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    MemoryCache.Default.Remove(cacheEnumerator.Key.ToString());
-                }
-            }
-        }
+        
 
        
 

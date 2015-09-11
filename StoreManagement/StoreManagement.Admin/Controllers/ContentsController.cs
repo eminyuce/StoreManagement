@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
@@ -137,6 +138,7 @@ namespace StoreManagement.Admin.Controllers
                     if (content.Id == 0)
                     {
                         ContentRepository.Add(content);
+                        MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
                     }
                     else
                     {
@@ -149,7 +151,7 @@ namespace StoreManagement.Admin.Controllers
                         ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
                     }
                     LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, ContentType);
-
+             
                     if (IsSuperAdmin)
                     {
                         return RedirectToAction("Index", new { storeId = content.StoreId, categoryId = content.CategoryId });

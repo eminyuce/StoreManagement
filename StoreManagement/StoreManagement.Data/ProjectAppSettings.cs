@@ -84,37 +84,37 @@ namespace StoreManagement.Data
         }
 
 
-        public static int CasheTinySeconds
+        public static int CacheTinySeconds
         {
             get
             {
-                return GetWebConfigInt("CasheTinySeconds", 1);
+                return GetWebConfigInt("CacheTinySeconds", 1);
             }
         }
 
 
-        public static int CasheShortSeconds
+        public static int CacheShortSeconds
         {
             get
             {
                 //return GetWebConfigInt("CasheShortSeconds", 1);
-                return GetWebConfigInt("CasheShortSeconds", 10);
+                return GetWebConfigInt("CacheShortSeconds", 10);
             }
         }
 
-        public static int CasheMediumSeconds
+        public static int CacheMediumSeconds
         {
             get
             {
-                return GetWebConfigInt("CasheMediumSeconds", 300);
+                return GetWebConfigInt("CacheMediumSeconds", 300);
             }
         }
 
-        public static int CasheLongSeconds
+        public static int CacheLongSeconds
         {
             get
             {
-                return GetWebConfigInt("CasheLongSeconds", 1800);
+                return GetWebConfigInt("CacheLongSeconds", 1800);
             }
         }
 

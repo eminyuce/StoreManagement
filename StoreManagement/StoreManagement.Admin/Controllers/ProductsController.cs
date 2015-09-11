@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -148,6 +149,7 @@ namespace StoreManagement.Admin.Controllers
                     if (product.Id == 0)
                     {
                         ProductRepository.Add(product);
+                        MemoryCacheHelper.ClearCache("GetCategoriesRelatedItemsCount");
                     }
                     else
                     {
@@ -164,7 +166,7 @@ namespace StoreManagement.Admin.Controllers
 
                     LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, StoreConstants.ProductType);
 
-
+   
                     if (IsSuperAdmin)
                     {
                         return RedirectToAction("Index", new { storeId = product.StoreId, categoryId = product.ProductCategoryId });

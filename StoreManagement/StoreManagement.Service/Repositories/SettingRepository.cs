@@ -65,7 +65,7 @@ namespace StoreManagement.Service.Repositories
 
         public void SaveSetting()
         {
-            ClearCache("GetStoreSettingsFromCache-");
+            MemoryCacheHelper.ClearCache("GetStoreSettingsFromCache-");
             this.Save();
         }
 

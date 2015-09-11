@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 using GenericRepository;
 using Newtonsoft.Json.Linq;
 using Ninject;
+using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -41,27 +43,54 @@ namespace StoreManagement.Admin.Controllers
             }
             else
             {
-                var result = new Dictionary<String, String>();
-                if (type.Equals(StoreConstants.ProductType))
+                String key = String.Format("GetCategoriesRelatedItemsCount-StoreId-{0}-Category-{1}-type-{2}", id, String.Join(",", categoriesId), type);
+
+                var result = (Dictionary<String, String>)MemoryCache.Default.Get(key);
+                if (result == null)
                 {
-                    foreach (var catId in categoriesId)
-                    {
-                        int categoryId = catId;
-                        var cnt = this.ProductRepository.Count(r => r.StoreId == id && r.ProductCategoryId == categoryId);
-                        result[categoryId.ToStr()] = cnt.ToStr();
-                    }
-                }
-                else if (type.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase) || type.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    foreach (var catId in categoriesId)
-                    {
-                        int categoryId = catId;
-                        var cnt = this.ContentRepository.Count(r => r.StoreId == id && r.CategoryId == categoryId && r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
-                        result[categoryId.ToStr()] = cnt.ToStr();
-                    }
+                    result = FetchCategoriesRelatedItemsCount(id, categoriesId, type);
+
+                    CacheItemPolicy policy = null;
+
+                    policy = new CacheItemPolicy();
+                    policy.Priority = CacheItemPriority.Default;
+                    policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(ProjectAppSettings.CacheMediumSeconds);
+
+                    MemoryCache.Default.Set(key, result, policy);
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
+           
             }
+        }
+
+        private Dictionary<String, String> FetchCategoriesRelatedItemsCount(int id, int[] categoriesId, string type)
+        {
+            var result = new Dictionary<String, String>();
+            if (type.Equals(StoreConstants.ProductType))
+            {
+                foreach (var catId in categoriesId)
+                {
+                    int categoryId = catId;
+                    var cnt = this.ProductRepository.Count(r => r.StoreId == id && r.ProductCategoryId == categoryId);
+                    result[categoryId.ToStr()] = cnt.ToStr();
+                }
+            }
+            else if (type.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase) ||
+                     type.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
+            {
+                foreach (var catId in categoriesId)
+                {
+                    int categoryId = catId;
+                    var cnt =
+                        this.ContentRepository.Count(
+                            r =>
+                            r.StoreId == id && r.CategoryId == categoryId &&
+                            r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase));
+                    result[categoryId.ToStr()] = cnt.ToStr();
+                }
+            }
+
+            return result;
 
         }
 

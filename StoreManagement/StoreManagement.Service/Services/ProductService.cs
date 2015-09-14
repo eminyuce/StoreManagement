@@ -248,18 +248,18 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public Task<List<Product>> GetPopularProducts(int storeId, string productType, int page, int pageSize)
+        public Task<List<Product>> GetPopularProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool ? isActive)
         {
             try
             {
                 SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetPopularProducts?" +
-                                                 "storeId={2}&productType={3}" +
-                                                 "&page={4}&pageSize={5}",
-                                                 WebServiceAddress,
-                                                 ApiControllerName,
-                                                 storeId, productType,
-                                                 page, pageSize);
+                                                    "storeId={2}&categoryId={3}&brandId={4}&productType={5}" +
+                                                    "&page={6}&pageSize={7}&isActive={8}",
+                                                    WebServiceAddress,
+                                                    ApiControllerName,
+                                                    storeId, categoryId, brandId, productType,
+                                                    page, pageSize, isActive);
 
                 return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
 
@@ -272,18 +272,18 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public Task<List<Product>> GetRecentProducts(int storeId, string productType, int page, int pageSize)
+        public Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
         {
             try
             {
                 SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetRecentProducts?" +
-                                                 "storeId={2}&productType={3}" +
-                                                 "&page={4}&pageSize={5}",
+                                                 "storeId={2}&categoryId={3}&brandId={4}&productType={5}" +
+                                                 "&page={6}&pageSize={7}&isActive={8}",
                                                  WebServiceAddress,
                                                  ApiControllerName,
-                                                 storeId, productType,
-                                                 page, pageSize);
+                                                 storeId, categoryId,brandId, productType,
+                                                 page, pageSize, isActive);
 
                 return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
 

@@ -240,11 +240,11 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<List<Product>> GetPopularProducts(int storeId, string productType, int page, int pageSize)
+        public async Task<List<Product>> GetPopularProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
         {
             try
             {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State;
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.BrandId == (brandId.HasValue ? brandId.Value : r2.BrandId);
                 Expression<Func<Product, int>> keySelector = t => t.TotalRating;
                 var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 return await items;
@@ -256,11 +256,11 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<List<Product>> GetRecentProducts(int storeId, string productType, int page, int pageSize)
+        public async Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
         {
             try
             {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State;
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.BrandId == (brandId.HasValue ? brandId.Value : r2.BrandId);
                 Expression<Func<Product, int>> keySelector = t => t.Id;
                 var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 return await items;

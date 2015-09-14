@@ -37,7 +37,7 @@
                                 <img width="180" height="50" src="@Url.Action("GetCaptcha", "Images", new { prefix = "StoreLogin" })" alt="Captcha"/>
                             </div>
                             <div class="col-md-9">
-                                @Html.TextBoxFor(model => model.Captcha, new { @class = "form-control",@placeholder="Security Question Answer..." })
+                                @Html.TextBoxFor(model => model.Captcha, new { @class = "form-control", @placeholder="Security Question Answer..." ,@autocomplete="false" })
                                 @Html.ValidationMessageFor(model => model.Captcha)
                             </div>
                         </div>

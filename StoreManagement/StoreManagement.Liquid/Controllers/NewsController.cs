@@ -15,8 +15,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class NewsController : BaseController
     {
-         
 
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Index(int page = 1)
         {
             try

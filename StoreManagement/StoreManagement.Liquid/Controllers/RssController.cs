@@ -11,16 +11,17 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Hour")]
     public class RssController : BaseController
     {
 
-        [OutputCache(CacheProfile = "Cache20Minutes")]
+
         public ActionResult Products(int take = 15, int description = 300, int imageHeight = 50, int imageWidth = 50)
         {
             var productsTask = ProductService.GetProductsAsync(StoreId, take, true);
             var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
             var store = StoreService.GetStoreAsync(StoreId);
-            var feed = ProductHelper.GetProductsRssFeed(store,productsTask, categoriesTask, description);
+            var feed = ProductHelper.GetProductsRssFeed(store, productsTask, categoriesTask, description);
             ProductHelper.ImageWidth = imageWidth;
             ProductHelper.ImageHeight = imageHeight;
             ProductHelper.StoreId = StoreId;
@@ -30,10 +31,9 @@ namespace StoreManagement.Liquid.Controllers
             return new FeedResult(feed, comment);
         }
 
-        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult News(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
         {
-            var contentsTask = ContentService.GetContentByTypeAsync(StoreId, take, true,StoreConstants.NewsType);
+            var contentsTask = ContentService.GetContentByTypeAsync(StoreId, take, true, StoreConstants.NewsType);
             var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
             var store = StoreService.GetStoreAsync(StoreId);
             var feed = ContentHelper.GetContentsRssFeed(store, contentsTask, categoriesTask, description, StoreConstants.NewsType);
@@ -46,7 +46,6 @@ namespace StoreManagement.Liquid.Controllers
             return new FeedResult(feed, comment);
         }
 
-       [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Blogs(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
         {
             var contentsTask = ContentService.GetContentByTypeAsync(StoreId, take, true, StoreConstants.BlogsType);

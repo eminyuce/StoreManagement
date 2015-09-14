@@ -20,7 +20,7 @@ namespace StoreManagement.Liquid.Controllers
     public class BlogsController : BaseController
     {
 
-        
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Index(int page = 1)
         {
             try
@@ -73,8 +73,7 @@ namespace StoreManagement.Liquid.Controllers
             return View();
         }
 
-        //
-        // GET: /Blogs/
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Blog(String id = "")
         {
             try

@@ -75,25 +75,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>09/12/2015 22:51:23</publishTime>
+      <publishTime>09/14/2015 15:41:50</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/11/2015 16:53:03</publishTime>
+      <publishTime>09/14/2015 15:41:40</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/12/2015 22:51:22</publishTime>
+      <publishTime>09/14/2015 15:41:42</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:24</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>07/30/2015 09:18:16</publishTime>
+      <publishTime>09/14/2015 15:41:15</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Primitives.dll">
       <publishTime>07/30/2015 09:18:24</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>07/30/2015 09:18:16</publishTime>
+      <publishTime>09/14/2015 15:41:15</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -119,6 +119,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>07/30/2015 09:18:35</publishTime>
     </File>
+    <File Include="bin/WebApi.OutputCache.Core.dll">
+      <publishTime>09/14/2015 15:41:15</publishTime>
+    </File>
+    <File Include="bin/WebApi.OutputCache.V2.dll">
+      <publishTime>09/14/2015 15:41:15</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>07/30/2015 09:17:37</publishTime>
     </File>
@@ -126,13 +132,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/18/2015 12:34:28</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/24/2015 12:05:50</publishTime>
+      <publishTime>09/14/2015 15:41:25</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/12/2015 22:35:51</publishTime>
+      <publishTime>09/14/2015 15:42:17</publishTime>
     </File>
   </ItemGroup>
 </Project>

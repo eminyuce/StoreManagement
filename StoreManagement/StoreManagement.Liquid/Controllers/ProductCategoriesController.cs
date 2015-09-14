@@ -14,7 +14,7 @@ namespace StoreManagement.Liquid.Controllers
     {
         private const String PageDesingName = "ProductCategoriesIndex";
 
-
+       [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Index(int page = 1)
         {
             try
@@ -56,6 +56,7 @@ namespace StoreManagement.Liquid.Controllers
 
         //
         // GET: /Product/
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Category(String id = "", int page = 1)
         {
             try

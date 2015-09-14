@@ -18,8 +18,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class HomeController : BaseController
     {
-       
 
+        [OutputCache(CacheProfile = "Cache1Hour")]
         public ActionResult Index()
         {
 

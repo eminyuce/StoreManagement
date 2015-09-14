@@ -232,16 +232,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>09/14/2015 09:39:32</publishTime>
+      <publishTime>09/14/2015 15:11:41</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/14/2015 09:39:24</publishTime>
+      <publishTime>09/14/2015 10:18:51</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/14/2015 09:39:27</publishTime>
+      <publishTime>09/14/2015 10:18:55</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -4642,7 +4642,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:55</publishTime>
     </File>
     <File Include="Scripts/storeManagement.js">
-      <publishTime>09/11/2015 12:17:03</publishTime>
+      <publishTime>09/14/2015 12:14:13</publishTime>
     </File>
     <File Include="Scripts/storesStyleChanger.js">
       <publishTime>07/30/2015 09:17:55</publishTime>
@@ -5059,7 +5059,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/PageDesigns/Index.cshtml">
-      <publishTime>09/14/2015 09:38:06</publishTime>
+      <publishTime>09/14/2015 12:07:09</publishTime>
     </File>
     <File Include="Views/PageDesigns/SaveOrEdit.cshtml">
       <publishTime>09/14/2015 09:38:27</publishTime>
@@ -5446,7 +5446,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/14/2015 09:39:47</publishTime>
+      <publishTime>09/14/2015 11:31:30</publishTime>
     </File>
   </ItemGroup>
 </Project>

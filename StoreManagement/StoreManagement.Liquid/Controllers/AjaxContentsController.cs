@@ -13,10 +13,9 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxContentsController : BaseController
     {
-
-
         public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String desingName = "")
         {
 

@@ -11,13 +11,12 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class BrandsController : BaseController
     {
-        //
-        // GET: /Brands/
+         
         public ActionResult Index()
         {
             return View();
         }
-
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Detail(String id = "")
         {
             try

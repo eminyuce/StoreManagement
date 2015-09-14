@@ -10,6 +10,7 @@ using StoreManagement.Liquid.Helper;
 
 namespace StoreManagement.Liquid.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxGenericsController : BaseController
     {
         public async Task<JsonResult> MainLayout()

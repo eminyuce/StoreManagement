@@ -9,6 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
+        [OutputCache(CacheProfile = "Cache20Minutes")]
     public class PhotoGalleryController : BaseController
     {
         

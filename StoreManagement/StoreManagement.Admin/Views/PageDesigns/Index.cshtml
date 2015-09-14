@@ -109,9 +109,7 @@
                                 <span class="btn btn-xs btn-default" id="SetStateOffAll">Set Selected State False All</span>
 
                             </span>
-                            <span class="col-md-2">
-                            
-                            </span>
+                            <span class="col-md-2"></span>
                         </div>
 
                         <div id="ErrorMessagePanel" style="display: none;" class="alert alert-danger">
@@ -151,90 +149,109 @@
 
 
                     </div>
-                    @Html.Grid(Model).Named(gridName).Columns(columns =>
-                        {
+
+                    <div class="row">
+                        <span class="col-md-7">
+
+                            @Html.Grid(Model).Named(gridName).Columns(columns =>
+                                {
 
 
-                            columns.Add().Encoded(false).
-                                    Sanitized(false).
-                                    SetWidth(10).
-                                    RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
-
-
-
-
-
-                            columns.Add(o => o.Id, true);
-
-                            columns.Add()
-                                   .Encoded(false)
-                                   .Sanitized(false)
-                                   .SetWidth(30)
-                                   .RenderValueAs(d =>
-                                                  @<b>
-                                                      @Html.ActionLink(" ", "SaveOrEdit", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
-                                                  </b>);
-
-                            columns.Add()
-                                   .Encoded(false)
-                                   .Sanitized(false)
-                                   .SetWidth(30)
-                                   .RenderValueAs(d =>
-                                                  @<b>
-                                                      @Html.ActionLink(" ", "Details", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
-                                                  </b>);
-
-                            if (!isRegularUser)
-                            {
-                                columns.Add()
-                                  .Encoded(false)
-                                  .Sanitized(false)
-                                  .SetWidth(30)
-                                  .RenderValueAs(d =>
-                                                 @<b>
-                                                     @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
-                                                 </b>);
-                            }
-
-
-                            columns.Add(c => c.Type)
-                            .Titled("Type");
-
-                            columns.Add(c => c.Name)
-                                   .Titled("Name");
-
-
-                
-
-
-                            columns.Add(o => o.State)
-                                   .Titled("State")
-                                   .Sortable(true)
-                                   .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                    Sanitized(false)
-                                   .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
-                                                                     o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
-
-
-                            columns.Add(o => o.UpdatedDate)
-                                   .Titled("UpdatedDate")
-                                   .Sortable(true)
-                                   .Css("gridDateClass")
-                                    .RenderValueAs(o => o.UpdatedDate != null ? String.Format("{0}", o.UpdatedDate.Value.ToShortDateString()) : null)
-                                   .SortInitialDirection(GridSortDirection.Descending);
-
-
-                            columns.Add(o => o.CreatedDate)
-                                   .Titled("CreatedDate")
-                                   .Sortable(true)
-                                   .Css("gridDateClass")
-                                    .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
-                                   .SortInitialDirection(GridSortDirection.Descending);
+                                    columns.Add().Encoded(false).
+                                            Sanitized(false).
+                                            SetWidth(10).
+                                            RenderValueAs(o => String.Format("<input gridkey-id='{0}'  name='checkboxGrid' type='checkbox'>", o.Id));
 
 
 
-                        }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
+
+                                    columns.Add(o => o.Id, true);
+
+                                    columns.Add()
+                                           .Encoded(false)
+                                           .Sanitized(false)
+                                           .SetWidth(30)
+                                           .RenderValueAs(d =>
+                                                          @<b>
+                                                              @Html.ActionLink(" ", "SaveOrEdit", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                                                          </b>);
+
+                                    columns.Add()
+                                           .Encoded(false)
+                                           .Sanitized(false)
+                                           .SetWidth(30)
+                                           .RenderValueAs(d =>
+                                                          @<b>
+                                                              <input id="detailPageDesing" value="Design" type="button" class="btn btn-primary btn-sm glyphicon glyphicon-pencil glyphicon-white" data-page-desing-item-id="@d.Id"/>
+                                                          </b>);
+
+
+
+                                    if (!isRegularUser)
+                                    {
+                                        columns.Add()
+                                               .Encoded(false)
+                                               .Sanitized(false)
+                                               .SetWidth(30)
+                                               .RenderValueAs(d =>
+                                                              @<b>
+                                                                  @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
+                                                              </b>);
+                                    }
+
+
+                                    columns.Add(c => c.Type)
+                                           .Titled("Type");
+
+                                    columns.Add(c => c.Name)
+                                           .Titled("Name");
+
+
+
+
+
+                                    columns.Add(o => o.State)
+                                           .Titled("State")
+                                           .Sortable(true)
+                                           .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
+                                            Sanitized(false)
+                                           .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
+                                                                             o.Id, (o.State ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.State));
+
+
+                                    columns.Add(o => o.UpdatedDate)
+                                           .Titled("UpdatedDate")
+                                           .Sortable(true)
+                                           .Css("gridDateClass")
+                                           .RenderValueAs(o => o.UpdatedDate != null ? String.Format("{0}", o.UpdatedDate.Value.ToShortDateString()) : null)
+                                           .SortInitialDirection(GridSortDirection.Descending);
+
+
+                                    columns.Add(o => o.CreatedDate)
+                                           .Titled("CreatedDate")
+                                           .Sortable(true)
+                                           .Css("gridDateClass")
+                                           .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
+                                           .SortInitialDirection(GridSortDirection.Descending);
+
+
+
+                                }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
+
+
+
+                        </span>
+                        <span class="col-md-5">
+                            <input type="hidden" id="selecedPageDesingItem" value="-1" />
+
+                            <input class="btn btn-success btn-block btn-lg" id="SavePageDesign" type="submit" value="Save">
+                            <br />
+                            <span class="text-success" id="PageDesignMessage"></span>
+                            <br />
+                            <textarea id="PageDesingText" style="margin: 0px; width: 693px; height: 1400px;"></textarea>
+                        </span>
+                    </div>
 
                 </div>
 
@@ -247,3 +264,44 @@
 
 
 </div>
+
+
+@section scripts
+{
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            bindPageDesingItem();
+            $('#SavePageDesign').click(function () {
+                var postData = JSON.stringify({ "id": $("#selecedPageDesingItem").val(), "text": $("#PageDesingText").val() });
+                ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
+                    $("#PageDesignMessage").text("IT IS SAVED...");
+                });
+            });
+        });
+
+        function bindPageDesingItem() {
+            $('[data-page-desing-item-id]').each(function () {
+                $(this).off("click");
+                $(this).on("click", handlePageDesingItem);
+            });
+        }
+        function handlePageDesingItem(e) {
+            var caller = e.target;
+            var itemId = $(caller).attr('data-page-desing-item-id');
+            var postData = JSON.stringify({ "id": itemId });
+            ajaxMethodCall(postData, "/Ajax/GetPageDesignText", function (data) {
+                $("#PageDesingText").val(data);
+                $("#selecedPageDesingItem").val(itemId);
+                $("#PageDesignMessage").text("");
+            });
+        }
+     
+
+    </script>
+
+}

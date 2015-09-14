@@ -30,6 +30,18 @@ namespace StoreManagement.Admin.Controllers
 
         static readonly TypedObjectCache<Store> UserStoreCache = new TypedObjectCache<Store>("UserStoreCache");
 
+
+        [Inject]
+        public IStoreContext DbContext { set; get; }
+ 
+        protected StoreContext StoreDbContext
+        {
+            get
+            {
+                return (StoreContext)DbContext;
+            }
+        }
+
         [Inject]
         public IItemFileRepository ItemFileRepository { get; set; }
 
@@ -64,8 +76,7 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public ISettingRepository SettingRepository { set; get; }
 
-        [Inject]
-        public IStoreContext DbContext { set; get; }
+     
 
         [Inject]
         public IEmailSender EmailSender { set; get; }

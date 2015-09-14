@@ -9,8 +9,7 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ActivitiesController : BaseController
     {
-        //
-        // GET: /Locations/
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Index()
         {
 

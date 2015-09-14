@@ -107,7 +107,12 @@ function GetPopularProducts() {
 
         var page = parseInt($(this).attr('data-page'));
         var designName = $(this).attr('data-template-design-name');
-        var postData = JSON.stringify({ "page": page, "designName": designName });
+        var categoryId = $(this).attr('data-product-category-id');
+        categoryId = categoryId === undefined ? -1 : categoryId;
+        var brandId = $(this).attr('data-brand-id');
+        brandId = brandId === undefined ? -1 : brandId;
+        
+        var postData = JSON.stringify({ "page": page, "designName": designName, "categoryId": categoryId, "brandId": brandId });
 
         ajaxMethodCall(postData, "/AjaxProducts/GetPopularProducts", function (data) {
             $(truethis).empty();
@@ -123,7 +128,11 @@ function GetRecentProducts() {
 
         var page = parseInt($(this).attr('data-page'));
         var designName = $(this).attr('data-template-design-name');
-        var postData = JSON.stringify({ "page": page, "designName": designName });
+        var categoryId = $(this).attr('data-product-category-id');
+        categoryId = categoryId === undefined ? -1 : categoryId;
+        var brandId = $(this).attr('data-brand-id');
+        brandId = brandId === undefined ? -1 : brandId;
+        var postData = JSON.stringify({ "page": page, "designName": designName, "categoryId": categoryId, "brandId": brandId });
 
         ajaxMethodCall(postData, "/AjaxProducts/GetRecentProducts", function (data) {
             $(truethis).empty();

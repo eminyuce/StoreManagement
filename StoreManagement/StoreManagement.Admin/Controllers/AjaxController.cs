@@ -59,7 +59,7 @@ namespace StoreManagement.Admin.Controllers
                     MemoryCache.Default.Set(key, result, policy);
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
-           
+
             }
         }
 
@@ -774,7 +774,20 @@ namespace StoreManagement.Admin.Controllers
             return Json(moduls, JsonRequestBehavior.AllowGet);
         }
 
-
+        public ActionResult GetPageDesignText(int id)
+        {
+            var item = PageDesignRepository.GetSingle(id);
+            return Json(item.PageTemplate, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SetPageDesignText(int id, String text)
+        {
+            var item = PageDesignRepository.GetSingle(id);
+            item.PageTemplate = text;
+            item.UpdatedDate = DateTime.Now;
+            PageDesignRepository.Edit(item);
+            PageDesignRepository.Save();
+            return Json(item.PageTemplate, JsonRequestBehavior.AllowGet);
+        }
 
     }
 

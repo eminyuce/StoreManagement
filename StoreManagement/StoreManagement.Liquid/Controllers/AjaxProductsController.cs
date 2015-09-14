@@ -13,6 +13,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxProductsController : BaseController
     {
         public async Task<JsonResult> GetProductCategories(String desingName = "")

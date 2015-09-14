@@ -13,8 +13,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ProductsController : BaseController
     {
-       
 
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Index(int page = 1)
         {
             try

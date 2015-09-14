@@ -160,6 +160,43 @@ namespace StoreManagement.Admin.Controllers
 
                 newStoreId = storeCopy.Id;
 
+
+                try
+                {
+                    var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
+                    foreach (var settingStore in settingsStore)
+                    {
+                        var s = GeneralHelper.DataContractSerialization(settingStore);
+                        s.Id = 0;
+                        s.StoreId = newStoreId;
+                        SettingRepository.Add(s);
+                    }
+                    SettingRepository.Save();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "CopyStore", newStoreId);
+                }
+
+
+                try
+                {
+                    var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
+                    foreach (var pageDesing in pageDesings)
+                    {
+                        var s = GeneralHelper.DataContractSerialization(pageDesing);
+                        s.Id = 0;
+                        s.StoreId = newStoreId;
+                        PageDesignRepository.Add(s);
+                    }
+                    PageDesignRepository.Save();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "CopyStore", newStoreId);
+                }
+
+
                 var res = Task.Factory.StartNew(() => CopyStoreData(copyStoreId, newStoreId));
 
 
@@ -360,40 +397,8 @@ namespace StoreManagement.Admin.Controllers
 
         private void CopyStoreData(int copyStoreId, int newStoreId)
         {
-            try
-            {
-                var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
-                foreach (var settingStore in settingsStore)
-                {
-                    var s = GeneralHelper.DataContractSerialization(settingStore);
-                    s.Id = 0;
-                    s.StoreId = newStoreId;
-                    SettingRepository.Add(s);
-                }
-                SettingRepository.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "CopyStore", newStoreId);
-            }
+            StoreDbContext.Configuration.ProxyCreationEnabled = false;
 
-
-            try
-            {
-                var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
-                foreach (var pageDesing in pageDesings)
-                {
-                    var s = GeneralHelper.DataContractSerialization(pageDesing);
-                    s.Id = 0;
-                    s.StoreId = newStoreId;
-                    PageDesignRepository.Add(s);
-                }
-                PageDesignRepository.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "CopyStore", newStoreId);
-            }
 
             try
             {
@@ -411,7 +416,22 @@ namespace StoreManagement.Admin.Controllers
             {
                 Logger.Error(ex, "CopyStore", newStoreId);
             }
-
+            try
+            {
+                var items = LocationRepository.GetLocationsByStoreId(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    LocationRepository.Add(s);
+                }
+                LocationRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
             try
             {
                 var items = EmailListRepository.GetStoreEmailList(copyStoreId, "");
@@ -428,7 +448,22 @@ namespace StoreManagement.Admin.Controllers
             {
                 Logger.Error(ex, "CopyStore", newStoreId);
             }
-
+            try
+            {
+                var items = BrandRepository.GetBrandsByStoreId(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    BrandRepository.Add(s);
+                }
+                BrandRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
             try
             {
                 var items = ContactRepository.GetContactsByStoreId(copyStoreId, "");
@@ -445,11 +480,34 @@ namespace StoreManagement.Admin.Controllers
             {
                 Logger.Error(ex, "CopyStore", newStoreId);
             }
-
-
+            int productCategoryId = 0;
             try
             {
-                var items = CategoryRepository.GetCategoriesByStoreIdWithContent(copyStoreId, null);
+                var items = ProductCategoryRepository.GetProductCategoriesByStoreId(copyStoreId);
+                foreach (var productCategory in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(productCategory);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    ProductCategoryRepository.Add(s);
+                    ProductCategoryRepository.Save();
+
+                    productCategoryId = s.Id;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "ProductCategoryRepository:CopyStore");
+            }
+
+            int blogCategoryId = 0;
+            int newsCategoryId = 0;
+            try
+            {
+
+                var items = CategoryRepository.GetCategoriesByStoreId(copyStoreId, StoreConstants.BlogsType);
                 foreach (var item in items)
                 {
                     var s = GeneralHelper.DataContractSerialization(item);
@@ -458,42 +516,20 @@ namespace StoreManagement.Admin.Controllers
                     CategoryRepository.Add(s);
                     CategoryRepository.Save();
 
-                    var newCategoryId = s.Id;
-                    try
-                    {
-                        foreach (var content in item.Contents)
-                        {
-                            var sContent = GeneralHelper.DataContractSerialization(content);
-                            sContent.Id = 0;
-                            sContent.CategoryId = newCategoryId;
-                            sContent.StoreId = newStoreId;
-                            ContentRepository.Add(sContent);
-                            ContentRepository.Save();
+                    blogCategoryId = s.Id;
 
+                }
 
-                            var newContentId = sContent.Id;
+                items = CategoryRepository.GetCategoriesByStoreId(copyStoreId, StoreConstants.NewsType);
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    CategoryRepository.Add(s);
+                    CategoryRepository.Save();
 
-                            try
-                            {
-                                foreach (var contentFile in content.ContentFiles)
-                                {
-
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.Error(ex, "ContentRepository:CopyStore", newCategoryId);
-                            }
-
-
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error(ex, "ContentRepository:CopyStore", newCategoryId);
-                    }
-
+                    newsCategoryId = s.Id;
 
                 }
 
@@ -504,7 +540,97 @@ namespace StoreManagement.Admin.Controllers
             }
 
 
+            try
+            {
 
+                var items = ProductRepository.GetProductsByStoreId(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.ProductCategoryId = productCategoryId;
+                    s.StoreId = newStoreId;
+                    ProductRepository.Add(s);
+                    ProductRepository.Save();
+
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+            try
+            {
+                var items = ContentRepository.GetContentsByStoreId(copyStoreId, "", StoreConstants.BlogsType);
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    s.CategoryId = blogCategoryId;
+                    ContentRepository.Add(s);
+                    ContentRepository.Save();
+                }
+
+                items = ContentRepository.GetContentsByStoreId(copyStoreId, "", StoreConstants.NewsType);
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    s.CategoryId = newsCategoryId;
+                    ContentRepository.Add(s);
+                    ContentRepository.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+            try
+            {
+
+                var items = LabelRepository.GetLabelsByStoreId(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    LabelRepository.Add(s);
+                    LabelRepository.Save();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+            try
+            {
+
+                var items = ActivityRepository.GetActivitiesByStoreId(copyStoreId, "");
+                foreach (var item in items)
+                {
+                    var s = GeneralHelper.DataContractSerialization(item);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    ActivityRepository.Add(s);
+                    ActivityRepository.Save();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
         }
 
 

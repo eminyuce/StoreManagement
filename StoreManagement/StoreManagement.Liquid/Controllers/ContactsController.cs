@@ -8,8 +8,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ContactsController : BaseController
     {
-        //
-        // GET: /Contacts/
+       
+        [OutputCache(CacheProfile = "Cache20Minutes")]
         public ActionResult Index()
         {
             try

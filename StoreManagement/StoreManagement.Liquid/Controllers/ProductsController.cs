@@ -46,7 +46,7 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
 
-
+            
                 return View(pagingDic);
 
             }

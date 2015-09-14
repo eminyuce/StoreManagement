@@ -96,14 +96,17 @@ namespace StoreManagement.Liquid.Helper
                 {
                     paginator = paginator
                 };
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var pagingHtml = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
 
 
-            var pagingDic = new Dictionary<String, String>();
-            pagingDic.Add(StoreConstants.PagingOutput, indexPageOutput);
-            pagingDic = pagingDic.MergeLeft(pageOutputDictionary);
-            PageOutput.LiquidRenderedResult = pagingDic;
+            //var pagingDic = new Dictionary<String, String>();
+            //pagingDic.Add(StoreConstants.PagingOutput, indexPageOutput);
+            //pagingDic = pagingDic.MergeLeft(pageOutputDictionary);
+            var html = pageOutputDictionary[StoreConstants.PageOutput];
+            pageOutputDictionary[StoreConstants.PageOutput] = HtmlAttributeHelper.AddPaging(html, pagingHtml);
+
+            //PageOutput.LiquidRenderedResult = pagingDic;
             return PageOutput;
         }
 

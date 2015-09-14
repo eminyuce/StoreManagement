@@ -204,24 +204,7 @@
                                    .Titled("Name");
 
 
-               
-                            columns.Add(o => o.IsPagingDown)
-                                         .Titled("IsPagingDown")
-                                         .Sortable(true)
-                                         .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                          Sanitized(false)
-                                         .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
-                                                                           o.Id, (o.IsPagingDown ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.IsPagingDown));
-
-                            columns.Add(o => o.IsPagingUp)
-                                                                  .Titled("IsPagingUp")
-                                                                  .Sortable(true)
-                                                                  .SortInitialDirection(GridSortDirection.Descending).Encoded(false).
-                                                                   Sanitized(false)
-                                                                  .RenderValueAs(o => String.Format("<span  gridkey-id='{0}' grid-data-value='{2}' {1}   name='spanState'> </span>",
-                                                                   o.Id, (o.IsPagingUp ? ProjectAppSettings.OkStyle : ProjectAppSettings.CancelStyle), o.IsPagingUp));
-
-
+                
 
 
                             columns.Add(o => o.State)

@@ -62,8 +62,8 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.PageSize, contents.pageSize.ToStr());
             dic.Add(StoreConstants.PageNumber, contents.page.ToStr());
             dic.Add(StoreConstants.TotalItemCount, contents.totalItemCount.ToStr());
-            dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-            dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+            //dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+            //dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;

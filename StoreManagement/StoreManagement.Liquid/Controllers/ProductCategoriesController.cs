@@ -23,15 +23,27 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
-
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingName);
                 var pageSize = GetSettingValueInt(PageDesingName, StoreConstants.DefaultPageSize);
                 var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
 
                 ProductCategoryHelper.StoreSettings = GetStoreSettings();
-                var dic = ProductCategoryHelper.GetCategoriesIndexPage(pageDesignTask, categories);
+                var pageOutput = ProductCategoryHelper.GetCategoriesIndexPage(pageDesignTask, categories);
 
-                return View(dic);
+
+
+                PagingHelper.StoreSettings = GetStoreSettings();
+                PagingHelper.StoreId = StoreId;
+                PagingHelper.PageOutput = pageOutput;
+                PagingHelper.HttpRequestBase = this.Request;
+                PagingHelper.RouteData = this.RouteData;
+                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
+
+
+                return View(pagingDic);
 
             }
             catch (Exception ex)

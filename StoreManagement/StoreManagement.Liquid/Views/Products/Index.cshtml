@@ -3,23 +3,9 @@
 @model StoreManagement.Data.LiquidEntities.StoreLiquidResult
 @{
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
-
-    
     ViewBag.Title = "Index";
-    var isPagingUp = outputDic.GetOrDefault(StoreConstants.IsPagingUp).ToBool();
-    var isPagingDown = outputDic.GetOrDefault(StoreConstants.IsPagingDown).ToBool(); 
 }
 
-
-@if (isPagingUp)
-{
- @Html.Raw(outputDic.GetOrDefault(StoreConstants.PagingOutput))
-}
-
+ 
  @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))
-
-
-@if (isPagingDown)
-{
- @Html.Raw(outputDic.GetOrDefault(StoreConstants.PagingOutput))
-}
+ 

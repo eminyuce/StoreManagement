@@ -161,6 +161,7 @@
     <Compile Include="GeneralHelper\FileHelper.cs" />
     <Compile Include="GeneralHelper\FilterHelper.cs" />
     <Compile Include="GeneralHelper\GeneralHelper.cs" />
+    <Compile Include="GeneralHelper\HtmlAttributeHelper.cs" />
     <Compile Include="GeneralHelper\HtmlCleanHelper.cs" />
     <Compile Include="GeneralHelper\HtmlMethodExtensions.cs" />
     <Compile Include="GeneralHelper\ImageHelper.cs" />

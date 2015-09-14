@@ -58,8 +58,8 @@ namespace StoreManagement.Liquid.Helper
                 dic.Add(StoreConstants.PageSize, categories.pageSize.ToStr());
                 dic.Add(StoreConstants.PageNumber, categories.page.ToStr());
                 dic.Add(StoreConstants.TotalItemCount, categories.totalItemCount.ToStr());
-                dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-                dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+                //dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+                //dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
                 result.LiquidRenderedResult = dic;
 
@@ -141,8 +141,8 @@ namespace StoreManagement.Liquid.Helper
                 dic.Add(StoreConstants.PageSize, products.pageSize.ToStr());
                 dic.Add(StoreConstants.PageNumber, products.page.ToStr());
                 dic.Add(StoreConstants.TotalItemCount, products.totalItemCount.ToStr());
-                dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-                dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
+                //dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
+               // dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
 

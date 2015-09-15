@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IBrandRepository : IBaseRepository<Brand, int>, IBrandService
+    public interface IBrandRepository : IBaseRepository<Brand, int>, IBrandService, IDisposable 
     {
 
         List<Brand> GetBrandsByStoreId(int storeId, string search);

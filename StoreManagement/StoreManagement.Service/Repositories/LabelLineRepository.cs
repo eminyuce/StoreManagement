@@ -45,5 +45,10 @@ namespace StoreManagement.Service.Repositories
             }
             Save();
         }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

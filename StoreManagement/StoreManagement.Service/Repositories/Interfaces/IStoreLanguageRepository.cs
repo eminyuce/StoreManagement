@@ -8,7 +8,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IStoreLanguageRepository : IBaseRepository<StoreLanguage, int>, IStoreLanguageService
+    public interface IStoreLanguageRepository : IBaseRepository<StoreLanguage, int>, IStoreLanguageService, IDisposable 
     {
         List<StoreLanguage> GetStoreLanguages(int storeId, string search);
     }

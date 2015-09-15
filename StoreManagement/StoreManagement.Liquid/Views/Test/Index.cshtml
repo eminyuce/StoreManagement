@@ -1,0 +1,12 @@
+﻿@model List<StoreManagement.Data.Entities.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach (var p in Model)
+{
+    <div>
+        @p.Name
+    </div>
+}

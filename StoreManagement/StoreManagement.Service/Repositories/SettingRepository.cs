@@ -129,7 +129,11 @@ namespace StoreManagement.Service.Repositories
 
             return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
         }
-
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
     }
 

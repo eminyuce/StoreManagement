@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IFileManagerRepository : IBaseRepository<FileManager, int>, IFileManagerService
+    public interface IFileManagerRepository : IBaseRepository<FileManager, int>, IFileManagerService, IDisposable 
     {
         List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels);
         List<FileManager> GetFilesBySearchKey(int storeId, String search);

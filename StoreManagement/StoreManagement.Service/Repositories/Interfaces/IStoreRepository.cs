@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Web;
 using GenericRepository.EntityFramework;
@@ -6,7 +7,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IStoreRepository : IBaseRepository<Store, int>, IStoreService
+    public interface IStoreRepository : IBaseRepository<Store, int>, IStoreService, IDisposable 
     {
         void DeleteStore(int storeId);
         List<Store> GetAllStores();

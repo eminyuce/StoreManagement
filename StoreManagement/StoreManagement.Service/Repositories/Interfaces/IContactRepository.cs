@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IContactRepository : IBaseRepository<Contact, int>, IContactService
+    public interface IContactRepository : IBaseRepository<Contact, int>, IContactService, IDisposable 
     {
 
         List<Contact> GetContactsByStoreId(int storeId, string search);

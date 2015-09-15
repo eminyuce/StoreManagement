@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IEmailListRepository : IBaseRepository<EmailList, int>, IEmailListService
+    public interface IEmailListRepository : IBaseRepository<EmailList, int>, IEmailListService, IDisposable 
     {
         List<EmailList> GetStoreEmailList(int storeId, String search);
 

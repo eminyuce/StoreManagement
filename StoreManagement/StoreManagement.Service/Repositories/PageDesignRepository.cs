@@ -36,12 +36,17 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public async Task<PageDesign> GetPageDesignByName(int storeId, string name)
+        public Task<PageDesign> GetPageDesignByName(int storeId, string name)
         {
-            PageDesign item = await this.FindAsync(r => r.StoreId == storeId && r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            var item = this.FindAsync(r => r.StoreId == storeId && r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
 
             return item;
 
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -462,6 +462,7 @@
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -545,6 +546,7 @@
     <Content Include="Views\Activities\Index.cshtml" />
     <Content Include="Views\ProductCategories\Category.cshtml" />
     <Content Include="Views\Shared\CssFiles.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

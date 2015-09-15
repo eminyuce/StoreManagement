@@ -31,8 +31,6 @@ namespace StoreManagement.Liquid.Helper
             var isApi = ProjectAppSettings.GetWebConfigBool("IsApiService");
 
 
-            Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
-                         productCategoriesTask);
 
             List<Product> products = null;
             List<Content> blogs = null;
@@ -41,6 +39,18 @@ namespace StoreManagement.Liquid.Helper
             List<FileManager> sliderImages = null;
             List<Category> categories = null;
             List<ProductCategory> productCategories = null;
+
+            Task.WhenAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
+                             productCategoriesTask).Wait();
+            //if (isApi)
+            //{
+            //    Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
+            //            productCategoriesTask);
+            //}
+            //else
+            //{
+              
+            //}
 
 
 
@@ -51,6 +61,8 @@ namespace StoreManagement.Liquid.Helper
             sliderImages = sliderTask.Result;
             categories = categoriesTask.Result;
             productCategories = productCategoriesTask.Result;
+
+            
 
 
 
@@ -115,6 +127,6 @@ namespace StoreManagement.Liquid.Helper
 
             return result;
         }
-
+ 
     }
 }

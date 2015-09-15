@@ -156,6 +156,11 @@ namespace StoreManagement.Service.Repositories
 
             return items;
         }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 
 

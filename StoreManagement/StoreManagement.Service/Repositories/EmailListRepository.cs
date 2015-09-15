@@ -34,5 +34,10 @@ namespace StoreManagement.Service.Repositories
            
             return emailList.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
         }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

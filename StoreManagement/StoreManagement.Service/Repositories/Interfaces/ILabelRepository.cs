@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ILabelRepository : IBaseRepository<Label, int>, ILabelService
+    public interface ILabelRepository : IBaseRepository<Label, int>, ILabelService, IDisposable 
     {
         List<Label> GetActiveLabels(int storeId);
         Label GetLabelByName(string label, int storeId);

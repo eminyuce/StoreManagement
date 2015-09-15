@@ -12,6 +12,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
      
     public interface IBaseRepository<T, TId> : IEntityRepository<T, TId> where T : class, IEntity<TId> where TId : IComparable
     {
-      
+
     }
 }

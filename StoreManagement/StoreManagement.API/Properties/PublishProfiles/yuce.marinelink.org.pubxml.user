@@ -24,10 +24,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2015 12:04:53</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>09/08/2015 10:34:50</publishTime>
+      <publishTime>09/15/2015 12:16:06</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>09/09/2015 12:04:32</publishTime>
+      <publishTime>09/15/2015 12:16:09</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>07/30/2015 09:18:15</publishTime>
@@ -75,13 +75,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>09/14/2015 15:41:50</publishTime>
+      <publishTime>09/15/2015 12:46:39</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/14/2015 15:41:40</publishTime>
+      <publishTime>09/15/2015 12:17:13</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/14/2015 15:41:42</publishTime>
+      <publishTime>09/15/2015 12:46:36</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:24</publishTime>
@@ -138,7 +138,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/14/2015 15:42:17</publishTime>
+      <publishTime>09/15/2015 12:47:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

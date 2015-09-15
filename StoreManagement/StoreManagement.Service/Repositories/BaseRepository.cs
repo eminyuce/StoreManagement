@@ -17,7 +17,9 @@ using StoreManagement.Service.DbContext;
 
 namespace StoreManagement.Service.Repositories
 {
-    public abstract class BaseRepository<T, TId> : EntityRepository<T, TId> where T : class, IEntity<TId> where TId : IComparable
+    public abstract class BaseRepository<T, TId> : EntityRepository<T, TId>
+        where T : class, IEntity<TId>
+        where TId : IComparable
     {
 
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -49,10 +51,19 @@ namespace StoreManagement.Service.Repositories
            // StoreDbContext.Database.Log = message => File.AppendText("C:\\logs\\StoreDbContext_log.txt").WriteLine(message);
             
         }
+        private bool disposed = false;
 
-        
-
-       
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    this.DbContext.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
 
     }
 }

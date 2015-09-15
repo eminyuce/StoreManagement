@@ -36,6 +36,10 @@ namespace StoreManagement.Service.Repositories
             return await BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
 
-
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

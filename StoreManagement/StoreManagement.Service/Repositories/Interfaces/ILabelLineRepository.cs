@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ILabelLineRepository : IBaseRepository<LabelLine, int>, ILabelLineService
+    public interface ILabelLineRepository : IBaseRepository<LabelLine, int>, ILabelLineService, IDisposable 
     {
 
         void DeleteLabelLinesByItem(int itemId, String itemType);

@@ -187,5 +187,11 @@ namespace StoreManagement.Service.Repositories
             return await items;
 
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

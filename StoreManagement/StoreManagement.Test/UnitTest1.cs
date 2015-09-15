@@ -34,6 +34,7 @@ using File = System.IO.File;
 namespace StoreManagement.Test
 {
     [TestClass]
+    [DeploymentItem("EntityFramework.SqlServer.dll")]
     public class UnitTest1
     {
         private const String ConnectionString = "Stores";
@@ -45,6 +46,28 @@ namespace StoreManagement.Test
             //  dbContext = new StoreContext(ConnectionString);
 
         }
+
+        [TestMethod]
+        public void Test33335555()
+        {
+ 
+            int? categoryId = null;
+            int StoreId = 9;
+            IProductService rep = new ProductRepository(new StoreContext(ConnectionString));
+            IContentService rep2 = new ContentRepository(new StoreContext(ConnectionString));
+            IPageDesignService rep3 = new PageDesignRepository(new StoreContext(ConnectionString));
+
+
+            var list = rep.GetProductsByBrandAsync(StoreId, 5, 100, null);
+            var pageDesignTask = rep3.GetPageDesignByName(StoreId, "HomePage");
+            var blogsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, 5);
+            var newsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, 5);
+
+            Task.WhenAll(list, pageDesignTask, blogsTask, newsTask).Wait();
+
+            Console.WriteLine(list.Result.Count);
+        }
+
         [TestMethod]
         public void DovizliAskerlik2()
         {
@@ -73,6 +96,7 @@ namespace StoreManagement.Test
         [TestMethod]
         public void Test3333()
         {
+            var x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
             ProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
             var m = rep.CountAsync(r => r.StoreId == 9);
             Task.WaitAll(m);
@@ -329,7 +353,7 @@ namespace StoreManagement.Test
             Console.WriteLine(productsTask.Result.Count);
 
         }
-      
+
         [TestMethod]
         public void TestGetPageDesignByName()
         {

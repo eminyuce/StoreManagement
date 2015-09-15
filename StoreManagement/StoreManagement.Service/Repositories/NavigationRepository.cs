@@ -73,6 +73,11 @@ namespace StoreManagement.Service.Repositories
         {
             return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 
 

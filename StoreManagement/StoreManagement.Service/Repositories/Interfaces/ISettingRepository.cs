@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ISettingRepository : IBaseRepository<Setting, int>, ISettingService
+    public interface ISettingRepository : IBaseRepository<Setting, int>, ISettingService, IDisposable 
     {
        
 

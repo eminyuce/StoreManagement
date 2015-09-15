@@ -221,7 +221,7 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public async Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        public  Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
         {
             try
             {
@@ -230,8 +230,9 @@ namespace StoreManagement.Service.Repositories
                 var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
                 var itemsResult = items;
-                return await itemsResult;
+                var rt =  itemsResult;
 
+                return rt;
             }
             catch (Exception exception)
             {
@@ -292,6 +293,12 @@ namespace StoreManagement.Service.Repositories
         public List<Product> GetProductsByStoreId(int storeId, String searchKey)
         {
             return BaseEntityRepository.GetActiveBaseEntitiesSearchList(this, storeId, searchKey);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

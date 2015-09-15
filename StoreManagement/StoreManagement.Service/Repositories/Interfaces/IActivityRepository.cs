@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 namespace StoreManagement.Service.Repositories.Interfaces
 {
 
-    public interface IActivityRepository : IBaseRepository<Activity, int>, IActivityService
+    public interface IActivityRepository : IBaseRepository<Activity, int>, IActivityService, IDisposable 
     {
         List<Activity> GetActivitiesByStoreId(int storeId, string search);
     }

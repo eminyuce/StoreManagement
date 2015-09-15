@@ -199,7 +199,7 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public async Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        public  Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
             try
             {
@@ -208,7 +208,7 @@ namespace StoreManagement.Service.Repositories
 
                 var items = this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take);
 
-                return await items;
+                return  items;
 
             }
             catch (Exception exception)
@@ -246,6 +246,11 @@ namespace StoreManagement.Service.Repositories
                 contents = contents.Where(r => r.Name.ToLower().Contains(searchKey.ToLower())).OrderBy(r => r.Name);
             }
             return contents.ToList();
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

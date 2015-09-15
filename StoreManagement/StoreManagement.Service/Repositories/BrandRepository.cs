@@ -33,5 +33,10 @@ namespace StoreManagement.Service.Repositories
         {
             return this.GetSingleAsync(brandId);
         }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

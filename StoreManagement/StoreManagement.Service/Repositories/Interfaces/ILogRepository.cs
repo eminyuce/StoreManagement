@@ -10,7 +10,7 @@ using StoreManagement.Data.LogEntities;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface ILogRepository : IBaseRepository<system_logging, int>
+    public interface ILogRepository : IBaseRepository<system_logging, int>, IDisposable 
     {
         LoggingModel GetApplicationLogs(String appName, String logLevel, int top, int skip, String search = "");
         List<AppNames> GetApplicationNames();

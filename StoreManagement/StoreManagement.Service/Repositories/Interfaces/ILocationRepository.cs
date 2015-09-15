@@ -10,7 +10,7 @@ using StoreManagement.Service.Interfaces;
 namespace StoreManagement.Service.Repositories.Interfaces
 {
 
-    public interface ILocationRepository : IBaseRepository<Location, int>, ILocationService
+    public interface ILocationRepository : IBaseRepository<Location, int>, ILocationService, IDisposable 
     {
         List<Location> GetLocationsByStoreId(int storeId, string search);
     }

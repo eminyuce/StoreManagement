@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IContentFileRepository : IBaseRepository<ContentFile, int>, IContentFileService
+    public interface IContentFileRepository : IBaseRepository<ContentFile, int>, IContentFileService, IDisposable 
     {
         List<ContentFile> GetContentFilesByContentId(int contentId);
         List<ContentFile> GetContentFilesByFileManagerId(int fileManagerId);

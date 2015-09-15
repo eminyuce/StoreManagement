@@ -218,6 +218,10 @@ namespace StoreManagement.Service.Repositories
             return result;
         }
 
-
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

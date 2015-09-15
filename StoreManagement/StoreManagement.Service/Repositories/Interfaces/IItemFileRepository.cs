@@ -9,7 +9,7 @@ using StoreManagement.Service.Interfaces;
 namespace StoreManagement.Service.Repositories.Interfaces
 {
 
-    public interface IItemFileRepository : IBaseRepository<ItemFile, int>, IItemFileService
+    public interface IItemFileRepository : IBaseRepository<ItemFile, int>, IItemFileService, IDisposable 
     {
 
     }

@@ -20,7 +20,14 @@ namespace StoreManagement.Liquid.Controllers
             var blogsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, 5);
             var newsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, 5);
 
-           await  Task.WhenAll(list, pageDesignTask, blogsTask, newsTask);
+            Task.WaitAny(list);
+            Task.WaitAny(pageDesignTask);
+            Task.WaitAny(blogsTask);
+            Task.WaitAny(newsTask);
+
+          //  var list2 = await list;
+          //  var pageDesignTask2 = await pageDesignTask;
+          // Task.WhenAll(list, pageDesignTask, blogsTask, newsTask).Wait();
 
             return View(list.Result);
         }

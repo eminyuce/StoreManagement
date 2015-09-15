@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using GenericRepository.EntityFramework.Enums;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
 using Google.Apis.Drive.v2.Data;
@@ -50,7 +51,7 @@ namespace StoreManagement.Test
         [TestMethod]
         public void Test33335555()
         {
- 
+
             int? categoryId = null;
             int StoreId = 9;
             IProductService rep = new ProductRepository(new StoreContext(ConnectionString));
@@ -92,6 +93,16 @@ namespace StoreManagement.Test
             Console.WriteLine("Total: " + total);
             Console.WriteLine(String.Format("Left:{0} {1}  {2}", left, left / 30, dt4.AddDays(left).ToShortDateString()));
 
+        }
+
+        [TestMethod]
+        public void Test3333444()
+        {
+            var x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
+            ProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
+            var m = rep.GetFirstAsync(r => r.StoreId, OrderByType.Descending);
+            Task.WaitAll(m);
+            Console.Write(m.Result.Id);
         }
         [TestMethod]
         public void Test3333()

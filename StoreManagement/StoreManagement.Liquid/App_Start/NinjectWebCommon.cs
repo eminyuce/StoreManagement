@@ -122,54 +122,54 @@ namespace StoreManagement.Liquid.App_Start
             else
             {
 
-                //kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
-                //kernel.Bind<IContentService>().To<ContentRepository>().InRequestScope();
-                //var m = kernel.Bind<IStoreService>().To<StoreRepository>().InRequestScope();
-                //kernel.Bind<ISettingService>().To<SettingRepository>().InRequestScope();
-                //kernel.Bind<IFileManagerService>().To<FileManagerRepository>().InRequestScope();
-                //kernel.Bind<ICategoryService>().To<CategoryRepository>().InRequestScope();
-                //kernel.Bind<IPageDesignService>().To<PageDesignRepository>().InRequestScope();
-                //kernel.Bind<IContentFileService>().To<ContentFileRepository>().InRequestScope();
-                //kernel.Bind<IStoreUserService>().To<StoreUserRepository>().InRequestScope();
+                kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+                kernel.Bind<IContentService>().To<ContentRepository>().InRequestScope();
+                var m = kernel.Bind<IStoreService>().To<StoreRepository>().InRequestScope();
+                kernel.Bind<ISettingService>().To<SettingRepository>().InRequestScope();
+                kernel.Bind<IFileManagerService>().To<FileManagerRepository>().InRequestScope();
+                kernel.Bind<ICategoryService>().To<CategoryRepository>().InRequestScope();
+                kernel.Bind<IPageDesignService>().To<PageDesignRepository>().InRequestScope();
+                kernel.Bind<IContentFileService>().To<ContentFileRepository>().InRequestScope();
+                kernel.Bind<IStoreUserService>().To<StoreUserRepository>().InRequestScope();
 
-                //kernel.Bind<INavigationService>().To<NavigationRepository>().InRequestScope();
-                //kernel.Bind<IProductService>().To<ProductRepository>().InRequestScope();
-                //kernel.Bind<IProductFileService>().To<ProductFileRepository>().InRequestScope();
-                //kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>().InRequestScope();
-                //kernel.Bind<ILocationService>().To<LocationRepository>().InRequestScope();
-                //kernel.Bind<IBrandService>().To<BrandRepository>().InRequestScope();
-                //kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>().InRequestScope();
-                //kernel.Bind<IItemFileService>().To<ItemFileRepository>().InRequestScope();
-                //kernel.Bind<ILabelService>().To<LabelRepository>().InRequestScope();
-                //kernel.Bind<IContactService>().To<ContactRepository>().InRequestScope();
-                //kernel.Bind<IActivityService>().To<ActivityRepository>().InRequestScope();
-                //kernel.Bind<ICommentService>().To<CommentRepository>().InRequestScope();
-
-
+                kernel.Bind<INavigationService>().To<NavigationRepository>().InRequestScope();
+                kernel.Bind<IProductService>().To<ProductRepository>().InRequestScope();
+                kernel.Bind<IProductFileService>().To<ProductFileRepository>().InRequestScope();
+                kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>().InRequestScope();
+                kernel.Bind<ILocationService>().To<LocationRepository>().InRequestScope();
+                kernel.Bind<IBrandService>().To<BrandRepository>().InRequestScope();
+                kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>().InRequestScope();
+                kernel.Bind<IItemFileService>().To<ItemFileRepository>().InRequestScope();
+                kernel.Bind<ILabelService>().To<LabelRepository>().InRequestScope();
+                kernel.Bind<IContactService>().To<ContactRepository>().InRequestScope();
+                kernel.Bind<IActivityService>().To<ActivityRepository>().InRequestScope();
+                kernel.Bind<ICommentService>().To<CommentRepository>().InRequestScope();
 
 
 
-                //kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
-                kernel.Bind<IContentService>().To<ContentRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IStoreService>().To<StoreRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ISettingService>().To<SettingRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IFileManagerService>().To<FileManagerRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ICategoryService>().To<CategoryRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IPageDesignService>().To<PageDesignRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IContentFileService>().To<ContentFileRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IStoreUserService>().To<StoreUserRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<INavigationService>().To<NavigationRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IProductService>().To<ProductRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IProductFileService>().To<ProductFileRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ILocationService>().To<LocationRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IBrandService>().To<BrandRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IItemFileService>().To<ItemFileRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ILabelService>().To<LabelRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IContactService>().To<ContactRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IActivityService>().To<ActivityRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ICommentService>().To<CommentRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName)); 
+
+
+                ////kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+                //kernel.Bind<IContentService>().To<ContentRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IStoreService>().To<StoreRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<ISettingService>().To<SettingRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IFileManagerService>().To<FileManagerRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<ICategoryService>().To<CategoryRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IPageDesignService>().To<PageDesignRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IContentFileService>().To<ContentFileRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IStoreUserService>().To<StoreUserRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<INavigationService>().To<NavigationRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IProductService>().To<ProductRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IProductFileService>().To<ProductFileRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<ILocationService>().To<LocationRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IBrandService>().To<BrandRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IItemFileService>().To<ItemFileRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<ILabelService>().To<LabelRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IContactService>().To<ContactRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<IActivityService>().To<ActivityRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+                //kernel.Bind<ICommentService>().To<CommentRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName)); 
   
             }
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();

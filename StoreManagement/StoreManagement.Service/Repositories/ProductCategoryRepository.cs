@@ -124,7 +124,7 @@ namespace StoreManagement.Service.Repositories
             {
                 Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
-                var items = this.FindAllAsync(match, null);
+                var items = this.FindAllAsync(match, null, null);
                 return await items;
 
             }
@@ -141,7 +141,7 @@ namespace StoreManagement.Service.Repositories
                 && r2.State == isActive.HasValue ? isActive.Value : r2.State
                 && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
-            var items = this.FindAllAsync(match, null);
+            var items = this.FindAllAsync(match, null, null);
             Task.WaitAll(items);
             var itemsResult = items.Result;
             var c = itemsResult.OrderBy(r => r.Ordering).ToList();
@@ -182,7 +182,7 @@ namespace StoreManagement.Service.Repositories
 
             Expression<Func<ProductCategory, bool>> match = r => r.StoreId == storeId && productCategories.Contains(r.Id);
 
-            var items = this.FindAllAsync(match, null);
+            var items = this.FindAllAsync(match, null, null);
 
             return await items;
 

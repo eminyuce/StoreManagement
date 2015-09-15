@@ -90,7 +90,7 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 Expression<Func<Setting, bool>> match = r2 => r2.StoreId == storeid && r2.State;
-                var items = this.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, null);
+                var items = this.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, null, null);
 
                 var itemsResult = items;
 

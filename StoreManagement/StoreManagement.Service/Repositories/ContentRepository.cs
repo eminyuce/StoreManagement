@@ -158,7 +158,7 @@ namespace StoreManagement.Service.Repositories
                     && r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
                     && r.CategoryId == categoryId
                     && r.Id != (excludedContentId.HasValue ? excludedContentId.Value : r.Id);
-                return await this.FindAllIncludingAsync(match, take, r1 => r1.Ordering, OrderByType.Descending, r1 => r1.ContentFiles.Select(r2 => r2.FileManager));
+                return await this.FindAllIncludingAsync(match, take, null, r1 => r1.Ordering, OrderByType.Descending, r1 => r1.ContentFiles.Select(r2 => r2.FileManager));
             }
             catch (Exception exception)
             {
@@ -199,24 +199,23 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public  Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
             try
             {
                 Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase)
                     && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) && r2.State && r2.MainPage;
 
-                var items = this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take);
+                var items = this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take, null);
 
-                return  items;
+                return items;
 
             }
             catch (Exception exception)
             {
                 Logger.Error(exception);
-                return null;
+                return Task.Run(() => new List<Content>());
             }
-
         }
 
         public async Task<List<Content>> GetContentByTypeAsync(int storeId, int? take, bool? isActive, string typeName)
@@ -226,7 +225,7 @@ namespace StoreManagement.Service.Repositories
                 Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
 
-                var items = this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take);
+                var items = this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take, null);
 
                 return await items;
 

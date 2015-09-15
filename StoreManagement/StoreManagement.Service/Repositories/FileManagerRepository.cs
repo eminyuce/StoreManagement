@@ -95,7 +95,7 @@ namespace StoreManagement.Service.Repositories
             {
                 Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId && r2.State;
                 Expression<Func<FileManager, int>> keySelector = t => t.Ordering;
-                var items = this.FindAllIncludingAsync(match, null, keySelector, OrderByType.Descending);
+                var items = this.FindAllIncludingAsync(match, null, null, keySelector, OrderByType.Descending);
                 return await items;
             }
             catch (Exception exception)
@@ -111,7 +111,7 @@ namespace StoreManagement.Service.Repositories
             {
                 Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.IsCarousel;
                 Expression<Func<FileManager, int>> keySelector = t => t.Ordering;
-                var items = this.FindAllIncludingAsync(match, take, keySelector, OrderByType.Descending);
+                var items = this.FindAllIncludingAsync(match, take, null, keySelector, OrderByType.Descending);
                 return await items;
             }
             catch (Exception exception)

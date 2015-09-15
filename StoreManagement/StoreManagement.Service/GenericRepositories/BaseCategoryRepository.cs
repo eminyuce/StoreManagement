@@ -57,14 +57,14 @@ namespace StoreManagement.Service.GenericRepositories
                 return null;
             }
         }
-        public static async Task<List<T>> GetCategoriesByStoreIdAsync<T>(IBaseRepository<T, int> repository, int storeId, String type, bool? isActive, int? take) where T : BaseCategory
+        public static async Task<List<T>> GetCategoriesByStoreIdAsync<T>(IBaseRepository<T, int> repository, int storeId, String type, bool? isActive, int? take, int? skip = null) where T : BaseCategory
         {
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId
                     && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
-                var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take);
+                var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take, skip);
                 var itemsResult = items;
                 return await itemsResult;
             }

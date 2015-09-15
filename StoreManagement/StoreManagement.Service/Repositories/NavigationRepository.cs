@@ -53,7 +53,7 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 Expression<Func<Navigation, bool>> match = r2 => r2.StoreId == storeId && r2.State ;
-                var items = this.FindAllAsync(match, null);
+                var items = this.FindAllAsync(match, null,null);
 
                 var itemsResult = items;
 

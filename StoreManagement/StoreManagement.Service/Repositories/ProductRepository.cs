@@ -165,7 +165,7 @@ namespace StoreManagement.Service.Repositories
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.MainPage;
                 Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
-                var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, includeProperties);
+                var items = this.FindAllIncludingAsync(match, take, null, t => t.Ordering, OrderByType.Descending, includeProperties);
 
                 var itemsResult = items;
 
@@ -185,7 +185,7 @@ namespace StoreManagement.Service.Repositories
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
                 Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
-                var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, includeProperties);
+                var items = this.FindAllIncludingAsync(match, take, null, t => t.Ordering, OrderByType.Descending, includeProperties);
 
                 var itemsResult = items;
 
@@ -206,7 +206,7 @@ namespace StoreManagement.Service.Repositories
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.ProductCategoryId == categoryId && r2.Id
                     != (excludedProductId.HasValue ? excludedProductId.Value : r2.Id);
                 Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
-                var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, includeProperties);
+                var items = this.FindAllIncludingAsync(match, take,null, t => t.Ordering, OrderByType.Descending, includeProperties);
 
                 var itemsResult = items;
 
@@ -227,7 +227,7 @@ namespace StoreManagement.Service.Repositories
             {
                 int excludedProductId2 = excludedProductId.HasValue ? excludedProductId.Value : 0;
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId && r2.Id != excludedProductId2;
-                var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                var items = this.FindAllIncludingAsync(match, take, null, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
                 var itemsResult = items;
                 var rt =  itemsResult;
@@ -279,7 +279,7 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.MainPage;
-                var items = this.FindAllIncludingAsync(match, take, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                var items = this.FindAllIncludingAsync(match, take,null, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 Task.WaitAll(items);
                 return items.Result;
             }

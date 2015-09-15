@@ -40,17 +40,23 @@ namespace StoreManagement.Liquid.Helper
             List<Category> categories = null;
             List<ProductCategory> productCategories = null;
 
-            Task.WhenAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
-                             productCategoriesTask).Wait();
-            //if (isApi)
-            //{
-            //    Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
-            //            productCategoriesTask);
-            //}
-            //else
-            //{
-              
-            //}
+           
+            if (isApi)
+            {
+                Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
+                        productCategoriesTask);
+            }
+            else
+            {
+                Task.WaitAny(productsTask);
+                Task.WaitAny(blogsTask);
+                Task.WaitAny(newsTask);
+                Task.WaitAny(pageDesignTask);
+                Task.WaitAny(sliderTask);
+                Task.WaitAny(categoriesTask);
+                Task.WaitAny(productCategoriesTask);
+
+            }
 
 
 

@@ -221,7 +221,7 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public  Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
+        public  async Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId)
         {
             try
             {
@@ -230,14 +230,14 @@ namespace StoreManagement.Service.Repositories
                 var items = this.FindAllIncludingAsync(match, take, null, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
                 var itemsResult = items;
-                var rt =  itemsResult;
+                var rt = await itemsResult;
 
                 return rt;
             }
             catch (Exception exception)
             {
                 Logger.Error(exception);
-                return null;
+                return new List<Product>();
             }
         }
 

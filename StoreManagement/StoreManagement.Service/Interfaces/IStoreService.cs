@@ -16,6 +16,7 @@ namespace StoreManagement.Service.Interfaces
         Store GetStoreByUserName(String userName);
         Boolean GetStoreCacheStatus(int id);
         int GetStoreIdByDomain(string domainName);
+        Task<Store> GetStoreIdByDomainAsync(string domainName);
         Task<Store> GetStoreAsync(int storeId);
     }
 }

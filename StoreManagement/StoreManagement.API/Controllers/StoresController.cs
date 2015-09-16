@@ -59,6 +59,11 @@ namespace StoreManagement.API.Controllers
             return this.StoreRepository.GetStoreIdByDomain(domainName);
         }
 
+        public Task<Store> GetStoreIdByDomainAsync(string domainName)
+        {
+            return this.StoreRepository.GetStoreIdByDomainAsync(domainName);
+        }
+
         public async Task<Store> GetStoreAsync(int storeId)
         {
             return await this.StoreRepository.GetStoreAsync(storeId);

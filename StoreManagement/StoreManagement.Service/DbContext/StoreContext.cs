@@ -13,7 +13,10 @@ namespace StoreManagement.Service.DbContext
     public class StoreContext : EntitiesContext, IStoreContext
     {
 
-        public StoreContext(String nameOrConnectionString) : base(nameOrConnectionString) { }
+        public StoreContext(String nameOrConnectionString) : base(nameOrConnectionString)
+        {
+            this.Database.CommandTimeout = int.MaxValue;
+        }
 
         public IDbSet<ContentFile> ContentFiles { get; set; }
         public IDbSet<Content> Contents { get; set; }

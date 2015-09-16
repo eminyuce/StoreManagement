@@ -67,6 +67,10 @@ namespace StoreManagement.Test
             Task.WhenAll(list, pageDesignTask, blogsTask, newsTask).Wait();
 
             Console.WriteLine(list.Result.Count);
+            Console.WriteLine(pageDesignTask.Result.Id);
+            Console.WriteLine(blogsTask.Result.Count);
+            Console.WriteLine(newsTask.Result.Count);
+
         }
 
         [TestMethod]
@@ -94,7 +98,15 @@ namespace StoreManagement.Test
             Console.WriteLine(String.Format("Left:{0} {1}  {2}", left, left / 30, dt4.AddDays(left).ToShortDateString()));
 
         }
-
+        [TestMethod]
+        public void Test333344466()
+        {
+          
+            StoreRepository rep = new StoreRepository(new StoreContext(ConnectionString));
+            var m = rep.GetStoreIdByDomainAsync("login.seatechnologyjobs.com");
+            Task.WaitAny(m);
+            Console.Write(m.Result.Id);
+        }
         [TestMethod]
         public void Test3333444()
         {

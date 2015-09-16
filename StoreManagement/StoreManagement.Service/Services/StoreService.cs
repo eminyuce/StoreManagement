@@ -69,6 +69,13 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResult<int>(url);
         }
 
+        public Task<Store> GetStoreIdByDomainAsync(string domainName)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetStoreIdByDomainAsync?storeId={2}", WebServiceAddress, ApiControllerName, domainName);
+            SetCache();
+            return HttpRequestHelper.GetUrlResultAsync<Store>(url);
+        }
+
         public Task<Store> GetStoreAsync(int storeId)
         {
             string url = string.Format("http://{0}/api/{1}/GetStoreAsync?storeId={2}", WebServiceAddress, ApiControllerName, storeId);

@@ -176,6 +176,12 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public async Task<Store> GetStoreIdByDomainAsync(string domainName)
+        {
+            Store store = await this.FindAsync(r => r.Domain.Equals(domainName, StringComparison.InvariantCultureIgnoreCase));
+            return store;
+        }
+
         public Task<Store> GetStoreAsync(int storeId)
         {
             return GetSingleAsync(storeId);

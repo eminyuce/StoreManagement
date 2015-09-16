@@ -17,7 +17,7 @@ namespace StoreManagement.Liquid.Controllers
     {
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1, String search="")
         {
             try
             {
@@ -27,7 +27,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
                 var newsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsIndex");
-                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize));
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize),search);
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
 
 

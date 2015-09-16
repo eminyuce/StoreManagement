@@ -15,7 +15,7 @@ namespace StoreManagement.Liquid.Controllers
     {
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1, String search = "")
         {
             try
             {

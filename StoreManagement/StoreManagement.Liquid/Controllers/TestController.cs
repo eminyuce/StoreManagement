@@ -17,23 +17,13 @@ namespace StoreManagement.Liquid.Controllers
     {
         //
         // GET: /Test/
+
+
+        [AsyncTimeout(150)]
+        [HandleError(ExceptionType = typeof(TimeoutException), View = "TimeoutError")]
         public async Task<ActionResult> Index()
         {
             int? categoryId = null;
-          //  var list = ProductService.GetProductsByBrandAsync(StoreId, 5, 100, null);
-          //  var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePage");
-          //  //var blogsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, 5);
-          //  //var newsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, 5);
-
-          //  //Task.WaitAny(list);
-          //  //Task.WaitAny(pageDesignTask);
-          //  //Task.WaitAny(blogsTask);
-          //  //Task.WaitAny(newsTask);
-
-          ////  var list2 = await list;
-          ////  var pageDesignTask2 = await pageDesignTask;
-         
-          //  Task.WhenAll(list, pageDesignTask).Wait();
 
             String ConnectionString = "Stores";
 

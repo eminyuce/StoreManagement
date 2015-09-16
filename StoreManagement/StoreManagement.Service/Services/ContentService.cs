@@ -117,6 +117,18 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlPagedResultsAsync<Content>(url);
         }
 
+        public Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize,
+                                               string search)
+        {
+            SetCache();
+            string url = string.Format("http://{0}/api/{1}/GetContentsCategoryIdAsync?storeId={2}" +
+                                       "&categoryId={3}" +
+                                       "&typeName={4}" +
+                                       "&isActive={5}&page={6}&pageSize={7}&search={8}",
+                                       WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive, page, pageSize, search);
+            return HttpRequestHelper.GetUrlPagedResultsAsync<Content>(url);
+        }
+
         public Task<Content> GetContentByIdAsync(int id)
         {
             string url = string.Format("http://{0}/api/{1}/GetContentByIdAsync?id={2}", WebServiceAddress, ApiControllerName, id);
@@ -140,7 +152,7 @@ namespace StoreManagement.Service.Services
         public Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
             SetCache();
-            string url = string.Format("http://{0}/api/{1}/GetMainPageContentsAsync?storeId={2}&categoryId={3}&type={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, categoryId,type, take);
+            string url = string.Format("http://{0}/api/{1}/GetMainPageContentsAsync?storeId={2}&categoryId={3}&type={4}&take={5}", WebServiceAddress, ApiControllerName, storeId, categoryId, type, take);
             return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
         }
 

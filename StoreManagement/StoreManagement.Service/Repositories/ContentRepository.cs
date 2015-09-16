@@ -136,12 +136,63 @@ namespace StoreManagement.Service.Repositories
             return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
 
-        public Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            var res = Task.FromResult(GetContentsCategoryId(storeId, categoryId, typeName, isActive, page, pageSize));
-            return res;
+            Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) && r2.MainPage;
+            Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
+
+            var items = await this.FindAllIncludingAsync(match, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
+            var totalItemNumber = await this.CountAsync(match);
 
 
+            var task = Task.Factory.StartNew(() =>
+                {
+
+                    StorePagedList<Content> resultItems = new StorePagedList<Content>(items, page, pageSize, totalItemNumber);
+                    return resultItems;
+                });
+            var result = await task;
+
+            return result;
+
+        }
+
+        public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize,
+                                               string search)
+        {
+
+
+
+            Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId
+                                                          && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
+                                                          &&
+                                                          r2.CategoryId ==
+                                                          (categoryId.HasValue ? categoryId.Value : r2.CategoryId) &&
+                                                          r2.MainPage;
+
+
+            var predicate = PredicateBuilder.Create<Content>(match);
+
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                predicate = predicate.And(r => r.Name.Contains(search.ToLower()));
+            }
+
+             Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
+
+             var items = await this.FindAllIncludingAsync(predicate, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
+             var totalItemNumber = await this.CountAsync(predicate);
+
+
+            var task = Task.Factory.StartNew(() =>
+                {
+
+                    StorePagedList<Content> resultItems = new StorePagedList<Content>(items, page, pageSize, totalItemNumber);
+                    return resultItems;
+                });
+            var result = await task;
+
+            return result;
         }
 
         public async Task<Content> GetContentByIdAsync(int blogId)
@@ -199,7 +250,7 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public  async Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
+        public async Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take)
         {
             try
             {
@@ -225,7 +276,7 @@ namespace StoreManagement.Service.Repositories
                 Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
 
-                var items =await this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take, null);
+                var items = await this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take, null);
 
                 return items;
 

@@ -70,7 +70,7 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductCategoryPage");
                 var pageSize = GetSettingValueInt("ProductCategoryPage_ItemsNumber", StoreConstants.DefaultPageSize);
                 var categories = ProductCategoryService.GetProductCategoryAsync(categoryId);
-                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, pageSize);
+                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, categoryId, StoreConstants.ProductType, true, page, pageSize);
 
                 ProductCategoryHelper.StoreSettings = GetStoreSettings();
                 ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoryPage_ImageWidth", 50);

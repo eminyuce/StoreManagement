@@ -47,7 +47,21 @@ namespace StoreManagement.Test
             //  dbContext = new StoreContext(ConnectionString);
 
         }
+        [TestMethod]
+        public void GetContentsCategoryIdAsyncSearch()
+        {
 
+            int? categoryId = null;
+            int StoreId = 9;
+            IContentService rep2 = new ContentRepository(new StoreContext(ConnectionString));
+
+
+            var blogsTask = rep2.GetContentsCategoryIdAsync(StoreId, categoryId, StoreConstants.BlogsType, true,1, 50, "salvage");
+
+            Task.WhenAll(blogsTask).Wait();
+    
+
+        }
         [TestMethod]
         public void Test33335555()
         {

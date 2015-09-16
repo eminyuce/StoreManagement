@@ -173,6 +173,19 @@ namespace StoreManagement.API.Controllers
             return items;
         }
 
+        public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize,
+                                               string search)
+        {
+            var items = await this.ContentRepository.GetContentsCategoryIdAsync(storeId,
+                         categoryId,
+                         typeName,
+                         isActive,
+                         page,
+                         pageSize, search);
+
+            return items;
+        }
+
         public async Task<Content> GetContentByIdAsync(int id)
         {
             return await this.ContentRepository.GetContentByIdAsync(id);

@@ -50,28 +50,37 @@ namespace StoreManagement.Liquid.Helper
                 }
 
                 String queryString = "";
-                foreach (var key in rv.Keys)
+                var idExists = rv.Keys.Count == 1 && rv.ContainsKey("id");
+                for (int i = rv.Count - 1; i >= 0; i--)
                 {
-                    if (key.Equals("id", StringComparison.InvariantCultureIgnoreCase))
+                    var item = rv.ElementAt(i);
+                    var itemKey = item.Key;
+                    var itemValue = item.Value;
+
+                    if (itemKey.Equals("id", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        queryString += "/" + rv[key];
+                        queryString += "/" + rv[itemKey];
                     }
                     else
                     {
-                        queryString += "&" + key + "=" + rv[key];
+                        queryString += (i == 0 ? "?" : "&") + itemKey + "=" + itemValue;
                     }
                 }
 
-                if (ActionName.Equals("Index", StringComparison.InvariantCultureIgnoreCase))
-                {
+                //if (ActionName.Equals("Index", StringComparison.InvariantCultureIgnoreCase))
+                //{
 
-                    return String.Format("{0}page=:num", String.IsNullOrEmpty(queryString) ? "?" : queryString + "&");
-                }
-                else
-                {
-                    String m = rv.Keys.Count == 1  && rv.ContainsKey("id") ? "?" : "&";
-                    return String.Format("/{2}/{0}{1}page=:num", ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName);
-                }
+                //    //return String.Format("{0}page=:num", String.IsNullOrEmpty(queryString) ? "?" : queryString + "&");
+                //    return String.Format("/{2}/{0}{1}page=:num", ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName);
+                //}
+                //else
+                //{
+
+                //}
+
+
+                String m = idExists ? "?" : "&";
+                return String.Format("/{2}/{0}{1}page=:num", ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName);
             }
         }
 
@@ -115,3 +124,4 @@ namespace StoreManagement.Liquid.Helper
 
     }
 }
+

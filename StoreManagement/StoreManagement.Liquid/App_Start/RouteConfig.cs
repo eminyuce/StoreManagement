@@ -24,6 +24,7 @@ namespace StoreManagement.Liquid
           );
 
 
+
             routes.MapRoute(
                       name: "ProductsDetail",
                       url: "Products/Product/{categoryName}/{id}",

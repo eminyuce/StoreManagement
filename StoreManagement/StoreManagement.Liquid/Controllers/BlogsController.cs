@@ -21,7 +21,7 @@ namespace StoreManagement.Liquid.Controllers
     {
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1, String search = "")
         {
             try
             {
@@ -29,10 +29,12 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
+               // String search = id;
+                int ? categoryId = null;
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
                 var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndex");
-                var take = GetSettingValueInt("BlogsIndex_PageSize", StoreConstants.DefaultPageSize);
-                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.BlogsType, true, page, take);
+                var pageSize = GetSettingValueInt("BlogsIndex_PageSize", StoreConstants.DefaultPageSize);
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, categoryId, StoreConstants.BlogsType, true, page, pageSize, search);
                 var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
 
 
@@ -101,6 +103,6 @@ namespace StoreManagement.Liquid.Controllers
                 return new HttpStatusCodeResult(500);
             }
         }
- 
+
     }
 }

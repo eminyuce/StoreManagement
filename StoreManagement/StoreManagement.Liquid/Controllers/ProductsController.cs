@@ -15,7 +15,7 @@ namespace StoreManagement.Liquid.Controllers
     {
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index(int page = 1, String search = "")
+        public async Task<ActionResult> Index(int page = 1, String search = "")
         {
             try
             {
@@ -23,18 +23,30 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
-                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
-                var productsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductsIndex");
+
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductsIndex");
                 var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize));
-                var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+                var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
 
 
                 ProductHelper.StoreSettings = GetStoreSettings();
                 ProductHelper.ImageWidth = GetSettingValueInt("ProductsIndex_ImageWidth", 50);
                 ProductHelper.ImageHeight = GetSettingValueInt("ProductsIndex_ImageHeight", 50);
 
-                var pageOutput = ProductHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories);
 
+                await Task.WhenAll(pageDesignTask, productsTask, categoriesTask);
+                var products = productsTask.Result;
+                var pageDesign = pageDesignTask.Result;
+                var categories = categoriesTask.Result;
+
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
+                var pageOutput = ProductHelper.GetProductsIndexPage(products, pageDesign, categories);
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
                 PagingHelper.StoreSettings = GetStoreSettings();
@@ -44,9 +56,10 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.RouteData = this.RouteData;
                 PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
+                await Task.WhenAll(pagingPageDesignTask);
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
 
-            
+
                 return View(pagingDic);
 
             }
@@ -65,7 +78,7 @@ namespace StoreManagement.Liquid.Controllers
             return View();
         }
 
-        public ActionResult Product(String id = "")
+        public async Task<ActionResult> Product(String id = "")
         {
 
             try
@@ -83,7 +96,14 @@ namespace StoreManagement.Liquid.Controllers
                 ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
                 ProductHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
                 ProductHelper.StoreSettings = GetStoreSettings();
-                var dic = ProductHelper.GetProductsDetailPage(productsTask, productsPageDesignTask, categoryTask);
+
+                await Task.WhenAll(productsPageDesignTask, productsTask, categoryTask);
+                var product = productsTask.Result;
+                var pageDesign = productsPageDesignTask.Result;
+                var category = categoryTask.Result;
+
+
+                var dic = ProductHelper.GetProductsDetailPage(product, pageDesign, category);
 
                 return View(dic);
 
@@ -101,6 +121,6 @@ namespace StoreManagement.Liquid.Controllers
 
             return View();
         }
- 
+
     }
 }

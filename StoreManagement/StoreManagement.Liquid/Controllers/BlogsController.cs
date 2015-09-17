@@ -21,7 +21,7 @@ namespace StoreManagement.Liquid.Controllers
     {
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index(int page = 1, String search = "")
+        public async Task<ActionResult> Index(int page = 1, String search = "")
         {
             try
             {
@@ -31,11 +31,11 @@ namespace StoreManagement.Liquid.Controllers
                 }
                // String search = id;
                 int ? categoryId = null;
-                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
-                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndex");
+
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndex");
                 var pageSize = GetSettingValueInt("BlogsIndex_PageSize", StoreConstants.DefaultPageSize);
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, categoryId, StoreConstants.BlogsType, true, page, pageSize, search);
-                var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
+                var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
 
 
 
@@ -43,8 +43,18 @@ namespace StoreManagement.Liquid.Controllers
                 ContentHelper.ImageWidth = GetSettingValueInt("BlogsIndex_ImageWidth", 50);
                 ContentHelper.ImageHeight = GetSettingValueInt("BlogsIndex_ImageHeight", 50);
 
-                var pageOutput = ContentHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
+                await Task.WhenAll(pageDesignTask, contentsTask, categoriesTask);
+                var contents = contentsTask.Result;
+                var pageDesign = pageDesignTask.Result;
+                var categories = categoriesTask.Result;
 
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+                var pageOutput = ContentHelper.GetContentsIndexPage(contents, pageDesign, categories, StoreConstants.BlogsType);
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
                 PagingHelper.StoreSettings = GetStoreSettings();
@@ -54,8 +64,8 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.RouteData = this.RouteData;
                 PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
+                await Task.WhenAll(pagingPageDesignTask);
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
 
                 return View(pagingDic);
 
@@ -76,7 +86,7 @@ namespace StoreManagement.Liquid.Controllers
         }
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Blog(String id = "")
+        public async Task<ActionResult> Blog(String id = "")
         {
             try
             {
@@ -85,14 +95,21 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
                 int blogId = id.Split("-".ToCharArray()).Last().ToInt();
-                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogDetailPage");
-                var contentsTask = ContentService.GetContentByIdAsync(blogId);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogDetailPage");
+                var contentTask = ContentService.GetContentByIdAsync(blogId);
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, blogId);
 
                 ContentHelper.StoreSettings = GetStoreSettings();
                 ContentHelper.ImageWidth = GetSettingValueInt("BlogsBlog_ImageWidth", 50);
                 ContentHelper.ImageHeight = GetSettingValueInt("BlogsBlog_ImageHeight", 50);
-                var dic = ContentHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.BlogsType);
+
+
+                await Task.WhenAll(pageDesignTask, contentTask, categoryTask);
+                var content = contentTask.Result;
+                var pageDesign = pageDesignTask.Result;
+                var category = categoryTask.Result;
+
+                var dic = ContentHelper.GetContentDetailPage(content, pageDesign, category, StoreConstants.BlogsType);
 
                 return View(dic);
 

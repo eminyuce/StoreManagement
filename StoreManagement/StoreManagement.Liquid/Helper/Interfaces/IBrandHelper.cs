@@ -10,11 +10,11 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IBrandHelper : IHelper
     {
-        StoreLiquidResult GetBrandsPartial(Task<List<Brand>> brandsTask, Task<PageDesign> pageDesignTask);
+        StoreLiquidResult GetBrandsPartial(List<Brand> brands, PageDesign pageDesign);
 
-        StoreLiquidResult GetBrandDetailPage(Task<Brand> brandTask, Task<List<Product>> productsTask,
-                                             Task<PageDesign> pageDesignTask,
-                                             Task<List<ProductCategory>> productCategoriesTask);
+        StoreLiquidResult GetBrandDetailPage(Brand brand, List<Product> products,
+                                             PageDesign pageDesign,
+                                             List<ProductCategory> productCategories);
 
     }
 }

@@ -10,6 +10,6 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IContactHelper : IHelper
     {
-        StoreLiquidResult GetContactIndexPage(Task<PageDesign> pageDesignTask, Task<List<Contact>> contactsTask);
+        StoreLiquidResult GetContactIndexPage(PageDesign pageDesign,List<Contact> contacts);
     }
 }

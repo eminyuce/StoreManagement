@@ -10,6 +10,6 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IActivityHelper : IHelper
     {
-        StoreLiquidResult GetActivityIndexPage(Task<PageDesign> pageDesignTask, Task<List<Activity>> activitiesTask);
+        StoreLiquidResult GetActivityIndexPage(PageDesign pageDesign, List<Activity> activities);
     }
 }

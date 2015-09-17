@@ -10,7 +10,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IHomePageHelper : IHelper
     {
-        StoreLiquidResult GetHomePageDesign(
+        Task<StoreLiquidResult> GetHomePageDesign(
             Task<List<Product>> productsTask,
             Task<List<Content>> blogsTask,
             Task<List<Content>> newsTask,
@@ -18,7 +18,12 @@ namespace StoreManagement.Liquid.Helper.Interfaces
             Task<PageDesign> pageDesignTask,
             Task<List<Category>> categoriesTask,
             Task<List<ProductCategory>> productCategoriesTask);
- 
+
+
+        StoreLiquidResult GetHomePageDesign(PageDesign pageDesing, List<FileManager> sliderImages,
+                                                   List<Product> products, List<Content> blogs, List<Content> news,
+                                                   List<Category> categories, List<ProductCategory> productCategories);
+
     }
 
 }

@@ -18,21 +18,9 @@ namespace StoreManagement.Liquid.Helper
     public class ProductHelper : BaseLiquidHelper, IProductHelper
     {
 
-        public StoreLiquidResult GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
-            Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask)
+        public StoreLiquidResult GetProductsIndexPage(StorePagedList<Product> products,
+            PageDesign pageDesign, List<ProductCategory> categories)
         {
-
-            Task.WaitAll(pageDesignTask, productsTask, categoriesTask);
-            var products = productsTask.Result;
-            var pageDesign = pageDesignTask.Result;
-            var categories = categoriesTask.Result;
-
-            if (pageDesign == null)
-            {
-                throw new Exception("PageDesing is null");
-            }
-
-
 
             var items = new List<ProductLiquid>();
             var cats = new List<ProductCategoryLiquid>();
@@ -74,12 +62,9 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
-        public StoreLiquidResult GetPopularProducts(Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetPopularProducts(List<Product> products, List<ProductCategory> productCategories, PageDesign pageDesign)
         {
-            Task.WaitAll(pageDesignTask, productsTask, productCategoriesTask);
-            var products = productsTask.Result;
-            var pageDesign = pageDesignTask.Result;
-            var productCategories = productCategoriesTask.Result;
+            
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -119,13 +104,9 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        public StoreLiquidResult GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask)
+        public StoreLiquidResult GetProductsDetailPage(Product product, PageDesign pageDesign, ProductCategory category)
         {
-            Task.WaitAll(productsPageDesignTask, productsTask, categoryTask);
-            var product = productsTask.Result;
-            var pageDesign = productsPageDesignTask.Result;
-            var category = categoryTask.Result;
-
+           
             var s = new ProductLiquid(product, category, pageDesign, ImageWidth, ImageHeight);
 
             var anonymousObject = LiquidAnonymousObject.GetProductAnonymousObject(s);
@@ -145,15 +126,12 @@ namespace StoreManagement.Liquid.Helper
 
      
 
-        public StoreLiquidResult  GetRelatedProductsPartialByCategory(Task<ProductCategory> categoryTask,
-            Task<List<Product>> relatedProductsTask,
-            Task<PageDesign> pageDesignTask
+        public StoreLiquidResult  GetRelatedProductsPartialByCategory(ProductCategory category,
+            List<Product> products,
+           PageDesign pageDesign
           )
         {
-            Task.WaitAll(pageDesignTask, relatedProductsTask, categoryTask);
-            var products = relatedProductsTask.Result;
-            var pageDesign = pageDesignTask.Result;
-            var category = categoryTask.Result;
+           
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             try
@@ -190,17 +168,13 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-        public StoreLiquidResult GetRelatedProductsPartialByBrand(Task<Brand> brandTask,
-            Task<List<Product>> relatedProductsTask,
-            Task<PageDesign> pageDesignTask,
-            Task<List<ProductCategory>> productCategoriesTask)
+        public StoreLiquidResult GetRelatedProductsPartialByBrand(Brand brand,
+            List<Product> products,
+            PageDesign pageDesign,
+            List<ProductCategory> productCategories)
         {
 
-            Task.WaitAll(pageDesignTask, relatedProductsTask, brandTask, productCategoriesTask);
-            var products = relatedProductsTask.Result;
-            var pageDesign = pageDesignTask.Result;
-            var brand = brandTask.Result;
-            var productCategories = productCategoriesTask.Result;
+         
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -244,12 +218,9 @@ namespace StoreManagement.Liquid.Helper
         }
 
  
-        public Rss20FeedFormatter GetProductsRssFeed( Task<Store> storeTask , Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, int description)
+        public Rss20FeedFormatter GetProductsRssFeed(Store store , List<Product> products, List<ProductCategory> productCategories, int description)
         {
-            Task.WaitAll(storeTask,productsTask, productCategoriesTask);
-            var store = storeTask.Result;
-            var products = productsTask.Result;
-            var productCategories = productCategoriesTask.Result;
+     
             try
             {
                 String url = "http://login.seatechnologyjobs.com/";

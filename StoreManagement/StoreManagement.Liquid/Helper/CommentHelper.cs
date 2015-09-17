@@ -13,15 +13,13 @@ namespace StoreManagement.Liquid.Helper
 {
     public class CommentHelper : BaseLiquidHelper, ICommentHelper
     {
-        public StoreLiquidResult GetCommentsPartial(Task<List<Comment>> commentsTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetCommentsPartial(List<Comment> comments, PageDesign pageDesign)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try
             {
-                Task.WaitAll(pageDesignTask, commentsTask);
-                var pageDesign = pageDesignTask.Result;
-                var comments = commentsTask.Result;
+           
 
                 if (pageDesign == null)
                 {

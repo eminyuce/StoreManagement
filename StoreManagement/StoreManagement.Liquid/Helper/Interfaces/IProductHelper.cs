@@ -12,23 +12,20 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IProductHelper : IHelper
     {
-        StoreLiquidResult GetProductsIndexPage(Task<StorePagedList<Product>> productsTask,
-                                                               Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> categoriesTask);
+        StoreLiquidResult GetProductsIndexPage(StorePagedList<Product> products,
+                                                               PageDesign pageDesign, List<ProductCategory> categories);
 
-        StoreLiquidResult GetProductsDetailPage(Task<Product> productsTask, Task<PageDesign> productsPageDesignTask, Task<ProductCategory> categoryTask);
+        StoreLiquidResult GetProductsDetailPage(Product products, PageDesign productsPageDesignTask, ProductCategory category);
 
-        StoreLiquidResult GetRelatedProductsPartialByCategory(Task<ProductCategory> categoryTask,
-                                                                               Task<List<Product>> relatedProductsTask,
-                                                                               Task<PageDesign> pageDesignTask
-            );
+        StoreLiquidResult GetRelatedProductsPartialByCategory(ProductCategory category,
+                                                                              List<Product> relatedProducts,
+                                                                              PageDesign pageDesign);
 
-        StoreLiquidResult GetRelatedProductsPartialByBrand(Task<Brand> brandTask,
-                                                                           Task<List<Product>> relatedProductsTask,
-                                                                           Task<PageDesign> pageDesignTask,
-                                                                           Task<List<ProductCategory>> productCategoriesTask);
+        StoreLiquidResult GetRelatedProductsPartialByBrand(Brand brandTask, List<Product> relatedProducts, PageDesign pageDesignTask,
+                                                                           List<ProductCategory> productCategories);
 
-        Rss20FeedFormatter GetProductsRssFeed(Task<Store> storeTask,Task<List<Product>> productsTask,    Task<List<ProductCategory>>  productCategoriesTask, int description);
+        Rss20FeedFormatter GetProductsRssFeed(Store store,List<Product> products,    List<ProductCategory>  productCategories, int description);
 
-        StoreLiquidResult GetPopularProducts(Task<List<Product>> productsTask, Task<List<ProductCategory>> productCategoriesTask, Task<PageDesign> pageDesignTask);
+        StoreLiquidResult GetPopularProducts(List<Product> products, List<ProductCategory> productCategories, PageDesign pageDesign);
     }
 }

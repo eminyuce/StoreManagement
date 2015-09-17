@@ -16,28 +16,30 @@ namespace StoreManagement.Liquid.Controllers
         public async Task<JsonResult> MainLayout()
         {
             int storeId = StoreId;
+            String returnHtml = "";
 
-            var res = Task.Factory.StartNew(() =>
+            try
             {
-                try
-                {
-                    var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainNavigation");
+                var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(storeId);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainNavigation");
 
-                    NavigationHelper.StoreSettings = GetStoreSettings();
-                    var pageOutput = NavigationHelper.GetMainLayoutLink(mainMenu, pageDesignTask);
-                    String html = pageOutput.PageOutputText;
-                    return html;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex, "MainLayout", storeId);
-                    return "";
-                }
+                NavigationHelper.StoreSettings = GetStoreSettings();
 
-            });
-            var returtHtml = await res;
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+                await Task.WhenAll(pageDesignTask, navigationsTask);
+                var navigations = navigationsTask.Result;
+                var pageDesign = pageDesignTask.Result;
+
+                var pageOutput = NavigationHelper.GetMainLayoutLink(navigations, pageDesign);
+                returnHtml = pageOutput.PageOutputText;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "MainLayout", storeId);
+
+            }
+
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
 
 
         }
@@ -45,25 +47,28 @@ namespace StoreManagement.Liquid.Controllers
         {
             int storeId = StoreId;
 
-            var res = Task.Factory.StartNew(() =>
+            String returnHtml = "";
+            try
             {
-                try
-                {
-                    var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "Footer");
-                    var pageOutput = NavigationHelper.GetMainLayoutFooterLink(mainMenu, pageDesignTask);
-                    String html = pageOutput.PageOutputText;
-                    return html;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex, "MainLayout", storeId);
-                    return "";
-                }
+                var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(storeId);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "Footer");
 
-            });
-            var returtHtml = await res;
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+                await Task.WhenAll(pageDesignTask, navigationsTask);
+                var navigations = navigationsTask.Result;
+                var pageDesign = pageDesignTask.Result;
+
+                var pageOutput = NavigationHelper.GetMainLayoutFooterLink(navigations, pageDesign);
+                returnHtml = pageOutput.PageOutputText;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "MainLayout", storeId);
+
+            }
+
+
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -76,29 +81,31 @@ namespace StoreManagement.Liquid.Controllers
             }
             int pageSize = GetSettingValueInt("Comments_PageSize", StoreConstants.DefaultPageSize);
 
-            var res = Task.Factory.StartNew(() =>
+            String returnHtml = "";
+            try
             {
-                try
-                {
-      
-                    var categoriesTask = CommentService.GetCommentsByItemIdAsync(StoreId, itemId, itemType, page, pageSize);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
 
-                    CommentHelper.StoreSettings = GetStoreSettings();
-                    var pageOuput = CommentHelper.GetCommentsPartial(categoriesTask, pageDesignTask);
-                    String html = pageOuput.PageOutputText;
-                    return html;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex, "ProductComments");
-                    return "";
-                }
+                var commentsTask = CommentService.GetCommentsByItemIdAsync(StoreId, itemId, itemType, page, pageSize);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
 
-            });
+                CommentHelper.StoreSettings = GetStoreSettings();
 
-            var returtHtml = await res;
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+                await Task.WhenAll(pageDesignTask, commentsTask);
+                var pageDesign = pageDesignTask.Result;
+                var comments = commentsTask.Result;
+
+                var pageOuput = CommentHelper.GetCommentsPartial(comments, pageDesign);
+                returnHtml = pageOuput.PageOutputText;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "ProductComments");
+
+            }
+
+
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
     }
 }

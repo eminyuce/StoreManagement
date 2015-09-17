@@ -24,67 +24,69 @@ namespace StoreManagement.Liquid.Controllers
                 desingName = "RelatedContentsPartial";
             }
 
+            String returtHtml = "";
 
-            var res = Task.Factory.StartNew(() =>
+            try
             {
-                try
+                var categoryTask = CategoryService.GetCategoryAsync(categoryId);
+
+                int take = 0;
+                if (contentType.Equals(StoreConstants.NewsType))
                 {
-                    var categoryTask = CategoryService.GetCategoryAsync(categoryId);
-
-                    int take = 0;
-                    if (contentType.Equals(StoreConstants.NewsType))
-                    {
-                        take = GetSettingValueInt("RelatedNews_ItemsNumber", 5);
-                    }
-                    else if (contentType.Equals(StoreConstants.BlogsType))
-                    {
-                        take = GetSettingValueInt("RelatedBlogs_ItemsNumber", 5);
-                    }
-
-                    var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take, excludedContentId);
-                    var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-
-                    ContentHelper.StoreSettings = GetStoreSettings();
-
-
-
-                    if (contentType.Equals(StoreConstants.NewsType))
-                    {
-                        ContentHelper.ImageWidth = GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50);
-                        ContentHelper.ImageHeight = GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50);
-                    }
-                    else if (contentType.Equals(StoreConstants.BlogsType))
-                    {
-                        ContentHelper.ImageWidth = GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50);
-                        ContentHelper.ImageHeight = GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50);
-                    }
-                    else
-                    {
-                        ContentHelper.ImageWidth = 0;
-                        ContentHelper.ImageHeight = 0;
-                        Logger.Trace("No ContentType is defined like that " + contentType);
-                    }
-
-
-                    var pageOutput = ContentHelper.GetRelatedContentsPartial(categoryTask, relatedContentsTask, pageDesignTask, contentType);
-                    String html = pageOutput.PageOutputText;
-                    return html;
-
+                    take = GetSettingValueInt("RelatedNews_ItemsNumber", 5);
                 }
-                catch (Exception ex)
+                else if (contentType.Equals(StoreConstants.BlogsType))
                 {
-                    Logger.Error(ex, "GetRelatedContents", contentType, categoryId);
-                    return "";
+                    take = GetSettingValueInt("RelatedBlogs_ItemsNumber", 5);
                 }
 
-            });
-            var returtHtml = await res;
+                var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take, excludedContentId);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+
+                ContentHelper.StoreSettings = GetStoreSettings();
+
+
+
+                if (contentType.Equals(StoreConstants.NewsType))
+                {
+                    ContentHelper.ImageWidth = GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50);
+                    ContentHelper.ImageHeight = GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50);
+                }
+                else if (contentType.Equals(StoreConstants.BlogsType))
+                {
+                    ContentHelper.ImageWidth = GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50);
+                    ContentHelper.ImageHeight = GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50);
+                }
+                else
+                {
+                    ContentHelper.ImageWidth = 0;
+                    ContentHelper.ImageHeight = 0;
+                    Logger.Trace("No ContentType is defined like that " + contentType);
+                }
+
+                await  Task.WhenAll(pageDesignTask, relatedContentsTask, categoryTask);
+                var contents = relatedContentsTask.Result;
+                var pageDesign = pageDesignTask.Result;
+                var category = categoryTask.Result;
+
+                var pageOutput = ContentHelper.GetRelatedContentsPartial(category, contents, pageDesign, contentType);
+                returtHtml = pageOutput.PageOutputText;
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "GetRelatedContents", contentType, categoryId);
+
+            }
+
+
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
 
-     
-   
+
+
 
 
     }

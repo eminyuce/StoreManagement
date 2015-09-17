@@ -20,15 +20,11 @@ namespace StoreManagement.Liquid.Helper
     {
 
 
-        public StoreLiquidResult GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask)
+        public StoreLiquidResult GetCategoriesIndexPage(PageDesign pageDesign, StorePagedList<ProductCategory> categories)
         {
 
 
-            Task.WaitAll(pageDesignTask, categoriesTask);
-            var pageDesign = pageDesignTask.Result;
-            var categories = categoriesTask.Result;
-
-
+     
             var result = new StoreLiquidResult();
 
             try
@@ -73,16 +69,13 @@ namespace StoreManagement.Liquid.Helper
 
         }
 
-        public StoreLiquidResult GetProductCategoriesPartial(Task<List<ProductCategory>> categoriesTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetProductCategoriesPartial(List<ProductCategory> categories, PageDesign pageDesign)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try
             {
-                Task.WaitAll(pageDesignTask, categoriesTask);
-                var pageDesign = pageDesignTask.Result;
-                var categories = categoriesTask.Result;
-
+               
 
                 var cats = new List<ProductCategoryLiquid>();
                 foreach (var item in categories)
@@ -110,17 +103,13 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
-        public StoreLiquidResult GetCategoryPage(Task<PageDesign> pageDesignTask, Task<ProductCategory> categoriesTask, Task<StorePagedList<Product>> productsTask)
+        public StoreLiquidResult GetCategoryPage(PageDesign pageDesign, ProductCategory category, StorePagedList<Product> products)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try
             {
-                Task.WaitAll(pageDesignTask, categoriesTask, productsTask);
-                var pageDesign = pageDesignTask.Result;
-                var category = categoriesTask.Result;
-                var products = productsTask.Result;
-
+               
                 var productCategories = new ProductCategoryLiquid(category, pageDesign);
 
                 var items = new List<ProductLiquid>();

@@ -152,8 +152,8 @@ namespace StoreManagement.Liquid.App_Start
 
 
 
-                //kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
-                //kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+                //var db = kernel.Bind<IStoreContext>().To<StoreContext>().InRequestScope().WithConstructorArgument("nameOrConnectionString", AppConstants.ConnectionStringName);
+                //var storeContext = (StoreContext)kernel.Get<IStoreContext>();
                 kernel.Bind<IContentService>().To<ContentRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
                 kernel.Bind<IStoreService>().To<StoreRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
                 kernel.Bind<ISettingService>().To<SettingRepository>().InRequestScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));

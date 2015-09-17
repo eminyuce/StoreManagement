@@ -17,7 +17,7 @@ namespace StoreManagement.Liquid.Controllers
     {
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index(int page = 1, String search="")
+        public async Task<ActionResult> Index(int page = 1, String search = "")
         {
             try
             {
@@ -25,17 +25,29 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
-                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
+ 
                 var newsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsIndex");
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize),search);
-                var categories = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
+                var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
 
 
                 ContentHelper.StoreSettings = GetStoreSettings();
                 ContentHelper.ImageWidth = GetSettingValueInt("NewsIndex_ImageWidth", 50);
                 ContentHelper.ImageHeight = GetSettingValueInt("NewsIndex_ImageHeight", 50);
-                var pageOutput = ContentHelper.GetContentsIndexPage(contentsTask, newsPageDesignTask, categories, StoreConstants.NewsType);
 
+                await Task.WhenAll(newsPageDesignTask, contentsTask, categoriesTask);
+                var contents = contentsTask.Result;
+                var pageDesign = newsPageDesignTask.Result;
+                var categories = categoriesTask.Result;
+
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
+                var pageOutput = ContentHelper.GetContentsIndexPage(contents, pageDesign, categories, StoreConstants.NewsType);
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
 
@@ -46,8 +58,8 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.RouteData = this.RouteData;
                 PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
+                await Task.WhenAll(pagingPageDesignTask);
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
  
                 return View(pagingDic);
 
@@ -60,7 +72,7 @@ namespace StoreManagement.Liquid.Controllers
         }
         //
         // GET: /Blogs/
-        public ActionResult Detail(String id = "")
+        public async Task<ActionResult> Detail(String id = "")
         {
             try
             {
@@ -69,8 +81,8 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
                 int newsId = id.Split("-".ToCharArray()).Last().ToInt();
-                var blogsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsDetailPage");
-                var contentsTask = ContentService.GetContentByIdAsync(newsId);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsDetailPage");
+                var contentTask = ContentService.GetContentByIdAsync(newsId);
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, newsId);
 
 
@@ -78,7 +90,14 @@ namespace StoreManagement.Liquid.Controllers
                 ContentHelper.StoreSettings = GetStoreSettings();
                 ContentHelper.ImageWidth = GetSettingValueInt("NewsDetail_ImageWidth", 50);
                 ContentHelper.ImageHeight = GetSettingValueInt("NewsDetail_ImageHeight", 50);
-                var dic = ContentHelper.GetContentDetailPage(contentsTask, blogsPageDesignTask, categoryTask, StoreConstants.NewsType);
+
+
+                await Task.WhenAll(pageDesignTask, contentTask, categoryTask);
+                var content = contentTask.Result;
+                var pageDesign = pageDesignTask.Result;
+                var category = categoryTask.Result;
+
+                var dic = ContentHelper.GetContentDetailPage(content, pageDesign, category, StoreConstants.NewsType);
 
 
                 return View(dic);

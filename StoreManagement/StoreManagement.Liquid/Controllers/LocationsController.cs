@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Constants;
@@ -11,7 +12,7 @@ namespace StoreManagement.Liquid.Controllers
     {
         //
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
 
             try
@@ -23,7 +24,13 @@ namespace StoreManagement.Liquid.Controllers
                 LocationHelper.StoreSettings = GetStoreSettings();
                 LocationHelper.ImageWidth = GetSettingValueInt("LocationsIndex_ImageWidth", 50);
                 LocationHelper.ImageHeight = GetSettingValueInt("LocationsIndex_ImageHeight", 50);
-                var pageOutput = LocationHelper.GetLocationIndexPage(pageDesignTask, locationsTask);
+
+
+                await Task.WhenAll(pageDesignTask, locationsTask);
+                var pageDesign = pageDesignTask.Result;
+                var locations = locationsTask.Result;
+
+                var pageOutput = LocationHelper.GetLocationIndexPage(pageDesign, locations);
 
 
                 return View(pageOutput);

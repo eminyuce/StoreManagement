@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ActivityHelper : BaseLiquidHelper, IActivityHelper
     {
-        public StoreLiquidResult GetActivityIndexPage(Task<PageDesign> pageDesignTask, Task<List<Activity>> activitiesTask)
+        public StoreLiquidResult GetActivityIndexPage(PageDesign pageDesign, List<Activity> activities)
         {
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
@@ -24,16 +24,7 @@ namespace StoreManagement.Liquid.Helper
             {
 
 
-                Task.WaitAll(pageDesignTask, activitiesTask);
-                var pageDesign = pageDesignTask.Result;
-                var activities = activitiesTask.Result;
-
-                if (pageDesign == null)
-                {
-                    Logger.Error("GetActivityIndexPage PageDesing is null.");
-                    throw new Exception("PageDesing is null");
-                }
-
+            
 
                 var items = new List<ActivitiesLiquid>();
                 foreach (var item in activities)

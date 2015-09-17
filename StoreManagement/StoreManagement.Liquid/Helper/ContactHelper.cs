@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Helper
 {
     public class ContactHelper : BaseLiquidHelper, IContactHelper
     {
-        public StoreLiquidResult GetContactIndexPage(Task<PageDesign> pageDesignTask, Task<List<Contact>> contactsTask)
+        public StoreLiquidResult GetContactIndexPage(PageDesign pageDesign, List<Contact> contacts)
         {
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
@@ -24,15 +24,7 @@ namespace StoreManagement.Liquid.Helper
             {
 
 
-                Task.WaitAll(pageDesignTask, contactsTask);
-                var pageDesign = pageDesignTask.Result;
-                var contacts = contactsTask.Result;
-
-                if (pageDesign == null)
-                {
-                    throw new Exception("PageDesing is null");
-                }
-
+            
 
                 var items = new List<ContactLiquid>();
                 foreach (var item in contacts)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Constants;
@@ -14,18 +15,30 @@ namespace StoreManagement.Liquid.Controllers
     {
         
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             try
             {
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "PhotoGalleryIndex");
-                var fileManagers = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
+                var fileManagersTask = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
 
                 PhotoGalleryHelper.StoreSettings = GetStoreSettings();
                 PhotoGalleryHelper.ImageWidth = GetSettingValueInt("PhotoGallery_ImageWidth", 500);
                 PhotoGalleryHelper.ImageHeight = GetSettingValueInt("PhotoGallery_ImageHeight", 500);
-                var dic = PhotoGalleryHelper.GetPhotoGalleryIndexPage(pageDesignTask, fileManagers);
+
+                await Task.WhenAll(pageDesignTask, fileManagersTask);
+                var pageDesign = pageDesignTask.Result;
+
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
+                var fileManagers = fileManagersTask.Result;
+
+                var dic = PhotoGalleryHelper.GetPhotoGalleryIndexPage(pageDesign, fileManagers);
 
                 return View(dic);
 

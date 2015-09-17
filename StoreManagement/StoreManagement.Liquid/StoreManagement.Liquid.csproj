@@ -549,6 +549,7 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Test\Index2.cshtml" />
     <Content Include="Views\Shared\TimeoutError.cshtml" />
+    <Content Include="Views\Test\Index3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

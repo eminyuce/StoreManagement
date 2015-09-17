@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,7 +11,7 @@ namespace StoreManagement.Liquid.Controllers
     {
        
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             try
             {
@@ -21,7 +22,18 @@ namespace StoreManagement.Liquid.Controllers
                 ContactHelper.ImageWidth = GetSettingValueInt("ContactsIndex_ImageWidth", 50);
                 ContactHelper.ImageHeight = GetSettingValueInt("ContactsIndex_ImageHeight", 50);
                 var contactsTask = ContactService.GetContactsByStoreIdAsync(StoreId, null, true);
-                var pageOutput = ContactHelper.GetContactIndexPage(pageDesignTask, contactsTask);
+
+                await Task.WhenAll(pageDesignTask, contactsTask);
+                var pageDesign = pageDesignTask.Result;
+                var contacts = contactsTask.Result;
+
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
+                var pageOutput = ContactHelper.GetContactIndexPage(pageDesign, contacts);
 
 
                 return View(pageOutput);

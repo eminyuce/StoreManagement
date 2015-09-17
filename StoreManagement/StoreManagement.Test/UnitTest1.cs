@@ -412,70 +412,9 @@ namespace StoreManagement.Test
 
 
         }
+ 
 
-        [TestMethod]
-        public void TestDotLiquidEngineOutput335555555()
-        {
-            int storeId = 9;
-            var pds = new PageDesignRepository(new StoreContext(ConnectionString));
-            var cat = new ProductCategoryRepository(new StoreContext(ConnectionString));
-
-            var pageDesignTask = pds.GetPageDesignByName(storeId, "ProductCategoriesIndex");
-            var pageSize = 25;
-            var categories = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true, 1, pageSize);
-            var liquidHelper = new ProductCategoryHelper();
-            //   liquidHelper.StoreSettings = StoreSettings;
-
-            var dic = liquidHelper.GetCategoriesIndexPage(pageDesignTask, categories);
-
-
-
-        }
-
-        [TestMethod]
-        public void TestDotLiquidEngineOutput335555()
-        {
-            int storeId = 9;
-            var rr = new ProductRepository(dbContext);
-            var pds = new PageDesignRepository(dbContext);
-            var cat = new ProductCategoryRepository(dbContext);
-            var controller = new ProductsController();
-
-
-            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
-            var productsPageDesignTask = pds.GetPageDesignByName(storeId, "ProductsIndex");
-            var categories1 = cat.GetProductCategoriesByStoreIdAsync(storeId, StoreConstants.ProductType, true);
-            var liquidHelper = new ProductHelper();
-            //   liquidHelper.StoreSettings = StoreSettings;
-            var dic = liquidHelper.GetProductsIndexPage(productsTask, productsPageDesignTask, categories1);
-
-
-
-        }
-
-        [TestMethod]
-        public void TestDotLiquidEngineOutput33()
-        {
-            int storeId = 9;
-            var rr = new ContentRepository(dbContext);
-            var pds = new PageDesignRepository(dbContext);
-            var cat = new CategoryRepository(dbContext);
-
-
-            var contentsTask = rr.GetContentsCategoryIdAsync(storeId, null, "blog", true, 1, 24);
-            var blogsPageDesignTask = pds.GetPageDesignByName(storeId, "BlogsIndex");
-            var categories = cat.GetCategoriesByStoreIdAsync(storeId, StoreConstants.BlogsType, true);
-            Task.WaitAll(blogsPageDesignTask, contentsTask, categories);
-
-            var contents = contentsTask.Result;
-            var blogsPageDesign = blogsPageDesignTask.Result;
-            var liquidHelper = new ContentHelper();
-            //   liquidHelper.StoreSettings = StoreSettings;
-            var dic = liquidHelper.GetContentsIndexPage(contentsTask, blogsPageDesignTask, categories, StoreConstants.BlogsType);
-
-        }
-
-
+ 
 
 
         public static string GetImportPath()

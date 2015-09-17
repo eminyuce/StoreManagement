@@ -11,7 +11,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
     public interface ILabelHelper : IHelper
     {
         StoreLiquidResult GetProductLabels(
-            Task<List<Label>> labelsTask,
-            Task<PageDesign> pageDesignTask);
+            List<Label> labels,
+            PageDesign pageDesign);
     }
 }

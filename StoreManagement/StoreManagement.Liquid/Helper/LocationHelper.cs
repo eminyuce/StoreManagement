@@ -16,7 +16,7 @@ namespace StoreManagement.Liquid.Helper
     {
 
 
-        public StoreLiquidResult GetLocationIndexPage(Task<PageDesign> pageDesignTask, Task<List<Location>> locationsTask)
+        public StoreLiquidResult GetLocationIndexPage(PageDesign pageDesign, List<Location> locations)
         {
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
@@ -27,10 +27,7 @@ namespace StoreManagement.Liquid.Helper
             {
 
 
-                Task.WaitAll(pageDesignTask, locationsTask);
-                var pageDesign = pageDesignTask.Result;
-                var locations = locationsTask.Result;
-
+              
                 if (pageDesign == null)
                 {
                     throw new Exception("PageDesing is null");

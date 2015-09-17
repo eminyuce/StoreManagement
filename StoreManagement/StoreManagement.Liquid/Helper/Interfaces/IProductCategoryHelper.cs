@@ -11,9 +11,9 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IProductCategoryHelper : IHelper
     {
-        StoreLiquidResult GetCategoriesIndexPage(Task<PageDesign> pageDesignTask, Task<StorePagedList<ProductCategory>> categoriesTask);
-        StoreLiquidResult GetProductCategoriesPartial(Task<List<ProductCategory>> categoriesTask, Task<PageDesign> pageDesignTask);
+        StoreLiquidResult GetCategoriesIndexPage(PageDesign pageDesign, StorePagedList<ProductCategory> categories);
+        StoreLiquidResult GetProductCategoriesPartial(List<ProductCategory> categories, PageDesign pageDesign);
 
-        StoreLiquidResult GetCategoryPage(Task<PageDesign> pageDesignTask, Task<ProductCategory> categories, Task<StorePagedList<Product>> productsTask);
+        StoreLiquidResult GetCategoryPage(PageDesign pageDesign, ProductCategory categories, StorePagedList<Product> products);
     }
 }

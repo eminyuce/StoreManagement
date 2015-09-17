@@ -23,19 +23,11 @@ namespace StoreManagement.Liquid.Helper
 
 
         public StoreLiquidResult GetContentsIndexPage(
-            Task<StorePagedList<Content>> contentsTask,
-            Task<PageDesign> pageDesignTask,
-                 Task<List<Category>> categoriesTask, String type)
+           StorePagedList<Content> contents,
+           PageDesign pageDesign,
+               List<Category> categories, String type)
         {
-            Task.WaitAll(pageDesignTask, contentsTask, categoriesTask);
-            var contents = contentsTask.Result;
-            var pageDesign = pageDesignTask.Result;
-            var categories = categoriesTask.Result;
-
-            if (pageDesign == null)
-            {
-                throw new Exception("PageDesing is null");
-            }
+            
 
 
 
@@ -71,12 +63,9 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        public StoreLiquidResult GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type)
+        public StoreLiquidResult GetContentDetailPage(Content content, PageDesign pageDesign, Category category, String type)
         {
-            Task.WaitAll(pageDesignTask, contentTask, categoryTask);
-            var content = contentTask.Result;
-            var pageDesign = pageDesignTask.Result;
-            var category = categoryTask.Result;
+          
             var items = new List<ContentLiquid>();
             var contentLiquid = new ContentLiquid(content, category, pageDesign, type, ImageWidth, ImageHeight);
 
@@ -97,12 +86,9 @@ namespace StoreManagement.Liquid.Helper
 
 
 
-        public StoreLiquidResult GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type)
+        public StoreLiquidResult GetRelatedContentsPartial(Category category, List<Content> contents,PageDesign pageDesign, String type)
         {
-            Task.WaitAll(pageDesignTask, relatedContentsTask, categoryTask);
-            var contents = relatedContentsTask.Result;
-            var pageDesign = pageDesignTask.Result;
-            var category = categoryTask.Result;
+       
 
             var items = new List<ContentLiquid>();
             foreach (var item in contents)
@@ -130,12 +116,9 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        public Rss20FeedFormatter GetContentsRssFeed(Task<Store> storeTask, Task<List<Content>> contentsTask, Task<List<Category>> categoriesTask, int description, string type)
+        public Rss20FeedFormatter GetContentsRssFeed(Store store, List<Content> contents, List<Category> categories, int description, string type)
         {
-            Task.WaitAll(storeTask, contentsTask, categoriesTask);
-            var store = storeTask.Result;
-            var content = contentsTask.Result;
-            var categories = categoriesTask.Result;
+          
             try
             {
                 String url = "http://login.seatechnologyjobs.com/";
@@ -147,7 +130,7 @@ namespace StoreManagement.Liquid.Helper
 
 
                 var feedItemList = new List<SyndicationItem>();
-                foreach (var product in content)
+                foreach (var product in contents)
                 {
                     try
                     {

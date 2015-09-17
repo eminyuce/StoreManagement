@@ -18,18 +18,10 @@ namespace StoreManagement.Liquid.Helper
 
 
         public StoreLiquidResult GetProductLabels(
-           Task<List<Label>> labelsTask,
-           Task<PageDesign> pageDesignTask)
+           List<Label> labels,
+           PageDesign pageDesign)
         {
-            Task.WaitAll(pageDesignTask, labelsTask);
-            var labels = labelsTask.Result;
-            var pageDesign = pageDesignTask.Result;
-
-            if (pageDesign == null)
-            {
-                throw new Exception("PageDesing is null");
-            }
-
+            
 
             var items = new List<LabelLiquid>();
             foreach (var item in labels)

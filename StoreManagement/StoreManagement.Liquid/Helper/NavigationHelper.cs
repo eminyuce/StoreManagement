@@ -19,12 +19,10 @@ namespace StoreManagement.Liquid.Helper
     {
 
         public StoreLiquidResult GetMainLayoutLink(
-           Task<List<Navigation>> navigationsTask,
-           Task<PageDesign> pageDesignTask)
+          List<Navigation> navigations,
+          PageDesign pageDesign)
         {
-            Task.WaitAll(pageDesignTask, navigationsTask);
-            var navigations = navigationsTask.Result;
-            var pageDesign = pageDesignTask.Result;
+            
 
             if (pageDesign == null)
             {
@@ -63,11 +61,9 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        public StoreLiquidResult GetMainLayoutFooterLink(Task<List<Navigation>> navigationsTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetMainLayoutFooterLink(List<Navigation> navigations, PageDesign pageDesign)
         {
-            Task.WaitAll(pageDesignTask, navigationsTask);
-            var navigations = navigationsTask.Result;
-            var pageDesign = pageDesignTask.Result;
+          
 
             var items = new List<NavigationLiquid>();
             foreach (var item in navigations)

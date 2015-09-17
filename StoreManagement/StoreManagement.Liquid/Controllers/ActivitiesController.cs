@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Liquid.Helper;
@@ -10,7 +11,7 @@ namespace StoreManagement.Liquid.Controllers
     public class ActivitiesController : BaseController
     {
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
 
             try
@@ -22,7 +23,19 @@ namespace StoreManagement.Liquid.Controllers
                 ActivityHelper.StoreSettings = GetStoreSettings();
                 ActivityHelper.ImageWidth = GetSettingValueInt("ActivitiesIndex_ImageWidth", 50);
                 ActivityHelper.ImageHeight = GetSettingValueInt("ActivitiesIndex_ImageHeight", 50);
-                var pageOutput = ActivityHelper.GetActivityIndexPage(pageDesignTask, activitiesTask);
+
+                await Task.WhenAll(pageDesignTask, activitiesTask);
+                var pageDesign = pageDesignTask.Result;
+                var activities = activitiesTask.Result;
+
+                if (pageDesign == null)
+                {
+                    Logger.Error("GetActivityIndexPage PageDesing is null.");
+                    throw new Exception("PageDesing is null");
+                }
+
+
+                var pageOutput = ActivityHelper.GetActivityIndexPage(pageDesign, activities);
 
 
                 return View(pageOutput);
@@ -34,5 +47,5 @@ namespace StoreManagement.Liquid.Controllers
                 return new HttpStatusCodeResult(500);
             }
         }
-	}
+    }
 }

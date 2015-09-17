@@ -84,16 +84,11 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-        public StoreLiquidResult GetPaging(Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetPaging(PageDesign pageDesign)
         {
-            Task.WaitAll(pageDesignTask);
-            var pageDesign = pageDesignTask.Result;
+           
 
-            if (pageDesign == null)
-            {
-                throw new Exception("PageDesing is null");
-            }
-
+           
 
             var paginator = new PaginatorLiquid();
             paginator.PaginatePath = this.PaginatePath;

@@ -19,10 +19,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2015 12:04:53</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>09/15/2015 15:39:42</publishTime>
+      <publishTime>09/17/2015 14:26:42</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>09/15/2015 15:45:33</publishTime>
+      <publishTime>09/17/2015 14:26:47</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>07/30/2015 09:18:15</publishTime>
@@ -58,13 +58,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/16/2015 14:52:41</publishTime>
+      <publishTime>09/17/2015 14:27:25</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>09/16/2015 16:15:09</publishTime>
+      <publishTime>09/17/2015 14:55:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/16/2015 15:19:14</publishTime>
+      <publishTime>09/17/2015 14:27:29</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -805,7 +805,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/01/2015 11:58:38</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/24/2015 12:06:24</publishTime>
+      <publishTime>09/17/2015 14:16:18</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/30/2015 09:18:00</publishTime>
@@ -1111,10 +1111,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Test/Index.cshtml">
-      <publishTime>09/15/2015 11:37:58</publishTime>
+      <publishTime>09/17/2015 11:49:49</publishTime>
     </File>
     <File Include="Views/Test/Index2.cshtml">
       <publishTime>09/16/2015 12:13:47</publishTime>
+    </File>
+    <File Include="Views/Test/Index3.cshtml">
+      <publishTime>09/17/2015 11:49:54</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>07/30/2015 09:18:01</publishTime>
@@ -1123,7 +1126,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/16/2015 15:01:00</publishTime>
+      <publishTime>09/17/2015 14:28:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -17,20 +17,10 @@ namespace StoreManagement.Liquid.Helper
     public class PhotoGalleryHelper : BaseLiquidHelper, IPhotoGalleryHelper
     {
 
-        public StoreLiquidResult GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask)
+        public StoreLiquidResult GetPhotoGalleryIndexPage(PageDesign pageDesign, List<FileManager> fileManagers)
         {
-            Task.WaitAll(pageDesignTask, fileManagersTask);
-            var pageDesign = pageDesignTask.Result;
-
-            if (pageDesign == null)
-            {
-                throw new Exception("PageDesing is null");
-            }
-
-
-            var fileManagers = fileManagersTask.Result;
-            Logger.Trace("FileManagers :" + fileManagers.Count);
-
+         
+          
             var cats = new List<FileManagerLiquid>();
     
             foreach (var item in fileManagers)

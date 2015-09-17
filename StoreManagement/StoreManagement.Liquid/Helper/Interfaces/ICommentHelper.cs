@@ -10,6 +10,6 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface ICommentHelper : IHelper
     {
-        StoreLiquidResult GetCommentsPartial(Task<List<Comment>> commentsTask, Task<PageDesign> pageDesignTask);
+        StoreLiquidResult GetCommentsPartial(List<Comment> comments, PageDesign pageDesign);
     }
 }

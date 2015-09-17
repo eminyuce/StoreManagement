@@ -13,13 +13,13 @@ namespace StoreManagement.Liquid.Helper.Interfaces
     public interface IContentHelper : IHelper
     {
         StoreLiquidResult GetContentsIndexPage(
-            Task<StorePagedList<Content>> contentsTask,
-            Task<PageDesign> pageDesignTask,
-            Task<List<Category>> categoriesTask, String type);
+            StorePagedList<Content> contents,
+            PageDesign pageDesign,
+            List<Category> categories, String type);
 
-        StoreLiquidResult GetContentDetailPage(Task<Content> contentTask, Task<PageDesign> pageDesignTask, Task<Category> categoryTask, String type);
-        StoreLiquidResult GetRelatedContentsPartial(Task<Category> categoryTask, Task<List<Content>> relatedContentsTask, Task<PageDesign> pageDesignTask, String type);
+        StoreLiquidResult GetContentDetailPage(Content content, PageDesign pageDesign, Category category, String type);
+        StoreLiquidResult GetRelatedContentsPartial(Category category, List<Content> relatedContentsTask, PageDesign pageDesignTask, String type);
 
-        Rss20FeedFormatter GetContentsRssFeed(Task<Store> store, Task<List<Content>> contentsTask, Task<List<Category>> categoriesTask, int description, string type);
+        Rss20FeedFormatter GetContentsRssFeed(Store store, List<Content> contents, List<Category> categories, int description, string type);
     }
 }

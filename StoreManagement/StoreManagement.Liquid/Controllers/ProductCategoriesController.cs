@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data.Constants;
@@ -15,7 +16,7 @@ namespace StoreManagement.Liquid.Controllers
         private const String PageDesingName = "ProductCategoriesIndex";
 
        [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Index(int page = 1)
+        public async  Task<ActionResult> Index(int page = 1)
         {
             try
             {
@@ -23,14 +24,19 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
-                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
+
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingName);
                 var pageSize = GetSettingValueInt(PageDesingName, StoreConstants.DefaultPageSize);
-                var categories = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
+                var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
 
                 ProductCategoryHelper.StoreSettings = GetStoreSettings();
-                var pageOutput = ProductCategoryHelper.GetCategoriesIndexPage(pageDesignTask, categories);
 
+                await Task.WhenAll(pageDesignTask, categoriesTask);
+                var pageDesign = pageDesignTask.Result;
+                var categories = categoriesTask.Result;
+
+                var pageOutput = ProductCategoryHelper.GetCategoriesIndexPage(pageDesign, categories);
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
                 PagingHelper.StoreSettings = GetStoreSettings();
@@ -40,7 +46,8 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.RouteData = this.RouteData;
                 PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
+                await Task.WhenAll(pagingPageDesignTask);
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
 
 
                 return View(pagingDic);
@@ -57,7 +64,7 @@ namespace StoreManagement.Liquid.Controllers
         //
         // GET: /Product/
         [OutputCache(CacheProfile = "Cache20Minutes")]
-        public ActionResult Category(String id = "", int page = 1)
+       public async Task<ActionResult> Category(String id = "", int page = 1)
         {
             try
             {
@@ -65,20 +72,25 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
-                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
+
                 int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductCategoryPage");
                 var pageSize = GetSettingValueInt("ProductCategoryPage_ItemsNumber", StoreConstants.DefaultPageSize);
-                var categories = ProductCategoryService.GetProductCategoryAsync(categoryId);
+                var categoriesTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
                 var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, categoryId, StoreConstants.ProductType, true, page, pageSize);
 
                 ProductCategoryHelper.StoreSettings = GetStoreSettings();
                 ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoryPage_ImageWidth", 50);
                 ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoryPage_ImageHeight", 50);
 
-                var pageOutput = ProductCategoryHelper.GetCategoryPage(pageDesignTask, categories, productsTask);
 
+                await Task.WhenAll(pageDesignTask, categoriesTask, productsTask);
+                var pageDesign = pageDesignTask.Result;
+                var categories = categoriesTask.Result;
+                var products = productsTask.Result;
 
+                var pageOutput = ProductCategoryHelper.GetCategoryPage(pageDesign, categories, products);
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
                 PagingHelper.StoreSettings = GetStoreSettings();
                 PagingHelper.StoreId = StoreId;
@@ -87,7 +99,9 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 PagingHelper.HttpRequestBase = this.Request;
                 PagingHelper.RouteData = this.RouteData;
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask);
+
+                await Task.WhenAll(pagingPageDesignTask);
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
 
 
                 return View(pagingDic);

@@ -17,7 +17,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
         string ControllerName { get; set; }
         HttpRequestBase HttpRequestBase { get; set; }
         RouteData RouteData { get; set; }
-        StoreLiquidResult GetPaging(Task<PageDesign> pagingPageDesignTask);
+        StoreLiquidResult GetPaging(PageDesign pagingPageDesignTask);
     }
 
 }

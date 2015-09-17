@@ -11,10 +11,10 @@ namespace StoreManagement.Liquid.Helper.Interfaces
     public interface INavigationHelper : IHelper
     {
         StoreLiquidResult GetMainLayoutLink(
-            Task<List<Navigation>> navigationsTask,
-            Task<PageDesign> pageDesignTask);
+           List<Navigation> navigations,
+           PageDesign pageDesign);
 
-        StoreLiquidResult GetMainLayoutFooterLink(Task<List<Navigation>> navigationsTask,
-                                                  Task<PageDesign> pageDesignTask);
+        StoreLiquidResult GetMainLayoutFooterLink(List<Navigation> navigations,
+                                                  PageDesign pageDesign);
     }
 }

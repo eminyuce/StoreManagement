@@ -18,20 +18,12 @@ namespace StoreManagement.Liquid.Helper
     {
 
 
-        public StoreLiquidResult GetBrandsPartial(Task<List<Brand>> brandsTask, Task<PageDesign> pageDesignTask)
+        public StoreLiquidResult GetBrandsPartial(List<Brand> brands, PageDesign pageDesign)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try
             {
-                Task.WaitAll(pageDesignTask, brandsTask);
-                var pageDesign = pageDesignTask.Result;
-                var brands = brandsTask.Result;
-
-                if (pageDesign == null)
-                {
-                    throw new Exception("PageDesing is null");
-                }
 
 
                 var items = new List<BrandLiquid>();
@@ -73,23 +65,13 @@ namespace StoreManagement.Liquid.Helper
       
 
 
-        public StoreLiquidResult GetBrandDetailPage(Task<Brand> brandTask, Task<List<Product>> productsTask, Task<PageDesign> pageDesignTask, Task<List<ProductCategory>> productCategoriesTask)
+        public StoreLiquidResult GetBrandDetailPage(Brand brand, List<Product> products, PageDesign pageDesign, List<ProductCategory> productCategories)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try
             {
-                Task.WaitAll(brandTask, pageDesignTask, pageDesignTask, productCategoriesTask);
-                var pageDesign = pageDesignTask.Result;
-                var products = productsTask.Result;
-                var productCategories = productCategoriesTask.Result;
-                var brand = brandTask.Result;
-
-                if (pageDesign == null)
-                {
-                    throw new Exception("PageDesing is null");
-                }
-
+             
 
 
                 var brandLiquid = new BrandLiquid(brand, pageDesign, ImageWidth, ImageHeight);

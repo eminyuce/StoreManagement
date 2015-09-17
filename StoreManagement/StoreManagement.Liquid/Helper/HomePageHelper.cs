@@ -19,7 +19,7 @@ namespace StoreManagement.Liquid.Helper
 
 
 
-        public StoreLiquidResult GetHomePageDesign(
+        public async Task<StoreLiquidResult> GetHomePageDesign(
          Task<List<Product>> productsTask,
          Task<List<Content>> blogsTask,
          Task<List<Content>> newsTask,
@@ -43,21 +43,16 @@ namespace StoreManagement.Liquid.Helper
            
             if (isApi)
             {
-                Task.WaitAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
-                        productCategoriesTask);
+            
             }
             else
             {
-                Task.WaitAny(productsTask);
-                Task.WaitAny(blogsTask);
-                Task.WaitAny(newsTask);
-                Task.WaitAny(pageDesignTask);
-                Task.WaitAny(sliderTask);
-                Task.WaitAny(categoriesTask);
-                Task.WaitAny(productCategoriesTask);
+                
 
             }
 
+           await  Task.WhenAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
+                    productCategoriesTask);
 
 
             products = productsTask.Result;
@@ -68,19 +63,19 @@ namespace StoreManagement.Liquid.Helper
             categories = categoriesTask.Result;
             productCategories = productCategoriesTask.Result;
 
-            
 
+            return GetHomePageDesign(pageDesing, sliderImages, products, blogs, news, categories, productCategories);
+        }
 
-
-
+        public StoreLiquidResult GetHomePageDesign(PageDesign pageDesing, List<FileManager> sliderImages, List<Product> products, List<Content> blogs, List<Content> news,
+                                         List<Category> categories, List<ProductCategory> productCategories)
+        {
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             result.LiquidRenderedResult = dic;
             try
             {
-
-
                 if (pageDesing == null)
                 {
                     throw new Exception("PageDesing is null");
@@ -102,7 +97,6 @@ namespace StoreManagement.Liquid.Helper
                 home.ImageHeightNews = GetSettingValueInt("NewsHomePage_ImageHeight", 50);
 
 
-
                 home.ImageWidthSlider = GetSettingValueInt("SliderHomePage_ImageWidth", 500);
                 home.ImageHeightSlider = GetSettingValueInt("SliderHomePage_ImageHeight", 500);
 
@@ -111,19 +105,16 @@ namespace StoreManagement.Liquid.Helper
                 home.ProductCategories = productCategories;
 
                 object anonymousObject = new
-                {
-                    blogs = LiquidAnonymousObject.GetContentLiquid(home.BlogsLiquidList),
-                    products = LiquidAnonymousObject.GetProductsLiquid(home.ProductLiquidList),
-                    news = LiquidAnonymousObject.GetContentLiquid(home.NewsLiquidList),
-                    sliders = LiquidAnonymousObject.GetSliderImagesLiquidList(home.SliderImagesLiquid),
-
-
-                };
+                    {
+                        blogs = LiquidAnonymousObject.GetContentLiquid(home.BlogsLiquidList),
+                        products = LiquidAnonymousObject.GetProductsLiquid(home.ProductLiquidList),
+                        news = LiquidAnonymousObject.GetContentLiquid(home.NewsLiquidList),
+                        sliders = LiquidAnonymousObject.GetSliderImagesLiquidList(home.SliderImagesLiquid),
+                    };
 
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing.PageTemplate, anonymousObject);
                 dic[StoreConstants.PageOutput] = indexPageOutput;
-
             }
             catch (Exception ex)
             {
@@ -133,6 +124,5 @@ namespace StoreManagement.Liquid.Helper
 
             return result;
         }
- 
     }
 }

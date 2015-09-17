@@ -10,7 +10,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 {
     public interface IPhotoGalleryHelper : IHelper
     {
-        StoreLiquidResult GetPhotoGalleryIndexPage(Task<PageDesign> pageDesignTask, Task<List<FileManager>> fileManagersTask);
+        StoreLiquidResult GetPhotoGalleryIndexPage(PageDesign pageDesign, List<FileManager> fileManagers);
     }
 
 }

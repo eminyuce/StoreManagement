@@ -16,7 +16,7 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxProductsController : BaseController
     {
-        public async Task<JsonResult> GetProductCategories(String desingName = "")
+        public async Task<JsonResult> GetProductCategories(String desingName = "", int imageWidth = 0, int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -31,8 +31,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
 
                 ProductCategoryHelper.StoreSettings = GetStoreSettings();
-                ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50);
-                ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50);
+                ProductCategoryHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50) : imageWidth;
+                ProductCategoryHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50) : imageHeight;
 
                 await Task.WhenAll(categoriesTask, pageDesignTask);
                 var categories = categoriesTask.Result;
@@ -53,7 +53,7 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetRelatedProductsPartialByCategory(int categoryId, int excludedProductId = 0, String desingName = "")
+        public async Task<JsonResult> GetRelatedProductsPartialByCategory(int categoryId, int excludedProductId = 0, String desingName = "", int take = 0, int imageWidth = 0, int imageHeight = 0)
         {
             if (String.IsNullOrEmpty(desingName))
             {
@@ -63,15 +63,15 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
                 var categoryTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
-                int take = GetSettingValueInt("RelatedProducts_ItemsNumber", 5);
+                take = take == 0 ? GetSettingValueInt("RelatedProducts_ItemsNumber", 5) : take;
                 var relatedProductsTask = ProductService.GetProductByTypeAndCategoryIdAsync(StoreId, categoryId, take, excludedProductId);
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
 
                 ProductHelper.StoreSettings = GetStoreSettings();
-                ProductHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByCategory_ImageWidth", 50);
-                ProductHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByCategory_ImageHeight", 50);
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedProductsPartialByCategory_ImageWidth", 50) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedProductsPartialByCategory_ImageHeight", 50) : imageHeight;
 
-                Task.WhenAll(pageDesignTask, relatedProductsTask, categoryTask);
+                await Task.WhenAll(pageDesignTask, relatedProductsTask, categoryTask);
                 var products = relatedProductsTask.Result;
                 var pageDesign = pageDesignTask.Result;
                 var category = categoryTask.Result;
@@ -88,7 +88,7 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetRelatedProductsPartialByBrand(int brandId, int excludedProductId = 0, String desingName = "")
+        public async Task<JsonResult> GetRelatedProductsPartialByBrand(int brandId, int excludedProductId = 0, String desingName = "", int imageWidth = 0, int imageHeight = 0, int take = 0)
         {
             if (String.IsNullOrEmpty(desingName))
             {
@@ -101,16 +101,16 @@ namespace StoreManagement.Liquid.Controllers
                                                                                              StoreConstants
                                                                                                  .ProductType, true);
                 var brandTask = BrandService.GetBrandAsync(brandId);
-                int take = GetSettingValueInt("RelatedProducts_ItemsNumber", 5);
+                take = take == 0 ? GetSettingValueInt("RelatedProducts_ItemsNumber", 5) : take;
                 var relatedProductsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, excludedProductId);
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
 
                 ProductHelper.StoreSettings = GetStoreSettings();
-                ProductHelper.ImageWidth = GetSettingValueInt("RelatedProductsPartialByBrand_ImageWidth", 50);
-                ProductHelper.ImageHeight = GetSettingValueInt("RelatedProductsPartialByBrand_ImageHeight", 50);
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedProductsPartialByBrand_ImageWidth", 50) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedProductsPartialByBrand_ImageHeight", 50) : imageHeight;
 
 
-                Task.WhenAll(pageDesignTask, relatedProductsTask, brandTask, productCategoriesTask);
+                await Task.WhenAll(pageDesignTask, relatedProductsTask, brandTask, productCategoriesTask);
                 var products = relatedProductsTask.Result;
                 var pageDesign = pageDesignTask.Result;
                 var brand = brandTask.Result;
@@ -131,7 +131,7 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetBrands(String desingName = "")
+        public async Task<JsonResult> GetBrands(String desingName = "", int imageWidth = 0, int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -148,8 +148,8 @@ namespace StoreManagement.Liquid.Controllers
                 var brandsTask = BrandService.GetBrandsAsync(StoreId, take, true);
 
                 BrandHelper.StoreSettings = GetStoreSettings();
-                BrandHelper.ImageWidth = GetSettingValueInt("BrandsPartial_ImageWidth", 50);
-                BrandHelper.ImageHeight = GetSettingValueInt("BrandsPartial_ImageHeight", 50);
+                BrandHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("BrandsPartial_ImageWidth", 50) : imageWidth;
+                BrandHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("BrandsPartial_ImageHeight", 50) : imageHeight;
 
                 await Task.WhenAll(pageDesignTask, brandsTask);
                 var pageDesign = pageDesignTask.Result;
@@ -174,7 +174,7 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetProductLabels(int id, String designName = "")
+        public async Task<JsonResult> GetProductLabels(int id, String designName = "", int imageWidth = 0, int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(designName))
@@ -190,8 +190,8 @@ namespace StoreManagement.Liquid.Controllers
                 var labelsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
 
                 LabelHelper.StoreSettings = GetStoreSettings();
-                LabelHelper.ImageWidth = GetSettingValueInt("ProductLabels_ImageWidth", 50);
-                LabelHelper.ImageHeight = GetSettingValueInt("ProductLabels_ImageHeight", 50);
+                LabelHelper.ImageWidth =imageWidth == 0 ?  GetSettingValueInt("ProductLabels_ImageWidth", 50) : imageWidth;
+                LabelHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("ProductLabels_ImageHeight", 50) : imageHeight;
 
 
                 await Task.WhenAll(pageDesignTask, labelsTask);
@@ -217,7 +217,8 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetPopularProducts(int page = 1, String desingName = "", int categoryId = -1, int brandId = -1)
+        public async Task<JsonResult> GetPopularProducts(int page = 1, String desingName = "", int categoryId = -1, int brandId = -1,
+            int pageSize = 0, int imageWidth = 0, int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -228,7 +229,8 @@ namespace StoreManagement.Liquid.Controllers
 
             try
             {
-                int pageSize = GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize);
+                pageSize = pageSize == 0 ? GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize) : pageSize;
+
                 var productsTask = ProductService.GetPopularProducts(StoreId, categoryId == -1 ? (int?)null : categoryId, brandId == -1 ? (int?)null : brandId, StoreConstants.ProductType, page, pageSize, true);
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
                 var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
@@ -241,8 +243,8 @@ namespace StoreManagement.Liquid.Controllers
                 var productCategories = productCategoriesTask.Result;
 
                 ProductHelper.StoreSettings = GetStoreSettings();
-                ProductHelper.ImageWidth = GetSettingValueInt("PopularProducts_ImageWidth", 99);
-                ProductHelper.ImageHeight = GetSettingValueInt("PopularProducts_ImageHeight", 99);
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("PopularProducts_ImageHeight", 99) : imageHeight;
                 var pageOuput = ProductHelper.GetPopularProducts(products, productCategories, pageDesign);
                 returtHtml = pageOuput.PageOutputText;
 
@@ -256,7 +258,7 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetRecentProducts(int page = 1, String desingName = "", int categoryId = -1, int brandId = -1)
+        public async Task<JsonResult> GetRecentProducts(int page = 1, String desingName = "", int categoryId = -1, int brandId = -1, int pageSize = 0, int imageWidth = 0, int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -267,7 +269,8 @@ namespace StoreManagement.Liquid.Controllers
             String returtHtml = "";
             try
             {
-                int pageSize = GetSettingValueInt("RecentProducts_PageSize", StoreConstants.DefaultPageSize);
+                pageSize = pageSize == 0 ? GetSettingValueInt("RecentProducts_PageSize", StoreConstants.DefaultPageSize) : pageSize;
+
                 var productsTask = ProductService.GetRecentProducts(StoreId, categoryId == -1 ? (int?)null : categoryId, brandId == -1 ? (int?)null : brandId, StoreConstants.ProductType, page, pageSize, true);
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
                 var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
@@ -281,8 +284,8 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 ProductHelper.StoreSettings = GetStoreSettings();
-                ProductHelper.ImageWidth = GetSettingValueInt("RecentProducts_ImageWidth", 99);
-                ProductHelper.ImageHeight = GetSettingValueInt("RecentProducts_ImageHeight", 99);
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RecentProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RecentProducts_ImageHeight", 99) : imageHeight;
                 var pageOuput = ProductHelper.GetPopularProducts(products, productCategories, pageDesign);
                 returtHtml = pageOuput.PageOutputText;
 

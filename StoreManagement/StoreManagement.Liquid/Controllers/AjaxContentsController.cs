@@ -16,7 +16,7 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxContentsController : BaseController
     {
-        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String desingName = "")
+        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String desingName = "", int take = 0, int imageWidth = 0, int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(desingName))
@@ -30,12 +30,12 @@ namespace StoreManagement.Liquid.Controllers
             {
                 var categoryTask = CategoryService.GetCategoryAsync(categoryId);
 
-                int take = 0;
-                if (contentType.Equals(StoreConstants.NewsType))
+
+                if (take == 0 && contentType.Equals(StoreConstants.NewsType))
                 {
                     take = GetSettingValueInt("RelatedNews_ItemsNumber", 5);
                 }
-                else if (contentType.Equals(StoreConstants.BlogsType))
+                else if (take == 0 && contentType.Equals(StoreConstants.BlogsType))
                 {
                     take = GetSettingValueInt("RelatedBlogs_ItemsNumber", 5);
                 }
@@ -49,13 +49,13 @@ namespace StoreManagement.Liquid.Controllers
 
                 if (contentType.Equals(StoreConstants.NewsType))
                 {
-                    ContentHelper.ImageWidth = GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50);
-                    ContentHelper.ImageHeight = GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50);
+                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50) : imageWidth;
+                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50) : imageHeight;
                 }
                 else if (contentType.Equals(StoreConstants.BlogsType))
                 {
-                    ContentHelper.ImageWidth = GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50);
-                    ContentHelper.ImageHeight = GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50);
+                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50) : imageWidth;
+                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50) : imageHeight;
                 }
                 else
                 {
@@ -64,7 +64,7 @@ namespace StoreManagement.Liquid.Controllers
                     Logger.Trace("No ContentType is defined like that " + contentType);
                 }
 
-                await  Task.WhenAll(pageDesignTask, relatedContentsTask, categoryTask);
+                await Task.WhenAll(pageDesignTask, relatedContentsTask, categoryTask);
                 var contents = relatedContentsTask.Result;
                 var pageDesign = pageDesignTask.Result;
                 var category = categoryTask.Result;

@@ -72,14 +72,15 @@ namespace StoreManagement.Liquid.Controllers
 
         }
 
-        public async Task<JsonResult> GetComments(int itemId, String itemType, int page, String desingName = "")
+        public async Task<JsonResult> GetComments(int itemId, String itemType, int page, String desingName = "", int pageSize=0)
         {
 
             if (String.IsNullOrEmpty(desingName))
             {
                 desingName = GetSettingValue("Comments_DefaultPageDesign", "CommentsPartial");
             }
-            int pageSize = GetSettingValueInt("Comments_PageSize", StoreConstants.DefaultPageSize);
+
+            pageSize = pageSize == 0 ? GetSettingValueInt("Comments_PageSize", StoreConstants.DefaultPageSize) : pageSize;
 
             String returnHtml = "";
             try

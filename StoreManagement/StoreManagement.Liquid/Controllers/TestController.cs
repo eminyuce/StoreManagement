@@ -59,6 +59,7 @@ namespace StoreManagement.Liquid.Controllers
             IFileManagerService rep6 = new FileManagerRepository(new StoreContext(ConnectionString));
 
 
+
             var productsTask = rep.GetProductsByBrandAsync(StoreId, 5, 100, null);
             var pageDesignTask = rep3.GetPageDesignByName(StoreId, "HomePage");
             var blogsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, 5);
@@ -67,6 +68,15 @@ namespace StoreManagement.Liquid.Controllers
             var categoriesTask = rep5.GetCategoriesByStoreIdAsync(StoreId);
             var sliderTask = rep6.GetStoreCarouselsAsync(StoreId, 58);
 
+
+
+
+            //IProductService rep = ProductService;
+            //IContentService rep2 = ContentService;
+            //IPageDesignService rep3 = PageDesignService;
+            //IProductCategoryService rep4 = ProductCategoryService;
+            //ICategoryService rep5 = CategoryService;
+            //IFileManagerService rep6 = FileManagerService;
 
             await Task.WhenAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
                      productCategoriesTask);

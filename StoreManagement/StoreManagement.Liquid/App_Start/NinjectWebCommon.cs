@@ -74,77 +74,77 @@ namespace StoreManagement.Liquid.App_Start
         private static void RegisterServices(IKernel kernel)
         {
 
-            var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", true);
-            if (isAPIService)
-            {
-                var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "localhost:8164");
-                var service1 = kernel.Bind<IContentService>().To<ContentService>().InRequestScope();
-                service1.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service2 = kernel.Bind<IStoreService>().To<StoreService>().InRequestScope();
-                service2.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service3 = kernel.Bind<ISettingService>().To<SettingService>().InRequestScope();
-                service3.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service4 = kernel.Bind<IFileManagerService>().To<FileManagerService>().InRequestScope();
-                service4.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service5 = kernel.Bind<ICategoryService>().To<CategoryService>().InRequestScope();
-                service5.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service6 = kernel.Bind<IPageDesignService>().To<PageDesignService>().InRequestScope();
-                service6.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service7 = kernel.Bind<IContentFileService>().To<ContentFileService>().InRequestScope();
-                service7.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service8 = kernel.Bind<IStoreUserService>().To<StoreUserService>().InRequestScope();
-                service8.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service10 = kernel.Bind<INavigationService>().To<NavigationService>().InRequestScope();
-                service10.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service11 = kernel.Bind<IProductService>().To<ProductService>().InRequestScope();
-                service11.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service12 = kernel.Bind<IProductFileService>().To<ProductFileService>().InRequestScope();
-                service12.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service13 = kernel.Bind<IProductCategoryService>().To<ProductCategoryService>().InRequestScope();
-                service13.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service14 = kernel.Bind<IBrandService>().To<BrandService>().InRequestScope();
-                service14.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service15 = kernel.Bind<ILocationService>().To<LocationService>().InRequestScope();
-                service15.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service16 = kernel.Bind<IStoreLanguageService>().To<StoreLanguageService>().InRequestScope();
-                service16.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service17 = kernel.Bind<IItemFileService>().To<ItemFileService>().InRequestScope();
-                service17.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service18 = kernel.Bind<IContactService>().To<ContactService>().InRequestScope();
-                service18.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service19 = kernel.Bind<ILabelService>().To<LabelService>().InRequestScope();
-                service19.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service20 = kernel.Bind<IActivityService>().To<ActivityService>().InRequestScope();
-                service20.WithConstructorArgument("webServiceAddress", webServiceAddress);
-                var service21 = kernel.Bind<ICommentService>().To<CommentService>().InRequestScope();
-                service21.WithConstructorArgument("webServiceAddress", webServiceAddress);
-            }
-            else
-            {
+            //var isAPIService = ProjectAppSettings.GetWebConfigBool("IsApiService", true);
+            //if (isAPIService)
+            //{
+            //    var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "localhost:8164");
+            //    var service1 = kernel.Bind<IContentService>().To<ContentService>().InRequestScope();
+            //    service1.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service2 = kernel.Bind<IStoreService>().To<StoreService>().InRequestScope();
+            //    service2.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service3 = kernel.Bind<ISettingService>().To<SettingService>().InRequestScope();
+            //    service3.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service4 = kernel.Bind<IFileManagerService>().To<FileManagerService>().InRequestScope();
+            //    service4.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service5 = kernel.Bind<ICategoryService>().To<CategoryService>().InRequestScope();
+            //    service5.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service6 = kernel.Bind<IPageDesignService>().To<PageDesignService>().InRequestScope();
+            //    service6.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service7 = kernel.Bind<IContentFileService>().To<ContentFileService>().InRequestScope();
+            //    service7.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service8 = kernel.Bind<IStoreUserService>().To<StoreUserService>().InRequestScope();
+            //    service8.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service10 = kernel.Bind<INavigationService>().To<NavigationService>().InRequestScope();
+            //    service10.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service11 = kernel.Bind<IProductService>().To<ProductService>().InRequestScope();
+            //    service11.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service12 = kernel.Bind<IProductFileService>().To<ProductFileService>().InRequestScope();
+            //    service12.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service13 = kernel.Bind<IProductCategoryService>().To<ProductCategoryService>().InRequestScope();
+            //    service13.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service14 = kernel.Bind<IBrandService>().To<BrandService>().InRequestScope();
+            //    service14.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service15 = kernel.Bind<ILocationService>().To<LocationService>().InRequestScope();
+            //    service15.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service16 = kernel.Bind<IStoreLanguageService>().To<StoreLanguageService>().InRequestScope();
+            //    service16.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service17 = kernel.Bind<IItemFileService>().To<ItemFileService>().InRequestScope();
+            //    service17.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service18 = kernel.Bind<IContactService>().To<ContactService>().InRequestScope();
+            //    service18.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service19 = kernel.Bind<ILabelService>().To<LabelService>().InRequestScope();
+            //    service19.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service20 = kernel.Bind<IActivityService>().To<ActivityService>().InRequestScope();
+            //    service20.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //    var service21 = kernel.Bind<ICommentService>().To<CommentService>().InRequestScope();
+            //    service21.WithConstructorArgument("webServiceAddress", webServiceAddress);
+            //}
+            //else
+            //{
 
-                kernel.Bind<IContentService>().To<ContentRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IStoreService>().To<StoreRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ISettingService>().To<SettingRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IFileManagerService>().To<FileManagerRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ICategoryService>().To<CategoryRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IPageDesignService>().To<PageDesignRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IContentFileService>().To<ContentFileRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IStoreUserService>().To<StoreUserRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<INavigationService>().To<NavigationRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IProductService>().To<ProductRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IProductFileService>().To<ProductFileRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ILocationService>().To<LocationRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IBrandService>().To<BrandRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IItemFileService>().To<ItemFileRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ILabelService>().To<LabelRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IContactService>().To<ContactRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<IActivityService>().To<ActivityRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
-                kernel.Bind<ICommentService>().To<CommentRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName)); 
+            //    //kernel.Bind<IContentService>().To<ContentRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IStoreService>().To<StoreRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<ISettingService>().To<SettingRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IFileManagerService>().To<FileManagerRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<ICategoryService>().To<CategoryRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IPageDesignService>().To<PageDesignRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IContentFileService>().To<ContentFileRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IStoreUserService>().To<StoreUserRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<INavigationService>().To<NavigationRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IProductService>().To<ProductRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IProductFileService>().To<ProductFileRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IProductCategoryService>().To<ProductCategoryRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<ILocationService>().To<LocationRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IBrandService>().To<BrandRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IStoreLanguageService>().To<StoreLanguageRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IItemFileService>().To<ItemFileRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<ILabelService>().To<LabelRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IContactService>().To<ContactRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<IActivityService>().To<ActivityRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName));
+            //    //kernel.Bind<ICommentService>().To<CommentRepository>().InTransientScope().WithConstructorArgument("dbContext", new StoreContext(AppConstants.ConnectionStringName)); 
 
   
-            }
+            //}
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();
 
             kernel.Bind<IProductCategoryHelper>().To<ProductCategoryHelper>().InRequestScope();

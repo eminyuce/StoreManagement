@@ -14,10 +14,14 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Liquid.Constants;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Liquid.Helper.Interfaces;
+using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using NLog;
+using StoreManagement.Service.Repositories;
+using StoreManagement.Service.Services;
 
 namespace StoreManagement.Liquid.Controllers
 {
@@ -67,70 +71,339 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public IHomePageHelper HomePageHelper { set; get; }
 
-        [Inject]
-        public IStoreService StoreService { set; get; }
-
-        [Inject]
-        public IItemFileService ItemFileService { set; get; }
-
-        [Inject]
-        public ISettingService SettingService { set; get; }
-
-        [Inject]
-        public IFileManagerService FileManagerService { get; set; }
-
-        [Inject]
-        public IContentFileService ContentFileService { set; get; }
-
-        [Inject]
-        public IContentService ContentService { set; get; }
-
-        [Inject]
-        public ICategoryService CategoryService { set; get; }
-
-        [Inject]
-        public INavigationService NavigationService { set; get; }
-
-        [Inject]
-        public IPageDesignService PageDesignService { set; get; }
-
-        [Inject]
-        public IStoreUserService StoreUserService { set; get; }
-
-        [Inject]
-        public ICommentService CommentService { set; get; }
 
         [Inject]
         public IEmailSender EmailSender { set; get; }
 
 
-        [Inject]
-        public IActivityService ActivityService { set; get; }
+        
+        public IStoreService StoreService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new StoreService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new StoreRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        
+        public IItemFileService ItemFileService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new ItemFileService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ItemFileRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        
+        public ISettingService SettingService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new SettingService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new SettingRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        
+        public IFileManagerService FileManagerService
+        {
+            get
+            {
+                if (ProjectAppSettings.IsApiService)
+                {
+                    return new FileManagerService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new FileManagerRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        
+        public IContentFileService ContentFileService
+        {
+            get
+            {
+                if (ProjectAppSettings.IsApiService)
+                {
+                    return new ContentFileService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ContentFileRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public IContentService ContentService
+        {
+            get
+            {
+                if (ProjectAppSettings.IsApiService)
+                {
+                    return new ContentService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ContentRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public ICategoryService CategoryService
+        {
+            get
+            {
+                if (ProjectAppSettings.IsApiService)
+                {
+                    return new CategoryService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new CategoryRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public INavigationService NavigationService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+                    return new NavigationService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new NavigationRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public IPageDesignService PageDesignService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new PageDesignService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new PageDesignRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public IStoreUserService StoreUserService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new StoreUserService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new StoreUserRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public ICommentService CommentService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new CommentService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new CommentRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
 
 
-        [Inject]
-        public IProductService ProductService { set; get; }
-
-        [Inject]
-        public IProductFileService ProductFileService { set; get; }
-
-        [Inject]
-        public IProductCategoryService ProductCategoryService { set; get; }
-
-        [Inject]
-        public IBrandService BrandService { set; get; }
-
-        [Inject]
-        public ILocationService LocationService { set; get; }
-
-        [Inject]
-        public IContactService ContactService { set; get; }
 
 
-        [Inject]
-        public ILabelService LabelService { set; get; }
+        public IActivityService ActivityService
+        {
+            get
+            {
 
-        // protected Store Store { set; get; }
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new ActivityService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ActivityRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+
+
+        public IProductService ProductService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new ProductService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ProductRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public IProductFileService ProductFileService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new ProductFileService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ProductFileRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        public IProductCategoryService ProductCategoryService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new ProductCategoryService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ProductCategoryRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        
+        public IBrandService BrandService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new BrandService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new BrandRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        
+        public ILocationService LocationService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new LocationService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new LocationRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+        
+        public IContactService ContactService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new ContactService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new ContactRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
+
+        public ILabelService LabelService
+        {
+            get
+            {
+
+                if (ProjectAppSettings.IsApiService)
+                {
+
+                    return new LabelService(ProjectAppSettings.WebServiceAddress);
+                }
+                else
+                {
+                    return new LabelRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }
+        }
+
         protected int StoreId { get; set; }
 
         protected override void Initialize(RequestContext requestContext)
@@ -150,7 +423,7 @@ namespace StoreManagement.Liquid.Controllers
             base.OnActionExecuting(filterContext);
         }
 
-        private  void GetStoreByDomain(RequestContext requestContext)
+        private void GetStoreByDomain(RequestContext requestContext)
         {
             var store = StoreHelper.GetStoreIdByDomain(StoreService, requestContext.HttpContext);
             this.StoreId = store;
@@ -306,7 +579,7 @@ namespace StoreManagement.Liquid.Controllers
             if (items == null)
             {
                 var itemsAsyn = SettingService.GetStoreSettingsFromCache(StoreId);
-      
+
                 items = itemsAsyn;
                 _settingStoreCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Setting_CacheAbsoluteExpiration_Minute", 10)));
 
@@ -314,7 +587,7 @@ namespace StoreManagement.Liquid.Controllers
             return items;
 
         }
-         
+
 
     }
 }

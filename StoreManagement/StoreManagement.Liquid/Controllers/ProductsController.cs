@@ -28,8 +28,8 @@ namespace StoreManagement.Liquid.Controllers
                 var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize));
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
 
-
-                ProductHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                ProductHelper.StoreSettings = settings;
                 ProductHelper.ImageWidth = GetSettingValueInt("ProductsIndex_ImageWidth", 50);
                 ProductHelper.ImageHeight = GetSettingValueInt("ProductsIndex_ImageHeight", 50);
 
@@ -49,7 +49,7 @@ namespace StoreManagement.Liquid.Controllers
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
-                PagingHelper.StoreSettings = GetStoreSettings();
+                PagingHelper.StoreSettings = settings;
                 PagingHelper.StoreId = StoreId;
                 PagingHelper.PageOutput = pageOutput;
                 PagingHelper.HttpRequestBase = this.Request;
@@ -93,16 +93,17 @@ namespace StoreManagement.Liquid.Controllers
                 var productsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductDetailPage");
                 var productsTask = ProductService.GetProductsByIdAsync(productId);
 
-                ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
-                ProductHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
-                ProductHelper.StoreSettings = GetStoreSettings();
 
-                await Task.WhenAll(productsPageDesignTask, productsTask, categoryTask);
+                await Task.WhenAll(productsTask, categoryTask, productsPageDesignTask);
                 var product = productsTask.Result;
                 var pageDesign = productsPageDesignTask.Result;
                 var category = categoryTask.Result;
 
 
+
+                ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
+                ProductHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
+                ProductHelper.StoreSettings = GetStoreSettings();
                 var dic = ProductHelper.GetProductsDetailPage(product, pageDesign, category);
 
                 return View(dic);

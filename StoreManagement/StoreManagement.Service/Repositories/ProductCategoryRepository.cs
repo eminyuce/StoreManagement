@@ -163,8 +163,15 @@ namespace StoreManagement.Service.Repositories
 
         public async Task<ProductCategory> GetProductCategoryAsync(int storeId, int productId)
         {
-            Product product = this.FindBy(r => r.StoreId == storeId).Select(r => r.Products.FirstOrDefault(t => t.Id == productId)).FirstOrDefault();
-            return await this.GetSingleAsync(product.ProductCategoryId);
+            Product product = this.DbContext.Products.FirstOrDefault(r => r.Id == productId);
+            if (product != null)
+            {
+                return await this.GetSingleAsync(product.ProductCategoryId);
+            }
+            else
+            {
+                return new ProductCategory();
+            }
         }
 
         public async Task<ProductCategory> GetProductCategoryAsync(int categoryId)

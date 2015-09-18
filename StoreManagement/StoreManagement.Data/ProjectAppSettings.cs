@@ -82,8 +82,20 @@ namespace StoreManagement.Data
             }
             return configValue == -1 ? defaultValue : configValue;
         }
-
-
+        public static bool IsApiService
+        {
+            get
+            {
+                return GetWebConfigBool("IsApiService");
+            }
+        }
+        public static String WebServiceAddress
+        {
+            get
+            {
+                return GetWebConfigString("WebServiceAddress");
+            }
+        }
         public static int CacheTinySeconds
         {
             get

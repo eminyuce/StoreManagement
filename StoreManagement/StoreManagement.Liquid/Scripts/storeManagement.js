@@ -230,16 +230,29 @@ function GetRelatedProductsPartialByBrand() {
     $('[data-related-products-by-brand]').each(function () {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
-        var brandId = $(this).attr('data-related-products-by-brand');
-        var excludedProductId = $(this).attr('data-excluded-product-id');
-        var postData = JSON.stringify({ "brandId": brandId, "excludedProductId": excludedProductId, "designName": designName });
+        var brandId =  GetValueInt($(this).attr('data-related-products-by-brand'));
+        var excludedProductId = GetValueInt( $(this).attr('data-excluded-product-id'));
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+        var take = GetValueInt($(this).attr('data-number-of-items'));
+        var postData = JSON.stringify({
+            "brandId": brandId,
+            "excludedProductId": excludedProductId,
+            "designName": designName,
+            "take": take,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight
+        });
         ajaxMethodCall(postData, "/AjaxProducts/GetRelatedProductsPartialByBrand", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
         });
     });
 }
-
+function GetValueInt(val) {
+    val = val === undefined ? 0 : val;
+    return val;
+}
 
 function ajaxMethodCall(postData, ajaxUrl, successFunction) {
 

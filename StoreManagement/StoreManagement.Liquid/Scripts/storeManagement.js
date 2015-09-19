@@ -90,7 +90,7 @@ function callAjaxMethod() {
     catch (err) {
         console.error(err.message);
     }
-    
+
     try {
         if ($('[data-recent-products]').length > 0) {
             GetRecentProducts();
@@ -107,12 +107,21 @@ function GetPopularProducts() {
 
         var page = parseInt($(this).attr('data-page'));
         var designName = $(this).attr('data-template-design-name');
-        var categoryId = $(this).attr('data-product-category-id');
-        categoryId = categoryId === undefined ? -1 : categoryId;
-        var brandId = $(this).attr('data-brand-id');
-        brandId = brandId === undefined ? -1 : brandId;
-        
-        var postData = JSON.stringify({ "page": page, "designName": designName, "categoryId": categoryId, "brandId": brandId });
+        var categoryId = GetValueInt($(this).attr('data-product-category-id'));
+        var brandId = GetValueInt($(this).attr('data-brand-id'));
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+        var pageSize = GetValueInt($(this).attr('data-page-size'));
+
+        var postData = JSON.stringify({
+            "page": page,
+            "designName": designName,
+            "categoryId": categoryId,
+            "brandId": brandId,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight,
+            "pageSize": pageSize
+        });
 
         ajaxMethodCall(postData, "/AjaxProducts/GetPopularProducts", function (data) {
             $(truethis).empty();
@@ -128,11 +137,21 @@ function GetRecentProducts() {
 
         var page = parseInt($(this).attr('data-page'));
         var designName = $(this).attr('data-template-design-name');
-        var categoryId = $(this).attr('data-product-category-id');
-        categoryId = categoryId === undefined ? -1 : categoryId;
-        var brandId = $(this).attr('data-brand-id');
-        brandId = brandId === undefined ? -1 : brandId;
-        var postData = JSON.stringify({ "page": page, "designName": designName, "categoryId": categoryId, "brandId": brandId });
+        var categoryId = GetValueInt($(this).attr('data-product-category-id'));
+        var brandId = GetValueInt($(this).attr('data-brand-id'));
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+        var pageSize = GetValueInt($(this).attr('data-page-size'));
+
+        var postData = JSON.stringify({
+            "page": page,
+            "designName": designName,
+            "categoryId": categoryId,
+            "brandId": brandId,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight,
+            "pageSize": pageSize
+        });
 
         ajaxMethodCall(postData, "/AjaxProducts/GetRecentProducts", function (data) {
             $(truethis).empty();
@@ -180,7 +199,14 @@ function GetBrands() {
         var truethis = this;
 
         var designName = $(this).attr('data-template-design-name');
-        var postData = JSON.stringify({ "designName": designName });
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+
+        var postData = JSON.stringify({
+            "designName": designName,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight
+        });
         ajaxMethodCall(postData, "/AjaxProducts/GetBrands", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
@@ -192,7 +218,13 @@ function GetProductCategories() {
     $('[data-product-categories]').each(function () {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
-        var postData = JSON.stringify({ "designName": designName });
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+        var postData = JSON.stringify({
+            "designName": designName,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight
+        });
         ajaxMethodCall(postData, "/AjaxProducts/GetProductCategories", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
@@ -205,7 +237,17 @@ function GetRelatedContents() {
         var designName = $(this).attr('data-template-design-name');
         var contentType = $(this).attr('data-related-contents-type');
         var categoryId = $(this).attr('data-related-contents');
-        var postData = JSON.stringify({ "categoryId": categoryId, "contentType": contentType, "designName": designName });
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+        var take = GetValueInt($(this).attr('data-number-of-items'));
+        var postData = JSON.stringify({
+            "categoryId": categoryId,
+            "contentType": contentType,
+            "designName": designName,
+            "take": take,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight
+        });
         ajaxMethodCall(postData, "/AjaxContents/GetRelatedContents", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
@@ -218,8 +260,18 @@ function GetRelatedProductsPartialByCategory() {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
         var productCategoryId = $(this).attr('data-related-products-by-category');
-        var excludedProductId = $(this).attr('data-excluded-product-id');
-        var postData = JSON.stringify({ "categoryId": productCategoryId, "excludedProductId": excludedProductId, "designName": designName });
+        var excludedProductId = GetValueInt($(this).attr('data-excluded-product-id'));
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+        var take = GetValueInt($(this).attr('data-number-of-items'));
+        var postData = JSON.stringify({
+            "categoryId": productCategoryId,
+            "excludedProductId": excludedProductId,
+            "designName": designName,
+            "take": take,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight
+        });
         ajaxMethodCall(postData, "/AjaxProducts/GetRelatedProductsPartialByCategory", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
@@ -230,8 +282,8 @@ function GetRelatedProductsPartialByBrand() {
     $('[data-related-products-by-brand]').each(function () {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
-        var brandId =  GetValueInt($(this).attr('data-related-products-by-brand'));
-        var excludedProductId = GetValueInt( $(this).attr('data-excluded-product-id'));
+        var brandId = GetValueInt($(this).attr('data-related-products-by-brand'));
+        var excludedProductId = GetValueInt($(this).attr('data-excluded-product-id'));
         var imageWidth = GetValueInt($(this).attr('data-image-width'));
         var imageHeight = GetValueInt($(this).attr('data-image-height'));
         var take = GetValueInt($(this).attr('data-number-of-items'));

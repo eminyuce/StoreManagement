@@ -217,7 +217,7 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetPopularProducts(int page = 1, String desingName = "", int categoryId = -1, int brandId = -1,
+        public async Task<JsonResult> GetPopularProducts(int page = 1, String desingName = "", int categoryId = 0, int brandId = 0,
             int pageSize = 0, int imageWidth = 0, int imageHeight = 0)
         {
 
@@ -258,7 +258,7 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
-        public async Task<JsonResult> GetRecentProducts(int page = 1, String desingName = "", int categoryId = -1, int brandId = -1, int pageSize = 0, int imageWidth = 0, int imageHeight = 0)
+        public async Task<JsonResult> GetRecentProducts(int page = 1, String desingName = "", int categoryId = 0, int brandId = 0, int pageSize = 0, int imageWidth = 0, int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(desingName))

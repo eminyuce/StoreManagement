@@ -777,7 +777,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult GetPageDesignText(int id)
         {
             var item = PageDesignRepository.GetSingle(id);
-            return Json(item.PageTemplate, JsonRequestBehavior.AllowGet);
+            return Json(item, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SetPageDesignText(int id, String text)
         {

@@ -244,7 +244,12 @@
                         </span>
                         <span class="col-md-5">
                             <input type="hidden" id="selecedPageDesingItem" value="-1" />
+                            <h2>
+                                            <span class="text-danger" id="PageDesingName"></span>
+                            </h2>
+                
 
+                            <br />
                             <input class="btn btn-success btn-block btn-lg" id="SavePageDesign" type="submit" value="Save">
                             <br />
                             <span class="text-success" id="PageDesignMessage"></span>
@@ -295,7 +300,9 @@
             var itemId = $(caller).attr('data-page-desing-item-id');
             var postData = JSON.stringify({ "id": itemId });
             ajaxMethodCall(postData, "/Ajax/GetPageDesignText", function (data) {
-                $("#PageDesingText").val(data);
+                $("#PageDesingText").val(data.PageTemplate);
+                $("#PageDesingName").text(data.Name);
+
                 $("#selecedPageDesingItem").val(itemId);
                 $("#PageDesignMessage").text("");
             });

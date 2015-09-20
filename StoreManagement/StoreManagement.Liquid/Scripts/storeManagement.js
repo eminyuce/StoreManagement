@@ -82,27 +82,19 @@ function callAjaxMethod() {
     }
 
     try {
-        if ($('[data-popular-products]').length > 0) {
-            GetPopularProducts();
-        }
-
-    }
-    catch (err) {
-        console.error(err.message);
-    }
-
-    try {
-        if ($('[data-recent-products]').length > 0) {
-            GetRecentProducts();
+        if ($('[data-products-by-product-type]').length > 0) {
+            GetProductsByProductType();
         }
     }
     catch (err) {
         console.error(err.message);
     }
+
+   
 }
-function GetPopularProducts() {
-
-    $('[data-popular-products]').each(function () {
+function GetProductsByProductType() {
+    
+    $('[data-products-by-product-type]').each(function () {
         var truethis = this;
 
         var page = parseInt($(this).attr('data-page'));
@@ -112,6 +104,7 @@ function GetPopularProducts() {
         var imageWidth = GetValueInt($(this).attr('data-image-width'));
         var imageHeight = GetValueInt($(this).attr('data-image-height'));
         var pageSize = GetValueInt($(this).attr('data-page-size'));
+        var productType = $(this).attr('data-product-type');
 
         var postData = JSON.stringify({
             "page": page,
@@ -120,46 +113,18 @@ function GetPopularProducts() {
             "brandId": brandId,
             "imageWidth": imageWidth,
             "imageHeight": imageHeight,
-            "pageSize": pageSize
+            "pageSize": pageSize,
+            "productType": productType
         });
 
-        ajaxMethodCall(postData, "/AjaxProducts/GetPopularProducts", function (data) {
+        ajaxMethodCall(postData, "/AjaxProducts/GetProductsByProductType", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
             $(truethis).attr('data-page', page + 1);
         });
     });
 }
-function GetRecentProducts() {
-
-    $('[data-recent-products]').each(function () {
-        var truethis = this;
-
-        var page = parseInt($(this).attr('data-page'));
-        var designName = $(this).attr('data-template-design-name');
-        var categoryId = GetValueInt($(this).attr('data-product-category-id'));
-        var brandId = GetValueInt($(this).attr('data-brand-id'));
-        var imageWidth = GetValueInt($(this).attr('data-image-width'));
-        var imageHeight = GetValueInt($(this).attr('data-image-height'));
-        var pageSize = GetValueInt($(this).attr('data-page-size'));
-
-        var postData = JSON.stringify({
-            "page": page,
-            "designName": designName,
-            "categoryId": categoryId,
-            "brandId": brandId,
-            "imageWidth": imageWidth,
-            "imageHeight": imageHeight,
-            "pageSize": pageSize
-        });
-
-        ajaxMethodCall(postData, "/AjaxProducts/GetRecentProducts", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
-            $(truethis).attr('data-page', page + 1);
-        });
-    });
-}
+ 
 function GetProductLabels() {
     $('[data-product-labels]').each(function () {
         var truethis = this;

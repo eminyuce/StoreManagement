@@ -26,5 +26,6 @@ namespace StoreManagement.Service.Interfaces
         Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId);
         Task<List<Product>> GetPopularProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive);
         Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive);
+        Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool ? isActive);
     }
 }

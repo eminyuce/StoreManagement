@@ -115,5 +115,12 @@ namespace StoreManagement.API.Controllers
         {
             return await ProductRepository.GetRecentProducts(storeId, categoryId, brandId, productType, page, pageSize, isActive);
         }
+
+        public async Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
+        {
+            return await ProductRepository.GetMainPageProductsAsync(storeId, categoryId, brandId, productType, page, pageSize, isActive);
+        }
+
+         
     }
 }

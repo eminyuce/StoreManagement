@@ -232,8 +232,8 @@ namespace StoreManagement.Liquid.Controllers
             {
                 
                 Task<List<Product>> productsTask = null;
-                var catId = categoryId == -1 ? (int?) null : categoryId;
-                var bId = brandId == -1 ? (int?) null : brandId;
+                var catId = categoryId == 0 ? (int?) null : categoryId;
+                var bId = brandId == 0 ? (int?) null : brandId;
                 if (productType.Equals("popular"))
                 {
                     pageSize = pageSize == 0 ? GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize) : pageSize;

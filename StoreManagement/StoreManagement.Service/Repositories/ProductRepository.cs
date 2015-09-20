@@ -225,7 +225,7 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                int excludedProductId2 = excludedProductId.HasValue ? excludedProductId.Value : 0;
+                int excludedProductId2 = excludedProductId ?? 0;
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.BrandId == brandId && r2.Id != excludedProductId2;
                 var items = this.FindAllIncludingAsync(match, take, null, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
@@ -245,7 +245,10 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.BrandId == (brandId.HasValue ? brandId.Value : r2.BrandId);
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId 
+                    && r2.State == (isActive ?? r2.State) 
+                    && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId) 
+                    && r2.BrandId == (brandId ?? r2.BrandId);
                 Expression<Func<Product, int>> keySelector = t => t.TotalRating;
                 var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 return await items;
@@ -261,7 +264,27 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId) && r2.BrandId == (brandId.HasValue ? brandId.Value : r2.BrandId);
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId 
+                    && r2.State == (isActive ?? r2.State) 
+                    && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId) 
+                    && r2.BrandId == (brandId ?? r2.BrandId);
+                Expression<Func<Product, int>> keySelector = t => t.Id;
+                var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                return await items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
+        public async Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
+            bool ? isActive)
+        {
+            try
+            {
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.MainPage && r2.State == (isActive ?? r2.State) && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId) && r2.BrandId == (brandId ?? r2.BrandId);
                 Expression<Func<Product, int>> keySelector = t => t.Id;
                 var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
                 return await items;

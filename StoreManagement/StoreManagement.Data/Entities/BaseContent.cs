@@ -28,7 +28,7 @@ namespace StoreManagement.Data.Entities
  
         public Boolean ImageState { get; set; }
 
-
+        public int TotalRating { get; set; }
          [AllowHtml]
          public string VideoUrl { get; set; }
 

@@ -28,5 +28,7 @@ namespace StoreManagement.Service.Interfaces
         Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive);
 
         Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool ? isActive);
+
+ 
     }
 }

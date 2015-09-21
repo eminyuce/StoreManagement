@@ -21,5 +21,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
         StoreLiquidResult GetRelatedContentsPartial(Category category, List<Content> relatedContentsTask, PageDesign pageDesignTask, String type);
 
         Rss20FeedFormatter GetContentsRssFeed(Store store, List<Content> contents, List<Category> categories, int description, string type);
+
+        StoreLiquidResult GetContentsByContentType(List<Content> contents, List<Category> categories, PageDesign pageDesign, String type);
     }
 }

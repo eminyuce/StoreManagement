@@ -115,6 +115,32 @@ namespace StoreManagement.Liquid.Helper
 
         }
 
+        public StoreLiquidResult GetContentsByContentType(List<Content> contents, List<Category> categories, PageDesign pageDesign, string type)
+        {
+            var items = new List<ContentLiquid>();
+            foreach (var item in contents)
+            {
+                var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
+                var blog = new ContentLiquid(item, category, pageDesign, type, ImageWidth, ImageHeight);
+                items.Add(blog);
+
+            }
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
+            {
+                items = LiquidAnonymousObject.GetContentLiquid(items)
+            }
+                );
+
+
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, indexPageOutput);
+
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            return result;
+        }
 
         public Rss20FeedFormatter GetContentsRssFeed(Store store, List<Content> contents, List<Category> categories, int description, string type)
         {
@@ -167,6 +193,8 @@ namespace StoreManagement.Liquid.Helper
                 return null;
             }
         }
+
+      
         private SyndicationItem GetSyndicationItem(Store store, Content product, Category productCategory, int description, String type)
         {
             if (productCategory == null)

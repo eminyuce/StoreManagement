@@ -22,7 +22,7 @@ namespace StoreManagement.Data.Entities
         public int BrandId { get; set; }
         public String ProductCode { get; set; }
         public int UnitsInStock { get; set; }
-        public int TotalRating { get; set; }
+
 
 
         public virtual ICollection<ProductFile> ProductFiles { get; set; }

@@ -288,6 +288,46 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public async Task<List<Content>> GetContentsByContentKeywordAsync(int storeId, int? catId, string type, int page, int pageSize, bool? isActive,
+                                                     string contentType)
+        {
+            try
+            {
+                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId
+                    &&  r2.State == (isActive ?? r2.State)
+                    && r2.CategoryId == (catId ?? r2.CategoryId) && r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase);
+
+                var predicate = PredicateBuilder.Create<Content>(match);
+
+              
+
+                Expression<Func<Content, int>> keySelector = t => t.Id;
+                if (contentType.Equals("popular"))
+                {
+                    keySelector = t => t.TotalRating;
+                }
+                else if (contentType.Equals("recent"))
+                {
+                    keySelector = t => t.Id;
+                }
+                else if (contentType.Equals("main"))
+                {
+                    keySelector = t => t.Ordering;
+                    predicate = predicate.And(r => r.MainPage);
+                }
+
+
+                var items = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector, OrderByType.Descending, r => r.ContentFiles.Select(r1 => r1.FileManager));
+                return await items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
+
         public List<Content> GetContentsByStoreId(int storeId, string searchKey, string typeName)
         {
             var contents = this.FindBy(r => r.StoreId == storeId && r.Type.Equals(typeName));

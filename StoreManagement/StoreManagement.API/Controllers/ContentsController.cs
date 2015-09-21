@@ -207,5 +207,12 @@ namespace StoreManagement.API.Controllers
         {
             return await this.ContentRepository.GetContentByTypeAsync(storeId, take, isActive, typeName);
         }
+
+        public async Task<List<Content>> GetContentsByContentKeywordAsync(int storeId, int? catId, string type, int page, int pageSize, bool? isActive,
+                                                     string contentType)
+        {
+            return
+                await ContentRepository.GetContentsByContentKeywordAsync(storeId, catId, type, page, pageSize, isActive, contentType);
+        }
     }
 }

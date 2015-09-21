@@ -90,7 +90,49 @@ function callAjaxMethod() {
         console.error(err.message);
     }
 
-   
+
+    try {
+        if ($('[data-contents-by-content-type]').length > 0) {
+            GetContentsByContentType();
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+
+}
+
+function GetContentsByContentType() {
+
+    $('[data-contents-by-content-type]').each(function () {
+        var truethis = this;
+
+        var page = parseInt($(this).attr('data-page'));
+        var designName = $(this).attr('data-template-design-name');
+        var categoryId = GetValueInt($(this).attr('data-content-category-id'));
+        var imageWidth = GetValueInt($(this).attr('data-image-width'));
+        var imageHeight = GetValueInt($(this).attr('data-image-height'));
+        var pageSize = GetValueInt($(this).attr('data-page-size'));
+        var contentType = $(this).attr('data-content-type');
+        var type = $(this).attr('data-contents-by-content-type');
+        
+        var postData = JSON.stringify({
+            "page": page,
+            "designName": designName,
+            "categoryId": categoryId,
+            "type": type,
+            "imageWidth": imageWidth,
+            "imageHeight": imageHeight,
+            "pageSize": pageSize,
+            "contentType": contentType
+        });
+
+        ajaxMethodCall(postData, "/AjaxContents/GetContentsByContentType", function (data) {
+            $(truethis).empty();
+            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            $(truethis).attr('data-page', page + 1);
+        });
+    });
 }
 function GetProductsByProductType() {
     

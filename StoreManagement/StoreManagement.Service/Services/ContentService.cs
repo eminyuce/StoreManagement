@@ -171,6 +171,31 @@ namespace StoreManagement.Service.Services
             }
         }
 
+        public Task<List<Content>> GetContentsByContentKeywordAsync(int storeId, int? catId, string type, int page, int pageSize, bool? isActive,
+                                                     string contentType)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetContentsByContentKeywordAsync?" +
+                                                 "storeId={2}&categoryId={3}&type={4}" +
+                                                 "&page={5}&pageSize={6}&isActive={7}&contentType={8}",
+                                                 WebServiceAddress,
+                                                 ApiControllerName,
+                                                 storeId, catId, type,
+                                                 page, pageSize, isActive,contentType);
+
+                return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+
 
         protected override void SetCache()
         {

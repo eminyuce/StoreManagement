@@ -254,12 +254,13 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase)
-                    && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) && r2.State && r2.MainPage;
+                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId 
+                    && r2.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase)
+                    && r2.CategoryId == (categoryId ?? r2.CategoryId) && r2.State && r2.MainPage;
 
-                var items = await this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take, null);
+                var items =  this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take, null);
 
-                return items;
+                return await items;
 
             }
             catch (Exception exception)

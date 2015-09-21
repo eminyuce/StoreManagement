@@ -55,12 +55,19 @@ namespace StoreManagement.Test
             int StoreId = 9;
             IContentService rep2 = new ContentRepository(new StoreContext(ConnectionString));
 
-
-            var blogsTask = rep2.GetContentsCategoryIdAsync(StoreId, categoryId, StoreConstants.BlogsType, true,1, 50, "salvage");
+            // (int storeId, int? catId, string type, int page, int pageSize, bool ? isActive, string contentType);
+            var blogsTask = rep2.GetContentsByContentKeywordAsync(
+                StoreId,
+                categoryId, 
+                StoreConstants.BlogsType,
+                1, 
+                50,
+                true,
+                "main");
 
             Task.WhenAll(blogsTask).Wait();
-    
 
+            Console.Write(blogsTask.Result.Count);
         }
         [TestMethod]
         public void Test33335555()

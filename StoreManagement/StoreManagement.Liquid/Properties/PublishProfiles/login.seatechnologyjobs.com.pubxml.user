@@ -9,6 +9,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\ProjectsEY\Thinktecture.IdentityServer.v2\WebSites\login.seatechnologyjobs.com</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/Common.Logging.Core.dll">
+      <publishTime>07/30/2015 09:18:07</publishTime>
+    </File>
+    <File Include="bin/Common.Logging.dll">
+      <publishTime>07/30/2015 09:18:07</publishTime>
+    </File>
     <File Include="bin/DotLiquid.dll">
       <publishTime>07/30/2015 09:18:07</publishTime>
     </File>
@@ -54,17 +60,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/NLog.dll">
       <publishTime>07/30/2015 09:18:26</publishTime>
     </File>
+    <File Include="bin/Quartz.dll">
+      <publishTime>07/30/2015 09:18:32</publishTime>
+    </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/21/2015 09:26:12</publishTime>
+      <publishTime>09/21/2015 15:35:11</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>09/21/2015 09:32:50</publishTime>
+      <publishTime>09/21/2015 16:05:58</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/21/2015 09:32:32</publishTime>
+      <publishTime>09/21/2015 15:35:12</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -805,7 +814,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/01/2015 11:58:38</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/17/2015 14:16:18</publishTime>
+      <publishTime>09/21/2015 14:45:04</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/30/2015 09:18:00</publishTime>
@@ -1126,7 +1135,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/21/2015 09:32:51</publishTime>
+      <publishTime>09/21/2015 14:54:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

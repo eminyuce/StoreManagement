@@ -8,6 +8,7 @@
     ViewBag.Title = "DeleteLogs";
     var applicationName = ViewBag.ApplicationName;
 }
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-lg btn-block" })
 
 <h2>@applicationName Delete Logs</h2>
 
@@ -27,7 +28,7 @@
     </p>
 }
 <div>
-    <input id="search-items" class = "form-control" placeholder="search" />
+    <input id="search-items" class="form-control" placeholder="search" />
 </div>
 
 <table class="table table-hover table-striped table-bordered">
@@ -92,7 +93,7 @@
                     $(this).show();
                 });
                 if (searchText) {
-                    $items.each(function() {
+                    $items.each(function () {
                         var $tds = $("td", this).slice(0, 2),
                             text = $tds.text();
                         if (text.search(regex) === -1) {
@@ -104,7 +105,7 @@
                     $items.each(function () {
                         $(this).show();
                     });
-                    
+
                 }
             });
         });

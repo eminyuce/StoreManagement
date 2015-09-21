@@ -178,7 +178,7 @@ namespace StoreManagement.Service.Services
             {
                 SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetContentsByContentKeywordAsync?" +
-                                                 "storeId={2}&categoryId={3}&type={4}" +
+                                                 "storeId={2}&catId={3}&type={4}" +
                                                  "&page={5}&pageSize={6}&isActive={7}&contentType={8}",
                                                  WebServiceAddress,
                                                  ApiControllerName,

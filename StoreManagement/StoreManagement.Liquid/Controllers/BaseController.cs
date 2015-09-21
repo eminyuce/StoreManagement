@@ -177,7 +177,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             var isCacheEnable = StoreService.GetStoreCacheStatus(StoreId);
             this.IsCacheEnable = isCacheEnable;
-            Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
+           // Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
             SettingService.IsCacheEnable = isCacheEnable;
             SettingService.CacheMinute = GetSettingValueInt("SettingService_CacheMinute", 200);
 

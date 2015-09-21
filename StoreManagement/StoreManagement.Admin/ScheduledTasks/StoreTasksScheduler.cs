@@ -54,5 +54,9 @@ namespace StoreManagement.Admin.ScheduledTasks
 
         }
 
+        public override void Stop()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

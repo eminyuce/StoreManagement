@@ -28,6 +28,10 @@ namespace StoreManagement.Admin.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index","Dashboard");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace StoreManagement.Admin.ScheduledTasks
+namespace StoreManagement.Liquid.ScheduledTasks
 {
     public abstract class BaseTasksScheduler : IBaseTasksScheduler
     {

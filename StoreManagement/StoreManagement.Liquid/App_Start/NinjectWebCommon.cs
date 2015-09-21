@@ -1,9 +1,11 @@
 using System.Web.Mvc;
+using Quartz;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Liquid.Constants;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Liquid.Helper.Interfaces;
+using StoreManagement.Liquid.ScheduledTasks;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -317,6 +319,13 @@ namespace StoreManagement.Liquid.App_Start
             kernel.Bind<IContactHelper>().To<ContactHelper>().InRequestScope();
             kernel.Bind<IActivityHelper>().To<ActivityHelper>().InRequestScope();
             kernel.Bind<ICommentHelper>().To<CommentHelper>().InRequestScope();
+
+
+            kernel.Bind<ISchedulerFactory>().To<NinjectSchedulerFactory>();
+            kernel.Bind<IScheduler>().ToMethod(ctx => ctx.Kernel.Get<ISchedulerFactory>().GetScheduler()).InSingletonScope();
+            kernel.Bind<IBaseTasksScheduler>().To<LiquidTasksScheduler>().WithConstructorArgument("scheduler", kernel.Get<IScheduler>());
+            kernel.Get<IBaseTasksScheduler>().Start();
+
         }           
     }
     

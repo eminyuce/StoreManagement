@@ -515,6 +515,7 @@
     <Compile Include="HtmlHelperExtensions\ExternalFilesExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduledTasks\BaseTasksScheduler.cs" />
+    <Compile Include="ScheduledTasks\HttpContextFactory.cs" />
     <Compile Include="ScheduledTasks\IBaseTasksScheduler.cs" />
     <Compile Include="ScheduledTasks\Jobs\TestJob.cs" />
     <Compile Include="ScheduledTasks\LiquidTasksScheduler.cs" />

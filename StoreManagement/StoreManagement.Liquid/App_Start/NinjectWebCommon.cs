@@ -320,6 +320,10 @@ namespace StoreManagement.Liquid.App_Start
             kernel.Bind<IActivityHelper>().To<ActivityHelper>().InRequestScope();
             kernel.Bind<ICommentHelper>().To<CommentHelper>().InRequestScope();
 
+            kernel.Bind<IHttpContextFactory>().To<HttpContextFactory>().InRequestScope();
+
+            kernel.Bind<HttpContext>().ToMethod(ctx => HttpContext.Current).InTransientScope();
+            kernel.Bind<HttpContextBase>().ToMethod(ctx => new HttpContextWrapper(HttpContext.Current)).InTransientScope();
 
             kernel.Bind<ISchedulerFactory>().To<NinjectSchedulerFactory>();
             kernel.Bind<IScheduler>().ToMethod(ctx => ctx.Kernel.Get<ISchedulerFactory>().GetScheduler()).InSingletonScope();

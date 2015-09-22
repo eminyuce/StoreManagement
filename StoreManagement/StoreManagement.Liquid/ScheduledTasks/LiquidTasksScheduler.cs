@@ -21,6 +21,10 @@ namespace StoreManagement.Liquid.ScheduledTasks
         public IStoreService StoreService { set; get; }
 
 
+        [Inject]
+        private IHttpContextFactory HttpContextFactory { set; get; }
+
+
         public LiquidTasksScheduler(IScheduler scheduler)
         {
             Scheduler = scheduler;
@@ -28,10 +32,14 @@ namespace StoreManagement.Liquid.ScheduledTasks
 
         public override void Start()
         {
-            Logger.Trace("TestJob is LiquidTasksScheduler running.");
-            var m = JobBuilder.Create<TestJob>();
 
-            IJobDetail testJob = m.Build();
+          
+
+
+            JobBuilder jobBuilder = JobBuilder.Create<TestJob>();
+            
+
+            IJobDetail testJob = jobBuilder.Build();
 
 
             var trigger = TriggerBuilder.Create()

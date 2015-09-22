@@ -17,12 +17,12 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxContentsController : BaseController
     {
-        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String desingName = "", int take = 0, int imageWidth = 0, int imageHeight = 0)
+        public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String designName = "", int take = 0, int imageWidth = 0, int imageHeight = 0)
         {
 
-            if (String.IsNullOrEmpty(desingName))
+            if (String.IsNullOrEmpty(designName))
             {
-                desingName = "RelatedContentsPartial";
+                return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
 
             String returtHtml = "";
@@ -42,7 +42,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
                 var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take, excludedContentId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
                 ContentHelper.StoreSettings = GetStoreSettings();
 

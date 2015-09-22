@@ -19,6 +19,6 @@ Technologies and Pattern <br>
 •Google Drive API <br>
 •Bootstrap <br>
 •DotLiquid Templating system<br>
-
+•Quartz.NET Scheduling Framework<br>
 
  

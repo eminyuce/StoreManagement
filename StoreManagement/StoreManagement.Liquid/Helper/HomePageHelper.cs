@@ -17,56 +17,6 @@ namespace StoreManagement.Liquid.Helper
     public class HomePageHelper : BaseLiquidHelper, IHomePageHelper
     {
 
-
-
-        public async Task<StoreLiquidResult> GetHomePageDesign(
-         Task<List<Product>> productsTask,
-         Task<List<Content>> blogsTask,
-         Task<List<Content>> newsTask,
-         Task<List<FileManager>> sliderTask,
-         Task<PageDesign> pageDesignTask,
-         Task<List<Category>> categoriesTask,
-         Task<List<ProductCategory>> productCategoriesTask)
-        {
-            var isApi = ProjectAppSettings.GetWebConfigBool("IsApiService");
-
-
-
-            List<Product> products = null;
-            List<Content> blogs = null;
-            List<Content> news = null;
-            PageDesign pageDesing = null;
-            List<FileManager> sliderImages = null;
-            List<Category> categories = null;
-            List<ProductCategory> productCategories = null;
-
-           
-            if (isApi)
-            {
-            
-            }
-            else
-            {
-                
-
-            }
-
-           await  Task.WhenAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
-                    productCategoriesTask);
-
-
-            products = productsTask.Result;
-            blogs = blogsTask.Result;
-            news = newsTask.Result;
-            pageDesing = pageDesignTask.Result;
-            sliderImages = sliderTask.Result;
-            categories = categoriesTask.Result;
-            productCategories = productCategoriesTask.Result;
-
-
-            return GetHomePageDesign(pageDesing, sliderImages, products, blogs, news, categories, productCategories);
-        }
-
         public StoreLiquidResult GetHomePageDesign(PageDesign pageDesing, List<FileManager> sliderImages, List<Product> products, List<Content> blogs, List<Content> news,
                                          List<Category> categories, List<ProductCategory> productCategories)
         {
@@ -111,6 +61,45 @@ namespace StoreManagement.Liquid.Helper
                         news = LiquidAnonymousObject.GetContentLiquid(home.NewsLiquidList),
                         sliders = LiquidAnonymousObject.GetSliderImagesLiquidList(home.SliderImagesLiquid),
                     };
+
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing.PageTemplate, anonymousObject);
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+            }
+            catch (Exception ex)
+            {
+                dic[StoreConstants.PageOutput] = ex.StackTrace;
+                Logger.Error(ex, ex.StackTrace);
+            }
+
+            return result;
+        }
+
+        public StoreLiquidResult GetHomePageDesign(PageDesign pageDesing, List<FileManager> sliderImages)
+        {
+            var result = new StoreLiquidResult();
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            result.LiquidRenderedResult = dic;
+            try
+            {
+                if (pageDesing == null)
+                {
+                    throw new Exception("PageDesing is null");
+                }
+
+
+                var home = new HomePageLiquid(pageDesing, sliderImages);
+
+                home.ImageWidthSlider = GetSettingValueInt("SliderHomePage_ImageWidth", 500);
+                home.ImageHeightSlider = GetSettingValueInt("SliderHomePage_ImageHeight", 500);
+
+
+
+                object anonymousObject = new
+                {
+                    sliders = LiquidAnonymousObject.GetSliderImagesLiquidList(home.SliderImagesLiquid)
+                };
 
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing.PageTemplate, anonymousObject);

@@ -248,18 +248,19 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public Task<List<Product>> GetPopularProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool ? isActive)
+        public Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
+                                             bool? isActive, string functionType)
         {
             try
             {
                 SetCache();
-                string url = string.Format("http://{0}/api/{1}/GetPopularProducts?" +
+                string url = string.Format("http://{0}/api/{1}/GetProductsByProductType?" +
                                                     "storeId={2}&categoryId={3}&brandId={4}&productType={5}" +
-                                                    "&page={6}&pageSize={7}&isActive={8}",
+                                                    "&page={6}&pageSize={7}&isActive={8}&functionType={9}",
                                                     WebServiceAddress,
                                                     ApiControllerName,
                                                     storeId, categoryId, brandId, productType,
-                                                    page, pageSize, isActive);
+                                                    page, pageSize, isActive, functionType);
 
                 return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
 
@@ -271,56 +272,6 @@ namespace StoreManagement.Service.Services
                 return null;
             }
         }
-
-        public Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
-        {
-            try
-            {
-                SetCache();
-                string url = string.Format("http://{0}/api/{1}/GetRecentProducts?" +
-                                                 "storeId={2}&categoryId={3}&brandId={4}&productType={5}" +
-                                                 "&page={6}&pageSize={7}&isActive={8}",
-                                                 WebServiceAddress,
-                                                 ApiControllerName,
-                                                 storeId, categoryId,brandId, productType,
-                                                 page, pageSize, isActive);
-
-                return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
-
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, ex.Message);
-                return null;
-            }
-        }
-
-        public Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
-                                             bool? isActive)
-        {
-            try
-            {
-                SetCache();
-                string url = string.Format("http://{0}/api/{1}/GetMainPageProductsAsync?" +
-                                                 "storeId={2}&categoryId={3}&brandId={4}&productType={5}" +
-                                                 "&page={6}&pageSize={7}&isActive={8}",
-                                                 WebServiceAddress,
-                                                 ApiControllerName,
-                                                 storeId, categoryId, brandId, productType,
-                                                 page, pageSize, isActive);
-
-                return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
-
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, ex.Message);
-                return null;
-            }
-        }
-
 
         protected override void SetCache()
         {

@@ -241,7 +241,8 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<List<Product>> GetPopularProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
+        public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
+                                             bool? isActive, string functionType)
         {
             try
             {
@@ -249,49 +250,39 @@ namespace StoreManagement.Service.Repositories
                     && r2.State == (isActive ?? r2.State)
                     && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId)
                     && r2.BrandId == (brandId ?? r2.BrandId);
-                Expression<Func<Product, int>> keySelector = t => t.TotalRating;
-                var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
-                return await items;
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception);
-                return null;
-            }
-        }
+                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
 
-        public async Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
-        {
-            try
-            {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId
-                    && r2.State == (isActive ?? r2.State)
-                    && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId)
-                    && r2.BrandId == (brandId ?? r2.BrandId);
-                Expression<Func<Product, int>> keySelector = t => t.Id;
-                var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
-                return await items;
-            }
-            catch (Exception exception)
-            {
-                Logger.Error(exception);
-                return null;
-            }
-        }
 
-        public async Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
-            bool? isActive)
-        {
-            try
-            {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.MainPage && r2.State == (isActive ?? r2.State) && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId) && r2.BrandId == (brandId ?? r2.BrandId);
+                var predicate = PredicateBuilder.Create<Product>(match);
                 Expression<Func<Product, int>> keySelector = t => t.Id;
-                var items = this.FindAllIncludingAsync(match, page, pageSize, keySelector, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+                if (functionType.Equals("popular", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.TotalRating;
+                }
+                else if (functionType.Equals("recent", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.Id;
+                }
+                else if (functionType.Equals("main", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.Ordering;
+                    predicate = predicate.And(r => r.MainPage);
+                }
+                else if (functionType.Equals("discount", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    predicate = predicate.And(r => r.Discount > 0);
+
+                    var items2 = this.FindAllIncludingAsync(predicate, page, pageSize, t => t.Discount, OrderByType.Descending, includeProperties);
+                    return await items2;
+                }
+
+                var items = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector, OrderByType.Descending, includeProperties);
                 return await items;
             }
             catch (Exception exception)
             {
-                Logger.Error(exception);
+                Logger.Error(exception, exception.StackTrace, storeId, categoryId, brandId, productType,
+                                                    page, pageSize, isActive, functionType);
                 return null;
             }
         }

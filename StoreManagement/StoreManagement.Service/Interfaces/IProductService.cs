@@ -19,16 +19,16 @@ namespace StoreManagement.Service.Interfaces
         Product GetProductWithFiles(int id);
         Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Task<Product> GetProductsByIdAsync(int productId);
-        Task<List<Product>> GetMainPageProductsAsync(int storeId,  int? take);
+        Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take);
         Task<List<Product>> GetProductsAsync(int storeId, int? take, bool? isActive);
- 
+
         Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId);
         Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId);
-        Task<List<Product>> GetPopularProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive);
-        Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive);
 
-        Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool ? isActive);
 
- 
+
+        Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive, String functionType);
+
+
     }
 }

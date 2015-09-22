@@ -106,20 +106,11 @@ namespace StoreManagement.API.Controllers
             return await ProductRepository.GetProductsByBrandAsync(storeId, brandId, take, excludedProductId);
         }
 
-        public async Task<List<Product>> GetPopularProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
+        public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
+                                             bool? isActive, string functionType)
         {
-            return await ProductRepository.GetPopularProducts(storeId, categoryId, brandId, productType, page, pageSize,isActive);
+            return await ProductRepository.GetProductsByProductType(storeId, categoryId, brandId, productType, page, pageSize, isActive, functionType);
         }
-
-        public async Task<List<Product>> GetRecentProducts(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive)
-        {
-            return await ProductRepository.GetRecentProducts(storeId, categoryId, brandId, productType, page, pageSize, isActive);
-        }
-
-        public async Task<List<Product>> GetMainPageProductsAsync(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
-                                             bool? isActive)
-        {
-            return await ProductRepository.GetMainPageProductsAsync(storeId, categoryId, brandId, productType, page, pageSize, isActive);
-        }
+ 
     }
 }

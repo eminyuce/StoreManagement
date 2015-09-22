@@ -17,8 +17,8 @@ namespace StoreManagement.Data.Entities
         [Required(ErrorMessage = "Please enter category")]
         public int ProductCategoryId { get; set; }
 
-        public double ?  Price { get; set; }
-        public double ? Discount { get; set; }
+        public double Price { get; set; }
+        public double Discount { get; set; }
         public int BrandId { get; set; }
         public String ProductCode { get; set; }
         public int UnitsInStock { get; set; }

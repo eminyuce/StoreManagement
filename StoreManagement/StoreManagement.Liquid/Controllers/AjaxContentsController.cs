@@ -87,7 +87,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
         public async Task<JsonResult> GetContentsByContentType(int page = 1, String desingName = "", int categoryId = 0,
-            int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String type = StoreConstants.BlogsType, String contentType = "popular")
+            int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String type = StoreConstants.BlogsType, String contentType = "popular", int excludedContentId = 0)
         {
 
             if (String.IsNullOrEmpty(desingName))

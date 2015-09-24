@@ -13,14 +13,14 @@ $(document).ready(function () {
 function callAjaxMethod() {
 
     try {
-        GetMainLayout();
+        GetMainNavigation();
     }
     catch (err) {
         console.error(err.message);
     }
 
     try {
-        GetMainFooter();
+        GetFooter();
     }
     catch (err) {
         console.error(err.message);
@@ -44,23 +44,7 @@ function callAjaxMethod() {
         console.error(err.message);
     }
 
-    try {
-        if ($('[data-related-products-by-brand]').length > 0) {
-            GetRelatedProductsPartialByBrand();
-        }
-    }
-    catch (err) {
-        console.error(err.message);
-    }
-
-    try {
-        if ($('[data-related-products-by-category]').length > 0) {
-            GetRelatedProductsPartialByCategory();
-        }
-    }
-    catch (err) {
-        console.error(err.message);
-    }
+   
 
     try {
         if ($('[data-product-categories]').length > 0) {
@@ -115,7 +99,7 @@ function GetContentsByContentType() {
         var pageSize = GetValueInt($(this).attr('data-page-size'));
         var contentType = $(this).attr('data-content-type');
         var type = $(this).attr('data-contents-by-content-type');
-        
+        var excludedContentId = GetValueInt($(this).attr('data-excluded-content-id'));
         var postData = JSON.stringify({
             "page": page,
             "designName": designName,
@@ -124,7 +108,8 @@ function GetContentsByContentType() {
             "imageWidth": imageWidth,
             "imageHeight": imageHeight,
             "pageSize": pageSize,
-            "contentType": contentType
+            "contentType": contentType,
+            "excludedContentId": excludedContentId
         });
 
         ajaxMethodCall(postData, "/AjaxContents/GetContentsByContentType", function (data) {
@@ -147,7 +132,7 @@ function GetProductsByProductType() {
         var imageHeight = GetValueInt($(this).attr('data-image-height'));
         var pageSize = GetValueInt($(this).attr('data-page-size'));
         var productType = $(this).attr('data-product-type');
-
+        var excludedProductId = GetValueInt($(this).attr('data-excluded-product-id'));
         var postData = JSON.stringify({
             "page": page,
             "designName": designName,
@@ -156,7 +141,8 @@ function GetProductsByProductType() {
             "imageWidth": imageWidth,
             "imageHeight": imageHeight,
             "pageSize": pageSize,
-            "productType": productType
+            "productType": productType,
+            "excludedProductId": excludedProductId
         });
 
         ajaxMethodCall(postData, "/AjaxProducts/GetProductsByProductType", function (data) {
@@ -180,21 +166,21 @@ function GetProductLabels() {
         });
     });
 }
-function GetMainFooter() {
+function GetFooter() {
     $('[data-main-footer]').each(function () {
         var truethis = this;
         var postData = JSON.stringify({});
-        ajaxMethodCall(postData, "/AjaxGenerics/MainLayoutFooter", function (data) {
+        ajaxMethodCall(postData, "/AjaxGenerics/Footer", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
         });
     });
 }
-function GetMainLayout() {
+function GetMainNavigation() {
     $('[data-main-navigation]').each(function () {
         var truethis = this;
         var postData = JSON.stringify({});
-        ajaxMethodCall(postData, "/AjaxGenerics/MainLayout", function (data) {
+        ajaxMethodCall(postData, "/AjaxGenerics/MainNavigation", function (data) {
             $(truethis).empty();
             $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
         });
@@ -262,52 +248,7 @@ function GetRelatedContents() {
     });
 }
 
-function GetRelatedProductsPartialByCategory() {
-    $('[data-related-products-by-category]').each(function () {
-        var truethis = this;
-        var designName = $(this).attr('data-template-design-name');
-        var productCategoryId = $(this).attr('data-related-products-by-category');
-        var excludedProductId = GetValueInt($(this).attr('data-excluded-product-id'));
-        var imageWidth = GetValueInt($(this).attr('data-image-width'));
-        var imageHeight = GetValueInt($(this).attr('data-image-height'));
-        var take = GetValueInt($(this).attr('data-number-of-items'));
-        var postData = JSON.stringify({
-            "categoryId": productCategoryId,
-            "excludedProductId": excludedProductId,
-            "designName": designName,
-            "take": take,
-            "imageWidth": imageWidth,
-            "imageHeight": imageHeight
-        });
-        ajaxMethodCall(postData, "/AjaxProducts/GetRelatedProductsPartialByCategory", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
-        });
-    });
-}
-function GetRelatedProductsPartialByBrand() {
-    $('[data-related-products-by-brand]').each(function () {
-        var truethis = this;
-        var designName = $(this).attr('data-template-design-name');
-        var brandId = GetValueInt($(this).attr('data-related-products-by-brand'));
-        var excludedProductId = GetValueInt($(this).attr('data-excluded-product-id'));
-        var imageWidth = GetValueInt($(this).attr('data-image-width'));
-        var imageHeight = GetValueInt($(this).attr('data-image-height'));
-        var take = GetValueInt($(this).attr('data-number-of-items'));
-        var postData = JSON.stringify({
-            "brandId": brandId,
-            "excludedProductId": excludedProductId,
-            "designName": designName,
-            "take": take,
-            "imageWidth": imageWidth,
-            "imageHeight": imageHeight
-        });
-        ajaxMethodCall(postData, "/AjaxProducts/GetRelatedProductsPartialByBrand", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
-        });
-    });
-}
+ 
 function GetValueInt(val) {
     val = val === undefined ? 0 : val;
     return val;

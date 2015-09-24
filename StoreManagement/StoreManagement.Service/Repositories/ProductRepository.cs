@@ -241,15 +241,16 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize,
-                                             bool? isActive, string functionType)
+        public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, 
+            int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
         {
             try
             {
                 Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId
                     && r2.State == (isActive ?? r2.State)
                     && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId)
-                    && r2.BrandId == (brandId ?? r2.BrandId);
+                    && r2.BrandId == (brandId ?? r2.BrandId)
+                    && r2.Id != excludedProductId;
                 Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
 
 

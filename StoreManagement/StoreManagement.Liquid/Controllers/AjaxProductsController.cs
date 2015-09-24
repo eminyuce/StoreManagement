@@ -54,84 +54,7 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetRelatedProductsPartialByCategory(int categoryId, int excludedProductId = 0, String desingName = "", int take = 0, int imageWidth = 0, int imageHeight = 0)
-        {
-            if (String.IsNullOrEmpty(desingName))
-            {
-                desingName = "RelatedProductsPartialByCategory";
-            }
-            String returtHtml = "";
-            try
-            {
-                var categoryTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
-                take = take == 0 ? GetSettingValueInt("RelatedProducts_ItemsNumber", 5) : take;
-                var relatedProductsTask = ProductService.GetProductByTypeAndCategoryIdAsync(StoreId, categoryId, take, excludedProductId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-
-                ProductHelper.StoreSettings = GetStoreSettings();
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedProductsPartialByCategory_ImageWidth", 50) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedProductsPartialByCategory_ImageHeight", 50) : imageHeight;
-
-                await Task.WhenAll(pageDesignTask, relatedProductsTask, categoryTask);
-                var products = relatedProductsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-                var category = categoryTask.Result;
-
-                var pageOuput = ProductHelper.GetRelatedProductsPartialByCategory(category, products, pageDesign);
-                returtHtml = pageOuput.PageOutputText;
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "GetRelatedProducts", categoryId);
-
-            }
-
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
-        }
-        public async Task<JsonResult> GetRelatedProductsPartialByBrand(int brandId, int excludedProductId = 0, String desingName = "", int imageWidth = 0, int imageHeight = 0, int take = 0)
-        {
-            if (String.IsNullOrEmpty(desingName))
-            {
-                desingName = "RelatedProductsPartialByBrand";
-            }
-            String returtHtml = "";
-            try
-            {
-                var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
-                                                                                             StoreConstants
-                                                                                                 .ProductType, true);
-                var brandTask = BrandService.GetBrandAsync(brandId);
-                take = take == 0 ? GetSettingValueInt("RelatedProducts_ItemsNumber", 5) : take;
-                var relatedProductsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, excludedProductId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-
-                ProductHelper.StoreSettings = GetStoreSettings();
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedProductsPartialByBrand_ImageWidth", 50) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedProductsPartialByBrand_ImageHeight", 50) : imageHeight;
-
-
-                await Task.WhenAll(pageDesignTask, relatedProductsTask, brandTask, productCategoriesTask);
-                var products = relatedProductsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-                var brand = brandTask.Result;
-                var productCategories = productCategoriesTask.Result;
-
-
-                var pageOuput = ProductHelper.GetRelatedProductsPartialByBrand(brand, products, pageDesign, productCategories);
-                returtHtml = pageOuput.PageOutputText;
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "GetRelatedProducts", brandId);
-
-            }
-
-
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
-        }
-
+        
         public async Task<JsonResult> GetBrands(String desingName = "", int imageWidth = 0, int imageHeight = 0)
         {
 
@@ -219,7 +142,7 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
         public async Task<JsonResult> GetProductsByProductType(int page = 1, String designName = "", int categoryId = 0, int brandId = 0,
-            int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular")
+            int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular", int excludedProductId=0)
         {
 
             if (String.IsNullOrEmpty(designName))
@@ -234,6 +157,7 @@ namespace StoreManagement.Liquid.Controllers
                 Task<List<Product>> productsTask = null;
                 var catId = categoryId == 0 ? (int?) null : categoryId;
                 var bId = brandId == 0 ? (int?) null : brandId;
+                var eProductId = excludedProductId == 0 ? (int?)null : excludedProductId;
                 Logger.Trace("StoreId " + StoreId +
                     " designName:" +
                     designName +
@@ -241,7 +165,7 @@ namespace StoreManagement.Liquid.Controllers
                     categoryId + " brandId:" +
                     brandId + " pageSize:" + pageSize + " page:" +
                     page + " imageWidth:" + imageWidth + " imageHeight:" + imageHeight + " productType:" + productType);
-                productsTask = ProductService.GetProductsByProductType(StoreId, catId, bId, StoreConstants.ProductType, page, pageSize, true, productType);
+                productsTask = ProductService.GetProductsByProductType(StoreId, catId, bId, StoreConstants.ProductType, page, pageSize, true, productType, eProductId);
 
                 if (productType.Equals("popular"))
                 {

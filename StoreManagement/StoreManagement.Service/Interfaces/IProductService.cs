@@ -27,7 +27,7 @@ namespace StoreManagement.Service.Interfaces
 
 
 
-        Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive, String functionType);
+        Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive, String functionType, int? excludedProductId);
 
 
     }

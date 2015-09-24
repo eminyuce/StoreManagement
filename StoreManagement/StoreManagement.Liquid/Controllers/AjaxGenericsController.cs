@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxGenericsController : BaseController
     {
-        public async Task<JsonResult> MainLayout()
+        public async Task<JsonResult> MainNavigation()
         {
             int storeId = StoreId;
             String returnHtml = "";
@@ -35,7 +35,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "MainLayout", storeId);
+                Logger.Error(ex, "MainNavigation", storeId);
 
             }
 
@@ -43,7 +43,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
         }
-        public async Task<JsonResult> MainLayoutFooter()
+        public async Task<JsonResult> Footer()
         {
             int storeId = StoreId;
 
@@ -63,7 +63,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "MainLayout", storeId);
+                Logger.Error(ex, "Footer", storeId);
 
             }
 

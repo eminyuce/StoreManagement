@@ -113,9 +113,7 @@ function GetContentsByContentType() {
         });
 
         ajaxMethodCall(postData, "/AjaxContents/GetContentsByContentType", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
-            $(truethis).attr('data-page', page + 1);
+            AddDataToDiv(truethis, data, page);
         });
     });
 }
@@ -146,9 +144,8 @@ function GetProductsByProductType() {
         });
 
         ajaxMethodCall(postData, "/AjaxProducts/GetProductsByProductType", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
-            $(truethis).attr('data-page', page + 1);
+            AddDataToDiv(truethis, data, page);
+  
         });
     });
 }
@@ -161,36 +158,33 @@ function GetProductLabels() {
         var itemtype = 'product';
         var postData = JSON.stringify({ id: itemid, "designName": designName });
         ajaxMethodCall(postData, "/AjaxProducts/GetProductLabels", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            AddDataToDiv(truethis, data);
         });
     });
 }
 function GetFooter() {
     $('[data-main-footer]').each(function () {
         var truethis = this;
-        var postData = JSON.stringify({});
+        var designName = $(this).attr('data-template-design-name');
+        var postData = JSON.stringify({ "designName": designName });
         ajaxMethodCall(postData, "/AjaxGenerics/Footer", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            AddDataToDiv(truethis, data, 0);
         });
     });
 }
 function GetMainNavigation() {
     $('[data-main-navigation]').each(function () {
         var truethis = this;
-        var postData = JSON.stringify({});
+        var designName = $(this).attr('data-template-design-name');
+        var postData = JSON.stringify({  "designName": designName });
         ajaxMethodCall(postData, "/AjaxGenerics/MainNavigation", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            AddDataToDiv(truethis, data,0);
         });
     });
 }
 function GetBrands() {
-
     $('[data-brands]').each(function () {
         var truethis = this;
-
         var designName = $(this).attr('data-template-design-name');
         var imageWidth = GetValueInt($(this).attr('data-image-width'));
         var imageHeight = GetValueInt($(this).attr('data-image-height'));
@@ -201,8 +195,7 @@ function GetBrands() {
             "imageHeight": imageHeight
         });
         ajaxMethodCall(postData, "/AjaxProducts/GetBrands", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            AddDataToDiv(truethis, data, 0);
         });
     });
 }
@@ -219,8 +212,7 @@ function GetProductCategories() {
             "imageHeight": imageHeight
         });
         ajaxMethodCall(postData, "/AjaxProducts/GetProductCategories", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            AddDataToDiv(truethis, data,0);
         });
     });
 }
@@ -242,12 +234,18 @@ function GetRelatedContents() {
             "imageHeight": imageHeight
         });
         ajaxMethodCall(postData, "/AjaxContents/GetRelatedContents", function (data) {
-            $(truethis).empty();
-            $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+            AddDataToDiv(truethis, data,0);
         });
     });
 }
-
+function AddDataToDiv(truethis, data, page) {
+    $(truethis).empty();
+    $(truethis).html(data).animate({ 'height': '150px' }, 'slow');
+    var dataPageAttr = $(truethis).attr('data-page');
+    if (typeof dataPageAttr !== typeof undefined && dataPageAttr !== false) {
+        $(truethis).attr('data-page', page + 1);
+    }
+}
  
 function GetValueInt(val) {
     val = val === undefined ? 0 : val;

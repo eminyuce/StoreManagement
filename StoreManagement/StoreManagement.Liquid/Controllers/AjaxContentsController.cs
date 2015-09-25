@@ -86,13 +86,13 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-        public async Task<JsonResult> GetContentsByContentType(int page = 1, String desingName = "", int categoryId = 0,
+        public async Task<JsonResult> GetContentsByContentType(int page = 1, String designName = "ContentsByContentType", int categoryId = 0,
             int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String type = StoreConstants.BlogsType, String contentType = "popular", int excludedContentId = 0)
         {
 
-            if (String.IsNullOrEmpty(desingName))
+            if (String.IsNullOrEmpty(designName))
             {
-                desingName = GetSettingValue("ContentsByContentType_DefaultPageDesign", "ContentsByContentType");
+                return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
             String returtHtml = "";
 
@@ -123,7 +123,7 @@ namespace StoreManagement.Liquid.Controllers
                 Task<List<Content>> contentsTask = ContentService.GetContentsByContentKeywordAsync(StoreId, catId, type, page, pageSize, true, contentType);
 
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, type, true);
 
                 await Task.WhenAll(pageDesignTask, contentsTask, categoriesTask);

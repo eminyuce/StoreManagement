@@ -17,19 +17,19 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxProductsController : BaseController
     {
-        public async Task<JsonResult> GetProductCategories(String desingName = "", int imageWidth = 0, int imageHeight = 0)
+        public async Task<JsonResult> GetProductCategories(String designName = "ProductCategoriesPartial", int imageWidth = 0, int imageHeight = 0)
         {
 
-            if (String.IsNullOrEmpty(desingName))
+            if (String.IsNullOrEmpty(designName))
             {
-                desingName = GetSettingValue("ProductCategoriesPartial_DefaultPageDesign", "ProductCategoriesPartial");
+                return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
             String returtHtml = "";
 
             try
             {
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
                 ProductCategoryHelper.StoreSettings = GetStoreSettings();
                 ProductCategoryHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50) : imageWidth;
@@ -54,13 +54,13 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
-        
-        public async Task<JsonResult> GetBrands(String desingName = "", int imageWidth = 0, int imageHeight = 0)
+
+        public async Task<JsonResult> GetBrands(String designName = "BrandsPartial", int imageWidth = 0, int imageHeight = 0)
         {
 
-            if (String.IsNullOrEmpty(desingName))
+            if (String.IsNullOrEmpty(designName))
             {
-                desingName = GetSettingValue("BrandsPartial_DefaultPageDesign", "BrandsPartial");
+                return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
 
             String returtHtml = "";
@@ -68,7 +68,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
                 int take = GetSettingValueInt("BrandsPartial_ItemsNumber", 50);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
                 var brandsTask = BrandService.GetBrandsAsync(StoreId, take, true);
 
                 BrandHelper.StoreSettings = GetStoreSettings();
@@ -90,7 +90,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetBrands", desingName);
+                Logger.Error(ex, "GetBrands", designName);
 
             }
 
@@ -98,14 +98,13 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetProductLabels(int id, String designName = "", int imageWidth = 0, int imageHeight = 0)
+        public async Task<JsonResult> GetProductLabels(int id, String designName = "ProductLabelsPartial", int imageWidth = 0, int imageHeight = 0)
         {
-
+             
             if (String.IsNullOrEmpty(designName))
             {
-                designName = GetSettingValue("ProductLabels_DefaultPageDesign", "ProductLabelsPartial");
+                return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
-
             String returtHtml = "";
 
             try
@@ -145,6 +144,7 @@ namespace StoreManagement.Liquid.Controllers
             int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular", int excludedProductId=0)
         {
 
+
             if (String.IsNullOrEmpty(designName))
             {
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
@@ -153,70 +153,8 @@ namespace StoreManagement.Liquid.Controllers
 
             try
             {
-                
-                Task<List<Product>> productsTask = null;
-                var catId = categoryId == 0 ? (int?) null : categoryId;
-                var bId = brandId == 0 ? (int?) null : brandId;
-                var eProductId = excludedProductId == 0 ? (int?)null : excludedProductId;
-                Logger.Trace("StoreId " + StoreId +
-                    " designName:" +
-                    designName +
-                    " categoryId:" + 
-                    categoryId + " brandId:" +
-                    brandId + " pageSize:" + pageSize + " page:" +
-                    page + " imageWidth:" + imageWidth + " imageHeight:" + imageHeight + " productType:" + productType);
-                productsTask = ProductService.GetProductsByProductType(StoreId, catId, bId, StoreConstants.ProductType, page, pageSize, true, productType, eProductId);
 
-                if (productType.Equals("popular"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularProducts_ImageWidth", 99) : imageWidth;
-                    ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("PopularProducts_ImageHeight", 99) : imageHeight;
-                     
-                }
-                else if (productType.Equals("recent"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("RecentProducts_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RecentProducts_ImageWidth", 99) : imageWidth;
-                    ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RecentProducts_ImageHeight", 99) : imageHeight;
-
-
-                }
-                else if (productType.Equals("main"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("MainProducts_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("MainProducts_ImageWidth", 99) : imageWidth;
-                    ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("MainProducts_ImageHeight", 99) : imageHeight;
-
-
-                }
-                else if (productType.Equals("discount"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("DiscountProducts_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("DiscountProducts_ImageWidth", 99) : imageWidth;
-                    ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("DiscountProducts_ImageHeight", 99) : imageHeight;
-
-
-                }
-
-
-
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
-                var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
-                                                                                           StoreConstants
-                                                                                               .ProductType, true);
-
-                await Task.WhenAll(pageDesignTask, productsTask, productCategoriesTask);
-                var products = productsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-                var productCategories = productCategoriesTask.Result;
-
-                ProductHelper.StoreSettings = GetStoreSettings();
-              
-                
-                var pageOuput = ProductHelper.GetPopularProducts(products, productCategories, pageDesign);
-                returtHtml = pageOuput.PageOutputText;
-
+                returtHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
             }
             catch (Exception ex)
             {
@@ -228,7 +166,82 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
 
+        private async Task<String> GetProductsByProductTypeHtml(int page, string designName, int categoryId, int brandId, int pageSize,
+                                                        int imageWidth, int imageHeight, string productType, int excludedProductId)
+        {
+            
+            string returtHtml;
+            Task<List<Product>> productsTask = null;
+            var catId = categoryId == 0 ? (int?) null : categoryId;
+            var bId = brandId == 0 ? (int?) null : brandId;
+            var eProductId = excludedProductId == 0 ? (int?) null : excludedProductId;
+            Logger.Trace("StoreId " + StoreId +
+                         " designName:" +
+                         designName +
+                         " categoryId:" +
+                         categoryId + " brandId:" +
+                         brandId + " pageSize:" + pageSize + " page:" +
+                         page + " imageWidth:" + imageWidth + " imageHeight:" + imageHeight + " productType:" + productType);
+          
+
+            if (productType.Equals("popular"))
+            {
+                pageSize = pageSize == 0
+                               ? GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize)
+                               : pageSize;
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0
+                                                ? GetSettingValueInt("PopularProducts_ImageHeight", 99)
+                                                : imageHeight;
+            }
+            else if (productType.Equals("recent"))
+            {
+                pageSize = pageSize == 0
+                               ? GetSettingValueInt("RecentProducts_PageSize", StoreConstants.DefaultPageSize)
+                               : pageSize;
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RecentProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0
+                                                ? GetSettingValueInt("RecentProducts_ImageHeight", 99)
+                                                : imageHeight;
+            }
+            else if (productType.Equals("main"))
+            {
+                pageSize = pageSize == 0
+                               ? GetSettingValueInt("MainProducts_PageSize", StoreConstants.DefaultPageSize)
+                               : pageSize;
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("MainProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("MainProducts_ImageHeight", 99) : imageHeight;
+            }
+            else if (productType.Equals("discount"))
+            {
+                pageSize = pageSize == 0
+                               ? GetSettingValueInt("DiscountProducts_PageSize", StoreConstants.DefaultPageSize)
+                               : pageSize;
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("DiscountProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0
+                                                ? GetSettingValueInt("DiscountProducts_ImageHeight", 99)
+                                                : imageHeight;
+            }
+
+            productsTask = ProductService.GetProductsByProductType(StoreId, catId, bId, StoreConstants.ProductType, page,
+                                                                 pageSize, true, productType, eProductId);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
+            var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
+                                                                                                  StoreConstants
+                                                                                                      .ProductType, true);
+
+            await Task.WhenAll(pageDesignTask, productsTask, productCategoriesTask);
+            var products = productsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var productCategories = productCategoriesTask.Result;
+
+            ProductHelper.StoreSettings = GetStoreSettings();
 
 
+            var pageOuput = ProductHelper.GetPopularProducts(products, productCategories, pageDesign);
+            returtHtml = pageOuput.PageOutputText;
+
+            return returtHtml;
+        }
     }
 }

@@ -14,6 +14,7 @@ using GenericRepository;
 using Newtonsoft.Json.Linq;
 using Ninject;
 using StoreManagement.Data;
+using StoreManagement.Data.Attributes;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -26,7 +27,7 @@ using StoreManagement.Service.Repositories.Interfaces;
 namespace StoreManagement.Admin.Controllers
 {
 
-    [Authorize]
+    [CustomAuthorize]
     public class AjaxController : BaseController
     {
         //

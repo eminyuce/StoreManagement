@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxGenericsController : BaseController
     {
-        public async Task<JsonResult> MainNavigation()
+        public async Task<JsonResult> MainNavigation(String desingName = "MainNavigation")
         {
             int storeId = StoreId;
             String returnHtml = "";
@@ -21,7 +21,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
                 var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "MainNavigation");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, desingName);
 
                 NavigationHelper.StoreSettings = GetStoreSettings();
 
@@ -43,7 +43,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
         }
-        public async Task<JsonResult> Footer()
+        public async Task<JsonResult> Footer(String desingName = "Footer")
         {
             int storeId = StoreId;
 
@@ -51,7 +51,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
                 var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, "Footer");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, desingName);
 
                 await Task.WhenAll(pageDesignTask, navigationsTask);
                 var navigations = navigationsTask.Result;
@@ -72,14 +72,9 @@ namespace StoreManagement.Liquid.Controllers
 
         }
 
-        public async Task<JsonResult> GetComments(int itemId, String itemType, int page, String desingName = "", int pageSize=0)
+        public async Task<JsonResult> GetComments(int itemId, String itemType, int page, String desingName = "CommentsPartial", int pageSize = 0)
         {
-
-            if (String.IsNullOrEmpty(desingName))
-            {
-                desingName = GetSettingValue("Comments_DefaultPageDesign", "CommentsPartial");
-            }
-
+ 
             pageSize = pageSize == 0 ? GetSettingValueInt("Comments_PageSize", StoreConstants.DefaultPageSize) : pageSize;
 
             String returnHtml = "";

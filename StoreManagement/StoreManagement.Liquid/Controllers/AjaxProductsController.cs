@@ -28,20 +28,7 @@ namespace StoreManagement.Liquid.Controllers
 
             try
             {
-                var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
-
-                ProductCategoryHelper.StoreSettings = GetStoreSettings();
-                ProductCategoryHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50) : imageWidth;
-                ProductCategoryHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50) : imageHeight;
-
-                await Task.WhenAll(categoriesTask, pageDesignTask);
-                var categories = categoriesTask.Result;
-                var pageDesign = pageDesignTask.Result;
-
-                var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categories, pageDesign);
-                returnHtml = pageOuput.PageOutputText;
-
+                returnHtml = await GetProductCategoriesHtml(designName, imageWidth, imageHeight);
             }
             catch (Exception ex)
             {
@@ -54,8 +41,33 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
+        private async Task<String> GetProductCategoriesHtml(string designName, int imageWidth, int imageHeight)
+        {
+            string returnHtml;
+            var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType,
+                                                                                           true);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
-        public async Task<JsonResult> GetBrands(String designName = "BrandsPartial",
+            ProductCategoryHelper.StoreSettings = GetStoreSettings();
+            ProductCategoryHelper.ImageWidth = imageWidth == 0
+                                                   ? GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50)
+                                                   : imageWidth;
+            ProductCategoryHelper.ImageHeight = imageHeight == 0
+                                                    ? GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50)
+                                                    : imageHeight;
+
+            await Task.WhenAll(categoriesTask, pageDesignTask);
+            var categories = categoriesTask.Result;
+            var pageDesign = pageDesignTask.Result;
+
+            var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categories, pageDesign);
+            returnHtml = pageOuput.PageOutputText;
+
+            return returnHtml;
+        }
+
+
+        public async Task<JsonResult> GetBrands(String designName = "BrandsPartial", int take = 0,
             int imageWidth = 0,
             int imageHeight = 0)
         {
@@ -69,26 +81,7 @@ namespace StoreManagement.Liquid.Controllers
 
             try
             {
-                int take = GetSettingValueInt("BrandsPartial_ItemsNumber", 50);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
-                var brandsTask = BrandService.GetBrandsAsync(StoreId, take, true);
-
-                BrandHelper.StoreSettings = GetStoreSettings();
-                BrandHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("BrandsPartial_ImageWidth", 50) : imageWidth;
-                BrandHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("BrandsPartial_ImageHeight", 50) : imageHeight;
-
-                await Task.WhenAll(pageDesignTask, brandsTask);
-                var pageDesign = pageDesignTask.Result;
-                var brands = brandsTask.Result;
-                if (pageDesign == null)
-                {
-                    throw new Exception("PageDesing is null");
-                }
-
-
-                var pageOuput = BrandHelper.GetBrandsPartial(brands, pageDesign);
-                returnHtml = pageOuput.PageOutputText;
-
+                returnHtml = await GetBrandsHtml(designName, take, imageWidth, imageHeight);
             }
             catch (Exception ex)
             {
@@ -100,6 +93,32 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
+        private async Task<String> GetBrandsHtml(string designName, int take, int imageWidth, int imageHeight)
+        {
+            string returnHtml;
+            take = take == 0 ? GetSettingValueInt("BrandsPartial_ItemsNumber", 50) : take;
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
+            var brandsTask = BrandService.GetBrandsAsync(StoreId, take, true);
+
+            BrandHelper.StoreSettings = GetStoreSettings();
+            BrandHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("BrandsPartial_ImageWidth", 50) : imageWidth;
+            BrandHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("BrandsPartial_ImageHeight", 50) : imageHeight;
+
+            await Task.WhenAll(pageDesignTask, brandsTask);
+            var pageDesign = pageDesignTask.Result;
+            var brands = brandsTask.Result;
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null");
+            }
+
+
+            var pageOuput = BrandHelper.GetBrandsPartial(brands, pageDesign);
+            returnHtml = pageOuput.PageOutputText;
+
+            return returnHtml;
+        }
+
         public async Task<JsonResult> GetProductLabels(int id, String designName = "ProductLabelsPartial", int imageWidth = 0, int imageHeight = 0)
         {
 
@@ -108,31 +127,10 @@ namespace StoreManagement.Liquid.Controllers
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
             String returnHtml = "";
-
+            String key = String.Format("GetProductLabels-{0}-{1}-{2}-{3}", id, designName, imageWidth, imageHeight);
             try
             {
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
-                var labelsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
-
-                LabelHelper.StoreSettings = GetStoreSettings();
-                LabelHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("ProductLabels_ImageWidth", 50) : imageWidth;
-                LabelHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("ProductLabels_ImageHeight", 50) : imageHeight;
-
-
-                await Task.WhenAll(pageDesignTask, labelsTask);
-                var labels = labelsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-
-                if (pageDesign == null)
-                {
-                    throw new Exception("PageDesing is null");
-                }
-
-
-
-                var pageOuput = LabelHelper.GetProductLabels(labels, pageDesign);
-                returnHtml = pageOuput.PageOutputText;
-
+                returnHtml = await GetProductLabelsHtml(id, designName, imageWidth, imageHeight);
             }
             catch (Exception ex)
             {
@@ -142,6 +140,34 @@ namespace StoreManagement.Liquid.Controllers
 
             return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
+
+        private async Task<String> GetProductLabelsHtml(int id, string designName, int imageWidth, int imageHeight)
+        {
+            string returnHtml;
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
+            var labelsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
+
+            LabelHelper.StoreSettings = GetStoreSettings();
+            LabelHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("ProductLabels_ImageWidth", 50) : imageWidth;
+            LabelHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("ProductLabels_ImageHeight", 50) : imageHeight;
+
+
+            await Task.WhenAll(pageDesignTask, labelsTask);
+            var labels = labelsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null");
+            }
+
+
+            var pageOuput = LabelHelper.GetProductLabels(labels, pageDesign);
+            returnHtml = pageOuput.PageOutputText;
+
+            return returnHtml;
+        }
+
         public async Task<JsonResult> GetProductsByProductType(int page = 1, String designName = "", int categoryId = 0, int brandId = 0,
             int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular", int excludedProductId = 0)
         {
@@ -152,23 +178,26 @@ namespace StoreManagement.Liquid.Controllers
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
             String returnHtml = "";
-            String key = String.Format("GetProductsByProductType-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}", 
+            String key = String.Format("GetProductsByProductType-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}",
                 StoreId, page, designName, categoryId, brandId, pageSize, imageHeight, imageWidth, productType, excludedProductId);
             try
             {
-                var tuple = GetCachingValue(key);
-                if (tuple.Item1)
-                {
-                    returnHtml = tuple.Item2;
-                    Logger.Trace("Data is coming from cache.Key="+key);
-                }
-                else
-                {
-                    returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
-                    SetCachingValue(key,returnHtml);
-                    Logger.Trace("Data is NOT coming from cache.Key=" + key);
-                }
-               
+
+                returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
+
+                //var tuple = GetCachingValue(key);
+                //if (tuple.Item1)
+                //{
+                //    returnHtml = tuple.Item2;
+                //    Logger.Trace("Ajax Data is coming from cache.Key=" + key);
+                //}
+                //else
+                //{
+                //    returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
+                //    SetCachingValue(key, returnHtml);
+                //    Logger.Trace("Ajax Data is NOT coming from cache.Key=" + key);
+                //}
+
             }
             catch (Exception ex)
             {

@@ -14,7 +14,7 @@ Technologies and Pattern <br>
 •Ajax <br>
 •LINQ <br>
 •Entity Framework <br>
-•DotLiquid <br>
+•Ninject Dependeceny Injection<br>
 •Generic Repository Pattern <br>
 •Google Drive API <br>
 •Bootstrap <br>

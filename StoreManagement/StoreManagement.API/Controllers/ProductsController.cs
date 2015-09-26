@@ -5,12 +5,16 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using StoreManagement.Data;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
+using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
+    [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
     public class ProductsController : BaseApiController<Product>, IProductService
     {
         public override IEnumerable<Product> GetAll()

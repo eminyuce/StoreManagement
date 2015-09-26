@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ using System.Web.Http;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
+using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
+    [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
     public class ProductCategoriesController : BaseApiController<ProductCategory>, IProductCategoryService
     {
         // GET api/Default1

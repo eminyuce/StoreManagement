@@ -4,11 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
+using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
+    [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
     public class ProductFilesController : BaseApiController<ProductFile>, IProductFileService
     {
 

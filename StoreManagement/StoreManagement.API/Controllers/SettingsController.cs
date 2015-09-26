@@ -5,12 +5,15 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
+using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
+    [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
     public class SettingsController : BaseApiController<Setting>, ISettingService
     {
         public List<Setting> GetStoreSettings(int storeid)

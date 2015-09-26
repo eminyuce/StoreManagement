@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MvcPaging;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ using System.Web;
 using System.Web.Http;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
+using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
+    [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
     public class FileManagersController : BaseApiController<FileManager>, IFileManagerService
     {
 

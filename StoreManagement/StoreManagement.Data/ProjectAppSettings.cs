@@ -113,7 +113,7 @@ namespace StoreManagement.Data
                 return GetWebConfigInt("CacheShortSeconds", 10);
             }
         }
-
+    
         public static int CacheMediumSeconds
         {
             get

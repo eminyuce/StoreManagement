@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using StoreManagement.API.Controllers;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using StoreManagement.Service.Interfaces;
+using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
+    [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
     public class PageDesignsController : BaseApiController<PageDesign>, IPageDesignService
     {
 

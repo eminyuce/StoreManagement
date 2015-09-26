@@ -58,5 +58,7 @@ namespace StoreManagement.Data.Constants
         //public static string IsPagingDown = "IsPagingDown";
 
         public static string RobotsTxt = "RobotsTxt";
+        public const int CacheClientTimeSpanSeconds = 600;
+        public const int CacheServerTimeSpanSeconds = 600;
     }
 }

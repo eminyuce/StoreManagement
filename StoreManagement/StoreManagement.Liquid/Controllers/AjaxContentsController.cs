@@ -94,62 +94,12 @@ namespace StoreManagement.Liquid.Controllers
             {
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
-            String returtHtml = "";
+            String returnHtml = "";
 
             try
             {
 
-                var catId = categoryId == 0 ? (int?)null : categoryId;
-                if (contentType.Equals("random"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("RandomContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
-                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("PopularContents_ImageHeight", 99) : imageHeight;
-
-                }
-                else if (contentType.Equals("normal"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("NormalContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
-                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("PopularContents_ImageHeight", 99) : imageHeight;
-
-                }
-                else if (contentType.Equals("popular"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("PopularContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
-                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("PopularContents_ImageHeight", 99) : imageHeight;
-
-                }
-                else if (contentType.Equals("recent"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("RecentContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RecentContents_ImageWidth", 99) : imageWidth;
-                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RecentContents_ImageHeight", 99) : imageHeight;
-                }
-                else if (contentType.Equals("main"))
-                {
-                    pageSize = pageSize == 0 ? GetSettingValueInt("MainContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
-                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("MainContents_ImageWidth", 99) : imageWidth;
-                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("MainContents_ImageHeight", 99) : imageHeight;
-                }
-                Task<List<Content>> contentsTask = ContentService.GetContentsByContentKeywordAsync(StoreId, catId, type, page, pageSize, true, contentType);
-
-
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
-                var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, type, true);
-
-                await Task.WhenAll(pageDesignTask, contentsTask, categoriesTask);
-                var contents = contentsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-                var categories = categoriesTask.Result;
-
-                ContentHelper.StoreSettings = GetStoreSettings();
-
-
-                var pageOuput = ContentHelper.GetContentsByContentType(contents, categories, pageDesign, type);
-                returtHtml = pageOuput.PageOutputText;
-
+                returnHtml = await GetContentsByContentTypeHtml(page, designName, categoryId, imageWidth, imageHeight, type, contentType);
             }
             catch (Exception ex)
             {
@@ -158,10 +108,82 @@ namespace StoreManagement.Liquid.Controllers
             }
 
 
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
+        private async Task<String> GetContentsByContentTypeHtml(int page, string designName, int categoryId, int imageWidth, int imageHeight,
+            string type, string contentType)
+        {
+            int pageSize = 10;
+            string returtHtml;
+            var catId = categoryId == 0 ? (int?)null : categoryId;
+            if (contentType.Equals("random"))
+            {
+                pageSize = pageSize == 0
+                    ? GetSettingValueInt("RandomContents_PageSize", StoreConstants.DefaultPageSize)
+                    : pageSize;
+                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
+                ContentHelper.ImageHeight = imageHeight == 0
+                    ? GetSettingValueInt("PopularContents_ImageHeight", 99)
+                    : imageHeight;
+            }
+            else if (contentType.Equals("normal"))
+            {
+                pageSize = pageSize == 0
+                    ? GetSettingValueInt("NormalContents_PageSize", StoreConstants.DefaultPageSize)
+                    : pageSize;
+                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
+                ContentHelper.ImageHeight = imageHeight == 0
+                    ? GetSettingValueInt("PopularContents_ImageHeight", 99)
+                    : imageHeight;
+            }
+            else if (contentType.Equals("popular"))
+            {
+                pageSize = pageSize == 0
+                    ? GetSettingValueInt("PopularContents_PageSize", StoreConstants.DefaultPageSize)
+                    : pageSize;
+                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
+                ContentHelper.ImageHeight = imageHeight == 0
+                    ? GetSettingValueInt("PopularContents_ImageHeight", 99)
+                    : imageHeight;
+            }
+            else if (contentType.Equals("recent"))
+            {
+                pageSize = pageSize == 0
+                    ? GetSettingValueInt("RecentContents_PageSize", StoreConstants.DefaultPageSize)
+                    : pageSize;
+                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RecentContents_ImageWidth", 99) : imageWidth;
+                ContentHelper.ImageHeight = imageHeight == 0
+                    ? GetSettingValueInt("RecentContents_ImageHeight", 99)
+                    : imageHeight;
+            }
+            else if (contentType.Equals("main"))
+            {
+                pageSize = pageSize == 0
+                    ? GetSettingValueInt("MainContents_PageSize", StoreConstants.DefaultPageSize)
+                    : pageSize;
+                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("MainContents_ImageWidth", 99) : imageWidth;
+                ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("MainContents_ImageHeight", 99) : imageHeight;
+            }
+            Task<List<Content>> contentsTask = ContentService.GetContentsByContentKeywordAsync(StoreId, catId, type, page,
+                pageSize, true, contentType);
 
 
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
+            var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, type, true);
+
+            await Task.WhenAll(pageDesignTask, contentsTask, categoriesTask);
+            var contents = contentsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var categories = categoriesTask.Result;
+
+            ContentHelper.StoreSettings = GetStoreSettings();
+
+
+            var pageOuput = ContentHelper.GetContentsByContentType(contents, categories, pageDesign, type);
+            returtHtml = pageOuput.PageOutputText;
+
+            return returtHtml;
+        }
     }
 }

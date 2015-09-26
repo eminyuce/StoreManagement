@@ -20,18 +20,7 @@ namespace StoreManagement.Liquid.Controllers
 
             try
             {
-                var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, desingName);
-
-                NavigationHelper.StoreSettings = GetStoreSettings();
-
-                await Task.WhenAll(pageDesignTask, navigationsTask);
-                var navigations = navigationsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-
-                var pageOutput = NavigationHelper.GetMainLayoutLink(navigations, pageDesign);
-                returnHtml = pageOutput.PageOutputText;
-
+                returnHtml = await GetMainNavigation(desingName);
             }
             catch (Exception ex)
             {
@@ -43,6 +32,25 @@ namespace StoreManagement.Liquid.Controllers
 
 
         }
+
+        private async Task<String> GetMainNavigation(string desingName)
+        {
+            string returnHtml;
+            var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(StoreId);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+
+            NavigationHelper.StoreSettings = GetStoreSettings();
+
+            await Task.WhenAll(pageDesignTask, navigationsTask);
+            var navigations = navigationsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+
+            var pageOutput = NavigationHelper.GetMainLayoutLink(navigations, pageDesign);
+            returnHtml = pageOutput.PageOutputText;
+
+            return returnHtml;
+        }
+
         public async Task<JsonResult> Footer(String desingName = "Footer")
         {
             int storeId = StoreId;
@@ -50,16 +58,7 @@ namespace StoreManagement.Liquid.Controllers
             String returnHtml = "";
             try
             {
-                var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(storeId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(storeId, desingName);
-
-                await Task.WhenAll(pageDesignTask, navigationsTask);
-                var navigations = navigationsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-
-                var pageOutput = NavigationHelper.GetMainLayoutFooterLink(navigations, pageDesign);
-                returnHtml = pageOutput.PageOutputText;
-
+               returnHtml = await GetMainFooter(desingName);
             }
             catch (Exception ex)
             {
@@ -72,27 +71,32 @@ namespace StoreManagement.Liquid.Controllers
 
         }
 
+        private async Task<String> GetMainFooter(string desingName)
+        {
+            string returnHtml;
+            var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(StoreId);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+
+            await Task.WhenAll(pageDesignTask, navigationsTask);
+            var navigations = navigationsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+
+            var pageOutput = NavigationHelper.GetMainLayoutFooterLink(navigations, pageDesign);
+            returnHtml = pageOutput.PageOutputText;
+
+            return returnHtml;
+        }
+
         public async Task<JsonResult> GetComments(int itemId, String itemType, int page, String desingName = "CommentsPartial", int pageSize = 0)
         {
- 
+
             pageSize = pageSize == 0 ? GetSettingValueInt("Comments_PageSize", StoreConstants.DefaultPageSize) : pageSize;
 
             String returnHtml = "";
             try
             {
 
-                var commentsTask = CommentService.GetCommentsByItemIdAsync(StoreId, itemId, itemType, page, pageSize);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
-
-                CommentHelper.StoreSettings = GetStoreSettings();
-
-                await Task.WhenAll(pageDesignTask, commentsTask);
-                var pageDesign = pageDesignTask.Result;
-                var comments = commentsTask.Result;
-
-                var pageOuput = CommentHelper.GetCommentsPartial(comments, pageDesign);
-                returnHtml = pageOuput.PageOutputText;
-
+               returnHtml = await GetCommentsHtml(itemId, itemType, page, desingName, pageSize);
             }
             catch (Exception ex)
             {
@@ -102,6 +106,24 @@ namespace StoreManagement.Liquid.Controllers
 
 
             return Json(returnHtml, JsonRequestBehavior.AllowGet);
+        }
+
+        private async Task<String> GetCommentsHtml(int itemId, string itemType, int page, string desingName, int pageSize)
+        {
+            string returnHtml;
+            var commentsTask = CommentService.GetCommentsByItemIdAsync(StoreId, itemId, itemType, page, pageSize);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+
+            CommentHelper.StoreSettings = GetStoreSettings();
+
+            await Task.WhenAll(pageDesignTask, commentsTask);
+            var pageDesign = pageDesignTask.Result;
+            var comments = commentsTask.Result;
+
+            var pageOuput = CommentHelper.GetCommentsPartial(comments, pageDesign);
+            returnHtml = pageOuput.PageOutputText;
+
+            return returnHtml;
         }
     }
 }

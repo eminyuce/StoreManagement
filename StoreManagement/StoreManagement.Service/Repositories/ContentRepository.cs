@@ -300,10 +300,20 @@ namespace StoreManagement.Service.Repositories
 
                 var predicate = PredicateBuilder.Create<Content>(match);
 
-              
+                Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
 
                 Expression<Func<Content, int>> keySelector = t => t.Id;
-                if (contentType.Equals("popular"))
+                if (contentType.Equals("random", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Expression<Func<Content, Guid>> keySelector2 = t => Guid.NewGuid();
+                    var itemsRandom = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector2, OrderByType.Descending, includeProperties);
+                    return await itemsRandom;
+                }
+                else if (contentType.Equals("normal", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.Ordering;
+                }
+                else if (contentType.Equals("popular"))
                 {
                     keySelector = t => t.TotalRating;
                 }
@@ -318,7 +328,7 @@ namespace StoreManagement.Service.Repositories
                 }
 
 
-                var items = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector, OrderByType.Descending, r => r.ContentFiles.Select(r1 => r1.FileManager));
+                var items = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector, OrderByType.Descending, includeProperties);
                 return await items;
             }
             catch (Exception exception)

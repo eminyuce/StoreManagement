@@ -35,7 +35,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "MainNavigation", storeId);
+                Logger.Error(ex, "MainNavigation:" + ex.StackTrace, storeId, desingName);
 
             }
 
@@ -63,7 +63,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Footer", storeId);
+                Logger.Error(ex, "Footer:" + ex.StackTrace, desingName, storeId);
 
             }
 
@@ -96,7 +96,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "ProductComments");
+                Logger.Error(ex, "ProductComments:" + ex.StackTrace, StoreId, itemId, itemType, page, pageSize);
 
             }
 

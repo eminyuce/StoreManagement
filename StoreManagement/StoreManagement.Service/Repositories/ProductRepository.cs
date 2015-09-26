@@ -256,7 +256,19 @@ namespace StoreManagement.Service.Repositories
 
                 var predicate = PredicateBuilder.Create<Product>(match);
                 Expression<Func<Product, int>> keySelector = t => t.Id;
-                if (functionType.Equals("popular", StringComparison.InvariantCultureIgnoreCase))
+
+
+                if (functionType.Equals("random", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
+                    var itemsRandom = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector2, OrderByType.Descending, includeProperties);
+                    return await itemsRandom;
+                }
+                else if (functionType.Equals("normal", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.Ordering;
+                }
+                else if (functionType.Equals("popular", StringComparison.InvariantCultureIgnoreCase))
                 {
                     keySelector = t => t.TotalRating;
                 }

@@ -45,7 +45,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetProductCategories");
+                Logger.Error(ex, "GetProductCategories:" + ex.StackTrace, designName);
 
             }
 
@@ -55,7 +55,9 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-        public async Task<JsonResult> GetBrands(String designName = "BrandsPartial", int imageWidth = 0, int imageHeight = 0)
+        public async Task<JsonResult> GetBrands(String designName = "BrandsPartial",
+            int imageWidth = 0,
+            int imageHeight = 0)
         {
 
             if (String.IsNullOrEmpty(designName))
@@ -90,7 +92,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetBrands", designName);
+                Logger.Error(ex, "GetBrands:" + ex.StackTrace, designName);
 
             }
 
@@ -100,7 +102,7 @@ namespace StoreManagement.Liquid.Controllers
 
         public async Task<JsonResult> GetProductLabels(int id, String designName = "ProductLabelsPartial", int imageWidth = 0, int imageHeight = 0)
         {
-             
+
             if (String.IsNullOrEmpty(designName))
             {
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
@@ -134,14 +136,14 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetProductLabels", designName);
+                Logger.Error(ex, "GetProductLabels:" + ex.StackTrace, designName);
             }
 
 
             return Json(returtHtml, JsonRequestBehavior.AllowGet);
         }
         public async Task<JsonResult> GetProductsByProductType(int page = 1, String designName = "", int categoryId = 0, int brandId = 0,
-            int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular", int excludedProductId=0)
+            int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular", int excludedProductId = 0)
         {
 
 
@@ -158,7 +160,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetProductsByProductType");
+                Logger.Error(ex, "GetProductsByProductType:" + ex.StackTrace, page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
 
             }
 
@@ -169,12 +171,12 @@ namespace StoreManagement.Liquid.Controllers
         private async Task<String> GetProductsByProductTypeHtml(int page, string designName, int categoryId, int brandId, int pageSize,
                                                         int imageWidth, int imageHeight, string productType, int excludedProductId)
         {
-            
+
             string returtHtml;
             Task<List<Product>> productsTask = null;
-            var catId = categoryId == 0 ? (int?) null : categoryId;
-            var bId = brandId == 0 ? (int?) null : brandId;
-            var eProductId = excludedProductId == 0 ? (int?) null : excludedProductId;
+            var catId = categoryId == 0 ? (int?)null : categoryId;
+            var bId = brandId == 0 ? (int?)null : brandId;
+            var eProductId = excludedProductId == 0 ? (int?)null : excludedProductId;
             Logger.Trace("StoreId " + StoreId +
                          " designName:" +
                          designName +
@@ -182,9 +184,28 @@ namespace StoreManagement.Liquid.Controllers
                          categoryId + " brandId:" +
                          brandId + " pageSize:" + pageSize + " page:" +
                          page + " imageWidth:" + imageWidth + " imageHeight:" + imageHeight + " productType:" + productType);
-          
 
-            if (productType.Equals("popular"))
+            if (productType.Equals("random"))
+            {
+                pageSize = pageSize == 0
+                               ? GetSettingValueInt("RandomProducts_PageSize", StoreConstants.DefaultPageSize)
+                               : pageSize;
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RandomProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0
+                                                ? GetSettingValueInt("RandomProducts_ImageHeight", 99)
+                                                : imageHeight;
+            }
+            else if (productType.Equals("normal"))
+            {
+                pageSize = pageSize == 0
+                               ? GetSettingValueInt("NormalProducts_PageSize", StoreConstants.DefaultPageSize)
+                               : pageSize;
+                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("NormalProducts_ImageWidth", 99) : imageWidth;
+                ProductHelper.ImageHeight = imageHeight == 0
+                                                ? GetSettingValueInt("NormalProducts_ImageHeight", 99)
+                                                : imageHeight;
+            }
+            else if (productType.Equals("popular"))
             {
                 pageSize = pageSize == 0
                                ? GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize)

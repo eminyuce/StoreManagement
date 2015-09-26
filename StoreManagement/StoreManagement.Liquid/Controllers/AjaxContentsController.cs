@@ -77,7 +77,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetRelatedContents", contentType, categoryId);
+                Logger.Error(ex, "GetRelatedContents:" + ex.StackTrace, StoreId, contentType, categoryId, take, excludedContentId);
 
             }
 
@@ -99,9 +99,22 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-                 var catId = categoryId == 0 ? (int?)null : categoryId;
-               
-                if (contentType.Equals("popular"))
+                var catId = categoryId == 0 ? (int?)null : categoryId;
+                if (contentType.Equals("random"))
+                {
+                    pageSize = pageSize == 0 ? GetSettingValueInt("RandomContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
+                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
+                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("PopularContents_ImageHeight", 99) : imageHeight;
+
+                }
+                else if (contentType.Equals("normal"))
+                {
+                    pageSize = pageSize == 0 ? GetSettingValueInt("NormalContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
+                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
+                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("PopularContents_ImageHeight", 99) : imageHeight;
+
+                }
+                else if (contentType.Equals("popular"))
                 {
                     pageSize = pageSize == 0 ? GetSettingValueInt("PopularContents_PageSize", StoreConstants.DefaultPageSize) : pageSize;
                     ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
@@ -140,7 +153,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetContentsByContentType");
+                Logger.Error(ex, "GetContentsByContentType:" + ex.StackTrace, StoreId, categoryId, type, page, pageSize, contentType);
 
             }
 

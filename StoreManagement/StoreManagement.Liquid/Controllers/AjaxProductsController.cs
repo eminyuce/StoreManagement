@@ -160,11 +160,13 @@ namespace StoreManagement.Liquid.Controllers
                 if (tuple.Item1)
                 {
                     returnHtml = tuple.Item2;
+                    Logger.Trace("Data is coming from cache.Key="+key);
                 }
                 else
                 {
                     returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
                     SetCachingValue(key,returnHtml);
+                    Logger.Trace("Data is NOT coming from cache.Key=" + key);
                 }
                
             }

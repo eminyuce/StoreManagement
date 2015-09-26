@@ -459,6 +459,7 @@
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AjaxContentsController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AjaxGenericsController.cs" />
     <Compile Include="Controllers\AjaxProductsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />

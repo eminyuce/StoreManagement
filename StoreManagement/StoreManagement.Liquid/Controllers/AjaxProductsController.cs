@@ -15,7 +15,7 @@ using StoreManagement.Service.Interfaces;
 namespace StoreManagement.Liquid.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Hour")]
-    public class AjaxProductsController : BaseController
+    public class AjaxProductsController : AjaxController
     {
         public async Task<JsonResult> GetProductCategories(String designName = "ProductCategoriesPartial", int imageWidth = 0, int imageHeight = 0)
         {

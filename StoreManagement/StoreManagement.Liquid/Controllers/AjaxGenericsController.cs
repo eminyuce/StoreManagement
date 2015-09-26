@@ -11,7 +11,7 @@ using StoreManagement.Liquid.Helper;
 namespace StoreManagement.Liquid.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Hour")]
-    public class AjaxGenericsController : BaseController
+    public class AjaxGenericsController : AjaxController
     {
         public async Task<JsonResult> MainNavigation(String desingName = "MainNavigation")
         {

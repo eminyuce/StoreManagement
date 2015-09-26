@@ -24,7 +24,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
-            String returtHtml = "";
+            String returnHtml = "";
 
             try
             {
@@ -40,7 +40,7 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesign = pageDesignTask.Result;
 
                 var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categories, pageDesign);
-                returtHtml = pageOuput.PageOutputText;
+                returnHtml = pageOuput.PageOutputText;
 
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
 
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -65,7 +65,7 @@ namespace StoreManagement.Liquid.Controllers
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
 
-            String returtHtml = "";
+            String returnHtml = "";
 
             try
             {
@@ -87,7 +87,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 var pageOuput = BrandHelper.GetBrandsPartial(brands, pageDesign);
-                returtHtml = pageOuput.PageOutputText;
+                returnHtml = pageOuput.PageOutputText;
 
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace StoreManagement.Liquid.Controllers
             }
 
 
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetProductLabels(int id, String designName = "ProductLabelsPartial", int imageWidth = 0, int imageHeight = 0)
@@ -107,7 +107,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
-            String returtHtml = "";
+            String returnHtml = "";
 
             try
             {
@@ -131,7 +131,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 var pageOuput = LabelHelper.GetProductLabels(labels, pageDesign);
-                returtHtml = pageOuput.PageOutputText;
+                returnHtml = pageOuput.PageOutputText;
 
             }
             catch (Exception ex)
@@ -140,7 +140,7 @@ namespace StoreManagement.Liquid.Controllers
             }
 
 
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
         public async Task<JsonResult> GetProductsByProductType(int page = 1, String designName = "", int categoryId = 0, int brandId = 0,
             int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular", int excludedProductId = 0)
@@ -151,12 +151,22 @@ namespace StoreManagement.Liquid.Controllers
             {
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
-            String returtHtml = "";
-
+            String returnHtml = "";
+            String key = String.Format("GetProductsByProductType-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}", 
+                StoreId, page, designName, categoryId, brandId, pageSize, imageHeight, imageWidth, productType, excludedProductId);
             try
             {
-
-                returtHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
+                var tuple = GetCachingValue(key);
+                if (tuple.Item1)
+                {
+                    returnHtml = tuple.Item2;
+                }
+                else
+                {
+                    returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
+                    SetCachingValue(key,returnHtml);
+                }
+               
             }
             catch (Exception ex)
             {
@@ -165,14 +175,14 @@ namespace StoreManagement.Liquid.Controllers
             }
 
 
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
         private async Task<String> GetProductsByProductTypeHtml(int page, string designName, int categoryId, int brandId, int pageSize,
                                                         int imageWidth, int imageHeight, string productType, int excludedProductId)
         {
 
-            string returtHtml;
+            string returnHtml;
             Task<List<Product>> productsTask = null;
             var catId = categoryId == 0 ? (int?)null : categoryId;
             var bId = brandId == 0 ? (int?)null : brandId;
@@ -260,9 +270,9 @@ namespace StoreManagement.Liquid.Controllers
 
 
             var pageOuput = ProductHelper.GetPopularProducts(products, productCategories, pageDesign);
-            returtHtml = pageOuput.PageOutputText;
+            returnHtml = pageOuput.PageOutputText;
 
-            return returtHtml;
+            return returnHtml;
         }
     }
 }

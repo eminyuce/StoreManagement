@@ -25,55 +25,11 @@ namespace StoreManagement.Liquid.Controllers
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
 
-            String returtHtml = "";
+            String returnHtml = "";
 
             try
             {
-                var categoryTask = CategoryService.GetCategoryAsync(categoryId);
-
-
-                if (take == 0 && contentType.Equals(StoreConstants.NewsType))
-                {
-                    take = GetSettingValueInt("RelatedNews_ItemsNumber", 5);
-                }
-                else if (take == 0 && contentType.Equals(StoreConstants.BlogsType))
-                {
-                    take = GetSettingValueInt("RelatedBlogs_ItemsNumber", 5);
-                }
-
-                var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take, excludedContentId);
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
-
-                ContentHelper.StoreSettings = GetStoreSettings();
-
-
-
-                if (contentType.Equals(StoreConstants.NewsType))
-                {
-                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50) : imageWidth;
-                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50) : imageHeight;
-                }
-                else if (contentType.Equals(StoreConstants.BlogsType))
-                {
-                    ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50) : imageWidth;
-                    ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50) : imageHeight;
-                }
-                else
-                {
-                    ContentHelper.ImageWidth = 0;
-                    ContentHelper.ImageHeight = 0;
-                    Logger.Trace("No ContentType is defined like that " + contentType);
-                }
-
-                await Task.WhenAll(pageDesignTask, relatedContentsTask, categoryTask);
-                var contents = relatedContentsTask.Result;
-                var pageDesign = pageDesignTask.Result;
-                var category = categoryTask.Result;
-
-                var pageOutput = ContentHelper.GetRelatedContentsPartial(category, contents, pageDesign, contentType);
-                returtHtml = pageOutput.PageOutputText;
-
-
+                returnHtml = await GetRelatedContentsHtml(categoryId, contentType, excludedContentId, designName, take, imageWidth, imageHeight);
             }
             catch (Exception ex)
             {
@@ -82,7 +38,66 @@ namespace StoreManagement.Liquid.Controllers
             }
 
 
-            return Json(returtHtml, JsonRequestBehavior.AllowGet);
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
+        }
+
+        private async Task<String> GetRelatedContentsHtml(int categoryId, string contentType, int excludedContentId, string designName, int take,
+            int imageWidth, int imageHeight)
+        {
+            string returnHtml;
+            var categoryTask = CategoryService.GetCategoryAsync(categoryId);
+
+
+            if (take == 0 && contentType.Equals(StoreConstants.NewsType))
+            {
+                take = GetSettingValueInt("RelatedNews_ItemsNumber", 5);
+            }
+            else if (take == 0 && contentType.Equals(StoreConstants.BlogsType))
+            {
+                take = GetSettingValueInt("RelatedBlogs_ItemsNumber", 5);
+            }
+
+            var relatedContentsTask = ContentService.GetContentByTypeAndCategoryIdAsync(StoreId, contentType, categoryId, take,
+                excludedContentId);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
+
+            ContentHelper.StoreSettings = GetStoreSettings();
+
+
+            if (contentType.Equals(StoreConstants.NewsType))
+            {
+                ContentHelper.ImageWidth = imageWidth == 0
+                    ? GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50)
+                    : imageWidth;
+                ContentHelper.ImageHeight = imageHeight == 0
+                    ? GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50)
+                    : imageHeight;
+            }
+            else if (contentType.Equals(StoreConstants.BlogsType))
+            {
+                ContentHelper.ImageWidth = imageWidth == 0
+                    ? GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50)
+                    : imageWidth;
+                ContentHelper.ImageHeight = imageHeight == 0
+                    ? GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50)
+                    : imageHeight;
+            }
+            else
+            {
+                ContentHelper.ImageWidth = 0;
+                ContentHelper.ImageHeight = 0;
+                Logger.Trace("No ContentType is defined like that " + contentType);
+            }
+
+            await Task.WhenAll(pageDesignTask, relatedContentsTask, categoryTask);
+            var contents = relatedContentsTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var category = categoryTask.Result;
+
+            var pageOutput = ContentHelper.GetRelatedContentsPartial(category, contents, pageDesign, contentType);
+            returnHtml = pageOutput.PageOutputText;
+
+            return returnHtml;
         }
 
 
@@ -115,7 +130,7 @@ namespace StoreManagement.Liquid.Controllers
             string type, string contentType)
         {
             int pageSize = 10;
-            string returtHtml;
+            string returnHtml;
             var catId = categoryId == 0 ? (int?)null : categoryId;
             if (contentType.Equals("random"))
             {
@@ -181,9 +196,9 @@ namespace StoreManagement.Liquid.Controllers
 
 
             var pageOuput = ContentHelper.GetContentsByContentType(contents, categories, pageDesign, type);
-            returtHtml = pageOuput.PageOutputText;
+            returnHtml = pageOuput.PageOutputText;
 
-            return returtHtml;
+            return returnHtml;
         }
     }
 }

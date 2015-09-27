@@ -13,18 +13,18 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxGenericsController : AjaxController
     {
-        public async Task<JsonResult> MainNavigation(String desingName = "MainNavigation")
+        public async Task<JsonResult> MainNavigation(String designName   = "MainNavigation")
         {
             int storeId = StoreId;
             String returnHtml = "";
 
             try
             {
-                returnHtml = await GetMainNavigation(desingName);
+                returnHtml = await GetMainNavigation(designName);
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "MainNavigation:" + ex.StackTrace, storeId, desingName);
+                Logger.Error(ex, "MainNavigation:" + ex.StackTrace, storeId, designName);
 
             }
 
@@ -33,11 +33,11 @@ namespace StoreManagement.Liquid.Controllers
 
         }
 
-        private async Task<String> GetMainNavigation(string desingName)
+        private async Task<String> GetMainNavigation(string designName)
         {
             string returnHtml;
             var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(StoreId);
-            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
             NavigationHelper.StoreSettings = GetStoreSettings();
 
@@ -51,18 +51,18 @@ namespace StoreManagement.Liquid.Controllers
             return returnHtml;
         }
 
-        public async Task<JsonResult> Footer(String desingName = "Footer")
+        public async Task<JsonResult> Footer(String designName = "Footer")
         {
             int storeId = StoreId;
 
             String returnHtml = "";
             try
             {
-               returnHtml = await GetMainFooter(desingName);
+               returnHtml = await GetMainFooter(designName);
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Footer:" + ex.StackTrace, desingName, storeId);
+                Logger.Error(ex, "Footer:" + ex.StackTrace, designName, storeId);
 
             }
 
@@ -71,11 +71,11 @@ namespace StoreManagement.Liquid.Controllers
 
         }
 
-        private async Task<String> GetMainFooter(string desingName)
+        private async Task<String> GetMainFooter(string designName)
         {
             string returnHtml;
             var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(StoreId);
-            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
             await Task.WhenAll(pageDesignTask, navigationsTask);
             var navigations = navigationsTask.Result;
@@ -87,7 +87,7 @@ namespace StoreManagement.Liquid.Controllers
             return returnHtml;
         }
 
-        public async Task<JsonResult> GetComments(int itemId, String itemType, int page, String desingName = "CommentsPartial", int pageSize = 0)
+        public async Task<JsonResult> GetComments(int itemId, String itemType, int page, String designName = "CommentsPartial", int pageSize = 0)
         {
 
             pageSize = pageSize == 0 ? GetSettingValueInt("Comments_PageSize", StoreConstants.DefaultPageSize) : pageSize;
@@ -96,7 +96,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-               returnHtml = await GetCommentsHtml(itemId, itemType, page, desingName, pageSize);
+               returnHtml = await GetCommentsHtml(itemId, itemType, page, designName, pageSize);
             }
             catch (Exception ex)
             {
@@ -108,11 +108,11 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
-        private async Task<String> GetCommentsHtml(int itemId, string itemType, int page, string desingName, int pageSize)
+        private async Task<String> GetCommentsHtml(int itemId, string itemType, int page, string designName, int pageSize)
         {
             string returnHtml;
             var commentsTask = CommentService.GetCommentsByItemIdAsync(StoreId, itemId, itemType, page, pageSize);
-            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, desingName);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
             CommentHelper.StoreSettings = GetStoreSettings();
 

@@ -76,7 +76,7 @@ namespace StoreManagement.Data.GeneralHelper
                 {
                     Logger.Trace("Get data from Cache=" + url);
                 }
-              
+
             }
             else
             {
@@ -119,27 +119,35 @@ namespace StoreManagement.Data.GeneralHelper
             }
 
         }
-        //public Task<T> ExecuteAsync<T>(RestRequest request, String url) where T : new()
-        //{
-        //    var client = new RestClient(url);
-        //    var taskCompletionSource = new TaskCompletionSource<T>();
-        //    // client.Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey);
-        //    //request.AddParameter("AccountSid", _accountSid, ParameterType.UrlSegment);
-        //    client.ExecuteAsync<T>(request, (response) => taskCompletionSource.SetResult(response.Data));
-        //    return taskCompletionSource.Task;
-        //}
+      
 
-        //public string MakeJsonRequest<T>(string url) where T : new()
-        //{
-        //    string returnJson = String.Empty;
-        //    var client = new RestClient(url);
-        //    var request = new RestRequest(Method.GET);
-        //    request.RequestFormat = DataFormat.Json;
-        //    request.AddHeader("Accept", "application/json");
-        //    request.AddHeader("Content-type", "application/json");
-        //    var myClass = await this.ExecuteAsync<T>(request,url );
-        //    return myClass.HasValue() ? myClass.Dump() : "";
-        //}
+        public Task<T> MakeJsonRequestAsync<T>(string url) where T : new()
+        {
+            try
+            {
+                var request = new RestRequest(Method.GET);
+                request.RequestFormat = DataFormat.Json;
+                request.AddHeader("Accept", "application/json");
+                request.AddHeader("Content-type", "application/json");
+                var myClass = this.ExecuteAsync<T>(request, url);
+                return myClass;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Error:" + ex.StackTrace, url);
+                return null;
+            }
+         
+        }
+        public Task<T> ExecuteAsync<T>(RestRequest request, String url) where T : new()
+        {
+            var client = new RestClient(url);
+            var taskCompletionSource = new TaskCompletionSource<T>();
+            // client.Authenticator = new HttpBasicAuthenticator(_accountSid, _secretKey);
+            //request.AddParameter("AccountSid", _accountSid, ParameterType.UrlSegment);
+            client.ExecuteAsync<T>(request, (response) => taskCompletionSource.SetResult(response.Data));
+            return taskCompletionSource.Task;
+        }
         public string MakeJsonRequest(string url)
         {
 
@@ -164,33 +172,6 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return returnJson;
         }
-        //private string CacheResponseOutput(string key, String responseContent)
-        //{
-
-        //    String jsonOutput = "";
-        //    RequestHelperCache.TryGet(key, out jsonOutput);
-        //    if (String.IsNullOrEmpty(jsonOutput))
-        //    {
-        //        jsonOutput = responseContent;
-        //        if (!String.IsNullOrEmpty(jsonOutput))
-        //        {
-        //            if (IsCacheEnable)
-        //            {
-
-        //                RequestHelperCache.Set(key, jsonOutput,
-        //                                       MemoryCacheHelper.CacheAbsoluteExpirationPolicy(_cacheMinute));
-
-        //            }
-        //        }
-        //        return jsonOutput;
-        //    }
-        //    else
-        //    {
-        //        return responseContent;
-        //    }
-        //}
-
-
 
         public IRestResponse PostBasicAuthenication(string baseUrl, string resourceUrl, string userName, string password, string json)
         {
@@ -252,17 +233,7 @@ namespace StoreManagement.Data.GeneralHelper
 
 
         }
-        public Task<StorePagedList<T>> GetUrlPagedResultsAsync<T>(string url) where T : new()
-        {
-            //var res = Task.FromResult(GetUrlPagedResults<T>(url));
-            //return res;
-
-            var task = new Task<StorePagedList<T>>(() => GetUrlPagedResults<T>(url));
-            task.Start();
-
-            return task;
-
-        }
+   
         public StorePagedList<T> GetUrlPagedResults<T>(string url) where T : new()
         {
             try
@@ -284,23 +255,17 @@ namespace StoreManagement.Data.GeneralHelper
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Error:" + ex.Message, ex);
+                Logger.Error(ex, "Error:" + ex.StackTrace, url);
                 return new StorePagedList<T>();
             }
         }
-        
-        public Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
-        {
-            var task = new Task<List<T>>(() => GetUrlResults<T>(url));
-            task.Start();
 
-            return task;
-            // return Task<T>.Factory.StartNew(() => { GetUrlResults<T>(url); });
-        }
+    
         public List<T> GetUrlResults<T>(string url) where T : new()
         {
             try
             {
+                //  
 
                 var responseContent = GetJsonFromCacheOrWebservice(url);
                 if (!String.IsNullOrEmpty(responseContent))
@@ -319,22 +284,18 @@ namespace StoreManagement.Data.GeneralHelper
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Error:" + ex.Message, ex);
+                Logger.Error(ex, "Error:" + ex.StackTrace, url);
                 return new List<T>();
             }
 
         }
-        public Task<T> GetUrlResultAsync<T>(string url) where T : new()
-        {
-            var task = new Task<T>(() => GetUrlResult<T>(url));
-            task.Start();
-
-            return task;
-        }
+    
         public T GetUrlResult<T>(string url) where T : new()
         {
             try
             {
+                //
+
                 var responseContent = GetJsonFromCacheOrWebservice(url);
                 if (!String.IsNullOrEmpty(responseContent))
                 {
@@ -349,10 +310,36 @@ namespace StoreManagement.Data.GeneralHelper
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Error:" + ex.Message, ex);
+                Logger.Error(ex, "Error:" + ex.StackTrace, url);
                 return new T();
             }
 
+        }
+        public Task<StorePagedList<T>> GetUrlPagedResultsAsync<T>(string url) where T : new()
+        {
+            return MakeJsonRequestAsync<StorePagedList<T>>(url);
+            //var task = new Task<StorePagedList<T>>(() => GetUrlPagedResults<T>(url));
+            //task.Start();
+
+            //return task;
+
+        }
+        public Task<T> GetUrlResultAsync<T>(string url) where T : new()
+        {
+            //var task = new Task<T>(() => GetUrlResult<T>(url));
+            //task.Start();
+
+            //return task;
+
+            return MakeJsonRequestAsync<T>(url);
+        }
+        public Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
+        {
+            //var task = new Task<List<T>>(() => GetUrlResults<T>(url));
+            //task.Start();
+            //return task;
+
+            return MakeJsonRequestAsync<List<T>>(url);
         }
     }
 

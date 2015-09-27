@@ -12,20 +12,24 @@ namespace StoreManagement.Liquid.Controllers
     public abstract class AjaxController : BaseController
     {
 
-        protected Tuple<bool, String> GetCachingValue(String key)
+        public static Tuple<bool, String> GetCachingValue(String key)
         { 
             var returnHtml = (String) MemoryCache.Default.Get(key);
             return Tuple.Create(!String.IsNullOrEmpty(returnHtml), returnHtml);
         }
 
-        protected void SetCachingValue(String key, String returnHtml)
+        public static void SetCachingValue(String key, String returnHtml, double dateTimeOffSetSeconds=0)
         {
+            if (dateTimeOffSetSeconds == 0)
+            {
+                dateTimeOffSetSeconds = ProjectAppSettings.CacheMediumSeconds;
+            }
             CacheItemPolicy policy = null;
             CacheEntryRemovedCallback callback = null;
 
             policy = new CacheItemPolicy();
             policy.Priority = CacheItemPriority.Default;
-            policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(ProjectAppSettings.CacheMediumSeconds);
+            policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(dateTimeOffSetSeconds);
 
             MemoryCache.Default.Set(key, returnHtml, policy);
         }

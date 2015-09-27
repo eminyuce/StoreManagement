@@ -317,29 +317,29 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public Task<StorePagedList<T>> GetUrlPagedResultsAsync<T>(string url) where T : new()
         {
-            return MakeJsonRequestAsync<StorePagedList<T>>(url);
-            //var task = new Task<StorePagedList<T>>(() => GetUrlPagedResults<T>(url));
-            //task.Start();
+           // return MakeJsonRequestAsync<StorePagedList<T>>(url);
+            var task = new Task<StorePagedList<T>>(() => GetUrlPagedResults<T>(url));
+            task.Start();
 
-            //return task;
+            return task;
 
         }
         public Task<T> GetUrlResultAsync<T>(string url) where T : new()
         {
-            //var task = new Task<T>(() => GetUrlResult<T>(url));
-            //task.Start();
+            var task = new Task<T>(() => GetUrlResult<T>(url));
+            task.Start();
 
-            //return task;
+            return task;
 
-            return MakeJsonRequestAsync<T>(url);
+           // return MakeJsonRequestAsync<T>(url);
         }
         public Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
         {
-            //var task = new Task<List<T>>(() => GetUrlResults<T>(url));
-            //task.Start();
-            //return task;
+            var task = new Task<List<T>>(() => GetUrlResults<T>(url));
+            task.Start();
+            return task;
 
-            return MakeJsonRequestAsync<List<T>>(url);
+            //return MakeJsonRequestAsync<List<T>>(url);
         }
     }
 

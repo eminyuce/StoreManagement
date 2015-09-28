@@ -227,7 +227,7 @@ namespace StoreManagement.Admin.Controllers
             catch (Exception ex)
             {
 
-
+                Logger.Error(ex);
             }
             return new HttpNotFoundResult(statusDescription);
         }
@@ -382,13 +382,13 @@ namespace StoreManagement.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("Error is " + ex.Message, ex);
+                    Logger.Error(ex, "Error is " + ex.StackTrace, storeId, labels);
                 }
 
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Unable to save labels:", ex);
+                Logger.Error(ex,"Unable to save labels:"+ex.StackTrace);
             }
             return isNewLabelExists;
         }

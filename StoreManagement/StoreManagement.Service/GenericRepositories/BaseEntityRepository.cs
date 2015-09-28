@@ -79,7 +79,7 @@ namespace StoreManagement.Service.GenericRepositories
             }
             catch (Exception exception)
             {
-                Logger.ErrorException("ChangeGridOrderingOrState<T> :" + String.Join(",", values), exception);
+                Logger.Error(exception, "ChangeGridOrderingOrState<T> :" + exception.StackTrace, String.Join(",", values));
             }
         }
 

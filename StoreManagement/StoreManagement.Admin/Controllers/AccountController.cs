@@ -30,7 +30,7 @@ namespace StoreManagement.Admin.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index","Dashboard");
+                return RedirectToAction("Index", "Dashboard");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -87,7 +87,7 @@ namespace StoreManagement.Admin.Controllers
             string userData = "";
             if (!isSuper)
             {
-               
+
                 var s = StoreRepository.GetStoreByUserName(userName);
                 userData = s.Id.ToStr();
             }
@@ -95,14 +95,14 @@ namespace StoreManagement.Admin.Controllers
             {
                 userData = isSuper.ToString();
             }
-            
+
             SetAuthCookie(userName, rememberMe, userData);
         }
         public int SetAuthCookie(string userName, bool rememberMe, String userData)
         {
             /// In order to pickup the settings from config, we create a default cookie and use its values to create a 
             /// new one.
-           
+
             String cookiestr;
             HttpCookie ck;
             var ticket = new FormsAuthenticationTicket(1, userName, DateTime.Now,
@@ -438,7 +438,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 return RedirectToAction("Index", "Dashboard");
             }
-       
+
         }
 
         public enum ManageMessageId
@@ -556,7 +556,7 @@ namespace StoreManagement.Admin.Controllers
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error("Exception is occured in ForgotPassword-Account controller", ex);
+                        Logger.Error(ex, "Exception is occured in ForgotPassword-Account controller." + ex.StackTrace, userName, captcha);
                     }
 
                     //create url with above token
@@ -588,14 +588,14 @@ namespace StoreManagement.Admin.Controllers
                         catch (Exception ex)
                         {
                             TempData["Message"] = "Error:" + ex.Message;
-                            Logger.ErrorException("Error:" + ex.Message, ex);
+                            Logger.Error(ex, "Error:" + ex.StackTrace, userName, captcha);
                         }
                     }
                     catch (Exception ex)
                     {
                         String m = "Error occured while sending email:" + ex.Message;
                         TempData["Message"] = m;
-                        Logger.Error(ex.ToString(), ex);
+                        Logger.Error(ex);
                     }
                 }
 

@@ -21,7 +21,6 @@ namespace StoreManagement.Admin.Controllers
         {
             var dic = new Dictionary<String, String>();
 
-            string size = "";
             string contentType = "";
             String id = "https://lh6.googleusercontent.com/s3Qelug63N8pnKOYARS31B20jTKtqu5CcbJbSY95ZUewozdaPn8aAMXPtgj2Veq1N1Hjjw=s220";
             String url = id;

@@ -98,7 +98,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ewx)
             {
-                Logger.Error("Exception is occured.", ewx);
+                Logger.Error(ewx, "Exception is occured." + ewx.StackTrace);
             }
 
             FileManagerRepository.Delete(f);
@@ -167,7 +167,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ewx)
             {
-                Logger.Error("this.UploadHelper.InsertFile Exception is occured." + ewx.StackTrace, ewx);
+                Logger.Error(ewx, "this.UploadHelper.InsertFile Exception is occured." + ewx.StackTrace, storeId);
                 fileManager.FileStatus = "Error";
             }
 

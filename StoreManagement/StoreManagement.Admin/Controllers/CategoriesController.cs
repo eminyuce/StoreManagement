@@ -100,7 +100,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Unable to save changes:" + category, ex);
+                Logger.Error(ex, "Unable to save changes:" + ex.StackTrace, category);
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
@@ -142,7 +142,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Unable to delete category:" + category, ex);
+                Logger.Error(ex, "Unable to delete category:" + ex.StackTrace, category);
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 

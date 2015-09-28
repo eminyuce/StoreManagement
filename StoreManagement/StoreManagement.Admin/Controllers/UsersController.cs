@@ -63,7 +63,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error("Exception " + ex.Message, ex);
+                Logger.Error(ex, "Exception " + ex.StackTrace, userName);
             }
 
 
@@ -71,10 +71,10 @@ namespace StoreManagement.Admin.Controllers
             {
                 Roles.RemoveUserFromRoles(userName, Roles.GetRolesForUser(userName));
             }
-            ((SimpleMembershipProvider) Membership.Provider).DeleteAccount(userName);
-                // deletes record from webpages_Membership table
-            ((SimpleMembershipProvider) Membership.Provider).DeleteUser(userName, true);
-                // deletes record from UserProfile table
+            ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(userName);
+            // deletes record from webpages_Membership table
+            ((SimpleMembershipProvider)Membership.Provider).DeleteUser(userName, true);
+            // deletes record from UserProfile table
         }
 
 
@@ -130,9 +130,9 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-
+                Logger.Error(ex, " StackTrace: " + ex.StackTrace, storeId, userName, roleName);
             }
-    
+
             UserProfile user = DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == userName.UserName.ToLower());
             // Check if user already exists
             if (user == null)
@@ -163,7 +163,7 @@ namespace StoreManagement.Admin.Controllers
                     StoreUserRepository.Add(su);
                     StoreUserRepository.Save();
                 }
-              
+
 
             }
             else

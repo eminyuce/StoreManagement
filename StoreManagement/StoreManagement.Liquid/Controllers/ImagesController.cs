@@ -170,7 +170,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 img = this.File(CaptchaHelper.GenerateCaptchaImg(captcha, true), "image/Jpeg");
             }
-            catch (Exception e)
+            catch
             {
             }
 

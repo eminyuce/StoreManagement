@@ -152,7 +152,7 @@ namespace StoreManagement.Admin.Controllers
                         ContentFileRepository.SaveContentFiles(selectedFileId, contentId);
                     }
                     LabelLineRepository.SaveLabelLines(selectedLabelId, contentId, ContentType);
-             
+
                     if (IsSuperAdmin)
                     {
                         return RedirectToAction("Index", new { storeId = content.StoreId, categoryId = content.CategoryId });
@@ -168,7 +168,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Unable to save changes:" + content, ex);
+                Logger.Error(ex, "Unable to save changes:" + ex.StackTrace, content);
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
@@ -222,7 +222,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Unable to delete it:" + content, ex);
+                Logger.Error(ex, "Unable to delete it:" + ex.StackTrace, content);
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 

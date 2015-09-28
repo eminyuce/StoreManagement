@@ -95,7 +95,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Unable to save:" + brand, ex);
+                Logger.Error(ex, "Unable to save:" + ex.StackTrace);
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
@@ -139,13 +139,13 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException("Unable to delete:" + brand, ex);
+                Logger.Error(ex, "Unable to delete:" + ex.StackTrace, brand);
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             return View(brand);
- 
+
         }
         public ActionResult StoreDetails(int id = 0)
         {

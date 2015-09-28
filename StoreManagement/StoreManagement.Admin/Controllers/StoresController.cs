@@ -143,7 +143,6 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult CopyStore(int copyStoreId, String name, String domain)
         {
-            String layout = "";
             //StoreRepository.CopyStore(copyStoreId, name, domain, layout);
             int newStoreId = 0;
 

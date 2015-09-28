@@ -41,7 +41,7 @@ namespace StoreManagement.Controllers
             catch (Exception ex)
             {
 
-                Logger.ErrorException("Home page exception" + ex.Message, ex);
+                Logger.Error(ex,"Home page exception" + ex.StackTrace);
             }
 
             return View(shp);

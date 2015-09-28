@@ -122,7 +122,7 @@ namespace StoreManagement.Controllers
             {
                 if (Store != null)
                 {
-                    Logger.ErrorException(string.Format("Store= {0} Key={1}", Store.Domain, key), ex);
+                    Logger.Error(ex, string.Format("Store= {0} Key={1}", Store.Domain, key) + ex.StackTrace, key);
                 }
                 return "";
             }

@@ -309,7 +309,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception exception)
             {
-                Logger.ErrorException("ChangeIsCarouselState  fileId" + fileId + " isCarousel:" + isCarousel, exception);
+                Logger.Error(exception, "ChangeIsCarouselState  fileId" + fileId + " isCarousel:" + isCarousel + " " + exception.StackTrace, fileId, isCarousel);
             }
 
             return Json(new { fileId, isCarousel }, JsonRequestBehavior.AllowGet);
@@ -408,7 +408,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception exception)
             {
-                Logger.ErrorException("DeleteFileManagerGridItem :" + String.Join(",", values), exception);
+                Logger.Error(exception, "DeleteFileManagerGridItem :" + exception.StackTrace, String.Join(",", values));
             }
             return Json(values, JsonRequestBehavior.AllowGet);
         }
@@ -430,13 +430,13 @@ namespace StoreManagement.Admin.Controllers
                     }
                     catch (Exception ex)
                     {
-                        Logger.ErrorException(String.Format("GoogleId={0} file could not deleted from google drive", googledriveFileId), ex);
+                        Logger.Error(ex, String.Format("GoogleId={0} file could not deleted from google drive", googledriveFileId) + " " + ex.StackTrace, googledriveFileId);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logger.ErrorException(String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId), ex);
+                Logger.Error(ex, String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId) + " " + ex.StackTrace, googledriveFileId);
             }
 
             try
@@ -452,7 +452,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorException(String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId), ex);
+                Logger.Error(ex, String.Format("GoogleId={0} could not deleted from DB.", googledriveFileId) + ex.StackTrace, googledriveFileId);
             }
         }
         [HttpPost]
@@ -567,7 +567,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception exception)
             {
-                Logger.ErrorException("ChangeFileManagerGridOrderingOrState :" + String.Join(",", values), exception);
+                Logger.Error(exception, "ChangeFileManagerGridOrderingOrState :" + exception.StackTrace, String.Join(",", values));
             }
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
@@ -606,7 +606,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception exception)
             {
-                Logger.ErrorException("SaveStyles :" + storeId + " styleArray:" + styleArray, exception);
+                Logger.Error(exception, "SaveStyles :" + storeId + " styleArray:" + styleArray + " " + exception.StackTrace, storeId, styleArray);
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }

@@ -18,7 +18,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
                 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "LocationsIndex");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "LocationsIndexPage");
                 var locationsTask = LocationService.GetLocationsAsync(StoreId, null, true);
 
                 LocationHelper.StoreSettings = GetStoreSettings();

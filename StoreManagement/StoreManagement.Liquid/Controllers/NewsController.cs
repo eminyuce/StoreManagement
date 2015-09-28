@@ -26,7 +26,7 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
  
-                var newsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsIndex");
+                var newsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "NewsIndexPage");
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, StoreConstants.NewsType, true, page, GetSettingValueInt("NewsIndexPageSize", StoreConstants.DefaultPageSize),search);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
 

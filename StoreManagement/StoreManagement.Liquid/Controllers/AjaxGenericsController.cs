@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxGenericsController : AjaxController
     {
-        public async Task<JsonResult> MainNavigation(String designName   = "MainNavigation")
+        public async Task<JsonResult> MainNavigation(String designName   = "MainNavigationPartial")
         {
             int storeId = StoreId;
             String returnHtml = "";
@@ -24,7 +24,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "MainNavigation:" + ex.StackTrace, storeId, designName);
+                Logger.Error(ex, "MainNavigationPartial:" + ex.StackTrace, storeId, designName);
 
             }
 
@@ -51,7 +51,7 @@ namespace StoreManagement.Liquid.Controllers
             return returnHtml;
         }
 
-        public async Task<JsonResult> Footer(String designName = "Footer")
+        public async Task<JsonResult> Footer(String designName = "FooterPartial")
         {
             int storeId = StoreId;
 
@@ -62,7 +62,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Footer:" + ex.StackTrace, designName, storeId);
+                Logger.Error(ex, "FooterPartial:" + ex.StackTrace, designName, storeId);
 
             }
 

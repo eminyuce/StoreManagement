@@ -20,7 +20,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "PhotoGalleryIndex");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "PhotoGalleryIndexPage");
                 var fileManagersTask = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
 
                 PhotoGalleryHelper.StoreSettings = GetStoreSettings();

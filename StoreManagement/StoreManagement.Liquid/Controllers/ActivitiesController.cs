@@ -17,7 +17,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ActivitiesIndex");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ActivitiesIndexPage");
                 var activitiesTask = ActivityService.GetActivitiesAsync(StoreId, null, true);
 
                 ActivityHelper.StoreSettings = GetStoreSettings();

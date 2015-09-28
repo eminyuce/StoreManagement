@@ -32,7 +32,7 @@ namespace StoreManagement.Liquid.Controllers
                // String search = id;
                 int ? categoryId = null;
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndex");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BlogsIndexPage");
                 var pageSize = GetSettingValueInt("BlogsIndex_PageSize", StoreConstants.DefaultPageSize);
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, categoryId, StoreConstants.BlogsType, true, page, pageSize, search);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);

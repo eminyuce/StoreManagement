@@ -763,7 +763,7 @@ namespace StoreManagement.Admin.Controllers
             m.Text = "Contacts";
             moduls.Add(m);
             m = new SelectListItem();
-            m.Value = "Photos-Index";
+            m.Value = "PhotoGallery-Index";
             m.Text = "Photo Gallery";
             moduls.Add(m);
             return moduls;

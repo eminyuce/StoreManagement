@@ -16,7 +16,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ContactsIndex");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ContactsIndexPage");
 
                 ContactHelper.StoreSettings = GetStoreSettings();
                 ContactHelper.ImageWidth = GetSettingValueInt("ContactsIndex_ImageWidth", 50);

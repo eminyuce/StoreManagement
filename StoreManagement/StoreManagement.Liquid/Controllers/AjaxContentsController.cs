@@ -101,7 +101,7 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-        public async Task<JsonResult> GetContentsByContentType(int page = 1, String designName = "ContentsByContentType", int categoryId = 0,
+        public async Task<JsonResult> GetContentsByContentType(int page = 1, String designName = "ContentsByContentTypePartial", int categoryId = 0,
             int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String type = StoreConstants.BlogsType, String contentType = "popular", int excludedContentId = 0)
         {
 
@@ -118,7 +118,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetContentsByContentType:" + ex.StackTrace, StoreId, categoryId, type, page, pageSize, contentType);
+                Logger.Error(ex, "ContentsByContentTypePartial:" + ex.StackTrace, StoreId, categoryId, type, page, pageSize, contentType);
 
             }
 

@@ -780,12 +780,38 @@ namespace StoreManagement.Admin.Controllers
             var item = PageDesignRepository.GetSingle(id);
             return Json(item, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SetPageDesignText(int id, String text)
+        public ActionResult SetPageDesignText(int id = 0, String text = "", String name = "", int storeId = 0)
         {
-            var item = PageDesignRepository.GetSingle(id);
-            item.PageTemplate = text;
-            item.UpdatedDate = DateTime.Now;
-            PageDesignRepository.Edit(item);
+            var item = new PageDesign();
+            if (id == 0)
+            {
+                if (storeId != 0 && !String.IsNullOrEmpty(name))
+                {
+                    var it =
+                        PageDesignRepository.GetPageDesignByStoreId(storeId, "")
+                                            .Any(r => r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+                    if (!it)
+                    {
+                        item.StoreId = storeId;
+                        item.PageTemplate = text;
+                        item.CreatedDate = DateTime.Now;
+                        item.State = true;
+                        item.Name = name;
+                        item.Type = name;
+                        item.UpdatedDate = DateTime.Now;
+                        PageDesignRepository.Add(item);
+                    }
+                }
+
+            }
+            else
+            {
+                item = PageDesignRepository.GetSingle(id);
+                item.PageTemplate = text;
+                item.UpdatedDate = DateTime.Now;
+                PageDesignRepository.Edit(item);
+            }
+
             PageDesignRepository.Save();
             return Json(item.PageTemplate, JsonRequestBehavior.AllowGet);
         }

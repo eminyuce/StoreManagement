@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using GenericRepository.EntityFramework.Enums;
@@ -14,7 +15,6 @@ using Google.Apis.Drive.v2;
 using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using MvcPaging;
 using Newtonsoft.Json;
 using RazorEngine;
@@ -58,9 +58,9 @@ namespace StoreManagement.Test
             // (int storeId, int? catId, string type, int page, int pageSize, bool ? isActive, string contentType);
             var blogsTask = rep2.GetContentsByContentKeywordAsync(
                 StoreId,
-                categoryId, 
+                categoryId,
                 StoreConstants.BlogsType,
-                1, 
+                1,
                 50,
                 true,
                 "main");
@@ -122,7 +122,7 @@ namespace StoreManagement.Test
         [TestMethod]
         public void Test333344466()
         {
-          
+
             StoreRepository rep = new StoreRepository(new StoreContext(ConnectionString));
             var m = rep.GetStoreIdByDomainAsync("login.seatechnologyjobs.com");
             Task.WaitAny(m);
@@ -419,9 +419,9 @@ namespace StoreManagement.Test
 
 
         }
- 
 
- 
+
+
 
 
         public static string GetImportPath()
@@ -555,7 +555,7 @@ namespace StoreManagement.Test
         {
             var s = new CategoryService("yuce.marinelink.org");
             var m1 = s.GetCategoriesByStoreIdAsync(9);
-             Task.WaitAll(m1);
+            Task.WaitAll(m1);
             var m = m1.Result;
             foreach (var q in m)
             {
@@ -577,10 +577,52 @@ namespace StoreManagement.Test
         [TestMethod]
         public void TestJsonText()
         {
-            String json = File.ReadAllText(@"C:\Users\Yuce\Desktop\Providers\testJsonText.txt");
-            RequestHelper r = new RequestHelper();
-            var result = r.GetUrlPagedResults<Content>("http://yuce.marinelink.org/api/Contents/GetContentsCategoryId?storeId=2&categoryId=1&typeName=product&isActive=True&page=4&pageSize=25");
-            Console.WriteLine(result.items.Count);
+
+            String rr = @"\\WEBDEVELOPERS15\Projects\SalesMailTracking\TestData\Inbount\yuce@marinelink.com.IMAP";
+            DirectoryInfo di = new DirectoryInfo(rr);
+            FileInfo[] smFiles = di.GetFiles("*.msg");
+            foreach (FileInfo fi in smFiles.Take(1))
+            {
+                String lineOfText = "";
+                String textFilePath = rr + "\\" + fi.Name;
+                var filestream = new FileStream(textFilePath,
+                                              FileMode.Open,
+                                              FileAccess.Read,
+                                              FileShare.ReadWrite);
+                var file = new StreamReader(filestream, System.Text.Encoding.UTF8, true, 128);
+                StringBuilder builder = new StringBuilder();
+                while ((lineOfText = file.ReadLine()) != null)
+                {
+                    if (String.IsNullOrEmpty(lineOfText))
+                    {
+                        break;
+                    }
+                    builder.AppendLine(lineOfText);
+
+                }
+                Console.WriteLine(fi.Name);
+                Console.WriteLine(builder);
+                var tt = GetSearchLine(builder.ToString(), "To");
+                Console.WriteLine(tt);
+            }
+
+        }
+
+        public String GetSearchLine(String sourceString, String key)
+        {
+            using (StringReader reader = new StringReader(sourceString))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.StartsWith(key))
+                    {
+                        return line;
+                    }
+                }
+            }
+
+            return "";
         }
         [TestMethod]
         public void ParseJson()

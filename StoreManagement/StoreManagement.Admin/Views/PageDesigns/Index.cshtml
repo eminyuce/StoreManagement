@@ -58,7 +58,7 @@
                                 @using (Html.BeginForm("SaveOrEdit", controller, FormMethod.Get))
                                 {
                                             
-                                    <input type="hidden" name="selectedStoreId" value="@storeId" />
+                                    <input type="hidden" id="selectedStoreId" name="selectedStoreId" value="@storeId" />
                                        
           
                                     <input type="hidden" name="id" value="0" />
@@ -243,18 +243,20 @@
 
                         </span>
                         <span class="col-md-5">
+                            <b>Page Design Name :</b>
+                            <strong><input id="PageDesignName" type="text"></strong>
+                            <input class="btn btn-primary" id="SavePageDesign" type="submit" value="Save">
+                    <input class="btn btn-danger" id="ClearPageDesign" type="submit" value="Clear">
                             <input type="hidden" id="selecedPageDesingItem" value="-1" />
-                            <h2>
-                                            <span class="text-danger" id="PageDesingName"></span>
-                            </h2>
-                
-
                             <br />
-                            <input class="btn btn-success btn-block btn-lg" id="SavePageDesign" type="submit" value="Save">
+                            <input class="btn btn-success btn-block" id="UpdatePageDesign" type="submit" value="Update"><strong>
+							
+							
+                            <span class="text-success, bg-danger" id="PageDesignMessage"></span>
+							
+							</strong>
                             <br />
-                            <span class="text-success" id="PageDesignMessage"></span>
-                            <br />
-                             <textarea id="PageDesingText"  rows="75" style="width: 100%; height: 100%;"></textarea>
+                            <textarea id="PageDesingText" rows="75" style="width: 100%; height: 100%;"></textarea>
                         </span>
                     </div>
 
@@ -281,11 +283,24 @@
         $(document).ready(function () {
 
             bindPageDesingItem();
-            $('#SavePageDesign').click(function () {
+            $('#UpdatePageDesign').click(function () {
                 var postData = JSON.stringify({ "id": $("#selecedPageDesingItem").val(), "text": $("#PageDesingText").val() });
                 ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
-                    $("#PageDesignMessage").text("IT IS SAVED...");
+                    $("#PageDesignMessage").text("IT IS UPDATED...");
                 });
+            });
+            $('#SavePageDesign').click(function () {
+                var postData = JSON.stringify({ "id": 0, "storeId": $("#selectedStoreId").val(), "name": $("#PageDesignName").val(), "text": $("#PageDesingText").val() });
+                ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
+                        window.location.reload();
+                });
+            });
+            $('#ClearPageDesign').click(function () {
+                $("#PageDesingText").val("");
+                $("#PageDesignName").val("");
+
+                $("#selecedPageDesingItem").val("-1");
+                 $("#PageDesignMessage").text("IT IS CLEAR...");
             });
         });
 
@@ -301,13 +316,13 @@
             var postData = JSON.stringify({ "id": itemId });
             ajaxMethodCall(postData, "/Ajax/GetPageDesignText", function (data) {
                 $("#PageDesingText").val(data.PageTemplate);
-                $("#PageDesingName").text(data.Name);
+                $("#PageDesignName").val(data.Name);
 
                 $("#selecedPageDesingItem").val(itemId);
                 $("#PageDesignMessage").text("");
             });
         }
-     
+
 
     </script>
 

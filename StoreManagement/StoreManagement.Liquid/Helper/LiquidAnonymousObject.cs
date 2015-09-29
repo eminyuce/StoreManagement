@@ -25,7 +25,11 @@ namespace StoreManagement.Liquid.Helper
             return from s in items
                    select new
                    {
-                       s.Activity.Name
+                       s.Activity.Name,
+                       s.Activity.BeginDate,
+                       s.Activity.Description,
+                       s.Activity.FinishDate,
+                       ActivityId = s.Activity.Id
 
                    };
         }
@@ -35,7 +39,7 @@ namespace StoreManagement.Liquid.Helper
                    select new
                    {
                        s.Comment.Name,
-                       s.Comment.Email 
+                       s.Comment.Email
                    };
         }
         public static IEnumerable GetBrandsEnumerable(List<BrandLiquid> items)
@@ -91,6 +95,7 @@ namespace StoreManagement.Liquid.Helper
                    select new
                    {
                        s.Navigation.Name,
+                       s.Navigation.Static,
                        s.Link
                    };
         }
@@ -100,9 +105,9 @@ namespace StoreManagement.Liquid.Helper
                    select new
                    {
                        CategoryName = s.Category.Name,
+                       CategoryDescription = s.Category.Description,
                        ProductCategoryId = s.Product.ProductCategoryId,
                        BrandId = s.Product.BrandId,
-                       CategoryDescription = s.Category.Description,
                        ProductId = s.Product.Id,
                        s.Product.Name,
                        s.Product.Description,
@@ -113,6 +118,7 @@ namespace StoreManagement.Liquid.Helper
                        s.Product.CreatedDate,
                        s.Product.TotalRating,
                        s.Product.UnitsInStock,
+                       s.Product.VideoUrl,
                        s.DetailLink,
                        images = s.ImageLiquid
 
@@ -136,6 +142,7 @@ namespace StoreManagement.Liquid.Helper
                 s.Product.CreatedDate,
                 s.Product.TotalRating,
                 s.Product.UnitsInStock,
+                s.Product.VideoUrl,
                 images = s.ImageLiquid
             };
             return anonymousObject;
@@ -179,13 +186,16 @@ namespace StoreManagement.Liquid.Helper
             return from s in blogsLiquidList
                    select new
                    {
+                       CategoryId = s.Content.CategoryId,
+                       CategoryName = s.Category.Name,
+                       CategoryDescription = s.Category.Description,
                        s.Content.Name,
                        s.Content.Description,
                        s.Content.Author,
                        s.Content.UpdatedDate,
                        s.DetailLink,
-                      // images = GetImageLiquidAnonymousObject(s.ImageLiquid)
-                        images = s.ImageLiquid
+                       s.Content.VideoUrl,
+                       images = s.ImageLiquid
                    };
         }
 
@@ -199,26 +209,13 @@ namespace StoreManagement.Liquid.Helper
                 ContentId = contentLiquid.Content.Id,
                 Name = contentLiquid.Content.Name,
                 Description = contentLiquid.Content.Description,
-                images = contentLiquid.ImageLiquid
+                contentLiquid.Content.VideoUrl,
+                images = contentLiquid.ImageLiquid,
+
             };
             return anonymousObject;
         }
 
-        public static object GetImageLiquidAnonymousObject(ImageLiquid imageLiquid)
-        {
-
-            return imageLiquid;
-            //object anonymousObject = new ImageLiquid
-            //{
-            //    this.image = imageLiquid.imagelinks,
-            //    imagehas = imageLiquid.imagehas,
-            //    mainimagesource = imageLiquid.mainimagesource,
-            //    imagecount = imageLiquid.imagecount,
-            //    imagesource = imageLiquid.imagesource,
-
-            //};
-            //return anonymousObject;
-        }
 
         internal static object GetProductCategory(ProductCategoryLiquid productCategories)
         {
@@ -226,7 +223,7 @@ namespace StoreManagement.Liquid.Helper
             {
                 CategoryId = productCategories.ProductCategory.Id,
                 CategoryName = productCategories.ProductCategory.Name,
-                CategoryDescription = productCategories.ProductCategory.Description 
+                CategoryDescription = productCategories.ProductCategory.Description
             };
             return anonymousObject;
         }

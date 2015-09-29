@@ -6,70 +6,145 @@ $(document).ready(function () {
 
 
 
+    try {
+        $("#contentTreeview").bind("select_node.jstree", function (event, data) {
+            var m = $("#" + data.selected[0]).find("[data-category-item]");
+            var selectedCategoryId = m.first().attr("data-category-item");
+            console.log(selectedCategoryId);
+            $("#CategoryId").val(selectedCategoryId);
 
-    $("#contentTreeview").bind("select_node.jstree", function (event, data) {
-        var m = $("#" + data.selected[0]).find("[data-category-item]");
-        var selectedCategoryId = m.first().attr("data-category-item");
-        console.log(selectedCategoryId);
-        $("#CategoryId").val(selectedCategoryId);
+            $("#ProductCategoryId").val(selectedCategoryId);
 
-        $("#ProductCategoryId").val(selectedCategoryId);
-
-    });
-
-    if ($("#CategoryId").length) {
-        GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
+        });
+    }
+    catch (err) {
+        console.error(err.message);
     }
 
-    if ($("#ProductCategoryId").length) {
-        GetProductCategoryTree($("#StoreId").val(), $("#categoryType").val());
-    }
-    
-    populateStoreLabelsDropDown($("#StoreId").val());
 
-
-    $('select#StoreDropDownId').select2({}).change(function (event) {
-
-
+    try {
+        
         if ($("#CategoryId").length) {
-            GetCategoryTree($(this).val(), $("#categoryType").val());
+            GetCategoryTree($("#StoreId").val(), $("#categoryType").val());
         }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
 
+
+    try {
 
         if ($("#ProductCategoryId").length) {
-            GetProductCategoryTree($(this).val(), $("#categoryType").val());
+            GetProductCategoryTree($("#StoreId").val(), $("#categoryType").val());
         }
 
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+
+
+    try {
+        if ($("#StoreId").length) {
+            populateStoreLabelsDropDown($("#StoreId").val());
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+
+ 
+
+    try {
+
+        $('select#StoreDropDownId').select2({}).change(function (event) {
+
+
+         
+
+            try {
+                
+                if ($("#CategoryId").length) {
+                    GetCategoryTree($(this).val(), $("#categoryType").val());
+                }
+
+            }
+            catch (err1) {
+                console.error(err1.message);
+            }
+
+            try {
+
+
+                if ($("#ProductCategoryId").length) {
+                    GetProductCategoryTree($(this).val(), $("#categoryType").val());
+                }
 
 
 
-        populateStoreLabelsDropDown($(this).val());
+            }
+            catch (err2) {
+                console.error(err2.message);
+            }
 
-        console.log("deneme");
-    });
+
+
+            try {
+
+                populateStoreLabelsDropDown($(this).val());
+            }
+            catch (err4) {
+                console.error(err.message);
+            }
+
+
+
+            console.log("deneme");
+        });
+        
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+
+
+
+  
 
     console.log("jquery is working");
 
     //GetFiles($("#Id").val());
 
 
-    $('textarea[data-html-editor="normal"]').ckeditor({
-        height: '360px',
-        toolbar: [
-            { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
-            { name: 'basicstyles', items: ['Bold', 'Italic'] }
-        ]
-    });
+    try {
 
-    $('textarea[data-html-editor="full"]').ckeditor({
-        height: '360px',
-        toolbar: [
-            { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
-            { name: 'basicstyles', items: ['Bold', 'Italic'] }
-        ]
-    });
+
+        $('textarea[data-html-editor="normal"]').ckeditor({
+            height: '360px',
+            toolbar: [
+                { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+                ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
+                { name: 'basicstyles', items: ['Bold', 'Italic'] }
+            ]
+        });
+
+        $('textarea[data-html-editor="full"]').ckeditor({
+            height: '360px',
+            toolbar: [
+                { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] }, // Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+                ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'], // Defines toolbar group without name.
+                { name: 'basicstyles', items: ['Bold', 'Italic'] }
+            ]
+        });
+        
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+
+
+
 
 });
 

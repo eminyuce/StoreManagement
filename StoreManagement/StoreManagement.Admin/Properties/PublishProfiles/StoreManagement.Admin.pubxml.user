@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:14</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>09/28/2015 10:23:13</publishTime>
+      <publishTime>09/29/2015 14:54:00</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>07/30/2015 09:18:15</publishTime>
@@ -232,16 +232,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>09/29/2015 10:16:22</publishTime>
+      <publishTime>09/29/2015 15:08:05</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>09/28/2015 11:28:24</publishTime>
+      <publishTime>09/29/2015 15:07:59</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>09/28/2015 11:28:26</publishTime>
+      <publishTime>09/29/2015 15:08:01</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:23</publishTime>
@@ -4623,6 +4623,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/knockout-2.2.0.js">
       <publishTime>07/30/2015 09:17:55</publishTime>
     </File>
+    <File Include="Scripts/liquid/plugin.js">
+      <publishTime>09/29/2015 14:44:30</publishTime>
+    </File>
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>07/30/2015 09:17:55</publishTime>
     </File>
@@ -4636,7 +4639,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:55</publishTime>
     </File>
     <File Include="Scripts/storeContent.js">
-      <publishTime>09/11/2015 12:16:56</publishTime>
+      <publishTime>09/29/2015 14:58:35</publishTime>
     </File>
     <File Include="Scripts/storeHelper.js">
       <publishTime>07/30/2015 09:17:55</publishTime>
@@ -5059,7 +5062,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
     <File Include="Views/PageDesigns/Index.cshtml">
-      <publishTime>09/29/2015 10:20:24</publishTime>
+      <publishTime>09/29/2015 15:11:18</publishTime>
     </File>
     <File Include="Views/PageDesigns/SaveOrEdit.cshtml">
       <publishTime>09/14/2015 09:38:27</publishTime>
@@ -5446,7 +5449,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/29/2015 10:00:57</publishTime>
+      <publishTime>09/29/2015 15:08:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

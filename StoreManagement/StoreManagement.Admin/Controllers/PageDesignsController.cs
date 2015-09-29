@@ -1,5 +1,6 @@
 ﻿using Ninject;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories.Interfaces;
 using System;
@@ -82,7 +83,7 @@ namespace StoreManagement.Admin.Controllers
 
                     if (IsSuperAdmin)
                     {
-                        return RedirectToAction("SaveOrEdit", new { id=pagedesign.Id, storeId = pagedesign.StoreId });
+                        return RedirectToAction("SaveOrEdit", new { id = pagedesign.Id, storeId = pagedesign.StoreId });
                     }
                     else
                     {
@@ -98,6 +99,43 @@ namespace StoreManagement.Admin.Controllers
             }
 
             return View(pagedesign);
+        }
+        public ActionResult CopyPageDesign(int id)
+        {
+            PageDesign pagedesign = PageDesignRepository.GetSingle(id);
+            try
+            {
+                var guid = Guid.NewGuid().ToString();
+                var pagedesignCopy = new PageDesign();
+                pagedesignCopy.PageTemplate = pagedesign.PageTemplate;
+                pagedesignCopy.Name = pagedesign.Name + "_" + guid;
+                pagedesignCopy.Type = pagedesign.Type + "_" + guid;
+                pagedesignCopy.Id = 0;
+                pagedesignCopy.CreatedDate = DateTime.Now;
+                pagedesignCopy.State = true;
+                pagedesignCopy.UpdatedDate = DateTime.Now;
+                pagedesignCopy.StoreId = pagedesign.StoreId;
+                PageDesignRepository.Add(pagedesignCopy);
+                PageDesignRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Unable to save:" + ex.StackTrace, pagedesign);
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+
+
+            if (IsSuperAdmin)
+            {
+                return RedirectToAction("Index", new { storeId = pagedesign.StoreId });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
         }
 
         //
@@ -133,7 +171,7 @@ namespace StoreManagement.Admin.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Unable to delete:" + ex.StackTrace, pagedesign);  
+                Logger.Error(ex, "Unable to delete:" + ex.StackTrace, pagedesign);
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }

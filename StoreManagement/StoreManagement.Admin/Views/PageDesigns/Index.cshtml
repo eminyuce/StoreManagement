@@ -174,7 +174,7 @@
                                            .SetWidth(30)
                                            .RenderValueAs(d =>
                                                           @<b>
-                                                              @Html.ActionLink(" ", "SaveOrEdit", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
+                                                              @Html.ActionLink(" ", "CopyPageDesign", new { id = d.Id }, new { @class = "btn btn-primary btn-sm    glyphicon glyphicon-asterisk" })
                                                           </b>);
 
                                     columns.Add()
@@ -201,14 +201,15 @@
                                     }
 
 
-                                    columns.Add(c => c.Type)
-                                           .Titled("Type");
-
-                                    columns.Add(c => c.Name)
-                                           .Titled("Name");
 
 
-
+                                    columns.Add(o => o.Name)
+                               .Titled("Name")
+                               .Sortable(true)
+                                .Sanitized(false)
+                                .Encoded(false)
+                               .RenderValueAs(o => String.Format("<span data-page-design-name='{0}'> {1} </span>",
+                                                                 o.Id, o.Name));
 
 
                                     columns.Add(o => o.State)
@@ -244,17 +245,15 @@
                         </span>
                         <span class="col-md-5">
                             <b>Page Design Name :</b>
-                            <strong><input id="PageDesignName" type="text"></strong>
-                            <input class="btn btn-primary" id="SavePageDesign" type="submit" value="Save">
-                    <input class="btn btn-danger" id="ClearPageDesign" type="submit" value="Clear">
+                            <input class="btn btn-primary btn-lg" id="SavePageDesign" type="submit" value="Save">
+                            <input class="btn btn-danger btn-lg" id="ClearPageDesign" type="submit" value="Clear">
+                            <strong>
+                                <input id="PageDesignName" style="width: 100% !important;" type="text"></strong>
                             <input type="hidden" id="selecedPageDesingItem" value="-1" />
                             <br />
-                            <input class="btn btn-success btn-block" id="UpdatePageDesign" type="submit" value="Update"><strong>
-							
-							
-                            <span class="text-success, bg-danger" id="PageDesignMessage"></span>
-							
-							</strong>
+                            <input class="btn btn-success btn-block btn-lg" id="UpdatePageDesign" type="submit" value="Update"><strong>
+                                <span class="text-success, bg-danger" id="PageDesignMessage"></span>
+                            </strong>
                             <br />
                             <textarea id="PageDesingText" rows="75" style="width: 100%; height: 100%;"></textarea>
                         </span>
@@ -275,33 +274,73 @@
 
 @section scripts
 {
-
-
-
+    <script src="/Content/Theme/vendors/ckeditor/adapters/jquery.js"></script>
+    <script src="~/Scripts/storeContent.js"></script>
+    <script src="~/Scripts/liquid/plugin.js"></script>
     <script>
 
         $(document).ready(function () {
 
-            bindPageDesingItem();
-            $('#UpdatePageDesign').click(function () {
-                var postData = JSON.stringify({ "id": $("#selecedPageDesingItem").val(), "text": $("#PageDesingText").val() });
-                ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
-                    $("#PageDesignMessage").text("IT IS UPDATED...");
-                });
-            });
-            $('#SavePageDesign').click(function () {
-                var postData = JSON.stringify({ "id": 0, "storeId": $("#selectedStoreId").val(), "name": $("#PageDesignName").val(), "text": $("#PageDesingText").val() });
-                ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
-                        window.location.reload();
-                });
-            });
-            $('#ClearPageDesign').click(function () {
-                $("#PageDesingText").val("");
-                $("#PageDesignName").val("");
+            try {
 
-                $("#selecedPageDesingItem").val("-1");
-                 $("#PageDesignMessage").text("IT IS CLEAR...");
-            });
+                bindPageDesingItem();
+            }
+            catch (err) {
+                console.error(err.message);
+            }
+
+
+
+            try {
+
+                $('#UpdatePageDesign').click(function () {
+                    var desingItemId = $("#selecedPageDesingItem").val();
+                    var postData = JSON.stringify({ "id": desingItemId, "text": $("#PageDesingText").val(), "name": $("#PageDesignName").val() });
+                    ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
+                        $("#PageDesignMessage").text("IT IS UPDATED...");
+                        $('[data-page-design-name=' + desingItemId + ']').text($("#PageDesignName").val());
+                    });
+                });
+
+            }
+            catch (err) {
+                console.error(err.message);
+            }
+
+
+            try {
+
+                $('#SavePageDesign').click(function () {
+                    var postData = JSON.stringify({ "id": 0, "storeId": $("#selectedStoreId").val(), "name": $("#PageDesignName").val(), "text": $("#PageDesingText").val() });
+                    ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
+                        window.location.reload();
+                    });
+                });
+
+            }
+            catch (err) {
+                console.error(err.message);
+            }
+
+
+            try {
+
+
+                $('#ClearPageDesign').click(function () {
+                    $("#PageDesingText").val("");
+                    $("#PageDesignName").val("");
+
+                    $("#selecedPageDesingItem").val("-1");
+                    $("#PageDesignMessage").text("IT IS CLEAR...");
+                });
+
+
+            }
+            catch (err) {
+                console.error(err.message);
+            }
+
+
         });
 
         function bindPageDesingItem() {

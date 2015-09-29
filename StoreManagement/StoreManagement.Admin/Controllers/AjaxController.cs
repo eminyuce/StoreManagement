@@ -808,6 +808,8 @@ namespace StoreManagement.Admin.Controllers
             {
                 item = PageDesignRepository.GetSingle(id);
                 item.PageTemplate = text;
+                item.Name = name;
+                item.Type = name;
                 item.UpdatedDate = DateTime.Now;
                 PageDesignRepository.Edit(item);
             }

@@ -39,7 +39,15 @@ $(document).ready(function () {
         $('#DeleteItemButton').click();
     });
 
-    bindCarouselImage();
+
+
+    try {
+        bindCarouselImage();
+    }
+    catch (err) {
+        console.error(err.message);
+    }
+
     var originalURL = window.location.href;
     var q = getQueryStringParameter(originalURL, "GridPageSize");
     if (!isEmpty(q)) {

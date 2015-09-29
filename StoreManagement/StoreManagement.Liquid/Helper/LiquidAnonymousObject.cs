@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using StoreManagement.Data.LiquidEntities;
 
@@ -54,7 +55,7 @@ namespace StoreManagement.Liquid.Helper
         }
         public static IEnumerable GetContactEnumerable(List<ContactLiquid> items)
         {
-            return from s in items
+            var  refobj = from s in items
                    select new
                    {
                        s.Contact.Name,
@@ -63,6 +64,9 @@ namespace StoreManagement.Liquid.Helper
                        s.Contact.PhoneWork,
                        s.Contact.Email
                    };
+
+
+            return refobj;
         }
         public static IEnumerable GetLabelsEnumerable(List<LabelLiquid> items)
         {

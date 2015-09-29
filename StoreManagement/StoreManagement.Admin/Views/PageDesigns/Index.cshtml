@@ -174,7 +174,7 @@
                                            .SetWidth(30)
                                            .RenderValueAs(d =>
                                                           @<b>
-                                                              @Html.ActionLink(" ", "CopyPageDesign", new { id = d.Id }, new { @class = "btn btn-primary btn-sm    glyphicon glyphicon-asterisk" })
+                                                              @Html.ActionLink("Copy", "CopyPageDesign", new { id = d.Id }, new { @class = "btn btn-primary btn-sm    glyphicon glyphicon-asterisk" })
                                                           </b>);
 
                                     columns.Add()
@@ -229,13 +229,7 @@
                                            .SortInitialDirection(GridSortDirection.Descending);
 
 
-                                    columns.Add(o => o.CreatedDate)
-                                           .Titled("CreatedDate")
-                                           .Sortable(true)
-                                           .Css("gridDateClass")
-                                           .RenderValueAs(o => o.CreatedDate != null ? String.Format("{0}", o.CreatedDate.Value.ToShortDateString()) : null)
-                                           .SortInitialDirection(GridSortDirection.Descending);
-
+                            
 
 
                                 }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)

@@ -41,7 +41,7 @@ namespace StoreManagement.Liquid.Helper
                     contacts = LiquidAnonymousObject.GetContactEnumerable(items)
                             
                 };
-
+                
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
 
 

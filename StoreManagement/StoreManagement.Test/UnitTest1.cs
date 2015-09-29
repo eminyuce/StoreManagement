@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -47,6 +48,7 @@ namespace StoreManagement.Test
             //  dbContext = new StoreContext(ConnectionString);
 
         }
+       
         [TestMethod]
         public void GetContentsCategoryIdAsyncSearch()
         {

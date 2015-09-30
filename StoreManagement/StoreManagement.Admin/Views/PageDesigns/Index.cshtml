@@ -188,19 +188,6 @@
 
 
 
-                                    if (!isRegularUser)
-                                    {
-                                        columns.Add()
-                                               .Encoded(false)
-                                               .Sanitized(false)
-                                               .SetWidth(30)
-                                               .RenderValueAs(d =>
-                                                              @<b>
-                                                                  @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
-                                                              </b>);
-                                    }
-
-
 
 
                                     columns.Add(o => o.Name)
@@ -231,8 +218,21 @@
 
                             
 
+                                    if (!isRegularUser)
+                                    {
+                                        columns.Add()
+                                               .Encoded(false)
+                                               .Sanitized(false)
+                                               .SetWidth(30)
+                                               .RenderValueAs(d =>
+                                                              @<b>
+                                                                  @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
+                                                              </b>);
+                                    }
 
-                                }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
+
+
+                                }).SetRowCssClasses(item => String.Format("page-desing-row-{0}", item.Id) ).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 
 
@@ -347,12 +347,22 @@
             var caller = e.target;
             var itemId = $(caller).attr('data-page-desing-item-id');
             var postData = JSON.stringify({ "id": itemId });
+            $('[data-page-desing-item-id]').each(function () {
+                $(this).parent().parent().parent().css({ 'background-color': "" });
+            });
             ajaxMethodCall(postData, "/Ajax/GetPageDesignText", function (data) {
                 $("#PageDesingText").val(data.PageTemplate);
                 $("#PageDesignName").val(data.Name);
 
                 $("#selecedPageDesingItem").val(itemId);
                 $("#PageDesignMessage").text("");
+        
+                var clonedRow = $('[data-page-desing-item-id=' + itemId + ']').parent().parent().parent().clone();
+                console.log(clonedRow);
+                $('.page-desing-row-' + itemId).remove();
+                $(".grid-table > tbody").prepend(clonedRow[0]);
+                $('[data-page-desing-item-id=' + itemId + ']').parent().parent().parent().css({ 'background-color': "#bcf0af" });
+                bindPageDesingItem();
             });
         }
 

@@ -21,14 +21,14 @@ namespace StoreManagement.Data.LiquidEntities
         public Brand Brand { get; set; }
 
 
-        public ProductLiquid(Product product, ProductCategory category, PageDesign pageDesign, int imageWidth, int imageHeight)
+        public ProductLiquid(Product product, ProductCategory category,  int imageWidth, int imageHeight)
         {
      
             this.Product = product;
             this.Category = category;
-            this.PageDesign = pageDesign;
+
             List<BaseFileEntity> baseFileEntities = product.ProductFiles != null && product.ProductFiles.Any() ? product.ProductFiles.Cast<BaseFileEntity>().ToList() : new List<BaseFileEntity>();
-            this.ImageLiquid = new ImageLiquid(baseFileEntities, pageDesign, imageWidth, imageHeight);
+            this.ImageLiquid = new ImageLiquid(baseFileEntities, imageWidth, imageHeight);
             this.ImageLiquid.ImageState = product.ImageState;
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;

@@ -33,7 +33,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = ProductCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                     if (category != null)
                     {
-                        var blog = new ProductLiquid(item, category, this.PageDesign, ImageWidthProduct, ImageHeightProduct);
+                        var blog = new ProductLiquid(item, category,  ImageWidthProduct, ImageHeightProduct);
                         list.Add(blog);
                     }
                 }
@@ -73,7 +73,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = Categories.FirstOrDefault(r => r.Id == item.CategoryId);
                     if (category != null)
                     {
-                        var blog = new ContentLiquid(item, category, this.PageDesign, StoreConstants.BlogsType, ImageWidthBlog, ImageHeightBlog);
+                        var blog = new ContentLiquid(item, category,  StoreConstants.BlogsType, ImageWidthBlog, ImageHeightBlog);
                         list.Add(blog);
                     }
                 }
@@ -95,7 +95,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = Categories.FirstOrDefault(r => r.Id == item.CategoryId);
                     if (category != null)
                     {
-                        var blog = new ContentLiquid(item, category, this.PageDesign, StoreConstants.NewsType, ImageWidthNews, ImageHeightNews);
+                        var blog = new ContentLiquid(item, category,  StoreConstants.NewsType, ImageWidthNews, ImageHeightNews);
                         list.Add(blog);
                     }
                 }
@@ -112,7 +112,7 @@ namespace StoreManagement.Data.LiquidEntities
                 var cats = new List<ProductCategoryLiquid>();
                 foreach (var item in ProductCategories)
                 {
-                    cats.Add(new ProductCategoryLiquid(item, this.PageDesign));
+                    cats.Add(new ProductCategoryLiquid(item));
                 }
 
                 return cats;
@@ -123,8 +123,7 @@ namespace StoreManagement.Data.LiquidEntities
 
         public HomePageLiquid(PageDesign pageDesing, List<FileManager> sliderImages)
         {
-            // TODO: Complete member initialization
-            this.PageDesign = pageDesing;
+         
             this.SliderImages = sliderImages;
         }
 

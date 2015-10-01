@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DotLiquid;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.LiquidEntities
 {
-    public class ProductCategoryLiquid : BaseDrop
+    public class CategoryLiquid : BaseDrop
     {
-        public ProductCategory ProductCategory { get; set; }
+
+        public Category  Category { get; set; }
 
 
-
-        public ProductCategoryLiquid(ProductCategory productCategory)
+        public CategoryLiquid(Category category)
         {
-            this.ProductCategory = productCategory;
- 
+            this.Category = category;
+     
         }
 
 
@@ -26,7 +25,7 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                return LinkHelper.GetProductCategoryLink(this.ProductCategory);
+                return LinkHelper.GetCategoryLink(this.Category);
             }
         }
         public int Count { get; set; }

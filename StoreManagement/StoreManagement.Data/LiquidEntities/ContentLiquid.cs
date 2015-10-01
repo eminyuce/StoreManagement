@@ -22,13 +22,13 @@ namespace StoreManagement.Data.LiquidEntities
 
 
 
-        public ContentLiquid(Content content, Category category, PageDesign pageDesign, String type, int imageWidth, int imageHeight)
+        public ContentLiquid(Content content, Category category, String type, int imageWidth, int imageHeight)
         {
             this.Content = content;
             this.Category = category;
-            this.PageDesign = pageDesign;
+
             List<BaseFileEntity> baseFileEntities = content.ContentFiles != null && content.ContentFiles.Any() ? content.ContentFiles.Cast<BaseFileEntity>().ToList() : new List<BaseFileEntity>();
-            this.ImageLiquid = new ImageLiquid(baseFileEntities, pageDesign, imageWidth, imageHeight);
+            this.ImageLiquid = new ImageLiquid(baseFileEntities, imageWidth, imageHeight);
             this.ImageLiquid.ImageState = content.ImageState;
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;

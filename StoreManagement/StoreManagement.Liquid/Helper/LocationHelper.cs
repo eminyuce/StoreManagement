@@ -38,7 +38,7 @@ namespace StoreManagement.Liquid.Helper
                 foreach (var item in locations)
                 {
 
-                    var i = new LocationLiquid(item, pageDesign, ImageWidth, ImageHeight);
+                    var i = new LocationLiquid(item, ImageWidth, ImageHeight);
                     items.Add(i);
 
                 }

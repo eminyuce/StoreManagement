@@ -38,7 +38,7 @@ namespace StoreManagement.Liquid.Helper
                 var cats = new List<ProductCategoryLiquid>();
                 foreach (var item in categories.items)
                 {
-                    cats.Add(new ProductCategoryLiquid(item, pageDesign));
+                    cats.Add(new ProductCategoryLiquid(item));
                 }
 
                 object anonymousObject = new
@@ -80,7 +80,7 @@ namespace StoreManagement.Liquid.Helper
                 var cats = new List<ProductCategoryLiquid>();
                 foreach (var item in categories)
                 {
-                    cats.Add(new ProductCategoryLiquid(item, pageDesign));
+                    cats.Add(new ProductCategoryLiquid(item));
                 }
 
                 object anonymousObject = new
@@ -110,12 +110,12 @@ namespace StoreManagement.Liquid.Helper
             try
             {
                
-                var productCategories = new ProductCategoryLiquid(category, pageDesign);
+                var productCategories = new ProductCategoryLiquid(category);
 
                 var items = new List<ProductLiquid>();
                 foreach (var item in products.items)
                 {
-                    var blog = new ProductLiquid(item, category, pageDesign, ImageWidth, ImageHeight);
+                    var blog = new ProductLiquid(item, category,  ImageWidth, ImageHeight);
                     items.Add(blog);
                 }
 

@@ -30,7 +30,7 @@ namespace StoreManagement.Liquid.Helper
                 foreach (var item in brands)
                 {
 
-                    var blog = new BrandLiquid(item, pageDesign, ImageWidth, ImageHeight);
+                    var blog = new BrandLiquid(item, ImageWidth, ImageHeight);
                     items.Add(blog);
 
                 }
@@ -74,7 +74,7 @@ namespace StoreManagement.Liquid.Helper
              
 
 
-                var brandLiquid = new BrandLiquid(brand, pageDesign, ImageWidth, ImageHeight);
+                var brandLiquid = new BrandLiquid(brand,  ImageWidth, ImageHeight);
                 brandLiquid.Products = products;
                 brandLiquid.ProductCategories = productCategories;
 

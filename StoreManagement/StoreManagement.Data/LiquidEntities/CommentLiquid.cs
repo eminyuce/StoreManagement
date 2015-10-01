@@ -11,10 +11,10 @@ namespace StoreManagement.Data.LiquidEntities
     {
         public Comment Comment;
 
-        public CommentLiquid(Comment comment, PageDesign pageDesign, int imageWidth, int imageHeight)
+        public CommentLiquid(Comment comment, int imageWidth, int imageHeight)
         {
             this.Comment = comment;
-            this.PageDesign = pageDesign;
+
             this.ImageWidth = imageWidth;
             this.ImageHeight = imageHeight;
         }

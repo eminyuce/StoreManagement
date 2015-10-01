@@ -12,10 +12,10 @@ namespace StoreManagement.Data.LiquidEntities
         public Contact Contact;
 
 
-        public ContactLiquid(Contact item, PageDesign pageDesign, int imageWidth, int imageHeight)
+        public ContactLiquid(Contact item,  int imageWidth, int imageHeight)
         {
             this.Contact = item;
-            this.PageDesign = pageDesign;
+
             this.ImageWidth = imageWidth;
             this.ImageHeight = imageHeight;
         }

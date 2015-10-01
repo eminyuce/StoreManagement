@@ -12,10 +12,10 @@ namespace StoreManagement.Data.LiquidEntities
     {
         public Label Label { get; set; }
 
-        public LabelLiquid(Label label, PageDesign pageDesign)
+        public LabelLiquid(Label label)
         {
             this.Label = label;
-            this.PageDesign = pageDesign;
+
         }
 
 

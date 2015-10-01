@@ -30,7 +30,7 @@ namespace StoreManagement.Liquid.Helper
                 foreach (var item in activities)
                 {
 
-                    var i = new ActivitiesLiquid(item, pageDesign, ImageWidth, ImageHeight);
+                    var i = new ActivitiesLiquid(item,  ImageWidth, ImageHeight);
                     items.Add(i);
 
                 }

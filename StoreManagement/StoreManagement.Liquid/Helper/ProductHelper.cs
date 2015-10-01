@@ -29,13 +29,13 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                 if (category != null)
                 {
-                    var blog = new ProductLiquid(item, category, pageDesign, ImageWidth, ImageHeight);
+                    var blog = new ProductLiquid(item, category,  ImageWidth, ImageHeight);
                     items.Add(blog);
                 }
             }
             foreach (var category in categories)
             {
-                var catLiquid = new ProductCategoryLiquid(category, pageDesign);
+                var catLiquid = new ProductCategoryLiquid(category);
                 catLiquid.Count = products.items.Count(r => r.ProductCategoryId == category.Id);
                 cats.Add(catLiquid);
             }
@@ -79,7 +79,7 @@ namespace StoreManagement.Liquid.Helper
                 foreach (var item in products)
                 {
                     var cat = productCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
-                    var product = new ProductLiquid(item, cat, pageDesign, this.ImageWidth, this.ImageHeight);
+                    var product = new ProductLiquid(item, cat,  this.ImageWidth, this.ImageHeight);
                     items.Add(product);
 
                 }
@@ -110,7 +110,7 @@ namespace StoreManagement.Liquid.Helper
         public StoreLiquidResult GetProductsDetailPage(Product product, PageDesign pageDesign, ProductCategory category)
         {
            
-            var s = new ProductLiquid(product, category, pageDesign, ImageWidth, ImageHeight);
+            var s = new ProductLiquid(product, category,  ImageWidth, ImageHeight);
 
             var anonymousObject = LiquidAnonymousObject.GetProductAnonymousObject(s);
 
@@ -144,7 +144,7 @@ namespace StoreManagement.Liquid.Helper
                 var items = new List<ProductLiquid>();
                 foreach (var item in products)
                 {
-                    var blog = new ProductLiquid(item, category, pageDesign, ImageWidth, ImageHeight);
+                    var blog = new ProductLiquid(item, category,  ImageWidth, ImageHeight);
                     items.Add(blog);
 
                 }
@@ -184,7 +184,7 @@ namespace StoreManagement.Liquid.Helper
             try
             {
 
-                var brandLiquid = new BrandLiquid(brand, pageDesign, ImageWidth, ImageHeight);
+                var brandLiquid = new BrandLiquid(brand, ImageWidth, ImageHeight);
 
                 var items = new List<ProductLiquid>();
                 foreach (var item in products)
@@ -192,7 +192,7 @@ namespace StoreManagement.Liquid.Helper
                     var imageWidth = GetSettingValueInt("BrandProduct_ImageWidth", 50);
                     var imageHeight = GetSettingValueInt("BrandProduct_ImageHeight", 50);
                     var cat = productCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
-                    var product = new ProductLiquid(item, cat, pageDesign, imageWidth, imageHeight);
+                    var product = new ProductLiquid(item, cat,  imageWidth, imageHeight);
                     product.Brand = brand;
                     items.Add(product);
 

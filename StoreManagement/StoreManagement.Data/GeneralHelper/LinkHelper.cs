@@ -42,14 +42,20 @@ namespace StoreManagement.Data.GeneralHelper
                 imageActionName, googleId, width, height, alt, title);
             return imageLink;
         }
-        public static string GetCategoryLink(BaseCategory productCategory)
+        public static string GetProductCategoryLink(BaseCategory productCategory)
         {
             String detailLink = String.Format("/ProductCategories/Category/{0}",
                 String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
             return detailLink.ToLowerInvariant();
         }
+        public static string GetCategoryLink(BaseCategory productCategory)
+        {
+            String detailLink = String.Format("/Categories/Category/{0}",
+                String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
+            return detailLink.ToLowerInvariant();
+        }
         public static string GetNavigationLink(Navigation navigation)
         {
             if (!navigation.Static)

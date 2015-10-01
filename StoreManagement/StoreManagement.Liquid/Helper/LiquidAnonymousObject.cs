@@ -222,7 +222,7 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        internal static object GetProductCategory(ProductCategoryLiquid productCategories)
+        public static object GetProductCategory(ProductCategoryLiquid productCategories)
         {
             object anonymousObject = new
             {
@@ -231,6 +231,18 @@ namespace StoreManagement.Liquid.Helper
                 CategoryDescription = productCategories.ProductCategory.Description
             };
             return anonymousObject;
+        }
+
+        public static IEnumerable GetCategoriesLiquid(List<CategoryLiquid> cats)
+        {
+            return from s in cats
+                   select new
+                   {
+                       s.Category.Name,
+                       s.Category.Description,
+                       s.DetailLink,
+                       s.Count
+                   };
         }
     }
 }

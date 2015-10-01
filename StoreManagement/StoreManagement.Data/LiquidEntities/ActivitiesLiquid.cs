@@ -11,10 +11,9 @@ namespace StoreManagement.Data.LiquidEntities
     {
         public Activity Activity;
 
-        public ActivitiesLiquid(Activity item, PageDesign pageDesign, int imageWidth, int imageHeight)
+        public ActivitiesLiquid(Activity item,  int imageWidth, int imageHeight)
         {
             this.Activity = item;
-            this.PageDesign = pageDesign;
             this.ImageWidth = imageWidth;
             this.ImageHeight = imageHeight;
         }

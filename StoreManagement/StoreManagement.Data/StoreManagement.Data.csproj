@@ -188,6 +188,7 @@
     <Compile Include="LiquidEntities\ActivitiesLiquid.cs" />
     <Compile Include="LiquidEntities\BaseDrop.cs" />
     <Compile Include="LiquidEntities\BrandLiquid.cs" />
+    <Compile Include="LiquidEntities\CategoryLiquid.cs" />
     <Compile Include="LiquidEntities\CommentLiquid.cs" />
     <Compile Include="LiquidEntities\ContactLiquid.cs" />
     <Compile Include="LiquidEntities\LabelLiquid.cs" />

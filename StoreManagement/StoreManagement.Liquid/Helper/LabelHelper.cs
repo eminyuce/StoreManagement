@@ -27,7 +27,7 @@ namespace StoreManagement.Liquid.Helper
             foreach (var item in labels)
             {
 
-                var nav = new LabelLiquid(item, pageDesign);
+                var nav = new LabelLiquid(item);
                 items.Add(nav);
             }
 

@@ -19,10 +19,10 @@ namespace StoreManagement.Data.LiquidEntities
             
         }
         
-        public NavigationLiquid(Navigation nav, PageDesign pageDesign)
+        public NavigationLiquid(Navigation nav)
         {
             this.Navigation = nav;
-            this.PageDesign = pageDesign;
+
         }
 
 

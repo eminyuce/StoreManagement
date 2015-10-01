@@ -30,7 +30,7 @@ namespace StoreManagement.Liquid.Helper
                 foreach (var item in contacts)
                 {
 
-                    var i = new ContactLiquid(item, pageDesign, ImageWidth, ImageHeight);
+                    var i = new ContactLiquid(item, ImageWidth, ImageHeight);
                     items.Add(i);
 
                 }

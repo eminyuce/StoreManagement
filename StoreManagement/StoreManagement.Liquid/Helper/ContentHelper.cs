@@ -32,19 +32,27 @@ namespace StoreManagement.Liquid.Helper
 
 
             var items = new List<ContentLiquid>();
+            var cats = new List<CategoryLiquid>();
             foreach (var item in contents.items)
             {
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
                 if (category != null)
                 {
-                    var blog = new ContentLiquid(item, category, pageDesign, type, ImageWidth, ImageHeight);
+                    var blog = new ContentLiquid(item, category, type, ImageWidth, ImageHeight);
                     items.Add(blog);
                 }
+            }
+            foreach (var category in categories)
+            {
+                var catLiquid = new CategoryLiquid(category);
+                catLiquid.Count = contents.items.Count(r => r.CategoryId == category.Id);
+                cats.Add(catLiquid);
             }
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
             {
-                items = LiquidAnonymousObject.GetContentLiquid(items)
+                items = LiquidAnonymousObject.GetContentLiquid(items),
+                categories = LiquidAnonymousObject.GetCategoriesLiquid(cats)
             }
                 );
 
@@ -67,7 +75,7 @@ namespace StoreManagement.Liquid.Helper
         {
           
             var items = new List<ContentLiquid>();
-            var contentLiquid = new ContentLiquid(content, category, pageDesign, type, ImageWidth, ImageHeight);
+            var contentLiquid = new ContentLiquid(content, category, type, ImageWidth, ImageHeight);
 
             var anonymousObject = LiquidAnonymousObject.GetContentAnonymousObject(contentLiquid);
 
@@ -93,7 +101,7 @@ namespace StoreManagement.Liquid.Helper
             var items = new List<ContentLiquid>();
             foreach (var item in contents)
             {
-                var blog = new ContentLiquid(item, category, pageDesign, type, ImageWidth, ImageHeight);
+                var blog = new ContentLiquid(item, category,  type, ImageWidth, ImageHeight);
                 items.Add(blog);
 
             }
@@ -121,7 +129,7 @@ namespace StoreManagement.Liquid.Helper
             foreach (var item in contents)
             {
                 var category = categories.FirstOrDefault(r => r.Id == item.CategoryId);
-                var blog = new ContentLiquid(item, category, pageDesign, type, ImageWidth, ImageHeight);
+                var blog = new ContentLiquid(item, category, type, ImageWidth, ImageHeight);
                 items.Add(blog);
 
             }

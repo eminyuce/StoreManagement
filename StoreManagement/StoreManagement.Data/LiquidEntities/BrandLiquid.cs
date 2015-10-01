@@ -14,10 +14,9 @@ namespace StoreManagement.Data.LiquidEntities
         public Brand Brand;
         public List<Product> Products { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
-        public BrandLiquid(Brand brand, PageDesign pageDesign, int imageWidth, int imageHeight)
+        public BrandLiquid(Brand brand, int imageWidth, int imageHeight)
         {
             this.Brand = brand;
-            this.PageDesign = pageDesign;
             this.ImageWidth = imageWidth;
             this.ImageHeight = imageHeight;
         }
@@ -43,7 +42,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var category = ProductCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                     if (category != null)
                     {
-                        var productLiquid = new ProductLiquid(item, category, this.PageDesign, ImageWidthProduct, ImageHeightProduct);
+                        var productLiquid = new ProductLiquid(item, category, ImageWidthProduct, ImageHeightProduct);
                         list.Add(productLiquid);
                     }
                 }
@@ -61,7 +60,7 @@ namespace StoreManagement.Data.LiquidEntities
                 var cats = new List<ProductCategoryLiquid>();
                 foreach (var item in ProductCategories)
                 {
-                    cats.Add(new ProductCategoryLiquid(item, this.PageDesign));
+                    cats.Add(new ProductCategoryLiquid(item));
                 }
 
                 return cats;

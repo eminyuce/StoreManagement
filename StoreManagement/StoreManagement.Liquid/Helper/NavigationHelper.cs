@@ -34,7 +34,7 @@ namespace StoreManagement.Liquid.Helper
             foreach (var item in navigations)
             {
 
-                var nav = new NavigationLiquid(item, pageDesign);
+                var nav = new NavigationLiquid(item);
                 items.Add(nav);
             }
 
@@ -69,7 +69,7 @@ namespace StoreManagement.Liquid.Helper
             foreach (var item in navigations)
             {
 
-                var nav = new NavigationLiquid(item, pageDesign);
+                var nav = new NavigationLiquid(item);
                 items.Add(nav);
             }
 

@@ -31,7 +31,7 @@ namespace StoreManagement.Liquid.Helper
                 foreach (var item in comments)
                 {
 
-                    var c = new CommentLiquid(item, pageDesign, ImageWidth, ImageHeight);
+                    var c = new CommentLiquid(item,  ImageWidth, ImageHeight);
                     items.Add(c);
 
                 }

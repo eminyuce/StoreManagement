@@ -19,11 +19,11 @@ namespace StoreManagement.Data.LiquidEntities
         //TODO: ImageState will manage visibility.
         public bool ImageState { get; set; }
 
-        public ImageLiquid(List<BaseFileEntity> baseFileEntities, PageDesign pageDesign, int width, int height)
+        public ImageLiquid(List<BaseFileEntity> baseFileEntities,  int width, int height)
         {
             this.BaseFileEntities = baseFileEntities;
             this.FileManagers = baseFileEntities.Select(r => r.FileManager).ToList();
-            this.PageDesign = pageDesign;
+    
 
             this.ImageWidth = width == 0 ? 99 : width;
             this.ImageHeight = height == 0 ? 99 : height;

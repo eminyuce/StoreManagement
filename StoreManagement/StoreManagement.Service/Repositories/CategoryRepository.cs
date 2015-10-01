@@ -80,7 +80,7 @@ namespace StoreManagement.Service.Repositories
             CategoryCache.TryGet(key, out items);
             if (items == null)
             {
-                
+
                 var cats = this.FindBy(r => r.StoreId == storeId &&
                          r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase))
                          .OrderBy(r => r.Ordering)
@@ -96,7 +96,7 @@ namespace StoreManagement.Service.Repositories
                     }
                 }
 
-               
+
                 CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
@@ -108,7 +108,7 @@ namespace StoreManagement.Service.Repositories
             return this.GetSingle(id);
         }
 
-  
+
 
         public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
@@ -122,7 +122,7 @@ namespace StoreManagement.Service.Repositories
 
         public async Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
         {
-            Content category = this.DbContext.Contents.FirstOrDefault(r=>r.Id == contentId);
+            Content category = this.DbContext.Contents.FirstOrDefault(r => r.Id == contentId);
             if (category != null)
             {
                 return await this.GetSingleAsync(category.CategoryId);
@@ -133,9 +133,23 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
+        public async Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
         {
-            throw new NotImplementedException();
+            Expression<Func<Category, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) & r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
+            Expression<Func<Category, int>> keySelector = t => t.Ordering;
+
+            var items = await this.FindAllAsync(match, keySelector, OrderByType.Descending, page, pageSize);
+            var totalItemNumber = await this.CountAsync(match);
+
+
+            var task = Task.Factory.StartNew(() =>
+            {
+                StorePagedList<Category> resultItems = new StorePagedList<Category>(items, page, pageSize, totalItemNumber);
+                return resultItems;
+            });
+            var result = await task;
+
+            return result;
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId)

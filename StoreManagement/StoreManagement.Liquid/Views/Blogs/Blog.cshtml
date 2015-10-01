@@ -3,7 +3,7 @@
 @using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.LiquidEntities.StoreLiquidResult  
 @{
-    ViewBag.Title = "Index";
+       ViewBag.Title = Model.PageTitle;
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
             
 }

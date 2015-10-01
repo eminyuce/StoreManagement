@@ -21,10 +21,7 @@ namespace StoreManagement.Liquid.Helper
             try
             {
 
-                if (pageDesign == null)
-                {
-                    throw new Exception("PageDesing is null");
-                }
+              
 
                 var cats = new List<CategoryLiquid>();
                 foreach (var item in categories.items)

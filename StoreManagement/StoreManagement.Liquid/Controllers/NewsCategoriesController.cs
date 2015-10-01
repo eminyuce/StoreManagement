@@ -12,7 +12,7 @@ namespace StoreManagement.Liquid.Controllers
         //
         // GET: /BlogsCategories/
         public NewsCategoriesController()
-            : base(StoreConstants.BlogsType)
+            : base(StoreConstants.NewsType)
         {
 
         }

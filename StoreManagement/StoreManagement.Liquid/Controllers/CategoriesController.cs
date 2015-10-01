@@ -12,7 +12,7 @@ namespace StoreManagement.Liquid.Controllers
 {
     public abstract class CategoriesController : BaseController
     {
-        private const String PageDesingName = "CategoriesIndex";
+        private String _pageDesingName = "CategoriesIndexPage";
         private String Type { get; set; }
         protected CategoriesController(String type)
         {
@@ -23,12 +23,9 @@ namespace StoreManagement.Liquid.Controllers
         {
             try
             {
-                if (!IsModulActive(Type))
-                {
-                    return HttpNotFound("Not Found");
-                }
-
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingName);
+                
+                _pageDesingName = Type + _pageDesingName;
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, _pageDesingName);
                 var pageSize = GetSettingValueInt(Type+"Categories_PageSize", StoreConstants.DefaultPageSize);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, Type, true, page, pageSize);
 
@@ -37,7 +34,10 @@ namespace StoreManagement.Liquid.Controllers
                 await Task.WhenAll(pageDesignTask, categoriesTask);
                 var pageDesign = pageDesignTask.Result;
                 var categories = categoriesTask.Result;
-
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null:" + _pageDesingName);
+                }
                 var pageOutput = CategoryHelper.GetCategoriesIndexPage(pageDesign, categories, Type);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 

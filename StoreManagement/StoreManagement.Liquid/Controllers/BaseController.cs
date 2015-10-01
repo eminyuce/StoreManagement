@@ -66,6 +66,9 @@ namespace StoreManagement.Liquid.Controllers
         public IProductCategoryHelper ProductCategoryHelper { set; get; }
 
         [Inject]
+        public ICategoryHelper  CategoryHelper { set; get; }
+
+        [Inject]
         public INavigationHelper NavigationHelper { set; get; }
 
         [Inject]

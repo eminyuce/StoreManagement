@@ -80,19 +80,7 @@ namespace StoreManagement.Service.Repositories
             CategoryCache.TryGet(key, out items);
             if (items == null)
             {
-                //var ttt = from cus in StoreDbContext.Categories
-                //    join ord in StoreDbContext.Contents on cus.Id equals ord.CategoryId
-                //    join cf in StoreDbContext.ContentFiles on ord.Id equals cf.ContentId
-                //    where cus.StoreId == storeId
-                //          && cus.Contents.Any()
-                //          && cus.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)
-                //    orderby cus.Ordering, ord.Ordering
-                //    select cus;
-
-                //var mmmm = ttt
-                //    .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)))
-                //    .ToList();
-
+                
                 var cats = this.FindBy(r => r.StoreId == storeId &&
                          r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase))
                          .OrderBy(r => r.Ordering)
@@ -108,16 +96,7 @@ namespace StoreManagement.Service.Repositories
                     }
                 }
 
-                //var mmmm = itemss.ToList();
-
-                //  items = GetCategoriesByStoreId(storeId, type);
-
-
-                //var mmmm = StoreDbContext.Categories
-                //    .Where(r => r.StoreId == storeId && r.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase))
-                //    .OrderBy(b => b.Ordering)
-                //    .Include(r => r.Contents.Select(r1 => r1.ContentFiles.Select(m => m.FileManager)));
-
+               
                 CategoryCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Categories_CacheAbsoluteExpiration_Minute", 10)));
             }
 
@@ -129,15 +108,7 @@ namespace StoreManagement.Service.Repositories
             return this.GetSingle(id);
         }
 
-        
-
-        public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
-        {
-            // var res = Task.FromResult(GetCategoriesByStoreId(storeId));
-            // return res;
-            return await BaseEntityRepository.GetBaseEnitiesAsync(this, storeId, null);
-        }
-
+  
 
         public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive)
         {
@@ -160,6 +131,11 @@ namespace StoreManagement.Service.Repositories
             {
                 return null;
             }
+        }
+
+        public Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Category> GetCategoriesByStoreId(int storeId)

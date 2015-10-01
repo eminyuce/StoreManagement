@@ -463,6 +463,7 @@
     <Compile Include="Controllers\AjaxGenericsController.cs" />
     <Compile Include="Controllers\AjaxProductsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BlogsCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -471,6 +472,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
@@ -485,10 +487,12 @@
     <Compile Include="Helper\ActivityHelper.cs" />
     <Compile Include="Helper\BaseLiquidHelper.cs" />
     <Compile Include="Helper\BrandHelper.cs" />
+    <Compile Include="Helper\CategoryHelper.cs" />
     <Compile Include="Helper\CommentHelper.cs" />
     <Compile Include="Helper\ContactHelper.cs" />
     <Compile Include="Helper\Interfaces\IActivityHelper.cs" />
     <Compile Include="Helper\Interfaces\IBrandHelper.cs" />
+    <Compile Include="Helper\Interfaces\ICategoryHelper.cs" />
     <Compile Include="Helper\Interfaces\ICommentHelper.cs" />
     <Compile Include="Helper\Interfaces\IContactHelper.cs" />
     <Compile Include="Helper\Interfaces\IContentHelper.cs" />
@@ -530,7 +534,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Products\Product.cshtml" />
     <Content Include="Views\Products\Product2.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
@@ -573,6 +576,8 @@
     <Content Include="Views\Test\Index2.cshtml" />
     <Content Include="Views\Shared\TimeoutError.cshtml" />
     <Content Include="Views\Test\Index3.cshtml" />
+    <Content Include="Views\BlogsCategories\Index.cshtml" />
+    <Content Include="Views\NewsCategories\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

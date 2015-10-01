@@ -556,7 +556,7 @@ namespace StoreManagement.Test
         public void TestApiCall2()
         {
             var s = new CategoryService("yuce.marinelink.org");
-            var m1 = s.GetCategoriesByStoreIdAsync(9);
+            var m1 = s.GetCategoriesByStoreIdAsync(9, StoreConstants.NewsType, true); 
             Task.WaitAll(m1);
             var m = m1.Result;
             foreach (var q in m)

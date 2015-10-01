@@ -65,7 +65,7 @@ namespace StoreManagement.Liquid.Controllers
             var blogsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, 5);
             var newsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, 5);
             var productCategoriesTask = rep4.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
-            var categoriesTask = rep5.GetCategoriesByStoreIdAsync(StoreId);
+            var categoriesTask = rep5.GetCategoriesByStoreIdAsync(StoreId,StoreConstants.NewsType,true);
             var sliderTask = rep6.GetStoreCarouselsAsync(StoreId, 58);
 
 

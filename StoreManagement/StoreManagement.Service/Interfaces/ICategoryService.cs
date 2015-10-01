@@ -16,11 +16,12 @@ namespace StoreManagement.Service.Interfaces
         List<Category> GetCategoriesByType(String type);
         List<Category> GetCategoriesByStoreIdFromCache(int storeId, String type);
         Category GetCategory(int id);
- 
-        Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId);
+
+
         Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, String type, bool? isActive);
         Task<Category> GetCategoryAsync(int id);
         Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId);
+        Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, String type, bool? isActive, int page = 1, int pageSize = 25);
     }
 
 }

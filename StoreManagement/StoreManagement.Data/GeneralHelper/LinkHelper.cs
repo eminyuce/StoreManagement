@@ -49,9 +49,9 @@ namespace StoreManagement.Data.GeneralHelper
 
             return detailLink.ToLowerInvariant();
         }
-        public static string GetCategoryLink(BaseCategory productCategory)
+        public static string GetCategoryLink(BaseCategory productCategory, String type)
         {
-            String detailLink = String.Format("/Categories/Category/{0}",
+            String detailLink = String.Format("/"+type+"categories/category/{0}",
                 String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
             return detailLink.ToLowerInvariant();

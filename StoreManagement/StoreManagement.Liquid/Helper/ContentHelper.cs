@@ -27,7 +27,7 @@ namespace StoreManagement.Liquid.Helper
            PageDesign pageDesign,
                List<Category> categories, String type)
         {
-            
+
 
 
 
@@ -44,7 +44,7 @@ namespace StoreManagement.Liquid.Helper
             }
             foreach (var category in categories)
             {
-                var catLiquid = new CategoryLiquid(category);
+                var catLiquid = new CategoryLiquid(category, type);
                 catLiquid.Count = contents.items.Count(r => r.CategoryId == category.Id);
                 cats.Add(catLiquid);
             }
@@ -73,7 +73,7 @@ namespace StoreManagement.Liquid.Helper
 
         public StoreLiquidResult GetContentDetailPage(Content content, PageDesign pageDesign, Category category, String type)
         {
-          
+
             var items = new List<ContentLiquid>();
             var contentLiquid = new ContentLiquid(content, category, type, ImageWidth, ImageHeight);
 
@@ -94,14 +94,14 @@ namespace StoreManagement.Liquid.Helper
 
 
 
-        public StoreLiquidResult GetRelatedContentsPartial(Category category, List<Content> contents,PageDesign pageDesign, String type)
+        public StoreLiquidResult GetRelatedContentsPartial(Category category, List<Content> contents, PageDesign pageDesign, String type)
         {
-       
+
 
             var items = new List<ContentLiquid>();
             foreach (var item in contents)
             {
-                var blog = new ContentLiquid(item, category,  type, ImageWidth, ImageHeight);
+                var blog = new ContentLiquid(item, category, type, ImageWidth, ImageHeight);
                 items.Add(blog);
 
             }
@@ -152,7 +152,7 @@ namespace StoreManagement.Liquid.Helper
 
         public Rss20FeedFormatter GetContentsRssFeed(Store store, List<Content> contents, List<Category> categories, int description, string type)
         {
-          
+
             try
             {
                 String url = "http://login.seatechnologyjobs.com/";
@@ -202,7 +202,7 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-      
+
         private SyndicationItem GetSyndicationItem(Store store, Content product, Category productCategory, int description, String type)
         {
             if (productCategory == null)

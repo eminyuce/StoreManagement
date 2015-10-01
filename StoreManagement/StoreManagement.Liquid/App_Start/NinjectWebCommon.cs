@@ -304,6 +304,7 @@ namespace StoreManagement.Liquid.App_Start
 
 
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();
+            kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();
 
             kernel.Bind<IProductCategoryHelper>().To<ProductCategoryHelper>().InRequestScope();
             kernel.Bind<IProductHelper>().To<ProductHelper>().InRequestScope();

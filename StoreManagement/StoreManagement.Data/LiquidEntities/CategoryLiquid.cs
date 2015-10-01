@@ -12,12 +12,12 @@ namespace StoreManagement.Data.LiquidEntities
     {
 
         public Category  Category { get; set; }
+        private String Type { get; set; }
 
-
-        public CategoryLiquid(Category category)
+        public CategoryLiquid(Category category, String type)
         {
             this.Category = category;
-     
+            this.Type = type;
         }
 
 
@@ -25,7 +25,7 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                return LinkHelper.GetCategoryLink(this.Category);
+                return LinkHelper.GetCategoryLink(this.Category, this.Type);
             }
         }
         public int Count { get; set; }

@@ -115,7 +115,7 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetCategoriesByStoreId(storeId);
         }
 
-        public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int ? take)
+        public List<Category> GetCategoriesByStoreIdWithContent(int storeId, int? take)
         {
             return CategoryRepository.GetCategoriesByStoreIdWithContent(storeId, take);
         }
@@ -147,12 +147,7 @@ namespace StoreManagement.API.Controllers
             return CategoryRepository.GetCategory(id);
         }
 
-       
- 
-        public async Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId)
-        {
-            return await CategoryRepository.GetCategoriesByStoreIdAsync(storeId);
-        }
+
 
 
 
@@ -169,6 +164,11 @@ namespace StoreManagement.API.Controllers
         public async Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId)
         {
             return await CategoryRepository.GetCategoryByContentIdAsync(storeId, contentId);
+        }
+
+        public async Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
+        {
+            return await CategoryRepository.GetCategoriesByStoreIdAsync(storeId, type, isActive, page, pageSize);
         }
     }
 }

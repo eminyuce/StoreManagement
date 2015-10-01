@@ -30,6 +30,6 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetCategoryLink(this.ProductCategory);
             }
         }
-
+        public int Count { get; set; }
     }
 }

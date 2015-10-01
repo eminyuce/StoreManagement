@@ -159,6 +159,7 @@ namespace StoreManagement.Liquid.Helper
                        s.ProductCategory.Name,
                        s.ProductCategory.Description,
                        s.DetailLink,
+                       s.Count
                    };
         }
         public static object GetBrandLiquid(BrandLiquid brandLiquid)

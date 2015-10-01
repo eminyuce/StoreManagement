@@ -32,9 +32,12 @@ namespace StoreManagement.Liquid.Helper
                     var blog = new ProductLiquid(item, category, pageDesign, ImageWidth, ImageHeight);
                     items.Add(blog);
                 }
+            }
+            foreach (var category in categories)
+            {
                 var catLiquid = new ProductCategoryLiquid(category, pageDesign);
+                catLiquid.Count = products.items.Count(r => r.ProductCategoryId == category.Id);
                 cats.Add(catLiquid);
-
             }
 
             object anonymousObject = new

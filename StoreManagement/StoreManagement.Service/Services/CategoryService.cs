@@ -119,9 +119,9 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResultAsync<Category>(url);
         }
 
-        public Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
+        public Task<StorePagedList<Category>> GetCategoriesByStoreIdWithPagingAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
         {
-            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdAsync?storeId={2}&type={3}&isActive={4}&page={5}&pageSize={6}",
+            string url = string.Format("http://{0}/api/{1}/GetCategoriesByStoreIdWithPagingAsync?storeId={2}&type={3}&isActive={4}&page={5}&pageSize={6}",
                     WebServiceAddress,
                     ApiControllerName,
                     storeId,

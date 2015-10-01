@@ -133,7 +133,7 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
+        public async Task<StorePagedList<Category>> GetCategoriesByStoreIdWithPagingAsync(int storeId, string type, bool? isActive, int page = 1, int pageSize = 25)
         {
             Expression<Func<Category, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) & r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
             Expression<Func<Category, int>> keySelector = t => t.Ordering;

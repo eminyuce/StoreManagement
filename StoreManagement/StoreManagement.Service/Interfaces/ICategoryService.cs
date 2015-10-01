@@ -21,7 +21,7 @@ namespace StoreManagement.Service.Interfaces
         Task<List<Category>> GetCategoriesByStoreIdAsync(int storeId, String type, bool? isActive);
         Task<Category> GetCategoryAsync(int id);
         Task<Category> GetCategoryByContentIdAsync(int storeId, int contentId);
-        Task<StorePagedList<Category>> GetCategoriesByStoreIdAsync(int storeId, String type, bool? isActive, int page = 1, int pageSize = 25);
+        Task<StorePagedList<Category>> GetCategoriesByStoreIdWithPagingAsync(int storeId, String type, bool? isActive, int page = 1, int pageSize = 25);
     }
 
 }

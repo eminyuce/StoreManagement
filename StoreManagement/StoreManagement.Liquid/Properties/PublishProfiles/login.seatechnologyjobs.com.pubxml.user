@@ -36,6 +36,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/HtmlAgilityPack.dll">
       <publishTime>07/30/2015 09:18:15</publishTime>
     </File>
+    <File Include="bin/Jil.dll">
+      <publishTime>10/01/2015 14:19:12</publishTime>
+    </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/30/2015 09:18:25</publishTime>
     </File>
@@ -66,14 +69,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/RestSharp.dll">
       <publishTime>07/30/2015 09:18:33</publishTime>
     </File>
+    <File Include="bin/Sigil.dll">
+      <publishTime>10/01/2015 14:19:12</publishTime>
+    </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/01/2015 13:58:05</publishTime>
+      <publishTime>10/01/2015 14:57:11</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>10/01/2015 14:02:39</publishTime>
+      <publishTime>10/01/2015 14:57:19</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/01/2015 14:02:37</publishTime>
+      <publishTime>10/01/2015 14:57:13</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -814,7 +820,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/01/2015 11:58:38</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/21/2015 19:48:29</publishTime>
+      <publishTime>10/01/2015 14:54:26</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/30/2015 09:18:00</publishTime>
@@ -1141,7 +1147,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/01/2015 14:02:41</publishTime>
+      <publishTime>10/01/2015 14:58:05</publishTime>
     </File>
   </ItemGroup>
 </Project>

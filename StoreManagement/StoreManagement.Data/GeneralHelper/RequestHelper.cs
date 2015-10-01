@@ -18,7 +18,7 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class RequestHelper
     {
-
+ 
         private static readonly TypedObjectCache<String> RequestHelperCache = new TypedObjectCache<String>("RequestHelperCache");
         private static CacheEntryUpdateCallback _callbackU = null;
         private bool _isCacheEnable = true;
@@ -42,9 +42,11 @@ namespace StoreManagement.Data.GeneralHelper
         public RequestHelper()
         {
             RequestHelperCache.IsCacheEnable = this.IsCacheEnable;
+ 
         }
 
         public RequestHelper(string accountSid, string secretKey)
+            : base()
         {
             _accountSid = accountSid;
             _secretKey = secretKey;
@@ -119,7 +121,7 @@ namespace StoreManagement.Data.GeneralHelper
             }
 
         }
-      
+
 
         public Task<T> MakeJsonRequestAsync<T>(string url) where T : new()
         {
@@ -137,7 +139,7 @@ namespace StoreManagement.Data.GeneralHelper
                 Logger.Error(ex, "Error:" + ex.StackTrace, url);
                 return null;
             }
-         
+
         }
         public Task<T> ExecuteAsync<T>(RestRequest request, String url) where T : new()
         {
@@ -223,17 +225,8 @@ namespace StoreManagement.Data.GeneralHelper
             return client.Execute(request);
         }
 
-        public string ConvertObjectToJason<T>(T arg)
-        {
-            return JsonConvert.SerializeObject(arg);
-
-            //var jsonSer = new JsonSerializer<T>();
-            //var result = jsonSer.SerializeToString(arg);
-            //return result;
 
 
-        }
-   
         public StorePagedList<T> GetUrlPagedResults<T>(string url) where T : new()
         {
             try
@@ -243,6 +236,7 @@ namespace StoreManagement.Data.GeneralHelper
                 if (!String.IsNullOrEmpty(responseContent))
                 {
                     String jsonString = responseContent;
+                   // var result = Jil.JSON.Deserialize<StorePagedList<T>>(jsonString, _jilOptions);
                     var result = JsonConvert.DeserializeObject<StorePagedList<T>>(jsonString);
                     //var jsonSer = new JsonSerializer<StorePagedList<T>>();
                     //var result = jsonSer.DeserializeFromString(jsonString);
@@ -260,7 +254,7 @@ namespace StoreManagement.Data.GeneralHelper
             }
         }
 
-    
+
         public List<T> GetUrlResults<T>(string url) where T : new()
         {
             try
@@ -271,6 +265,7 @@ namespace StoreManagement.Data.GeneralHelper
                 if (!String.IsNullOrEmpty(responseContent))
                 {
                     String jsonString = responseContent;
+                  //  var result = Jil.JSON.Deserialize<List<T>>(jsonString, _jilOptions);
                     var result = JsonConvert.DeserializeObject<List<T>>(jsonString);
                     //var jsonSer = new JsonSerializer<List<T>>();
                     //var result = jsonSer.DeserializeFromString(jsonString);
@@ -289,7 +284,7 @@ namespace StoreManagement.Data.GeneralHelper
             }
 
         }
-    
+
         public T GetUrlResult<T>(string url) where T : new()
         {
             try
@@ -301,6 +296,7 @@ namespace StoreManagement.Data.GeneralHelper
                 {
                     String jsonString = responseContent;
                     var result = JsonConvert.DeserializeObject<T>(jsonString);
+                  //  var result = Jil.JSON.Deserialize<T>(jsonString);
                     //var jsonSer = new JsonSerializer<T>();
                     //var result = jsonSer.DeserializeFromString(jsonString);
                     return result;
@@ -317,7 +313,7 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public Task<StorePagedList<T>> GetUrlPagedResultsAsync<T>(string url) where T : new()
         {
-           // return MakeJsonRequestAsync<StorePagedList<T>>(url);
+            // return MakeJsonRequestAsync<StorePagedList<T>>(url);
             var task = new Task<StorePagedList<T>>(() => GetUrlPagedResults<T>(url));
             task.Start();
 
@@ -331,7 +327,7 @@ namespace StoreManagement.Data.GeneralHelper
 
             return task;
 
-           // return MakeJsonRequestAsync<T>(url);
+            // return MakeJsonRequestAsync<T>(url);
         }
         public Task<List<T>> GetUrlResultsAsync<T>(string url) where T : new()
         {

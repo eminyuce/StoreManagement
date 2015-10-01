@@ -35,6 +35,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/HtmlAgilityPack.dll">
       <publishTime>07/30/2015 09:18:15</publishTime>
     </File>
+    <File Include="bin/Jil.dll">
+      <publishTime>10/01/2015 14:19:12</publishTime>
+    </File>
     <File Include="bin/Microsoft.AspNet.WebApi.MessageHandlers.Compression.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
     </File>
@@ -74,14 +77,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/ServiceStack.Text.dll">
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
+    <File Include="bin/Sigil.dll">
+      <publishTime>10/01/2015 14:19:12</publishTime>
+    </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>10/01/2015 14:03:00</publishTime>
+      <publishTime>10/01/2015 14:57:17</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/01/2015 13:58:05</publishTime>
+      <publishTime>10/01/2015 14:57:11</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/01/2015 14:02:37</publishTime>
+      <publishTime>10/01/2015 14:57:13</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/30/2015 09:18:24</publishTime>
@@ -132,13 +138,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/18/2015 12:34:28</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/14/2015 15:41:25</publishTime>
+      <publishTime>10/01/2015 14:54:13</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/01/2015 13:58:12</publishTime>
+      <publishTime>10/01/2015 14:57:46</publishTime>
     </File>
   </ItemGroup>
 </Project>

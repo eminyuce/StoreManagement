@@ -10,6 +10,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ActivitiesController : BaseController
     {
+        private const String IndexPageDesingName = "ActivitiesIndexPage";
+
         [OutputCache(CacheProfile = "Cache20Minutes")]
         public async Task<ActionResult> Index()
         {
@@ -30,8 +32,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 if (pageDesign == null)
                 {
-                    Logger.Error("GetActivityIndexPage PageDesing is null.");
-                    throw new Exception("PageDesing is null");
+                  
+                    throw new Exception("PageDesing is null:" + IndexPageDesingName);
                 }
 
 

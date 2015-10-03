@@ -21,7 +21,7 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static String AddPaging(String html, String additionalHtml)
         {
-            var r = AddHtml(html, "div", "data-paging", additionalHtml);
+            var r = AddHtml(html, "span", "data-paging", additionalHtml);
 
             return r;
         }

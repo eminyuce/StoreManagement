@@ -93,9 +93,34 @@ namespace StoreManagement.Liquid.Helper
             var paginator = new PaginatorLiquid();
             paginator.PaginatePath = this.PaginatePath;
             var pageOutputDictionary = PageOutput.LiquidRenderedResult;
-            paginator.Page = pageOutputDictionary[StoreConstants.PageNumber].ToInt();
-            paginator.TotalRecords = pageOutputDictionary[StoreConstants.TotalItemCount].ToInt();
-            paginator.PageSize = pageOutputDictionary[StoreConstants.PageSize].ToInt();
+            if (pageOutputDictionary.ContainsKey(StoreConstants.PageNumber))
+            {
+                paginator.Page = pageOutputDictionary[StoreConstants.PageNumber].ToInt();
+            }
+            else
+            {
+                Logger.Error("Key NOT FOUND :" + StoreConstants.PageNumber);
+            }
+
+            if (pageOutputDictionary.ContainsKey(StoreConstants.TotalItemCount))
+            {
+                paginator.TotalRecords = pageOutputDictionary[StoreConstants.TotalItemCount].ToInt();
+            }
+            else
+            {
+                Logger.Error("Key NOT FOUND :" + StoreConstants.TotalItemCount);
+            }
+
+            if (pageOutputDictionary.ContainsKey(StoreConstants.PageSize))
+            {
+                paginator.PageSize = pageOutputDictionary[StoreConstants.PageSize].ToInt();
+            }
+            else
+            {
+                Logger.Error("Key NOT FOUND :" + StoreConstants.PageSize);
+            }
+          
+
             object anonymousObject = new
                 {
                     paginator = paginator
@@ -107,7 +132,17 @@ namespace StoreManagement.Liquid.Helper
             //var pagingDic = new Dictionary<String, String>();
             //pagingDic.Add(StoreConstants.PagingOutput, indexPageOutput);
             //pagingDic = pagingDic.MergeLeft(pageOutputDictionary);
-            var html = pageOutputDictionary[StoreConstants.PageOutput];
+            String html = "";
+            if (pageOutputDictionary.ContainsKey(StoreConstants.PageOutput))
+            {
+                html = pageOutputDictionary[StoreConstants.PageOutput];
+            }
+            else
+            {
+                Logger.Error("Key NOT FOUND :" + StoreConstants.PageOutput);
+            }
+          
+          
             pageOutputDictionary[StoreConstants.PageOutput] = HtmlAttributeHelper.AddPaging(html, pagingHtml);
 
             //PageOutput.LiquidRenderedResult = pagingDic;

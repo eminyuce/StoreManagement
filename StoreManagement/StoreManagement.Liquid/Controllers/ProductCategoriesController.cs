@@ -13,7 +13,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ProductCategoriesController : BaseController
     {
-        private const String PageDesingName = "ProductCategoriesIndexPage";
+        private const String IndexPageDesingName = "ProductCategoriesIndexPage";
+        private const String CategoryPageDesingName = "ProductCategoriesCategoryPage";
 
        [OutputCache(CacheProfile = "Cache20Minutes")]
         public async  Task<ActionResult> Index(int page = 1)
@@ -25,7 +26,7 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingName);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
                 var pageSize = GetSettingValueInt("ProductCategories_PageSize", StoreConstants.DefaultPageSize);
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
 
@@ -34,6 +35,12 @@ namespace StoreManagement.Liquid.Controllers
                 await Task.WhenAll(pageDesignTask, categoriesTask);
                 var pageDesign = pageDesignTask.Result;
                 var categories = categoriesTask.Result;
+
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null:" + IndexPageDesingName);
+                }
+
 
                 var pageOutput = ProductCategoryHelper.GetCategoriesIndexPage(pageDesign, categories);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
@@ -56,7 +63,7 @@ namespace StoreManagement.Liquid.Controllers
             catch (Exception ex)
             {
                 Logger.Error(ex, "ProductCategories:Index:" + ex.StackTrace, page);
-                return new HttpStatusCodeResult(500);
+                throw ex;
             }
         }
 
@@ -72,9 +79,9 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     return HttpNotFound("Not Found");
                 }
-
+        
                 int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductCategoryPage");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, CategoryPageDesingName);
                 var pageSize = GetSettingValueInt("ProductCategoryPage_ItemsNumber", StoreConstants.DefaultPageSize);
                 var categoriesTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
                 var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, categoryId, StoreConstants.ProductType, true, page, pageSize);
@@ -88,6 +95,12 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesign = pageDesignTask.Result;
                 var categories = categoriesTask.Result;
                 var products = productsTask.Result;
+                
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null" + CategoryPageDesingName);
+                }
+
 
                 var pageOutput = ProductCategoryHelper.GetCategoryPage(pageDesign, categories, products);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
@@ -110,7 +123,7 @@ namespace StoreManagement.Liquid.Controllers
             catch (Exception ex)
             {
                 Logger.Error(ex, "Category:Index:" + ex.StackTrace, id);
-                return new HttpStatusCodeResult(500);
+                throw ex;
             }
 
         }

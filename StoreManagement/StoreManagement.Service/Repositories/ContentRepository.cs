@@ -138,7 +138,8 @@ namespace StoreManagement.Service.Repositories
 
         public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
-            Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) && r2.MainPage;
+            Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && typeName.Equals(r2.Type, StringComparison.InvariantCultureIgnoreCase)
+                && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) && r2.MainPage;
             Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
 
             var items = await this.FindAllIncludingAsync(match, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
@@ -165,8 +166,8 @@ namespace StoreManagement.Service.Repositories
 
             Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId
                                                           && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
-                                                          &&
-                                                          r2.CategoryId ==
+                                                          && typeName.Equals(r2.Type,StringComparison.InvariantCultureIgnoreCase)
+                                                          && r2.CategoryId ==
                                                           (categoryId.HasValue ? categoryId.Value : r2.CategoryId) &&
                                                           r2.MainPage;
 

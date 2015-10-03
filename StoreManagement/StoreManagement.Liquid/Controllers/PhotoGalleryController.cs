@@ -13,14 +13,14 @@ namespace StoreManagement.Liquid.Controllers
         [OutputCache(CacheProfile = "Cache20Minutes")]
     public class PhotoGalleryController : BaseController
     {
-        
+            private const String IndexPageDesingName = "PhotoGalleryIndexPage";
 
         public async Task<ActionResult> Index()
         {
             try
             {
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "PhotoGalleryIndexPage");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
                 var fileManagersTask = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
 
                 PhotoGalleryHelper.StoreSettings = GetStoreSettings();
@@ -32,7 +32,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 if (pageDesign == null)
                 {
-                    throw new Exception("PageDesing is null");
+                    throw new Exception("PageDesing is null:" + IndexPageDesingName);
                 }
 
 

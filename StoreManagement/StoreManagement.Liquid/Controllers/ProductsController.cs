@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ProductsController : BaseController
     {
-
+        private const String IndexPageDesingName = "ProductsIndexPage";
         [OutputCache(CacheProfile = "Cache20Minutes")]
         public async Task<ActionResult> Index(int page = 1, String search = "")
         {
@@ -24,7 +24,7 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
 
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductsIndexPage");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
                 var pageSize =  GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
                 var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, pageSize);
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
@@ -42,7 +42,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 if (pageDesign == null)
                 {
-                    throw new Exception("PageDesing is null");
+                    throw new Exception("PageDesing is null:" + IndexPageDesingName);
                 }
 
 

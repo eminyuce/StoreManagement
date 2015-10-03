@@ -21,32 +21,44 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static String AddPaging(String html, String additionalHtml)
         {
-            var r = AddHtml(html, "span", "data-paging", additionalHtml);
+            var r = AddHtml(html, "div", "data-paging", additionalHtml);
 
             return r;
         }
 
         public static String AddHtml(String html, String attributeTag, String dataAttribute, String additionalHtml)
         {
-            String result = "";
-            var htmlDocument = GetHtml(html);
-            HtmlNodeCollection nodes =
-                htmlDocument.DocumentNode.SelectNodes(String.Format("//{1}[@{0}]", dataAttribute, attributeTag));
-            if (nodes != null)
-            {
-                foreach (HtmlNode divNode in nodes)
-                {
-                    // HtmlAttribute attribute = divNode.Attributes[String.Format("{0}", dataAttribute)];
-                    divNode.InnerHtml = additionalHtml;
-                    // links.Add(attribute.Value);
-                }
-            }
-            else
-            {
+            //String result = html;
+            //var htmlDocument = GetHtml(html);
+            //HtmlNodeCollection nodes =
+            //    htmlDocument.DocumentNode.SelectNodes(String.Format("//{0}[@{1}]", attributeTag, dataAttribute));
+            ////string classToFind = "sitepaging";
+            ////nodes = htmlDocument.DocumentNode.SelectNodes(string.Format("//*[contains(@class,'{0}')]", classToFind));
+            ////var nodes1 = htmlDocument.DocumentNode.Descendants("div").Where(d =>
+            ////                d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains(classToFind)
+            ////            ).ToList();
 
-            }
-            result = htmlDocument.DocumentNode.OuterHtml;
-            return result;
+
+            //if (nodes.Any())
+            //{
+            //    foreach (HtmlNode divNode in nodes)
+            //    {
+            //        // HtmlAttribute attribute = divNode.Attributes[String.Format("{0}", dataAttribute)];
+            //        divNode.InnerHtml = additionalHtml;
+            //        // links.Add(attribute.Value);
+            //    }
+            //    result = htmlDocument.DocumentNode.OuterHtml;
+            //}
+            //else
+            //{
+
+            //}
+
+            //return result;
+
+            html = html.Replace("<StorePagingHtml>", additionalHtml);
+
+            return html;
         }
     }
 }

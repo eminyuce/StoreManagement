@@ -252,7 +252,7 @@
                             <b>Page Design Name :</b>
                         
                               
-                                  <input style="font-size:xx-large"  id="PageDesignName" style="width: 100% !important;" type="text">
+                                  <input style="font-size:x-large"  id="PageDesignName" style="width: 100% !important;" type="text">
                             <input class="btn btn-primary btn-lg" id="SavePageDesign" type="submit" value="Save">
                             <input class="btn btn-danger btn-lg" id="ClearPageDesign" type="submit" value="Clear">
                        
@@ -262,12 +262,12 @@
                             <input type="hidden" id="selecedPageDesingItem" value="-1" />
                             <br />
                             <input class="btn btn-success btn-block btn-lg" id="UpdatePageDesign" type="submit" value="Update"><strong>
-                              <span style="font-size:xx-large" class="text-success, bg-danger" id="PageDesignMessage"></span>  
+                              <span style="font-size:x-large" class="text-success, bg-danger" id="PageDesignMessage"></span>  
                             </strong>
                             <br />
                          
                                 
-                                <textarea id="PageDesingText" rows="75" style="width: 100%; height: 100%;"></textarea>
+                                <textarea id="PageDesingText"  rows="75" style="width: 100%; height: 100%;"></textarea>
 
                      
          
@@ -296,6 +296,7 @@
 
         $(document).ready(function () {
 
+            
             try {
 
                 bindPageDesingItem();
@@ -362,7 +363,7 @@
             if (desingItemId > 0) {
                 var postData = JSON.stringify({ "id": desingItemId, "text": $("#PageDesingText").val(), "name": $("#PageDesignName").val() });
                 ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
-                    SetTextMessage(" PAGE DESING IS UPDATED...");
+                    SetTextMessage(" IS UPDATED...");
                     $('[data-page-design-name=' + desingItemId + ']').text($("#PageDesignName").val());
                 });
 
@@ -387,7 +388,7 @@
                             $(this).parent().parent().parent().css({ 'background-color': "" });
                         });
                    
-                        SetTextMessage(" PAGE DESING IS FETCHED...");
+                        SetTextMessage(" IS FETCHED...");
                         $("#PageDesingText").val(data.PageTemplate);
                         $("#PageDesignName").val(data.Name);
                         $("#selecedPageDesingItem").val(itemId);
@@ -415,7 +416,7 @@
 
                 $("#selecedPageDesingItem").val(itemId);
  
-                SetTextMessage(" PAGE DESING IS FETCHED...");
+                SetTextMessage(" IS FETCHED...");
                 var clonedRow = $('[data-page-desing-item-id=' + itemId + ']').parent().parent().parent().clone();
                 console.log(clonedRow);
                 $('.page-desing-row-' + itemId).remove();

@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 
     try {
-
+      
 
         $('textarea[data-html-editor="normal"]').ckeditor({
             height: '360px',

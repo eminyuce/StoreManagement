@@ -92,23 +92,7 @@
                    @Html.ActionLink(" ", "SaveOrEdit", "Stores", new { id = d.Id }, new { @class = "btn btn-primary btn-sm     glyphicon glyphicon-pencil glyphicon-white" })
                </b>);
 
-        columns.Add()
-                   .Encoded(false)
-                   .Sanitized(false)
-                   .SetWidth(30)
-                   .RenderValueAs(d =>
-                       @<b>
-                           @Html.ActionLink(" ", "Details", "Stores", new { id = d.Id }, new { @class = "btn btn-default btn-sm     glyphicon glyphicon-eye-open" })
-                       </b>);
 
-        columns.Add()
-.Encoded(false)
-.Sanitized(false)
-.SetWidth(30)
-.RenderValueAs(d =>
-@<b>
-    @Html.ActionLink(" ", "Delete", "Stores", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-remove glyphicon-white" })
-</b>);
 
 
         columns.Add()
@@ -162,10 +146,26 @@
                 .Sanitized(false)
                 .SetWidth(30)
                 .RenderValueAs(d =>
-                @<b>
-                    @Html.ActionLink("Copy Store", "CopyStore", "Stores", new { id = d.Id }, new { @class = "glyphicon glyphicon-copy btn btn-warning btn-block" })
-                </b>);
-                        
+                               @<b>
+
+                                   <div class="dropdown">
+                                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                           Store Actions
+                                            <span class="caret"></span>
+                                       </button>
+                                       <ul class="dropdown-menu">
+                                           <li>@Html.ActionLink("Copy All Store", "CopyStore", "Stores", new { id = d.Id, copyState = 1 }, new { @class = "glyphicon glyphicon-copy" })</li>
+                                           <li>@Html.ActionLink("Copy Store Settings and Page Desing", "CopyStore", "Stores", new { id = d.Id, copyState = 2 }, new { @class = "glyphicon glyphicon-copy" })</li>
+                                           <li class="divider"></li>
+                                           <li>
+                                               @Html.ActionLink("Details", "Details", "Stores", new { id = d.Id }, new { @class = "  glyphicon glyphicon-eye-open" })
+                                           </li>
+                                           <li>@Html.ActionLink("Delete", "Delete", "Stores", new { id = d.Id }, new { @class = "glyphicon glyphicon-remove glyphicon-white" })</li>
+                                       </ul>
+                                   </div>
+
+                               </b>);
+
 
         columns.Add(o => o.CreatedDate)
               .Titled("CreatedDate")
@@ -179,8 +179,8 @@
               .Sortable(true).
               RenderValueAs(o => String.Format("{0}", o.UpdatedDate.Value.ToShortDateString()))
               .SortInitialDirection(GridSortDirection.Descending);
-              
-              
+
+
     }).SetRowCssClasses(item => item.Id % 2 == 0 ? "warning" : string.Empty).WithPaging(pageSizeNumber).Sortable().Filterable().WithMultipleFilters().Selectable(false)
 
 

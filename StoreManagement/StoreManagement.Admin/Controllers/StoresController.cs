@@ -136,8 +136,9 @@ namespace StoreManagement.Admin.Controllers
             }
         }
         [HttpGet]
-        public ActionResult CopyStore(int id)
+        public ActionResult CopyStore(int id, int copyState=1)
         {
+            TempData["CopyState"] = copyState;
             return View(StoreRepository.GetSingle(id));
         }
         [HttpPost]
@@ -145,58 +146,15 @@ namespace StoreManagement.Admin.Controllers
         {
             //StoreRepository.CopyStore(copyStoreId, name, domain, layout);
             int newStoreId = 0;
-
+            int copyState = (int) TempData["CopyState"];
             try
             {
-                var store = StoreRepository.GetStore(copyStoreId);
-                var storeCopy = GeneralHelper.DataContractSerialization(store);
-                storeCopy.Id = 0;
-                storeCopy.Name = name;
-                storeCopy.Domain = domain;
-                storeCopy.GoogleDriveFolder = domain;
-                StoreRepository.Add(storeCopy);
-                StoreRepository.Save();
-
-                newStoreId = storeCopy.Id;
-
-
-                try
+                newStoreId = CopyStoreAndPageDesingAndSettings(copyStoreId, name, domain, newStoreId);
+                if (copyState == 1)
                 {
-                    var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
-                    foreach (var settingStore in settingsStore)
-                    {
-                        var s = GeneralHelper.DataContractSerialization(settingStore);
-                        s.Id = 0;
-                        s.StoreId = newStoreId;
-                        SettingRepository.Add(s);
-                    }
-                    SettingRepository.Save();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex, "CopyStore", newStoreId);
+                    var res = Task.Factory.StartNew(() => CopyStoreData(copyStoreId, newStoreId));
                 }
 
-
-                try
-                {
-                    var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
-                    foreach (var pageDesing in pageDesings)
-                    {
-                        var s = GeneralHelper.DataContractSerialization(pageDesing);
-                        s.Id = 0;
-                        s.StoreId = newStoreId;
-                        PageDesignRepository.Add(s);
-                    }
-                    PageDesignRepository.Save();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex, "CopyStore", newStoreId);
-                }
-
-
-                var res = Task.Factory.StartNew(() => CopyStoreData(copyStoreId, newStoreId));
 
 
                 return RedirectToAction("Index", new { search = name.ToLower() });
@@ -216,7 +174,56 @@ namespace StoreManagement.Admin.Controllers
 
         }
 
+        private int CopyStoreAndPageDesingAndSettings(int copyStoreId, string name, string domain, int newStoreId)
+        {
+            var store = StoreRepository.GetStore(copyStoreId);
+            var storeCopy = GeneralHelper.DataContractSerialization(store);
+            storeCopy.Id = 0;
+            storeCopy.Name = name;
+            storeCopy.Domain = domain;
+            storeCopy.GoogleDriveFolder = domain;
+            StoreRepository.Add(storeCopy);
+            StoreRepository.Save();
 
+            newStoreId = storeCopy.Id;
+
+
+            try
+            {
+                var settingsStore = SettingRepository.GetStoreSettings(copyStoreId);
+                foreach (var settingStore in settingsStore)
+                {
+                    var s = GeneralHelper.DataContractSerialization(settingStore);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    SettingRepository.Add(s);
+                }
+                SettingRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+
+
+            try
+            {
+                var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
+                foreach (var pageDesing in pageDesings)
+                {
+                    var s = GeneralHelper.DataContractSerialization(pageDesing);
+                    s.Id = 0;
+                    s.StoreId = newStoreId;
+                    PageDesignRepository.Add(s);
+                }
+                PageDesignRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "CopyStore", newStoreId);
+            }
+            return newStoreId;
+        }
 
 
         //

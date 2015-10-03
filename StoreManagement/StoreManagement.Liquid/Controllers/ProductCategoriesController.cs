@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ProductCategoriesController : BaseController
     {
-        private const String PageDesingName = "ProductCategoriesIndex";
+        private const String PageDesingName = "ProductCategoriesIndexPage";
 
        [OutputCache(CacheProfile = "Cache20Minutes")]
         public async  Task<ActionResult> Index(int page = 1)

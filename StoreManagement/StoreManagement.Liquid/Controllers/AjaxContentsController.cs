@@ -114,7 +114,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-                returnHtml = await GetContentsByContentTypeHtml(page, designName, categoryId, imageWidth, imageHeight, type, contentType);
+                returnHtml = await GetContentsByContentTypeHtml(page,pageSize, designName, categoryId, imageWidth, imageHeight, type, contentType);
             }
             catch (Exception ex)
             {
@@ -126,10 +126,10 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
-        private async Task<String> GetContentsByContentTypeHtml(int page, string designName, int categoryId, int imageWidth, int imageHeight,
+        private async Task<String> GetContentsByContentTypeHtml(int page,  int pageSize, string designName, int categoryId, int imageWidth, int imageHeight,
             string type, string contentType)
         {
-            int pageSize = 10;
+ 
             string returnHtml;
             var catId = categoryId == 0 ? (int?)null : categoryId;
             if (contentType.Equals("random"))

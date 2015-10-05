@@ -182,7 +182,7 @@ function GetFooter() {
             var postData = JSON.stringify({ "designName": designName });
             ajaxMethodCall(postData, "/AjaxGenerics/Footer", function(data) {
                 AddDataToDiv(truethis, data, 0);
-                GetAttributeBaseAjax();
+ 
             });
         }
     });
@@ -196,7 +196,7 @@ function GetMainNavigation() {
             var postData = JSON.stringify({ "designName": designName });
             ajaxMethodCall(postData, "/AjaxGenerics/MainNavigation", function (data) {
                 AddDataToDiv(truethis, data, 0);
-                GetAttributeBaseAjax();
+                 
             });
         }
     });

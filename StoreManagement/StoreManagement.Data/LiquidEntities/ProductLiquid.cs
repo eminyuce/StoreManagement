@@ -46,5 +46,9 @@ namespace StoreManagement.Data.LiquidEntities
 
 
 
+        public String PlainDescription
+        {
+            get { return YuceConvert.StripHtml(this.Product.Description); }
+        }
     }
 }

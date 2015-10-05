@@ -45,6 +45,11 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetContentLink(this.Content, Category.Name, this.Type);
             }
         }
-       
+
+
+        public String PlainDescription
+        {
+            get { return YuceConvert.StripHtml(this.Content.Description); }
+        }
     }
 }

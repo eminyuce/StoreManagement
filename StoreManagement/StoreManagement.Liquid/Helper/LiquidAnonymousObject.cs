@@ -124,6 +124,7 @@ namespace StoreManagement.Liquid.Helper
                        s.Product.UnitsInStock,
                        s.Product.VideoUrl,
                        s.DetailLink,
+                       s.PlainDescription,
                        images = s.ImageLiquid
 
                    };
@@ -200,6 +201,7 @@ namespace StoreManagement.Liquid.Helper
                        s.Content.UpdatedDate,
                        s.DetailLink,
                        s.Content.VideoUrl,
+                       s.PlainDescription,
                        images = s.ImageLiquid
                    };
         }

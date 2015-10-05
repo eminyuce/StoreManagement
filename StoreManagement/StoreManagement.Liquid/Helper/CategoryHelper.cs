@@ -21,7 +21,7 @@ namespace StoreManagement.Liquid.Helper
             try
             {
 
-              
+
 
                 var cats = new List<CategoryLiquid>();
                 foreach (var item in categories.items)
@@ -57,14 +57,14 @@ namespace StoreManagement.Liquid.Helper
 
         }
 
-        public StoreLiquidResult GetCategoryPage(PageDesign pageDesign, Category category, String type, StorePagedList<Content> contents)
+        public StoreLiquidResult GetCategoryPage(PageDesign pageDesign, Category category, StorePagedList<Content> contents, String type)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try
             {
 
-                var productCategory = new CategoryLiquid(category, type);
+                var contentCategory = new CategoryLiquid(category, type);
 
                 var items = new List<ContentLiquid>();
                 foreach (var item in contents.items)
@@ -75,8 +75,8 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    category = LiquidAnonymousObject.GetCategory(productCategory),
-                    products = LiquidAnonymousObject.GetContentLiquid(items)
+                    category = LiquidAnonymousObject.GetCategory(contentCategory),
+                    items = LiquidAnonymousObject.GetContentLiquid(items)
                 };
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

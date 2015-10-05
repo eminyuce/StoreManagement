@@ -229,8 +229,8 @@ namespace StoreManagement.Liquid.Helper
             object anonymousObject = new
             {
                 CategoryId = productCategories.ProductCategory.Id,
-                CategoryName = productCategories.ProductCategory.Name,
-                CategoryDescription = productCategories.ProductCategory.Description
+                Name = productCategories.ProductCategory.Name,
+                Description = productCategories.ProductCategory.Description
             };
             return anonymousObject;
         }
@@ -239,8 +239,8 @@ namespace StoreManagement.Liquid.Helper
             object anonymousObject = new
             {
                 CategoryId = productCategories.Category.Id,
-                CategoryName = productCategories.Category.Name,
-                CategoryDescription = productCategories.Category.Description
+                Name = productCategories.Category.Name,
+                Description = productCategories.Category.Description
             };
             return anonymousObject;
         }

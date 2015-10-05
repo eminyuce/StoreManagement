@@ -464,7 +464,7 @@
     <Compile Include="Controllers\AjaxGenericsController.cs" />
     <Compile Include="Controllers\AjaxProductsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\BlogsCategoriesController.cs" />
+    <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -577,8 +577,10 @@
     <Content Include="Views\Test\Index2.cshtml" />
     <Content Include="Views\Shared\TimeoutError.cshtml" />
     <Content Include="Views\Test\Index3.cshtml" />
-    <Content Include="Views\BlogsCategories\Index.cshtml" />
+    <Content Include="Views\BlogCategories\Index.cshtml" />
     <Content Include="Views\NewsCategories\Index.cshtml" />
+    <Content Include="Views\NewsCategories\Category.cshtml" />
+    <Content Include="Views\BlogCategories\Category.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -12,7 +12,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
     {
         StoreLiquidResult GetCategoriesIndexPage(PageDesign pageDesign, StorePagedList<Category> categories, String type);
 
-        StoreLiquidResult GetCategoryPage(PageDesign pageDesign, Category category, String type, StorePagedList<Content> contents);
+        StoreLiquidResult GetCategoryPage(PageDesign pageDesign, Category category, StorePagedList<Content> contents, String type);
     }
 
    

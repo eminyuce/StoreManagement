@@ -7,13 +7,15 @@ using StoreManagement.Data.Constants;
 
 namespace StoreManagement.Liquid.Controllers
 {
-    public class BlogsCategoriesController : CategoriesController
+    public class BlogCategoriesController : CategoriesController
     {
         //
         // GET: /BlogsCategories/
-        public BlogsCategoriesController()
+        public BlogCategoriesController()
             : base(StoreConstants.BlogsType)
         {
+            this.PageDesingCategoryPageName = "BlogsCategoryPage";
+            this.PageDesingIndexPageName = "BlogCategoriesIndexPage";
 
         }
         

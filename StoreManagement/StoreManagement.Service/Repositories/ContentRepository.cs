@@ -135,28 +135,7 @@ namespace StoreManagement.Service.Repositories
         {
             return this.GetAllIncluding(r2 => r2.ContentFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
-
-        public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
-        {
-            Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && typeName.Equals(r2.Type, StringComparison.InvariantCultureIgnoreCase)
-                && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.CategoryId == (categoryId.HasValue ? categoryId.Value : r2.CategoryId) && r2.MainPage;
-            Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
-
-            var items = await this.FindAllIncludingAsync(match, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
-            var totalItemNumber = await this.CountAsync(match);
-
-
-            var task = Task.Factory.StartNew(() =>
-                {
-
-                    StorePagedList<Content> resultItems = new StorePagedList<Content>(items, page, pageSize, totalItemNumber);
-                    return resultItems;
-                });
-            var result = await task;
-
-            return result;
-
-        }
+ 
 
         public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize,
                                                string search)
@@ -168,8 +147,7 @@ namespace StoreManagement.Service.Repositories
                                                           && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
                                                           && typeName.Equals(r2.Type,StringComparison.InvariantCultureIgnoreCase)
                                                           && r2.CategoryId ==
-                                                          (categoryId.HasValue ? categoryId.Value : r2.CategoryId) &&
-                                                          r2.MainPage;
+                                                          (categoryId.HasValue ? categoryId.Value : r2.CategoryId);
 
 
             var predicate = PredicateBuilder.Create<Content>(match);
@@ -180,8 +158,8 @@ namespace StoreManagement.Service.Repositories
             }
 
              Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
-
-             var items = await this.FindAllIncludingAsync(predicate, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
+             Expression<Func<Content, int>> keySelector = t => t.Ordering;
+             var items = await this.FindAllIncludingAsync(predicate, page, pageSize, keySelector, OrderByType.Descending, includeProperties);
              var totalItemNumber = await this.CountAsync(predicate);
 
 

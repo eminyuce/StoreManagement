@@ -14,7 +14,8 @@ namespace StoreManagement.Liquid.Controllers
         public NewsCategoriesController()
             : base(StoreConstants.NewsType)
         {
-
+            this.PageDesingCategoryPageName = "NewsCategoryPage";
+            this.PageDesingIndexPageName = "NewsCategoriesIndexPage";
         }
 	}
 }

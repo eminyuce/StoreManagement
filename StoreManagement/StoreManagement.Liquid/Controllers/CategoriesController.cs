@@ -12,7 +12,9 @@ namespace StoreManagement.Liquid.Controllers
 {
     public abstract class CategoriesController : BaseController
     {
-        private String _pageDesingName = "CategoriesIndexPage";
+        protected String PageDesingIndexPageName { get; set; }
+        protected String PageDesingCategoryPageName { get; set; }
+
         private String Type { get; set; }
         protected CategoriesController(String type)
         {
@@ -23,10 +25,10 @@ namespace StoreManagement.Liquid.Controllers
         {
             try
             {
-                
-                _pageDesingName = Type + _pageDesingName;
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, _pageDesingName);
-                var pageSize = GetSettingValueInt(Type+"Categories_PageSize", StoreConstants.DefaultPageSize);
+
+
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingIndexPageName);
+                var pageSize = GetSettingValueInt(Type + "Categories_PageSize", StoreConstants.DefaultPageSize);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdWithPagingAsync(StoreId, Type, true, page, pageSize);
 
                 CategoryHelper.StoreSettings = GetStoreSettings();
@@ -36,7 +38,8 @@ namespace StoreManagement.Liquid.Controllers
                 var categories = categoriesTask.Result;
                 if (pageDesign == null)
                 {
-                    throw new Exception("PageDesing is null:" + _pageDesingName);
+                    Logger.Error("PageDesing is null:" + PageDesingIndexPageName);
+                    throw new Exception("PageDesing is null:" + PageDesingIndexPageName);
                 }
                 var pageOutput = CategoryHelper.GetCategoriesIndexPage(pageDesign, categories, Type);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
@@ -58,7 +61,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Categories:Index:" + ex.StackTrace, page);
+                Logger.Error(ex, Type + "Categories:Index:" + ex.StackTrace, page);
                 return new HttpStatusCodeResult(500);
             }
         }
@@ -75,22 +78,26 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
                 int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductCategoryPage");
-                var pageSize = GetSettingValueInt("ProductCategoryPage_ItemsNumber", StoreConstants.DefaultPageSize);
-                var categoriesTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
-                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, categoryId, StoreConstants.ProductType, true, page, pageSize);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingCategoryPageName);
+                var pageSize = GetSettingValueInt(Type + "CategoryPage_ItemsNumber", StoreConstants.DefaultPageSize);
+                var categoriesTask = CategoryService.GetCategoryAsync(categoryId);
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, categoryId, Type, true, page, pageSize,"");
 
-                ProductCategoryHelper.StoreSettings = GetStoreSettings();
-                ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoryPage_ImageWidth", 50);
-                ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoryPage_ImageHeight", 50);
+                CategoryHelper.StoreSettings = GetStoreSettings();
+                CategoryHelper.ImageWidth = GetSettingValueInt(Type + "CategoryPage_ImageWidth", 50);
+                CategoryHelper.ImageHeight = GetSettingValueInt(Type + "CategoryPage_ImageHeight", 50);
 
 
-                await Task.WhenAll(pageDesignTask, categoriesTask, productsTask);
+                await Task.WhenAll(pageDesignTask, categoriesTask, contentsTask);
                 var pageDesign = pageDesignTask.Result;
                 var categories = categoriesTask.Result;
-                var products = productsTask.Result;
-
-                var pageOutput = ProductCategoryHelper.GetCategoryPage(pageDesign, categories, products);
+                var contents = contentsTask.Result;
+                if (pageDesign == null)
+                {
+                    Logger.Error("PageDesing is null:" + PageDesingCategoryPageName);
+                    throw new Exception("PageDesing is null:" + PageDesingIndexPageName);
+                }
+                var pageOutput = CategoryHelper.GetCategoryPage(pageDesign, categories, contents, Type);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
                 PagingHelper.StoreSettings = GetStoreSettings();
@@ -110,7 +117,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Category:Index:" + ex.StackTrace, id);
+                Logger.Error(ex, Type + "Category:Index:" + ex.StackTrace, id);
                 return new HttpStatusCodeResult(500);
             }
 

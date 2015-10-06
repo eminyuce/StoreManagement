@@ -103,7 +103,7 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
-        public StoreLiquidResult GetCategoryPage(PageDesign pageDesign, ProductCategory category, StorePagedList<Product> products)
+        public StoreLiquidResult GetCategoryPage(PageDesign pageDesign, ProductCategory category)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -112,26 +112,15 @@ namespace StoreManagement.Liquid.Helper
                
                 var productCategories = new ProductCategoryLiquid(category);
 
-                var items = new List<ProductLiquid>();
-                foreach (var item in products.items)
-                {
-                    var blog = new ProductLiquid(item, category,  ImageWidth, ImageHeight);
-                    items.Add(blog);
-                }
+                 
 
                 object anonymousObject = new
                 {
-                    category = LiquidAnonymousObject.GetProductCategory(productCategories),
-                    products = LiquidAnonymousObject.GetProductsLiquid(items)
+                    category = LiquidAnonymousObject.GetProductCategory(productCategories)
                 };
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
                 dic[StoreConstants.PageOutput] = indexPageOutput;
-                dic.Add(StoreConstants.PageSize, products.pageSize.ToStr());
-                dic.Add(StoreConstants.PageNumber, products.page.ToStr());
-                dic.Add(StoreConstants.TotalItemCount, products.totalItemCount.ToStr());
-                //dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-               // dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
 

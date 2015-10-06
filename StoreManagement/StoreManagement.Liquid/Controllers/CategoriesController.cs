@@ -79,40 +79,24 @@ namespace StoreManagement.Liquid.Controllers
 
                 int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingCategoryPageName);
-                var pageSize = GetSettingValueInt(Type + "CategoryPage_ItemsNumber", StoreConstants.DefaultPageSize);
-                var categoriesTask = CategoryService.GetCategoryAsync(categoryId);
-                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, categoryId, Type, true, page, pageSize,"");
+                var categoryTask = CategoryService.GetCategoryAsync(categoryId);
 
                 CategoryHelper.StoreSettings = GetStoreSettings();
                 CategoryHelper.ImageWidth = GetSettingValueInt(Type + "CategoryPage_ImageWidth", 50);
                 CategoryHelper.ImageHeight = GetSettingValueInt(Type + "CategoryPage_ImageHeight", 50);
 
 
-                await Task.WhenAll(pageDesignTask, categoriesTask, contentsTask);
+                await Task.WhenAll(pageDesignTask, categoryTask);
                 var pageDesign = pageDesignTask.Result;
-                var categories = categoriesTask.Result;
-                var contents = contentsTask.Result;
+                var category = categoryTask.Result;
                 if (pageDesign == null)
                 {
                     Logger.Error("PageDesing is null:" + PageDesingCategoryPageName);
                     throw new Exception("PageDesing is null:" + PageDesingIndexPageName);
                 }
-                var pageOutput = CategoryHelper.GetCategoryPage(pageDesign, categories, contents, Type);
-                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
+                var pageOutput = CategoryHelper.GetCategoryPage(pageDesign, category,  Type);
 
-                PagingHelper.StoreSettings = GetStoreSettings();
-                PagingHelper.StoreId = StoreId;
-                PagingHelper.PageOutput = pageOutput;
-                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
-                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-                PagingHelper.HttpRequestBase = this.Request;
-                PagingHelper.RouteData = this.RouteData;
-
-                await Task.WhenAll(pagingPageDesignTask);
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-
-
-                return View(pagingDic);
+                return View(pageOutput);
 
             }
             catch (Exception ex)

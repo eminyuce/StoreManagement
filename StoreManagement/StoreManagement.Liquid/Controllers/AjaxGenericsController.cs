@@ -125,16 +125,18 @@ namespace StoreManagement.Liquid.Controllers
 
             return returnHtml;
         }
-        public ActionResult SearchAutoComplete(String term, String type)
+        public ActionResult SearchAutoComplete(String term, String type, int take=0)
         {
 
             var list = new List<String>();
             String searchKey = term;
 
+            take = take == 0 ? 10 : take;
+
             if (type.Equals("products", StringComparison.InvariantCultureIgnoreCase))
             {
                 list =
-                    ProductService.GetProductByTypeAndCategoryId(StoreId, StoreConstants.ProductType, 0, searchKey, true)
+                    ProductService.GetProductByTypeAndCategoryId(StoreId, StoreConstants.ProductType, 0, searchKey, true).Take(take)
                                   .Select(r => r.Name)
                                   .ToList();
             }
@@ -142,7 +144,7 @@ namespace StoreManagement.Liquid.Controllers
             {
 
                 list =
-                       ContentService.GetContentByTypeAndCategoryId(StoreId, type, 0, searchKey, true)
+                       ContentService.GetContentByTypeAndCategoryId(StoreId, type, 0, searchKey, true).Take(take)
                                      .Select(r => r.Name)
                                      .ToList();
             }

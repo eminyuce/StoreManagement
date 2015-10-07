@@ -119,12 +119,13 @@ function GetAttributeBaseAjax() {
         $('[data-auto-complete]').each(function () {
             var truethis = this;
             var autoComplete = $(truethis).attr('data-auto-complete');
+            var take = parseInt($(truethis).attr('data-take'));
             $(truethis).autocomplete({
                 source: function (request, response) {
 
                     console.log("auto complate " + autoComplete);
                     var items = new Array();
-                    var jsonRequest = { "term": request.term, "type": autoComplete };
+                    var jsonRequest = { "term": request.term, "type": autoComplete, "take": take };
                     console.log(jsonRequest);
                     if (request.term.length > 2) {
                         $.ajax({

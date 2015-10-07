@@ -12,10 +12,50 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class BrandsController : BaseController
     {
-         
-        public ActionResult Index()
+        public String PageDesingIndexPageName = "BrandsIndexPage";
+        public async Task<ActionResult> Index(int page = 1)
         {
-            return View();
+            try
+            {
+
+
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingIndexPageName);
+                var pageSize = GetSettingValueInt("Brands_PageSize", StoreConstants.DefaultPageSize);
+                var brandsTask = BrandService.GetBrandsByStoreIdWithPagingAsync(StoreId, true, page, pageSize);
+
+                BrandHelper.StoreSettings = GetStoreSettings();
+
+                await Task.WhenAll(pageDesignTask, brandsTask);
+                var pageDesign = pageDesignTask.Result;
+                var brands = brandsTask.Result;
+                if (pageDesign == null)
+                {
+                    Logger.Error("PageDesing is null:" + PageDesingIndexPageName);
+                    throw new Exception("PageDesing is null:" + PageDesingIndexPageName);
+                }
+                var pageOutput = BrandHelper.GetBrandsIndexPage(pageDesign, brands);
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
+
+
+                PagingHelper.StoreSettings = GetStoreSettings();
+                PagingHelper.StoreId = StoreId;
+                PagingHelper.PageOutput = pageOutput;
+                PagingHelper.HttpRequestBase = this.Request;
+                PagingHelper.RouteData = this.RouteData;
+                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                await Task.WhenAll(pagingPageDesignTask);
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
+
+
+                return View(pagingDic);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Brands:Index:" + ex.StackTrace, page);
+                return new HttpStatusCodeResult(500);
+            }
         }
         [OutputCache(CacheProfile = "Cache20Minutes")]
         public async Task<ActionResult> Detail(String id = "")

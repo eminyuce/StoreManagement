@@ -13,7 +13,7 @@ using StoreManagement.Liquid.Helper.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-   
+
     public class BrandHelper : BaseLiquidHelper, IBrandHelper
     {
 
@@ -62,7 +62,7 @@ namespace StoreManagement.Liquid.Helper
 
         }
 
-      
+
 
 
         public StoreLiquidResult GetBrandDetailPage(Brand brand, List<Product> products, PageDesign pageDesign, List<ProductCategory> productCategories)
@@ -71,17 +71,17 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.PageOutput, "");
             try
             {
-             
 
 
-                var brandLiquid = new BrandLiquid(brand,  ImageWidth, ImageHeight);
+
+                var brandLiquid = new BrandLiquid(brand, ImageWidth, ImageHeight);
                 brandLiquid.Products = products;
                 brandLiquid.ProductCategories = productCategories;
 
                 object anonymousObject = new
                 {
-                    brand=brandLiquid,
-                    name=brandLiquid.Brand.Name,
+                    brand = brandLiquid,
+                    name = brandLiquid.Brand.Name,
                     description = brandLiquid.Brand.Description,
                     products = LiquidAnonymousObject.GetProductsLiquid(brandLiquid.ProductLiquidList),
                     productcategories = LiquidAnonymousObject.GetProductCategories(brandLiquid.ProductCategoriesLiquids)
@@ -103,6 +103,44 @@ namespace StoreManagement.Liquid.Helper
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
             return result;
+        }
+
+        public StoreLiquidResult GetBrandsIndexPage(PageDesign pageDesign, StorePagedList<Brand> brands)
+        {
+            var result = new StoreLiquidResult();
+
+            try
+            {
+                var brandList = new List<BrandLiquid>();
+                foreach (var item in brands.items)
+                {
+                    brandList.Add(new BrandLiquid(item, this.ImageWidth, this.ImageHeight));
+                }
+
+                object anonymousObject = new
+                {
+                    brands = LiquidAnonymousObject.GetBrandsEnumerable(brandList)
+                };
+
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+
+
+                var dic = new Dictionary<String, String>();
+                dic.Add(StoreConstants.PageOutput, indexPageOutput);
+                dic.Add(StoreConstants.PageSize, brands.pageSize.ToStr());
+                dic.Add(StoreConstants.PageNumber, brands.page.ToStr());
+                dic.Add(StoreConstants.TotalItemCount, brands.totalItemCount.ToStr());
+
+                result.LiquidRenderedResult = dic;
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "GetbrandsIndexPage : brands and pageDesign", String.Format("brands Items Count : {0}", brands.items.Count));
+            }
+
+            return result;
+
         }
     }
 }

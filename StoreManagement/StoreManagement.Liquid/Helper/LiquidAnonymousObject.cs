@@ -163,6 +163,7 @@ namespace StoreManagement.Liquid.Helper
                        s.Count
                    };
         }
+        
         public static object GetBrandLiquid(BrandLiquid brandLiquid)
         {
             return new

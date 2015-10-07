@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEntities;
+using StoreManagement.Data.Paging;
 
 namespace StoreManagement.Liquid.Helper.Interfaces
 {
@@ -16,5 +17,6 @@ namespace StoreManagement.Liquid.Helper.Interfaces
                                              PageDesign pageDesign,
                                              List<ProductCategory> productCategories);
 
+        StoreLiquidResult GetBrandsIndexPage(PageDesign pageDesign, StorePagedList<Brand> brands);
     }
 }

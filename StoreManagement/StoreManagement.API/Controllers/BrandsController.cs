@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 using WebApi.OutputCache.V2;
 
@@ -48,6 +49,11 @@ namespace StoreManagement.API.Controllers
         public async Task<Brand> GetBrandAsync(int brandId)
         {
             return await BrandRepository.GetBrandAsync(brandId);
+        }
+
+        public async Task<StorePagedList<Brand>> GetBrandsByStoreIdWithPagingAsync(int storeId, bool? isActive, int page = 1, int pageSize = 25)
+        {
+            return await BrandRepository.GetBrandsByStoreIdWithPagingAsync(storeId, isActive, page, pageSize);
         }
     }
 }

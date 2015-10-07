@@ -59,23 +59,23 @@ namespace StoreManagement.Service.Repositories
                        .ToList();
         }
 
-        public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
+        public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search, bool? isActive)
         {
-            var products = this.FindBy(
-                r => r.StoreId == storeId &&
-                     r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
+
+            Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId 
+                && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
+                && r2.ProductCategoryId == (categoryId > 0 ? categoryId : r2.ProductCategoryId) &&
+                     r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase);
 
 
+            var predicate = PredicateBuilder.Create<Product>(match);
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
-                products = products.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
-            else if (categoryId > 0)
-            {
-                products = products.Where(r => r.ProductCategoryId == categoryId);
+                predicate = predicate.And(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
 
 
+            var products = this.FindBy(predicate);
 
             return products.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 
@@ -133,13 +133,17 @@ namespace StoreManagement.Service.Repositories
             return this.GetAllIncluding(r2 => r2.ProductFiles.Select(r3 => r3.FileManager)).FirstOrDefault(r1 => r1.Id == id);
         }
 
-        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize, String search)
         {
             Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State) && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId);
             Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
-
-            var items = await this.FindAllIncludingAsync(match, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
-            var totalItemNumber = await this.CountAsync(match);
+            var predicate = PredicateBuilder.Create<Product>(match);
+            if (!String.IsNullOrEmpty(search.ToStr()))
+            {
+                predicate = predicate.And(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+            }
+            var items = await this.FindAllIncludingAsync(predicate, page, pageSize, r => r.Ordering, OrderByType.Descending, includeProperties);
+            var totalItemNumber = await this.CountAsync(predicate);
 
 
             var task = Task.Factory.StartNew(() =>
@@ -319,7 +323,7 @@ namespace StoreManagement.Service.Repositories
         }
         public List<Product> GetProductsByStoreId(int storeId, String searchKey)
         {
-            return BaseEntityRepository.GetActiveBaseEntitiesSearchList(this, storeId, searchKey);
+            return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
 
         public void Dispose()

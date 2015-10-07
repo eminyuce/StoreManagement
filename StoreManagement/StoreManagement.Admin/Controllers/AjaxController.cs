@@ -103,7 +103,7 @@ namespace StoreManagement.Admin.Controllers
             if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
                     controller.Equals("Products", StringComparison.InvariantCultureIgnoreCase))
             {
-                list = ProductRepository.GetProductsByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
+                list = ProductRepository.GetProductByTypeAndCategoryId(storeId, StoreConstants.ProductType, 0, searchKey, null).Select(r => r.Name).ToList();
             }
             else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
                     controller.Equals("News", StringComparison.InvariantCultureIgnoreCase))
@@ -783,24 +783,31 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult SetPageDesignText(int id = 0, String text = "", String name = "", int storeId = 0)
         {
             var item = new PageDesign();
+
+
             if (id == 0)
             {
                 if (storeId != 0 && !String.IsNullOrEmpty(name))
                 {
-                    var it =
-                        PageDesignRepository.GetPageDesignByStoreId(storeId, "")
-                                            .Any(r => r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
-                    if (!it)
+
+                    var isSamePageNameExists =
+                       PageDesignRepository.GetPageDesignByStoreId(storeId, "")
+                                           .Any(r => r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+
+                    if (isSamePageNameExists)
                     {
-                        item.StoreId = storeId;
-                        item.PageTemplate = text;
-                        item.CreatedDate = DateTime.Now;
-                        item.State = true;
-                        item.Name = name;
-                        item.Type = name;
-                        item.UpdatedDate = DateTime.Now;
-                        PageDesignRepository.Add(item);
+                        return Json("Same name exists.", JsonRequestBehavior.AllowGet);
                     }
+
+                    item.StoreId = storeId;
+                    item.PageTemplate = text;
+                    item.CreatedDate = DateTime.Now;
+                    item.State = true;
+                    item.Name = name;
+                    item.Type = name;
+                    item.UpdatedDate = DateTime.Now;
+                    PageDesignRepository.Add(item);
+
                 }
 
             }
@@ -815,7 +822,7 @@ namespace StoreManagement.Admin.Controllers
             }
 
             PageDesignRepository.Save();
-            return Json(item.PageTemplate, JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
     }

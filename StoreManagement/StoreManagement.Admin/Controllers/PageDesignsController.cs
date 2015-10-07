@@ -70,12 +70,24 @@ namespace StoreManagement.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+
+                   
+
                     if (pagedesign.Id > 0)
                     {
                         PageDesignRepository.Edit(pagedesign);
                     }
                     else
                     {
+                        var isSamePageNameExists = PageDesignRepository.GetPageDesignByStoreId(pagedesign.StoreId, "")
+                                            .Any(r => r.Name.Equals(pagedesign.Name, StringComparison.InvariantCultureIgnoreCase));
+                        if (isSamePageNameExists)
+                        {
+                            ModelState.AddModelError("", "Same Page Desing Name exists, put a different name.");
+                            return View(pagedesign);
+                        }
+                       
+                        
                         PageDesignRepository.Add(pagedesign);
                     }
 

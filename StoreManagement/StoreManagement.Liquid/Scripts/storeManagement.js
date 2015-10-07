@@ -115,6 +115,49 @@ function GetAttributeBaseAjax() {
     catch (err) {
         console.error(err.message);
     }
+    try {
+        $('[data-auto-complete]').each(function () {
+            var truethis = this;
+            var autoComplete = $(truethis).attr('data-auto-complete');
+            $(truethis).autocomplete({
+                source: function (request, response) {
+
+                    console.log("auto complate " + autoComplete);
+                    var items = new Array();
+                    var jsonRequest = { "term": request.term, "type": autoComplete };
+                    console.log(jsonRequest);
+                    if (request.term.length > 2) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/AjaxGenerics/SearchAutoComplete",
+                            data: jsonRequest,
+                            success: function (data) {
+                                for (var i = 0; i < data.length ; i++) {
+                                    items[i] = { text: data[i], value: data[i] };
+                                }
+                                console.log(items);
+                                response(sortInputFirst(request.term, items));
+                            }
+                        });
+                    }
+
+                },
+                select: function (event, ui) {
+                    $("#SearchButton").click();
+                }
+
+
+            });
+        });
+        
+
+       
+
+
+    }
+    catch (err) {
+        console.error(err.message);
+    }
 }
 
 function GetContentsByContentType() {

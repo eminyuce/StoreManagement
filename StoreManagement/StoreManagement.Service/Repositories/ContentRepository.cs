@@ -50,53 +50,28 @@ namespace StoreManagement.Service.Repositories
                     .ToList();
         }
 
+ 
 
-        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
+        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search, bool ? isActive)
         {
-            return this.GetAllIncluding(r1 => r1.ContentFiles.Select(r2 => r2.FileManager)).Where(
-                     r => r.StoreId == storeId &&
-                         r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) &&
-                         r.CategoryId == categoryId)
-                     .ToList();
-        }
-
-        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
-        {
-            var contents = this.FindBy(
-                r => r.StoreId == storeId &&
-                     r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase));
+            Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId
+                && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
+                && r2.CategoryId == (categoryId > 0 ? categoryId : r2.CategoryId) &&
+                     r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase);
 
 
+            var predicate = PredicateBuilder.Create<Content>(match);
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
-                contents = contents.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
-            }
-            else if (categoryId > 0)
-            {
-                contents = contents.Where(r => r.CategoryId == categoryId);
+                predicate = predicate.And(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
             }
 
+            var contents = this.FindBy(predicate);
 
             return contents.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
-
         }
 
-        public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
-        {
-            String key = String.Format("Store-{0}-GetContentByTypeAndCategoryIdFromCache-{1}-{2}", storeId, typeName, categoryId);
-            List<Content> items = null;
-
-            _contentCache.IsCacheEnable = this.IsCacheEnable;
-            _contentCache.TryGet(key, out items);
-
-            if (items == null)
-            {
-                items = GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
-                _contentCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(this.CacheMinute));
-            }
-
-            return items;
-        }
+      
 
         public StorePagedList<Content> GetContentsCategoryId(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {

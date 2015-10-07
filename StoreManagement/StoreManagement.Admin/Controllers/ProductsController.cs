@@ -27,7 +27,7 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0 && (categoryId != 0 || !String.IsNullOrEmpty(search)))
             {
-                resultList = ProductRepository.GetProductByTypeAndCategoryId(storeId, StoreConstants.ProductType, categoryId, search);
+                resultList = ProductRepository.GetProductByTypeAndCategoryId(storeId, StoreConstants.ProductType, categoryId, search, null);
             }
 
             var contentsAdminViewModel = new ProductsAdminViewModel();

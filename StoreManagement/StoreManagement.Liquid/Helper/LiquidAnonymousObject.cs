@@ -110,8 +110,8 @@ namespace StoreManagement.Liquid.Helper
                    {
                        CategoryName = s.Category.Name,
                        CategoryDescription = s.Category.Description,
-                       ProductCategoryId = s.Product.ProductCategoryId,
-                       BrandId = s.Product.BrandId,
+                       CategoryId = s.Product.ProductCategoryId,
+                       s.Product.BrandId,
                        ProductId = s.Product.Id,
                        s.Product.Name,
                        s.Product.Description,
@@ -134,8 +134,8 @@ namespace StoreManagement.Liquid.Helper
             object anonymousObject = new
             {
                 CategoryName = s.Category.Name,
-                ProductCategoryId = s.Product.ProductCategoryId,
-                BrandId = s.Product.BrandId,
+                CategoryId = s.Product.ProductCategoryId,
+                s.Product.BrandId,
                 CategoryDescription = s.Category.Description,
                 ProductId = s.Product.Id,
                 s.Product.Name,

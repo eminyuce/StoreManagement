@@ -54,25 +54,21 @@ namespace StoreManagement.Service.Services
 
         }
 
-        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
+       
+
+        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search, bool? isActive)
         {
             SetCache();
             string url = string.Format("http://{0}/api/{1}/GetContentByTypeAndCategoryId?" +
                                         "storeId={2}" +
-                                        "&typeName={3}&categoryId={4}",
+                                        "&typeName={3}&categoryId={4}&search={5}&isActive={6}",
                                         WebServiceAddress,
                                         ApiControllerName,
                                         storeId,
                                         typeName,
-                                        categoryId);
+                                        categoryId, search, isActive);
 
             return HttpRequestHelper.GetUrlResults<Content>(url);
-
-        }
-
-        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
@@ -106,7 +102,7 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResult<Content>(url);
 
         }
- 
+
 
         public Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize,
                                                string search)
@@ -174,7 +170,7 @@ namespace StoreManagement.Service.Services
                                                  WebServiceAddress,
                                                  ApiControllerName,
                                                  storeId, catId, type,
-                                                 page, pageSize, isActive,contentType);
+                                                 page, pageSize, isActive, contentType);
 
                 return HttpRequestHelper.GetUrlResultsAsync<Content>(url);
 

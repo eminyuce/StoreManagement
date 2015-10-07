@@ -13,7 +13,7 @@ namespace StoreManagement.Controllers
 {
     public class AjaxController : BaseController
     {
-        
+
 
         public ActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace StoreManagement.Controllers
             var returnModel = new ContentDetailViewModel();
             returnModel.Store = Store;
             returnModel.Category = CategoryService.GetCategory(categoryId);
-            returnModel.RelatedContents = ContentService.GetContentByTypeAndCategoryId(Store.Id, contentType, categoryId).Take(5).ToList();
+            returnModel.RelatedContents = ContentService.GetContentByTypeAndCategoryId(Store.Id, contentType, categoryId, "", true).Take(5).ToList();
             String partialViewName = @"pContents\pRelatedContents";
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);
@@ -34,7 +34,7 @@ namespace StoreManagement.Controllers
             var returnModel = new ProductDetailViewModel();
             returnModel.Store = Store;
             returnModel.Category = ProductCategoryService.GetProductCategory(categoryId);
-            returnModel.RelatedProducts =ProductService.GetProductByTypeAndCategoryId(Store.Id, "product", categoryId).Take(5).ToList();
+            returnModel.RelatedProducts = ProductService.GetProductByTypeAndCategoryId(Store.Id, "product", categoryId).Take(5).ToList();
             String partialViewName = @"pProducts\pRelatedProducts";
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);
@@ -52,7 +52,7 @@ namespace StoreManagement.Controllers
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-       
 
-	}
+
+    }
 }

@@ -26,7 +26,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
                 var pageSize =  GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
-                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, pageSize);
+                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, pageSize, search);
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
 
                 var settings = GetStoreSettings();

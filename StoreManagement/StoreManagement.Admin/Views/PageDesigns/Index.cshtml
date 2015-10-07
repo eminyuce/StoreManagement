@@ -361,10 +361,16 @@
         function SavePageDesing() {
             var desingItemId =parseInt($("#selecedPageDesingItem").val());
             if (desingItemId > 0) {
-                var postData = JSON.stringify({ "id": desingItemId, "text": $("#PageDesingText").val(), "name": $("#PageDesignName").val() });
+                var postData = JSON.stringify({ "id": desingItemId, "storeId": $("#selectedStoreId").val(), "text": $("#PageDesingText").val(), "name": $("#PageDesignName").val() });
                 ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
-                    SetTextMessage(" IS UPDATED...");
-                    $('[data-page-design-name=' + desingItemId + ']').text($("#PageDesignName").val());
+                   
+                    if (!isEmpty(data)) {
+                        SetTextMessage(data);
+                    } else {
+                        SetTextMessage(" IS UPDATED...");
+                        $('[data-page-design-name=' + desingItemId + ']').text($("#PageDesignName").val());
+                    }
+                   
                 });
 
             }

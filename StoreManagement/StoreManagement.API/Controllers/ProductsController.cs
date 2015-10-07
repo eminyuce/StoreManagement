@@ -59,9 +59,9 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductByTypeAndCategoryId(storeId, typeName, categoryId);
         }
 
-        public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
+        public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search, bool? isActive)
         {
-            throw new NotImplementedException();
+            return ProductRepository.GetProductByTypeAndCategoryId(storeId, typeName, categoryId, search, isActive);
         }
 
         public List<Product> GetProductByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
@@ -80,9 +80,9 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductWithFiles(id);
         }
 
-        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize, String search)
         {
-            return await ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize);
+            return await ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize, search);
         }
 
         public async Task<Product> GetProductsByIdAsync(int productId)

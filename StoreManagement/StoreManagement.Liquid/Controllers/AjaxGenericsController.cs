@@ -13,7 +13,7 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class AjaxGenericsController : AjaxController
     {
-        public async Task<JsonResult> MainNavigation(String designName   = "MainNavigationPartial")
+        public async Task<JsonResult> MainNavigation(String designName = "MainNavigationPartial")
         {
             int storeId = StoreId;
             String returnHtml = "";
@@ -58,7 +58,7 @@ namespace StoreManagement.Liquid.Controllers
             String returnHtml = "";
             try
             {
-               returnHtml = await GetMainFooter(designName);
+                returnHtml = await GetMainFooter(designName);
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-               returnHtml = await GetCommentsHtml(itemId, itemType, page, designName, pageSize);
+                returnHtml = await GetCommentsHtml(itemId, itemType, page, designName, pageSize);
             }
             catch (Exception ex)
             {
@@ -124,6 +124,32 @@ namespace StoreManagement.Liquid.Controllers
             returnHtml = pageOuput.PageOutputText;
 
             return returnHtml;
+        }
+        public ActionResult SearchAutoComplete(String term, String type)
+        {
+
+            var list = new List<String>();
+            String searchKey = term;
+
+            if (type.Equals("products", StringComparison.InvariantCultureIgnoreCase))
+            {
+                list =
+                    ProductService.GetProductByTypeAndCategoryId(StoreId, StoreConstants.ProductType, 0, searchKey, true)
+                                  .Select(r => r.Name)
+                                  .ToList();
+            }
+            else if (type.Equals(StoreConstants.BlogsType, StringComparison.InvariantCultureIgnoreCase) || type.Equals(StoreConstants.NewsType, StringComparison.InvariantCultureIgnoreCase))
+            {
+
+                list =
+                       ContentService.GetContentByTypeAndCategoryId(StoreId, type, 0, searchKey, true)
+                                     .Select(r => r.Name)
+                                     .ToList();
+            }
+           
+
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
     }
 }

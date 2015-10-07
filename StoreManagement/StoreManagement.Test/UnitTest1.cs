@@ -155,21 +155,12 @@ namespace StoreManagement.Test
             int storeId = 9;
             var rr = new ProductRepository(new StoreContext(ConnectionString));
 
-            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25);
+            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25,"");
             Task.WaitAll(productsTask);
             Console.WriteLine(productsTask.Result.totalItemCount);
 
         }
-        [TestMethod]
-        public void TestGetProductsCategoryIdAsync1()
-        {
-            ProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
-            var m = rep.GetProductsCategoryIdAsync(9, null, "product", true, 1, 20);
-            Task.WaitAll(m);
-
-            Console.Write(m.Result.items);
-
-        }
+       
 
         [TestMethod]
         public void TestProductRepository2()
@@ -641,24 +632,7 @@ namespace StoreManagement.Test
             }
 
         }
-        [TestMethod]
-        public void TestGetContentsCategoryId()
-        {
-            ContentRepository rep = new ContentRepository(dbContext);
-            //  StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
-            var blogs = rep.GetContentByTypeAndCategoryId(5, "news", 55, "proxy");
-
-            // var p = m.PageCount2;
-
-            //foreach (var content in m)
-            //{
-            //    Console.WriteLine(content);
-            //}
-
-
-
-        }
-
+        
         [TestMethod]
         public void TestContentService()
         {

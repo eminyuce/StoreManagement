@@ -13,11 +13,11 @@ namespace StoreManagement.Service.Interfaces
         Product GetProductsById(int productId);
         List<Product> GetProductByType(String typeName);
         List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId);
-        List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId, String search);
+        List<Product> GetProductByTypeAndCategoryId(int storeId, String typeName, int categoryId, String search, bool? isActive);
         List<Product> GetProductByTypeAndCategoryIdFromCache(int storeId, String typeName, int categoryId);
         StorePagedList<Product> GetProductsCategoryId(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize);
         Product GetProductWithFiles(int id);
-        Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize);
+        Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, String typeName, bool? isActive, int page, int pageSize,String search);
         Task<Product> GetProductsByIdAsync(int productId);
         Task<List<Product>> GetMainPageProductsAsync(int storeId, int? take);
         Task<List<Product>> GetProductsAsync(int storeId, int? take, bool? isActive);

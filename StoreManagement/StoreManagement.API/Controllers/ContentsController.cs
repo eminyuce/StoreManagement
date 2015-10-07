@@ -131,21 +131,14 @@ namespace StoreManagement.API.Controllers
 
 
 
+ 
 
-        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId)
+        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search, bool? isActive)
         {
-            return this.ContentRepository.GetContentByTypeAndCategoryId(storeId, typeName, categoryId);
+            return this.ContentRepository.GetContentByTypeAndCategoryId(storeId, typeName, categoryId, search, isActive);
         }
 
-        public List<Content> GetContentByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Content> GetContentByTypeAndCategoryIdFromCache(int storeId, string typeName, int categoryId)
-        {
-            return this.ContentRepository.GetContentByTypeAndCategoryIdFromCache(storeId, typeName, categoryId);
-        }
+ 
 
         public StorePagedList<Content> GetContentsCategoryId(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
         {
@@ -164,7 +157,7 @@ namespace StoreManagement.API.Controllers
             return this.ContentRepository.GetContentWithFiles(id);
         }
 
-        
+
 
         public async Task<StorePagedList<Content>> GetContentsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize,
                                                string search)

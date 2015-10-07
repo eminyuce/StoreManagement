@@ -170,13 +170,15 @@ namespace StoreManagement.Service.GenericRepositories
         {
             try
             {
-
-                var items = repository.FindBy(r => r.StoreId == storeId);
-
+                Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId;
+                var predicate = PredicateBuilder.Create<T>(match);
                 if (!String.IsNullOrEmpty(search.ToStr()))
                 {
-                    items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+                    predicate = predicate.And(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
                 }
+
+                var items = repository.FindBy(predicate);
+               
 
                 return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 
@@ -191,14 +193,13 @@ namespace StoreManagement.Service.GenericRepositories
         {
             try
             {
-
-
-                var items = repository.FindBy(r => r.StoreId == storeId && r.State);
-
+                Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId & r2.State;
+                var predicate = PredicateBuilder.Create<T>(match);
                 if (!String.IsNullOrEmpty(search.ToStr()))
                 {
-                    items = items.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
+                    predicate = predicate.And(r => r.Name.ToLower().Contains(search.ToLower().Trim()));
                 }
+                var items = repository.FindBy(predicate);
 
                 return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
 

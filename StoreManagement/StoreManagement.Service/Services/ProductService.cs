@@ -64,7 +64,7 @@ namespace StoreManagement.Service.Services
 
         }
 
-        public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search)
+        public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search, bool? isActive)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace StoreManagement.Service.Services
 
         }
 
-        public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize)
+        public Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize, String search)
         {
 
             try
@@ -122,7 +122,7 @@ namespace StoreManagement.Service.Services
                 string url = string.Format("http://{0}/api/{1}/GetProductsCategoryIdAsync?storeId={2}" +
                                   "&categoryId={3}" +
                                   "&typeName={4}" +
-                                  "&isActive={5}&page={6}&pageSize={7}", WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive, page, pageSize);
+                                  "&isActive={5}&page={6}&pageSize={7}&search={8}", WebServiceAddress, ApiControllerName, storeId, categoryId, typeName, isActive, page, pageSize, search);
                 return HttpRequestHelper.GetUrlPagedResultsAsync<Product>(url);
 
             }

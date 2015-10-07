@@ -28,7 +28,7 @@ namespace StoreManagement.Admin.Controllers
             storeId = GetStoreId(storeId);
             if (storeId != 0 && (categoryId != 0 || !String.IsNullOrEmpty(search)))
             {
-                resultList = ContentRepository.GetContentByTypeAndCategoryId(storeId, ContentType, categoryId, search);
+                resultList = ContentRepository.GetContentByTypeAndCategoryId(storeId, ContentType, categoryId, search, null);
             }
 
 

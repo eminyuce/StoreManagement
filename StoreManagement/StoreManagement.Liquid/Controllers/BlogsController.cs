@@ -21,7 +21,7 @@ namespace StoreManagement.Liquid.Controllers
     {
         public BlogsController(): base(StoreConstants.BlogsType)
         {
-            this.PageDesingCategoryPageName = "BlogDetailPage";
+            this.PageDesingDetailPageName = "BlogDetailPage";
             this.PageDesingIndexPageName = "BlogsIndexPage";
         }
          

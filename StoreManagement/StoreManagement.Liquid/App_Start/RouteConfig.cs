@@ -17,12 +17,11 @@ namespace StoreManagement.Liquid
 
 
 
-         routes.MapRoute(
+            routes.MapRoute(
              name: "robots",
              url: "robots.txt",
                      defaults: new { controller = "Robots", action = "RobotsText" }
           );
-
 
 
             routes.MapRoute(

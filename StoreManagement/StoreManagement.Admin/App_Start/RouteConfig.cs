@@ -20,17 +20,7 @@ namespace StoreManagement.Admin
                         defaults: new { controller = "Robots", action = "RobotsText" }
              );
 
-           // routes.MapRoute(
-           //name: "CompanySearch",
-           //url: "Company/list/{*filters}",
-           //defaults: new { controller = "Companies", action = "CompaniesSearch", filters = UrlParameter.Optional });
-
-            routes.MapRoute(
-          name: "CompanySearch",
-          url: "Companies/CompaniesSearch/{*filters}",
-          defaults: new { controller = "Companies", action = "CompaniesSearch", filters = UrlParameter.Optional });
-
-
+         
 
             routes.MapRoute(
                 name: "Default",

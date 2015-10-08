@@ -12,7 +12,7 @@ namespace StoreManagement.Liquid.Controllers
     public abstract class ContentsController : BaseController
     {
         protected String PageDesingIndexPageName { get; set; }
-        protected String PageDesingCategoryPageName { get; set; }
+        protected String PageDesingDetailPageName { get; set; }
 
         private String Type { get; set; }
         protected ContentsController(String type)
@@ -20,7 +20,7 @@ namespace StoreManagement.Liquid.Controllers
             this.Type = type;
         }
 
-        public virtual async Task<ActionResult> Index(int page = 1, String search = "")
+        public virtual async Task<ActionResult> Index(int page = 1, String search = "", int ? categoryId = null)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 var newsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingIndexPageName);
                 var pageSize = GetSettingValueInt(Type+"IndexPageSize", StoreConstants.DefaultPageSize);
-                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, null, Type, true, page, pageSize, search);
+                var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, categoryId, Type, true, page, pageSize, search);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, Type, true);
 
 
@@ -86,7 +86,7 @@ namespace StoreManagement.Liquid.Controllers
                     return HttpNotFound("Not Found");
                 }
                 int newsId = id.Split("-".ToCharArray()).Last().ToInt();
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingCategoryPageName);
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingDetailPageName);
                 var contentTask = ContentService.GetContentByIdAsync(newsId);
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, newsId);
 
@@ -104,7 +104,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 if (pageDesign == null)
                 {
-                    throw new Exception("PageDesing is null:" + PageDesingCategoryPageName);
+                    throw new Exception("PageDesing is null:" + PageDesingDetailPageName);
                 }
 
 

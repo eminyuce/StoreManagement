@@ -24,7 +24,7 @@ namespace StoreManagement.Data.LiquidEngineHelpers
             {
                 foreach (var e in template.Errors)
                 {
-                    Logger.Error(e, e.Message, templateCode);
+                    Logger.Error(e, "Template Rending Errors:" + e.StackTrace, templateCode, anonymousObject);
                 }
             }
              

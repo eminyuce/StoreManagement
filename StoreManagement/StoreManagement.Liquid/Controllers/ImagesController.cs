@@ -57,8 +57,7 @@ namespace StoreManagement.Liquid.Controllers
         public void Thumbnail(String id, int width = 60, int height = 60)
         {
 
-            try
-            {
+             
                 String url = "";
                 var dic = new Dictionary<String, String>();
                 String googleId = id;
@@ -67,14 +66,10 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 new WebImage(imageData)
-                        .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
-                        .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                        .Resize(width, height) // Resizing the image to 100x100 px on the fly...
+                      //  .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
                         .Write();
-            }
-            catch (Exception)
-            {
-                
-            }
+            
            
         }
 

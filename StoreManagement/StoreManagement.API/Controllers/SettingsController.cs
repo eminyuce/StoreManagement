@@ -36,6 +36,11 @@ namespace StoreManagement.API.Controllers
             return SettingRepository.GetStoreSettingsByType(storeid, type);
         }
 
+        public async Task<Setting> GetStoreSettingsByKey(int storeid, string key)
+        {
+            return await SettingRepository.GetStoreSettingsByKey(storeid, key);
+        }
+
 
         public override IEnumerable<Setting> GetAll()
         {

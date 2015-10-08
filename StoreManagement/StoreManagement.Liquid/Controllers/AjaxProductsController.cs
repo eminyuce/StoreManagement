@@ -185,19 +185,6 @@ namespace StoreManagement.Liquid.Controllers
 
                 returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
 
-                //var tuple = GetCachingValue(key);
-                //if (tuple.Item1)
-                //{
-                //    returnHtml = tuple.Item2;
-                //    Logger.Trace("Ajax Data is coming from cache.Key=" + key);
-                //}
-                //else
-                //{
-                //    returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
-                //    SetCachingValue(key, returnHtml);
-                //    Logger.Trace("Ajax Data is NOT coming from cache.Key=" + key);
-                //}
-
             }
             catch (Exception ex)
             {

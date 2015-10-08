@@ -21,9 +21,9 @@ namespace StoreManagement.Data.LiquidEntities
         public Brand Brand { get; set; }
 
 
-        public ProductLiquid(Product product, ProductCategory category,  int imageWidth, int imageHeight)
+        public ProductLiquid(Product product, ProductCategory category, int imageWidth, int imageHeight)
         {
-     
+
             this.Product = product;
             this.Category = category;
 
@@ -34,7 +34,7 @@ namespace StoreManagement.Data.LiquidEntities
             ImageHeight = imageHeight;
 
         }
-       
+
         public String DetailLink
         {
             get
@@ -44,11 +44,21 @@ namespace StoreManagement.Data.LiquidEntities
         }
 
 
-
-
         public String PlainDescription
         {
-            get { return YuceConvert.StripHtml(this.Product.Description); }
+            get
+            {
+                try
+                {
+                    var item = YuceConvert.StripHtml(this.Product.Description);
+
+                    return item;
+                }
+                catch (Exception)
+                {
+                    return "";
+                }
+            }
         }
     }
 }

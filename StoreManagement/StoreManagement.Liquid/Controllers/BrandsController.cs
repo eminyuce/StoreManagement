@@ -12,7 +12,9 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class BrandsController : BaseController
     {
-        public String PageDesingIndexPageName = "BrandsIndexPage";
+        private const String PageDesingIndexPageName = "BrandsIndexPage";
+        private const String BrandDetailPageDesignName = "BrandDetailPage";
+
         public async Task<ActionResult> Index(int page = 1)
         {
             try
@@ -64,7 +66,7 @@ namespace StoreManagement.Liquid.Controllers
             {
 
                 int brandId = id.Split("-".ToCharArray()).Last().ToInt();
-                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "BrandDetailPage");
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, BrandDetailPageDesignName);
                 var brandTask = BrandService.GetBrandAsync(brandId);
                 var take = GetSettingValueInt("BrandProducts_ItemNumber", 20);
                 var productsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, 0);
@@ -82,7 +84,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 if (pageDesign == null)
                 {
-                    throw new Exception("PageDesing is null");
+                    throw new Exception("PageDesing is null:" + BrandDetailPageDesignName);
                 }
 
                 var dic = BrandHelper.GetBrandDetailPage(brand, products, pageDesign, productCategories);

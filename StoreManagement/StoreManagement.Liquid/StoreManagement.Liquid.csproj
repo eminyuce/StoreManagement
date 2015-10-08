@@ -469,6 +469,7 @@
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
@@ -592,6 +593,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Contents\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

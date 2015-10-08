@@ -73,13 +73,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2015 14:19:12</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/07/2015 11:58:25</publishTime>
+      <publishTime>10/08/2015 10:04:16</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>10/07/2015 13:55:13</publishTime>
+      <publishTime>10/08/2015 10:45:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/07/2015 13:50:37</publishTime>
+      <publishTime>10/08/2015 10:04:17</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/30/2015 09:18:17</publishTime>
@@ -907,7 +907,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/07/2015 10:48:08</publishTime>
     </File>
     <File Include="Scripts/storeManagement.js">
-      <publishTime>10/07/2015 11:57:43</publishTime>
+      <publishTime>10/08/2015 10:21:40</publishTime>
     </File>
     <File Include="Scripts/Trizzy/custom.js">
       <publishTime>07/30/2015 09:17:59</publishTime>
@@ -1162,7 +1162,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/07/2015 11:58:32</publishTime>
+      <publishTime>10/07/2015 15:21:36</publishTime>
     </File>
   </ItemGroup>
 </Project>

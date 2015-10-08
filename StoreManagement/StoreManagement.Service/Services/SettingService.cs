@@ -62,7 +62,14 @@ namespace StoreManagement.Service.Services
             return items;
         }
 
+        public Task<Setting> GetStoreSettingsByKey(int storeid, string key)
+        {
+            string url = string.Format("http://{0}/api/{1}/GetStoreSettingsByKey?storeid={2}&key={3}", WebServiceAddress, ApiControllerName, storeid, key);
+            SetCache();
+            var items = HttpRequestHelper.GetUrlResultAsync<Setting>(url);
 
+            return items;
+        }
 
 
         protected override void SetCache()

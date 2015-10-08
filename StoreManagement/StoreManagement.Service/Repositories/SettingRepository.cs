@@ -111,6 +111,11 @@ namespace StoreManagement.Service.Repositories
                 && r.Type.Equals(type, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
+        public async Task<Setting> GetStoreSettingsByKey(int storeid, string key)
+        {
+            return await this.FindAsync(r => r.StoreId == storeid && r.SettingKey.Equals(key));
+        }
+
         public List<Setting> GetStoreSettingsByType(int storeid, string type, string search)
         {
             var items = this.FindBy(r => r.StoreId == storeid);

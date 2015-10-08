@@ -201,6 +201,7 @@
                                     columns.Add(o => o.Name)
                                .Titled("Name")
                                .Sortable(true)
+                                 .Filterable(true)
                                 .Sanitized(false)
                                 .Encoded(false)
                                .RenderValueAs(o => String.Format("<span data-page-design-name='{0}'> {1} </span>",

@@ -548,7 +548,7 @@
     <Content Include="Views\Home\Faq.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
     <Content Include="Views\Blogs\Index2.cshtml" />
-    <Content Include="Views\Blogs\Blog.cshtml" />
+    <Content Include="Views\Blogs\Detail.cshtml" />
     <Content Include="Views\Blogs\Copy of Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
     <Content Include="Views\News\Index.cshtml" />

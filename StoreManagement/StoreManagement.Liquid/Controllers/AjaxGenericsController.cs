@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
+using StoreManagement.Data.Entities;
 using StoreManagement.Liquid.Helper;
 
 namespace StoreManagement.Liquid.Controllers
@@ -152,6 +153,47 @@ namespace StoreManagement.Liquid.Controllers
 
 
             return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public async Task<JsonResult> GetContactForm(String designName = "ContactFormPartial")
+        {
+
+
+            String returnHtml = "";
+            try
+            {
+
+                var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
+
+                CommentHelper.StoreSettings = GetStoreSettings();
+
+                await Task.WhenAll(pageDesignTask);
+                var pageDesign = pageDesignTask.Result;
+
+                returnHtml = pageDesign.PageTemplate;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "ContactFormPartial:" + ex.StackTrace, StoreId, designName);
+
+            }
+
+
+            return Json(returnHtml, JsonRequestBehavior.AllowGet);
+        }
+
+      
+        public ActionResult SaveContactForm(Message message)
+        {
+            //MessageService.SaveContactForm(message);
+            Logger.Trace("Message "+message);
+            message.CreatedDate = DateTime.Now;
+            message.UpdatedDate = DateTime.Now;
+            message.State = true;
+            message.StoreId = StoreId;
+            message.Ordering = 1;
+            MessageService.SaveContactFormMessage(message);
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
     }
 }

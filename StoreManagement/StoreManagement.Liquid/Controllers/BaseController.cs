@@ -74,7 +74,11 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public IHomePageHelper HomePageHelper { set; get; }
 
- 
+
+        [Inject]
+        public IMessageService MessageService { set; get; }
+
+
         [Inject]
         public IStoreService StoreService { set; get; }
 

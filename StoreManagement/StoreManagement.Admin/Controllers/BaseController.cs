@@ -43,6 +43,10 @@ namespace StoreManagement.Admin.Controllers
         }
 
         [Inject]
+        public IMessageRepository MessageRepository { get; set; }
+
+
+        [Inject]
         public IItemFileRepository ItemFileRepository { get; set; }
 
         [Inject]

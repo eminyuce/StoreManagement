@@ -318,6 +318,7 @@
     <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\LogsController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\NavigationsController.cs" />
     <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -1993,6 +1994,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
+    <Folder Include="Views\Messages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

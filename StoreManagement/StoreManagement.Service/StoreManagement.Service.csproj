@@ -88,6 +88,7 @@
     <Compile Include="Interfaces\ILabelLineService.cs" />
     <Compile Include="Interfaces\ILabelService.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
+    <Compile Include="Interfaces\IMessageService.cs" />
     <Compile Include="Interfaces\IProductCategoryService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IContentFileService.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Repositories\Interfaces\ILabelRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILocationRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILogRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMessageRepository.cs" />
     <Compile Include="Repositories\Interfaces\INavigationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPageDesignRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductCategoryRepository.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Repositories\LabelRepository.cs" />
     <Compile Include="Repositories\LocationRepository.cs" />
     <Compile Include="Repositories\LogRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Repositories\NavigationRepository.cs" />
     <Compile Include="Repositories\PageDesignRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />
@@ -164,6 +167,7 @@
     <Compile Include="Services\ItemFileService.cs" />
     <Compile Include="Services\LabelService.cs" />
     <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PageDesignService.cs" />
     <Compile Include="Services\ProductCategoryService.cs" />

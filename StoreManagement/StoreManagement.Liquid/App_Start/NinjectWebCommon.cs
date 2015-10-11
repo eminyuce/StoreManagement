@@ -302,6 +302,17 @@ namespace StoreManagement.Liquid.App_Start
                 }
             }).InRequestScope();
 
+            kernel.Bind<IMessageService>().ToMethod(ctx =>
+            {
+                if (isApiService)
+                {
+                    return new MessageService(webServiceAddress);
+                }
+                else
+                {
+                    return new MessageRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }).InRequestScope();
 
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();
             kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();

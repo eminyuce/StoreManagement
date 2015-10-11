@@ -105,7 +105,8 @@ namespace StoreManagement.Admin.App_Start
             kernel.Get<IBaseTasksScheduler>().Start();
             kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>().InRequestScope(); 
             kernel.Bind<IItemFileRepository>().To<ItemFileRepository>().InRequestScope(); 
-            kernel.Bind<IActivityRepository>().To<ActivityRepository>().InRequestScope(); 
+            kernel.Bind<IActivityRepository>().To<ActivityRepository>().InRequestScope();
+            kernel.Bind<IMessageRepository>().To<MessageRepository>().InRequestScope();
 
         }
     }

@@ -10,6 +10,11 @@ $(document).ready(function () {
 
     callAjaxMethod();
     GetAttributeBaseAjax();
+    
+    
+
+
+
 });
 function callAjaxMethod() {
 
@@ -150,17 +155,52 @@ function GetAttributeBaseAjax() {
 
             });
         });
-        
 
-       
+
+
 
 
     }
     catch (err) {
         console.error(err.message);
     }
+    
+
+    try {
+        if ($('[data-contact-form]').length > 0) {
+            GetContactForm();
+        }
+    }
+    catch (err) {
+        console.error(err.message);
+    }
 }
 
+function GetContactForm() {
+
+    $('[data-contact-form]').each(function () {
+        var truethis = this;
+        var designName = $(this).attr('data-template-design-name');
+        var postData = JSON.stringify({
+            "designName": designName
+        });
+        ajaxMethodCall(postData, "/AjaxGenerics/GetContactForm", function (data) {
+            AddDataToDiv(truethis, data, 0);
+            
+            if ($('#btnSaveContactForm').length > 0) {
+
+                $('#btnSaveContactForm').off("click");
+                $('#btnSaveContactForm').on("click", function (e) {
+                    var request = new ContactFormModel();
+                    var postData = JSON.stringify(request);
+                    ajaxMethodCall(postData, "/AjaxGenerics/SaveContactForm", function (data) {
+                        console.log(data);
+                    });
+                });
+            }
+        });
+    });
+}
 function GetContentsByContentType() {
 
     $('[data-contents-by-content-type]').each(function () {
@@ -360,4 +400,14 @@ function ajaxMethodCall(postData, ajaxUrl, successFunction) {
         contentType: "application/json",
         dataType: "json"
     });
+}
+function ContactFormModel() {
+    var self = this;
+    self.Name = $("#Fullname").val();
+    self.Email = $("#Email").val();
+    self.Telefon = $("#Telefon").val();
+    self.Company = $("#Company").val();
+    self.Address = $("#Address").val();
+    self.UserMessage = $("#UserMessage").val();
+
 }

@@ -25,7 +25,7 @@ namespace StoreManagement.Data.GeneralHelper
             }
             else if (type.Equals(StoreConstants.BlogsType))
             {
-                url = "/Blogs/Blog/";
+                url = "/Blogs/Detail/";
             }
             String detailLink = url + String.Format("{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id));
             return detailLink.ToLowerInvariant();

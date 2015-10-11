@@ -69,33 +69,34 @@ namespace StoreManagement.API.App_Start
             var storeContext = (StoreContext)kernel.Get<IStoreContext>();
             storeContext.Configuration.LazyLoadingEnabled = false;
 
-            kernel.Bind<IContentRepository>().To<ContentRepository>();
-            kernel.Bind<IStoreRepository>().To<StoreRepository>();
-            kernel.Bind<ISettingRepository>().To<SettingRepository>();
-            kernel.Bind<IFileManagerRepository>().To<FileManagerRepository>();
-            kernel.Bind<INavigationRepository>().To<NavigationRepository>();
-            kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
-            kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>();
-            kernel.Bind<IContentFileRepository>().To<ContentFileRepository>();
+            kernel.Bind<IContentRepository>().To<ContentRepository>().InRequestScope();
+            kernel.Bind<IStoreRepository>().To<StoreRepository>().InRequestScope();
+            kernel.Bind<ISettingRepository>().To<SettingRepository>().InRequestScope();
+            kernel.Bind<IFileManagerRepository>().To<FileManagerRepository>().InRequestScope();
+            kernel.Bind<INavigationRepository>().To<NavigationRepository>().InRequestScope();
+            kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
+            kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>().InRequestScope();
+            kernel.Bind<IContentFileRepository>().To<ContentFileRepository>().InRequestScope();
 
-            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>();
+            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>().InRequestScope();
 
-            kernel.Bind<ILabelRepository>().To<LabelRepository>();
-            kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>();
+            kernel.Bind<ILabelRepository>().To<LabelRepository>().InRequestScope();
+            kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>().InRequestScope();
 
-            kernel.Bind<IProductRepository>().To<ProductRepository>();
-            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>();
-            kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>();
+            kernel.Bind<IProductRepository>().To<ProductRepository>().InRequestScope();
+            kernel.Bind<IProductFileRepository>().To<ProductFileRepository>().InRequestScope();
+            kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>().InRequestScope();
 
-            kernel.Bind<IEmailListRepository>().To<EmailListRepository>();
-            kernel.Bind<IContactRepository>().To<ContactRepository>();
-            kernel.Bind<ILocationRepository>().To<LocationRepository>();
-            kernel.Bind<IBrandRepository>().To<BrandRepository>();
-            kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>();
-            kernel.Bind<ILogRepository>().To<LogRepository>();
-            kernel.Bind<IItemFileRepository>().To<ItemFileRepository>();
-            kernel.Bind<IActivityRepository>().To<ActivityRepository>();
-            kernel.Bind<ICommentRepository>().To<CommentRepository>();
+            kernel.Bind<IEmailListRepository>().To<EmailListRepository>().InRequestScope();
+            kernel.Bind<IContactRepository>().To<ContactRepository>().InRequestScope();
+            kernel.Bind<ILocationRepository>().To<LocationRepository>().InRequestScope();
+            kernel.Bind<IBrandRepository>().To<BrandRepository>().InRequestScope();
+            kernel.Bind<IStoreLanguageRepository>().To<StoreLanguageRepository>().InRequestScope();
+            kernel.Bind<ILogRepository>().To<LogRepository>().InRequestScope();
+            kernel.Bind<IItemFileRepository>().To<ItemFileRepository>().InRequestScope();
+            kernel.Bind<IActivityRepository>().To<ActivityRepository>().InRequestScope();
+            kernel.Bind<ICommentRepository>().To<CommentRepository>().InRequestScope();
+            kernel.Bind<IMessageRepository>().To<MessageRepository>().InRequestScope();
         }        
     }
 }

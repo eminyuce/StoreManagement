@@ -168,6 +168,7 @@
     <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\LogMeController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\FileManagersController.cs" />
     <Compile Include="Controllers\NavigationsController.cs" />

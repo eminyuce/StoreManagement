@@ -43,5 +43,6 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<StoreLanguage> StoreLanguages { get; set; }
         public IDbSet<ItemFile> ItemFiles { get; set; }
         public IDbSet<Activity> Activities { get; set; }
+        public IDbSet<Message> Messages { get; set; }
     }
 }

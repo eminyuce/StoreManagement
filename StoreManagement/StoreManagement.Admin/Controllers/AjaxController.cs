@@ -766,6 +766,10 @@ namespace StoreManagement.Admin.Controllers
             m.Value = "PhotoGallery-Index";
             m.Text = "Photo Gallery";
             moduls.Add(m);
+            m = new SelectListItem();
+            m.Value = "Brands-Index";
+            m.Text = "Brands";
+            moduls.Add(m);
             return moduls;
         }
         public ActionResult GetStoreModuls(int id)

@@ -24,6 +24,10 @@ namespace StoreManagement.API.Controllers
         public IStoreContext StoreContext { get; set; }
 
 
+
+        [Inject]
+        public IMessageRepository MessageRepository { get; set; }
+
         [Inject]
         public IFileManagerRepository FileManagerRepository { get; set; }
 

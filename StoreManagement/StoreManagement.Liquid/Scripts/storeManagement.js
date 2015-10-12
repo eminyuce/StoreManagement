@@ -181,6 +181,7 @@ function GetContactForm() {
     $('[data-contact-form]').each(function () {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
+        var successMessage = $(this).attr('data-contact-success-message');
         var postData = JSON.stringify({
             "designName": designName
         });
@@ -193,12 +194,20 @@ function GetContactForm() {
                 $('#btnSaveContactForm').on("click", function (e) {
                     var request = new ContactFormModel();
                     var postData = JSON.stringify(request);
-                    ajaxMethodCall(postData, "/AjaxGenerics/SaveContactForm", function (data) {
-                        console.log(data);
+                    ajaxMethodCall(postData, "/AjaxGenerics/SaveContactForm", function (result) {
+                        console.log(successMessage);
+                        console.log(result);
+                        SetTextMessage(successMessage);
+                        EmptyContactFormModel();
                     });
                 });
             }
         });
+    });
+}
+function SetTextMessage(message) {
+    $("#contactMessage").animate({ opacity: 0 }, function () {
+        $(this).text($("#contactMessage").val() + message).animate({ opacity: 1 });
     });
 }
 function GetContentsByContentType() {
@@ -403,11 +412,49 @@ function ajaxMethodCall(postData, ajaxUrl, successFunction) {
 }
 function ContactFormModel() {
     var self = this;
-    self.Name = $("#Fullname").val();
-    self.Email = $("#Email").val();
-    self.Telefon = $("#Telefon").val();
-    self.Company = $("#Company").val();
-    self.Address = $("#Address").val();
-    self.UserMessage = $("#UserMessage").val();
-    self.Type = $("#FormType").val();
+    if ($('#Fullname').length > 0) {
+        self.Name = $("#Fullname").val();
+    }
+    if ($('#Email').length > 0) {
+        self.Email = $("#Email").val();
+    }
+    if ($('#Telefon').length > 0) {
+        self.Telefon = $("#Telefon").val();
+    }
+    if ($('#Company').length > 0) {
+        self.Company = $("#Company").val();
+    }
+    if ($('#Address').length > 0) {
+        self.Address = $("#Address").val();
+    }
+    if ($('#UserMessage').length > 0) {
+            self.UserMessage = $("#UserMessage").val();
+    }
+    if ($('#FormType').length > 0) {
+        self.Type = $("#FormType").val();
+    }
+}
+function EmptyContactFormModel() {
+     
+    if ($('#Fullname').length > 0) {
+       $("#Fullname").val("");
+    }
+    if ($('#Email').length > 0) {
+        $("#Email").val("");
+    }
+    if ($('#Telefon').length > 0) {
+         $("#Telefon").val("");
+    }
+    if ($('#Company').length > 0) {
+        $("#Company").val("");
+    }
+    if ($('#Address').length > 0) {
+         $("#Address").val("");
+    }
+    if ($('#UserMessage').length > 0) {
+         $("#UserMessage").val("");
+    }
+    if ($('#FormType').length > 0) {
+        $("#FormType").val("");
+    }
 }

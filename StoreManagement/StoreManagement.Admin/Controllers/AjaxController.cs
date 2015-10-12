@@ -343,9 +343,13 @@ namespace StoreManagement.Admin.Controllers
             BaseEntityRepository.DeleteBaseEntity(StoreLanguageRepository, values);
             return Json(values, JsonRequestBehavior.AllowGet);
         }
-
-
-
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin,StoreAdmin")]
+        public ActionResult DeleteMessageGridItem(List<String> values)
+        {
+            BaseEntityRepository.DeleteBaseEntity(MessageRepository, values);
+            return Json(values, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin,StoreAdmin")]
         public ActionResult DeleteNavigationGridItem(List<String> values)
@@ -524,6 +528,11 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult ChangeContactsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
         {
             BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(ContactRepository, values, checkbox);
+            return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChangeMessageGridOrderingOrState(List<OrderingItem> values, String checkbox = "")
+        {
+            BaseEntityRepository.ChangeGridBaseEntityOrderingOrState(MessageRepository, values, checkbox);
             return Json(new { values, checkbox }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChangePageDesignsGridOrderingOrState(List<OrderingItem> values, String checkbox = "")

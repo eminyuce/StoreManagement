@@ -12,5 +12,6 @@ namespace StoreManagement.Service.Repositories.Interfaces
     public interface IMessageRepository : IBaseRepository<Message, int>, IMessageService, IDisposable
     {
 
+        List<Message> GetMessagesByStoreId(int storeId, string search);
     }
 }

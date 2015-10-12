@@ -409,5 +409,5 @@ function ContactFormModel() {
     self.Company = $("#Company").val();
     self.Address = $("#Address").val();
     self.UserMessage = $("#UserMessage").val();
-
+    self.Type = $("#FormType").val();
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.DbContext;
+using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
@@ -17,7 +18,13 @@ namespace StoreManagement.Service.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public List<Message> GetMessagesByStoreId(int storeId, string search)
+        {
+            return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, search);
         }
 
         public void SaveContactFormMessage(Message message)

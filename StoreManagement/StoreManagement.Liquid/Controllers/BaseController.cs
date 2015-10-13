@@ -124,6 +124,12 @@ namespace StoreManagement.Liquid.Controllers
         public IProductService ProductService { set; get; }
 
         [Inject]
+        public IProductAttributeService ProductAttributeService { set; get; }
+
+        [Inject]
+        public IProductAttributeRelationService ProductAttributeRelationService { set; get; }
+
+        [Inject]
         public IProductFileService ProductFileService { set; get; }
 
         [Inject]

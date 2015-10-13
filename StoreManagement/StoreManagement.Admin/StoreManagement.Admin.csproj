@@ -323,6 +323,7 @@
     <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PageDesignsController.cs" />
+    <Compile Include="Controllers\ProductAttributesController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
@@ -1993,6 +1994,10 @@
     <Content Include="Views\Messages\Delete.cshtml" />
     <Content Include="Views\Messages\Details.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\ProductAttributes\Delete.cshtml" />
+    <Content Include="Views\ProductAttributes\Details.cshtml" />
+    <Content Include="Views\ProductAttributes\Index.cshtml" />
+    <Content Include="Views\ProductAttributes\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -314,6 +314,35 @@ namespace StoreManagement.Liquid.App_Start
                 }
             }).InRequestScope();
 
+
+
+
+            kernel.Bind<IProductAttributeService>().ToMethod(ctx =>
+            {
+                if (isApiService)
+                {
+                    return new ProductAttributeService(webServiceAddress);
+                }
+                else
+                {
+                    return new ProductAttributeRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }).InRequestScope();
+
+
+            kernel.Bind<IProductAttributeRelationService>().ToMethod(ctx =>
+            {
+                if (isApiService)
+                {
+                    return new ProductAttributeRelationService(webServiceAddress);
+                }
+                else
+                {
+                    return new ProductAttributeRelationRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }).InRequestScope();
+
+
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();
             kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();
 

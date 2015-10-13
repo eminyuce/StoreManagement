@@ -24,6 +24,12 @@ namespace StoreManagement.API.Controllers
         public IStoreContext StoreContext { get; set; }
 
 
+        [Inject]
+        public IProductAttributeRepository ProductAttributeRepository { get; set; }
+
+        [Inject]
+        public IProductAttributeRelationRepository ProductAttributeRelationRepository { get; set; }
+
 
         [Inject]
         public IMessageRepository MessageRepository { get; set; }

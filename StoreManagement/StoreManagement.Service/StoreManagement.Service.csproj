@@ -89,6 +89,7 @@
     <Compile Include="Interfaces\ILabelService.cs" />
     <Compile Include="Interfaces\ILocationService.cs" />
     <Compile Include="Interfaces\IMessageService.cs" />
+    <Compile Include="Interfaces\IProductAttributeRelationService.cs" />
     <Compile Include="Interfaces\IProductCategoryService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IContentFileService.cs" />
@@ -132,6 +133,8 @@
     <Compile Include="Repositories\Interfaces\IMessageRepository.cs" />
     <Compile Include="Repositories\Interfaces\INavigationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPageDesignRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProductAttributeRelationRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProductAttributeRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductCategoryRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingRepository.cs" />
@@ -147,6 +150,8 @@
     <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Repositories\NavigationRepository.cs" />
     <Compile Include="Repositories\PageDesignRepository.cs" />
+    <Compile Include="Repositories\ProductAttributeRelationRepository.cs" />
+    <Compile Include="Repositories\ProductAttributeRepository.cs" />
     <Compile Include="Repositories\ProductCategoryRepository.cs" />
     <Compile Include="Repositories\ProductFileRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
@@ -164,12 +169,15 @@
     <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\EmailListService.cs" />
     <Compile Include="Services\FileManagerService.cs" />
+    <Compile Include="Interfaces\IProductAttributeService.cs" />
     <Compile Include="Services\ItemFileService.cs" />
     <Compile Include="Services\LabelService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PageDesignService.cs" />
+    <Compile Include="Services\ProductAttributeRelationService.cs" />
+    <Compile Include="Services\ProductAttributeService.cs" />
     <Compile Include="Services\ProductCategoryService.cs" />
     <Compile Include="Services\ProductFileService.cs" />
     <Compile Include="Services\ProductService.cs" />

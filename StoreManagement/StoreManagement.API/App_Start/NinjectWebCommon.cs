@@ -97,6 +97,8 @@ namespace StoreManagement.API.App_Start
             kernel.Bind<IActivityRepository>().To<ActivityRepository>().InRequestScope();
             kernel.Bind<ICommentRepository>().To<CommentRepository>().InRequestScope();
             kernel.Bind<IMessageRepository>().To<MessageRepository>().InRequestScope();
+            kernel.Bind<IProductAttributeRepository>().To<ProductAttributeRepository>().InRequestScope();
+            kernel.Bind<IProductAttributeRelationRepository>().To<ProductAttributeRelationRepository>().InRequestScope();
         }        
     }
 }

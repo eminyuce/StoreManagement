@@ -44,5 +44,7 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<ItemFile> ItemFiles { get; set; }
         public IDbSet<Activity> Activities { get; set; }
         public IDbSet<Message> Messages { get; set; }
+        public IDbSet<ProductAttributeRelation> ProductAttributeRelations { get; set; }
+        public IDbSet<ProductAttribute> ProductAttributes { get; set; }
     }
 }

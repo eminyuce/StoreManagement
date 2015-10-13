@@ -238,16 +238,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>10/12/2015 18:29:06</publishTime>
+      <publishTime>10/13/2015 14:08:35</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/12/2015 18:10:09</publishTime>
+      <publishTime>10/13/2015 12:31:32</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/12/2015 18:10:14</publishTime>
+      <publishTime>10/13/2015 14:06:31</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>10/08/2015 12:52:02</publishTime>
@@ -5085,6 +5085,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/PageDesigns/_CreateOrEdit.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
+    <File Include="Views/ProductAttributes/Delete.cshtml">
+      <publishTime>10/13/2015 14:07:53</publishTime>
+    </File>
+    <File Include="Views/ProductAttributes/Details.cshtml">
+      <publishTime>10/13/2015 14:07:48</publishTime>
+    </File>
+    <File Include="Views/ProductAttributes/Index.cshtml">
+      <publishTime>10/13/2015 14:07:43</publishTime>
+    </File>
+    <File Include="Views/ProductAttributes/SaveOrEdit.cshtml">
+      <publishTime>10/13/2015 14:09:57</publishTime>
+    </File>
     <File Include="Views/ProductCategories/Delete.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
@@ -5464,7 +5476,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/12/2015 18:24:42</publishTime>
+      <publishTime>10/13/2015 14:00:53</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -151,6 +151,8 @@
     <Compile Include="Entities\Navigation.cs" />
     <Compile Include="Entities\PageDesign.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ProductAttribute.cs" />
+    <Compile Include="Entities\ProductAttributeRelation.cs" />
     <Compile Include="Entities\ProductCategory.cs" />
     <Compile Include="Entities\ProductFile.cs" />
     <Compile Include="Entities\Setting.cs" />

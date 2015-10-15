@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using System.Threading.Tasks;
+using Ninject;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
@@ -34,7 +35,45 @@ namespace StoreManagement.Admin.Controllers
             return View(pagedesign);
         }
 
+        public ActionResult ExportExcel(int id = 0)
+        {
+            int selectedStoreId = id;
+            var store = StoreRepository.GetStore(selectedStoreId);
+            var resultList = PageDesignRepository.GetPageDesignByStoreId(selectedStoreId, "");
+            var dt = MapToListHelper.ToDataTable(resultList);
+            var report = ExcelHelper.GetExcelByteArrayFromDataTable(dt);
+            return File(report, "application/vnd.ms-excel",
+                         String.Format("PageDesigns-{0}-{1}.xls",store.Name,DateTime.Now.ToString("yyyyMMdd", System.Globalization.CultureInfo.GetCultureInfo("en-US"))));
+        }
+        [HttpPost]
+        public ActionResult ImportExcel(int id, HttpPostedFileBase excelFile)
+        {
+            var dt = ExcelHelper.PostValues(excelFile);
+            var pageDesingsExcelReport = MapToListHelper.ToList<PageDesign>(dt);
+            foreach (var pageDesign in pageDesingsExcelReport.Where(r =>
+                !r.Name.Equals("Name", StringComparison.InvariantCultureIgnoreCase) &&
+                !r.PageTemplate.Equals("PageTemplate", StringComparison.InvariantCultureIgnoreCase)))
+            {
 
+                pageDesign.StoreId = id;
+                var pageDesignTask = PageDesignRepository.GetPageDesignByNameSync(id, pageDesign.Name);
+                if (pageDesignTask == null)
+                {
+                    pageDesign.Id = 0;
+                    PageDesignRepository.Add(pageDesign);
+                }
+                else
+                {
+                    pageDesignTask.PageTemplate = pageDesign.PageTemplate;
+                    PageDesignRepository.Edit(pageDesignTask);
+                }
+                pageDesign.CreatedDate = DateTime.Now;
+                pageDesign.UpdatedDate = DateTime.Now;
+            }
+            PageDesignRepository.Save();
+
+            return RedirectToAction("Index", new { storeId = id });
+        }
         //
         // GET: /PageDesigns/Edit/5
 
@@ -71,7 +110,7 @@ namespace StoreManagement.Admin.Controllers
                 if (ModelState.IsValid)
                 {
 
-                   
+
 
                     if (pagedesign.Id > 0)
                     {
@@ -86,8 +125,8 @@ namespace StoreManagement.Admin.Controllers
                             ModelState.AddModelError("", "Same Page Desing Name exists, put a different name.");
                             return View(pagedesign);
                         }
-                       
-                        
+
+
                         PageDesignRepository.Add(pagedesign);
                     }
 

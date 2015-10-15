@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +11,7 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class MapToListHelper
     {
+          
         public static List<T> DataReaderMapToList<T>(IDataReader dr)
         {
             List<T> list = new List<T>();
@@ -51,6 +53,25 @@ namespace StoreManagement.Data.GeneralHelper
             return dataReader[columnName] == DBNull.Value;
         }
 
+
+
+
+        public static DataTable ToDataTable<T>(IList<T> data)
+        {
+            PropertyDescriptorCollection properties =
+                TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
+        }
         /// <summary>
         /// Checks if a column exists in a data reader
         /// </summary>
@@ -69,5 +90,93 @@ namespace StoreManagement.Data.GeneralHelper
                 return false;
             }
         }
+
+
+        /// <summary>
+        /// Converts datatable to list<T> dynamically
+        /// </summary>
+        /// <typeparam name="T">Class name</typeparam>
+        /// <param name="dataTable">data table to convert</param>
+        /// <returns>List<T></returns>
+        public static List<T> ToList<T>(DataTable dataTable) where T : new()
+        {
+            var dataList = new List<T>();
+
+            //Define what attributes to be read from the class
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+
+            //Read Attribute Names and Types
+            var objFieldNames = typeof(T).GetProperties(flags).Cast<PropertyInfo>().
+                Select(item => new
+                {
+                    Name = item.Name,
+                    Type = Nullable.GetUnderlyingType(item.PropertyType) ?? item.PropertyType
+                }).ToList();
+
+            //Read Datatable column names and types
+            var dtlFieldNames = dataTable.Columns.Cast<DataColumn>().
+                Select(item => new
+                {
+                    Name = item.ColumnName,
+                    Type = item.DataType
+                }).ToList();
+
+            foreach (DataRow dataRow in dataTable.AsEnumerable().ToList())
+            {
+                var classObj = new T();
+
+                foreach (var dtField in dtlFieldNames)
+                {
+                    PropertyInfo propertyInfos = classObj.GetType().GetProperty(dtField.Name);
+
+                    var field = objFieldNames.Find(x => x.Name == dtField.Name);
+
+                    if (field != null)
+                    {
+                        if (propertyInfos.PropertyType == typeof(DateTime))
+                        {
+                            propertyInfos.SetValue(classObj, dataRow[dtField.Name].ToDateTime(), null);
+                        }
+                        else if (propertyInfos.PropertyType == typeof(int))
+                        {
+                            propertyInfos.SetValue
+                            (classObj, dataRow[dtField.Name].ToInt(), null);
+                        }
+                        else if (propertyInfos.PropertyType == typeof(long))
+                        {
+                            propertyInfos.SetValue
+                            (classObj,   dataRow[dtField.Name].ToLong(), null);
+                        }
+                        else if (propertyInfos.PropertyType == typeof(bool))
+                        {
+                            propertyInfos.SetValue
+                            (classObj, dataRow[dtField.Name].ToBool(), null);
+                        }
+                        else if (propertyInfos.PropertyType == typeof(decimal))
+                        {
+                            propertyInfos.SetValue
+                            (classObj,dataRow[dtField.Name].ToDecimal(), null);
+                        }
+                        else if (propertyInfos.PropertyType == typeof(String))
+                        {
+                            if (dataRow[dtField.Name] is DateTime)
+                            {
+                                propertyInfos.SetValue
+                                (classObj, dataRow[dtField.Name].ToDateTime(), null);
+                            }
+                            else
+                            {
+                                propertyInfos.SetValue
+                                (classObj, dataRow[dtField.Name].ToStr(), null);
+                            }
+                        }
+                    }
+                }
+                dataList.Add(classObj);
+            }
+            return dataList;
+        }
+
+       
     }
 }

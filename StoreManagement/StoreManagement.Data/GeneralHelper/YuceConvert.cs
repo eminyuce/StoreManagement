@@ -167,7 +167,12 @@ namespace StoreManagement.Data.GeneralHelper
             return ret;
         }
 
-
+        public static decimal ToDecimal(this object arg)
+        {
+            decimal ret = 0;
+            Decimal.TryParse(arg.ToStr(), out ret);
+            return ret;
+        }
         public static long ToLong(this object arg)
         {
             long ret = 0;

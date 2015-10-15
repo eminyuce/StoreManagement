@@ -59,6 +59,7 @@
                                 {
                                             
                                     <input type="hidden" id="selectedStoreId" name="selectedStoreId" value="@storeId" />
+                           
                                        
           
                                     <input type="hidden" name="id" value="0" />
@@ -68,9 +69,31 @@
 
 
                             </span>
-                            <span class="col-md-9">
+                            <span class="col-md-7">
                                 @Html.Partial("pSearchForm")
                             </span>
+                            <span class="col-md-2">
+
+
+                                @using (Html.BeginForm("ExportExcel", controller, FormMethod.Get))
+                                {
+                                    <input type="hidden"  name="id" value="@storeId" />
+                                    <button type="submit" class="btn">Export to Excel</button>
+                                }
+                                @using (Html.BeginForm("ImportExcel", controller, FormMethod.Post, new { EncType = "multipart/form-data" }))
+                                {   
+                                           <input type="hidden"  name="id" value="@storeId" />
+                                        <input type="file" id="excelFile" name="excelFile" />
+                                    <p style="margin-top: 20px;">
+                                        <input type="submit" class="btn" value="Upload" />
+                                    </p>
+ 
+                                }
+
+
+
+                            </span>
+
                         </div>
                         <div class="row">
                             <span class="col-md-1">
@@ -193,8 +216,8 @@
                                              .SetWidth(30)
                                              .RenderValueAs(d =>
                                                             @<b>
-                                                              <input id="detailPageDesing" value="Quick View" type="button" class="btn btn-primary btn-sm glyphicon glyphicon-pencil glyphicon-white" data-page-desing-quick-view-item-id="@d.Id"/>
-                                                          </b>);
+                                                                <input id="detailPageDesing" value="Quick View" type="button" class="btn btn-primary btn-sm glyphicon glyphicon-pencil glyphicon-white" data-page-desing-quick-view-item-id="@d.Id"/>
+                                                            </b>);
 
 
 
@@ -235,8 +258,8 @@
                                                .SetWidth(30)
                                                .RenderValueAs(d =>
                                                               @<b>
-                                                                @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
-                                                            </b>);
+                                                                  @Html.ActionLink(" ", "Delete", new { id = d.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash glyphicon-white" })
+                                                              </b>);
                                     }
 
 
@@ -251,27 +274,27 @@
                         </span>
                         <span class="col-md-5">
                             <b>Page Design Name :</b>
-                        
-                              
-                                  <input style="font-size:x-large"  id="PageDesignName" style="width: 100% !important;" type="text">
+
+
+                            <input style="font-size: x-large" id="PageDesignName" style="width: 100% !important;" type="text">
                             <input class="btn btn-primary btn-lg" id="SavePageDesign" type="submit" value="Save">
                             <input class="btn btn-danger btn-lg" id="ClearPageDesign" type="submit" value="Clear">
-                       
-                            
-                     
-                                             
+
+
+
+
                             <input type="hidden" id="selecedPageDesingItem" value="-1" />
                             <br />
                             <input class="btn btn-success btn-block btn-lg" id="UpdatePageDesign" type="submit" value="Update"><strong>
-                              <span style="font-size:x-large" class="text-success, bg-danger" id="PageDesignMessage"></span>  
+                                <span style="font-size: x-large" class="text-success, bg-danger" id="PageDesignMessage"></span>
                             </strong>
                             <br />
-                         
-                                
-                                <textarea id="PageDesingText"  rows="75" style="width: 100%; height: 100%;"></textarea>
 
-                     
-         
+
+                            <textarea id="PageDesingText" rows="75" style="width: 100%; height: 100%;"></textarea>
+
+
+
                         </span>
                     </div>
 
@@ -297,7 +320,7 @@
 
         $(document).ready(function () {
 
-            
+
             try {
 
                 bindPageDesingItem();
@@ -360,18 +383,18 @@
 
         });
         function SavePageDesing() {
-            var desingItemId =parseInt($("#selecedPageDesingItem").val());
+            var desingItemId = parseInt($("#selecedPageDesingItem").val());
             if (desingItemId > 0) {
                 var postData = JSON.stringify({ "id": desingItemId, "storeId": $("#selectedStoreId").val(), "text": $("#PageDesingText").val(), "name": $("#PageDesignName").val() });
                 ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
-                   
+
                     if (!isEmpty(data)) {
                         SetTextMessage(data);
                     } else {
                         SetTextMessage(" IS UPDATED...");
                         $('[data-page-design-name=' + desingItemId + ']').text($("#PageDesignName").val());
                     }
-                   
+
                 });
 
             }
@@ -394,7 +417,7 @@
                         $('[data-page-desing-quick-view-item-id]').each(function () {
                             $(this).parent().parent().parent().css({ 'background-color': "" });
                         });
-                   
+
                         SetTextMessage(" IS FETCHED...");
                         $("#PageDesingText").val(data.PageTemplate);
                         $("#PageDesignName").val(data.Name);
@@ -422,7 +445,7 @@
                 $("#PageDesignName").val(data.Name);
 
                 $("#selecedPageDesingItem").val(itemId);
- 
+
                 SetTextMessage(" IS FETCHED...");
                 var clonedRow = $('[data-page-desing-item-id=' + itemId + ']').parent().parent().parent().clone();
                 console.log(clonedRow);

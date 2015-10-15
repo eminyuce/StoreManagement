@@ -199,11 +199,42 @@
                                    .Encoded(false)
                                    .RenderValueAs(o =>
                                             @<b>
-                                                @Html.ActionLink(o.Name, "StoreDetails", new { id = o.Id }, new { target = "_blank" })
+                                                @Html.ActionLink(String.IsNullOrEmpty(o.Name) ? "Empty" : o.Name, "StoreDetails", new { id = o.Id }, new { target = "_blank" })
                                             </b>
                                        );
 
 
+                            columns.Add(c => c.Email)
+                                   .Titled("Email")
+                                   .Css("gridTitleClass");
+
+
+
+
+                            columns.Add(c => c.Address)
+                                   .Titled("Address")
+                                   .Css("gridTitleClass");
+
+
+
+                            columns.Add(c => c.Company)
+                                   .Titled("Company")
+                                   .Css("gridTitleClass");
+
+
+
+                            columns.Add(c => c.UserMessage)
+                                   .Titled("UserMessage")
+                                   .Css("gridTitleClass")
+                                   .Filterable(true)
+                                   .Sanitized(false)
+                                   .Encoded(false)
+                                   .RenderValueAs(o =>
+                                            @<b>
+                                                @String.Format("{0}",o.UserMessage.ToStr(50))
+                                            </b>
+                                       );
+                                  
 
                             columns.Add(o => o.Ordering).Encoded(false).
                                     Sanitized(false).

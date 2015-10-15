@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -71,6 +72,17 @@ namespace StoreManagement.Test
 
             Console.Write(blogsTask.Result.Count);
         }
+
+        [TestMethod]
+        public void Test3333555533()
+        {
+          //  var dt = new DataTable();
+          //  var pageDesingsExcelReport = MapToListHelper.ToList<PageDesign>(dt);
+
+            var mm = "10/12/2015 6:18:42 PM".ToDateTime();
+            Console.WriteLine(mm);
+        }
+
         [TestMethod]
         public void Test33335555()
         {

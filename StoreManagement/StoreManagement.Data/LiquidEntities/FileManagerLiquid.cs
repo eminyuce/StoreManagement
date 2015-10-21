@@ -32,7 +32,7 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                return LinkHelper.GetImageLink("Thumbnail", this.FileManager.GoogleImageId, this.ImageWidth, this.ImageHeight);
+                return LinkHelper.GetImageLink("Thumbnail", this.FileManager, this.ImageWidth, this.ImageHeight);
             }
         }
 

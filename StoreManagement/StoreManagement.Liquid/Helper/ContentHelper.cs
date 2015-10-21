@@ -247,7 +247,7 @@ namespace StoreManagement.Liquid.Helper
                 {
 
 
-                    string imageSrc = LinkHelper.GetImageLink("Thumbnail", mainImage.FileManager.GoogleImageId, this.ImageWidth, this.ImageHeight);
+                    string imageSrc = LinkHelper.GetImageLink("Thumbnail", mainImage.FileManager, this.ImageWidth, this.ImageHeight);
                     if (!string.IsNullOrEmpty(imageSrc))
                     {
                         try

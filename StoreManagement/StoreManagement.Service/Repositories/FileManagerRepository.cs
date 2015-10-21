@@ -105,6 +105,21 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public List<FileManager> GetImagesByStoreId(int storeId, bool? isActive)
+        {
+            try
+            {
+                Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId && r2.State;
+                var items = this.FindBy(match).ToList();
+                return items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
         public async Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
         {
             try

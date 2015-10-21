@@ -613,6 +613,41 @@ namespace StoreManagement.Test
 
         }
 
+        [TestMethod]
+        public void DownloadMaritimeReporter()
+        {
+            var myFile = new System.IO.StreamReader(@"\\WEBDEVELOPERS15\Projects\BpaNewsLetter\MaritimePropulsion\MaritimePropulsion.txt");
+            string myString = myFile.ReadToEnd();
+            using (StringReader reader = new StringReader(myString))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    try
+                    {
+                        string url = line;
+                        var dictionary = new Dictionary<String, String>();
+                        var pdfFile = RequestHelper.GetImageFromUrl(line, dictionary);
+                        String fileName = "";
+                        if (dictionary.ContainsKey("Content-Disposition"))
+                        {
+                            fileName = dictionary["Content-Disposition"].ToStr().Split(";".ToCharArray())[1].Replace("filename=", "");
+
+                        }
+                        File.WriteAllBytes(String.Format(@"\\WEBDEVELOPERS15\Projects\BpaNewsLetter\MaritimePropulsion\{0}", fileName), pdfFile);
+                    }
+                    catch (Exception ex)
+                    {
+
+
+                    }
+
+
+                }
+            }
+
+        }
+
         public String GetSearchLine(String sourceString, String key)
         {
             using (StringReader reader = new StringReader(sourceString))

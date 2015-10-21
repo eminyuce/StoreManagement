@@ -11,7 +11,8 @@ namespace StoreManagement.Data.Entities
         public bool IsFilterable { get; set; }
         public bool IsRequired { get; set; }
         public bool IsSearchable { get; set; }
-        public String ComponentType { get; set; }
+        public String ComponentType { get; set; }       
         public String DefaultValue { get; set; }
+        public bool IsEndUserOnly { get; set; }
     }
 }

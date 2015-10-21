@@ -50,9 +50,24 @@ namespace StoreManagement.Liquid.Controllers
                 return File(imageData, "image/png");
             }
 
-
         }
 
+        public void ImageUrl(int id, int width = 60, int height = 60)
+        {
+        //    var fileManagers = GetStoreImages();
+            var images = FileManagerService.GetFilesById(id);  //fileManagers.FirstOrDefault(r => r.Id == id);
+            if (images != null)
+            {
+                String url = images.WebContentLink;
+                var dic = new Dictionary<String, String>();
+                byte[] imageData = GeneralHelper.GetImageFromUrlFromCache(url, dic);
+
+                new WebImage(imageData)
+                    .Resize(width, height) // Resizing the image to 100x100 px on the fly...
+                    //  .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                    .Write();
+            }
+        }
 
         public void Thumbnail(String id, int width = 60, int height = 60)
         {

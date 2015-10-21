@@ -43,6 +43,8 @@ namespace StoreManagement.Data.Entities
          [JsonIgnore]
         public int ?  Height { get; set; }
 
+         public string ImageSourceType { get; set; }
+
 
     }
 }

@@ -84,6 +84,13 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResultsAsync<FileManager>(url);
         }
 
+        public List<FileManager> GetImagesByStoreId(int storeId, bool? isActive)
+        {
+            SetCache();
+            string url = string.Format("http://{0}/api/{1}/GetImagesByStoreId?storeId={2}&isActive={3}", WebServiceAddress, ApiControllerName, storeId, isActive);
+            return HttpRequestHelper.GetUrlResults<FileManager>(url);
+        }
+
         public Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
         {
             SetCache();

@@ -35,6 +35,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/HtmlAgilityPack.dll">
       <publishTime>10/08/2015 12:52:22</publishTime>
     </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
     <File Include="bin/Jil.dll">
       <publishTime>10/01/2015 14:19:12</publishTime>
     </File>
@@ -71,6 +74,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/NLog.dll">
       <publishTime>10/08/2015 12:50:41</publishTime>
     </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>10/08/2015 12:52:26</publishTime>
     </File>
@@ -81,13 +96,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2015 14:19:12</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>10/13/2015 14:00:06</publishTime>
+      <publishTime>10/19/2015 11:40:12</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/13/2015 12:31:32</publishTime>
+      <publishTime>10/19/2015 11:39:55</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/13/2015 13:54:52</publishTime>
+      <publishTime>10/19/2015 11:39:57</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>10/08/2015 12:52:19</publishTime>
@@ -144,7 +159,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/13/2015 14:00:35</publishTime>
+      <publishTime>10/15/2015 15:08:57</publishTime>
     </File>
   </ItemGroup>
 </Project>

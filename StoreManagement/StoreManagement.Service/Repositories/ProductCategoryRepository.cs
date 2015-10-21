@@ -144,18 +144,12 @@ namespace StoreManagement.Service.Repositories
                 && r2.State == isActive.HasValue ? isActive.Value : r2.State
                 && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
-            var items = this.FindAllAsync(match, null, null);
-            Task.WaitAll(items);
-            var itemsResult = items.Result;
-            var c = itemsResult.OrderBy(r => r.Ordering).ToList();
-
+            var items = this.Paginate(page, pageSize, r => r.Ordering, match);
 
             var res = Task.Factory.StartNew(() =>
             {
                 StorePagedList<ProductCategory> result = null;
-
-
-                result = new StorePagedList<ProductCategory>(c.Skip((page - 1) * pageSize).Take(pageSize).ToList(), page, c.Count());
+                result = new StorePagedList<ProductCategory>(items, items.PageIndex, items.PageSize, items.TotalCount);
                 return result;
 
 

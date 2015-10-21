@@ -110,7 +110,7 @@ function GetAttributeBaseAjax() {
         console.error(err.message);
     }
     try {
-        $(this).find('[data-products-next-page-button]').each(function () {
+        $('[data-products-next-page-button]').each(function () {
             $(this).off("click");
             $(this).on("click", function (e) {
                 GetProductsByProductType();

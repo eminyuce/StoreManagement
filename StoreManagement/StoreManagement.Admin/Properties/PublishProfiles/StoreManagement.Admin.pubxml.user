@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2015 12:51:42</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>10/13/2015 22:02:40</publishTime>
+      <publishTime>10/15/2015 12:04:42</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>10/08/2015 12:50:53</publishTime>
@@ -253,16 +253,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>10/15/2015 11:35:48</publishTime>
+      <publishTime>10/19/2015 12:03:58</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/15/2015 11:31:27</publishTime>
+      <publishTime>10/19/2015 12:03:53</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/15/2015 11:31:28</publishTime>
+      <publishTime>10/19/2015 12:03:55</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>10/08/2015 12:52:02</publishTime>
@@ -5377,7 +5377,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Views/Shared/_LeftMenu.cshtml">
-      <publishTime>10/11/2015 22:11:57</publishTime>
+      <publishTime>10/16/2015 11:11:46</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
@@ -5491,7 +5491,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/15/2015 09:59:13</publishTime>
+      <publishTime>10/15/2015 15:09:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

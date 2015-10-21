@@ -153,6 +153,11 @@ namespace StoreManagement.API.Controllers
             return  await FileManagerRepository.GetImagesByStoreIdAsync(storeId, isActive);
         }
 
+        public List<FileManager> GetImagesByStoreId(int storeId, bool? isActive)
+        {
+            return FileManagerRepository.GetImagesByStoreId(storeId, isActive);
+        }
+
         public async Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
         {
             return await FileManagerRepository.GetStoreCarouselsAsync(storeId, take);

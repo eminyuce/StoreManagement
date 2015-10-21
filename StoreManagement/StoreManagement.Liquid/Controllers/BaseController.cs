@@ -66,7 +66,7 @@ namespace StoreManagement.Liquid.Controllers
         public IProductCategoryHelper ProductCategoryHelper { set; get; }
 
         [Inject]
-        public ICategoryHelper  CategoryHelper { set; get; }
+        public ICategoryHelper CategoryHelper { set; get; }
 
         [Inject]
         public INavigationHelper NavigationHelper { set; get; }
@@ -93,7 +93,7 @@ namespace StoreManagement.Liquid.Controllers
 
         [Inject]
         public IContentFileService ContentFileService { set; get; }
-        
+
         [Inject]
         public ICommentService CommentService { set; get; }
 
@@ -190,7 +190,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             var isCacheEnable = StoreService.GetStoreCacheStatus(StoreId);
             this.IsCacheEnable = isCacheEnable;
-           // Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
+            // Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
             SettingService.IsCacheEnable = isCacheEnable;
             SettingService.CacheMinute = GetSettingValueInt("SettingService_CacheMinute", 200);
 
@@ -314,6 +314,8 @@ namespace StoreManagement.Liquid.Controllers
         }
 
         private readonly TypedObjectCache<List<Setting>> _settingStoreCache = new TypedObjectCache<List<Setting>>("SettingsCache");
+        private readonly TypedObjectCache<List<FileManager>> _imagesStoreCache = new TypedObjectCache<List<FileManager>>("FileManagersCache");
+
 
         protected List<Setting> GetStoreSettings()
         {
@@ -332,7 +334,22 @@ namespace StoreManagement.Liquid.Controllers
             return items;
 
         }
+        protected List<FileManager> GetStoreImages()
+        {
+            String key = String.Format("GetStoreImages-{0}", StoreId);
+            _settingStoreCache.IsCacheEnable = true;
+            List<FileManager> items = null;
+            _imagesStoreCache.TryGet(key, out items);
+            if (items == null)
+            {
+                var itemsAsyn = FileManagerService.GetImagesByStoreId(StoreId, true);
 
+                _imagesStoreCache.Set(key, itemsAsyn, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.CacheLongSeconds));
+
+            }
+            return items;
+
+        }
 
     }
 }

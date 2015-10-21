@@ -23,6 +23,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 if (!IsModulActive(StoreConstants.ProductType))
                 {
+                    Logger.Trace("Navigation Modul is not active:" + StoreConstants.ProductType);
                     return HttpNotFound("Not Found");
                 }
 
@@ -77,6 +78,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 if (!IsModulActive(StoreConstants.ProductType))
                 {
+                    Logger.Trace("Navigation Modul is not active:" + StoreConstants.ProductType);
                     return HttpNotFound("Not Found");
                 }
         

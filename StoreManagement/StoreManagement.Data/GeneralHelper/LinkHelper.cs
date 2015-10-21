@@ -31,15 +31,36 @@ namespace StoreManagement.Data.GeneralHelper
             return detailLink.ToLowerInvariant();
         }
 
-        public static String GetImageLink(String imageActionName, String googleId, int width, int height)
+        public static String GetImageLink(String imageActionName, FileManager fileImage, int width, int height)
         {
-            String imageLink = String.Format("/Images/{0}/{1}?width={2}&height={3}", imageActionName, googleId, width, height);
+
+            String imageLink = "";
+            if (fileImage.ImageSourceType.Equals("ShopStyle", StringComparison.InvariantCultureIgnoreCase))
+            {
+                imageLink = String.Format("/Images/{0}/{1}?width={2}&height={3}", "ImageUrl", fileImage.Id, width, height);
+            }
+            else
+            {
+                imageLink = String.Format("/Images/{0}/{1}?width={2}&height={3}", imageActionName, fileImage.GoogleImageId, width, height);
+            }
+
+           
             return imageLink;
         }
-        public static String GetImageLinkHtml(String imageActionName, String googleId, int width, int height, String title, String alt)
+        public static String GetImageLinkHtml(String imageActionName, FileManager fileImage, int width, int height, String title, String alt)
         {
-            String imageLink = String.Format("<img class='imageItem' src='/Images/{0}/{1}?width={2}&height={3}' alt='{4}' title='{5}' />",
-                imageActionName, googleId, width, height, alt, title);
+            String imageLink = "";
+
+            if (fileImage.ImageSourceType.Equals("ShopStyle", StringComparison.InvariantCultureIgnoreCase))
+            {
+                imageLink = String.Format("<img class='imageItem' src='/Images/{0}/{1}?width={2}&height={3}' alt='{4}' title='{5}' />",
+                    "ImageUrl", fileImage.Id, width, height, alt, title);
+            }
+            else
+            {
+                imageLink = String.Format("<img class='imageItem' src='/Images/{0}/{1}?width={2}&height={3}' alt='{4}' title='{5}' />",
+                imageActionName, fileImage.GoogleImageId, width, height, alt, title);
+            }
             return imageLink;
         }
         public static string GetProductCategoryLink(BaseCategory productCategory)

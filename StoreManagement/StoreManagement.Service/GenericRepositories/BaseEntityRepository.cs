@@ -180,7 +180,7 @@ namespace StoreManagement.Service.GenericRepositories
                 var items = repository.FindBy(predicate);
                
 
-                return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+                return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
 
             }
             catch (Exception exception)
@@ -201,7 +201,7 @@ namespace StoreManagement.Service.GenericRepositories
                 }
                 var items = repository.FindBy(predicate);
 
-                return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Id).ToList();
+                return items.OrderBy(r => r.Ordering).ThenByDescending(r => r.Name).ToList();
 
             }
             catch (Exception exception)

@@ -43,12 +43,14 @@ namespace StoreManagement.Admin.Controllers
             var dt = MapToListHelper.ToDataTable(resultList);
             var report = ExcelHelper.GetExcelByteArrayFromDataTable(dt);
             return File(report, "application/vnd.ms-excel",
-                         String.Format("PageDesigns-{0}-{1}.xls",store.Name,DateTime.Now.ToString("yyyyMMdd", System.Globalization.CultureInfo.GetCultureInfo("en-US"))));
+                         String.Format("PageDesigns-{0}-{1}.xls", store.Name, DateTime.Now.ToString("yyyyMMdd", System.Globalization.CultureInfo.GetCultureInfo("en-US"))));
         }
         [HttpPost]
         public ActionResult ImportExcel(int id, HttpPostedFileBase excelFile)
         {
             var dt = ExcelHelper.PostValues(excelFile);
+            int selectedStoreId = id;
+            var resultList = PageDesignRepository.GetPageDesignByStoreId(selectedStoreId, "");
             var pageDesingsExcelReport = MapToListHelper.ToList<PageDesign>(dt);
             foreach (var pageDesign in pageDesingsExcelReport.Where(r =>
                 !r.Name.Equals("Name", StringComparison.InvariantCultureIgnoreCase) &&
@@ -56,7 +58,7 @@ namespace StoreManagement.Admin.Controllers
             {
 
                 pageDesign.StoreId = id;
-                var pageDesignTask = PageDesignRepository.GetPageDesignByNameSync(id, pageDesign.Name);
+                var pageDesignTask = resultList.FirstOrDefault(r => r.Name.Equals(pageDesign.Name, StringComparison.InvariantCultureIgnoreCase));
                 if (pageDesignTask == null)
                 {
                     pageDesign.Id = 0;

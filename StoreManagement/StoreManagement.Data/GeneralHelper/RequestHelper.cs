@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Caching;
@@ -174,7 +175,43 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return returnJson;
         }
+        public static byte[] GetImageFromUrl(string url, Dictionary<String, String> dictionary)
+        {
+            System.Net.HttpWebRequest request = null;
+            System.Net.HttpWebResponse response = null;
+            byte[] b = null;
 
+            if (dictionary == null)
+            {
+                dictionary = new Dictionary<String, String>();
+            }
+
+            request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
+            response = (System.Net.HttpWebResponse)request.GetResponse();
+
+            if (request.HaveResponse)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    Stream receiveStream = response.GetResponseStream();
+                    using (BinaryReader br = new BinaryReader(receiveStream))
+                    {
+                        b = br.ReadBytes(500000);
+                        br.Close();
+                    }
+
+                    foreach (var h in response.Headers.AllKeys)
+                    {
+                        dictionary.Add(h, response.Headers[h]);
+                    }
+                    dictionary.Add("ContentType", response.ContentType);
+                }
+            }
+
+            return b;
+        }
+
+       
         public IRestResponse PostBasicAuthenication(string baseUrl, string resourceUrl, string userName, string password, string json)
         {
             var client = new RestClient(baseUrl);
@@ -336,6 +373,86 @@ namespace StoreManagement.Data.GeneralHelper
             return task;
 
             //return MakeJsonRequestAsync<List<T>>(url);
+        }
+ 
+        public static Dictionary<String, String> UploadFileToWebStorage(String urlFilesPutfile, byte[] byteArray, string fileContentType, string fileName)
+        {
+            var resultImageDic = new Dictionary<String, String>();
+
+            try
+            {
+                var client = new RestClient(string.Format(urlFilesPutfile));
+                var request = new RestRequest(Method.POST);
+                request.AddFile("file", byteArray, fileName, fileContentType);
+                request.AddHeader("ContentType", fileContentType);
+                request.AddHeader("FileName", fileName);
+
+                var response = client.Execute(request);
+                GetResponse(response, resultImageDic);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(String.Join("Exception is thrown while making request to storage fileName:{0} fileContentType:{1} Message:{2}", fileName, fileContentType, ex.Message), ex);
+            }
+
+
+            return resultImageDic;
+        }
+
+        private static void GetResponse(IRestResponse response, Dictionary<string, string> resultImageDic)
+        {
+            var statusCode = response.StatusCode;
+            var p = response.Headers.FirstOrDefault(r => r.Name.Equals("FileNameUrl", StringComparison.InvariantCultureIgnoreCase));
+            var p1 =
+                response.Headers.FirstOrDefault(
+                    r => r.Name.Equals("FileHash", StringComparison.InvariantCultureIgnoreCase));
+
+            var isImageHeader = response.Headers.FirstOrDefault(r => r.Name.Equals("IsImage", StringComparison.InvariantCultureIgnoreCase));
+            var isImage = isImageHeader != null && isImageHeader.Value.Equals("True");
+            resultImageDic.Add("IsImage", isImage.ToStr());
+
+            var heightHeader = response.Headers.FirstOrDefault(r => r.Name.Equals("Height", StringComparison.InvariantCultureIgnoreCase));
+            if (heightHeader != null)
+            {
+                var height = heightHeader.Value.ToInt();
+                resultImageDic.Add("Height", height.ToStr());
+            }
+            else
+            {
+                resultImageDic.Add("Height", "0");
+            }
+
+            var widthHeader = response.Headers.FirstOrDefault(r => r.Name.Equals("Width", StringComparison.InvariantCultureIgnoreCase));
+            if (widthHeader != null)
+            {
+                var width = widthHeader.Value.ToInt();
+                resultImageDic.Add("Width", width.ToStr());
+            }
+            else
+            {
+                resultImageDic.Add("Width", "0");
+            }
+
+
+            if (p != null)
+            {
+                var fileNameUrl = p.Value.ToStr();
+                resultImageDic.Add("FileNameUrl", fileNameUrl);
+            }
+            else
+            {
+                resultImageDic.Add("FileNameUrl", "");
+            }
+
+            if (p1 != null)
+            {
+                var fileHash = p1.Value.ToStr();
+                resultImageDic.Add("FileHash", fileHash);
+            }
+            else
+            {
+                resultImageDic.Add("FileHash", "");
+            }
         }
     }
 

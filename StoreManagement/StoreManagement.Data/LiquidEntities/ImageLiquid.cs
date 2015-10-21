@@ -69,7 +69,7 @@ namespace StoreManagement.Data.LiquidEntities
                 if (mainImage != null)
                 {
 
-                    return LinkHelper.GetImageLinkHtml("Thumbnail", mainImage.GoogleImageId, this.ImageWidth,
+                    return LinkHelper.GetImageLinkHtml("Thumbnail", mainImage, this.ImageWidth,
                                                        this.ImageHeight, mainImage.Title, mainImage.Title);
 
                 }
@@ -92,7 +92,7 @@ namespace StoreManagement.Data.LiquidEntities
                 {
                     var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => x.Id).FirstOrDefault();
                     if (firstOrDefault != null)
-                        return LinkHelper.GetImageLinkHtml("Thumbnail", firstOrDefault.GoogleImageId, this.ImageWidth, this.ImageHeight, firstOrDefault.Title, firstOrDefault.Title);
+                        return LinkHelper.GetImageLinkHtml("Thumbnail", firstOrDefault, this.ImageWidth, this.ImageHeight, firstOrDefault.Title, firstOrDefault.Title);
                 }
                 return "";
             }
@@ -112,7 +112,7 @@ namespace StoreManagement.Data.LiquidEntities
                 {
                     var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
                     if (firstOrDefault != null)
-                        return LinkHelper.GetImageLinkHtml("Thumbnail", firstOrDefault.GoogleImageId,
+                        return LinkHelper.GetImageLinkHtml("Thumbnail", firstOrDefault,
                             this.ImageWidth,
                             this.ImageHeight, firstOrDefault.Title, firstOrDefault.Title);
                 }
@@ -134,7 +134,7 @@ namespace StoreManagement.Data.LiquidEntities
                     var imageList = new List<String>();
                     foreach (var image in this.FileManagers.Where(r => r.State))
                     {
-                        var imageLink = LinkHelper.GetImageLinkHtml("Thumbnail", image.GoogleImageId,
+                        var imageLink = LinkHelper.GetImageLinkHtml("Thumbnail", image,
                                                                 this.ImageWidth,
                                                                 this.ImageHeight, image.Title, image.Title);
                         imageList.Add(imageLink);

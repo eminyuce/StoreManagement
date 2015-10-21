@@ -87,6 +87,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 if (!IsModulActive(StoreConstants.ProductType))
                 {
+                    Logger.Trace("Navigation Modul is not active:" + StoreConstants.ProductType);
                     return HttpNotFound("Not Found");
                 }
                 int productId = id.Split("-".ToCharArray()).Last().ToInt();

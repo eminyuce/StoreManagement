@@ -26,6 +26,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 if (!IsModulActive(Type))
                 {
+                    Logger.Trace("Navigation Modul is not active:" + Type);
                     return HttpNotFound("Not Found");
                 }
 
@@ -83,6 +84,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 if (!IsModulActive(Type))
                 {
+                    Logger.Trace("Navigation Modul is not active:" + Type);
                     return HttpNotFound("Not Found");
                 }
                 int newsId = id.Split("-".ToCharArray()).Last().ToInt();

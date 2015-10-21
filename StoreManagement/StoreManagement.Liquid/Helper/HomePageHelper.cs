@@ -24,6 +24,7 @@ namespace StoreManagement.Liquid.Helper
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesing.Name;
             try
             {
                 if (pageDesing == null)
@@ -81,6 +82,7 @@ namespace StoreManagement.Liquid.Helper
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesing.Name;
             try
             {
                 if (pageDesing == null)

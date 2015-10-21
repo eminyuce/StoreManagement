@@ -67,6 +67,7 @@ namespace StoreManagement.Liquid.Helper
 
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
             return result;
         }
 
@@ -89,6 +90,7 @@ namespace StoreManagement.Liquid.Helper
 
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
             return result;
         }
 
@@ -119,6 +121,7 @@ namespace StoreManagement.Liquid.Helper
 
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
             return result;
 
         }
@@ -147,6 +150,7 @@ namespace StoreManagement.Liquid.Helper
 
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
             return result;
         }
 

@@ -18,6 +18,7 @@ namespace StoreManagement.Data.Entities
         public string Title { get; set; }
         public string WebContentLink { get; set; }       
         public string FileStatus { get; set; }
+        public string FileSize { get; set; }
 
          [JsonIgnore]
         public string ThumbnailLink { get; set; }

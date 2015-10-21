@@ -46,7 +46,7 @@ namespace StoreManagement.Liquid.Helper
                 //dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
                 result.LiquidRenderedResult = dic;
-
+                result.PageDesingName = pageDesign.Name;
             }
             catch (Exception exception)
             {
@@ -83,6 +83,7 @@ namespace StoreManagement.Liquid.Helper
 
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
             return result;
         }
     }

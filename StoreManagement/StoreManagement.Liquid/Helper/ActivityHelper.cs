@@ -16,6 +16,7 @@ namespace StoreManagement.Liquid.Helper
         public StoreLiquidResult GetActivityIndexPage(PageDesign pageDesign, List<Activity> activities)
         {
             var result = new StoreLiquidResult();
+            result.PageDesingName = pageDesign.Name;
             var dic = new Dictionary<String, String>();
             result.LiquidRenderedResult = dic;
             dic.Add(StoreConstants.PageOutput, "");

@@ -61,6 +61,7 @@ namespace StoreManagement.Liquid.Helper
 
 
             var result = new StoreLiquidResult();
+            result.PageDesingName = pageDesign.Name;
             result.LiquidRenderedResult = dic;
             return result;
         }
@@ -123,7 +124,9 @@ namespace StoreManagement.Liquid.Helper
 
 
             var result = new StoreLiquidResult();
+            result.PageDesingName = pageDesign.Name;
             result.LiquidRenderedResult = dic;
+
             return result;
         }
 
@@ -136,6 +139,7 @@ namespace StoreManagement.Liquid.Helper
         {
            
             var result = new StoreLiquidResult();
+            result.PageDesingName = pageDesign.Name;
             var dic = new Dictionary<String, String>();
             try
             {
@@ -179,6 +183,7 @@ namespace StoreManagement.Liquid.Helper
 
          
             var result = new StoreLiquidResult();
+            result.PageDesingName = pageDesign.Name;
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             try

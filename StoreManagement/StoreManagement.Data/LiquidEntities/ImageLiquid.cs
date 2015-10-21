@@ -19,11 +19,11 @@ namespace StoreManagement.Data.LiquidEntities
         //TODO: ImageState will manage visibility.
         public bool ImageState { get; set; }
 
-        public ImageLiquid(List<BaseFileEntity> baseFileEntities,  int width, int height)
+        public ImageLiquid(List<BaseFileEntity> baseFileEntities, int width, int height)
         {
             this.BaseFileEntities = baseFileEntities;
             this.FileManagers = baseFileEntities.Select(r => r.FileManager).ToList();
-    
+
 
             this.ImageWidth = width == 0 ? 99 : width;
             this.ImageHeight = height == 0 ? 99 : height;
@@ -75,27 +75,60 @@ namespace StoreManagement.Data.LiquidEntities
                 }
                 else
                 {
-                    return FirstImageSource;
+                    return BestImageSource;
                 }
 
             }
         }
-        public String FirstImageSource
+        public String BestImageSource
         {
-            get
+            get { return GetImageSource("best"); }
+        }
+        public String PhoneSmallImageSource
+        {
+            get { return GetImageSource("IPhoneSmall"); }
+        }
+        public String PhoneImageSource
+        {
+            get { return GetImageSource("IPhone"); }
+        }
+        public String OriginalImageSource
+        {
+            get { return GetImageSource("Original"); }
+        }
+        public String SmallImageSource
+        {
+            get { return GetImageSource("Small"); }
+        }
+        public String XlargeImageSource
+        {
+            get { return GetImageSource("XLarge"); }
+        }
+        public String MediumImageSource
+        {
+            get { return GetImageSource("Medium"); }
+        }
+        public String LargeImageSource
+        {
+            get { return GetImageSource("Large"); }
+        }
+        public String GetImageSource(String size)
+        {
+
+            if (!ImageState)
             {
-                if (!ImageState)
-                {
-                    return "";
-                }
-                if (ImageHas)
-                {
-                    var firstOrDefault = FileManagers.Where(r => r.State).OrderBy(x => x.Id).FirstOrDefault();
-                    if (firstOrDefault != null)
-                        return LinkHelper.GetImageLinkHtml("Thumbnail", firstOrDefault, this.ImageWidth, this.ImageHeight, firstOrDefault.Title, firstOrDefault.Title);
-                }
                 return "";
             }
+            if (ImageHas)
+            {
+                var fileImage = FileManagers.FirstOrDefault(r => r.State && r.FileSize.Equals(size, StringComparison.InvariantCultureIgnoreCase));
+                if (fileImage != null)
+                    if (fileImage.Width != null)
+                        if (fileImage.Height != null)
+                            return LinkHelper.GetImageLinkHtml("Thumbnail", fileImage, fileImage.Width.Value, fileImage.Height.Value, fileImage.Title, fileImage.Title);
+            }
+            return "";
+
         }
 
 

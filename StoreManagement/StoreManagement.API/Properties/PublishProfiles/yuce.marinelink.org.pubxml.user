@@ -96,13 +96,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2015 14:19:12</publishTime>
     </File>
     <File Include="bin/StoreManagement.API.dll">
-      <publishTime>10/19/2015 11:40:12</publishTime>
+      <publishTime>10/21/2015 13:29:44</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/19/2015 11:39:55</publishTime>
+      <publishTime>10/21/2015 13:28:24</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/19/2015 11:39:57</publishTime>
+      <publishTime>10/21/2015 13:28:26</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>10/08/2015 12:52:19</publishTime>
@@ -159,7 +159,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2015 19:25:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/15/2015 15:08:57</publishTime>
+      <publishTime>10/21/2015 13:29:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ namespace StoreManagement.Data.LiquidEntities
                 return LiquidRenderedResult[StoreConstants.PageOutput];
             }
         }
-
+        public String PageDesingName { get; set; }
 
     }
 }

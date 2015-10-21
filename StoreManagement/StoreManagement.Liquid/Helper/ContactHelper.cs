@@ -18,6 +18,7 @@ namespace StoreManagement.Liquid.Helper
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
             dic.Add(StoreConstants.PageOutput, "");
 
             try

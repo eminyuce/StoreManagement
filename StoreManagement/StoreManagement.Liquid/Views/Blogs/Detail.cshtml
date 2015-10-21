@@ -7,5 +7,5 @@
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
             
 }
-
+ @Html.HiddenFor(r=>r.PageDesingName)
  @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))

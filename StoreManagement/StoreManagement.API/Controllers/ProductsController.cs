@@ -110,9 +110,9 @@ namespace StoreManagement.API.Controllers
             return await ProductRepository.GetProductsByBrandAsync(storeId, brandId, take, excludedProductId);
         }
 
-        public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
         {
-            return await ProductRepository.GetProductsByProductType(storeId, categoryId, brandId, productType, page, pageSize, isActive, functionType, excludedProductId);
+            return await ProductRepository.GetProductsByProductType(storeId, categoryId, brandId, retailerId, productType, page, pageSize, isActive, functionType, excludedProductId);
         }
  
     }

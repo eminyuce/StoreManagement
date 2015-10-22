@@ -248,6 +248,7 @@ function GetProductsByProductType() {
         var designName = $(this).attr('data-template-design-name');
         var categoryId = GetValueInt($(this).attr('data-product-category-id'));
         var brandId = GetValueInt($(this).attr('data-brand-id'));
+        var retailerId = GetValueInt($(this).attr('data-retailer-id'));
         var imageWidth = GetValueInt($(this).attr('data-image-width'));
         var imageHeight = GetValueInt($(this).attr('data-image-height'));
         var pageSize = GetValueInt($(this).attr('data-page-size'));
@@ -258,6 +259,7 @@ function GetProductsByProductType() {
             "designName": designName,
             "categoryId": categoryId,
             "brandId": brandId,
+            "retailerId": retailerId,
             "imageWidth": imageWidth,
             "imageHeight": imageHeight,
             "pageSize": pageSize,

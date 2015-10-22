@@ -248,19 +248,18 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId,
-            int? brandId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        public Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
         {
             try
             {
                 SetCache();
                 string url = string.Format("http://{0}/api/{1}/GetProductsByProductType?" +
                                                     "storeId={2}&categoryId={3}&brandId={4}&productType={5}" +
-                                                    "&page={6}&pageSize={7}&isActive={8}&functionType={9}&excludedProductId={10}",
+                                                    "&page={6}&pageSize={7}&isActive={8}&functionType={9}&excludedProductId={10}&retailerId={11}",
                                                     WebServiceAddress,
                                                     ApiControllerName,
                                                     storeId, categoryId, brandId, productType,
-                                                    page, pageSize, isActive, functionType, excludedProductId);
+                                                    page, pageSize, isActive, functionType, excludedProductId, retailerId);
 
                 return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
 

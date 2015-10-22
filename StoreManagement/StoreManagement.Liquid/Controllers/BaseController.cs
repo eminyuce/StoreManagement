@@ -39,6 +39,9 @@ namespace StoreManagement.Liquid.Controllers
         public IStoreHelper StoreHelper { set; get; }
 
         [Inject]
+        public IRetailerHelper RetailerHelper { set; get; }
+
+        [Inject]
         public IContactHelper ContactHelper { set; get; }
 
         [Inject]

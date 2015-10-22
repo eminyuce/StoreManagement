@@ -124,6 +124,10 @@ namespace StoreManagement.Liquid.Controllers
 
             return View();
         }
-
+        public ActionResult ProductBuy(int id=0)
+        {
+            var productsTask = ProductService.GetProductsById(id);
+            return Redirect(productsTask.VideoUrl);
+        }
     }
 }

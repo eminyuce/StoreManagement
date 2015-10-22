@@ -46,5 +46,6 @@ namespace StoreManagement.Service.DbContext
         public IDbSet<Message> Messages { get; set; }
         public IDbSet<ProductAttributeRelation> ProductAttributeRelations { get; set; }
         public IDbSet<ProductAttribute> ProductAttributes { get; set; }
+        public IDbSet<Retailer> Retailers { get; set; }
     }
 }

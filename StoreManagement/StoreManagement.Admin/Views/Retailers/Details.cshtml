@@ -1,0 +1,63 @@
+@model StoreManagement.Data.Entities.Retailer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Labels</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>Retailer Management</h2>
+
+            
+
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Retailer</legend>
+
+    <div class="display-Retailer">StoreId</div>
+    <div class="display-field">@Model.StoreId</div>
+
+
+    <div class="display-Retailer">Name</div>
+    <div class="display-field">@Model.Name</div>
+     
+
+    <div class="display-Retailer">UpdatedDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.UpdatedDate)</div>
+
+    <div class="display-Retailer">CreatedDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedDate)</div>
+
+    <div class="display-Retailer">Ordering</div>
+    <div class="display-field">@Model.Ordering</div>
+
+    <div class="display-Retailer">State</div>
+    <div class="display-field">@Model.State</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id },new{@class="btn btn-primary btn-lg btn-block"}) |
+                        @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+</p>
+
+
+
+ 
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

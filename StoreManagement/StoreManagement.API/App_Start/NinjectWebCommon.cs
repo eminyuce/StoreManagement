@@ -69,6 +69,7 @@ namespace StoreManagement.API.App_Start
             var storeContext = (StoreContext)kernel.Get<IStoreContext>();
             storeContext.Configuration.LazyLoadingEnabled = false;
 
+            kernel.Bind<IRetailerRepository>().To<RetailerRepository>().InRequestScope();
             kernel.Bind<IContentRepository>().To<ContentRepository>().InRequestScope();
             kernel.Bind<IStoreRepository>().To<StoreRepository>().InRequestScope();
             kernel.Bind<ISettingRepository>().To<SettingRepository>().InRequestScope();

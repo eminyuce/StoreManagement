@@ -342,6 +342,18 @@ namespace StoreManagement.Liquid.App_Start
                 }
             }).InRequestScope();
 
+            kernel.Bind<IRetailerService>().ToMethod(ctx =>
+            {
+                if (isApiService)
+                {
+                    return new RetailerService(webServiceAddress);
+                }
+                else
+                {
+                    return new RetailerRepository(new StoreContext(AppConstants.ConnectionStringName));
+                }
+            }).InRequestScope();
+
 
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();
             kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();
@@ -360,7 +372,7 @@ namespace StoreManagement.Liquid.App_Start
             kernel.Bind<IContactHelper>().To<ContactHelper>().InRequestScope();
             kernel.Bind<IActivityHelper>().To<ActivityHelper>().InRequestScope();
             kernel.Bind<ICommentHelper>().To<CommentHelper>().InRequestScope();
-
+            kernel.Bind<IRetailerHelper>().To<RetailerHelper>().InRequestScope();
             kernel.Bind<IHttpContextFactory>().To<HttpContextFactory>().InRequestScope();
 
             kernel.Bind<HttpContext>().ToMethod(ctx => HttpContext.Current).InTransientScope();

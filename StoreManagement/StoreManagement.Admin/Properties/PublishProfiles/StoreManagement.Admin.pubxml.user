@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2015 12:51:42</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>10/21/2015 13:28:24</publishTime>
+      <publishTime>10/22/2015 11:26:12</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>10/08/2015 12:50:53</publishTime>
@@ -253,16 +253,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>10/21/2015 13:28:31</publishTime>
+      <publishTime>10/22/2015 11:26:21</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/21/2015 13:28:24</publishTime>
+      <publishTime>10/22/2015 11:26:13</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/21/2015 13:28:26</publishTime>
+      <publishTime>10/22/2015 11:26:16</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>10/08/2015 12:52:02</publishTime>
@@ -5157,6 +5157,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/ProductsLabels/SaveOrEdit.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
     </File>
+    <File Include="Views/Retailers/Delete.cshtml">
+      <publishTime>10/22/2015 10:16:21</publishTime>
+    </File>
+    <File Include="Views/Retailers/Details.cshtml">
+      <publishTime>10/22/2015 10:15:29</publishTime>
+    </File>
+    <File Include="Views/Retailers/Index.cshtml">
+      <publishTime>10/22/2015 10:15:29</publishTime>
+    </File>
+    <File Include="Views/Retailers/SaveOrEdit.cshtml">
+      <publishTime>10/22/2015 10:15:29</publishTime>
+    </File>
     <File Include="Views/Settings/Create.cshtml">
       <publishTime>06/07/2015 10:44:41</publishTime>
     </File>
@@ -5377,7 +5389,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Views/Shared/_LeftMenu.cshtml">
-      <publishTime>10/16/2015 11:11:46</publishTime>
+      <publishTime>10/22/2015 10:17:05</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>07/30/2015 09:17:56</publishTime>
@@ -5491,7 +5503,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/21/2015 13:28:47</publishTime>
+      <publishTime>10/22/2015 11:26:39</publishTime>
     </File>
   </ItemGroup>
 </Project>

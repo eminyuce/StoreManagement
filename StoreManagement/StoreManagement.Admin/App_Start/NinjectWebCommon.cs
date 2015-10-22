@@ -85,8 +85,9 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope(); 
             kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>().InRequestScope(); 
             kernel.Bind<IContentFileRepository>().To<ContentFileRepository>().InRequestScope(); 
-            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>().InRequestScope(); 
+            kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>().InRequestScope();
 
+            kernel.Bind<IRetailerRepository>().To<RetailerRepository>().InRequestScope();
             kernel.Bind<IProductRepository>().To<ProductRepository>().InRequestScope();
             kernel.Bind<IProductFileRepository>().To<ProductFileRepository>().InRequestScope();
             kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>().InRequestScope(); 

@@ -326,6 +326,7 @@
     <Compile Include="Controllers\ProductAttributesController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StoreCategoriesController.cs" />
@@ -1998,6 +1999,10 @@
     <Content Include="Views\ProductAttributes\Details.cshtml" />
     <Content Include="Views\ProductAttributes\Index.cshtml" />
     <Content Include="Views\ProductAttributes\SaveOrEdit.cshtml" />
+    <Content Include="Views\Retailers\Delete.cshtml" />
+    <Content Include="Views\Retailers\Details.cshtml" />
+    <Content Include="Views\Retailers\Index.cshtml" />
+    <Content Include="Views\Retailers\SaveOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

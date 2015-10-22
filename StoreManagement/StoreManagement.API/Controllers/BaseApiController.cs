@@ -30,6 +30,8 @@ namespace StoreManagement.API.Controllers
         [Inject]
         public IProductAttributeRelationRepository ProductAttributeRelationRepository { get; set; }
 
+        [Inject]
+        public IRetailerRepository RetailerRepository { get; set; }
 
         [Inject]
         public IMessageRepository MessageRepository { get; set; }

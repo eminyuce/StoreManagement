@@ -175,6 +175,7 @@
     <Compile Include="Entities\ProductAttributeRelation.cs" />
     <Compile Include="Entities\ProductCategory.cs" />
     <Compile Include="Entities\ProductFile.cs" />
+    <Compile Include="Entities\Retailer.cs" />
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\StoreLanguage.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="LiquidEntities\ImageLiquid.cs" />
     <Compile Include="LiquidEntities\NavigationLiquid.cs" />
     <Compile Include="LiquidEntities\ProductLiquid.cs" />
+    <Compile Include="LiquidEntities\RetailerLiquid.cs" />
     <Compile Include="LiquidEntities\StoreLiquidResult.cs" />
     <Compile Include="LiquidFilters\TextFilter.cs" />
     <Compile Include="LogEntities\AppNames.cs" />

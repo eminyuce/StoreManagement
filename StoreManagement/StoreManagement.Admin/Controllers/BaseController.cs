@@ -48,7 +48,8 @@ namespace StoreManagement.Admin.Controllers
         [Inject]
         public IProductAttributeRelationRepository ProductAttributeRelationRepository { get; set; }
 
-
+        [Inject]
+        public IRetailerRepository RetailerRepository { set; get; }
 
         [Inject]
         public IMessageRepository MessageRepository { get; set; }

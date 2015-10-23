@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +23,11 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public List<PageDesign> GetPageDesignByStoreId(int storeId, string search)
+        public List<PageDesign> GetPageDesignByStoreId(int storePageDesignId, string search)
         {
-            var pages = this.FindBy(r => r.StoreId == storeId);
-
-
+            var pages = this.FindBy(item => item.StorePageDesignId == storePageDesignId);
+           
+            
             if (!String.IsNullOrEmpty(search.ToStr()))
             {
                 pages = pages.Where(r => r.Name.ToLower().Contains(search.ToLower().Trim()) || r.PageTemplate.ToLower().Contains(search.ToLower().Trim()) || r.Type.ToLower().Contains(search.ToLower().Trim()));
@@ -36,18 +37,24 @@ namespace StoreManagement.Service.Repositories
 
         }
 
-        public PageDesign GetPageDesignByNameSync(int storeId, string name)
+        public PageDesign GetPageDesignByNameSync(int storePageDesignId, string name)
         {
-            var item = this.FindBy(r => r.StoreId == storeId && r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-
-            return item;
+            var item1 =  this.FindBy(item => item.StorePageDesignId == storePageDesignId && item.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+           
+            return item1;
         }
 
         public async Task<PageDesign> GetPageDesignByName(int storeId, string name)
         {
-            var item = await this.FindAsync(r => r.StoreId == storeId && r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            IQueryable<PageDesign> item1 = from s in this.StoreDbContext.Stores
+                                    join c in this.StoreDbContext.StorePageDesigns on s.StorePageDesignId equals c.Id
+                                    join u in this.StoreDbContext.PageDesigns on c.Id equals u.StorePageDesignId
+                                    where s.Id == storeId && u.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)
+                                    select u;
 
+            var item = await  item1.Where(r => r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefaultAsync();
             return item;
+            // return item1.FirstOrDefault();
 
         }
         public void Dispose()

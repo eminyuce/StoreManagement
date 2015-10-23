@@ -793,18 +793,18 @@ namespace StoreManagement.Admin.Controllers
             var item = PageDesignRepository.GetSingle(id);
             return Json(item, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SetPageDesignText(int id = 0, String text = "", String name = "", int storeId = 0)
+        public ActionResult SetPageDesignText(int id = 0, String text = "", String name = "", int storePageDesignId = 0)
         {
             var item = new PageDesign();
 
 
             if (id == 0)
             {
-                if (storeId != 0 && !String.IsNullOrEmpty(name))
+                if (storePageDesignId != 0 && !String.IsNullOrEmpty(name))
                 {
 
                     var isSamePageNameExists =
-                       PageDesignRepository.GetPageDesignByStoreId(storeId, "")
+                       PageDesignRepository.GetPageDesignByStoreId(storePageDesignId, "")
                                            .Any(r => r.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
 
                     if (isSamePageNameExists)
@@ -812,7 +812,7 @@ namespace StoreManagement.Admin.Controllers
                         return Json("Same name exists.", JsonRequestBehavior.AllowGet);
                     }
 
-                    item.StoreId = storeId;
+                
                     item.PageTemplate = text;
                     item.CreatedDate = DateTime.Now;
                     item.State = true;

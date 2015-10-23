@@ -82,7 +82,7 @@ namespace StoreManagement.Admin.Controllers
             {
                 store = StoreRepository.GetSingle(id);
             }
-
+            ViewBag.StorePageDesigns = StorePageDesignRepository.GetActiveStoreDesings();
             ViewBag.StoreCategories = CategoryRepository.GetCategoriesByType(StoreConstants.StoreType);
             return View(store);
         }
@@ -93,7 +93,7 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(Store store, HttpPostedFileBase certUpload = null)
         {
-
+            ViewBag.StorePageDesigns = StorePageDesignRepository.GetActiveStoreDesings();
             ViewBag.StoreCategories = CategoryRepository.GetCategoriesByType(StoreConstants.StoreType);
             if (ModelState.IsValid)
             {
@@ -206,22 +206,7 @@ namespace StoreManagement.Admin.Controllers
             }
 
 
-            try
-            {
-                var pageDesings = PageDesignRepository.GetPageDesignByStoreId(copyStoreId, "");
-                foreach (var pageDesing in pageDesings)
-                {
-                    var s = GeneralHelper.DataContractSerialization(pageDesing);
-                    s.Id = 0;
-                    s.StoreId = newStoreId;
-                    PageDesignRepository.Add(s);
-                }
-                PageDesignRepository.Save();
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "CopyStore", newStoreId);
-            }
+            
             return newStoreId;
         }
 

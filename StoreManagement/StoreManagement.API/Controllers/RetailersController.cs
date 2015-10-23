@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
@@ -34,6 +35,11 @@ namespace StoreManagement.API.Controllers
         public override HttpResponseMessage Delete(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<Retailer>> GetRetailersAsync(int storeId, int? take, bool isActive)
+        {
+            return await RetailerRepository.GetRetailersAsync(storeId, take, isActive);
         }
     }
 }

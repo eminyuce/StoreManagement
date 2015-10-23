@@ -1,0 +1,75 @@
+@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.Entities.StorePageDesign
+
+@{
+    ViewBag.Title = "Edit";
+
+   
+}
+
+
+
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Labels</div>
+            </div>
+            <div class="bootstrap-admin-panel-content">
+                <h2>StorePageDesign Management</h2>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>StorePageDesign</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.UpdatedDate)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                      
+
+                        <div class="editor-StorePageDesign">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+
+
+                        <div class="editor-StorePageDesign">
+                            @Html.LabelFor(model => model.Ordering)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Ordering)
+                            @Html.ValidationMessageFor(model => model.Ordering)
+                        </div>
+
+                        <div class="editor-StorePageDesign">
+                            @Html.LabelFor(model => model.State)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.State)
+                            @Html.ValidationMessageFor(model => model.State)
+                        </div>
+
+                        <p>
+                            <input type="submit" class="btn btn-success btn-block btn-lg" value="Save" />
+                        </p>
+                    </fieldset>
+                }
+
+
+                <div>
+                     @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-default btn-lg btn-block"})
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

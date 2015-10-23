@@ -5,6 +5,7 @@
 @{
     ViewBag.Title = "Edit";
     List<Category> storeCategories = ViewBag.StoreCategories;
+    List<StorePageDesign> storePageDesigns = ViewBag.StorePageDesigns;
 }
 
 
@@ -33,7 +34,15 @@
                             @Html.LabelFor(model => model.CategoryId)
 
                             @Html.DropDownListFor(model => model.CategoryId, new SelectList(storeCategories,
-                                        "Id", "Name", Model.CategoryId), new { @class = "form-control" })
+                                                                                            "Id", "Name", Model.CategoryId), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId)
+                        </div>
+                        
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.StorePageDesignId)
+
+                            @Html.DropDownListFor(model => model.StorePageDesignId, new SelectList(storePageDesigns,
+                                        "Id", "Name", Model.StorePageDesignId), new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CategoryId)
                         </div>
 

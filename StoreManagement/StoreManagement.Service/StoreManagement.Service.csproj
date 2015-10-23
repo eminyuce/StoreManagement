@@ -141,6 +141,7 @@
     <Compile Include="Repositories\Interfaces\IRetailerRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISettingRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreLanguageRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IStorePageDesignRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStoreUserRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProductFileRepository.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Repositories\RetailerRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\StoreLanguageRepository.cs" />
+    <Compile Include="Repositories\StorePageDesignRepository.cs" />
     <Compile Include="Repositories\StoreRepository.cs" />
     <Compile Include="Repositories\StoreUserRepository.cs" />
     <Compile Include="Services\ActivityService.cs" />

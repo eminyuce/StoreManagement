@@ -13,7 +13,7 @@
     int pageSizeNumber = Request.QueryString["GridPageSize"].ToInt();
     pageSizeNumber = pageSizeNumber == 0 ? 250 : pageSizeNumber;
     var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
-    int storeId = Request.QueryString["storeId"].ToInt();
+    int storePageDesignId = Request.QueryString["storePageDesignId"].ToInt();
 
 
 
@@ -45,7 +45,7 @@
 
 
                 <div>
-                    @Html.Action("StoresFilter", "Stores", new { actionName = "Index", controllerName = controller })
+                    @Html.Action("StorePageDesignsFilter", "StorePageDesigns", new { actionName = "Index", controllerName = controller })
                 </div>
 
 
@@ -58,7 +58,7 @@
                                 @using (Html.BeginForm("SaveOrEdit", controller, FormMethod.Get))
                                 {
                                             
-                                    <input type="hidden" id="selectedStoreId" name="selectedStoreId" value="@storeId" />
+                                    <input type="hidden" id="storePageDesignId" name="storePageDesignId" value="@storePageDesignId" />
                            
                                        
           
@@ -77,12 +77,12 @@
 
                                 @using (Html.BeginForm("ExportExcel", controller, FormMethod.Get))
                                 {
-                                    <input type="hidden"  name="id" value="@storeId" />
+                                    <input type="hidden"  name="id" value="@storePageDesignId" />
                                     <button type="submit" class="btn">Export to Excel</button>
                                 }
                                 @using (Html.BeginForm("ImportExcel", controller, FormMethod.Post, new { EncType = "multipart/form-data" }))
                                 {   
-                                           <input type="hidden"  name="id" value="@storeId" />
+                                           <input type="hidden"  name="id" value="@storePageDesignId" />
                                         <input type="file" id="excelFile" name="excelFile" />
                                     <p style="margin-top: 20px;">
                                         <input type="submit" class="btn" value="Upload" />
@@ -351,7 +351,7 @@
             try {
 
                 $('#SavePageDesign').click(function () {
-                    var postData = JSON.stringify({ "id": 0, "storeId": $("#selectedStoreId").val(), "name": $("#PageDesignName").val(), "text": $("#PageDesingText").val() });
+                    var postData = JSON.stringify({ "id": 0, "storePageDesignId": $("#selectedStoreId").val(), "name": $("#PageDesignName").val(), "text": $("#PageDesingText").val() });
                     ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
                         window.location.reload();
                     });
@@ -385,7 +385,7 @@
         function SavePageDesing() {
             var desingItemId = parseInt($("#selecedPageDesingItem").val());
             if (desingItemId > 0) {
-                var postData = JSON.stringify({ "id": desingItemId, "storeId": $("#selectedStoreId").val(), "text": $("#PageDesingText").val(), "name": $("#PageDesignName").val() });
+                var postData = JSON.stringify({ "id": desingItemId, "storePageDesignId": $("#storePageDesignId").val(), "text": $("#PageDesingText").val(), "name": $("#PageDesignName").val() });
                 ajaxMethodCall(postData, "/Ajax/SetPageDesignText", function (data) {
 
                     if (!isEmpty(data)) {

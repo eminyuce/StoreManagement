@@ -122,6 +122,8 @@ namespace StoreManagement.Liquid.Controllers
         [Inject]
         public IActivityService ActivityService { set; get; }
 
+        [Inject]
+        public IRetailerService RetailerService { set; get; }
 
         [Inject]
         public IProductService ProductService { set; get; }

@@ -244,7 +244,33 @@
                 window.location.href = originalURL + "?storeId=" + theID;
             });
         }
-        
+        if ($('select#StorePageDesignAdminDropDownId').length > 0) {
+
+
+            $('select#StorePageDesignAdminDropDownId').select2({});
+
+            var adminDropDown = $('select#StorePageDesignAdminDropDownId').select2('data');
+
+            var theID = adminDropDown[0].id;
+            var theSelection = adminDropDown[0].text;
+
+            $("#StorePageDesignAdminText").text(theSelection);
+
+            $('select#StorePageDesignAdminDropDownId').select2({}).change(function (event) {
+                adminDropDown = $('select#StorePageDesignAdminDropDownId').select2('data');
+          
+                theID = adminDropDown[0].id;
+                theSelection = adminDropDown[0].text;
+                console.log(adminDropDown);
+
+                $("#StorePageDesignAdminText").text(theSelection);
+                var originalURL = window.location.href;
+                if (originalURL.split('?').length > 1) {
+                    originalURL = originalURL.split('?')[0];
+                }
+                window.location.href = originalURL + "?storePageDesignId=" + theID;
+            });
+        }
 
     });
 

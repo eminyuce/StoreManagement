@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using StoreManagement.Liquid.Helper;
+using StoreManagement.Service.Services;
 
 namespace StoreManagement.Liquid.Controllers
 {
-    public class ActivitiesController : BaseController
+    public class RetailersController : BaseController
     {
-        private const String IndexPageDesingName = "ActivitiesIndexPage";
+        private const String IndexPageDesingName = "RetailersIndexPage";
 
         [OutputCache(CacheProfile = "Cache20Minutes")]
         public async Task<ActionResult> Index()
@@ -20,24 +20,24 @@ namespace StoreManagement.Liquid.Controllers
             {
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
-                var activitiesTask = ActivityService.GetActivitiesAsync(StoreId, null, true);
+
+                var retailersTask = RetailerService.GetRetailersAsync(StoreId, null, true);
 
                 ActivityHelper.StoreSettings = GetStoreSettings();
-                ActivityHelper.ImageWidth = GetSettingValueInt("ActivitiesIndex_ImageWidth", 50);
-                ActivityHelper.ImageHeight = GetSettingValueInt("ActivitiesIndex_ImageHeight", 50);
+                ActivityHelper.ImageWidth = GetSettingValueInt("RetailersIndex_ImageWidth", 50);
+                ActivityHelper.ImageHeight = GetSettingValueInt("RetailersIndex_ImageHeight", 50);
 
-                await Task.WhenAll(pageDesignTask, activitiesTask);
+                await Task.WhenAll(pageDesignTask, retailersTask);
                 var pageDesign = pageDesignTask.Result;
-                var activities = activitiesTask.Result;
+                var retailers = retailersTask.Result;
 
                 if (pageDesign == null)
                 {
-                  
                     throw new Exception("PageDesing is null:" + IndexPageDesingName);
                 }
 
 
-                var pageOutput = ActivityHelper.GetActivityIndexPage(pageDesign, activities);
+                var pageOutput = RetailerHelper.GetRetailers(retailers, pageDesign);
 
 
                 return View(pageOutput);

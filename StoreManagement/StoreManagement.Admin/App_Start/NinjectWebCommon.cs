@@ -110,7 +110,7 @@ namespace StoreManagement.Admin.App_Start
             kernel.Bind<IMessageRepository>().To<MessageRepository>().InRequestScope();
             kernel.Bind<IProductAttributeRepository>().To<ProductAttributeRepository>().InRequestScope();
             kernel.Bind<IProductAttributeRelationRepository>().To<ProductAttributeRelationRepository>().InRequestScope();
-
+            kernel.Bind<IStorePageDesignRepository>().To<StorePageDesignRepository>().InRequestScope();
         }
     }
 }

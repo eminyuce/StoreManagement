@@ -1,0 +1,37 @@
+﻿@using StoreManagement.Data.GeneralHelper
+@model IEnumerable<StoreManagement.Data.Entities.StorePageDesign>
+@{
+    String actionName = ViewBag.ActionName;
+    String controllerName = ViewBag.ControllerName;
+    bool isSuperAdmin = ViewBag.IsSuperAdmin;
+
+
+
+    int storePageDesignId = Request.QueryString["storePageDesignId"].ToInt();
+    List<SelectListItem> storesListItems = new List<SelectListItem>();
+    storesListItems.Add(new SelectListItem() { Text = "Select a Store", Value = "0" });
+
+    var items = Model.ToList().Select(c => new SelectListItem
+           {
+               Text = c.Name,
+               Value = c.Id.ToString(),
+               Selected = c.Id == storePageDesignId ? true : false
+           }).ToList();
+
+    storesListItems.AddRange(items);
+
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Selected Store: <span class="text-danger" id="AdminSelectedStoreText"></span></h3>
+    </div>
+    <div class="col-md-12">
+        @Html.DropDownList("StorePageDesignAdminDropDownId",
+                storesListItems,
+                new { @class = "form-control" })
+    </div>
+
+</div>
+

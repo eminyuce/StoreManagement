@@ -43,6 +43,9 @@ namespace StoreManagement.Admin.Controllers
         }
 
         [Inject]
+        public IStorePageDesignRepository StorePageDesignRepository { get; set; }
+
+        [Inject]
         public IProductAttributeRepository ProductAttributeRepository { get; set; }
 
         [Inject]

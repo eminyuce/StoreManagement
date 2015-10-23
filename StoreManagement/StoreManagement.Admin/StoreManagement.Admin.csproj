@@ -331,6 +331,7 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StoreCategoriesController.cs" />
     <Compile Include="Controllers\StoreLanguagesController.cs" />
+    <Compile Include="Controllers\StorePageDesignsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2003,6 +2004,11 @@
     <Content Include="Views\Retailers\Details.cshtml" />
     <Content Include="Views\Retailers\Index.cshtml" />
     <Content Include="Views\Retailers\SaveOrEdit.cshtml" />
+    <Content Include="Views\StorePageDesigns\Delete.cshtml" />
+    <Content Include="Views\StorePageDesigns\Details.cshtml" />
+    <Content Include="Views\StorePageDesigns\Index.cshtml" />
+    <Content Include="Views\StorePageDesigns\SaveOrEdit.cshtml" />
+    <Content Include="Views\StorePageDesigns\_StorePageDesignsFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

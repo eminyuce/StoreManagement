@@ -31,7 +31,7 @@ namespace StoreManagement.Data.Entities
         public virtual ICollection<StoreUser> StoreUsers { get; set; }
 
         public int CategoryId { get; set; }
-
+        public int StorePageDesignId { get; set; }
         public String GoogleDriveClientId { set; get; }
          [JsonIgnore]
         public String GoogleDriveUserEmail { set; get; }

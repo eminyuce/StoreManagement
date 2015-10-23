@@ -77,6 +77,15 @@ namespace StoreManagement.Liquid.Helper
                        s.Link
                    };
         }
+        public static IEnumerable GetRetailersEnumerable(List<RetailerLiquid> items)
+        {
+            return from s in items
+                   select new
+                   {
+                       s.Retailer.Name,
+                       s.Link
+                   };
+        }
         public static IEnumerable GetLocationsEnumerable(List<LocationLiquid> items)
         {
             return from s in items

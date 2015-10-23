@@ -12,7 +12,8 @@ namespace StoreManagement.Service.Repositories
 {
     public class RetailerRepository : BaseRepository<Retailer, int>, IRetailerRepository
     {
-        public RetailerRepository(IStoreContext dbContext) : base(dbContext)
+        public RetailerRepository(IStoreContext dbContext)
+            : base(dbContext)
         {
         }
 
@@ -25,6 +26,11 @@ namespace StoreManagement.Service.Repositories
         public List<Retailer> GetRetailersByStoreId(int storeId, string search)
         {
             return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, search);
+        }
+
+        public Task<List<Retailer>> GetRetailersAsync(int storeId, int? take, bool isActive)
+        {
+            return BaseEntityRepository.GetActiveBaseEnitiesAsync(this, storeId, take, isActive);
         }
     }
 }

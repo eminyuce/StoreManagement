@@ -18,11 +18,11 @@ namespace StoreManagement.Admin.Controllers
 
         //
         // GET: /PageDesigns/
-        public ViewResult Index(int storeId = 0, String search = "")
+        public ViewResult Index(int storePageDesignId = 0, String search = "")
         {
-            storeId = GetStoreId(storeId);
+           
             var resultList = new List<PageDesign>();
-            resultList = PageDesignRepository.GetPageDesignByStoreId(storeId, search);
+            resultList = PageDesignRepository.GetPageDesignByStoreId(storePageDesignId, search);
             return View(resultList);
         }
 
@@ -37,13 +37,13 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult ExportExcel(int id = 0)
         {
-            int selectedStoreId = id;
-            var store = StoreRepository.GetStore(selectedStoreId);
-            var resultList = PageDesignRepository.GetPageDesignByStoreId(selectedStoreId, "");
+            int storePageDesignId = id;
+            var storePageDesing = StorePageDesignRepository.GetSingle(storePageDesignId);
+            var resultList = PageDesignRepository.GetPageDesignByStoreId(storePageDesignId, "");
             var dt = MapToListHelper.ToDataTable(resultList);
             var report = ExcelHelper.GetExcelByteArrayFromDataTable(dt);
             return File(report, "application/vnd.ms-excel",
-                         String.Format("PageDesigns-{0}-{1}.xls", store.Name, DateTime.Now.ToString("yyyyMMdd", System.Globalization.CultureInfo.GetCultureInfo("en-US"))));
+                         String.Format("PageDesigns-{0}-{1}.xls", storePageDesing.Name, DateTime.Now.ToString("yyyyMMdd", System.Globalization.CultureInfo.GetCultureInfo("en-US"))));
         }
         [HttpPost]
         public ActionResult ImportExcel(int id, HttpPostedFileBase excelFile)
@@ -57,7 +57,7 @@ namespace StoreManagement.Admin.Controllers
                 !r.PageTemplate.Equals("PageTemplate", StringComparison.InvariantCultureIgnoreCase)))
             {
 
-                pageDesign.StoreId = id;
+                pageDesign.StorePageDesignId = id;
                 var pageDesignTask = resultList.FirstOrDefault(r => r.Name.Equals(pageDesign.Name, StringComparison.InvariantCultureIgnoreCase));
                 if (pageDesignTask == null)
                 {
@@ -79,7 +79,7 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /PageDesigns/Edit/5
 
-        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId = 0)
+        public ActionResult SaveOrEdit(int id = 0, int storePageDesignId = 0)
         {
             var pagedesign = new PageDesign();
 
@@ -88,7 +88,7 @@ namespace StoreManagement.Admin.Controllers
                 pagedesign.CreatedDate = DateTime.Now;
                 pagedesign.State = true;
                 pagedesign.UpdatedDate = DateTime.Now;
-                pagedesign.StoreId = selectedStoreId;
+                pagedesign.StorePageDesignId = storePageDesignId;
             }
             else
             {
@@ -120,7 +120,7 @@ namespace StoreManagement.Admin.Controllers
                     }
                     else
                     {
-                        var isSamePageNameExists = PageDesignRepository.GetPageDesignByStoreId(pagedesign.StoreId, "")
+                        var isSamePageNameExists = PageDesignRepository.GetPageDesignByStoreId(pagedesign.StorePageDesignId, "")
                                             .Any(r => r.Name.Equals(pagedesign.Name, StringComparison.InvariantCultureIgnoreCase));
                         if (isSamePageNameExists)
                         {
@@ -136,7 +136,7 @@ namespace StoreManagement.Admin.Controllers
 
                     if (IsSuperAdmin)
                     {
-                        return RedirectToAction("SaveOrEdit", new { id = pagedesign.Id, storeId = pagedesign.StoreId });
+                        return RedirectToAction("SaveOrEdit", new { id = pagedesign.Id, storePageDesignId = pagedesign.StorePageDesignId });
                     }
                     else
                     {
@@ -167,7 +167,7 @@ namespace StoreManagement.Admin.Controllers
                 pagedesignCopy.CreatedDate = DateTime.Now;
                 pagedesignCopy.State = true;
                 pagedesignCopy.UpdatedDate = DateTime.Now;
-                pagedesignCopy.StoreId = pagedesign.StoreId;
+                pagedesignCopy.StorePageDesignId = pagedesign.StorePageDesignId;
                 PageDesignRepository.Add(pagedesignCopy);
                 PageDesignRepository.Save();
             }
@@ -182,7 +182,7 @@ namespace StoreManagement.Admin.Controllers
 
             if (IsSuperAdmin)
             {
-                return RedirectToAction("Index", new { storeId = pagedesign.StoreId });
+                return RedirectToAction("Index", new { storeId = pagedesign.StorePageDesignId });
             }
             else
             {
@@ -215,7 +215,7 @@ namespace StoreManagement.Admin.Controllers
 
                 if (IsSuperAdmin)
                 {
-                    return RedirectToAction("Index", new { storeId = pagedesign.StoreId });
+                    return RedirectToAction("Index", new { storeId = pagedesign.StorePageDesignId });
                 }
                 else
                 {

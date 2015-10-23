@@ -179,6 +179,7 @@
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\StoreLanguage.cs" />
+    <Compile Include="Entities\StorePageDesign.cs" />
     <Compile Include="Entities\StoreUser.cs" />
     <Compile Include="Enums\ImageOrientation.cs" />
     <Compile Include="GeneralHelper\CaptchaHelper.cs" />

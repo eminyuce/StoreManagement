@@ -479,6 +479,7 @@
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
@@ -585,6 +586,7 @@
     <Content Include="Views\NewsCategories\Category.cshtml" />
     <Content Include="Views\BlogCategories\Category.cshtml" />
     <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Retailers\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

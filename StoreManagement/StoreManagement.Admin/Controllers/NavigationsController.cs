@@ -44,9 +44,10 @@ namespace StoreManagement.Admin.Controllers
         //
         // GET: /Navigations/Create
 
-        public ActionResult SaveOrEdit(int id = 0)
+        public ActionResult SaveOrEdit(int id = 0, int selectedStoreId=0)
         {
             var item = new Navigation();
+            item.StoreId = GetStoreId(selectedStoreId);
             if (id == 0)
             {
                 item.ParentId = 0;

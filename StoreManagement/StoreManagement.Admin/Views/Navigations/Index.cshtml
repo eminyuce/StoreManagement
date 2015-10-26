@@ -12,6 +12,16 @@
     String search = (String)ViewBag.Search;
     var isRegularUser = User.IsInRole(StoreConstants.RoleUser);
     int storeId = Request.QueryString["storeId"].ToInt();
+    bool isSuperAdmin = false;
+
+    try
+    {
+        isSuperAdmin = User.Identity.IsAuthenticated && Roles.GetRolesForUser(User.Identity.Name).Contains("SuperAdmin");
+    }
+    catch (Exception ex)
+    {
+
+    }
 }
 
 
@@ -36,7 +46,19 @@
                     <div class="panel-body">
                         <div class="row">
                             <span class="col-md-3">
-                                @Html.ActionLink("Create", "SaveOrEdit", "Navigations", new { id = 0, selectedStoreId = storeId }, new { @class = "btn btn-primary btn-block" })
+                               
+                                
+                                  @using (Html.BeginForm("SaveOrEdit", "Navigations", FormMethod.Get))
+                                        {
+                                            if (isSuperAdmin)
+                                            {
+                                            <input type="hidden" name="selectedStoreId" value="@storeId" />
+                                            }
+             
+                                            <input type="hidden" name="id" value="0" />
+                                            <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-plus">Create</button>
+                                        }
+
                             </span>
                             <span class="col-md-9">
                                 @Html.Partial("pSearchForm")

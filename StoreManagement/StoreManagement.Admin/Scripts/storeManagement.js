@@ -260,39 +260,7 @@ function getQueryStringParameter(originalURL, param) {
     }
     return "";
 }
-
-function ajaxMethodCall(postData, ajaxUrl, successFunction) {
-
-    $.ajax({
-        type: "POST",
-        url: ajaxUrl,
-        data: postData,
-        success: successFunction,
-        contentType: "application/json",
-        dataType: "json",
-        error: function (jqXHR, exception) {
-            console.error("parameters :" + postData);
-            console.error("ajaxUrl :" + ajaxUrl);
-            console.error("responseText :" + jqXHR.responseText);
-            if (jqXHR.status === 0) {
-                console.error('Not connect.\n Verify Network.');
-            } else if (jqXHR.status == 404) {
-                console.error('Requested page not found. [404]');
-            } else if (jqXHR.status == 500) {
-                console.error('Internal Server Error [500].');
-            } else if (exception === 'parsererror') {
-                console.error('Requested JSON parse failed.');
-            } else if (exception === 'timeout') {
-                console.error('Time out error.');
-            } else if (exception === 'abort') {
-                console.error('Ajax request aborted.');
-            } else {
-                console.error('Uncaught Error.\n' + jqXHR.responseText);
-            }
-        },
-        traditional: true
-    });
-}
+ 
 function deleteItemsSuccess(data) {
 
     data.forEach(function (entry) {
@@ -356,35 +324,23 @@ function changeCarouselStateSuccess(data) {
 
 function populateStoreLabelsDropDown(storeId) {
 
-    var jsonRequest = JSON.stringify({ "storeId": storeId });
-    jQuery.ajax({
-        url: "/Ajax/GetStoreLabels",
-        type: 'POST',
-        data: jsonRequest,
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (data) {
-            console.log(data);
-            // Parse the returned json data
-            //   var opts = $.parseJSON(data);
-            // Use jQuery's each to iterate over the opts value
-            $('#selectedLabels').empty();
-            $.each(data, function (i, d) {
-                // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
-                $('#selectedLabels').append('<option value="' + d.Id + '">' + d.Name + '</option>');
+    var postData = JSON.stringify({ "storeId": storeId });
+   
 
-            });
+    ajaxMethodCall(postData, "/Ajax/GetCategoriesRelatedItemsCount", function (data) {
+        console.log(data);
+        $('#selectedLabels').empty();
+        $.each(data, function (i, d) {
+            // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
+            $('#selectedLabels').append('<option value="' + d.Id + '">' + d.Name + '</option>');
 
-            $("#selectedLabels").select2({ tags: true });
+        });
 
-        },
-        error: function (request, status, error) {
-            console.error('Error ' + status + ' ' + request.responseText);
-        },
-        beforeSend: function () {
+        $("#selectedLabels").select2({ tags: true });
 
-        }
     });
+ 
+
 
 }
 function searchAutoComplete() {
@@ -396,37 +352,22 @@ function searchAutoComplete() {
             var items = new Array();
             var jsonRequest = { "term": request.term, "action": $("#action").val(), "controller": $("#controller").val(), "id": $("#storeId").val() };
             console.log(jsonRequest);
-            if (request.term.length > 2) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Ajax/SearchAutoComplete",
-                    data: jsonRequest,
-                    success: function (data) {
-                        for (var i = 0; i < data.length ; i++) {
-                            items[i] = { text: data[i], value: data[i] };
-                        }
-                        console.log(items);
-                        response(sortInputFirst(request.term, items));
+            if (request.term.length > 2)
+            {
+                ajaxMethodCall(jsonRequest, "/Ajax/SearchAutoComplete", function (data) {
+                    for (var i = 0; i < data.length ; i++) {
+                        items[i] = { text: data[i], value: data[i] };
                     }
+                    console.log(items);
+                    response(sortInputFirst(request.term, items));
                 });
+
             }
 
         },
         select: function (event, ui) {
             $("#SearchButton").click();
-            //fill selected customer details on form
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Ajax/SearchAutoCompleteDetail",
-            //    data: { "id": ui.item.Id },
-
-            //    success: function (data) {
-
-            //    },
-            //    error: function (xhr, ajaxOptions, thrownError) {
-            //        alert('Failed to retrieve states.');
-            //    }
-            //});
+            
         }
     });
 
@@ -448,30 +389,21 @@ function bindCategoryRelatedItemsCount(type, categoryItemAttribute) {
             idList.push(categoryId);
         });
         //console.log(idList);
-        var jsonRequest = JSON.stringify({ "id": id, "categoriesId": idList, "type": type });
-        jQuery.ajax({
-            url: "/Ajax/GetCategoriesRelatedItemsCount",
-            type: 'POST',
-            data: jsonRequest,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                //console.log(data);
-                $.each(idList, function (index, value) {
-                    //console.log(data[idList[index]] + " " + idList[index]);
+        var postData = JSON.stringify({ "id": id, "categoriesId": idList, "type": type });
+        
 
-                    var customCategoryAttribute = $('[' + categoryItemAttribute + '=' + idList[index] + ']');
-                    customCategoryAttribute.text(customCategoryAttribute.text() + ' (' + data[idList[index]] + ')');
-                    //console.log(customCategoryAttribute);
-                });
-            },
-            error: function (request, status, error) {
-                console.error('Error ' + status + ' ' + request.responseText);
-            },
-            beforeSend: function () {
+        ajaxMethodCall(postData, "/Ajax/GetCategoriesRelatedItemsCount", function (data) {
+            
+            $.each(idList, function (index, value) {
 
-            }
+                var customCategoryAttribute = $('[' + categoryItemAttribute + '=' + idList[index] + ']');
+                customCategoryAttribute.text(customCategoryAttribute.text() + ' (' + data[idList[index]] + ')');
+                
+            });
         });
+        
+
+        
 
     }
 }

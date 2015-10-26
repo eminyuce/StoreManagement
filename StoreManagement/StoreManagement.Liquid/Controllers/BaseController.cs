@@ -175,8 +175,8 @@ namespace StoreManagement.Liquid.Controllers
 
         private void GetStoreByDomain(RequestContext requestContext)
         {
-            var store = StoreHelper.GetStoreIdByDomain(StoreService, requestContext.HttpContext);
-            this.StoreId = store;
+            var storeId = StoreHelper.GetStoreIdByDomain(StoreService, requestContext.HttpContext);
+            this.StoreId = storeId;
 
 
             if (StoreId == 0)

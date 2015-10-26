@@ -61,11 +61,23 @@ namespace StoreManagement.Liquid.Controllers
                 String url = images.WebContentLink;
                 var dic = new Dictionary<String, String>();
                 byte[] imageData = GeneralHelper.GetImageFromUrlFromCache(url, dic);
+                if (width > 0 && height > 0)
+                {
 
-                new WebImage(imageData)
-                    .Resize(width, height) // Resizing the image to 100x100 px on the fly...
-                    //  .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
-                    .Write();
+                    float ratio = images.Width.ToFloat()/images.Height.ToFloat();
+                    height = (int) (width*ratio);
+                    new WebImage(imageData)
+                        .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
+                        .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                        .Write();
+                }
+                else
+                {
+                    new WebImage(imageData)
+                        .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                   .Write();
+                }
+          
             }
         }
 
@@ -81,7 +93,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 new WebImage(imageData)
-                        .Resize(width, height) // Resizing the image to 100x100 px on the fly...
+                        .Resize(width, height, false, true) // Resizing the image to 100x100 px on the fly...
                       //  .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
                         .Write();
             

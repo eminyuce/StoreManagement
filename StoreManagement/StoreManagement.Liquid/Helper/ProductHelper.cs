@@ -126,7 +126,7 @@ namespace StoreManagement.Liquid.Helper
             var result = new StoreLiquidResult();
             result.PageDesingName = pageDesign.Name;
             result.LiquidRenderedResult = dic;
-
+            result.DetailLink = s.DetailLink;
             return result;
         }
 

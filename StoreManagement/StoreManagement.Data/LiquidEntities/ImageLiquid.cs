@@ -112,7 +112,42 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return GetImageSource("Large"); }
         }
-        public String GetImageSource(String size)
+
+
+        public String BestImageSourceFix
+        {
+            get { return GetImageSource("best",false); }
+        }
+        public String PhoneSmallImageSourceFix
+        {
+            get { return GetImageSource("IPhoneSmall",false); }
+        }
+        public String PhoneImageSourceFix
+        {
+            get { return GetImageSource("IPhone",false); }
+        }
+        public String OriginalImageSourceFix
+        {
+            get { return GetImageSource("Original",false); }
+        }
+        public String SmallImageSourceFix
+        {
+            get { return GetImageSource("Small",false); }
+        }
+        public String XlargeImageSourceFix
+        {
+            get { return GetImageSource("XLarge",false); }
+        }
+        public String MediumImageSourceFix
+        {
+            get { return GetImageSource("Medium",false); }
+        }
+        public String LargeImageSourceFix
+        {
+            get { return GetImageSource("Large",false); }
+        }
+
+        public String GetImageSource(String size,bool isImageSizeActive=true)
         {
 
             if (!ImageState)
@@ -123,9 +158,22 @@ namespace StoreManagement.Data.LiquidEntities
             {
                 var fileImage = FileManagers.FirstOrDefault(r => r.State && r.FileSize.Equals(size, StringComparison.InvariantCultureIgnoreCase));
                 if (fileImage != null)
+                {
                     if (fileImage.Width != null)
+                    { 
                         if (fileImage.Height != null)
-                            return LinkHelper.GetImageLinkHtml("Thumbnail", fileImage, fileImage.Width.Value, fileImage.Height.Value, fileImage.Title, fileImage.Title);
+                        {
+                            int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
+                            int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
+
+                            return LinkHelper.GetImageLinkHtml("Thumbnail", fileImage, w, h, fileImage.Title, fileImage.Title);
+                        }
+                        
+                    }
+                }
+                   
+                       
+                           
             }
             return "";
 

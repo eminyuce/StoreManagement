@@ -107,7 +107,8 @@ namespace StoreManagement.Liquid.Controllers
                 ProductHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
                 ProductHelper.StoreSettings = GetStoreSettings();
                 var dic = ProductHelper.GetProductsDetailPage(product, pageDesign, category);
-
+                dic.StoreId = this.StoreId;
+ 
                 return View(dic);
 
             }

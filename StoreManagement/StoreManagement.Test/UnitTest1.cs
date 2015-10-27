@@ -267,7 +267,7 @@ namespace StoreManagement.Test
             var db = new StoreContext(ConnectionString);
             db.Configuration.LazyLoadingEnabled = false;
             var log = new ProductCategoryRepository(db);
-            var mm = log.GetCategoriesByRetailerIdAsync(9, 5);
+            var mm = log.GetCategoriesByRetailerIdAsync(52, 478);
             Task.WaitAll(mm);
             var resultLabels = mm.Result;
 

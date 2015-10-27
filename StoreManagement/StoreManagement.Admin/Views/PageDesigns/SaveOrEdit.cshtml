@@ -5,8 +5,8 @@
     ViewBag.Title = "Edit";
 
 
-    var requestStoreId = Request.QueryString["storeId"].ToInt();
-    int storeId = Model != null ? Model.StoreId : requestStoreId;
+    var rstorePageDesignId = Request.QueryString["storePageDesignId"].ToInt();
+    int storePageDesignId = Model != null ? Model.StorePageDesignId : rstorePageDesignId;
 
 
     bool isSuperAdmin = false;
@@ -41,14 +41,22 @@
                         <legend>PageDesign</legend>
 
                         @Html.HiddenFor(model => model.Id)
-
+                        <input type="hidden" name="storePageDesignId" value="@storePageDesignId"/>
 
 
                         <div class="editor-label control-group">
-                            @Html.LabelFor(model => model.StoreId, new { @class = "control-label" })
+                            <b>
+                                Store Page Design Name
+                            </b> 
                         </div>
                         <div class="editor-field controls">
-                            @Html.Action("StoresDropDown", "Stores", new { storeId })
+                            <h2>
+                                <b>
+                                    @ViewBag.StorePageDesignName
+                                </b>
+                            </h2>
+                            
+
                         </div>
 
 
@@ -95,7 +103,7 @@
                 }
 
                 <div>
-                    @Html.ActionLink("Back to List", "Index", new { storeId = storeId }, new { @class = "btn btn-default btn-lg btn-block" })
+                    @Html.ActionLink("Back to List", "Index", new { storePageDesignId = storePageDesignId }, new { @class = "btn btn-default btn-lg btn-block" })
                 </div>
 
 

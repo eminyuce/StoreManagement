@@ -17,7 +17,7 @@ using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
-    [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
+   
     public class PageDesignsController : BaseApiController<PageDesign>, IPageDesignService
     {
 

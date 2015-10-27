@@ -73,14 +73,14 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesign = pageDesignTask.Result;
                 var products = productsTask.Result;
                 var productCategories = productCategoriesTask.Result;
-                var brand = retailerTask.Result;
+                var retailer = retailerTask.Result;
 
                 if (pageDesign == null)
                 {
                     throw new Exception("PageDesing is null:" + RetailerDetailPageDesignName);
                 }
 
-                var dic = RetailerHelper.GetRetailerDetailPage(brand, products, pageDesign, productCategories);
+                var dic = RetailerHelper.GetRetailerDetailPage(retailer, products, pageDesign, productCategories);
 
 
                 return View(dic);

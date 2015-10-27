@@ -83,7 +83,8 @@ namespace StoreManagement.Liquid.Helper
                    select new
                    {
                        s.Retailer.Name,
-                       s.Link
+                       s.Link,
+                       s.DetailLink
                    };
         }
         public static IEnumerable GetLocationsEnumerable(List<LocationLiquid> items)

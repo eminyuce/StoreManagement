@@ -245,6 +245,28 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public async Task<List<Product>> GetProductsByRetailerAsync(int storeId, int retailerId, int? take, int? excludedProductId)
+        {
+            try
+            {
+                int excludedProductId2 = excludedProductId ?? 0;
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State 
+                    && r2.RetailerId == retailerId 
+                    && r2.Id != excludedProductId2;
+                var items = this.FindAllIncludingAsync(match, take, null, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
+
+                var itemsResult = items;
+                var rt = await itemsResult;
+
+                return rt;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return new List<Product>();
+            }
+        }
+
         public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
         {
             try

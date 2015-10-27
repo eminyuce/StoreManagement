@@ -82,7 +82,7 @@ namespace StoreManagement.Admin.Controllers
         public ActionResult SaveOrEdit(int id = 0, int storePageDesignId = 0)
         {
             var pagedesign = new PageDesign();
-
+            
             if (id == 0)
             {
                 pagedesign.CreatedDate = DateTime.Now;
@@ -96,7 +96,8 @@ namespace StoreManagement.Admin.Controllers
                 pagedesign.State = true;
                 pagedesign.UpdatedDate = DateTime.Now;
             }
-
+            var spd = StorePageDesignRepository.GetSingle(pagedesign.StorePageDesignId);
+            ViewBag.StorePageDesignName = spd.Name;
             return View(pagedesign);
         }
 
@@ -106,7 +107,8 @@ namespace StoreManagement.Admin.Controllers
         [HttpPost]
         public ActionResult SaveOrEdit(PageDesign pagedesign)
         {
-
+            var spd = StorePageDesignRepository.GetSingle(pagedesign.StorePageDesignId);
+            ViewBag.StorePageDesignName = spd.Name;
             try
             {
                 if (ModelState.IsValid)

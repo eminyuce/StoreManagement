@@ -182,7 +182,7 @@ namespace StoreManagement.Service.Repositories
             var labelIds =
                StoreDbContext.Products.Where(
                    r => r.StoreId == storeId && r.BrandId == brandId).ToList();
-            var productCategories = labelIds.Select(r1 => r1.ProductCategoryId);
+            var productCategories = labelIds.Select(r1 => r1.ProductCategoryId).Distinct();
 
             Expression<Func<ProductCategory, bool>> match = r => r.StoreId == storeId && productCategories.Contains(r.Id);
 
@@ -196,7 +196,7 @@ namespace StoreManagement.Service.Repositories
             var labelIds =
                StoreDbContext.Products.Where(
                    r => r.StoreId == storeId && r.RetailerId == retailerId).ToList();
-            var productCategories = labelIds.Select(r1 => r1.ProductCategoryId);
+            var productCategories = labelIds.Select(r1 => r1.ProductCategoryId).Distinct();
 
             Expression<Func<ProductCategory, bool>> match = r => r.StoreId == storeId && productCategories.Contains(r.Id);
 

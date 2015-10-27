@@ -68,12 +68,12 @@ namespace StoreManagement.Liquid.Helper
 
         public StoreLiquidResult GetBrandDetailPage(Brand brand, List<Product> products, PageDesign pageDesign, List<ProductCategory> productCategories)
         {
+            var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
+         
             try
             {
-
-
 
                 var brandLiquid = new BrandLiquid(brand, ImageWidth, ImageHeight);
                 brandLiquid.Products = products;
@@ -92,6 +92,7 @@ namespace StoreManagement.Liquid.Helper
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;
+                result.DetailLink = brandLiquid.DetailLink;
 
             }
             catch (Exception ex)
@@ -101,9 +102,10 @@ namespace StoreManagement.Liquid.Helper
             }
 
 
-            var result = new StoreLiquidResult();
+
             result.LiquidRenderedResult = dic;
             result.PageDesingName = pageDesign.Name;
+
             return result;
         }
 

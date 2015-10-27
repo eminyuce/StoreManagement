@@ -88,13 +88,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2015 14:19:12</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>10/26/2015 16:42:51</publishTime>
+      <publishTime>10/27/2015 09:19:09</publishTime>
     </File>
     <File Include="bin/StoreManagement.Liquid.dll">
-      <publishTime>10/26/2015 16:42:54</publishTime>
+      <publishTime>10/27/2015 09:37:08</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>10/26/2015 16:42:53</publishTime>
+      <publishTime>10/27/2015 09:34:24</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>10/08/2015 12:50:29</publishTime>
@@ -1006,7 +1006,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/21/2015 14:01:54</publishTime>
     </File>
     <File Include="Views/BlogCategories/Category.cshtml">
-      <publishTime>10/21/2015 14:01:54</publishTime>
+      <publishTime>10/27/2015 09:10:56</publishTime>
     </File>
     <File Include="Views/BlogCategories/Index.cshtml">
       <publishTime>10/21/2015 14:01:54</publishTime>
@@ -1018,10 +1018,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2015 13:28:15</publishTime>
     </File>
     <File Include="Views/Blogs/Detail.cshtml">
-      <publishTime>10/21/2015 14:01:54</publishTime>
+      <publishTime>10/27/2015 09:10:51</publishTime>
     </File>
     <File Include="Views/Blogs/Index.cshtml">
-      <publishTime>10/26/2015 16:33:29</publishTime>
+      <publishTime>10/26/2015 16:44:03</publishTime>
     </File>
     <File Include="Views/Blogs/Index2.cshtml">
       <publishTime>07/30/2015 09:18:00</publishTime>
@@ -1033,7 +1033,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2015 13:28:15</publishTime>
     </File>
     <File Include="Views/Brands/Detail.cshtml">
-      <publishTime>10/21/2015 14:01:54</publishTime>
+      <publishTime>10/27/2015 09:09:52</publishTime>
     </File>
     <File Include="Views/Brands/Index.cshtml">
       <publishTime>10/21/2015 14:01:54</publishTime>
@@ -1102,7 +1102,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/21/2015 14:01:54</publishTime>
     </File>
     <File Include="Views/News/Detail.cshtml">
-      <publishTime>10/21/2015 14:01:54</publishTime>
+      <publishTime>10/27/2015 09:19:04</publishTime>
     </File>
     <File Include="Views/News/Index.cshtml">
       <publishTime>10/21/2015 14:01:54</publishTime>
@@ -1111,7 +1111,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/05/2015 12:19:30</publishTime>
     </File>
     <File Include="Views/NewsCategories/Category.cshtml">
-      <publishTime>10/21/2015 14:01:54</publishTime>
+      <publishTime>10/27/2015 09:10:30</publishTime>
     </File>
     <File Include="Views/NewsCategories/Index.cshtml">
       <publishTime>10/21/2015 14:01:54</publishTime>
@@ -1132,7 +1132,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
-      <publishTime>10/26/2015 16:34:10</publishTime>
+      <publishTime>10/26/2015 16:43:39</publishTime>
     </File>
     <File Include="Views/Products/Product2.cshtml">
       <publishTime>07/30/2015 09:18:01</publishTime>
@@ -1183,7 +1183,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/25/2015 11:13:23</publishTime>
+      <publishTime>10/26/2015 18:59:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

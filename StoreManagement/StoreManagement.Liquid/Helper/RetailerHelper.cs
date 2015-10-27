@@ -48,5 +48,48 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
+
+        public StoreLiquidResult GetRetailerDetailPage(Retailer retailer, List<Product> products, PageDesign pageDesign, List<ProductCategory> productCategories)
+        {
+            var result = new StoreLiquidResult();
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+
+            try
+            {
+
+                var retailerLiquid = new RetailerLiquid(retailer, ImageWidth, ImageHeight);
+                retailerLiquid.Products = products;
+                retailerLiquid.ProductCategories = productCategories;
+
+                object anonymousObject = new
+                {
+                    retailer = retailerLiquid,
+                    name = retailerLiquid.Retailer.Name,
+                    retailerLiquid.Retailer.RetailerUrl,
+                    products = LiquidAnonymousObject.GetProductsLiquid(retailerLiquid.ProductLiquidList),
+                    productcategories = LiquidAnonymousObject.GetProductCategories(retailerLiquid.ProductCategoriesLiquids)
+
+                };
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+
+
+                dic[StoreConstants.PageOutput] = indexPageOutput;
+                result.DetailLink = retailerLiquid.DetailLink;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+
+            }
+
+
+
+            result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
+
+            return result;
+        }
     }
 }

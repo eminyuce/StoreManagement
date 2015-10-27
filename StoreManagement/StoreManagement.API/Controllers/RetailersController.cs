@@ -41,5 +41,10 @@ namespace StoreManagement.API.Controllers
         {
             return await RetailerRepository.GetRetailersAsync(storeId, take, isActive);
         }
+
+        public async Task<Retailer> GetRetailerAsync(int retailerId)
+        {
+            return await RetailerRepository.GetRetailerAsync(retailerId);
+        }
     }
 }

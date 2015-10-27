@@ -10,3 +10,4 @@
  @Html.HiddenFor(r=>r.PageDesingName)
 
     @Html.Raw(Model.PageOutputText)
+ @Html.Raw(Model.GetCanonicalUrl(Request.RequestContext.HttpContext))

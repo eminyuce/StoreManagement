@@ -10,5 +10,6 @@ namespace StoreManagement.Service.Interfaces
     public interface IRetailerService : IService
     {
         Task<List<Retailer>> GetRetailersAsync(int storeId, int ? take, bool isActive);
+        Task<Retailer> GetRetailerAsync(int retailerId);
     }
 }

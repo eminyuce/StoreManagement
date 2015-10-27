@@ -12,11 +12,12 @@
     {
 
     }
-    
+
     string action = ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToStr();
     string controller = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToStr();
     string search = @Request.QueryString["search"].ToStr();
-    string storeId = @Request.QueryString["storeId"].ToStr();
+    int storeId = @Request.QueryString["storeId"].ToInt();
+    int storePageDesignId = @Request.QueryString["storePageDesignId"].ToInt();
     int selectedCategoryId = @Request.QueryString["categoryId"].ToInt();
 
 
@@ -25,38 +26,105 @@
 <input type="hidden" id="action"  value="@action" />
 <input type="hidden" id="controller"  value="@controller" />
 
-@using (Html.BeginForm(action, controller, FormMethod.Get))
+@if (String.IsNullOrEmpty(search))
 {
-     if (isSuperAdmin)
-     {
-             <input type="hidden" name="storeId" id="storeId"  value="@storeId" />
-     }
 
-    
-    <input type="hidden" name="categoryId"  value="0" />
+    using (Html.BeginForm(action, controller, FormMethod.Get))
+    {
+        if (isSuperAdmin)
+        {
+
+            if (storeId > 0)
+            {
+    <input type="hidden" name="storeId" id="storeId"  value="@storeId" />
+            }
+            else
+            {
+    <input type="hidden" name="storePageDesignId" id="storePageDesignId"  value="@storePageDesignId" />
+            }
+
+        }
+
+
+    <input type="hidden" name="categoryId" value="0" />
     <div class="row">
         <div class="col-md-7 col-xs-6">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search" id="search" name="search" value="@search"/>
             </div>
         </div>
-        @if (!String.IsNullOrEmpty(search))
+        <div class="col-md-5 col-xs-6">
+            <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
+        </div>
+
+    </div>
+
+
+    }
+
+}
+else
+{
+    <div class="col-md-10 col-xs-4">
+        @using (Html.BeginForm(action, controller, FormMethod.Get))
         {
-            <div class="col-md-3 col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
+            if (isSuperAdmin)
+            {
+
+                if (storeId > 0)
+                {
+            <input type="hidden" name="storeId" id="storeId"  value="@storeId" />
+                }
+                else
+                {
+            <input type="hidden" name="storePageDesignId" id="storePageDesignId"  value="@storePageDesignId" />
+                }
+
+            }
+
+
+            <input type="hidden" name="categoryId" value="0" />
+            <div class="row">
+                <div class="col-md-7 col-xs-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" id="search" name="search" value="@search"/>
+                    </div>
+                </div>
+                <div class="col-md-5 col-xs-6">
+                    <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
+                </div>
+
             </div>
-            <div class="col-md-2 col-xs-2">
-                @Html.ActionLink("Clear", action, controller, new { storeId = storeId, search = "", categoryId = selectedCategoryId }, new { @class = "btn btn-danger btn-block glyphicon glyphicon-remove-circle" })
-            </div>
+
+
         }
-        else
+    </div>
+    <div class="col-md-2 col-xs-2">
+
+
+
+        @using (Html.BeginForm(action, controller, FormMethod.Get))
         {
-            <div class="col-md-5 col-xs-6">
-                <button type="submit" id="SearchButton" class="btn btn-primary btn-block glyphicon glyphicon-search">Search</button>
-            </div>
+            <input type="hidden" class="form-control" placeholder="Search" name="search" value="" />
+
+            if (isSuperAdmin)
+            {
+
+                if (storeId > 0)
+                {
+            <input type="hidden" name="storeId"  value="@storeId" />
+                }
+                else
+                {
+            <input type="hidden" name="storePageDesignId"   value="@storePageDesignId" />
+                }
+
+            }
+            <input type="hidden" name="categoryId" id="categoryId"  value="@selectedCategoryId" />
+
+            <button type="submit" class="btn btn-danger btn-block glyphicon glyphicon-remove-circle">Clear</button>
         }
 
     </div>
-    
 }
- 
+

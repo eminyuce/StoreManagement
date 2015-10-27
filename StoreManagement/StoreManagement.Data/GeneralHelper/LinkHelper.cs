@@ -120,5 +120,12 @@ namespace StoreManagement.Data.GeneralHelper
 
             return link.ToLowerInvariant();
         }
+
+        public static string GetRetailerDetailLink(Retailer retailer)
+        {
+            String link = String.Format("/Retailers/Detail/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(retailer.Name), retailer.Id));
+
+            return link.ToLowerInvariant();
+        }
     }
 }

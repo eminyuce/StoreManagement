@@ -169,5 +169,10 @@ namespace StoreManagement.API.Controllers
         {
             return ProductCategoryRepository.GetCategoriesByBrandIdAsync(storeId, brandId);
         }
+
+        public Task<List<ProductCategory>> GetCategoriesByRetailerIdAsync(int storeId, int retailerId)
+        {
+            return ProductCategoryRepository.GetCategoriesByRetailerIdAsync(storeId, retailerId);
+        }
     }
 }

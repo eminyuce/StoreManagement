@@ -74,7 +74,7 @@ namespace StoreManagement.Admin.Controllers
             }
             PageDesignRepository.Save();
 
-            return RedirectToAction("Index", new { storeId = id });
+            return RedirectToAction("Index", new { storePageDesignId = id });
         }
         //
         // GET: /PageDesigns/Edit/5
@@ -215,7 +215,7 @@ namespace StoreManagement.Admin.Controllers
 
                 if (IsSuperAdmin)
                 {
-                    return RedirectToAction("Index", new { storeId = pagedesign.StorePageDesignId });
+                    return RedirectToAction("Index", new { storePageDesignId = pagedesign.StorePageDesignId });
                 }
                 else
                 {

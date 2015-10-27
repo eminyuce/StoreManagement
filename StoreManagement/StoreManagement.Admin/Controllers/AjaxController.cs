@@ -97,9 +97,18 @@ namespace StoreManagement.Admin.Controllers
 
         public ActionResult SearchAutoComplete(String term, String action, String controller, int id = 0)
         {
-            int storeId = GetStoreId(id);
-            var list = new List<String>();
             String searchKey = term;
+            var list = new List<String>();
+            if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
+                controller.Equals("PageDesigns", StringComparison.InvariantCultureIgnoreCase))
+            {
+                int storePageDesignId = id;
+                list = PageDesignRepository.GetPageDesignByStoreId(storePageDesignId, searchKey).Select(r => r.Name).ToList();
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+
+            int storeId = GetStoreId(id);
+ 
             if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
                     controller.Equals("Products", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -169,11 +178,6 @@ namespace StoreManagement.Admin.Controllers
                    controller.Equals("StoreCategories", StringComparison.InvariantCultureIgnoreCase))
             {
                 list = CategoryRepository.GetCategoriesByStoreId(0, StoreConstants.StoreType, searchKey).Select(r => r.Name).ToList();
-            }
-            else if (action.Equals("Index", StringComparison.InvariantCultureIgnoreCase) &&
-                controller.Equals("PageDesigns", StringComparison.InvariantCultureIgnoreCase))
-            {
-                list = PageDesignRepository.GetPageDesignByStoreId(storeId, searchKey).Select(r => r.Name).ToList();
             }
             else if (action.Equals("DisplayImages", StringComparison.InvariantCultureIgnoreCase) &&
               controller.Equals("FileManager", StringComparison.InvariantCultureIgnoreCase))

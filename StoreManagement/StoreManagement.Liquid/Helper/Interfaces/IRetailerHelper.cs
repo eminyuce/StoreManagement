@@ -12,5 +12,12 @@ namespace StoreManagement.Liquid.Helper.Interfaces
         StoreLiquidResult GetRetailers(
             List<Retailer> labels,
             PageDesign pageDesign);
+
+        StoreLiquidResult GetRetailerDetailPage(Retailer retailer,
+                                                List<Product> products, PageDesign pageDesign,
+                                                List<ProductCategory> productCategories);
+
+
+
     }
 }

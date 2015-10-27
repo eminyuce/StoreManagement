@@ -189,6 +189,20 @@ namespace StoreManagement.Service.Repositories
             var items = this.FindAllAsync(match, null, null);
 
             return await items;
+        }
+
+        public async Task<List<ProductCategory>> GetCategoriesByRetailerIdAsync(int storeId, int retailerId)
+        {
+            var labelIds =
+               StoreDbContext.Products.Where(
+                   r => r.StoreId == storeId && r.RetailerId == retailerId).ToList();
+            var productCategories = labelIds.Select(r1 => r1.ProductCategoryId);
+
+            Expression<Func<ProductCategory, bool>> match = r => r.StoreId == storeId && productCategories.Contains(r.Id);
+
+            var items = this.FindAllAsync(match, null, null);
+
+            return await items;
 
         }
 

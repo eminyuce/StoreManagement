@@ -21,6 +21,7 @@ namespace StoreManagement.Service.Interfaces
         Task<ProductCategory> GetProductCategoryAsync(int storeId,int productId);
         Task<ProductCategory> GetProductCategoryAsync(int categoryId);
         Task<List<ProductCategory>> GetCategoriesByBrandIdAsync(int storeId, int brandId);
+        Task<List<ProductCategory>> GetCategoriesByRetailerIdAsync(int storeId, int retailerId);
     }
 
 }

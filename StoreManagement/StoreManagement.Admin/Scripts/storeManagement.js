@@ -350,7 +350,11 @@ function searchAutoComplete() {
         source: function (request, response) {
             console.log("auto complate");
             var items = new Array();
-            var jsonRequest = { "term": request.term, "action": $("#action").val(), "controller": $("#controller").val(), "id": $("#storeId").val() };
+            var storeId = parseInt($("#storeId").val());
+            var storePageDesignId = parseInt($("#storePageDesignId").val());
+            var rId = storeId > 0 ? storeId : storePageDesignId;
+            
+            var jsonRequest = JSON.stringify({ "term": request.term, "action": $("#action").val(), "controller": $("#controller").val(), "id": rId });
             console.log(jsonRequest);
             if (request.term.length > 2)
             {

@@ -41,5 +41,23 @@ namespace StoreManagement.Service.Services
 
             }
         }
+
+        public Task<Retailer> GetRetailerAsync(int retailerId)
+        {
+
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetRetailerAsync?retailerId={2}",
+                    WebServiceAddress, ApiControllerName, retailerId);
+                return HttpRequestHelper.GetUrlResultAsync<Retailer>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return null;
+
+            }
+        }
     }
 }

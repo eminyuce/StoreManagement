@@ -10,7 +10,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
-        [OutputCache(CacheProfile = "Cache20Minutes")]
+     //   [OutputCache(CacheProfile = "Cache20Minutes")]
     public class PhotoGalleryController : BaseController
     {
             private const String IndexPageDesingName = "PhotoGalleryIndexPage";

@@ -25,7 +25,7 @@ namespace StoreManagement.Liquid.Controllers
             var defaultContent = "User-agent: *" + Environment.NewLine;
             defaultContent += "Disallow: /" + Environment.NewLine;
             var content = GetSettingValue(StoreConstants.RobotsTxt, defaultContent);
-            return File(Encoding.UTF8.GetBytes(defaultContent), "text/plain");
+            return File(Encoding.UTF8.GetBytes(content), "text/plain");
         }
 	}
 }

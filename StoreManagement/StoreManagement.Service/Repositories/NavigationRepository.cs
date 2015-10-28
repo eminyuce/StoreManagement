@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
+using GenericRepository.EntityFramework.Enums;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
@@ -46,6 +47,8 @@ namespace StoreManagement.Service.Repositories
             }
 
             return items;
+
+             
         }
 
         public async Task<List<Navigation>> GetStoreActiveNavigationsAsync(int storeId)
@@ -53,7 +56,7 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 Expression<Func<Navigation, bool>> match = r2 => r2.StoreId == storeId && r2.State ;
-                var items = this.FindAllAsync(match, null,null);
+                var items = this.FindAllAsync(match, r=>r.Ordering,OrderByType.Ascending, 0,0);
 
                 var itemsResult = items;
 

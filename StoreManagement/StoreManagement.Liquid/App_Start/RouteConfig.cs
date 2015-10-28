@@ -17,6 +17,17 @@ namespace StoreManagement.Liquid
 
 
 
+             routes.MapRoute(
+                 name: "storeDefaultSitemap",
+                 url: "sitemaps/sitemap.xml",
+                         defaults: new { controller = "Sitemaps", action = "Index" }
+              );
+             routes.MapRoute(
+                 name: "storeProductSitemap",
+                 url: "sitemaps/productssitemap.xml",
+                         defaults: new { controller = "Sitemaps", action = "Products" }
+              );
+
             routes.MapRoute(
              name: "robots",
              url: "robots.txt",

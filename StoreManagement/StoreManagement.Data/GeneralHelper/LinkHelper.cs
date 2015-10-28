@@ -11,9 +11,14 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class LinkHelper
     {
+        public static String GetProductIdRouteValue(Product c, String categoryName)
+        {
+            return String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id,
+                                 GeneralHelper.GetUrlSeoString(categoryName));
+        }
         public static String GetProductLink(Product c, String categoryName)
         {
-            String detailLink = String.Format("/Products/Product/{0}", String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id, GeneralHelper.GetUrlSeoString(categoryName)));
+            String detailLink = String.Format("/Products/Product/{0}",GetProductIdRouteValue(c,categoryName));
             return detailLink.ToLowerInvariant();
         }
         public static String GetContentLink(Content c, String categoryName, String type)

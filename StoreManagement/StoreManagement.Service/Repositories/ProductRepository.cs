@@ -55,7 +55,7 @@ namespace StoreManagement.Service.Repositories
             return this.GetAllIncluding(r1 => r1.ProductFiles.Select(r2 => r2.FileManager)).Where(
                        r => r.StoreId == storeId &&
                            r.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase) &&
-                           r.ProductCategoryId == categoryId)
+                           r.ProductCategoryId == (categoryId > 0 ? categoryId : r.ProductCategoryId))
                        .ToList();
         }
 

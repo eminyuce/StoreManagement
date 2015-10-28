@@ -756,6 +756,14 @@ namespace StoreManagement.Admin.Controllers
             m.Text = "News";
             moduls.Add(m);
             m = new SelectListItem();
+            m.Value = "ProductCategories-Index";
+            m.Text = "ProductCategories";
+            moduls.Add(m);
+            m = new SelectListItem();
+            m.Value = "Retailers-Index";
+            m.Text = "Retailers";
+            moduls.Add(m);
+            m = new SelectListItem();
             m.Value = "Products-Index";
             m.Text = "Products";
             moduls.Add(m);

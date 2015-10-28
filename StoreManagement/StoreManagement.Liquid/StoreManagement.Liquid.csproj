@@ -211,6 +211,7 @@
     </None>
     <None Include="Properties\PublishProfiles\Liquid.pubxml" />
     <None Include="Properties\PublishProfiles\login.seatechnologyjobs.com.pubxml" />
+    <None Include="Properties\PublishProfiles\wwwEminFindYourClothing.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\alert_boxes_close_ico.png" />
     <Content Include="Images\bg\bedge_grunge.png" />
@@ -483,6 +484,7 @@
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
+    <Compile Include="Controllers\SitemapsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -598,7 +600,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Contents\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

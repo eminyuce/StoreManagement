@@ -142,6 +142,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\SitemapResult.cs" />
     <Compile Include="Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="CacheHelper\MemoryCacheHelper.cs" />
     <Compile Include="CacheHelper\TypedObjectCache.cs" />
@@ -186,7 +187,7 @@
     <Compile Include="GeneralHelper\DictionaryExtensions.cs" />
     <Compile Include="GeneralHelper\EnumHelper.cs" />
     <Compile Include="GeneralHelper\ExcelHelper.cs" />
-    <Compile Include="GeneralHelper\FeedResult.cs" />
+    <Compile Include="ActionResults\FeedResult.cs" />
     <Compile Include="GeneralHelper\FileHelper.cs" />
     <Compile Include="GeneralHelper\FilterHelper.cs" />
     <Compile Include="GeneralHelper\GeneralHelper.cs" />
@@ -254,6 +255,11 @@
     <Compile Include="RequestModel\ProductsViewModel.cs" />
     <Compile Include="RequestModel\StoreHomePage.cs" />
     <Compile Include="RequestModel\VmDashboard.cs" />
+    <Compile Include="SEO\ISitemapGenerator.cs" />
+    <Compile Include="SEO\ISitemapItem.cs" />
+    <Compile Include="SEO\SitemapChangeFrequency.cs" />
+    <Compile Include="SEO\SitemapGenerator.cs" />
+    <Compile Include="SEO\SitemapItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

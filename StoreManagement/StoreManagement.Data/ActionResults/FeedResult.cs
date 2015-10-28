@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 
-namespace StoreManagement.Data.GeneralHelper
+namespace StoreManagement.Data.ActionResults
 {
 
     public class FeedResult : ActionResult

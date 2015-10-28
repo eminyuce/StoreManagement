@@ -42,6 +42,11 @@ namespace StoreManagement.Liquid.Helper
 
 
 
+            //var dic = new Dictionary<String, String>();
+            //dic.Add(StoreConstants.PageOutput, indexPageOutput);
+            //dic.Add(StoreConstants.PageSize, products.pageSize.ToStr());
+            //dic.Add(StoreConstants.PageNumber, products.page.ToStr());
+            //dic.Add(StoreConstants.TotalItemCount, products.totalItemCount.ToStr());
 
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
@@ -50,5 +55,33 @@ namespace StoreManagement.Liquid.Helper
 
         }
 
+        public StoreLiquidResult GetPhotoGalleryIndexPage(PageDesign pageDesign, StorePagedList<FileManager> fileManagers)
+        {
+            var cats = new List<FileManagerLiquid>();
+
+            foreach (var item in fileManagers.items)
+            {
+                cats.Add(new FileManagerLiquid(item, ImageWidth, ImageHeight));
+            }
+
+            object anonymousObject = new
+            {
+                photogalleries = LiquidAnonymousObject.GetFileManagerLiquidEnumerable(cats)
+            };
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+
+
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, indexPageOutput);
+            dic.Add(StoreConstants.PageSize, fileManagers.pageSize.ToStr());
+            dic.Add(StoreConstants.PageNumber, fileManagers.page.ToStr());
+            dic.Add(StoreConstants.TotalItemCount, fileManagers.totalItemCount.ToStr());
+
+            var result = new StoreLiquidResult();
+            result.LiquidRenderedResult = dic;
+            result.PageDesingName = pageDesign.Name;
+            return result;
+        }
     }
 }

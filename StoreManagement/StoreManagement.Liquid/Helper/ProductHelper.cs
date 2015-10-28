@@ -110,6 +110,20 @@ namespace StoreManagement.Liquid.Helper
 
         public StoreLiquidResult GetProductsDetailPage(Product product, PageDesign pageDesign, ProductCategory category)
         {
+            if (product == null)
+            {
+                throw new Exception("Product is NULL");
+            }
+            if (pageDesign == null)
+            {
+                throw new Exception("pageDesign is NULL");
+            }
+
+            if (category == null)
+            {
+                throw new Exception("ProductCategory is NULL");
+            }
+           
            
             var s = new ProductLiquid(product, category,  ImageWidth, ImageHeight);
 

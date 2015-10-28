@@ -136,6 +136,32 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public async Task<StorePagedList<FileManager>> GetImagesByFileSizeAsync(int storeId, string imageSourceType, string fileSizes, int page, int pageSize)
+        {
+            try
+            {
+                Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.ImageSourceType.Equals(imageSourceType, StringComparison.InvariantCultureIgnoreCase);
+                Expression<Func<FileManager, int>> keySelector = t => t.Ordering;
+                var items = this.Paginate(page, pageSize, keySelector, match);
+
+                var task = Task.Factory.StartNew(() =>
+                {
+
+                    StorePagedList<FileManager> resultItems = new StorePagedList<FileManager>(items, items.PageIndex, items.PageSize, items.TotalCount);
+                    return resultItems;
+                });
+                var result = await task;
+
+                return result;
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
+
         public List<FileManager> GetFilesByStoreIdAndLabels(int storeId, string[] labels)
         {
             var labelIds = labels.Select(r => r.ToInt());
@@ -145,7 +171,7 @@ namespace StoreManagement.Service.Repositories
                       join c in this.StoreDbContext.LabelLines on s.Id equals c.ItemId
                       join u in this.StoreDbContext.Labels on c.LabelId equals u.Id
                       where s.StoreId == storeId && u.StoreId == storeId && c.ItemType.Equals(StoreConstants.Files) && labelIds.Contains(u.Id)
-                      orderby s.Ordering descending 
+                      orderby s.Ordering descending
                       select s;
 
             var result = res.Distinct().ToList();

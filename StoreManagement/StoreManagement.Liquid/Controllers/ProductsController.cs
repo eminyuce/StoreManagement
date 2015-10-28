@@ -14,6 +14,8 @@ namespace StoreManagement.Liquid.Controllers
     public class ProductsController : BaseController
     {
         private const String IndexPageDesingName = "ProductsIndexPage";
+        private const String ProductDetailPage = "ProductDetailPage";
+
         [OutputCache(CacheProfile = "Cache20Minutes")]
         public async Task<ActionResult> Index(int page = 1, String search = "")
         {
@@ -92,7 +94,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
                 int productId = id.Split("-".ToCharArray()).Last().ToInt();
                 var categoryTask = ProductCategoryService.GetProductCategoryAsync(StoreId, productId);
-                var productsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductDetailPage");
+                var productsPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, ProductDetailPage);
                 var productsTask = ProductService.GetProductsByIdAsync(productId);
 
 
@@ -101,6 +103,10 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesign = productsPageDesignTask.Result;
                 var category = categoryTask.Result;
 
+                if (pageDesign == null)
+                {
+                    throw new Exception("PageDesing is null:" + ProductDetailPage);
+                }
 
 
                 ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
@@ -115,7 +121,7 @@ namespace StoreManagement.Liquid.Controllers
             catch (Exception ex)
             {
                 Logger.Error(ex, "ProductsController:Product:" + ex.StackTrace);
-                return new HttpStatusCodeResult(500);
+                return RedirectToAction("Index");
             }
         }
         public ActionResult Product2()

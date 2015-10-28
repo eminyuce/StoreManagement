@@ -98,7 +98,16 @@ namespace StoreManagement.Service.Services
             return HttpRequestHelper.GetUrlResultsAsync<FileManager>(url);
         }
 
- 
+        public Task<StorePagedList<FileManager>> GetImagesByFileSizeAsync(int storeId, string imageSourceType, string fileSizes, int page, int pageSize)
+        {
+            SetCache();
+            string url = string.Format("http://{0}/api/{1}/GetImagesByFileSizeAsync?storeId={2}&imageSourceType={3}&fileSizes={4}&page={5}&pageSize={6}",
+                WebServiceAddress, 
+                ApiControllerName, 
+                storeId, imageSourceType, fileSizes, page, pageSize);
+            return HttpRequestHelper.GetUrlPagedResultsAsync<FileManager>(url);
+        }
+
 
         protected override void SetCache()
         {

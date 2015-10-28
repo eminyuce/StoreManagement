@@ -10,20 +10,21 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
-     //   [OutputCache(CacheProfile = "Cache20Minutes")]
+    //   [OutputCache(CacheProfile = "Cache20Minutes")]
     public class PhotoGalleryController : BaseController
     {
-            private const String IndexPageDesingName = "PhotoGalleryIndexPage";
+        private const String IndexPageDesingName = "PhotoGalleryIndexPage";
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
             try
             {
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
-                var fileManagersTask = FileManagerService.GetImagesByStoreIdAsync(StoreId, true);
-
-                PhotoGalleryHelper.StoreSettings = GetStoreSettings();
+                var pageSize = GetSettingValueInt("PhotoGallery_PageSize", StoreConstants.DefaultPageSize);
+                var fileManagersTask = FileManagerService.GetImagesByFileSizeAsync(StoreId, "ShopStyle", "Best,Large", page, pageSize);
+                var settings = GetStoreSettings();
+                PhotoGalleryHelper.StoreSettings = settings;
                 PhotoGalleryHelper.ImageWidth = GetSettingValueInt("PhotoGallery_ImageWidth", 500);
                 PhotoGalleryHelper.ImageHeight = GetSettingValueInt("PhotoGallery_ImageHeight", 500);
 
@@ -38,9 +39,23 @@ namespace StoreManagement.Liquid.Controllers
 
                 var fileManagers = fileManagersTask.Result;
 
-                var dic = PhotoGalleryHelper.GetPhotoGalleryIndexPage(pageDesign, fileManagers);
+                var pageOutput = PhotoGalleryHelper.GetPhotoGalleryIndexPage(pageDesign, fileManagers);
 
-                return View(dic);
+                var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
+
+
+                PagingHelper.StoreSettings = settings;
+                PagingHelper.StoreId = StoreId;
+                PagingHelper.PageOutput = pageOutput;
+                PagingHelper.HttpRequestBase = this.Request;
+                PagingHelper.RouteData = this.RouteData;
+                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                await Task.WhenAll(pagingPageDesignTask);
+                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
+
+
+                return View(pagingDic);
 
             }
             catch (Exception ex)
@@ -50,6 +65,6 @@ namespace StoreManagement.Liquid.Controllers
             }
         }
 
-      
+
     }
 }

@@ -21,5 +21,6 @@ namespace StoreManagement.Service.Interfaces
         Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive);
         List<FileManager> GetImagesByStoreId(int storeId, bool? isActive);
         Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int ? take);
+        Task<StorePagedList<FileManager>> GetImagesByFileSizeAsync(int storeId, String imageSourceType, String fileSizes, int page, int pageSize);
     }
 }

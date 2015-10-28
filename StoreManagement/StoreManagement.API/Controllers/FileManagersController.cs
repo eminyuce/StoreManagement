@@ -150,7 +150,7 @@ namespace StoreManagement.API.Controllers
 
         public async Task<List<FileManager>> GetImagesByStoreIdAsync(int storeId, bool? isActive)
         {
-            return  await FileManagerRepository.GetImagesByStoreIdAsync(storeId, isActive);
+            return await FileManagerRepository.GetImagesByStoreIdAsync(storeId, isActive);
         }
 
         public List<FileManager> GetImagesByStoreId(int storeId, bool? isActive)
@@ -161,6 +161,11 @@ namespace StoreManagement.API.Controllers
         public async Task<List<FileManager>> GetStoreCarouselsAsync(int storeId, int? take)
         {
             return await FileManagerRepository.GetStoreCarouselsAsync(storeId, take);
+        }
+
+        public async Task<StorePagedList<FileManager>> GetImagesByFileSizeAsync(int storeId, string imageSourceType, string fileSizes, int page, int pageSize)
+        {
+            return await FileManagerRepository.GetImagesByFileSizeAsync(storeId, imageSourceType, fileSizes, page, pageSize);
         }
     }
 }

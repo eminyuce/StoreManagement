@@ -18,7 +18,8 @@ namespace StoreManagement.Liquid.Helper
                    select new
                    {
                        Name = s.FileManager.OriginalFilename,
-                       s.ImageSource
+                       s.ImageSource,
+                       s.FileManager.FileSize
                    };
         }
         public static IEnumerable GetActivitiesEnumerable(List<ActivitiesLiquid> items)

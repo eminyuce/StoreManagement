@@ -36,6 +36,8 @@ namespace StoreManagement.Liquid.Controllers
 
             await Task.WhenAll(pageDesignTask, sliderTask);
 
+            var settings = GetStoreSettings();
+            HomePageHelper.StoreSettings = settings;
             HomePageHelper.StoreId = this.StoreId;
             HomePageHelper.StoreSettings = GetStoreSettings();
 
@@ -46,8 +48,8 @@ namespace StoreManagement.Liquid.Controllers
 
             StoreLiquidResult liquidResult = HomePageHelper.GetHomePageDesign(pageDesing, sliderImages);
             liquidResult.StoreId = this.StoreId;
-
-
+            liquidResult.PageTitle = GetSettingValue("HomePage_Title", "");
+            liquidResult.StoreSettings = settings;
             // Stop timing.
             stopwatch.Stop();
 

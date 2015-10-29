@@ -30,8 +30,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingIndexPageName);
                 var pageSize = GetSettingValueInt(Type + "Categories_PageSize", StoreConstants.DefaultPageSize);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdWithPagingAsync(StoreId, Type, true, page, pageSize);
-
-                CategoryHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                CategoryHelper.StoreSettings = settings;
 
                 await Task.WhenAll(pageDesignTask, categoriesTask);
                 var pageDesign = pageDesignTask.Result;
@@ -54,7 +54,7 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-
+                pagingDic.StoreSettings = settings;
 
                 return View(pagingDic);
 
@@ -81,7 +81,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingCategoryPageName);
                 var categoryTask = CategoryService.GetCategoryAsync(categoryId);
 
-                CategoryHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                CategoryHelper.StoreSettings = settings;
                 CategoryHelper.ImageWidth = GetSettingValueInt(Type + "CategoryPage_ImageWidth", 50);
                 CategoryHelper.ImageHeight = GetSettingValueInt(Type + "CategoryPage_ImageHeight", 50);
 
@@ -95,6 +96,7 @@ namespace StoreManagement.Liquid.Controllers
                     throw new Exception("PageDesing is null:" + PageDesingIndexPageName);
                 }
                 var pageOutput = CategoryHelper.GetCategoryPage(pageDesign, category,  Type);
+                pageOutput.StoreSettings = settings;
 
                 return View(pageOutput);
 

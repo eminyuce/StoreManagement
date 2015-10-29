@@ -30,8 +30,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
                 var pageSize = GetSettingValueInt("ProductCategories_PageSize", StoreConstants.DefaultPageSize);
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
-
-                ProductCategoryHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                ProductCategoryHelper.StoreSettings = settings;
 
                 await Task.WhenAll(pageDesignTask, categoriesTask);
                 var pageDesign = pageDesignTask.Result;
@@ -56,7 +56,7 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-
+                pagingDic.StoreSettings = settings;
 
                 return View(pagingDic);
 
@@ -86,7 +86,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, CategoryPageDesingName);
                 var categoryTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
 
-                ProductCategoryHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                ProductCategoryHelper.StoreSettings = settings;
                 ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoryPage_ImageWidth", 50);
                 ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoryPage_ImageHeight", 50);
 
@@ -102,7 +103,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 var pageOutput = ProductCategoryHelper.GetCategoryPage(pageDesign, category);
-
+                pageOutput.StoreSettings = settings;
                 return View(pageOutput);
 
             }

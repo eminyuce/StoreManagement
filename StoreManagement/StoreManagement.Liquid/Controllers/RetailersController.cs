@@ -25,8 +25,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
 
                 var retailersTask = RetailerService.GetRetailersAsync(StoreId, null, true);
-
-                RetailerHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                RetailerHelper.StoreSettings = settings;
                 RetailerHelper.ImageWidth = GetSettingValueInt("RetailersIndex_ImageWidth", 50);
                 RetailerHelper.ImageHeight = GetSettingValueInt("RetailersIndex_ImageHeight", 50);
 
@@ -41,7 +41,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 var pageOutput = RetailerHelper.GetRetailers(retailers, pageDesign);
-
+                pageOutput.StoreSettings = settings;
 
                 return View(pageOutput);
 
@@ -65,7 +65,8 @@ namespace StoreManagement.Liquid.Controllers
                                                                  take, true, "normal", null);
                 var productCategoriesTask = ProductCategoryService.GetCategoriesByRetailerIdAsync(StoreId, retailerId);
 
-                RetailerHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                RetailerHelper.StoreSettings = settings;
                 RetailerHelper.ImageWidth = GetSettingValueInt("RetailerDetail_ImageWidth", 50);
                 RetailerHelper.ImageHeight = GetSettingValueInt("RetailerDetail_ImageHeight", 50);
 
@@ -81,7 +82,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
                 var dic = RetailerHelper.GetRetailerDetailPage(retailer, products, pageDesign, productCategories);
-
+                dic.StoreSettings = settings;
 
                 return View(dic);
 

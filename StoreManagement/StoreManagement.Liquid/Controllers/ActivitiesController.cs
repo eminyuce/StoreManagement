@@ -22,7 +22,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
                 var activitiesTask = ActivityService.GetActivitiesAsync(StoreId, null, true);
 
-                ActivityHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                ActivityHelper.StoreSettings = settings;
                 ActivityHelper.ImageWidth = GetSettingValueInt("ActivitiesIndex_ImageWidth", 50);
                 ActivityHelper.ImageHeight = GetSettingValueInt("ActivitiesIndex_ImageHeight", 50);
 
@@ -38,7 +39,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 var pageOutput = ActivityHelper.GetActivityIndexPage(pageDesign, activities);
-
+                pageOutput.StoreSettings = settings;
 
                 return View(pageOutput);
 

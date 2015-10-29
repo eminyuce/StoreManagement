@@ -140,7 +140,10 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId && r2.State && r2.ImageSourceType.Equals(imageSourceType, StringComparison.InvariantCultureIgnoreCase);
+                String[] fSize = fileSizes.Split(",".ToCharArray());
+                Expression<Func<FileManager, bool>> match = r2 => r2.StoreId == storeId
+                    && r2.State && fSize.Contains(r2.FileSize)
+                    && r2.ImageSourceType.Equals(imageSourceType, StringComparison.InvariantCultureIgnoreCase);
                 Expression<Func<FileManager, int>> keySelector = t => t.Ordering;
                 var items = this.Paginate(page, pageSize, keySelector, match);
 

@@ -2,9 +2,11 @@
 @using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.LiquidEntities.StoreLiquidResult
 @{
-    ViewBag.Title = Model.StoreId;
+    ViewBag.Title = Model.PageTitle;
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
             
 }
-
+ @Html.HiddenFor(r=>r.PageDesingName)
 @Html.Raw(Model.PageOutputText)
+
+ @Html.Raw(Model["GoogleAnalytics"])

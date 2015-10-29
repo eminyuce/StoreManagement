@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Constants;
+using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Data.LiquidEntities
 {
@@ -35,6 +36,24 @@ namespace StoreManagement.Data.LiquidEntities
             else
             {
                 return "";
+            }
+        }
+
+        public List<Setting> StoreSettings { get; set; }
+ 
+        public String this[String key]
+        {
+            get
+            {
+                var item = StoreSettings.FirstOrDefault(r => r.SettingKey.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                if (item != null)
+                {
+                    return item.SettingValue;
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
     }

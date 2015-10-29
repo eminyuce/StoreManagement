@@ -11,3 +11,5 @@
 
     @Html.Raw(Model.PageOutputText)
  @Html.Raw(Model.GetCanonicalUrl(Request.RequestContext.HttpContext))
+
+ @Html.Raw(Model["GoogleAnalytics"])

@@ -24,8 +24,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, PageDesingIndexPageName);
                 var pageSize = GetSettingValueInt("Brands_PageSize", StoreConstants.DefaultPageSize);
                 var brandsTask = BrandService.GetBrandsByStoreIdWithPagingAsync(StoreId, true, page, pageSize);
-
-                BrandHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                BrandHelper.StoreSettings = settings;
 
                 await Task.WhenAll(pageDesignTask, brandsTask);
                 var pageDesign = pageDesignTask.Result;
@@ -39,7 +39,7 @@ namespace StoreManagement.Liquid.Controllers
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
-                PagingHelper.StoreSettings = GetStoreSettings();
+                PagingHelper.StoreSettings = settings;
                 PagingHelper.StoreId = StoreId;
                 PagingHelper.PageOutput = pageOutput;
                 PagingHelper.HttpRequestBase = this.Request;
@@ -48,7 +48,7 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-
+                pagingDic.StoreSettings = settings;
 
                 return View(pagingDic);
 
@@ -72,7 +72,8 @@ namespace StoreManagement.Liquid.Controllers
                 var productsTask = ProductService.GetProductsByBrandAsync(StoreId, brandId, take, 0);
                 var productCategoriesTask = ProductCategoryService.GetCategoriesByBrandIdAsync(StoreId, brandId);
 
-                BrandHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                BrandHelper.StoreSettings = settings;
                 BrandHelper.ImageWidth = GetSettingValueInt("BrandDetail_ImageWidth", 50);
                 BrandHelper.ImageHeight = GetSettingValueInt("BrandDetail_ImageHeight", 50);
 
@@ -88,7 +89,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
                 var dic = BrandHelper.GetBrandDetailPage(brand, products, pageDesign, productCategories);
-
+                dic.StoreSettings = settings;
 
                 return View(dic);
 

@@ -61,8 +61,8 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-
-
+                pagingDic.StoreSettings = settings;
+       
                 return View(pagingDic);
 
             }
@@ -102,19 +102,20 @@ namespace StoreManagement.Liquid.Controllers
                 var product = productsTask.Result;
                 var pageDesign = productsPageDesignTask.Result;
                 var category = categoryTask.Result;
-
+                var settings = GetStoreSettings();
                 if (pageDesign == null)
                 {
                     throw new Exception("PageDesing is null:" + ProductDetailPage);
                 }
 
-
+                ProductHelper.StoreSettings = settings;
                 ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
                 ProductHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
                 ProductHelper.StoreSettings = GetStoreSettings();
                 var dic = ProductHelper.GetProductsDetailPage(product, pageDesign, category);
                 dic.StoreId = this.StoreId;
- 
+                dic.StoreSettings = settings;
+
                 return View(dic);
 
             }

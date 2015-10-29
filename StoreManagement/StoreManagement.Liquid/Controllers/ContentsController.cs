@@ -35,8 +35,8 @@ namespace StoreManagement.Liquid.Controllers
                 var contentsTask = ContentService.GetContentsCategoryIdAsync(StoreId, categoryId, Type, true, page, pageSize, search);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, Type, true);
 
-
-                ContentHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                ContentHelper.StoreSettings = settings;
                 ContentHelper.ImageWidth = GetSettingValueInt(Type + "Index_ImageWidth", 50);
                 ContentHelper.ImageHeight = GetSettingValueInt(Type + "Index_ImageHeight", 50);
 
@@ -66,7 +66,7 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-
+                pagingDic.StoreSettings = settings;
                 return View(pagingDic);
 
             }
@@ -94,7 +94,8 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 ContentHelper.StoreId = this.StoreId;
-                ContentHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                ContentHelper.StoreSettings = settings;
                 ContentHelper.ImageWidth = GetSettingValueInt(Type + "Detail_ImageWidth", 50);
                 ContentHelper.ImageHeight = GetSettingValueInt(Type + "Detail_ImageHeight", 50);
 
@@ -111,7 +112,7 @@ namespace StoreManagement.Liquid.Controllers
 
 
                 var dic = ContentHelper.GetContentDetailPage(content, pageDesign, category, Type);
-
+                dic.StoreSettings = settings;
 
                 return View(dic);
 

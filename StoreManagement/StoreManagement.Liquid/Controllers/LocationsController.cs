@@ -20,8 +20,8 @@ namespace StoreManagement.Liquid.Controllers
                 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "LocationsIndexPage");
                 var locationsTask = LocationService.GetLocationsAsync(StoreId, null, true);
-
-                LocationHelper.StoreSettings = GetStoreSettings();
+                var settings = GetStoreSettings();
+                LocationHelper.StoreSettings = settings;
                 LocationHelper.ImageWidth = GetSettingValueInt("LocationsIndex_ImageWidth", 50);
                 LocationHelper.ImageHeight = GetSettingValueInt("LocationsIndex_ImageHeight", 50);
 
@@ -31,7 +31,7 @@ namespace StoreManagement.Liquid.Controllers
                 var locations = locationsTask.Result;
 
                 var pageOutput = LocationHelper.GetLocationIndexPage(pageDesign, locations);
-
+                pageOutput.StoreSettings = settings;
 
                 return View(pageOutput);
 

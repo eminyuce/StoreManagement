@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data;
+using StoreManagement.Data.Attributes;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -15,6 +16,7 @@ using StoreManagement.Service.Interfaces;
 namespace StoreManagement.Liquid.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Hour")]
+    [Compress]
     public class AjaxContentsController : AjaxController
     {
         public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String designName = "", int take = 0, int imageWidth = 0, int imageHeight = 0)

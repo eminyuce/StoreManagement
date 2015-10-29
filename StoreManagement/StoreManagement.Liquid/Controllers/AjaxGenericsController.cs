@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using StoreManagement.Data;
+using StoreManagement.Data.Attributes;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Liquid.Helper;
@@ -12,6 +13,7 @@ using StoreManagement.Liquid.Helper;
 namespace StoreManagement.Liquid.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Hour")]
+    [Compress]
     public class AjaxGenericsController : AjaxController
     {
         public async Task<JsonResult> MainNavigation(String designName = "MainNavigationPartial")

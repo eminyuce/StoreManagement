@@ -46,8 +46,12 @@ namespace StoreManagement.Admin.Controllers
                          String.Format("PageDesigns-{0}-{1}.xls", storePageDesing.Name, DateTime.Now.ToString("yyyyMMdd", System.Globalization.CultureInfo.GetCultureInfo("en-US"))));
         }
         [HttpPost]
-        public ActionResult ImportExcel(int id, HttpPostedFileBase excelFile)
+        public ActionResult ImportExcel(int id, HttpPostedFileBase excelFile=null)
         {
+            if (excelFile == null)
+            {
+                return RedirectToAction("Index", new { storePageDesignId = id });
+            }
             var dt = ExcelHelper.PostValues(excelFile);
             int selectedStoreId = id;
             var resultList = PageDesignRepository.GetPageDesignByStoreId(selectedStoreId, "");

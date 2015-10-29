@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResults\SitemapResult.cs" />
+    <Compile Include="Attributes\CompressAttribute.cs" />
     <Compile Include="Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="CacheHelper\MemoryCacheHelper.cs" />
     <Compile Include="CacheHelper\TypedObjectCache.cs" />

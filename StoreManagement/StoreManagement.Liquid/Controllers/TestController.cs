@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -23,6 +24,7 @@ namespace StoreManagement.Liquid.Controllers
         [HandleError(ExceptionType = typeof(TimeoutException), View = "TimeoutError")]
         public async Task<ActionResult> Index()
         {
+         
             int? categoryId = null;
 
             String ConnectionString = "Stores";

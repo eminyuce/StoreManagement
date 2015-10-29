@@ -70,7 +70,7 @@ namespace StoreManagement.Liquid.Controllers
                 RetailerHelper.ImageWidth = GetSettingValueInt("RetailerDetail_ImageWidth", 50);
                 RetailerHelper.ImageHeight = GetSettingValueInt("RetailerDetail_ImageHeight", 50);
 
-                await Task.WhenAll(retailerTask, pageDesignTask, pageDesignTask, productCategoriesTask);
+                await Task.WhenAll(retailerTask, pageDesignTask,productsTask, productCategoriesTask);
                 var pageDesign = pageDesignTask.Result;
                 var products = productsTask.Result;
                 var productCategories = productCategoriesTask.Result;

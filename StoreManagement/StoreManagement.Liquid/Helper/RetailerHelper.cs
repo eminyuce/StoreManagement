@@ -62,9 +62,7 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    retailer = retailerLiquid,
-                    name = retailerLiquid.Retailer.Name,
-                    retailerLiquid.Retailer.RetailerUrl,
+                    retailer =  LiquidAnonymousObject.GetRetailer(retailerLiquid),
                     products = LiquidAnonymousObject.GetProductsLiquid(retailerLiquid.ProductLiquidList),
                     productcategories = LiquidAnonymousObject.GetProductCategories(retailerLiquid.ProductCategoriesLiquids)
 
@@ -73,6 +71,7 @@ namespace StoreManagement.Liquid.Helper
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;
+                result.PageDesingName = pageDesign.Name;
                 result.DetailLink = retailerLiquid.DetailLink;
 
             }

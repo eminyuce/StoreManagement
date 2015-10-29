@@ -237,7 +237,16 @@ namespace StoreManagement.Liquid.Helper
             return anonymousObject;
         }
 
-
+        public static object GetRetailer(RetailerLiquid retailerLiquid)
+        {
+            object anonymousObject = new
+            {
+                RetailerId = retailerLiquid.Retailer.Id,
+                Name = retailerLiquid.Retailer.Name,
+                retailerLiquid.Retailer.RetailerUrl
+            };
+            return anonymousObject;
+        }
         public static object GetProductCategory(ProductCategoryLiquid productCategories)
         {
             object anonymousObject = new

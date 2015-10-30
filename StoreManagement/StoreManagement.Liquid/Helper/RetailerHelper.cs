@@ -64,7 +64,7 @@ namespace StoreManagement.Liquid.Helper
                 {
                     retailer =  LiquidAnonymousObject.GetRetailer(retailerLiquid),
                     products = LiquidAnonymousObject.GetProductsLiquid(retailerLiquid.ProductLiquidList),
-                    productcategories = LiquidAnonymousObject.GetProductCategories(retailerLiquid.ProductCategoriesLiquids)
+                    productCategories = LiquidAnonymousObject.GetProductCategories(retailerLiquid.ProductCategoriesLiquids)
 
                 };
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.Attributes;
 using StoreManagement.Data.Constants;
@@ -16,6 +17,7 @@ namespace StoreManagement.Liquid.Controllers
     [Compress]
     public class AjaxGenericsController : AjaxController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public async Task<JsonResult> MainNavigation(String designName = "MainNavigationPartial")
         {
             int storeId = StoreId;

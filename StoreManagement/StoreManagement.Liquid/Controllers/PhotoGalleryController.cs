@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data.Constants;
 using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.Interfaces;
@@ -14,6 +15,8 @@ namespace StoreManagement.Liquid.Controllers
     public class PhotoGalleryController : BaseController
     {
         private const String IndexPageDesingName = "PhotoGalleryIndexPage";
+
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public async Task<ActionResult> Index(int page = 1)
         {

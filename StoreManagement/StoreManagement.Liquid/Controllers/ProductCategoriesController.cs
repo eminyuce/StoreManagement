@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
@@ -13,6 +14,10 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ProductCategoriesController : BaseController
     {
+
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+
         private const String IndexPageDesingName = "ProductCategoriesIndexPage";
         private const String CategoryPageDesingName = "ProductCategoriesCategoryPage";
 

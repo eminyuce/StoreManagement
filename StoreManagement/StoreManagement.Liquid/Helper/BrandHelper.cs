@@ -81,11 +81,9 @@ namespace StoreManagement.Liquid.Helper
 
                 object anonymousObject = new
                 {
-                    brand = brandLiquid,
-                    name = brandLiquid.Brand.Name,
-                    description = brandLiquid.Brand.Description,
+                    brand = LiquidAnonymousObject.GetBrandLiquid(brandLiquid),
                     products = LiquidAnonymousObject.GetProductsLiquid(brandLiquid.ProductLiquidList),
-                    productcategories = LiquidAnonymousObject.GetProductCategories(brandLiquid.ProductCategoriesLiquids)
+                    productCategories = LiquidAnonymousObject.GetProductCategories(brandLiquid.ProductCategoriesLiquids)
 
                 };
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);

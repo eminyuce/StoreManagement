@@ -27,7 +27,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public abstract class BaseController : Controller
     {
-        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        protected static readonly Logger BaseLogger = LogManager.GetCurrentClassLogger();
 
         [Inject]
         public IActivityHelper ActivityHelper { set; get; }
@@ -190,7 +191,7 @@ namespace StoreManagement.Liquid.Controllers
         {
             if (StoreService == null)
             {
-                Logger.Trace("StoreService is null");
+                BaseLogger.Trace("StoreService is null");
                 return;
             }
             var isCacheEnable = StoreService.GetStoreCacheStatus(StoreId);
@@ -248,7 +249,7 @@ namespace StoreManagement.Liquid.Controllers
 
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
         {
-            Logger.Trace("Store:" + StoreId + " HttpNotFoundResult:" + statusDescription + " ");
+            BaseLogger.Trace("Store:" + StoreId + " HttpNotFoundResult:" + statusDescription + " ");
             return new HttpNotFoundResult(statusDescription);
         }
 
@@ -280,7 +281,7 @@ namespace StoreManagement.Liquid.Controllers
             var value = GetSettingValue(key);
             if (String.IsNullOrEmpty(value))
             {
-                Logger.Trace("Store Default Setting= " + StoreId + " Key=" + key + " defaultValue=" + defaultValue);
+                BaseLogger.Trace("Store Default Setting= " + StoreId + " Key=" + key + " defaultValue=" + defaultValue);
                 return ProjectAppSettings.GetWebConfigString(key, defaultValue);
             }
             else
@@ -312,7 +313,7 @@ namespace StoreManagement.Liquid.Controllers
             catch (Exception ex)
             {
 
-                Logger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
+                BaseLogger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
 
                 return "";
             }

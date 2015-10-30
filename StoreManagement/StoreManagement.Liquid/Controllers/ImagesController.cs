@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
 
@@ -13,7 +14,7 @@ namespace StoreManagement.Liquid.Controllers
     public class ImagesController : BaseController
     {
 
-
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public ActionResult FetchImage(String id = "", string size = "", string contentType = "")
         {
             var dic = new Dictionary<String, String>();

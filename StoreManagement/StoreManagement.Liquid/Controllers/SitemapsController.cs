@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.ActionResults;
 using StoreManagement.Data.CacheHelper;
@@ -16,6 +17,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class SitemapsController : BaseController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private static readonly TypedObjectCache<List<SitemapItem>> ProductSitemapItemCache = new TypedObjectCache<List<SitemapItem>>("ProductSitemapItemCache");
         //
         // GET: /Sitemap/

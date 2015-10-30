@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.LiquidEntities;
@@ -19,7 +20,7 @@ namespace StoreManagement.Liquid.Controllers
     {
         //
         // GET: /Test/
-
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         [AsyncTimeout(150)]
         [HandleError(ExceptionType = typeof(TimeoutException), View = "TimeoutError")]
         public async Task<ActionResult> Index()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
@@ -12,6 +13,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class BrandsController : BaseController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private const String PageDesingIndexPageName = "BrandsIndexPage";
         private const String BrandDetailPageDesignName = "BrandDetailPage";
 
@@ -77,7 +80,7 @@ namespace StoreManagement.Liquid.Controllers
                 BrandHelper.ImageWidth = GetSettingValueInt("BrandDetail_ImageWidth", 50);
                 BrandHelper.ImageHeight = GetSettingValueInt("BrandDetail_ImageHeight", 50);
 
-                await Task.WhenAll(brandTask, pageDesignTask, pageDesignTask, productCategoriesTask);
+                await Task.WhenAll(brandTask, pageDesignTask, productsTask, productCategoriesTask);
                 var pageDesign = pageDesignTask.Result;
                 var products = productsTask.Result;
                 var productCategories = productCategoriesTask.Result;

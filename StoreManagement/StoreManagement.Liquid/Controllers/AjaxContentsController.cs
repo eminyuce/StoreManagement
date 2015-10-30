@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.Attributes;
 using StoreManagement.Data.Constants;
@@ -19,6 +20,8 @@ namespace StoreManagement.Liquid.Controllers
     [Compress]
     public class AjaxContentsController : AjaxController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public async Task<JsonResult> GetRelatedContents(int categoryId, String contentType, int excludedContentId = 0, String designName = "", int take = 0, int imageWidth = 0, int imageHeight = 0)
         {
 

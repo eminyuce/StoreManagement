@@ -1,15 +1,1 @@
 ﻿
-
-
-@model List<StoreManagement.Data.Entities.Product>
-@{
-       ViewBag.Title = Model.PageTitle;
-}
-
-<h2>Index</h2>
-@foreach (var p in Model)
-{
-    <div>
-        @p.Name
-    </div>
-}

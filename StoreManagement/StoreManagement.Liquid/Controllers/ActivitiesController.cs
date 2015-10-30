@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Liquid.Helper;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class ActivitiesController : BaseController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private const String IndexPageDesingName = "ActivitiesIndexPage";
 
         [OutputCache(CacheProfile = "Cache20Minutes")]

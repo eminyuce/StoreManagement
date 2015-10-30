@@ -165,11 +165,12 @@ namespace StoreManagement.Liquid.Helper
             };
             return anonymousObject;
         }
-        public static IEnumerable GetProductCategories(List<ProductCategoryLiquid> cats)
+        public static IEnumerable GetProductCategories(List<ProductCategoryLiquid> productCategories)
         {
-            return from s in cats
+            return from s in productCategories
                    select new
                    {
+                       CategoryId = s.ProductCategory.Id,
                        s.ProductCategory.Name,
                        s.ProductCategory.Description,
                        s.DetailLink,
@@ -182,6 +183,7 @@ namespace StoreManagement.Liquid.Helper
             return new
             {
                 brandLiquid,
+                BrandId =brandLiquid.Brand.Id,
                 Name = brandLiquid.Brand.Name,
                 Description = brandLiquid.Brand.Description
             };

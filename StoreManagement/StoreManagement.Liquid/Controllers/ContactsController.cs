@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 
 namespace StoreManagement.Liquid.Controllers
 {
     public class ContactsController : BaseController
     {
-       
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         [OutputCache(CacheProfile = "Cache20Minutes")]
         public async Task<ActionResult> Index()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Liquid.Helper;
@@ -13,6 +14,8 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class ProductsController : BaseController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private const String IndexPageDesingName = "ProductsIndexPage";
         private const String ProductDetailPage = "ProductDetailPage";
 
@@ -107,6 +110,16 @@ namespace StoreManagement.Liquid.Controllers
                 {
                     throw new Exception("PageDesing is null:" + ProductDetailPage);
                 }
+                if (product == null)
+                {
+                    throw new Exception("Product is NULL. ProductId:"+productId);
+                }
+
+                if (category == null)
+                {
+                    throw new Exception("ProductCategory is NULL.ProductId:" + productId);
+                }
+           
 
                 ProductHelper.StoreSettings = settings;
                 ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);

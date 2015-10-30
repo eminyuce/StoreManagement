@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using Ninject;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
@@ -18,6 +19,7 @@ namespace StoreManagement.Liquid.Controllers
 {
     public class HomeController : BaseController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         [OutputCache(CacheProfile = "Cache1Hour")]
         public async Task<ActionResult> Index()

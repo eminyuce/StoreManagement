@@ -1,3 +1,5 @@
+using GenericRepository;
+using GenericRepository.EntityFramework;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -78,16 +80,12 @@ namespace StoreManagement.API.App_Start
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
             kernel.Bind<IPageDesignRepository>().To<PageDesignRepository>().InRequestScope();
             kernel.Bind<IContentFileRepository>().To<ContentFileRepository>().InRequestScope();
-
             kernel.Bind<IStoreUserRepository>().To<StoreUserRepository>().InRequestScope();
-
             kernel.Bind<ILabelRepository>().To<LabelRepository>().InRequestScope();
             kernel.Bind<ILabelLineRepository>().To<LabelLineRepository>().InRequestScope();
-
             kernel.Bind<IProductRepository>().To<ProductRepository>().InRequestScope();
             kernel.Bind<IProductFileRepository>().To<ProductFileRepository>().InRequestScope();
             kernel.Bind<IProductCategoryRepository>().To<ProductCategoryRepository>().InRequestScope();
-
             kernel.Bind<IEmailListRepository>().To<EmailListRepository>().InRequestScope();
             kernel.Bind<IContactRepository>().To<ContactRepository>().InRequestScope();
             kernel.Bind<ILocationRepository>().To<LocationRepository>().InRequestScope();
@@ -100,6 +98,9 @@ namespace StoreManagement.API.App_Start
             kernel.Bind<IMessageRepository>().To<MessageRepository>().InRequestScope();
             kernel.Bind<IProductAttributeRepository>().To<ProductAttributeRepository>().InRequestScope();
             kernel.Bind<IProductAttributeRelationRepository>().To<ProductAttributeRelationRepository>().InRequestScope();
+
+
+    
         }        
     }
 }

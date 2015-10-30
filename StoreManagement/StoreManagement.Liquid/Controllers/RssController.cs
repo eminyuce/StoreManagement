@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.ActionResults;
@@ -15,7 +16,7 @@ namespace StoreManagement.Liquid.Controllers
     [OutputCache(CacheProfile = "Cache1Hour")]
     public class RssController : BaseController
     {
-
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public async Task<ActionResult> Products(int take = 15, int description = 300, int imageHeight = 50, int imageWidth = 50)
         {

@@ -170,6 +170,10 @@ namespace StoreManagement.Liquid.Controllers
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+
+            ViewData["MetaKeywords"] = GetSettingValue("MetaTagKeywords", "");
+            ViewData["MetaDescription"] = GetSettingValue("MetaTagDescription", "");
+        
             SetStoreCache();
             base.OnActionExecuting(filterContext);
         }
@@ -245,7 +249,6 @@ namespace StoreManagement.Liquid.Controllers
             StoreService.IsCacheEnable = isCacheEnable;
             StoreService.CacheMinute = GetSettingValueInt("StoreService_CacheMinute", 200);
         }
-
 
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
         {

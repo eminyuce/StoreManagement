@@ -12,6 +12,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Days")]
     public class ProductsController : BaseController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -19,7 +20,7 @@ namespace StoreManagement.Liquid.Controllers
         private const String IndexPageDesingName = "ProductsIndexPage";
         private const String ProductDetailPage = "ProductDetailPage";
 
-        [OutputCache(CacheProfile = "Cache20Minutes")]
+     
         public async Task<ActionResult> Index(int page = 1, String search = "")
         {
             try
@@ -138,13 +139,7 @@ namespace StoreManagement.Liquid.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult Product2()
-        {
-
-
-
-            return View();
-        }
+       
         public ActionResult ProductBuy(int id=0)
         {
             var productsTask = ProductService.GetProductsById(id);

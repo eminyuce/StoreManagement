@@ -13,14 +13,20 @@ namespace StoreManagement.Data.GeneralHelper
     {
         public static String GetProductIdRouteValue(Product c, String categoryName)
         {
-            return String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id,
+            return String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name).ToStr(0, 200), c.Id,
                                  GeneralHelper.GetUrlSeoString(categoryName));
         }
         public static String GetProductLink(Product c, String categoryName)
         {
-            String detailLink = String.Format("/Products/Product/{0}",GetProductIdRouteValue(c,categoryName));
+            String detailLink = String.Format("/Products/Product/{0}", GetProductIdRouteValue(c, categoryName));
             return detailLink.ToLowerInvariant();
         }
+
+        public static String GetContentLinkRouteValue(Content c, String categoryName, String type)
+        {
+            return String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id);
+        }
+
         public static String GetContentLink(Content c, String categoryName, String type)
         {
             String url = "/Blogs/Blog/";
@@ -32,7 +38,7 @@ namespace StoreManagement.Data.GeneralHelper
             {
                 url = "/Blogs/Detail/";
             }
-            String detailLink = url + String.Format("{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id));
+            String detailLink = url + String.Format("{0}", GetContentLinkRouteValue(c, categoryName, type));
             return detailLink.ToLowerInvariant();
         }
 
@@ -49,7 +55,7 @@ namespace StoreManagement.Data.GeneralHelper
                 imageLink = String.Format("/Images/{0}/{1}?width={2}&height={3}", imageActionName, fileImage.GoogleImageId, width, height);
             }
 
-           
+
             return imageLink;
         }
         public static String GetImageLinkHtml(String imageActionName, FileManager fileImage, int width, int height, String title, String alt)
@@ -77,7 +83,7 @@ namespace StoreManagement.Data.GeneralHelper
         }
         public static string GetCategoryLink(BaseCategory productCategory, String type)
         {
-            String detailLink = String.Format("/"+type+"categories/category/{0}",
+            String detailLink = String.Format("/" + type + "categories/category/{0}",
                 String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
 
             return detailLink.ToLowerInvariant();

@@ -51,6 +51,7 @@ namespace StoreManagement.Liquid.Helper
             var result = new StoreLiquidResult();
             result.LiquidRenderedResult = dic;
             result.PageDesingName = pageDesign.Name;
+            result.StoreSettings = this.StoreSettings;
             return result;
 
         }

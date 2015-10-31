@@ -33,7 +33,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 await Task.WhenAll(pageDesignTask, fileManagersTask);
                 var pageDesign = pageDesignTask.Result;
-
+               // PhotoGalleryHelper.StoreSettings = GetStoreSettings();
                 if (pageDesign == null)
                 {
                     throw new Exception("PageDesing is null:" + IndexPageDesingName);
@@ -56,7 +56,7 @@ namespace StoreManagement.Liquid.Controllers
                 PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-
+                pagingDic.StoreSettings = GetStoreSettings();
 
                 return View(pagingDic);
 

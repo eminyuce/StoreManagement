@@ -276,15 +276,27 @@ namespace StoreManagement.Service.Repositories
                     && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId)
                     && r2.BrandId == (brandId ?? r2.BrandId)
                  && r2.RetailerId == (retailerId ?? r2.RetailerId)
-                    && r2.Id != excludedProductId;
-                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+                    && r2.Id != excludedProductId
+                &&
+                r2.ProductFiles.Any();
+
+                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager) ;
 
 
                 var predicate = PredicateBuilder.Create<Product>(match);
                 Expression<Func<Product, int>> keySelector = t => t.Id;
 
-
-                if (functionType.Equals("random", StringComparison.InvariantCultureIgnoreCase))
+                if (functionType.Equals("mainrandom", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
+                    predicate = predicate.And(r => r.MainPage);
+                    var itemsRandom = this.FindAllIncludingAsync(predicate,
+                        page, pageSize,
+                        keySelector2, 
+                        OrderByType.Descending, includeProperties);
+                    return await itemsRandom;
+                }
+                else if (functionType.Equals("random", StringComparison.InvariantCultureIgnoreCase))
                 {
                     Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
                     var itemsRandom = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector2, OrderByType.Descending, includeProperties);

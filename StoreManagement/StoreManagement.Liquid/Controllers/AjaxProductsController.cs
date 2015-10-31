@@ -16,7 +16,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {
-    [OutputCache(CacheProfile = "Cache1Hour")]
+    [OutputCache(CacheProfile = "Cache1Days")]
     [Compress]
     public class AjaxProductsController : AjaxController
     {

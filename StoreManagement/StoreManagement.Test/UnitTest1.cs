@@ -220,8 +220,8 @@ namespace StoreManagement.Test
         [TestMethod]
         public void RemoveNewLines()
         {
-            String m = "\n\n\n\tProductCategoryService_CacheMinute \t";
-            Console.Write(m.RemoveTabNewLines());
+            String m = "Bru Joy Travel Pillow Neck Inflatable Rosy Red Best Travel Head Rest Kids Adults - Blow Up Get Desired Support for Airplanes Camping Sleeping Car Driving Home Office Snaps Bath Spa - Premium Quality - Super Soft - Convertible 2 in 1 U Shaped Waterproof Washable with a Deluxe Pouch - No More Neck Pain - SAVE EXTRA 10% + FREE SHIPPING For 3 and More, Blue Or Red";
+            Console.Write(m.ToStr(0,200));
         }
 
 

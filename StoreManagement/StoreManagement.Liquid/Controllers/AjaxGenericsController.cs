@@ -13,7 +13,7 @@ using StoreManagement.Liquid.Helper;
 
 namespace StoreManagement.Liquid.Controllers
 {
-    [OutputCache(CacheProfile = "Cache1Hour")]
+    [OutputCache(CacheProfile = "Cache1Days")]
     [Compress]
     public class AjaxGenericsController : AjaxController
     {

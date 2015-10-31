@@ -15,6 +15,7 @@ using StoreManagement.Data.SEO;
 
 namespace StoreManagement.Liquid.Controllers
 {
+       [OutputCache(CacheProfile = "Cache10Days")]
     public class SitemapsController : BaseController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();

@@ -13,10 +13,28 @@ namespace StoreManagement.Liquid
     {
         protected void Application_Start()
         {
+            MvcHandler.DisableMvcResponseHeader = true; 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
         
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            Redirect301();
+        }
+        private void Redirect301()
+        {
+           
+            if (!Request.Url.Host.StartsWith("www") && !Request.Url.IsLoopback)
+            {
+                UriBuilder builder = new UriBuilder(Request.Url);
+                builder.Host = "www." + Request.Url.Host;
+                Response.StatusCode = 301;
+                Response.AddHeader("Location", builder.ToString());
+                Response.End();
+            }
         }
     }
 }

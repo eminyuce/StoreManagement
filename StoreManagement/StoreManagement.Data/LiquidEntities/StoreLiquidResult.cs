@@ -31,11 +31,11 @@ namespace StoreManagement.Data.LiquidEntities
             if (request.Url != null)
             {
                 var m = request.Url.Scheme + Uri.SchemeDelimiter;
-                return String.Format("<link rel='canonical' href='{0}{1}{2}' >", m, domainName, DetailLink);
+                return String.Format("{0}www.{1}{2}", m, domainName, DetailLink);
             }
             else
             {
-                return "";
+                return this[StoreConstants.CanonicalUrl];
             }
         }
 

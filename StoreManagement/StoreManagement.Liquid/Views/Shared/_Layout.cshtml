@@ -1,10 +1,12 @@
-﻿
+﻿@using StoreManagement.Data.Constants
+
 <!DOCTYPE html>
 <html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml" >
     <head>
         <meta charset="utf-8" />
-        <meta name="keywords" content="@ViewData["MetaKeywords"]" />
-        <meta name="description" content="@ViewData["MetaDescription"]" />
+        <link rel="canonical"  href="@ViewData[StoreConstants.CanonicalUrl]" />  
+        <meta name="keywords" content="@ViewData[StoreConstants.MetaTagKeywords]" />
+        <meta name="description" content="@ViewData[StoreConstants.MetaTagDescription]" />
         <meta content="en" http-equiv="content-language" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="msvalidate.01" content="AF4AB2D14FCF11B55A944D4E1C29BF5C" />

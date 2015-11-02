@@ -5,11 +5,12 @@
 @{
        ViewBag.Title = Model.PageTitle;
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
+    ViewData[StoreConstants.CanonicalUrl] = Model.GetCanonicalUrl(Request.RequestContext.HttpContext);
             
 }
  @Html.HiddenFor(r=>r.PageDesingName)
 
- @Html.Raw(Model.GetCanonicalUrl(Request.RequestContext.HttpContext))
+ 
  @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))
 
 

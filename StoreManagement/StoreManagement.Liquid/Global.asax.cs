@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using DotLiquid;
+using StoreManagement.Data;
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidFilters;
 
 namespace StoreManagement.Liquid
@@ -26,7 +28,12 @@ namespace StoreManagement.Liquid
         }
         private void Redirect301()
         {
-           
+
+            if (Request.Url.Host.Contains(ProjectAppSettings.GetWebConfigString("DefaultSiteDomain")))
+            {
+                return;
+            }
+
             if (!Request.Url.Host.StartsWith("www") && !Request.Url.IsLoopback)
             {
                 UriBuilder builder = new UriBuilder(Request.Url);

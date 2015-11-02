@@ -164,16 +164,14 @@ namespace StoreManagement.Liquid.Controllers
             GetStoreByDomain(requestContext);
 
 
-            ViewBag.MetaDescription = GetSettingValue(StoreConstants.MetaTagDescription);
-            ViewBag.MetaKeywords = GetSettingValue(StoreConstants.MetaTagKeywords);
 
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 
-            ViewData["MetaKeywords"] = GetSettingValue("MetaTagKeywords", "");
-            ViewData["MetaDescription"] = GetSettingValue("MetaTagDescription", "");
-        
+            ViewData[StoreConstants.MetaTagKeywords] = GetSettingValue(StoreConstants.MetaTagKeywords, "");
+            ViewData[StoreConstants.MetaTagDescription] = GetSettingValue(StoreConstants.MetaTagDescription, "");
+            ViewData[StoreConstants.CanonicalUrl] = GetSettingValue(StoreConstants.CanonicalUrl, "");
             SetStoreCache();
             base.OnActionExecuting(filterContext);
         }

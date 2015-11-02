@@ -60,5 +60,7 @@ namespace StoreManagement.Data.Constants
         public static string RobotsTxt = "RobotsTxt";
         public const int CacheClientTimeSpanSeconds = 0;
         public const int CacheServerTimeSpanSeconds = 0;
+
+        public static string CanonicalUrl = "CanonicalUrl";
     }
 }

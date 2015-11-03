@@ -141,7 +141,8 @@ namespace StoreManagement.Service.GenericRepositories
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
-                var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take, null);
+                Expression<Func<T, int>> keySelector = t => t.Ordering;
+                var items = repository.FindAllAsync(match, keySelector, OrderByType.Descending, take, null);
                 var itemsResult = items;
                 return await itemsResult;
             }

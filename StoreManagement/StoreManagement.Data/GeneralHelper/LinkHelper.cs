@@ -11,10 +11,12 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class LinkHelper
     {
+        private const int MaxUrlLength = 200;
+
         public static String GetProductIdRouteValue(Product c, String categoryName)
         {
-            return String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name).ToStr(0, 200), c.Id,
-                                 GeneralHelper.GetUrlSeoString(categoryName));
+            return String.Format("{2}/{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name).ToStr(0, MaxUrlLength), c.Id,
+                                 GeneralHelper.GetUrlSeoString(categoryName).ToStr(0, MaxUrlLength));
         }
         public static String GetProductLink(Product c, String categoryName)
         {
@@ -24,7 +26,7 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static String GetContentLinkRouteValue(Content c, String categoryName, String type)
         {
-            return String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name), c.Id);
+            return String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(c.Name).ToStr(0, MaxUrlLength), c.Id);
         }
 
         public static String GetContentLink(Content c, String categoryName, String type)
@@ -77,14 +79,14 @@ namespace StoreManagement.Data.GeneralHelper
         public static string GetProductCategoryLink(BaseCategory productCategory)
         {
             String detailLink = String.Format("/ProductCategories/Category/{0}",
-                String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
+                String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name).ToStr(0, MaxUrlLength), productCategory.Id));
 
             return detailLink.ToLowerInvariant();
         }
         public static string GetCategoryLink(BaseCategory productCategory, String type)
         {
             String detailLink = String.Format("/" + type + "categories/category/{0}",
-                String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name), productCategory.Id));
+                String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name).ToStr(0, MaxUrlLength), productCategory.Id));
 
             return detailLink.ToLowerInvariant();
         }
@@ -113,28 +115,28 @@ namespace StoreManagement.Data.GeneralHelper
 
         public static string GetBrandDetailLink(Brand brand)
         {
-            String link = String.Format("/Brands/Detail/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name), brand.Id));
+            String link = String.Format("/Brands/Detail/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name).ToStr(0, MaxUrlLength), brand.Id));
 
             return link.ToLowerInvariant();
         }
 
         public static string GetLabelLink(Label label)
         {
-            String link = String.Format("/Tags/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(label.Name), label.Id));
+            String link = String.Format("/Tags/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(label.Name).ToStr(0, MaxUrlLength), label.Id));
 
             return link.ToLowerInvariant();
         }
 
         public static string GetRetailerLink(Retailer retailer)
         {
-            String link = String.Format("/Retailers/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(retailer.Name), retailer.Id));
+            String link = String.Format("/Retailers/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(retailer.Name).ToStr(0, MaxUrlLength), retailer.Id));
 
             return link.ToLowerInvariant();
         }
 
         public static string GetRetailerDetailLink(Retailer retailer)
         {
-            String link = String.Format("/Retailers/Detail/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(retailer.Name), retailer.Id));
+            String link = String.Format("/Retailers/Detail/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(retailer.Name).ToStr(0, MaxUrlLength), retailer.Id));
 
             return link.ToLowerInvariant();
         }

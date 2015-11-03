@@ -166,7 +166,7 @@ namespace StoreManagement.Data.LiquidEntities
                             int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
                             int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
 
-                            return LinkHelper.GetImageLinkHtml("Thumbnail", fileImage, w, h, fileImage.Title, fileImage.Title);
+                            return LinkHelper.GetImageLink("Thumbnail", fileImage, w, h);
                         }
                         
                     }

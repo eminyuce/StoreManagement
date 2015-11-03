@@ -200,6 +200,7 @@
     <Content Include="fonts\fontello.eot" />
     <Content Include="fonts\fontello.ttf" />
     <Content Include="fonts\fontello.woff" />
+    <Content Include="Images\spinner.gif" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -471,6 +472,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
+    <Compile Include="Controllers\CssController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
@@ -597,6 +599,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Css\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

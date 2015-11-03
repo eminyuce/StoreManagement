@@ -1,6 +1,6 @@
 ﻿
 
-
+ 
 $(document).ready(function () {
     //var mm = $("[data-view-contact-resume-contact=" + encodedResumeId + "]");
     //mm.fadeOut('slow', function () {
@@ -12,7 +12,7 @@ $(document).ready(function () {
     GetAttributeBaseAjax();
     
     
-
+    $('[data-toggle="tooltip"]').tooltip();
 
 
 });
@@ -35,7 +35,12 @@ function callAjaxMethod() {
 
 
 }
-
+function showLoadingImage() {
+    
+}
+function hideLoadingImage() {
+    
+}
 
 function GetAttributeBaseAjax() {
     try {
@@ -182,6 +187,7 @@ function GetContactForm() {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
         var successMessage = $(this).attr('data-contact-success-message');
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         var postData = JSON.stringify({
             "designName": designName
         });
@@ -202,7 +208,7 @@ function GetContactForm() {
                     });
                 });
             }
-        });
+        }, enabledLoaderImage);
     });
 }
 function SetTextMessage(message) {
@@ -223,6 +229,7 @@ function GetContentsByContentType() {
         var contentType = $(this).attr('data-content-type');
         var type = $(this).attr('data-contents-by-content-type');
         var excludedContentId = GetValueInt($(this).attr('data-excluded-content-id'));
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         var postData = JSON.stringify({
             "page": page,
             "designName": designName,
@@ -237,7 +244,7 @@ function GetContentsByContentType() {
 
         ajaxMethodCall(postData, "/AjaxContents/GetContentsByContentType", function (data) {
             AddDataToDiv(truethis, data, page);
-        });
+        }, enabledLoaderImage);
     });
 }
 function GetProductsByProductType() {
@@ -254,6 +261,7 @@ function GetProductsByProductType() {
         var pageSize = GetValueInt($(this).attr('data-page-size'));
         var productType = $(this).attr('data-product-type');
         var excludedProductId = GetValueInt($(this).attr('data-excluded-product-id'));
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         var postData = JSON.stringify({
             "page": page,
             "designName": designName,
@@ -270,7 +278,7 @@ function GetProductsByProductType() {
         ajaxMethodCall(postData, "/AjaxProducts/GetProductsByProductType", function (data) {
             AddDataToDiv(truethis, data, page);
 
-        });
+        }, enabledLoaderImage);
     });
 }
 
@@ -279,11 +287,12 @@ function GetProductLabels() {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
         var itemid = $(this).attr('data-product-itemid');
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         var itemtype = 'product';
         var postData = JSON.stringify({ id: itemid, "designName": designName });
         ajaxMethodCall(postData, "/AjaxProducts/GetProductLabels", function (data) {
             AddDataToDiv(truethis, data);
-        });
+        }, enabledLoaderImage);
     });
 }
 function GetFooter() {
@@ -291,10 +300,11 @@ function GetFooter() {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
         var postData = JSON.stringify({ "designName": designName });
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         ajaxMethodCall(postData, "/AjaxGenerics/Footer", function (data) {
             AddDataToDiv(truethis, data, 0);
 
-        });
+        }, enabledLoaderImage);
     });
 }
 function GetMainNavigation() {
@@ -304,10 +314,11 @@ function GetMainNavigation() {
         if (innerHtmlLength == 0) {
             var designName = $(this).attr('data-template-design-name');
             var postData = JSON.stringify({ "designName": designName });
+            var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
             ajaxMethodCall(postData, "/AjaxGenerics/MainNavigation", function (data) {
                 AddDataToDiv(truethis, data, 0);
 
-            });
+            }, enabledLoaderImage);
         }
     });
 }
@@ -317,7 +328,7 @@ function GetBrands() {
         var designName = $(this).attr('data-template-design-name');
         var imageWidth = GetValueInt($(this).attr('data-image-width'));
         var imageHeight = GetValueInt($(this).attr('data-image-height'));
-
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         var postData = JSON.stringify({
             "designName": designName,
             "imageWidth": imageWidth,
@@ -325,7 +336,7 @@ function GetBrands() {
         });
         ajaxMethodCall(postData, "/AjaxProducts/GetBrands", function (data) {
             AddDataToDiv(truethis, data, 0);
-        });
+        }, enabledLoaderImage);
     });
 }
 function GetProductCategories() {
@@ -333,6 +344,7 @@ function GetProductCategories() {
     $('[data-product-categories]').each(function () {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         var imageWidth = GetValueInt($(this).attr('data-image-width'));
         var imageHeight = GetValueInt($(this).attr('data-image-height'));
         var postData = JSON.stringify({
@@ -342,13 +354,14 @@ function GetProductCategories() {
         });
         ajaxMethodCall(postData, "/AjaxProducts/GetProductCategories", function (data) {
             AddDataToDiv(truethis, data, 0);
-        });
+        }, enabledLoaderImage);
     });
 }
 function GetRelatedContents() {
     $('[data-related-contents]').each(function () {
         var truethis = this;
         var designName = $(this).attr('data-template-design-name');
+        var enabledLoaderImage = $(this).attr('data-enabled-loader-image');
         var contentType = $(this).attr('data-related-contents-type');
         var categoryId = $(this).attr('data-related-contents');
         var imageWidth = GetValueInt($(this).attr('data-image-width'));
@@ -364,7 +377,7 @@ function GetRelatedContents() {
         });
         ajaxMethodCall(postData, "/AjaxContents/GetRelatedContents", function (data) {
             AddDataToDiv(truethis, data, 0);
-        });
+        }, enabledLoaderImage);
     });
 }
 function AddDataToDiv(truethis, data, page) {
@@ -381,8 +394,13 @@ function GetValueInt(val) {
     return val;
 }
 
-function ajaxMethodCall(postData, ajaxUrl, successFunction) {
+function ajaxMethodCall(postData, ajaxUrl, successFunction, enabledLoaderImage) {
 
+
+    if (enabledLoaderImage) {
+        showLoadingImage();
+    }
+    
     $.ajax({
         type: "POST",
         url: ajaxUrl,
@@ -409,7 +427,15 @@ function ajaxMethodCall(postData, ajaxUrl, successFunction) {
             }
         },
         contentType: "application/json",
-        dataType: "json"
+        dataType: "json",
+        complete: function() {
+                // no matter the result, complete will fire, so it's a good place
+                // to do the non-conditional stuff, like hiding a loading image.
+            if (enabledLoaderImage) {
+                hideLoadingImage();
+            }
+              
+       }
     });
 }
 function ContactFormModel() {

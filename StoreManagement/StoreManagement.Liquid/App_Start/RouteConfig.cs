@@ -22,11 +22,30 @@ namespace StoreManagement.Liquid
                  url: "sitemaps/sitemap.xml",
                          defaults: new { controller = "Sitemaps", action = "Index" }
               );
+
+             routes.MapRoute(
+                name: "storeRetailersSiteMap",
+                url: "sitemaps/retailers.xml",
+                        defaults: new { controller = "Sitemaps", action = "Retailers" }
+             );
+
+             routes.MapRoute(
+                name: "storeBrandsSiteMap",
+                url: "sitemaps/brands.xml",
+                        defaults: new { controller = "Sitemaps", action = "Brands" }
+             );
+
              routes.MapRoute(
                  name: "storeProductSitemap",
                  url: "sitemaps/productssitemap.xml",
                          defaults: new { controller = "Sitemaps", action = "Products" }
               );
+
+             routes.MapRoute(
+                name: "storeProductCategoriesSiteMap",
+                url: "sitemaps/productcategories.xml",
+                        defaults: new { controller = "Sitemaps", action = "ProductCategories" }
+             );
 
             routes.MapRoute(
              name: "robots",

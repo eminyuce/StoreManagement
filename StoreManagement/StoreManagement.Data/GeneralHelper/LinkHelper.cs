@@ -76,10 +76,14 @@ namespace StoreManagement.Data.GeneralHelper
             }
             return imageLink;
         }
+        public static string GetProductCategoryIdRouteValue(BaseCategory productCategory)
+        {
+            return String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name).ToStr(0, MaxUrlLength),
+                                 productCategory.Id);
+        }
         public static string GetProductCategoryLink(BaseCategory productCategory)
         {
-            String detailLink = String.Format("/ProductCategories/Category/{0}",
-                String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(productCategory.Name).ToStr(0, MaxUrlLength), productCategory.Id));
+            String detailLink = String.Format("/ProductCategories/Category/{0}", GetProductCategoryIdRouteValue(productCategory));
 
             return detailLink.ToLowerInvariant();
         }
@@ -113,9 +117,14 @@ namespace StoreManagement.Data.GeneralHelper
 
         }
 
+        public static string GetBrandIdRouteValue(Brand brand)
+        {
+            return String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name).ToStr(0, MaxUrlLength), brand.Id);
+        }
+
         public static string GetBrandDetailLink(Brand brand)
         {
-            String link = String.Format("/Brands/Detail/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(brand.Name).ToStr(0, MaxUrlLength), brand.Id));
+            String link = String.Format("/Brands/Detail/{0}", GetBrandIdRouteValue(brand));
 
             return link.ToLowerInvariant();
         }
@@ -126,10 +135,15 @@ namespace StoreManagement.Data.GeneralHelper
 
             return link.ToLowerInvariant();
         }
+        public static string GetRetailerIdRouteValue(Retailer retailer)
+        {
+            return String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(retailer.Name).ToStr(0, MaxUrlLength),
+                                 retailer.Id);
+        }
 
         public static string GetRetailerLink(Retailer retailer)
         {
-            String link = String.Format("/Retailers/{0}", String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(retailer.Name).ToStr(0, MaxUrlLength), retailer.Id));
+            String link = String.Format("/Retailers/{0}", GetRetailerIdRouteValue(retailer));
 
             return link.ToLowerInvariant();
         }

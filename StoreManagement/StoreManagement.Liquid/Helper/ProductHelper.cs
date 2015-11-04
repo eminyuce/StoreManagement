@@ -14,7 +14,7 @@ using StoreManagement.Liquid.Helper.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
 {
-    
+
     public class ProductHelper : BaseLiquidHelper, IProductHelper
     {
 
@@ -29,7 +29,7 @@ namespace StoreManagement.Liquid.Helper
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
                 if (category != null)
                 {
-                    var blog = new ProductLiquid(item, category,  ImageWidth, ImageHeight);
+                    var blog = new ProductLiquid(item, category, ImageWidth, ImageHeight);
                     items.Add(blog);
                 }
             }
@@ -69,7 +69,7 @@ namespace StoreManagement.Liquid.Helper
 
         public StoreLiquidResult GetPopularProducts(List<Product> products, List<ProductCategory> productCategories, PageDesign pageDesign)
         {
-            
+
             var result = new StoreLiquidResult();
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -81,14 +81,14 @@ namespace StoreManagement.Liquid.Helper
                 foreach (var item in products)
                 {
                     var cat = productCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
-                    var product = new ProductLiquid(item, cat,  this.ImageWidth, this.ImageHeight);
+                    var product = new ProductLiquid(item, cat, this.ImageWidth, this.ImageHeight);
                     items.Add(product);
 
                 }
 
                 object anonymousObject = new
                 {
-                    products = LiquidAnonymousObject.GetProductsLiquid(items) 
+                    products = LiquidAnonymousObject.GetProductsLiquid(items)
                 };
 
                 var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
@@ -124,9 +124,9 @@ namespace StoreManagement.Liquid.Helper
             {
                 throw new Exception("ProductCategory is NULL");
             }
-           
-           
-            var s = new ProductLiquid(product, category,  ImageWidth, ImageHeight);
+
+
+            var s = new ProductLiquid(product, category, ImageWidth, ImageHeight);
 
             var anonymousObject = LiquidAnonymousObject.GetProductAnonymousObject(s);
 
@@ -145,14 +145,14 @@ namespace StoreManagement.Liquid.Helper
             return result;
         }
 
-     
 
-        public StoreLiquidResult  GetRelatedProductsPartialByCategory(ProductCategory category,
+
+        public StoreLiquidResult GetRelatedProductsPartialByCategory(ProductCategory category,
             List<Product> products,
            PageDesign pageDesign
           )
         {
-           
+
             var result = new StoreLiquidResult();
             result.PageDesingName = pageDesign.Name;
             var dic = new Dictionary<String, String>();
@@ -163,7 +163,7 @@ namespace StoreManagement.Liquid.Helper
                 var items = new List<ProductLiquid>();
                 foreach (var item in products)
                 {
-                    var blog = new ProductLiquid(item, category,  ImageWidth, ImageHeight);
+                    var blog = new ProductLiquid(item, category, ImageWidth, ImageHeight);
                     items.Add(blog);
 
                 }
@@ -196,7 +196,7 @@ namespace StoreManagement.Liquid.Helper
             List<ProductCategory> productCategories)
         {
 
-         
+
             var result = new StoreLiquidResult();
             result.PageDesingName = pageDesign.Name;
             var dic = new Dictionary<String, String>();
@@ -212,7 +212,7 @@ namespace StoreManagement.Liquid.Helper
                     var imageWidth = GetSettingValueInt("BrandProduct_ImageWidth", 50);
                     var imageHeight = GetSettingValueInt("BrandProduct_ImageHeight", 50);
                     var cat = productCategories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
-                    var product = new ProductLiquid(item, cat,  imageWidth, imageHeight);
+                    var product = new ProductLiquid(item, cat, imageWidth, imageHeight);
                     product.Brand = brand;
                     items.Add(product);
 
@@ -240,13 +240,13 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
- 
-        public Rss20FeedFormatter GetProductsRssFeed(Store store , List<Product> products, List<ProductCategory> productCategories, int description)
+
+        public Rss20FeedFormatter GetProductsRssFeed(Store store, List<Product> products, List<ProductCategory> productCategories, int description)
         {
-     
+
             try
             {
-                String url = "http://www."+store.Domain.ToLower();
+                String url = "http://www." + store.Domain.ToLower();
 
                 var feed = new SyndicationFeed(store.Name, store.Description, new Uri(url))
                 {
@@ -269,16 +269,16 @@ namespace StoreManagement.Liquid.Helper
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);    
+                        Logger.Error(ex);
                     }
 
                 }
                 feed.Items = feedItemList;
 
 
-                feed.AddNamespace("products", url+"/products");
+                feed.AddNamespace("products", url + "/products");
                 var rssFeed = new Rss20FeedFormatter(feed);
- 
+
 
                 return rssFeed;
             }
@@ -289,7 +289,7 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-      
+
 
         private SyndicationItem GetSyndicationItem(Store store, Product product, ProductCategory productCategory, int description)
         {
@@ -305,7 +305,7 @@ namespace StoreManagement.Liquid.Helper
             string desc = "";
             if (description > 0)
             {
-                desc = GeneralHelper.GetDescription(product.Description,description);
+                desc = GeneralHelper.GetDescription(product.Description, description);
             }
             var uri = new Uri(detailPage);
             var si = new SyndicationItem(product.Name, desc, uri);
@@ -320,37 +320,27 @@ namespace StoreManagement.Liquid.Helper
                 si.ElementExtensions.Add("products:category", String.Empty, productCategory.Name);
             }
             si.ElementExtensions.Add("guid", String.Empty, uri);
-           
+
 
 
             if (product.ProductFiles.Any())
             {
-                var mainImage =  product.ProductFiles.FirstOrDefault(r => r.IsMainImage);
-                if (mainImage == null)
-                {
-                    mainImage = product.ProductFiles.FirstOrDefault();
-                } 
-                
-                if (mainImage != null)
-                {
-                    
-            
-                    string imageSrc = LinkHelper.GetImageLink("Thumbnail",mainImage.FileManager , this.ImageWidth,this.ImageHeight);
-                    if (!string.IsNullOrEmpty(imageSrc))
-                    {
-                        try
-                        {
-                            SyndicationLink imageLink =
-                                SyndicationLink.CreateMediaEnclosureLink(new Uri(imageSrc), "image/jpeg", 100);
-                            si.Links.Add(imageLink);
-                        }
-                        catch (Exception e)
-                        {
-                        
-                        }
 
-                    }
+                List<BaseFileEntity> baseFileEntities = product.ProductFiles != null && product.ProductFiles.Any() ? product.ProductFiles.Cast<BaseFileEntity>().ToList() : new List<BaseFileEntity>();
+                var imageLiquid = new ImageLiquid(baseFileEntities, this.ImageWidth, this.ImageHeight);
+                imageLiquid.ImageState = true;
+                String imageSrcHtml = String.Format("http://{0}{1}", store.Domain.ToLower(), imageLiquid.SmallImageSource);
+                try
+                {
+                    SyndicationLink imageLink =
+                        SyndicationLink.CreateMediaEnclosureLink(new Uri(imageSrcHtml), "image/jpeg", 100);
+                    si.Links.Add(imageLink);
                 }
+                catch (Exception e)
+                {
+
+                }
+
             }
 
             return si;

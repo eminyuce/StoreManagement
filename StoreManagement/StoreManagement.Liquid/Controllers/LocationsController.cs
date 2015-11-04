@@ -34,7 +34,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageOutput = LocationHelper.GetLocationIndexPage(pageDesign, locations);
                 pageOutput.StoreSettings = settings;
-
+                pageOutput.MyStore = this.MyStore;
                 return View(pageOutput);
 
             }

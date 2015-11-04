@@ -57,7 +57,8 @@ namespace StoreManagement.Liquid.Controllers
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = GetStoreSettings();
-
+                pagingDic.MyStore = this.MyStore;
+                pageOutput.PageTitle = "Photo Gallery";
                 return View(pagingDic);
 
             }

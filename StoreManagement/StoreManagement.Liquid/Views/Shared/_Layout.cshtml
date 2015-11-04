@@ -1,5 +1,8 @@
 ﻿@using StoreManagement.Data.Constants
-
+@using StoreManagement.Data.GeneralHelper
+@{
+    String title = String.IsNullOrEmpty(ViewBag.Title) ? ViewData["StoreName"].ToStr() : ViewBag.Title+" - "+ ViewData["StoreName"].ToStr();
+}
 <!DOCTYPE html>
 <html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml" >
     <head>
@@ -11,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="msvalidate.01" content="AF4AB2D14FCF11B55A944D4E1C29BF5C" />
         <meta name='yandex-verification' content='56e652557d1b17ae' />
-        <title>@ViewBag.Title
+        <title>@title
 
         </title>
 

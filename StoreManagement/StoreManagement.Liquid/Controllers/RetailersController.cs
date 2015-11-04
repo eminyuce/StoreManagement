@@ -46,7 +46,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageOutput = RetailerHelper.GetRetailers(retailers, pageDesign);
                 pageOutput.StoreSettings = settings;
-
+                pageOutput.PageTitle = "Retailers";
+                pageOutput.MyStore = this.MyStore;
                 return View(pageOutput);
 
             }
@@ -87,7 +88,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 var dic = RetailerHelper.GetRetailerDetailPage(retailer, products, pageDesign, productCategories);
                 dic.StoreSettings = settings;
-
+                dic.MyStore = this.MyStore;
+                dic.PageTitle = retailer.Name;
                 return View(dic);
 
             }

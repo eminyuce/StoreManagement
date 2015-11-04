@@ -42,7 +42,7 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageOutput = ActivityHelper.GetActivityIndexPage(pageDesign, activities);
                 pageOutput.StoreSettings = settings;
-
+                pageOutput.MyStore = this.MyStore;
                 return View(pageOutput);
 
             }

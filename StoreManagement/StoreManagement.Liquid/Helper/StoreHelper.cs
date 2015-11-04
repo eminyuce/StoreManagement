@@ -29,7 +29,23 @@ namespace StoreManagement.Liquid.Helper
             domainName = GeneralHelper.GetSiteDomain(request);
             if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
-                return storeService.GetStore(domainName);
+                String key = domainName;
+                Store storeObj = new Store();
+                storeObj = (Store)MemoryCache.Default.Get(key);
+                if (storeObj == null)
+                {
+                    storeObj = storeService.GetStoreByDomain(domainName);
+
+                    CacheItemPolicy policy = null;
+
+                    policy = new CacheItemPolicy();
+                    policy.Priority = CacheItemPriority.Default;
+                    policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(ProjectAppSettings.CacheLongSeconds);
+
+                    MemoryCache.Default.Set(key, storeObj, policy);
+                }
+                return storeObj;
+
             }
             else
             {
@@ -39,43 +55,6 @@ namespace StoreManagement.Liquid.Helper
             }
 
         }
-        public int GetStoreIdByDomain(IStoreService storeService, HttpContextBase request)
-        {
-            String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
-            String domainName = "FUELTECHNOLOGYAGE.COM";
-
-            domainName = GeneralHelper.GetSiteDomain(request);
-            if (domainName.Contains("localhost"))
-            {
-                domainName = ProjectAppSettings.GetWebConfigString("DefaultSiteDomain",
-                                                                               "login.seatechnologyjobs.com");
-            }
-            String key = domainName;
-            int storeId = 0;
-            if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-
-                storeId = MemoryCache.Default.Get(key).ToInt();
-                if (storeId == 0)
-                {
-                    storeId = storeService.GetStoreIdByDomain(domainName);
-
-                    CacheItemPolicy policy = null;
-
-                    policy = new CacheItemPolicy();
-                    policy.Priority = CacheItemPriority.Default;
-                    policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(ProjectAppSettings.CacheLongSeconds);
-
-                    MemoryCache.Default.Set(key, storeId, policy);
-                }
-
-                return storeId;
-            }
-            else
-            {
-                storeId = storeService.GetStoreIdByDomain(domainName);
-                return storeId;
-            }
-        }
+       
     }
 }

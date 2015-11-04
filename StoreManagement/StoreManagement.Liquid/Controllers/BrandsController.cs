@@ -52,7 +52,8 @@ namespace StoreManagement.Liquid.Controllers
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = settings;
-
+                pageOutput.MyStore = this.MyStore;
+                pageOutput.PageTitle = "Brands";
                 return View(pagingDic);
 
             }
@@ -93,7 +94,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 var dic = BrandHelper.GetBrandDetailPage(brand, products, pageDesign, productCategories);
                 dic.StoreSettings = settings;
-
+                dic.MyStore = this.MyStore;
+                dic.PageTitle = brand.Name;
                 return View(dic);
 
             }

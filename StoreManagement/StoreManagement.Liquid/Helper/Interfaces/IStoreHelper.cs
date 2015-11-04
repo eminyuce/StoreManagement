@@ -11,7 +11,6 @@ namespace StoreManagement.Liquid.Helper.Interfaces
     public interface IStoreHelper
     {
         Store GetStoreByDomain(IStoreService storeService, HttpContextBase request);
-        int GetStoreIdByDomain(IStoreService storeService, HttpContextBase request);
     }
 
 }

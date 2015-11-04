@@ -184,6 +184,7 @@ namespace StoreManagement.Admin.Controllers
             fileManager.GoogleImageId = googleFile.Id;
             fileManager.ThumbnailLink = googleFile.ThumbnailLink;
             fileManager.ModifiedDate = googleFile.ModifiedDate;
+            fileManager.UpdatedDate = googleFile.ModifiedDate;
             fileManager.OriginalFilename = googleFile.OriginalFilename;
             fileManager.Title = googleFile.Title;
             fileManager.IconLink = googleFile.IconLink;
@@ -191,6 +192,8 @@ namespace StoreManagement.Admin.Controllers
             fileManager.WebContentLink = googleFile.WebContentLink;
             fileManager.Width = googleFile.Width.HasValue ? googleFile.Width.Value : 0;
             fileManager.Height = googleFile.Height.HasValue ? googleFile.Height.Value : 0;
+            fileManager.ImageSourceType = "GoogleApi";
+            fileManager.FileSize = "";
         }
 
 

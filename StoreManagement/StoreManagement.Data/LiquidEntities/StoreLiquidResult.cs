@@ -11,7 +11,7 @@ namespace StoreManagement.Data.LiquidEntities
 {
     public class StoreLiquidResult
     {
-        public int StoreId { get; set; }
+        public Store MyStore { get; set; }
         public String PageTitle { get; set; }
         public Dictionary<String, String> LiquidRenderedResult { get; set; }
 

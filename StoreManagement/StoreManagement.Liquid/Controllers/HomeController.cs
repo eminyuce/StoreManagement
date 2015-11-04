@@ -49,9 +49,11 @@ namespace StoreManagement.Liquid.Controllers
         
 
             StoreLiquidResult liquidResult = HomePageHelper.GetHomePageDesign(pageDesing, sliderImages);
-            liquidResult.StoreId = this.StoreId;
+            liquidResult.MyStore = this.MyStore;
             liquidResult.PageTitle = GetSettingValue("HomePage_Title", "");
             liquidResult.StoreSettings = settings;
+            liquidResult.MyStore = this.MyStore;
+           
             // Stop timing.
             stopwatch.Stop();
 

@@ -97,7 +97,7 @@ namespace StoreManagement.Liquid.Controllers
 
             StoreLiquidResult liquidResult = HomePageHelper.GetHomePageDesign(pageDesing, sliderImages, products, blogs,
                                                                               news, categories, productCategories);
-            liquidResult.StoreId = this.StoreId;
+            liquidResult.MyStore = this.MyStore;
 
 
             return View(liquidResult);

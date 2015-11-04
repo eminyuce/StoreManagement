@@ -3,7 +3,7 @@
 @model StoreManagement.Data.LiquidEntities.StoreLiquidResult
 @{
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
-       ViewBag.Title = Model.PageTitle;
+    ViewBag.Title = Model.PageTitle;
        ViewData[StoreConstants.CanonicalUrl] = Model.GetCanonicalUrl(Request.RequestContext.HttpContext);
 }
    @Html.HiddenFor(r=>r.PageDesingName)

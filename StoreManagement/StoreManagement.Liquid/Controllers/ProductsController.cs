@@ -66,7 +66,9 @@ namespace StoreManagement.Liquid.Controllers
                 await Task.WhenAll(pagingPageDesignTask);
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = settings;
-       
+                pagingDic.PageTitle = "Products";
+                pageOutput.MyStore = this.MyStore;
+        
                 return View(pagingDic);
 
             }
@@ -127,9 +129,11 @@ namespace StoreManagement.Liquid.Controllers
                 ProductHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
                 ProductHelper.StoreSettings = GetStoreSettings();
                 var dic = ProductHelper.GetProductsDetailPage(product, pageDesign, category);
-                dic.StoreId = this.StoreId;
+                dic.MyStore = this.MyStore;
                 dic.StoreSettings = settings;
-
+                dic.PageTitle = product.Name;
+                dic.MyStore = this.MyStore;
+                dic.PageTitle = product.Name;
                 return View(dic);
 
             }

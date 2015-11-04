@@ -156,7 +156,8 @@ namespace StoreManagement.Liquid.Controllers
 
 
         protected int StoreId { get; set; }
-
+        protected String StoreName { get; set; }
+        protected Store MyStore { get; set; }
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
@@ -172,15 +173,18 @@ namespace StoreManagement.Liquid.Controllers
             ViewData[StoreConstants.MetaTagKeywords] = GetSettingValue(StoreConstants.MetaTagKeywords, "");
             ViewData[StoreConstants.MetaTagDescription] = GetSettingValue(StoreConstants.MetaTagDescription, "");
             ViewData[StoreConstants.CanonicalUrl] = GetSettingValue(StoreConstants.CanonicalUrl, "");
+            ViewData["StoreName"] = StoreName;
+
             SetStoreCache();
             base.OnActionExecuting(filterContext);
         }
 
         private void GetStoreByDomain(RequestContext requestContext)
         {
-            var storeId = StoreHelper.GetStoreIdByDomain(StoreService, requestContext.HttpContext);
-            this.StoreId = storeId;
-
+            var storeObj = StoreHelper.GetStoreByDomain(StoreService, requestContext.HttpContext);
+            this.StoreId = storeObj.Id;
+            this.StoreName = storeObj.Name;
+            this.MyStore = storeObj;
 
             if (StoreId == 0)
             {

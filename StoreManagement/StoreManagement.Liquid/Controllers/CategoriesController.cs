@@ -15,6 +15,7 @@ namespace StoreManagement.Liquid.Controllers
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        protected String PageTitle { get; set; }
         protected String PageDesingIndexPageName { get; set; }
         protected String PageDesingCategoryPageName { get; set; }
 
@@ -59,7 +60,8 @@ namespace StoreManagement.Liquid.Controllers
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = settings;
                 pagingDic.MyStore = this.MyStore;
-                pagingDic.PageTitle = "Categories";
+                pagingDic.PageTitle = this.PageTitle;
+
                 return View(pagingDic);
 
             }

@@ -246,9 +246,9 @@ namespace StoreManagement.Liquid.Helper
      
             try
             {
-                String url = "http://login.seatechnologyjobs.com/";
+                String url = "http://www."+store.Domain.ToLower();
 
-                var feed = new SyndicationFeed(store.Name, "", new Uri(url))
+                var feed = new SyndicationFeed(store.Name, store.Description, new Uri(url))
                 {
                     Language = "en-US"
                 };
@@ -276,7 +276,7 @@ namespace StoreManagement.Liquid.Helper
                 feed.Items = feedItemList;
 
 
-                feed.AddNamespace("products", "https://www.maritimejobs.com/jobs");
+                feed.AddNamespace("products", url+"/products");
                 var rssFeed = new Rss20FeedFormatter(feed);
  
 
@@ -300,15 +300,15 @@ namespace StoreManagement.Liquid.Helper
                 description = 300;
 
             var productDetailLink = LinkHelper.GetProductLink(product, productCategory.Name);
-            String detailPage = String.Format("http://{0}{1}", store.Domain, productDetailLink);
+            String detailPage = String.Format("http://{0}{1}", store.Domain.ToLower(), productDetailLink);
 
             string desc = "";
             if (description > 0)
             {
                 desc = GeneralHelper.GetDescription(product.Description,description);
             }
-
-            var si = new SyndicationItem(product.Name, desc, new Uri(detailPage));
+            var uri = new Uri(detailPage);
+            var si = new SyndicationItem(product.Name, desc, uri);
             if (product.UpdatedDate != null)
             {
                 si.PublishDate = product.UpdatedDate.Value.ToUniversalTime();
@@ -317,10 +317,10 @@ namespace StoreManagement.Liquid.Helper
 
             if (!String.IsNullOrEmpty(productCategory.Name))
             {
-                si.ElementExtensions.Add("Category", String.Empty, productCategory.Name);
+                si.ElementExtensions.Add("products:category", String.Empty, productCategory.Name);
             }
-
-            
+            si.ElementExtensions.Add("guid", String.Empty, uri);
+           
 
 
             if (product.ProductFiles.Any())

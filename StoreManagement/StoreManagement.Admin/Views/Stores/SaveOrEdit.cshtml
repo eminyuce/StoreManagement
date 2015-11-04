@@ -67,6 +67,15 @@
                             @Html.TextBoxFor(model => model.Layout, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Layout)
                         </div>
+                        
+                        
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Description)
+
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+
 
                         <div class="editor-label">
                             @Html.LabelFor(model => model.GoogleDriveClientId)

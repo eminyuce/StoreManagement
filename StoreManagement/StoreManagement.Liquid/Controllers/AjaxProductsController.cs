@@ -174,7 +174,7 @@ namespace StoreManagement.Liquid.Controllers
             return returnHtml;
         }
 
-        public async Task<JsonResult> GetProductsByProductType(int page = 1, String designName = "", int categoryId = 0, int brandId = 0, int retailerId=0,
+        public async Task<JsonResult> GetProductsByProductType(int page = 1, String designName = "", int categoryId = 0, int brandId = 0, int retailerId = 0,
             int pageSize = 0, int imageWidth = 0, int imageHeight = 0, String productType = "popular", int excludedProductId = 0)
         {
 
@@ -189,7 +189,7 @@ namespace StoreManagement.Liquid.Controllers
             try
             {
 
-                returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId,retailerId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
+                returnHtml = await GetProductsByProductTypeHtml(page, designName, categoryId, brandId, retailerId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
 
             }
             catch (Exception ex)
@@ -202,11 +202,13 @@ namespace StoreManagement.Liquid.Controllers
             return Json(returnHtml, JsonRequestBehavior.AllowGet);
         }
 
-        private async Task<String> GetProductsByProductTypeHtml(int page, string designName, int categoryId, int brandId, int retailerId , int pageSize,
+        private async Task<String> GetProductsByProductTypeHtml(int page, string designName, int categoryId, int brandId, int retailerId, int pageSize,
                                                         int imageWidth, int imageHeight, string productType, int excludedProductId)
         {
 
-            string returnHtml;
+            string returnHtml = "";
+
+
             Task<List<Product>> productsTask = null;
             var catId = categoryId == 0 ? (int?)null : categoryId;
             var retId = retailerId == 0 ? (int?)null : retailerId;

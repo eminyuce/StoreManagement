@@ -1,46 +1,48 @@
 ﻿@using StoreManagement.Data.Constants
 @using StoreManagement.Data.GeneralHelper
 @{
-    String title = String.IsNullOrEmpty(ViewBag.Title) ? ViewData["StoreName"].ToStr() : ViewBag.Title+" - "+ ViewData["StoreName"].ToStr();
+    String title = (String)ViewBag.Title;
+    title = title.ToStr(0, 50);
+    title = String.IsNullOrEmpty(title) ? ViewData["StoreName"].ToStr() : title + " - " + ViewData["StoreName"].ToStr();
 }
 <!DOCTYPE html>
-<html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml" >
-    <head>
-        <meta charset="utf-8" />
-        <link rel="canonical"  href="@ViewData[StoreConstants.CanonicalUrl]" />  
-        <meta name="keywords" content="@ViewData[StoreConstants.MetaTagKeywords]" />
-        <meta name="description" content="@ViewData[StoreConstants.MetaTagDescription]" />
-        <meta content="en" http-equiv="content-language" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="msvalidate.01" content="AF4AB2D14FCF11B55A944D4E1C29BF5C" />
-        <meta name='yandex-verification' content='56e652557d1b17ae' />
-        <title>@title
+<html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="canonical"  href="@ViewData[StoreConstants.CanonicalUrl]" />
+    <meta name="keywords" content="@ViewData[StoreConstants.MetaTagKeywords]" />
+    <meta name="description" content="@ViewData[StoreConstants.MetaTagDescription]" />
+    <meta content="en" http-equiv="content-language" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msvalidate.01" content="AF4AB2D14FCF11B55A944D4E1C29BF5C" />
+    <meta name='yandex-verification' content='56e652557d1b17ae' />
+    <title>@title
 
-        </title>
+    </title>
 
 
 
-   
-          @Html.Partial("CssFiles")
-    </head>
-    
+
+    @Html.Partial("CssFiles")
+</head>
+
 <body>
 
 
-    
- 
-        @RenderBody()
- 
+
+
+    @RenderBody()
 
 
 
 
 
- 
-     @Html.Partial("JavascriptFiles")
+
+    <input type="hidden" value='' id="RootUrl" />
+    @Html.Partial("JavascriptFiles")
     <script src="~/Scripts/storeManagement.js"></script>
     <script src="~/Scripts/storeHelper.js"></script>
-  
+
 </body>
 
 </html>

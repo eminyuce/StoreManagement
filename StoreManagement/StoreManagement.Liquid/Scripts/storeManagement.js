@@ -400,7 +400,9 @@ function ajaxMethodCall(postData, ajaxUrl, successFunction, enabledLoaderImage) 
     if (enabledLoaderImage) {
         showLoadingImage();
     }
-    
+
+    ajaxUrl = $("#RootUrl").val() + ajaxUrl;
+    console.log("ajaxUrl:"+ajaxUrl);
     $.ajax({
         type: "POST",
         url: ajaxUrl,

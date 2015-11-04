@@ -230,8 +230,9 @@ namespace StoreManagement.Service.Repositories
             {
                 Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+                Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
 
-                var items = await this.FindAllAsync(match, r => r.Ordering, OrderByType.Descending, take, null);
+                var items = await this.FindAllIncludingAsync(match, take, null, r => r.Ordering, OrderByType.Descending, includeProperties);
 
                 return items;
 

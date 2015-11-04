@@ -17,7 +17,7 @@ namespace StoreManagement.Data.Constants
 
         public const String ProductType = "product";
         public const String NewsType = "news";
-        public const String BlogsType = "blog";
+        public const String BlogsType = "blogs";
         public const String StoreType = "store";
         public const String FilesType = "files";
         public const String LabelsType = "label";

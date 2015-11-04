@@ -159,7 +159,7 @@ namespace StoreManagement.Liquid.Helper
 
             try
             {
-                String url = "http://login.seatechnologyjobs.com/";
+                String url = "http://www." + store.Domain.ToLower();
 
                 var feed = new SyndicationFeed(store.Name, "", new Uri(url))
                 {
@@ -193,7 +193,7 @@ namespace StoreManagement.Liquid.Helper
                 feed.Items = feedItemList;
 
 
-                feed.AddNamespace(type, "https://www.maritimejobs.com/jobs");
+                feed.AddNamespace(type, url+"/"+type);
                 var rssFeed = new Rss20FeedFormatter(feed);
 
 
@@ -207,33 +207,34 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        private SyndicationItem GetSyndicationItem(Store store, Content product, Category productCategory, int description, String type)
+        private SyndicationItem GetSyndicationItem(Store store, Content product, Category category, int description, String type)
         {
-            if (productCategory == null)
+            if (category == null)
                 return null;
 
             if (description == 0)
                 description = 300;
 
-            var productDetailLink = LinkHelper.GetContentLink(product, productCategory.Name, type);
-            String detailPage = String.Format("http://{0}{1}", store.Domain, productDetailLink);
+            var productDetailLink = LinkHelper.GetContentLink(product, category.Name, type);
+            String detailPage = String.Format("http://{0}{1}", store.Domain.ToLower(), productDetailLink);
 
             string desc = "";
             if (description > 0)
             {
                 desc = GeneralHelper.GetDescription(product.Description, description);
             }
-
-            var si = new SyndicationItem(product.Name, desc, new Uri(detailPage));
+            var uri = new Uri(detailPage);
+            var si = new SyndicationItem(product.Name, desc, uri);
+            si.ElementExtensions.Add("guid", String.Empty, uri);
             if (product.UpdatedDate != null)
             {
                 si.PublishDate = product.UpdatedDate.Value.ToUniversalTime();
             }
 
 
-            if (!String.IsNullOrEmpty(productCategory.Name))
+            if (!String.IsNullOrEmpty(category.Name))
             {
-                si.ElementExtensions.Add("Category", String.Empty, productCategory.Name);
+                si.ElementExtensions.Add(type+":category", String.Empty, category.Name);
             }
 
 

@@ -20,6 +20,7 @@ namespace StoreManagement.Liquid.Controllers
         {
             this.PageDesingDetailPageName = "NewsDetailPage";
             this.PageDesingIndexPageName = "NewsIndexPage";
+            this.PageTitle = "News";
         }
         
     }

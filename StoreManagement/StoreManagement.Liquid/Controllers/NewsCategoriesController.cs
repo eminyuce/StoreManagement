@@ -17,6 +17,7 @@ namespace StoreManagement.Liquid.Controllers
         {
             this.PageDesingCategoryPageName = "NewsCategoryPage";
             this.PageDesingIndexPageName = "NewsCategoriesIndexPage";
+            this.PageTitle = "News Categories";
         }
 	}
 }

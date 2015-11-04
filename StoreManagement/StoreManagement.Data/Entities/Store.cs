@@ -55,6 +55,8 @@ namespace StoreManagement.Data.Entities
             return Id + " " + Name;
         }
 
+
+        public string Description { get; set; }
     }
 
 }

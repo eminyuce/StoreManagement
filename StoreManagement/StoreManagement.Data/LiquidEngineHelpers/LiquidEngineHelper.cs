@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DotLiquid;
 using NLog;
+using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidFilters;
 
 namespace StoreManagement.Data.LiquidEngineHelpers
@@ -14,21 +15,38 @@ namespace StoreManagement.Data.LiquidEngineHelpers
 
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static String RenderPage(string templateCode, object anonymousObject)
+        public static String RenderPage(PageDesign pageDesign, object anonymousObject)
         {
-            Template.RegisterFilter(typeof(TextFilter));
-            Template template = Template.Parse(templateCode);
-       
-            String renderPage =  template.Render(Hash.FromAnonymousObject(anonymousObject));
-            if (template.Errors.Any())
+            String renderHtml = "";
+            String templateCode = pageDesign.PageTemplate;
+            String pageDesignName = pageDesign.Name;
+            try
             {
-                foreach (var e in template.Errors)
+
+
+                Template.RegisterFilter(typeof(TextFilter));
+                Template template = Template.Parse(templateCode);
+
+                String renderPage = template.Render(Hash.FromAnonymousObject(anonymousObject));
+                if (template.Errors.Any())
                 {
-                    Logger.Error(e, "Template Rending Errors:" + e.StackTrace, templateCode, anonymousObject);
+                    foreach (var e in template.Errors)
+                    {
+                        Logger.Error(" Template Rending Errors:" + e.StackTrace + " templateCode:" + templateCode + " PAGE DESING NAME:" + pageDesignName);
+                        Logger.Error(e, "Template Rending Errors:" + e.StackTrace + " templateCode:" + templateCode, anonymousObject + " PAGE DESING NAME:" + pageDesignName);
+                    }
                 }
+
+                renderHtml = renderPage;
+
             }
-             
-            return renderPage;
+            catch (Exception ex)
+            {
+                Logger.Error("RenderPage:" + ex.StackTrace + " templateCode:" + templateCode + " PAGE DESING NAME:" + pageDesignName);
+                renderHtml = "ERROR";
+            }
+
+            return renderHtml;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace StoreManagement.Liquid.Helper
                 };
 
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;

@@ -49,7 +49,7 @@ namespace StoreManagement.Liquid.Helper
                 cats.Add(catLiquid);
             }
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, new
             {
                 items = LiquidAnonymousObject.GetContentLiquid(items),
                 categories = LiquidAnonymousObject.GetCategoriesLiquid(cats)
@@ -80,7 +80,7 @@ namespace StoreManagement.Liquid.Helper
 
             var anonymousObject = LiquidAnonymousObject.GetContentAnonymousObject(contentLiquid);
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
 
@@ -108,7 +108,7 @@ namespace StoreManagement.Liquid.Helper
 
             }
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, new
             {
                 items = LiquidAnonymousObject.GetContentLiquid(items)
             }
@@ -137,7 +137,7 @@ namespace StoreManagement.Liquid.Helper
 
             }
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, new
             {
                 items = LiquidAnonymousObject.GetContentLiquid(items)
             }

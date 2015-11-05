@@ -64,7 +64,7 @@ namespace StoreManagement.Liquid.Helper
                     };
 
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing, anonymousObject);
                 dic[StoreConstants.PageOutput] = indexPageOutput;
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace StoreManagement.Liquid.Helper
                 };
 
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesing, anonymousObject);
                 dic[StoreConstants.PageOutput] = indexPageOutput;
             }
             catch (Exception ex)

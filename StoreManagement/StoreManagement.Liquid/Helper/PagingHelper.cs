@@ -125,7 +125,7 @@ namespace StoreManagement.Liquid.Helper
                 {
                     paginator = paginator
                 };
-            var pagingHtml = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var pagingHtml = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
 

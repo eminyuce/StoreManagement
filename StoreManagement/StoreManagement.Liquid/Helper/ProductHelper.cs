@@ -47,7 +47,7 @@ namespace StoreManagement.Liquid.Helper
                     categories = LiquidAnonymousObject.GetProductCategories(cats)
                 };
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
             var dic = new Dictionary<String, String>();
@@ -91,7 +91,7 @@ namespace StoreManagement.Liquid.Helper
                     products = LiquidAnonymousObject.GetProductsLiquid(items)
                 };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;
@@ -130,7 +130,7 @@ namespace StoreManagement.Liquid.Helper
 
             var anonymousObject = LiquidAnonymousObject.GetProductAnonymousObject(s);
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
 
@@ -168,7 +168,7 @@ namespace StoreManagement.Liquid.Helper
 
                 }
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, new
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, new
                 {
                     products = LiquidAnonymousObject.GetProductsLiquid(items)
                 }
@@ -224,7 +224,7 @@ namespace StoreManagement.Liquid.Helper
                         brand = LiquidAnonymousObject.GetBrandLiquid(brandLiquid)
                     };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;

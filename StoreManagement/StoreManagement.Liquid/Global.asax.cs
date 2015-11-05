@@ -29,9 +29,9 @@ namespace StoreManagement.Liquid
         private void Redirect301()
         {
 
-            if (Request.Url.Host.Contains(ProjectAppSettings.GetWebConfigString("DefaultSiteDomain")))
+            if (Request.Url.Host.Contains("login.seatechnologyjobs.com"))
             {
-                return;
+               return;
             }
 
             if (!Request.Url.Host.StartsWith("www") && !Request.Url.IsLoopback)

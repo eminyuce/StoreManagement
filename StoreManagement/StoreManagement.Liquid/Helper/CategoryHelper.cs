@@ -34,7 +34,7 @@ namespace StoreManagement.Liquid.Helper
                     categories = LiquidAnonymousObject.GetCategoriesLiquid(cats)
                 };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
                 var dic = new Dictionary<String, String>();
@@ -71,7 +71,7 @@ namespace StoreManagement.Liquid.Helper
                     category = LiquidAnonymousObject.GetCategory(contentCategory) 
                 };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
                 dic[StoreConstants.PageOutput] = indexPageOutput;
 
 

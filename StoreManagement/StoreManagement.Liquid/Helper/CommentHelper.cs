@@ -42,7 +42,7 @@ namespace StoreManagement.Liquid.Helper
                     comments = LiquidAnonymousObject.GetCommentsEnumerable(items)
                 };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;

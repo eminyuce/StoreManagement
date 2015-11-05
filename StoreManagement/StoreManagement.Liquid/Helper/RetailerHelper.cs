@@ -32,7 +32,7 @@ namespace StoreManagement.Liquid.Helper
             };
 
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
             var dic = new Dictionary<String, String>();
@@ -67,7 +67,7 @@ namespace StoreManagement.Liquid.Helper
                     productCategories = LiquidAnonymousObject.GetProductCategories(retailerLiquid.ProductCategoriesLiquids)
 
                 };
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
                 dic[StoreConstants.PageOutput] = indexPageOutput;

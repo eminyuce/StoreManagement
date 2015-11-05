@@ -33,7 +33,7 @@ namespace StoreManagement.Liquid.Helper
                 photogalleries = LiquidAnonymousObject.GetFileManagerLiquidEnumerable(cats)
             };
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
             var dic = new Dictionary<String, String>();
@@ -70,7 +70,7 @@ namespace StoreManagement.Liquid.Helper
                 photogalleries = LiquidAnonymousObject.GetFileManagerLiquidEnumerable(cats)
             };
 
-            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
             var dic = new Dictionary<String, String>();

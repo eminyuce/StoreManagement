@@ -47,7 +47,7 @@ namespace StoreManagement.Liquid.Helper
                     categories = LiquidAnonymousObject.GetProductCategories(cats)
                 };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
 
 
                 var dic = new Dictionary<String, String>();
@@ -89,7 +89,7 @@ namespace StoreManagement.Liquid.Helper
                     categories = LiquidAnonymousObject.GetProductCategories(cats)
                 };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
                 dic[StoreConstants.PageOutput] = indexPageOutput;
 
 
@@ -121,7 +121,7 @@ namespace StoreManagement.Liquid.Helper
                     category = LiquidAnonymousObject.GetProductCategory(productCategories)
                 };
 
-                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign.PageTemplate, anonymousObject);
+                var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
                 dic[StoreConstants.PageOutput] = indexPageOutput;
 
 

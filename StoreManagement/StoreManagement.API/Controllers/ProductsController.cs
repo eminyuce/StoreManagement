@@ -80,9 +80,9 @@ namespace StoreManagement.API.Controllers
             return ProductRepository.GetProductWithFiles(id);
         }
 
-        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize, String search)
+        public async Task<StorePagedList<Product>> GetProductsCategoryIdAsync(int storeId, int? categoryId, string typeName, bool? isActive, int page, int pageSize, string search, string filters)
         {
-            return await ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize, search);
+            return await ProductRepository.GetProductsCategoryIdAsync(storeId, categoryId, typeName, isActive, page, pageSize, search, filters);
         }
 
         public async Task<Product> GetProductsByIdAsync(int productId)

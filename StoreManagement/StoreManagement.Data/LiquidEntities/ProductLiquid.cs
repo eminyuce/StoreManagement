@@ -39,7 +39,8 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                return LinkHelper.GetProductLink(this.Product, Category.Name);
+                String catName = Category == null ? "category" : Category.Name;
+                return LinkHelper.GetProductLink(this.Product, catName);
             }
         }
 

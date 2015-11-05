@@ -20,8 +20,8 @@ namespace StoreManagement.Liquid.Controllers
         private const String IndexPageDesingName = "ProductsIndexPage";
         private const String ProductDetailPage = "ProductDetailPage";
 
-     
-        public async Task<ActionResult> Index(int page = 1, String search = "")
+
+        public async Task<ActionResult> Index(int page = 1, int catId = 0, String search = "", String filters = "")
         {
             try
             {
@@ -31,8 +31,8 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
-                var pageSize =  GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
-                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, null, StoreConstants.ProductType, true, page, pageSize, search);
+                var pageSize = GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
+                var productsTask = ProductService.GetProductsCategoryIdAsync(StoreId, catId, StoreConstants.ProductType, true, page, pageSize, search, filters);
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
 
                 var settings = GetStoreSettings();
@@ -68,7 +68,7 @@ namespace StoreManagement.Liquid.Controllers
                 pagingDic.StoreSettings = settings;
                 pagingDic.PageTitle = "Products";
                 pageOutput.MyStore = this.MyStore;
-        
+
                 return View(pagingDic);
 
             }
@@ -115,14 +115,14 @@ namespace StoreManagement.Liquid.Controllers
                 }
                 if (product == null)
                 {
-                    throw new Exception("Product is NULL. ProductId:"+productId);
+                    throw new Exception("Product is NULL. ProductId:" + productId);
                 }
 
                 if (category == null)
                 {
                     throw new Exception("ProductCategory is NULL.ProductId:" + productId);
                 }
-           
+
 
                 ProductHelper.StoreSettings = settings;
                 ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
@@ -143,8 +143,8 @@ namespace StoreManagement.Liquid.Controllers
                 return RedirectToAction("Index");
             }
         }
-       
-        public ActionResult ProductBuy(int id=0)
+
+        public ActionResult ProductBuy(int id = 0)
         {
             var productsTask = ProductService.GetProductsById(id);
             return Redirect(productsTask.VideoUrl);

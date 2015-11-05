@@ -167,7 +167,7 @@ namespace StoreManagement.Test
             int storeId = 9;
             var rr = new ProductRepository(new StoreContext(ConnectionString));
 
-            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25,"");
+            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25,"", "");
             Task.WaitAll(productsTask);
             Console.WriteLine(productsTask.Result.totalItemCount);
 

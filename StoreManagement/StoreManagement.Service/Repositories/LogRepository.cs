@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.LogEntities;
@@ -32,7 +33,7 @@ namespace StoreManagement.Service.Repositories
             // Create a SQL command to execute the sproc 
             using (SqlCommand command = (SqlCommand)StoreDbContext.Database.Connection.CreateCommand())
             {
-                command.CommandTimeout = 20000;
+                command.CommandTimeout = StoreConstants.StoreProcedureCommandTimeOut;
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "log_GetApplicationLogs";
                 if (!String.IsNullOrEmpty(appName.Trim()))
@@ -127,7 +128,7 @@ namespace StoreManagement.Service.Repositories
             using (SqlCommand command = (SqlCommand)StoreDbContext.Database.Connection.CreateCommand())
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandTimeout = 20000;
+                command.CommandTimeout = StoreConstants.StoreProcedureCommandTimeOut;
                 using (SqlDataAdapter adapter = new SqlDataAdapter())
                 {
                     command.CommandText = "log_GetApplicationNames";
@@ -182,7 +183,7 @@ namespace StoreManagement.Service.Repositories
                 }
                 command.CommandText = "log_DeleteApplicationLogs";
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandTimeout = 200000;
+                command.CommandTimeout = StoreConstants.StoreProcedureCommandTimeOut;
                 command.ExecuteNonQuery();
             }//command
             StoreDbContext.Database.Connection.Close();

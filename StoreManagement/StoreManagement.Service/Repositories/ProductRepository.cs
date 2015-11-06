@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using GenericRepository.EntityFramework.Enums;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
@@ -429,7 +430,7 @@ namespace StoreManagement.Service.Repositories
             parameterList.Add(DatabaseUtility.GetSqlParameter("filter", dtFilters, SqlDbType.Structured));
             parameterList.Add(DatabaseUtility.GetSqlParameter("top", top, SqlDbType.Int));
             parameterList.Add(DatabaseUtility.GetSqlParameter("skip", skip, SqlDbType.Int));
-            DatabaseUtility.SqlCommandTimeout = 20000;
+            DatabaseUtility.SqlCommandTimeout = StoreConstants.StoreProcedureCommandTimeOut;
             DataSet dataSet = DatabaseUtility.ExecuteDataSet((SqlConnection)StoreDbContext.Database.Connection, commandText, commandType, parameterList.ToArray());
             if (dataSet.Tables.Count > 0)
             {

@@ -62,5 +62,8 @@ namespace StoreManagement.Data.Constants
         public const int CacheServerTimeSpanSeconds = 0;
 
         public static string CanonicalUrl = "CanonicalUrl";
+
+
+        public static int StoreProcedureCommandTimeOut = 20000;
     }
 }

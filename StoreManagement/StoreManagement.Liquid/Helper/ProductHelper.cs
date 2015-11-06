@@ -111,7 +111,42 @@ namespace StoreManagement.Liquid.Helper
 
         public StoreLiquidResult GetProductsSearchPage(ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories)
         {
-            throw new NotImplementedException();
+            var dic = new Dictionary<String, String>();
+            dic.Add(StoreConstants.PageOutput, "");
+            var items = new List<ProductLiquid>();
+            var cats = new List<ProductCategoryLiquid>();
+            var products = productSearchResult.Products;
+            foreach (var item in products)
+            {
+                var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
+                if (category != null)
+                {
+                    var blog = new ProductLiquid(item, category, ImageWidth, ImageHeight);
+                    items.Add(blog);
+                }
+            }
+            foreach (var category in categories)
+            {
+                var catLiquid = new ProductCategoryLiquid(category);
+                catLiquid.Count = products.Count(r => r.ProductCategoryId == category.Id);
+                cats.Add(catLiquid);
+            }
+
+            object anonymousObject = new
+            {
+
+                products = LiquidAnonymousObject.GetProductsLiquid(items),
+                categories = LiquidAnonymousObject.GetProductCategories(cats)
+            };
+
+            var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
+            dic[StoreConstants.PageOutput] = indexPageOutput;
+
+            var result = new StoreLiquidResult();
+            result.PageDesingName = pageDesign.Name;
+            result.LiquidRenderedResult = dic;
+
+            return result; 
         }
 
 

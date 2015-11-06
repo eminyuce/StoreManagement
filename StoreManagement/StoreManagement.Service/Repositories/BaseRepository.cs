@@ -21,7 +21,7 @@ namespace StoreManagement.Service.Repositories
         where T : class, IEntity<TId>
         where TId : IComparable
     {
-
+        
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private bool _isCacheEnable = true;

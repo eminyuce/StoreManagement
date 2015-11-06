@@ -7,6 +7,7 @@ using System.Web;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Liquid.Helper.Interfaces
 {
@@ -27,5 +28,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
         Rss20FeedFormatter GetProductsRssFeed(Store store,List<Product> products,    List<ProductCategory>  productCategories, int description);
 
         StoreLiquidResult GetPopularProducts(List<Product> products, List<ProductCategory> productCategories, PageDesign pageDesign);
+
+        StoreLiquidResult GetProductsSearchPage(ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories);
     }
 }

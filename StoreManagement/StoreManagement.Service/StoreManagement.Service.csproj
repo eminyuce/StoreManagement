@@ -78,6 +78,7 @@
     <Compile Include="GenericRepositories\BaseCategoryRepository.cs" />
     <Compile Include="GenericRepositories\BaseContentRepository.cs" />
     <Compile Include="GenericRepositories\BaseEntityRepository.cs" />
+    <Compile Include="GenericRepositories\DatabaseUtility.cs" />
     <Compile Include="GenericRepositories\GenericBaseRepository.cs" />
     <Compile Include="Interfaces\IActivityService.cs" />
     <Compile Include="Interfaces\IBrandService.cs" />

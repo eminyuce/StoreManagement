@@ -10,6 +10,7 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Data.RequestModel;
 using StoreManagement.Liquid.Helper.Interfaces;
 
 namespace StoreManagement.Liquid.Helper
@@ -106,6 +107,11 @@ namespace StoreManagement.Liquid.Helper
                 dic.Add(StoreConstants.PageOutput, ex.Message);
                 return result;
             }
+        }
+
+        public StoreLiquidResult GetProductsSearchPage(ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories)
+        {
+            throw new NotImplementedException();
         }
 
 

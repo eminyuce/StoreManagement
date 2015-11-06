@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Service.Interfaces
 {
@@ -29,6 +30,8 @@ namespace StoreManagement.Service.Interfaces
 
         Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int ? retailerId, string productType, int page, int pageSize, bool? isActive, String functionType, int? excludedProductId);
 
+        Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, String filters,
+                                                                        int top, int skip, bool isAdmin);
 
     }
 }

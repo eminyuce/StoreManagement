@@ -17,11 +17,11 @@ namespace StoreManagement.Service.Repositories
     public class LogRepository : BaseRepository<system_logging, int>, ILogRepository
     {
 
-        private StoreContext storeContext;
+ 
         public LogRepository(IStoreContext dbContext)
             : base(dbContext)
         {
-            storeContext = (StoreContext)dbContext;
+ 
         }
 
 
@@ -30,7 +30,7 @@ namespace StoreManagement.Service.Repositories
             var result = new LoggingModel();
 
             // Create a SQL command to execute the sproc 
-            using (SqlCommand command = (SqlCommand)storeContext.Database.Connection.CreateCommand())
+            using (SqlCommand command = (SqlCommand)StoreDbContext.Database.Connection.CreateCommand())
             {
                 command.CommandTimeout = 20000;
                 command.CommandType = CommandType.StoredProcedure;
@@ -124,7 +124,7 @@ namespace StoreManagement.Service.Repositories
             var result = new List<AppNames>();
 
             // Create a SQL command to execute the sproc 
-            using (SqlCommand command = (SqlCommand)storeContext.Database.Connection.CreateCommand())
+            using (SqlCommand command = (SqlCommand)StoreDbContext.Database.Connection.CreateCommand())
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandTimeout = 20000;
@@ -160,9 +160,9 @@ namespace StoreManagement.Service.Repositories
 
         public void DeleteLogs(string application = "", String logLevel="")
         {
-            storeContext.Database.Connection.Open();
+            StoreDbContext.Database.Connection.Open();
             // Create a SQL command to execute the sproc 
-            using (SqlCommand command = (SqlCommand)storeContext.Database.Connection.CreateCommand())
+            using (SqlCommand command = (SqlCommand)StoreDbContext.Database.Connection.CreateCommand())
             {
                 if (String.IsNullOrEmpty(application))
                 {
@@ -185,7 +185,7 @@ namespace StoreManagement.Service.Repositories
                 command.CommandTimeout = 200000;
                 command.ExecuteNonQuery();
             }//command
-             storeContext.Database.Connection.Close();
+            StoreDbContext.Database.Connection.Close();
         }
 
         public List<DataTable> GetTotalTablesSpace()
@@ -193,7 +193,7 @@ namespace StoreManagement.Service.Repositories
             var result = new List<DataTable>();
 
             // Create a SQL command to execute the sproc 
-            using (SqlCommand command = (SqlCommand)storeContext.Database.Connection.CreateCommand())
+            using (SqlCommand command = (SqlCommand)StoreDbContext.Database.Connection.CreateCommand())
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandTimeout = 200000;

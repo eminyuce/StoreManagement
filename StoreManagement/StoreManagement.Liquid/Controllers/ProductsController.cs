@@ -149,5 +149,32 @@ namespace StoreManagement.Liquid.Controllers
             var productsTask = ProductService.GetProductsById(id);
             return Redirect(productsTask.VideoUrl);
         }
+
+
+        public async Task<ActionResult> Index3(String search = "", String filters = "", String page = "")
+        {
+            int iPage = page.ToInt(); if (iPage == 0) iPage = 1;
+            var top = GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
+            int skip = (iPage - 1) * top;
+            var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
+            var productSearchResultTask = ProductService.GetProductsSearchResult(StoreId, search, filters, top, skip, false);
+            await Task.WhenAll(productSearchResultTask, categoriesTask, pageDesignTask);
+            var productSearchResult = productSearchResultTask.Result;
+            var pageDesign = pageDesignTask.Result;
+            var categories = categoriesTask.Result;
+
+            if (pageDesign == null)
+            {
+                throw new Exception("PageDesing is null:" + IndexPageDesingName);
+            }
+
+
+            var pageOutput = ProductHelper.GetProductsSearchPage(productSearchResult, pageDesign, categories);
+
+
+            return View(pageOutput);
+        }
+
     }
 }

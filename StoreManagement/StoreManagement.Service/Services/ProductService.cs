@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Service.Services
@@ -286,6 +287,30 @@ namespace StoreManagement.Service.Services
                                                     page, pageSize, isActive, functionType, excludedProductId, retailerId);
 
                 return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, ex.Message);
+                return null;
+            }
+        }
+
+        public Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetProductsSearchResult?" +
+                                                    "storeId={2}&search={3}&filters={4}&top={5}" +
+                                                    "&skip={6}&isAdmin={7}",
+                                                    WebServiceAddress,
+                                                    ApiControllerName,
+                                                    storeId, search, filters, top,
+                                                    skip, isAdmin);
+
+                return HttpRequestHelper.GetUrlResultAsync<ProductsSearchResult>(url);
 
 
             }

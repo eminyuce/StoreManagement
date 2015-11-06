@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -9,7 +11,9 @@ using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
+using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.GenericRepositories;
 using StoreManagement.Service.Interfaces;
@@ -62,7 +66,7 @@ namespace StoreManagement.Service.Repositories
         public List<Product> GetProductByTypeAndCategoryId(int storeId, string typeName, int categoryId, string search, bool? isActive)
         {
 
-            Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId 
+            Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId
                 && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
                 && r2.ProductCategoryId == (categoryId > 0 ? categoryId : r2.ProductCategoryId) &&
                      r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase);
@@ -256,8 +260,8 @@ namespace StoreManagement.Service.Repositories
             try
             {
                 int excludedProductId2 = excludedProductId ?? 0;
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State 
-                    && r2.RetailerId == retailerId 
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId && r2.State
+                    && r2.RetailerId == retailerId
                     && r2.Id != excludedProductId2;
                 var items = this.FindAllIncludingAsync(match, take, null, t => t.Ordering, OrderByType.Descending, r => r.ProductFiles.Select(r1 => r1.FileManager));
 
@@ -286,7 +290,7 @@ namespace StoreManagement.Service.Repositories
                 &&
                 r2.ProductFiles.Any();
 
-                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager) ;
+                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
 
 
                 var predicate = PredicateBuilder.Create<Product>(match);
@@ -298,7 +302,7 @@ namespace StoreManagement.Service.Repositories
                     predicate = predicate.And(r => r.MainPage);
                     var itemsRandom = this.FindAllIncludingAsync(predicate,
                         page, pageSize,
-                        keySelector2, 
+                        keySelector2,
                         OrderByType.Descending, includeProperties);
                     return await itemsRandom;
                 }
@@ -365,6 +369,182 @@ namespace StoreManagement.Service.Repositories
         {
             return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
+
+        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, String filters, int top, int skip, bool isAdmin)
+        {
+            var fltrs = FilterHelper.ParseFiltersFromString(filters);
+            ProductsSearchResult t = await Task.Run(() => this.GetProductsSearchResult(storeId, search, fltrs, top, skip, isAdmin));
+            return t;
+        }
+
+        public static ItemType ProductsItem
+        {
+            get
+            {
+                return new ItemType()
+                {
+                    Name = "Products/Products Directory",
+                    Type = typeof(Product),
+                    SearchAction = "Products",
+                    Controller = "Index",
+                    ItemTypeID = 1
+                };
+
+            }
+        }
+        private ProductsSearchResult GetProductsSearchResult(
+           int storeId, 
+           string search,
+           List<Filter> filters,
+           int top,
+           int skip,
+           Boolean isAdmin = false)
+        {
+            var searchResult = new ProductsSearchResult();
+
+            String commandText = @"SearchProducts";
+            var commandType = CommandType.StoredProcedure;
+            var parameterList = new List<SqlParameter>();
+            var dtFilters = new DataTable("med_tpt_Filter");
+
+            dtFilters.Columns.Add("FieldName");
+            dtFilters.Columns.Add("ValueFirst");
+            dtFilters.Columns.Add("ValueLast");
+
+            if (filters != null && filters.Any())
+            {
+                foreach (var filter in filters)
+                {
+                    DataRow dr = dtFilters.NewRow();
+                    dr["FieldName"] = filter.FieldName;
+                    dr["ValueFirst"] = filter.ValueFirst;
+                    dr["ValueLast"] = filter.ValueLast;
+                    dtFilters.Rows.Add(dr);
+                }
+            }
+
+            parameterList.Add(DatabaseUtility.GetSqlParameter("IsAdmin", isAdmin, SqlDbType.Bit));
+            parameterList.Add(DatabaseUtility.GetSqlParameter("storeId", storeId, SqlDbType.Int));
+            parameterList.Add(DatabaseUtility.GetSqlParameter("search", search.ToStr(), SqlDbType.NVarChar));
+            parameterList.Add(DatabaseUtility.GetSqlParameter("filter", dtFilters, SqlDbType.Structured));
+            parameterList.Add(DatabaseUtility.GetSqlParameter("top", top, SqlDbType.Int));
+            parameterList.Add(DatabaseUtility.GetSqlParameter("skip", skip, SqlDbType.Int));
+            DatabaseUtility.SqlCommandTimeout = 20000;
+            DataSet dataSet = DatabaseUtility.ExecuteDataSet((SqlConnection)StoreDbContext.Database.Connection, commandText, commandType, parameterList.ToArray());
+            if (dataSet.Tables.Count > 0)
+            {
+                var productCategories = new List<ProductCategory>();
+                using (DataTable dt = dataSet.Tables[0])
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        var item = GetProductCategoriesFromDataRow(dr);
+                        productCategories.Add(item);
+                    };
+                }
+                searchResult.ProductCategories = productCategories;
+
+                var products = new List<Product>();
+                using (DataTable dt = dataSet.Tables[1])
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        var item = GetProductsFromDataRow(dr);
+                        products.Add(item);
+                    };
+                }
+                searchResult.Products = products;
+
+                using (DataTable dt = dataSet.Tables[2])
+                {
+                    var m = new List<Filter>();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        var item = GetFilterFromDataRow(dr);
+                        item.OwnerType = ProductsItem;
+                        m.Add(item);
+                    }
+                    searchResult.Filters = m;
+                }
+                using (DataTable dt = dataSet.Tables[3])
+                {
+                    var stats = new RecordsStats();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        stats = GetRecordsStatsFromDataRow(dr);
+                        stats.OwnerType = ProductsItem;
+                    }
+                    searchResult.Stats = stats;
+                }
+            }
+            return searchResult;
+        }
+        private static ProductCategory GetProductCategoriesFromDataRow(DataRow dr)
+        {
+            var item = new ProductCategory();
+
+            item.Id = dr["Id"].ToInt();
+            item.StoreId = dr["StoreId"].ToInt();
+            item.ParentId = dr["ParentId"].ToInt();
+            item.Ordering = dr["Ordering"].ToInt();
+            item.CategoryType = dr["CategoryType"].ToStr();
+            item.Name = dr["Name"].ToStr();
+            item.Description = dr["Description"].ToStr();
+            item.State = dr["State"].ToBool();
+            item.CreatedDate = dr["CreatedDate"].ToDateTime();
+            item.UpdatedDate = dr["UpdatedDate"].ToDateTime();
+            item.ApiCategoryId = dr["ApiCategoryId"].ToStr();
+            item.ApiCategoryParentId = dr["ApiCategoryParentId"].ToStr();
+            return item;
+        }
+
+        private static Filter GetFilterFromDataRow(DataRow dr)
+        {
+            var item = new Filter();
+            item.FieldName = dr["FieldName"].ToStr();
+            item.ValueFirst = dr["ValueFirst"].ToStr();
+            item.ValueLast = dr["ValueLast"].ToStr();
+            item.Cnt = dr["Cnt"].ToInt();
+
+            return item;
+        }
+        private static RecordsStats GetRecordsStatsFromDataRow(DataRow dr)
+        {
+            var stats = new RecordsStats();
+            stats.RecordFirst = dr["RecordFirst"].ToInt();
+            stats.RecordLast = dr["RecordLast"].ToInt();
+            stats.RecordsTotal = dr["RecordsTotal"].ToInt();
+            stats.RecordCount = dr["recordCount"].ToInt();
+            return stats;
+        }
+
+        private static Product GetProductsFromDataRow(DataRow dr)
+        {
+            var item = new Product();
+
+            item.Id = dr["Id"].ToInt();
+            item.StoreId = dr["StoreId"].ToInt();
+            item.ProductCategoryId = dr["ProductCategoryId"].ToInt();
+            item.BrandId = dr["BrandId"].ToInt();
+            item.RetailerId = dr["RetailerId"].ToInt();
+            item.ProductCode = dr["ProductCode"].ToStr();
+            item.Name = dr["Name"].ToStr();
+            item.Description = dr["Description"].ToStr();
+            item.Type = dr["Type"].ToStr();
+            item.MainPage = dr["MainPage"].ToBool();
+            item.State = dr["State"].ToBool();
+            item.Ordering = dr["Ordering"].ToInt();
+            item.CreatedDate = dr["CreatedDate"].ToDateTime();
+            item.ImageState = dr["ImageState"].ToBool();
+            item.UpdatedDate = dr["UpdatedDate"].ToDateTime();
+            item.Price = dr["Price"].ToFloat();
+            item.Discount = dr["Discount"].ToFloat();
+            item.UnitsInStock = dr["UnitsInStock"].ToInt();
+            item.TotalRating = dr["TotalRating"].ToInt();
+            item.VideoUrl = dr["VideoUrl"].ToStr();
+            return item;
+        }
+
 
         public void Dispose()
         {

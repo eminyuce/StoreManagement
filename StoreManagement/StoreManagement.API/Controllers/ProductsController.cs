@@ -9,6 +9,7 @@ using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
+using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.Interfaces;
 using WebApi.OutputCache.V2;
 
@@ -119,6 +120,10 @@ namespace StoreManagement.API.Controllers
         {
             return await ProductRepository.GetProductsByProductType(storeId, categoryId, brandId, retailerId, productType, page, pageSize, isActive, functionType, excludedProductId);
         }
- 
+
+        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin)
+        {
+            return await ProductRepository.GetProductsSearchResult(storeId, search, filters, top, skip, isAdmin);
+        }
     }
 }

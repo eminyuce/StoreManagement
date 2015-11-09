@@ -386,7 +386,7 @@ namespace StoreManagement.Service.Repositories
                 {
                     Name = "Products/Products Directory",
                     Type = typeof(Product),
-                    SearchAction = "Index3",
+                    SearchAction = "Index",
                     Controller = "Products",
                     ItemTypeID = 1
                 };

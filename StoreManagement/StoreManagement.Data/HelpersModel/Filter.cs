@@ -41,7 +41,7 @@ namespace StoreManagement.Data.HelpersModel
                         else
                         {
 
-                            return ValueFirst + " - " + ValueLast;
+                            return ValueLast;
                         }
                     }
                     else

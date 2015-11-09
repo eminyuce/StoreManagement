@@ -73,7 +73,7 @@ namespace StoreManagement.Service.Services
                 string url = string.Format("http://{0}/api/{1}/GetProductByTypeAndCategoryId" +
                                            "?storeId={2}" +
                                            "&typeName={3}" +
-                                           "&categoryId={4}&search={5}", WebServiceAddress, ApiControllerName, storeId, typeName, categoryId, search);
+                                           "&categoryId={4}&search={5}&isActive={6}", WebServiceAddress, ApiControllerName, storeId, typeName, categoryId, search, isActive);
                 return HttpRequestHelper.GetUrlResults<Product>(url);
             }
             catch (Exception ex)

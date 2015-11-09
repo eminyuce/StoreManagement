@@ -153,6 +153,7 @@ namespace StoreManagement.Liquid.Controllers
 
         public async Task<ActionResult> Index3(String search = "", String filters = "", String page = "")
         {
+            search = search.ToStr();
             int iPage = page.ToInt(); if (iPage == 0) iPage = 1;
             var pageSize = GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
             int skip = (iPage - 1) * pageSize;
@@ -171,7 +172,7 @@ namespace StoreManagement.Liquid.Controllers
 
             var settings = GetStoreSettings();
             ProductHelper.StoreSettings = settings;
-            var pageOutput = ProductHelper.GetProductsSearchPage(this,productSearchResult, pageDesign, categories);
+            var pageOutput = ProductHelper.GetProductsSearchPage(this, productSearchResult, pageDesign, categories, search, filters);
 
             var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
             PagingHelper.StoreSettings = settings;

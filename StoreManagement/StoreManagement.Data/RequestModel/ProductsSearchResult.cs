@@ -50,6 +50,8 @@ namespace StoreManagement.Data.RequestModel
             }
         }
         public int PageSize { get; set; }
-     
+
+
+        
     }
 }

@@ -111,7 +111,12 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-        public StoreLiquidResult GetProductsSearchPage(Controller controller, ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories)
+        public StoreLiquidResult GetProductsSearchPage(Controller controller, 
+            ProductsSearchResult productSearchResult, 
+            PageDesign pageDesign,
+            List<ProductCategory> categories, 
+            String search,
+            String filters)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -153,7 +158,10 @@ namespace StoreManagement.Liquid.Helper
             {
                 filterGroup = LiquidAnonymousObject.GetFilterGroup(filterGroups),
                 products = LiquidAnonymousObject.GetProductsLiquid(items),
-                categories = LiquidAnonymousObject.GetProductCategories(cats)
+                categories = LiquidAnonymousObject.GetProductCategories(cats),
+                search = search,
+                recordsTotal = productSearchResult.Stats.RecordsTotal,
+                isCleanButton = !String.IsNullOrEmpty(search) || !String.IsNullOrEmpty(filters)
             };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);

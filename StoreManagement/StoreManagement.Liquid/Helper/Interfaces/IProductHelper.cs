@@ -30,6 +30,11 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 
         StoreLiquidResult GetPopularProducts(List<Product> products, List<ProductCategory> productCategories, PageDesign pageDesign);
 
-        StoreLiquidResult GetProductsSearchPage(Controller productController, ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories);
+        StoreLiquidResult GetProductsSearchPage(Controller productController,
+            ProductsSearchResult productSearchResult, 
+            PageDesign pageDesign, 
+            List<ProductCategory> categories, 
+            String search,
+            String filters);
     }
 }

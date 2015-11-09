@@ -6,7 +6,8 @@
        ViewBag.Title = Model.PageTitle;
 }
 
-  @Html.HiddenFor(r=>r.PageDesingName)
+@Html.HiddenFor(r=>r.MyStore.Id)
+@Html.HiddenFor(r=>r.PageDesingName)
  @Html.Raw(outputDic.GetOrDefault(StoreConstants.PageOutput))
  
 

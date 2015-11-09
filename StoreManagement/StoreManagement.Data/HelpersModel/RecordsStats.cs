@@ -1,9 +1,10 @@
 ﻿using System;
+using StoreManagement.Data.LiquidEntities;
 
 
 namespace StoreManagement.Data.HelpersModel
 {
-    public class RecordsStats
+    public class RecordsStats : BaseDrop
     {
         public int RecordsTotal { get; set; }
         public int RecordFirst { get; set; }

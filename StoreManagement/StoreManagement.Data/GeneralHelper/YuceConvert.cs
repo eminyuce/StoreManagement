@@ -490,9 +490,9 @@ namespace StoreManagement.Data.GeneralHelper
         {
             if (string.IsNullOrEmpty(text))
                 return "";
-            //return UrlEncodeCustom(text);
+            return UrlEncodeCustom(text);
             //   return HttpUtility.UrlEncode(text.Replace(" ", "_")).ToLower();
-            return UrlDencode(text, true);
+            // return UrlDencode(text, true);
             //char c;
             //((int) c).ToString("X");
 
@@ -501,10 +501,10 @@ namespace StoreManagement.Data.GeneralHelper
         public static string UrlDecode(this string text)
         {
             //return HttpUtility.UrlDecode(text);
-            //return UrlDecodeCustom(text);
+            return UrlDecodeCustom(text);
             // return HttpUtility.UrlDecode(text).Replace("_", " ").ToLower();
 
-            return UrlDencode(text, false);
+           // return UrlDencode(text, false);
         }
 
 

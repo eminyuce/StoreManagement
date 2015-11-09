@@ -68,9 +68,7 @@ namespace StoreManagement.Data.HelpersModel
         {
             get
             {
-                //  Uri.EscapeDataString()
-                //if(!string.IsNullOrEmpty(ValueLast) && ValueFirst!=ValueLast)
-                //{
+                
                 string url = FieldName.UrlEncode() + "-";
                 if (ValueFirst == ValueLast)
                 {
@@ -81,11 +79,8 @@ namespace StoreManagement.Data.HelpersModel
                     url += ValueFirst.UrlEncode() + (!string.IsNullOrEmpty(ValueLast) ? "-" + ValueLast.UrlEncode() : "");
                 }
 
-
                 return url.Trim();
-
-                // }
-
+ 
 
             }
         }
@@ -149,6 +144,56 @@ namespace StoreManagement.Data.HelpersModel
 
             var urlHelper = new UrlHelper(httpRequestBase.RequestContext);
             return urlHelper.Action(OwnerType.SearchAction, OwnerType.Controller, rv).ToLower();
+        }
+
+
+        public string LinkExclude(HttpRequestBase httpRequestBase, ItemType ownerType)
+        {
+            //RequestContext
+            string sFilters = (string)httpRequestBase.RequestContext.RouteData.Values["filters"];
+            var filters = FilterHelper.ParseFiltersFromString(sFilters);
+
+
+            var rv = new RouteValueDictionary();
+
+
+            if (filters != null)
+            {
+                int index = filters.FindIndex(i => i.FieldName.ToLower() == FieldName.ToLower());
+                if (index >= 0)
+                {
+                    filters.RemoveAt(index);
+                }
+
+                string urlFilters = string.Join("/",
+                                        filters.OrderBy(i => i.FieldName).Select(
+                                            i => (i.FieldName.ToLower() == FieldName.ToLower()) ? Url : i.Url));
+
+                rv.Add("filters", urlFilters.ToLower());
+            }
+
+
+
+
+            foreach (var key in httpRequestBase.QueryString.AllKeys)
+            {
+                if (key != null)
+                    if (key.ToLower() != "page")
+                    {
+                        if (!rv.ContainsKey(key))
+                        {
+                            rv.Add(key, httpRequestBase.QueryString[key]);
+                        }
+                    }
+            }
+
+
+            var urlHelper = new UrlHelper(httpRequestBase.RequestContext);
+
+            //  return urlHelper.Action("BoatsSearch", "Directory", rv);
+            return urlHelper.Action(ownerType.SearchAction, ownerType.Controller, rv).ToLower();
+
+
         }
          
     }

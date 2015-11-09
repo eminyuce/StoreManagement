@@ -57,6 +57,21 @@ namespace StoreManagement.Liquid.Controllers
             pagingDic.StoreSettings = settings;
             pagingDic.PageTitle = "Products";
             pagingDic.MyStore = this.MyStore;
+            String f = "";
+            var fltrs = FilterHelper.ParseFiltersFromString(filters);
+            if (fltrs.Any())
+            {
+                f = String.Join("– ", fltrs.Select(r => r.Text.ToTitleCase()));
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                f += " '" + search.ToTitleCase() + "'";
+            }
+
+
+
+            pagingDic.PageTitle = pagingDic.PageTitle+" "+f;
 
             return View(pagingDic);
 

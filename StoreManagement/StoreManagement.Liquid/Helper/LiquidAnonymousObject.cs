@@ -294,6 +294,18 @@ namespace StoreManagement.Liquid.Helper
                   
                    };
         }
- 
+
+
+        public static IEnumerable GetFilters(List<Filter> filtersList)
+        {
+            return from s in filtersList
+                   select new
+                   {
+                       s.FieldName, 
+                       s.Text,
+                       s.Cnt,
+                       s.FilterLink
+                   };
+        }
     }
 }

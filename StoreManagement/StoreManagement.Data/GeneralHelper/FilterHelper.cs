@@ -100,12 +100,7 @@ namespace StoreManagement.Data.GeneralHelper
             return urlHelper.Action(itemType.SearchAction, itemType.Controller, rv);
         }
 
-        public static List<Filter> GetNavigationFilters(ViewContext viewContext)
-        {
-            string filters = (string)viewContext.RouteData.Values["filters"];
-            var fltrs = FilterHelper.ParseFiltersFromString(filters);
-            return fltrs.OrderBy(i => i.FieldName).ToList();
-        }
+       
 
         public static string Link(Filter f,HttpRequestBase httpRequestBase, ViewContext viewContext)
         {
@@ -213,6 +208,13 @@ namespace StoreManagement.Data.GeneralHelper
             var urlHelper = new UrlHelper(httpRequestBase.RequestContext);
             return urlHelper.Action("AppLogDetail", "Logs", rv);
 
+        }
+
+        public static List<Filter> GetFiltersFromContextRequest(HttpRequestBase httpContextRequest)
+        {
+            string sFilters = (string)httpContextRequest.RequestContext.RouteData.Values["filters"];
+            var fltrs = FilterHelper.ParseFiltersFromString(sFilters);
+            return fltrs.OrderBy(i => i.FieldName).ToList();
         }
     }
 }

@@ -138,6 +138,12 @@ namespace StoreManagement.Liquid.Helper
                 }
             }
 
+            var filtersList = FilterHelper.GetFiltersFromContextRequest(httpContextRequest);
+            foreach (var filter in filtersList)
+            {
+                filter.FilterLink =  filter.LinkExclude(httpContextRequest, productSearchResult.Stats.OwnerType);
+            }
+
             foreach (var item in products)
             {
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
@@ -156,6 +162,7 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
+                filterExcluded = LiquidAnonymousObject.GetFilters(filtersList),
                 filterGroup = LiquidAnonymousObject.GetFilterGroup(filterGroups),
                 products = LiquidAnonymousObject.GetProductsLiquid(items),
                 categories = LiquidAnonymousObject.GetProductCategories(cats),

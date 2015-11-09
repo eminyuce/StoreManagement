@@ -4,9 +4,11 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
@@ -109,13 +111,28 @@ namespace StoreManagement.Liquid.Helper
             }
         }
 
-        public StoreLiquidResult GetProductsSearchPage(ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories)
+        public StoreLiquidResult GetProductsSearchPage(Controller controller, ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
             var items = new List<ProductLiquid>();
             var cats = new List<ProductCategoryLiquid>();
             var products = productSearchResult.Products;
+            var filterGroups = productSearchResult.FiltersGroups;
+            var httpContextRequest = controller.Request;
+            foreach (FilterGroup filterGroup in filterGroups)
+            {
+                foreach (Data.HelpersModel.Filter filter in filterGroup.FiltersHidden)
+                {
+                    if (string.IsNullOrEmpty(filter.Text))
+                    {
+                        continue;
+                    }
+
+                    filter.FilterLink = filter.Link(httpContextRequest);
+                }
+            }
+
             foreach (var item in products)
             {
                 var category = categories.FirstOrDefault(r => r.Id == item.ProductCategoryId);
@@ -134,19 +151,22 @@ namespace StoreManagement.Liquid.Helper
 
             object anonymousObject = new
             {
-
+                filterGroup = LiquidAnonymousObject.GetFilterGroup(filterGroups),
                 products = LiquidAnonymousObject.GetProductsLiquid(items),
                 categories = LiquidAnonymousObject.GetProductCategories(cats)
             };
 
             var indexPageOutput = LiquidEngineHelper.RenderPage(pageDesign, anonymousObject);
             dic[StoreConstants.PageOutput] = indexPageOutput;
+            dic.Add(StoreConstants.PageSize, productSearchResult.PageSize.ToStr());
+            dic.Add(StoreConstants.PageNumber, productSearchResult.Stats.PageCurrent.ToStr());
+            dic.Add(StoreConstants.TotalItemCount, productSearchResult.Stats.RecordsTotal.ToStr());
 
             var result = new StoreLiquidResult();
             result.PageDesingName = pageDesign.Name;
             result.LiquidRenderedResult = dic;
 
-            return result; 
+            return result;
         }
 
 

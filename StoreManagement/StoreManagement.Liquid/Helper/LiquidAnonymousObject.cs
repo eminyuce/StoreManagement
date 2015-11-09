@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Liquid.Helper
@@ -279,6 +280,18 @@ namespace StoreManagement.Liquid.Helper
                        s.Category.Description,
                        s.DetailLink,
                        s.Count
+                   };
+        }
+
+        public static IEnumerable GetFilterGroup(List<FilterGroup> filterGroups)
+        {
+            return from s in filterGroups
+                   select new
+                   {
+                       s.FieldName,
+                       s.FieldNameFull,
+                       s.FiltersHidden 
+                  
                    };
         }
     }

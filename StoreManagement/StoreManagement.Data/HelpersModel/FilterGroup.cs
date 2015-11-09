@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreManagement.Data.LiquidEntities;
 
 
 namespace StoreManagement.Data.HelpersModel
 {
-    public class FilterGroup
+    public class FilterGroup : BaseDrop
     {
         public string FieldName { get; set; }
 

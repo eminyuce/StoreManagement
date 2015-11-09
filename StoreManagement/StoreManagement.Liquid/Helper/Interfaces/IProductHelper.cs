@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
@@ -29,6 +30,6 @@ namespace StoreManagement.Liquid.Helper.Interfaces
 
         StoreLiquidResult GetPopularProducts(List<Product> products, List<ProductCategory> productCategories, PageDesign pageDesign);
 
-        StoreLiquidResult GetProductsSearchPage(ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories);
+        StoreLiquidResult GetProductsSearchPage(Controller productController, ProductsSearchResult productSearchResult, PageDesign pageDesign, List<ProductCategory> categories);
     }
 }

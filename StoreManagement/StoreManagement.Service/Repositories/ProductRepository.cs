@@ -386,8 +386,8 @@ namespace StoreManagement.Service.Repositories
                 {
                     Name = "Products/Products Directory",
                     Type = typeof(Product),
-                    SearchAction = "Products",
-                    Controller = "Index",
+                    SearchAction = "Index3",
+                    Controller = "Products",
                     ItemTypeID = 1
                 };
 
@@ -478,6 +478,7 @@ namespace StoreManagement.Service.Repositories
                     searchResult.Stats = stats;
                 }
             }
+            searchResult.PageSize = top;
             return searchResult;
         }
         private static ProductCategory GetProductCategoriesFromDataRow(DataRow dr)

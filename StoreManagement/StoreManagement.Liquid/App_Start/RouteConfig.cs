@@ -53,6 +53,12 @@ namespace StoreManagement.Liquid
                      defaults: new { controller = "Robots", action = "RobotsText" }
           );
 
+            routes.MapRoute(
+               name: "ProductsSearch",
+               url: "Products/{*filters}",
+         defaults: new { controller = "Products", action = "Index3", filters = UrlParameter.Optional }
+         , constraints: new { filters = @"(^[^/]+-.*)|^$" }
+         );
 
             routes.MapRoute(
                       name: "ProductsDetail",

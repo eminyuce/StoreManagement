@@ -67,7 +67,7 @@ namespace StoreManagement.Liquid.Controllers
                 var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = settings;
                 pagingDic.PageTitle = "Products";
-                pageOutput.MyStore = this.MyStore;
+                pagingDic.MyStore = this.MyStore;
 
                 return View(pagingDic);
 
@@ -154,11 +154,11 @@ namespace StoreManagement.Liquid.Controllers
         public async Task<ActionResult> Index3(String search = "", String filters = "", String page = "")
         {
             int iPage = page.ToInt(); if (iPage == 0) iPage = 1;
-            var top = GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
-            int skip = (iPage - 1) * top;
+            var pageSize = GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
+            int skip = (iPage - 1) * pageSize;
             var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
-            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
-            var productSearchResultTask = ProductService.GetProductsSearchResult(StoreId, search, filters, top, skip, false);
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductsSearchIndexPage");
+            var productSearchResultTask = ProductService.GetProductsSearchResult(StoreId, search, filters, pageSize, skip, false);
             await Task.WhenAll(productSearchResultTask, categoriesTask, pageDesignTask);
             var productSearchResult = productSearchResultTask.Result;
             var pageDesign = pageDesignTask.Result;
@@ -169,11 +169,28 @@ namespace StoreManagement.Liquid.Controllers
                 throw new Exception("PageDesing is null:" + IndexPageDesingName);
             }
 
+            var settings = GetStoreSettings();
+            ProductHelper.StoreSettings = settings;
+            var pageOutput = ProductHelper.GetProductsSearchPage(this,productSearchResult, pageDesign, categories);
 
-            var pageOutput = ProductHelper.GetProductsSearchPage(productSearchResult, pageDesign, categories);
+            var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
+            PagingHelper.StoreSettings = settings;
+            PagingHelper.StoreId = StoreId;
+            PagingHelper.PageOutput = pageOutput;
+            PagingHelper.HttpRequestBase = this.Request;
+            PagingHelper.RouteData = this.RouteData;
+            PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToStr();
+            PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToStr();
+            await Task.WhenAll(pagingPageDesignTask);
+            var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
+            pagingDic.StoreSettings = settings;
+            pagingDic.PageTitle = "Products";
+            pagingDic.MyStore = this.MyStore;
+
+            return View(pagingDic);
 
 
-            return View(pageOutput);
+
         }
 
     }

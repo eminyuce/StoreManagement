@@ -49,6 +49,7 @@ namespace StoreManagement.Data.RequestModel
                 return groups;
             }
         }
-
+        public int PageSize { get; set; }
+     
     }
 }

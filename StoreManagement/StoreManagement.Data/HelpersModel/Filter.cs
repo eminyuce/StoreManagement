@@ -5,12 +5,17 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.HelpersModel
 {
-    public class Filter
+    public class Filter: BaseDrop
     {
+        public string FilterLink { get; set; }
+
         public String FieldName { get; set; }
         private string _valueFirst = "";
         public String ValueFirst { get { return _valueFirst; } set { _valueFirst = value; } }
@@ -97,8 +102,54 @@ namespace StoreManagement.Data.HelpersModel
         public ItemType OwnerType { get { return _ownerType; } set { _ownerType = value; } }
 
 
-       
+        public string Link(HttpRequestBase httpRequestBase)
+        {
+
+            string sFilters = (string)httpRequestBase.RequestContext.RouteData.Values["filters"];
+            var filters = FilterHelper.ParseFiltersFromString(sFilters);
+
+            string urlFilters;
+
+            if (filters != null && filters.Count() > 0)
+            {
+                if (!filters.Any(i => i.FieldName.ToLower() == FieldName.ToLower()))
+                {
+                    filters.Add(this);
+                }
+
+                urlFilters = string.Join("/",
+                                         filters.OrderBy(i => i.FieldName).Select(
+                                             i => (i.FieldName.ToLower() == FieldName.ToLower()) ? Url : i.Url));
+            }
+            else
+            {
+                urlFilters = Url;
+            }
 
 
+
+            var rv = new RouteValueDictionary();
+            rv.Add("filters", urlFilters);
+
+            foreach (var key in httpRequestBase.QueryString.AllKeys)
+            {
+                if (key != null)
+                {
+                    if (key.ToLower() != "page")
+                    {
+                        if (!rv.ContainsKey(key))
+                        {
+                            rv.Add(key, httpRequestBase.QueryString[key]);
+                        }
+                    }
+                }
+            }
+
+
+
+            var urlHelper = new UrlHelper(httpRequestBase.RequestContext);
+            return urlHelper.Action(OwnerType.SearchAction, OwnerType.Controller, rv).ToLower();
+        }
+         
     }
 }

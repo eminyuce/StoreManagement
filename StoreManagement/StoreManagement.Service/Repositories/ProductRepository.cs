@@ -394,7 +394,7 @@ namespace StoreManagement.Service.Repositories
             }
         }
         private ProductsSearchResult GetProductsSearchResult(
-           int storeId, 
+           int storeId,
            string search,
            List<Filter> filters,
            int top,
@@ -445,6 +445,30 @@ namespace StoreManagement.Service.Repositories
                 }
                 searchResult.ProductCategories = productCategories;
 
+
+                var fileManagerList = new List<FileManager>();
+                using (DataTable dt = dataSet.Tables[3])
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        var item = GetFileManagerFromDataRow(dr);
+                        fileManagerList.Add(item);
+
+                    };
+                }
+
+                var productFiles = new List<ProductFile>();
+                using (DataTable dt = dataSet.Tables[2])
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        var item = GetProductFilesFromDataRow(dr);
+                        productFiles.Add(item);
+                        item.FileManager = fileManagerList.FirstOrDefault(r => r.Id == item.FileManagerId);
+                    };
+                }
+
+
                 var products = new List<Product>();
                 using (DataTable dt = dataSet.Tables[1])
                 {
@@ -452,11 +476,12 @@ namespace StoreManagement.Service.Repositories
                     {
                         var item = GetProductsFromDataRow(dr);
                         products.Add(item);
+                        item.ProductFiles = productFiles.Where(r => r.ProductId == item.Id).ToList();
                     };
                 }
                 searchResult.Products = products;
 
-                using (DataTable dt = dataSet.Tables[2])
+                using (DataTable dt = dataSet.Tables[4])
                 {
                     var m = new List<Filter>();
                     foreach (DataRow dr in dt.Rows)
@@ -467,7 +492,7 @@ namespace StoreManagement.Service.Repositories
                     }
                     searchResult.Filters = m;
                 }
-                using (DataTable dt = dataSet.Tables[3])
+                using (DataTable dt = dataSet.Tables[5])
                 {
                     var stats = new RecordsStats();
                     foreach (DataRow dr in dt.Rows)
@@ -547,6 +572,45 @@ namespace StoreManagement.Service.Repositories
             return item;
         }
 
+        private static FileManager GetFileManagerFromDataRow(DataRow dr)
+        {
+            var item = new FileManager();
+
+            item.Id = dr["Id"].ToInt();
+            item.StoreId = dr["StoreId"].ToInt();
+            item.GoogleImageId = dr["GoogleImageId"].ToStr();
+            item.OriginalFilename = dr["OriginalFilename"].ToStr();
+            item.Title = dr["Title"].ToStr();
+            item.Name = dr["Name"].ToStr();
+            item.ContentType = dr["ContentType"].ToStr();
+            item.ContentLength = dr["ContentLength"].ToInt();
+            item.State = dr["State"].ToBool();
+            item.Ordering = dr["Ordering"].ToInt();
+            item.ThumbnailLink = dr["ThumbnailLink"].ToStr();
+            item.IconLink = dr["IconLink"].ToStr();
+            item.WebContentLink = dr["WebContentLink"].ToStr();
+            item.ModifiedDate = dr["ModifiedDate"].ToDateTime();
+            item.CreatedDate = dr["CreatedDate"].ToDateTime();
+            item.IsCarousel = dr["IsCarousel"].ToBool();
+            item.UpdatedDate = dr["UpdatedDate"].ToDateTime();
+            item.Width = dr["Width"].ToInt();
+            item.Height = dr["Height"].ToInt();
+            item.FileStatus = dr["FileStatus"].ToStr();
+            item.ImageSourceType = dr["ImageSourceType"].ToStr();
+            item.FileSize = dr["FileSize"].ToStr();
+            return item;
+        }
+
+        private static ProductFile GetProductFilesFromDataRow(DataRow dr)
+        {
+            var item = new ProductFile();
+
+            item.Id = dr["Id"].ToInt();
+            item.ProductId = dr["ProductId"].ToInt();
+            item.FileManagerId = dr["FileManagerId"].ToInt();
+            item.IsMainImage = dr["IsMainImage"].ToBool();
+            return item;
+        }
 
         public void Dispose()
         {

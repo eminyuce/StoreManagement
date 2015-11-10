@@ -24,6 +24,21 @@ namespace StoreManagement.Liquid.Controllers
         public async Task<ActionResult> Index(String search = "", String filters = "", String page = "")
         {
             search = search.ToStr();
+
+            String headerText = "";
+            var fltrs = FilterHelper.ParseFiltersFromString(filters);
+            if (fltrs.Any())
+            {
+                headerText = String.Join("– ", fltrs.Select(r => r.Text.ToTitleCase()));
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                headerText += " '" + search.ToTitleCase() + "'";
+            }
+
+
+
             int iPage = page.ToInt(); if (iPage == 0) iPage = 1;
             var pageSize = GetSettingValueInt("ProductsIndex_PageSize", StoreConstants.DefaultPageSize);
             int skip = (iPage - 1) * pageSize;
@@ -42,7 +57,7 @@ namespace StoreManagement.Liquid.Controllers
 
             var settings = GetStoreSettings();
             ProductHelper.StoreSettings = settings;
-            var pageOutput = ProductHelper.GetProductsSearchPage(this, productSearchResult, pageDesign, categories, search, filters);
+            var pageOutput = ProductHelper.GetProductsSearchPage(this, productSearchResult, pageDesign, categories, search, filters, headerText);
 
             var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
             PagingHelper.StoreSettings = settings;
@@ -57,21 +72,10 @@ namespace StoreManagement.Liquid.Controllers
             pagingDic.StoreSettings = settings;
             pagingDic.PageTitle = "Products";
             pagingDic.MyStore = this.MyStore;
-            String f = "";
-            var fltrs = FilterHelper.ParseFiltersFromString(filters);
-            if (fltrs.Any())
-            {
-                f = String.Join("– ", fltrs.Select(r => r.Text.ToTitleCase()));
-            }
-
-            if (!string.IsNullOrEmpty(search))
-            {
-                f += " '" + search.ToTitleCase() + "'";
-            }
+        
 
 
-
-            pagingDic.PageTitle = pagingDic.PageTitle+" "+f;
+            pagingDic.PageTitle = pagingDic.PageTitle+" "+headerText;
 
             return View(pagingDic);
 

@@ -35,6 +35,6 @@ namespace StoreManagement.Liquid.Helper.Interfaces
             PageDesign pageDesign, 
             List<ProductCategory> categories, 
             String search,
-            String filters);
+            String filters, String headerText);
     }
 }

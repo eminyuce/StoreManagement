@@ -3,7 +3,7 @@
 @model StoreManagement.Data.LiquidEntities.StoreLiquidResult
 @{
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
-    ViewBag.Title = GeneralHelper.TruncateAtWord(ViewBag.Title, 60);
+    ViewBag.Title = GeneralHelper.TruncateAtWord(Model.PageTitle, 60);
 }
 
   @Html.HiddenFor(r=>r.PageDesingName)

@@ -58,8 +58,6 @@ namespace StoreManagement.Liquid.Helper
             dic.Add(StoreConstants.PageSize, products.pageSize.ToStr());
             dic.Add(StoreConstants.PageNumber, products.page.ToStr());
             dic.Add(StoreConstants.TotalItemCount, products.totalItemCount.ToStr());
-            //dic.Add(StoreConstants.IsPagingUp, pageDesign.IsPagingUp ? Boolean.TrueString : Boolean.FalseString);
-            //dic.Add(StoreConstants.IsPagingDown, pageDesign.IsPagingDown ? Boolean.TrueString : Boolean.FalseString);
 
 
 
@@ -116,7 +114,7 @@ namespace StoreManagement.Liquid.Helper
             PageDesign pageDesign,
             List<ProductCategory> categories, 
             String search,
-            String filters)
+            String filters, String headerText)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -167,6 +165,8 @@ namespace StoreManagement.Liquid.Helper
                 products = LiquidAnonymousObject.GetProductsLiquid(items),
                 categories = LiquidAnonymousObject.GetProductCategories(cats),
                 search = search,
+                filters=filters,
+                headerText=headerText,
                 recordsTotal = productSearchResult.Stats.RecordsTotal,
                 isCleanButton = !String.IsNullOrEmpty(search) || !String.IsNullOrEmpty(filters)
             };

@@ -50,15 +50,20 @@ namespace StoreManagement.Admin
         //string custom filled with the value of "varyByCustom" in your web.config
         public override string GetVaryByCustomString(HttpContext context, string custom)
         {
-            if (custom == "User")
+            if ("User".Equals(custom, StringComparison.InvariantCultureIgnoreCase))
             {
-                // depends on your authentication mechanism
-                return "User=" + context.User.Identity.Name;
-                //?return "User=" + context.Session.SessionID;
+                if (context.User.Identity.IsAuthenticated)
+                {
+                    return context.User.Identity.Name;
+                }
+                else
+                {
+                    return base.GetVaryByCustomString(context, custom);
+                }
             }
-
             return base.GetVaryByCustomString(context, custom);
         }
+      
         private static SimpleMembershipInitializer _initializer;
         private static object _initializerLock = new object();
         private static bool _isInitialized;

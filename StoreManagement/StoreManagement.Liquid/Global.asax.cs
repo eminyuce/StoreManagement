@@ -21,7 +21,22 @@ namespace StoreManagement.Liquid
 
         
         }
-
+        public override string GetVaryByCustomString(HttpContext context, string custom)
+        {
+            if ("User".Equals(custom, StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (context.User.Identity.IsAuthenticated)
+                {
+                    return context.User.Identity.Name;
+                }
+                else
+                {
+                    return base.GetVaryByCustomString(context, custom);
+                }
+            }
+            return base.GetVaryByCustomString(context, custom);
+        }
+      
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             Redirect301();

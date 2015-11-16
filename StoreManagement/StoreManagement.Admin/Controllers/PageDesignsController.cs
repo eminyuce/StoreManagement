@@ -188,7 +188,7 @@ namespace StoreManagement.Admin.Controllers
 
             if (IsSuperAdmin)
             {
-                return RedirectToAction("Index", new { storeId = pagedesign.StorePageDesignId });
+                return RedirectToAction("Index", new { storePageDesignId = pagedesign.StorePageDesignId });
             }
             else
             {

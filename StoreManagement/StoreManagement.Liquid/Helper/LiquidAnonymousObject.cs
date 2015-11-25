@@ -172,6 +172,7 @@ namespace StoreManagement.Liquid.Helper
                    select new
                    {
                        CategoryId = s.ProductCategory.Id,
+                       s.ProductCategory.ParentId,
                        s.ProductCategory.Name,
                        s.ProductCategory.Description,
                        s.DetailLink,
@@ -194,6 +195,7 @@ namespace StoreManagement.Liquid.Helper
             return from s in sliderImagesLiquid
                    select new
                    {
+                       s.FileManager.Id,
                        imagesource = s.ImageSource,
                        s.FileManager.Title,
                        s.FileManager.OriginalFilename,
@@ -276,6 +278,8 @@ namespace StoreManagement.Liquid.Helper
             return from s in cats
                    select new
                    {
+                       s.Category.Id,
+                       s.Category.ParentId,
                        s.Category.Name,
                        s.Category.Description,
                        s.DetailLink,

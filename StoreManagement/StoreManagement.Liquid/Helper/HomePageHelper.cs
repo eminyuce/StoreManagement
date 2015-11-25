@@ -60,6 +60,8 @@ namespace StoreManagement.Liquid.Helper
                         blogs = LiquidAnonymousObject.GetContentLiquid(home.BlogsLiquidList),
                         products = LiquidAnonymousObject.GetProductsLiquid(home.ProductLiquidList),
                         news = LiquidAnonymousObject.GetContentLiquid(home.NewsLiquidList),
+                        productCategories = LiquidAnonymousObject.GetProductCategories(home.ProductCategoriesLiquids),
+                        categories = LiquidAnonymousObject.GetCategoriesLiquid(home.CategoriesLiquids),
                         sliders = LiquidAnonymousObject.GetSliderImagesLiquidList(home.SliderImagesLiquid),
                     };
 

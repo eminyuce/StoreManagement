@@ -62,7 +62,7 @@ namespace StoreManagement.Service.GenericRepositories
             try
             {
                 Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId
-                    && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)
+                    && !String.IsNullOrEmpty(type) ?  r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase) : true 
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
                 var items = repository.FindAllAsync(match, t => t.Ordering, OrderByType.Descending, take, skip);
                 var itemsResult = items;

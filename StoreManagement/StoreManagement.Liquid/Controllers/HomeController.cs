@@ -16,13 +16,14 @@ using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
-{
+{ 
+    [OutputCache(CacheProfile = "Cache1Hour")]
     public class HomeController : BaseController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        [OutputCache(CacheProfile = "Cache1Hour")]
-        public async Task<ActionResult> Index()
+
+        public async Task<ActionResult> Index2()
         {
 
 
@@ -41,19 +42,18 @@ namespace StoreManagement.Liquid.Controllers
             var settings = GetStoreSettings();
             HomePageHelper.StoreSettings = settings;
             HomePageHelper.StoreId = this.StoreId;
-            HomePageHelper.StoreSettings = GetStoreSettings();
 
-         
+
             var pageDesing = pageDesignTask.Result;
             var sliderImages = sliderTask.Result;
-        
+
 
             StoreLiquidResult liquidResult = HomePageHelper.GetHomePageDesign(pageDesing, sliderImages);
-            liquidResult.MyStore = this.MyStore;
+          
             liquidResult.PageTitle = GetSettingValue("HomePage_Title", "");
             liquidResult.StoreSettings = settings;
             liquidResult.MyStore = this.MyStore;
-           
+
             // Stop timing.
             stopwatch.Stop();
 
@@ -61,9 +61,70 @@ namespace StoreManagement.Liquid.Controllers
             return View(liquidResult);
 
         }
+
+
+        public async Task<ActionResult> Index()
+        {
+
+
+            int blogsTake = GetSettingValueInt("HomePageMainBlogsContents_ItemsNumber", StoreConstants.DefaultPageSize);
+            int newsTake = GetSettingValueInt("HomePageMainNewsContents_ItemsNumber", StoreConstants.DefaultPageSize);
+            int productsTake = GetSettingValueInt("HomePageMainProductsContents_ItemsNumber", StoreConstants.DefaultPageSize);
+            int sliderTake = GetSettingValueInt("HomePageSliderImages_ItemsNumber", StoreConstants.DefaultPageSize);
+
+
+            int? categoryId = null;
+            String key = String.Format("Home:Index-{0}-{1}-{2}-{3}-{4}", StoreId, blogsTake, newsTake,
+                                       productsTake, sliderTake);
+
+            var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "HomePageWithMainData");
+            var blogsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, blogsTake);
+            var newsTask = ContentService.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, newsTake);
+            var productsTask = ProductService.GetMainPageProductsAsync(StoreId, productsTake);
+            var sliderTask = FileManagerService.GetStoreCarouselsAsync(StoreId, sliderTake);
+            var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, "", true);
+            var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
+
+            // Create new stopwatch.
+            Stopwatch stopwatch = new Stopwatch();
+
+            // Begin timing.
+            stopwatch.Start();
+
+
+
+            await Task.WhenAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
+                     productCategoriesTask);
+            var settings = GetStoreSettings();
+            HomePageHelper.StoreId = this.StoreId;
+            HomePageHelper.StoreSettings = settings;
+
+            var products = productsTask.Result;
+            var blogs = blogsTask.Result;
+            var news = newsTask.Result;
+            var pageDesing = pageDesignTask.Result;
+            var sliderImages = sliderTask.Result;
+            var categories = categoriesTask.Result;
+            var productCategories = productCategoriesTask.Result;
+
+            StoreLiquidResult liquidResult = HomePageHelper.GetHomePageDesign(pageDesing, sliderImages, products, blogs,
+                                                                              news, categories, productCategories);
+            liquidResult.PageTitle = GetSettingValue("HomePage_Title", "");
+            liquidResult.StoreSettings = settings;
+            liquidResult.MyStore = this.MyStore;
+
+
+            // Stop timing.
+            stopwatch.Stop();
+
+            Logger.Info("Home:Index:Time elapsed: {0} elapsed milliseconds", stopwatch.ElapsedMilliseconds);
+            return View(liquidResult);
+
+
+        }
         public ActionResult Contact()
         {
-        
+
             return View();
         }
 

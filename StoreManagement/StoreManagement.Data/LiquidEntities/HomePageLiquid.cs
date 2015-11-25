@@ -119,6 +119,20 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
+        public List<CategoryLiquid> CategoriesLiquids
+        {
+            get
+            {
+
+                var cats = new List<CategoryLiquid>();
+                foreach (var item in Categories)
+                {
+                    cats.Add(new CategoryLiquid(item,item.CategoryType));
+                }
+
+                return cats;
+            }
+        }
 
 
         public HomePageLiquid(PageDesign pageDesing, List<FileManager> sliderImages)

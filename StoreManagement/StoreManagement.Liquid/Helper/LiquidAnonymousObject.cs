@@ -176,6 +176,7 @@ namespace StoreManagement.Liquid.Helper
                        s.ProductCategory.Name,
                        s.ProductCategory.Description,
                        s.DetailLink,
+                       s.ProductCategory.ApiCategoryId,
                        s.Count
                    };
         }

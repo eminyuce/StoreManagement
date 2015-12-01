@@ -371,10 +371,10 @@ namespace StoreManagement.Service.Repositories
             return BaseEntityRepository.GetBaseEntitiesSearchList(this, storeId, searchKey);
         }
 
-        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, String filters, int top, int skip, bool isAdmin)
+        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin, string categoryApiId)
         {
             var fltrs = FilterHelper.ParseFiltersFromString(filters);
-            ProductsSearchResult t = await Task.Run(() => this.GetProductsSearchResult(storeId, search, fltrs, top, skip, isAdmin));
+            ProductsSearchResult t = await Task.Run(() => this.GetProductsSearchResult(storeId, search, fltrs, top, skip, isAdmin, categoryApiId));
             return t;
         }
 
@@ -399,7 +399,7 @@ namespace StoreManagement.Service.Repositories
            List<Filter> filters,
            int top,
            int skip,
-           Boolean isAdmin = false)
+           Boolean isAdmin = false, string categoryApiId="women")
         {
             var searchResult = new ProductsSearchResult();
 
@@ -427,6 +427,7 @@ namespace StoreManagement.Service.Repositories
             parameterList.Add(DatabaseUtility.GetSqlParameter("IsAdmin", isAdmin, SqlDbType.Bit));
             parameterList.Add(DatabaseUtility.GetSqlParameter("storeId", storeId, SqlDbType.Int));
             parameterList.Add(DatabaseUtility.GetSqlParameter("search", search.ToStr(), SqlDbType.NVarChar));
+            parameterList.Add(DatabaseUtility.GetSqlParameter("ApiCategoryId", categoryApiId.ToStr(), SqlDbType.NVarChar));
             parameterList.Add(DatabaseUtility.GetSqlParameter("filter", dtFilters, SqlDbType.Structured));
             parameterList.Add(DatabaseUtility.GetSqlParameter("top", top, SqlDbType.Int));
             parameterList.Add(DatabaseUtility.GetSqlParameter("skip", skip, SqlDbType.Int));

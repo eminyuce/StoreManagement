@@ -151,19 +151,17 @@ namespace StoreManagement.Liquid.Helper
                     items.Add(blog);
                 }
             }
-            foreach (var category in categories)
-            {
-                var catLiquid = new ProductCategoryLiquid(category);
-                catLiquid.Count = products.Count(r => r.ProductCategoryId == category.Id);
-                cats.Add(catLiquid);
-            }
+            
+            var categoryTree = controller.RenderPartialToStringCache(
+                        "pCreateCategoryTree",
+                        new ViewDataDictionary(categories));
 
             object anonymousObject = new
             {
                 filterExcluded = LiquidAnonymousObject.GetFilters(filtersList),
                 filterGroup = LiquidAnonymousObject.GetFilterGroup(filterGroups),
                 products = LiquidAnonymousObject.GetProductsLiquid(items),
-                categories = LiquidAnonymousObject.GetProductCategories(cats),
+                categoryTree = categoryTree,
                 search = search,
                 filters=filters,
                 headerText=headerText,

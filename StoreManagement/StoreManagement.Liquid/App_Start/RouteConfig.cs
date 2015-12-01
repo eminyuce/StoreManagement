@@ -55,8 +55,8 @@ namespace StoreManagement.Liquid
 
             routes.MapRoute(
                name: "ProductsSearch",
-               url: "Products/{*filters}",
-         defaults: new { controller = "Products", action = "Index", filters = UrlParameter.Optional }
+               url: "Products/Index/{id}/{*filters}",
+         defaults: new { controller = "Products", action = "Index", filters = UrlParameter.Optional, id = UrlParameter.Optional }
          , constraints: new { filters = @"(^[^/]+-.*)|^$" }
          );
 

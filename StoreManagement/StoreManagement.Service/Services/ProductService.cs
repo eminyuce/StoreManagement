@@ -297,7 +297,7 @@ namespace StoreManagement.Service.Services
             }
         }
 
-        public Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin)
+        public Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin, string categoryApiId)
         {
             try
             {

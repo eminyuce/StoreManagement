@@ -124,8 +124,7 @@ namespace StoreManagement.Service.Repositories
             {
                 Expression<Func<ProductCategory, bool>> match = r2 => r2.StoreId == storeId 
                     && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
-                    && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase)
-                    && r2.Products.Any();
+                    && r2.CategoryType.Equals(type, StringComparison.InvariantCultureIgnoreCase);
 
                 var items = this.FindAllAsync(match, null, null);
                 return await items;

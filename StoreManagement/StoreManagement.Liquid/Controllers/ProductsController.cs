@@ -21,10 +21,11 @@ namespace StoreManagement.Liquid.Controllers
         private const String ProductDetailPage = "ProductDetailPage";
 
 
-        public async Task<ActionResult> Index(String search = "", String filters = "", String page = "")
+        public async Task<ActionResult> Index(String search = "", String filters = "", String page = "", String id = "")
         {
             search = search.ToStr();
-
+            String categoryApiId = id;
+            Logger.Debug("categoryApiId:" + categoryApiId);
             String headerText = "";
             var fltrs = FilterHelper.ParseFiltersFromString(filters);
             if (fltrs.Any())
@@ -44,7 +45,7 @@ namespace StoreManagement.Liquid.Controllers
             int skip = (iPage - 1) * pageSize;
             var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ProductsSearchIndexPage");
-            var productSearchResultTask = ProductService.GetProductsSearchResult(StoreId, search, filters, pageSize, skip, false);
+            var productSearchResultTask = ProductService.GetProductsSearchResult(StoreId, search, filters, pageSize, skip, false, categoryApiId);
             await Task.WhenAll(productSearchResultTask, categoriesTask, pageDesignTask);
             var productSearchResult = productSearchResultTask.Result;
             var pageDesign = pageDesignTask.Result;
@@ -72,10 +73,10 @@ namespace StoreManagement.Liquid.Controllers
             pagingDic.StoreSettings = settings;
             pagingDic.PageTitle = "Products";
             pagingDic.MyStore = this.MyStore;
-        
 
 
-            pagingDic.PageTitle = pagingDic.PageTitle+" "+headerText;
+
+            pagingDic.PageTitle = pagingDic.PageTitle + " " + headerText;
 
             return View(pagingDic);
 
@@ -213,7 +214,7 @@ namespace StoreManagement.Liquid.Controllers
         }
 
 
-        
+
 
     }
 }

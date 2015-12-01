@@ -121,9 +121,9 @@ namespace StoreManagement.API.Controllers
             return await ProductRepository.GetProductsByProductType(storeId, categoryId, brandId, retailerId, productType, page, pageSize, isActive, functionType, excludedProductId);
         }
 
-        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin)
+        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin, string categoryApiId)
         {
-            return await ProductRepository.GetProductsSearchResult(storeId, search, filters, top, skip, isAdmin);
+            return await ProductRepository.GetProductsSearchResult(storeId, search, filters, top, skip, isAdmin, categoryApiId);
         }
     }
 }

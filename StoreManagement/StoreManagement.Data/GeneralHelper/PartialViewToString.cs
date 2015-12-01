@@ -6,11 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
+using StoreManagement.Data.CacheHelper;
+using StoreManagement.Data.Entities;
 
 namespace StoreManagement.Data.GeneralHelper
 {
     public static class PartialViewToString
     {
+
+        private static readonly TypedObjectCache<String> PartialViewToStringCache = new TypedObjectCache<String>("PartialViewToString");
         public static string RenderPartialToString(this Controller controller, string partialViewName, ViewDataDictionary viewData, TempDataDictionary tempData)
         {
             ControllerContext controllerContext = controller.ControllerContext;
@@ -43,7 +47,21 @@ namespace StoreManagement.Data.GeneralHelper
         {
             return RenderPartialToString(controller, partialView, viewData, new TempDataDictionary());
         }
+        public static string RenderPartialToStringCache(this Controller controller, string partialView, ViewDataDictionary viewData)
+        {
+            
+            String key = String.Format("RenderPartialToStringCache-{0}", partialView);
+            String item = null;
+            PartialViewToStringCache.TryGet(key, out item);
 
+            if (String.IsNullOrEmpty(item))
+            {
+                item = RenderPartialToString(controller, partialView, viewData, new TempDataDictionary());
+                PartialViewToStringCache.Set(key, item, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.CacheLongSeconds));
+            }
+
+            return item;
+        }
         public static string RenderPartialToString(this Controller controller, string partialView)
         {
             return RenderPartialToString(controller, partialView, new ViewDataDictionary(), new TempDataDictionary());

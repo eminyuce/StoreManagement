@@ -31,7 +31,7 @@ namespace StoreManagement.Service.Interfaces
         Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int ? retailerId, string productType, int page, int pageSize, bool? isActive, String functionType, int? excludedProductId);
 
         Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, String filters,
-                                                                        int top, int skip, bool isAdmin);
+                                                                        int top, int skip, bool isAdmin,String categoryApiId);
 
     }
 }

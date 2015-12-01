@@ -114,7 +114,9 @@ namespace StoreManagement.Liquid.Helper
             PageDesign pageDesign,
             List<ProductCategory> categories, 
             String search,
-            String filters, String headerText)
+            String filters,
+            String headerText, 
+            String categoryApiId)
         {
             var dic = new Dictionary<String, String>();
             dic.Add(StoreConstants.PageOutput, "");
@@ -161,6 +163,7 @@ namespace StoreManagement.Liquid.Helper
                 filterExcluded = LiquidAnonymousObject.GetFilters(filtersList),
                 filterGroup = LiquidAnonymousObject.GetFilterGroup(filterGroups),
                 products = LiquidAnonymousObject.GetProductsLiquid(items),
+                selectedCategory =categoryApiId,
                 categoryTree = categoryTree,
                 search = search,
                 filters=filters,

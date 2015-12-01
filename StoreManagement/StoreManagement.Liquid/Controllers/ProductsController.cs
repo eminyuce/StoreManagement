@@ -58,7 +58,7 @@ namespace StoreManagement.Liquid.Controllers
 
             var settings = GetStoreSettings();
             ProductHelper.StoreSettings = settings;
-            var pageOutput = ProductHelper.GetProductsSearchPage(this, productSearchResult, pageDesign, categories, search, filters, headerText);
+            var pageOutput = ProductHelper.GetProductsSearchPage(this, productSearchResult, pageDesign, categories, search, filters, headerText, categoryApiId);
 
             var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
             PagingHelper.StoreSettings = settings;

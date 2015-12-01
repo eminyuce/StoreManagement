@@ -19,7 +19,7 @@
         @foreach (var node in nodes.Where(n => n.ParentId == parentId)) 
         {
             <li>
-                <a href=@String.Format("/Products/Index/{0}",node.ApiCategoryId)>@node.Name </a>
+                <a href=@String.Format("/products/index/{0}",node.ApiCategoryId)>@node.Name </a>
                 @CategoryTree(nodes, node.Id)
             </li>
         }

@@ -32,11 +32,15 @@ namespace StoreManagement.Liquid.Helper
             {
                 var rv = new Dictionary<String, String>();
                 string id = RouteData.Values["id"].ToStr();
+                string filters = RouteData.Values["filters"].ToStr();
                 if (!String.IsNullOrEmpty(id))
                 {
                     rv.Add("id", id);
                 }
-
+                if (!String.IsNullOrEmpty(filters))
+                {
+                    rv.Add("filters", filters);
+                }
                 foreach (var key in HttpRequestBase.QueryString.AllKeys)
                 {
 
@@ -50,7 +54,8 @@ namespace StoreManagement.Liquid.Helper
                 }
 
                 String queryString = "";
-                var idExists = rv.Keys.Count == 1 && rv.ContainsKey("id");
+                queryString += rv.ContainsKey("id") ? "/" + rv["id"] : "";
+                queryString += rv.ContainsKey("filters") ?  "/" + rv["filters"] : "";
                 for (int i = rv.Count - 1; i >= 0; i--)
                 {
                     var item = rv.ElementAt(i);
@@ -59,7 +64,11 @@ namespace StoreManagement.Liquid.Helper
 
                     if (itemKey.Equals("id", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        queryString += "/" + rv[itemKey];
+                        //queryString += "/" + rv[itemKey];
+                    }
+                    else if (itemKey.Equals("filters", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                       // queryString += "/" + rv[itemKey];
                     }
                     else
                     {
@@ -67,20 +76,10 @@ namespace StoreManagement.Liquid.Helper
                     }
                 }
 
-                //if (ActionName.Equals("Index", StringComparison.InvariantCultureIgnoreCase))
-                //{
+              
 
-                //    //return String.Format("{0}page=:num", String.IsNullOrEmpty(queryString) ? "?" : queryString + "&");
-                //    return String.Format("/{2}/{0}{1}page=:num", ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName);
-                //}
-                //else
-                //{
-
-                //}
-
-
-                String m = idExists ? "?" : "&";
-                return String.Format("/{2}/{0}{1}page=:num", ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName);
+                String m = rv.ContainsKey("id") || rv.ContainsKey("filters")   ? "?" : "&";
+                return String.Format("/{2}/{0}{1}page=:num", ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName).ToLower();
             }
         }
 

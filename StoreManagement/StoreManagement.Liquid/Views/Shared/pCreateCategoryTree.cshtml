@@ -3,11 +3,9 @@
 @{
     Layout = null;
 }
- <div   class="treeview" id="tree">
-    <ul id="contentTreeview">
+  
     @CategoryTree(Model, 0)
-    </ul>
-</div>
+  
  
 
 @helper CategoryTree(List<ProductCategory> nodes, int? parentId)
@@ -15,12 +13,37 @@
     
     if (nodes.Any(n => n.ParentId == parentId)) 
     { 
-    <ul>
-        @foreach (var node in nodes.Where(n => n.ParentId == parentId)) 
+    <ul  @if (parentId == 0)
         {
-            <li>
-                <a href=@String.Format("/products/index/{0}",node.ApiCategoryId)>@node.Name </a>
-                @CategoryTree(nodes, node.Id)
+       //   @String.Format("id=categoriesTreeview")  
+        }else{
+	
+               //  @String.Format("	class=dropdown-menu role=menu  ")
+		}
+		>
+        @foreach (var node in nodes.Where(n => n.ParentId == parentId))
+        {
+            var children = nodes.Any(n => n.ParentId == node.Id);
+            <li
+                  @if (children)
+                  {
+                     @String.Format("class=has-sub")
+                  }
+                >
+                
+                @if (children)
+                 {
+                   <a    href=@String.Format("/products/index/{0}",node.ApiCategoryId)>@node.Name </a>
+       
+
+                     
+                 }
+                 else
+                 {
+                     <a  href=@String.Format("/products/index/{0}",node.ApiCategoryId)>@node.Name </a>
+                 }
+                        @CategoryTree(nodes, node.Id)
+             
             </li>
         }
     </ul>

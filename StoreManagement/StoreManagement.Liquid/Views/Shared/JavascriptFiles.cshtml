@@ -1,53 +1,26 @@
 ﻿ 
  
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
-
-
-
-
-@* <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>*@
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
  
- 
-@* 
- <script src="~/~/Scripts/Trizzy/js/jquery.easing.1.3.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/bootstrap.min.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/jquery.fancybox.pack.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/jquery.fancybox-media.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/google-code-prettify/prettify.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/portfolio/jquery.quicksand.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/portfolio/setting.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/jquery.flexslider.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/animate.js"></script>
-   <script src="~/~/Scripts/Trizzy/js/custom.js"></script>
- *@
-
-
-@*<script src="~/Scripts/Trizzy/jquery.jpanelmenu.js"></script>
-<script src="~/Scripts/Trizzy/jquery.themepunch.plugins.min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.themepunch.revolution.min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.themepunch.showbizpro.min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.magnific-popup.min.js"></script>
-<script src="~/Scripts/Trizzy/hoverIntent.js"></script>
-<script src="~/Scripts/Trizzy/superfish.js"></script>
-<script src="~/Scripts/Trizzy/jquery.pureparallax.js"></script>
-<script src="~/Scripts/Trizzy/jquery.pricefilter.js"></script>
-<script src="~/Scripts/Trizzy/jquery.selectric.min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.royalslider.min.js"></script>
-<script src="~/Scripts/Trizzy/SelectBox.js"></script>
-<script src="~/Scripts/Trizzy/modernizr.custom.js"></script>
-<script src="~/Scripts/Trizzy/waypoints.min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.flexslider-min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.counterup.min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.tooltips.min.js"></script>
-<script src="~/Scripts/Trizzy/jquery.isotope.min.js"></script>
-<script src="~/Scripts/Trizzy/puregrid.js"></script>
-<script src="~/Scripts/Trizzy/stacktable.js"></script>
-<script src="~/Scripts/Trizzy/custom.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>*@
-
-
-
-<!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
+<script>
+    
+    (function ($) {
+        $(document).ready(function () {
+            $('#cssmenu').prepend('<div id="menu-button">Menu</div>');
+            $('#cssmenu #menu-button').on('click', function () {
+                var menu = $(this).next('ul');
+                if (menu.hasClass('open')) {
+                    menu.removeClass('open');
+                }
+                else {
+                    menu.addClass('open');
+                }
+            });
+        });
+    })(jQuery);
+
+
+</script>

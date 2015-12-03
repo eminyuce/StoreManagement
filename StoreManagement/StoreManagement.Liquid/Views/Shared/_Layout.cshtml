@@ -2,8 +2,7 @@
 @using StoreManagement.Data.GeneralHelper
 @{
     String title = (String)ViewBag.Title;
-    title = title.ToStr(0, 50);
-    title = String.IsNullOrEmpty(title) ? ViewData["StoreName"].ToStr() : title + " - " + ViewData["StoreName"].ToStr();
+    title = String.IsNullOrEmpty(title) ? ViewData["StoreName"].ToStr() : title;
 }
 <!DOCTYPE html>
 <html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">

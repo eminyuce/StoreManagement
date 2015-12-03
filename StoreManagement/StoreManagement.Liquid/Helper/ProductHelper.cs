@@ -160,6 +160,8 @@ namespace StoreManagement.Liquid.Helper
                         "pCreateCategoryTree",
                         new ViewDataDictionary(categories));
 
+
+
             object anonymousObject = new
             {
                 filterExcluded = LiquidAnonymousObject.GetFilters(filtersList),
@@ -183,7 +185,7 @@ namespace StoreManagement.Liquid.Helper
             var result = new StoreLiquidResult();
             result.PageDesingName = pageDesign.Name;
             result.LiquidRenderedResult = dic;
-
+            result.PageTitle = selectedCategory.Name+" Products";
             return result;
         }
 

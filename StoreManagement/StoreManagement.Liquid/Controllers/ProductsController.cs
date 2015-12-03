@@ -71,12 +71,12 @@ namespace StoreManagement.Liquid.Controllers
             await Task.WhenAll(pagingPageDesignTask);
             var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
             pagingDic.StoreSettings = settings;
-            pagingDic.PageTitle = "Products";
+            pagingDic.PageTitle = pageOutput.PageTitle;
             pagingDic.MyStore = this.MyStore;
 
 
 
-            pagingDic.PageTitle = pagingDic.PageTitle + " " + headerText;
+            pagingDic.PageTitle = String.IsNullOrEmpty(headerText) ?  pagingDic.PageTitle  : headerText;
 
             return View(pagingDic);
 

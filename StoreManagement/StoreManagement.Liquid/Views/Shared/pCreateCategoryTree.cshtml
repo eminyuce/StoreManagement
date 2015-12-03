@@ -15,10 +15,10 @@
     { 
     <ul  @if (parentId == 0)
         {
-       //   @String.Format("id=categoriesTreeview")  
+          @: class='nav navbar-nav'  
         }else{
 	
-               //  @String.Format("	class=dropdown-menu role=menu  ")
+             @: class='dropdown-menu' role='menu' 
 		}
 		>
         @foreach (var node in nodes.Where(n => n.ParentId == parentId))
@@ -27,13 +27,23 @@
             <li
                   @if (children)
                   {
-                     @String.Format("class=has-sub")
+                    
+
+                      
+                       if (parentId == 0)
+        {
+            @: class='dropdown'
+        }else{
+	
+              @: class='dropdown-submenu'
+		}
+                      
                   }
                 >
                 
                 @if (children)
                  {
-                   <a    href=@String.Format("/products/index/{0}",node.ApiCategoryId)>@node.Name </a>
+                   <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"  href=@String.Format("/products/index/{0}",node.ApiCategoryId)>@node.Name </a>
        
 
                      

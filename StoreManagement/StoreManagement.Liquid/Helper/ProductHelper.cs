@@ -153,7 +153,9 @@ namespace StoreManagement.Liquid.Helper
                     items.Add(blog);
                 }
             }
-            
+            var selectedCategory = categories.FirstOrDefault(r => r.ApiCategoryId.Equals(categoryApiId,StringComparison.InvariantCultureIgnoreCase));
+            var selectedCategoryLiquid = new ProductCategoryLiquid(selectedCategory);
+
             var categoryTree = controller.RenderPartialToStringCache(
                         "pCreateCategoryTree",
                         new ViewDataDictionary(categories));
@@ -163,7 +165,7 @@ namespace StoreManagement.Liquid.Helper
                 filterExcluded = LiquidAnonymousObject.GetFilters(filtersList),
                 filterGroup = LiquidAnonymousObject.GetFilterGroup(filterGroups),
                 products = LiquidAnonymousObject.GetProductsLiquid(items),
-                selectedCategory =categoryApiId,
+                selectedCategory = LiquidAnonymousObject.GetProductCategory(selectedCategoryLiquid),
                 categoryTree = categoryTree,
                 search = search,
                 filters=filters,

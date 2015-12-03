@@ -99,7 +99,7 @@ namespace StoreManagement.Data.HelpersModel
 
         public string Link(HttpRequestBase httpRequestBase)
         {
-
+            string id = (string)httpRequestBase.RequestContext.RouteData.Values["id"];
             string sFilters = (string)httpRequestBase.RequestContext.RouteData.Values["filters"];
             var filters = FilterHelper.ParseFiltersFromString(sFilters);
 
@@ -124,6 +124,7 @@ namespace StoreManagement.Data.HelpersModel
 
 
             var rv = new RouteValueDictionary();
+            rv.Add("id", id);
             rv.Add("filters", urlFilters);
 
             foreach (var key in httpRequestBase.QueryString.AllKeys)
@@ -150,12 +151,13 @@ namespace StoreManagement.Data.HelpersModel
         public string LinkExclude(HttpRequestBase httpRequestBase, ItemType ownerType)
         {
             //RequestContext
+            string id = (string)httpRequestBase.RequestContext.RouteData.Values["id"];
             string sFilters = (string)httpRequestBase.RequestContext.RouteData.Values["filters"];
             var filters = FilterHelper.ParseFiltersFromString(sFilters);
 
 
             var rv = new RouteValueDictionary();
-
+            rv.Add("id", id);
 
             if (filters != null)
             {

@@ -259,6 +259,7 @@ namespace StoreManagement.Liquid.Helper
             {
                 CategoryId = productCategories.ProductCategory.Id,
                 Name = productCategories.ProductCategory.Name,
+                ApiCategoryId = productCategories.ProductCategory.ApiCategoryId,
                 Description = productCategories.ProductCategory.Description
             };
             return anonymousObject;

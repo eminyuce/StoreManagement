@@ -21,11 +21,11 @@ namespace StoreManagement.Liquid.Controllers
         private const String ProductDetailPage = "ProductDetailPage";
 
 
-        public async Task<ActionResult> Index(String search = "", String filters = "", String page = "", String id = "")
+        public async Task<ActionResult> Index(String search = "", String filters = "", String page = "", String id = "women")
         {
             search = search.ToStr();
             String categoryApiId = id;
-            Logger.Debug("categoryApiId:" + categoryApiId);
+            RouteData.Values["id"] = id;
             String headerText = "";
             var fltrs = FilterHelper.ParseFiltersFromString(filters);
             if (fltrs.Any())

@@ -18,7 +18,7 @@ namespace StoreManagement.Liquid.Controllers
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public async Task<ActionResult> Products(int take = 1, int description = 300, int imageHeight = 50, int imageWidth = 50)
+        public async Task<ActionResult> Products(int take = 1, int description = 300, int imageHeight = 50, int imageWidth = 50, int isDetailLink=0)
         {
            // var productsTask = ProductService.GetProductsAsync(StoreId, take, true);
             var  productsTask = ProductService.GetProductsByProductType(StoreId, null, null, null, StoreConstants.ProductType, 1,
@@ -31,7 +31,7 @@ namespace StoreManagement.Liquid.Controllers
             var products = productsTask.Result;
             var productCategories = productCategoriesTask.Result;
 
-            var feed = ProductHelper.GetProductsRssFeed(store, products, productCategories, description);
+            var feed = ProductHelper.GetProductsRssFeed(store, products, productCategories, description, isDetailLink);
             ProductHelper.ImageWidth = imageWidth;
             ProductHelper.ImageHeight = imageHeight;
             ProductHelper.StoreId = StoreId;

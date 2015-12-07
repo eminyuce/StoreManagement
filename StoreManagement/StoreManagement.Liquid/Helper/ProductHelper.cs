@@ -322,7 +322,7 @@ namespace StoreManagement.Liquid.Helper
         }
 
 
-        public Rss20FeedFormatter GetProductsRssFeed(Store store, List<Product> products, List<ProductCategory> productCategories, int description)
+        public Rss20FeedFormatter GetProductsRssFeed(Store store, List<Product> products, List<ProductCategory> productCategories, int description, int isDetailLink)
         {
 
             try
@@ -342,7 +342,7 @@ namespace StoreManagement.Liquid.Helper
                     {
                         var feedItem = GetSyndicationItem(store, product,
                                                                              productCategories.FirstOrDefault(r => r.Id == product.ProductCategoryId),
-                                                                             description);
+                                                                             description, isDetailLink);
                         if (feedItem != null)
                         {
                             feedItemList.Add(feedItem);
@@ -372,7 +372,7 @@ namespace StoreManagement.Liquid.Helper
 
 
 
-        private SyndicationItem GetSyndicationItem(Store store, Product product, ProductCategory productCategory, int description)
+        private SyndicationItem GetSyndicationItem(Store store, Product product, ProductCategory productCategory, int description, int isDetailLink)
         {
             if (productCategory == null)
                 return null;
@@ -382,7 +382,10 @@ namespace StoreManagement.Liquid.Helper
 
             var productDetailLink = LinkHelper.GetProductLink(product, productCategory.Name);
             String detailPage = String.Format("http://{0}{1}", store.Domain.ToLower(), productDetailLink);
-
+            if (isDetailLink == 1)
+            {
+                detailPage = String.Format("http://{0}{1}", store.Domain.ToLower(), "/products/productbuy/"+product.Id);
+            }
             string desc = "";
             if (description > 0)
             {

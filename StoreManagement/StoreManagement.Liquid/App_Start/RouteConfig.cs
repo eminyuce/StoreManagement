@@ -55,7 +55,7 @@ namespace StoreManagement.Liquid
 
             routes.MapRoute(
                name: "ProductsSearch",
-               url: "Products/Index/{id}/{*filters}",
+               url: "Products/{id}/{*filters}",
          defaults: new { controller = "Products", action = "Index", filters = UrlParameter.Optional, id = UrlParameter.Optional }
          , constraints: new { filters = @"(^[^/]+-.*)|^$" }
          );
@@ -66,11 +66,26 @@ namespace StoreManagement.Liquid
                       defaults: new { controller = "Products", action = "Product", id = UrlParameter.Optional }
                   );
 
+            routes.MapRoute(
+             name: "Rss",
+             url: "Rss/{action}",
+             defaults: new { controller = "Rss", action = "Products" }
+         );
 
             routes.MapRoute(
+               name: "ImageUrl",
+               url: "Images/ImageUrl/{id}",
+               defaults: new { controller = "Images", action = "ImageUrl", id = UrlParameter.Optional }
+           );
+            routes.MapRoute(
+                name: "ProductAction",
+                url: "Products/{action}/{id}",
+                defaults: new { controller = "Products", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "products", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{id}",
+                defaults: new { controller = "Products", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

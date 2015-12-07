@@ -34,7 +34,6 @@
                         @Html.HiddenFor(model => model.ParentId)
                         @Html.HiddenFor(model => model.CreatedDate)
                         @Html.HiddenFor(model => model.ControllerName)
-                        @Html.HiddenFor(model => model.ActionName)
 
                         @Html.HiddenFor(model => model.CreatedDate)
                         @Html.HiddenFor(model => model.UpdatedDate)
@@ -53,6 +52,15 @@
                             @Html.EditorFor(model => model.Name, new { @class = "input-xlarge" })
                             @Html.ValidationMessageFor(model => model.Name)
                         </div>
+                        
+                           <div class="editor-label control-group">
+                            @Html.LabelFor(model => model.ActionName, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field controls">
+                            @Html.EditorFor(model => model.ActionName, new { @class = "input-xlarge" })
+                            @Html.ValidationMessageFor(model => model.ActionName)
+                        </div>
+
 
                         <div class="editor-label control-group">
                             @Html.LabelFor(model => model.Modul, new { @class = "control-label" })

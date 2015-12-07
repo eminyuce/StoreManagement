@@ -26,7 +26,7 @@ namespace StoreManagement.Liquid.Helper.Interfaces
         StoreLiquidResult GetRelatedProductsPartialByBrand(Brand brandTask, List<Product> relatedProducts, PageDesign pageDesignTask,
                                                                            List<ProductCategory> productCategories);
 
-        Rss20FeedFormatter GetProductsRssFeed(Store store,List<Product> products,    List<ProductCategory>  productCategories, int description);
+        Rss20FeedFormatter GetProductsRssFeed(Store store, List<Product> products, List<ProductCategory> productCategories, int description, int isDetailLink);
 
         StoreLiquidResult GetPopularProducts(List<Product> products, List<ProductCategory> productCategories, PageDesign pageDesign);
 

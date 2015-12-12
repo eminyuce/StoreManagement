@@ -160,20 +160,20 @@ namespace StoreManagement.Data.LiquidEntities
                 if (fileImage != null)
                 {
                     if (fileImage.Width != null)
-                    { 
+                    {
                         if (fileImage.Height != null)
                         {
                             int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
                             int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
 
-                            return LinkHelper.GetImageLink("Thumbnail", fileImage, w, h);
+                            return fileImage.WebContentLink;
                         }
-                        
+
                     }
                 }
-                   
-                       
-                           
+
+
+
             }
             return "";
 

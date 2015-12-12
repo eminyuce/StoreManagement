@@ -593,6 +593,7 @@
     <Content Include="Views\Products\Index3.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Shared\pCreateCategoryTree.cshtml" />
+    <Content Include="Views\Shared\Copy of pCreateCategoryTree.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

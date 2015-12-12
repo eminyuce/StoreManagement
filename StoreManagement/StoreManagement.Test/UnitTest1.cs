@@ -31,6 +31,7 @@ using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
 using Newtonsoft.Json.Linq;
+using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Service.Services;
 using File = System.IO.File;
 
@@ -49,7 +50,7 @@ namespace StoreManagement.Test
             //  dbContext = new StoreContext(ConnectionString);
 
         }
-       
+
         [TestMethod]
         public void GetContentsCategoryIdAsyncSearch()
         {
@@ -72,15 +73,30 @@ namespace StoreManagement.Test
 
             Console.Write(blogsTask.Result.Count);
         }
-
+        
         [TestMethod]
-        public void Test3333555533()
+        public void DeleteBrandsWithoutProducts()
         {
-          //  var dt = new DataTable();
-          //  var pageDesingsExcelReport = MapToListHelper.ToList<PageDesign>(dt);
-
-            var mm = "10/12/2015 6:18:42 PM".ToDateTime();
-            Console.WriteLine(mm);
+            IProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
+            IBrandRepository brandService = new BrandRepository(new StoreContext(ConnectionString));
+            var brands = brandService.GetBrandsByStoreId(53, "");
+            var products = rep.GetProductsByStoreId(53, "");
+            List<int> ints = new List<int>();
+            foreach (var brand in brands)
+            {
+                if (products.All(r => r.BrandId != brand.Id))
+                {
+                    Console.WriteLine(brand.Name);
+                    ints.Add(brand.Id);
+                }
+            }
+            Console.WriteLine(String.Join(",", ints));
+            //foreach (var brandId in ints)
+            //{
+            //    var brand = brandService.GetSingle(brandId);
+            //    brandService.Delete(brand);
+            //    brandService.Save();
+            //}
         }
 
         [TestMethod]
@@ -108,31 +124,7 @@ namespace StoreManagement.Test
 
         }
 
-        [TestMethod]
-        public void DovizliAskerlik2()
-        {
-            var dt = new DateTime(2012, 8, 20);
-            var dt2 = new DateTime(2013, 3, 8);
-            var u = dt2.Subtract(dt).Days;
-            var dt3 = new DateTime(2013, 5, 14);
-            var dt4 = DateTime.Now;
-            var s = dt4.Subtract(dt3).Days;
-            Console.WriteLine("Intersoft:" + u);
-            Console.WriteLine("Maritime: " + s);
-
-            var hDt = new DateTime(2014, 9, 11);
-            var hDt2 = new DateTime(2014, 9, 28);
-            int bahamaHoliday = 1;
-            int holiday = hDt2.Subtract(hDt).Days;
-            holiday += bahamaHoliday;
-
-            Console.WriteLine("Holiday: " + holiday);
-            int total = (s + u) - holiday;
-            int left = (1095 - total);
-            Console.WriteLine("Total: " + total);
-            Console.WriteLine(String.Format("Left:{0} {1}  {2}", left, left / 30, dt4.AddDays(left).ToShortDateString()));
-
-        }
+        
         [TestMethod]
         public void Test333344466()
         {
@@ -167,42 +159,16 @@ namespace StoreManagement.Test
             int storeId = 9;
             var rr = new ProductRepository(new StoreContext(ConnectionString));
 
-            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25,"", "");
+            var productsTask = rr.GetProductsCategoryIdAsync(storeId, null, StoreConstants.ProductType, true, 1, 25, "", "");
             Task.WaitAll(productsTask);
             Console.WriteLine(productsTask.Result.totalItemCount);
 
         }
 
-        [TestMethod]
-        public void DovizliAskerlik22()
-        {
-            var dt = new DateTime(2012, 8, 20);
-            var dt2 = new DateTime(2013, 3, 8);
-            var u = dt2.Subtract(dt).Days;
-            var dt3 = new DateTime(2013, 5, 14);
-            var dt4 = DateTime.Now;
-            var s = dt4.Subtract(dt3).Days;
-            Console.WriteLine("Intersoft:" + u);
-            Console.WriteLine("Maritime: " + s);
 
-            var hDt = new DateTime(2014, 9, 11);
-            var hDt2 = new DateTime(2014, 9, 28);
-            int bahamaHoliday = 1;
-            int holiday = hDt2.Subtract(hDt).Days;
-            holiday += bahamaHoliday;
 
-             hDt = new DateTime(2015, 11, 12);
-             hDt2 = new DateTime(2015, 11, 27);
 
-             holiday += hDt2.Subtract(hDt).Days;
 
-            Console.WriteLine("Holiday: " + holiday);
-            int total = (s + u) - holiday;
-            int left = (1095 - total);
-            Console.WriteLine("Total: " + total);
-            Console.WriteLine(String.Format("Left:{0} {1}  {2}", left, left / 30, dt4.AddDays(left).ToShortDateString()));
-
-        }
 
         [TestMethod]
         public void TestProductRepository2()
@@ -251,7 +217,7 @@ namespace StoreManagement.Test
         public void RemoveNewLines()
         {
             String m = "Bru Joy Travel Pillow Neck Inflatable Rosy Red Best Travel Head Rest Kids Adults - Blow Up Get Desired Support for Airplanes Camping Sleeping Car Driving Home Office Snaps Bath Spa - Premium Quality - Super Soft - Convertible 2 in 1 U Shaped Waterproof Washable with a Deluxe Pouch - No More Neck Pain - SAVE EXTRA 10% + FREE SHIPPING For 3 and More, Blue Or Red";
-            Console.Write(m.ToStr(0,200));
+            Console.Write(m.ToStr(0, 200));
         }
 
 
@@ -372,32 +338,7 @@ namespace StoreManagement.Test
 
 
         }
-
-        [TestMethod]
-        public void DovizliAskerlik()
-        {
-            var dt = new DateTime(2012, 8, 20);
-            var dt2 = new DateTime(2013, 3, 8);
-            var u = dt2.Subtract(dt).Days;
-            var dt3 = new DateTime(2013, 5, 14);
-            var dt4 = DateTime.Now;
-            var s = dt4.Subtract(dt3).Days;
-            Console.WriteLine("Intersoft:" + u);
-            Console.WriteLine("Maritime: " + s);
-
-            var hDt = new DateTime(2014, 9, 11);
-            var hDt2 = new DateTime(2014, 9, 28);
-            int bahamaHoliday = 1;
-            int holiday = hDt2.Subtract(hDt).Days;
-            holiday += bahamaHoliday;
-
-            Console.WriteLine("Holiday: " + holiday);
-            int total = (s + u) - holiday;
-            int left = (1095 - total);
-            Console.WriteLine("Total: " + total);
-            Console.WriteLine(String.Format("Left:{0} {1}  {2}", left, left / 30, dt4.AddDays(left).ToShortDateString()));
-
-        }
+ 
 
         [TestMethod]
         public void TestSettingRepository1()
@@ -589,7 +530,7 @@ namespace StoreManagement.Test
         public void TestApiCall2()
         {
             var s = new CategoryService("yuce.marinelink.org");
-            var m1 = s.GetCategoriesByStoreIdAsync(9, StoreConstants.NewsType, true); 
+            var m1 = s.GetCategoriesByStoreIdAsync(9, StoreConstants.NewsType, true);
             Task.WaitAll(m1);
             var m = m1.Result;
             foreach (var q in m)
@@ -709,7 +650,7 @@ namespace StoreManagement.Test
             }
 
         }
-        
+
         [TestMethod]
         public void TestContentService()
         {

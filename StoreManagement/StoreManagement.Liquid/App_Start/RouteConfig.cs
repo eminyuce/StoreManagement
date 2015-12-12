@@ -66,6 +66,15 @@ namespace StoreManagement.Liquid
                       defaults: new { controller = "Products", action = "Product", id = UrlParameter.Optional }
                   );
 
+
+            routes.MapRoute(
+             name: "Css",
+             url: "Css/{action}",
+             defaults: new { controller = "Css", action = "GetTheme" }
+         );
+
+
+
             routes.MapRoute(
              name: "Rss",
              url: "Rss/{action}",

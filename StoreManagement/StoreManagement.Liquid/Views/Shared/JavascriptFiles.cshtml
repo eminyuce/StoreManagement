@@ -3,38 +3,22 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
  
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+@*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>*@
 
-<script>
-    
-    (function ($) {
-        $(document).ready(function () {
-            $('#cssmenu').prepend('<div id="menu-button">Menu</div>');
-            $('#cssmenu #menu-button').on('click', function () {
-                var menu = $(this).next('ul');
-                if (menu.hasClass('open')) {
-                    menu.removeClass('open');
-                }
-                else {
-                    menu.addClass('open');
-                }
-            });
-            
+<script type="text/javascript"> 
 
-            // For the Second level Dropdown menu, highlight the parent	
-            $(".dropdown-menu")
-            .mouseenter(function () {
-                $(this).parent('li').addClass('active');
-            })
-            .mouseleave(function () {
-                $(this).parent('li').removeClass('active');
-            });
+ 
+    sfHover = function () {
+        var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+        for (var i = 0; i < sfEls.length; i++) {
+            sfEls[i].onmouseover = function () {
+                this.className += " sfhover";
+            }
+            sfEls[i].onmouseout = function () {
+                this.className = this.className.replace(new RegExp(" sfhover\\b"), "");
+            }
+        }
+    }
+    if (window.attachEvent) window.attachEvent("onload", sfHover);
 
-
-          
-
-        });
-    })(jQuery);
-
-
-</script>
+//--><!]]></script>

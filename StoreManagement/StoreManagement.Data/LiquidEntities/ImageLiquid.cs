@@ -159,17 +159,19 @@ namespace StoreManagement.Data.LiquidEntities
                 var fileImage = FileManagers.FirstOrDefault(r => r.State && r.FileSize.Equals(size, StringComparison.InvariantCultureIgnoreCase));
                 if (fileImage != null)
                 {
-                    if (fileImage.Width != null)
-                    {
-                        if (fileImage.Height != null)
-                        {
-                            int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
-                            int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
 
-                            return fileImage.WebContentLink;
-                        }
+                    return fileImage.WebContentLink;
 
-                    }
+                    //if (fileImage.Width != null)
+                    //{
+                    //    if (fileImage.Height != null)
+                    //    {
+                    //        int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
+                    //        int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
+
+                    //    }
+
+                    //}
                 }
 
 

@@ -43,7 +43,7 @@ namespace StoreManagement.Data.Constants
         public static String MailPassword = "MailPassword";
 
         public static String AboutUs = "AboutUs";
-
+        public static String MainMenu = "MainMenu";
 
 
         public static String Files = "Files";

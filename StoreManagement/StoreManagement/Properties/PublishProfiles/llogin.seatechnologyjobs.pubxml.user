@@ -145,7 +145,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2015 12:50:39</publishTime>
     </File>
     <File Include="bin/NLog.config">
-      <publishTime>07/30/2015 09:18:04</publishTime>
+      <publishTime>12/15/2015 10:58:57</publishTime>
     </File>
     <File Include="bin/NLog.dll">
       <publishTime>10/08/2015 12:50:41</publishTime>
@@ -184,13 +184,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>12/15/2015 10:52:37</publishTime>
+      <publishTime>12/15/2015 13:52:31</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>12/15/2015 10:52:43</publishTime>
+      <publishTime>12/15/2015 13:52:34</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>12/15/2015 10:52:40</publishTime>
+      <publishTime>12/15/2015 13:52:33</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -886,7 +886,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:04</publishTime>
     </File>
     <File Include="NLog.config">
-      <publishTime>07/30/2015 09:18:04</publishTime>
+      <publishTime>12/15/2015 10:58:57</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/24/2015 12:05:00</publishTime>
@@ -1165,7 +1165,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/15/2015 10:43:02</publishTime>
+      <publishTime>12/15/2015 13:52:09</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>07/30/2015 09:18:06</publishTime>
@@ -1177,7 +1177,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/15/2015 10:52:47</publishTime>
+      <publishTime>12/15/2015 13:43:28</publishTime>
     </File>
   </ItemGroup>
 </Project>

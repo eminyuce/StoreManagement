@@ -272,6 +272,7 @@
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
+    <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\ModulAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -549,6 +550,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Rss\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

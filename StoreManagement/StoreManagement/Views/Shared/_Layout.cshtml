@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using StoreManagement.Data.Constants
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -102,7 +103,7 @@ Navigation Bar Section
                     </a>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            @Html.Action("MainMenu", "Home")
+                             @Html.Action("MainMenu","Home")
                         </ul>
                         <form action="#" class="navbar-search pull-left">
                             <input type="text" placeholder="Search" class="search-query span2">

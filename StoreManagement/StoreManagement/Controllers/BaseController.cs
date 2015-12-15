@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -151,6 +152,8 @@ namespace StoreManagement.Controllers
             ViewData["StoreName"] = MyStore.Name;
 
             SetStoreCache();
+
+            
             base.OnActionExecuting(filterContext);
         }
         protected bool IsCacheEnable { get; set; }

@@ -176,6 +176,9 @@ namespace StoreManagement.Liquid.Controllers
             ViewData["StoreName"] = StoreName;
 
             SetStoreCache();
+
+
+
             base.OnActionExecuting(filterContext);
         }
 

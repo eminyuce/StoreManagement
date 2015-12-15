@@ -78,11 +78,9 @@ namespace StoreManagement.Controllers
             return View();
         }
 
-        public async Task<ActionResult> MainMenu()
+        public ActionResult MainMenu()
         {
-            var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(this.MyStore.Id);
-            await Task.WhenAll(navigationsTask);
-            var navigations = navigationsTask.Result;
+            var navigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             return View(navigations);
         }
 

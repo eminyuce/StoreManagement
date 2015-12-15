@@ -19,7 +19,7 @@ namespace StoreManagement.Controllers
             var builder = new StringBuilder();
             //IDictionary<string, IDictionary<string, string>> css = new Dictionary<string, IDictionary<string, string>>();
 
-            var settingStyle = this.SettingService.GetStoreSettings(Store.Id)
+            var settingStyle = this.SettingService.GetStoreSettings(MyStore.Id)
                 .Where(r => r.Type.ToLower().Contains("Style".ToLower())).ToList();
 
             /* Populate css object from the database */

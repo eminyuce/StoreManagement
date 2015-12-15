@@ -116,69 +116,77 @@ namespace StoreManagement.Data.LiquidEntities
 
         public String BestImageSourceFix
         {
-            get { return GetImageSource("best",false); }
+            get { return GetImageSource("best", false); }
         }
         public String PhoneSmallImageSourceFix
         {
-            get { return GetImageSource("IPhoneSmall",false); }
+            get { return GetImageSource("IPhoneSmall", false); }
         }
         public String PhoneImageSourceFix
         {
-            get { return GetImageSource("IPhone",false); }
+            get { return GetImageSource("IPhone", false); }
         }
         public String OriginalImageSourceFix
         {
-            get { return GetImageSource("Original",false); }
+            get { return GetImageSource("Original", false); }
         }
         public String SmallImageSourceFix
         {
-            get { return GetImageSource("Small",false); }
+            get { return GetImageSource("Small", false); }
         }
         public String XlargeImageSourceFix
         {
-            get { return GetImageSource("XLarge",false); }
+            get { return GetImageSource("XLarge", false); }
         }
         public String MediumImageSourceFix
         {
-            get { return GetImageSource("Medium",false); }
+            get { return GetImageSource("Medium", false); }
         }
         public String LargeImageSourceFix
         {
-            get { return GetImageSource("Large",false); }
+            get { return GetImageSource("Large", false); }
         }
 
-        public String GetImageSource(String size,bool isImageSizeActive=true)
+        public String GetImageSource(String size, bool isImageSizeActive = true)
         {
 
-            if (!ImageState)
+            try
             {
-                return "";
-            }
-            if (ImageHas)
-            {
-                var fileImage = FileManagers.FirstOrDefault(r => r.State && r.FileSize.Equals(size, StringComparison.InvariantCultureIgnoreCase));
-                if (fileImage != null)
+
+
+                if (!ImageState)
                 {
+                    return "";
+                }
+                if (ImageHas)
+                {
+                    var fileImage = FileManagers.FirstOrDefault(r => r.State && r.FileSize.Equals(size, StringComparison.InvariantCultureIgnoreCase));
+                    if (fileImage != null)
+                    {
 
-                    return fileImage.WebContentLink;
+                        return fileImage.WebContentLink;
 
-                    //if (fileImage.Width != null)
-                    //{
-                    //    if (fileImage.Height != null)
-                    //    {
-                    //        int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
-                    //        int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
+                        //if (fileImage.Width != null)
+                        //{
+                        //    if (fileImage.Height != null)
+                        //    {
+                        //        int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
+                        //        int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
 
-                    //    }
+                        //    }
 
-                    //}
+                        //}
+                    }
+
                 }
 
-
-
             }
-            return "";
+            catch (Exception)
+            {
 
+
+            }              
+            return "";
         }
 
 

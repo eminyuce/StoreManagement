@@ -17,14 +17,11 @@ namespace StoreManagement.Controllers
 
         public ActionResult Index(int page = 1)
         {
-
-
-
             var newsContents = new ContentsViewModel();
-            newsContents.Store = Store;
-            var m = ContentService.GetContentsCategoryId(Store.Id, null, "blog", true, page, 24);
+            newsContents.Store = MyStore;
+            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, "blog", true, page, 24);
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            var blogsIndex = PageDesignService.GetPageDesignByName(Store.Id, "BlogsIndex");
+            var blogsIndex = PageDesignService.GetPageDesignByName(MyStore.Id, "BlogsIndex");
 
             return View(newsContents);
         }
@@ -33,9 +30,9 @@ namespace StoreManagement.Controllers
             var returnModel = new ContentDetailViewModel();
             int blogId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Content = ContentService.GetContentsContentId(blogId);
-            returnModel.Store = Store;
+            returnModel.Store = MyStore;
             returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, "blog", true);
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, "blog", true);
 
 
 

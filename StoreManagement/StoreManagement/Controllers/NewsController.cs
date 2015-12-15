@@ -23,8 +23,8 @@ namespace StoreManagement.Controllers
                 return HttpNotFound("Not Found");
             }
             var newsContents = new ContentsViewModel();
-            newsContents.Store = Store;
-            var m = ContentService.GetContentsCategoryId(Store.Id, null, StoreConstants.NewsType, true, page, 24);
+            newsContents.Store = MyStore;
+            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.NewsType, true, page, 24);
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
             return View(newsContents);
         }
@@ -43,9 +43,9 @@ namespace StoreManagement.Controllers
                 return HttpNotFound("Not Found"); 
             }
 
-            returnModel.Store = Store;
+            returnModel.Store = MyStore;
             returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(Store.Id, StoreConstants.NewsType);
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType);
 
             return View(returnModel);
         }

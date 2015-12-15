@@ -25,10 +25,10 @@ namespace StoreManagement.Controllers
         {
             var returnModel = new ProductCategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreId(Store.Id, StoreConstants.ProductType);
-            returnModel.Store = Store;
+            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id, StoreConstants.ProductType);
+            returnModel.Store = MyStore;
             returnModel.Category = ProductCategoryService.GetProductCategory(categoryId);
-            var m = ProductService.GetProductsCategoryId(Store.Id, categoryId, StoreConstants.ProductType, true, page, 24);
+            var m = ProductService.GetProductsCategoryId(MyStore.Id, categoryId, StoreConstants.ProductType, true, page, 24);
             returnModel.Products = new PagedList<Product>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
 
             return View(returnModel);

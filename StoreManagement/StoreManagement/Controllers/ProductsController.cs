@@ -19,7 +19,7 @@ namespace StoreManagement.Controllers
         {
             var returnModel = new ProductsViewModel();
           //  returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(Store.Id, StoreConstants.ProductType);
-            returnModel.Store = Store;
+            returnModel.Store = MyStore;
             return View(returnModel);
         }
         //
@@ -29,9 +29,9 @@ namespace StoreManagement.Controllers
             var returnModel = new ProductDetailViewModel();
             int productId = id.Split("-".ToCharArray()).Last().ToInt();
             returnModel.Product = ProductService.GetProductsById(productId);
-            returnModel.Store = Store;
+            returnModel.Store = MyStore;
             returnModel.Category = ProductCategoryService.GetProductCategory(returnModel.Product.ProductCategoryId);
-            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreId(Store.Id, StoreConstants.ProductType);
+            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id, StoreConstants.ProductType);
             return View(returnModel);
         }
 	}

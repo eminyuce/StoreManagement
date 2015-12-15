@@ -68,8 +68,12 @@ namespace StoreManagement.Liquid
          defaults: new { controller = "Products", action = "Index", filters = UrlParameter.Optional, id = UrlParameter.Optional }
          , constraints: new { filters = @"(^[^/]+-.*)|^$" }
          );
-
-           
+            //AjaxProducts
+            routes.MapRoute(
+             name: "AjaxProducts",
+             url: "AjaxProducts/{action}",
+             defaults: new { controller = "AjaxProducts", action = "GetProductsByProductType" }
+         );
 
             routes.MapRoute(
              name: "Css",

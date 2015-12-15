@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
+using NLog;
 using Ninject;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
@@ -19,7 +20,7 @@ namespace StoreManagement.Controllers
 {
     public class CategoriesController : BaseController
     {
-         
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public ActionResult Index()
         {
@@ -39,13 +40,13 @@ namespace StoreManagement.Controllers
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
 
-            Task<List<Category>> task1 = CategoryService.GetCategoriesByStoreIdAsync(Store.Id, StoreConstants.BlogsType,null);
-            var task2 = ContentService.GetContentsCategoryIdAsync(Store.Id, categoryId, StoreConstants.BlogsType, true, page, 600,"");
+            Task<List<Category>> task1 = CategoryService.GetCategoriesByStoreIdAsync(MyStore.Id, StoreConstants.BlogsType,null);
+            var task2 = ContentService.GetContentsCategoryIdAsync(MyStore.Id, categoryId, StoreConstants.BlogsType, true, page, 600,"");
             var task3 = CategoryService.GetCategoryAsync(categoryId);
             await Task.WhenAll(task1, task2, task3);
 
             returnModel.Categories = task1.Result;
-            returnModel.Store = Store;
+            returnModel.Store = MyStore;
             returnModel.Category = task3.Result;
 
             returnModel.Contents = new PagedList<Content>(task2.Result.items, task2.Result.page - 1, task2.Result.pageSize, task2.Result.totalItemCount);
@@ -70,13 +71,13 @@ namespace StoreManagement.Controllers
             var returnModel = new CategoryViewModel();
             int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
 
-            var task1 = CategoryService.GetCategoriesByStoreId(Store.Id, StoreConstants.BlogsType);
-            var task2 = ContentService.GetContentsCategoryId(Store.Id, categoryId, StoreConstants.BlogsType, true, page, 600);
+            var task1 = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType);
+            var task2 = ContentService.GetContentsCategoryId(MyStore.Id, categoryId, StoreConstants.BlogsType, true, page, 600);
             var task3 = CategoryService.GetCategory(categoryId);
             //await Task.WhenAll(task1, task2, task3);
 
             returnModel.Categories = task1;
-            returnModel.Store = Store;
+            returnModel.Store = MyStore;
             returnModel.Category = task3;
 
             returnModel.Contents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);

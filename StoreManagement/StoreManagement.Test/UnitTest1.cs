@@ -73,7 +73,7 @@ namespace StoreManagement.Test
 
             Console.Write(blogsTask.Result.Count);
         }
-        
+
         [TestMethod]
         public void DeleteBrandsWithoutProducts()
         {
@@ -124,7 +124,7 @@ namespace StoreManagement.Test
 
         }
 
-        
+
         [TestMethod]
         public void Test333344466()
         {
@@ -164,7 +164,82 @@ namespace StoreManagement.Test
             Console.WriteLine(productsTask.Result.totalItemCount);
 
         }
+        /*
+         
+         
+         
+SELECT  COunt(Products.Id)
+FROM         ProductFiles AS p RIGHT OUTER JOIN
+                      Products ON p.ProductId = Products.Id
+WHERE     (p.Id IS NULL)
+         * 
+         */
+        [TestMethod]
+        public void FileManagerProductImages()
+        {
+            var db = dbContext = new StoreContext(ConnectionString);
+            IFileManagerService rep3 = new FileManagerRepository(db);
+            var files = rep3.GetFilesByStoreId(53);
+            IProductService rep = new ProductRepository(db);
+            IProductFileRepository rep2 = new ProductFileRepository(db);
+            IProductCategoryService repCategory = new ProductCategoryRepository(new StoreContext(ConnectionString));
+            var categoriesTask = repCategory.GetProductCategoriesByStoreId(53);
+            foreach (var c in categoriesTask)
+            {
+                var products = rep.GetProductByTypeAndCategoryId(53, "product", c.Id);
+                foreach (var p in products)
+                {
+                    try
+                    {
+                        var productList = p.ProductFiles;
+                        if (productList != null && !productList.Any())
+                        {
+                            try
+                            {
+                                Product p1 = p;
+                                if (!String.IsNullOrEmpty(p1.Name))
+                                {
+                                    var productFile = files.Where(r => !String.IsNullOrEmpty(r.OriginalFilename) && r.OriginalFilename.Contains(p1.Name));
+                                    foreach (var pf in productFile)
+                                    {
+                                        try
+                                        {
+                                            var item = new ProductFile();
+                                            item.FileManagerId = pf.Id;
+                                            item.ProductId = p.Id;
+                                            item.IsMainImage = true;
+                                            rep2.Add(item);
+                                            rep2.Save();
 
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            String mm = ex.Message;  
+                                   
+                                        }
+                                      
+
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                String mm = e.Message;
+
+                            }
+
+
+                        }
+
+                    }
+                    catch (Exception m)
+                    {
+                        String mm = m.Message;  
+
+                    }
+                }
+            }
+        }
 
 
 
@@ -338,7 +413,7 @@ namespace StoreManagement.Test
 
 
         }
- 
+
 
         [TestMethod]
         public void TestSettingRepository1()

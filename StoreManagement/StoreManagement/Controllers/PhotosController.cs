@@ -17,8 +17,8 @@ namespace StoreManagement.Controllers
         public ActionResult Index(int page = 1)
         {
             var photos = new PhotosViewModel();
-            photos.Store = this.Store;
-            var m = FileManagerService.GetImagesByStoreId(Store.Id, page, 24);
+            photos.Store = this.MyStore;
+            var m = FileManagerService.GetImagesByStoreId(MyStore.Id, page, 24);
             photos.FileManagers = new PagedList<FileManager>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
             return View(photos);
         }

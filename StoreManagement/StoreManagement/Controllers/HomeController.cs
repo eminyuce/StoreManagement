@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
@@ -19,6 +20,7 @@ namespace StoreManagement.Controllers
     public class HomeController : BaseController
     {
 
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public ActionResult Index()
         {
@@ -28,14 +30,14 @@ namespace StoreManagement.Controllers
             try
             {
 
-                shp.Store = Store;
-                shp.CarouselImages = FileManagerService.GetStoreCarousels(Store.Id);
-                shp.ProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(Store.Id);
-                var products = ProductService.GetProductsCategoryId(Store.Id, null, StoreConstants.ProductType, true, page, 24);
+                shp.Store = MyStore;
+                shp.CarouselImages = FileManagerService.GetStoreCarousels(MyStore.Id);
+                shp.ProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id);
+                var products = ProductService.GetProductsCategoryId(MyStore.Id, null, StoreConstants.ProductType, true, page, 24);
                 shp.Products = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
-                var contents = ContentService.GetContentsCategoryId(Store.Id, null, StoreConstants.NewsType, true, page, 24);
+                var contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.NewsType, true, page, 24);
                 shp.News = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
-                contents = ContentService.GetContentsCategoryId(Store.Id, null, StoreConstants.BlogsType, true, page, 24);
+                contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.BlogsType, true, page, 24);
                 shp.Blogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
             }
             catch (Exception ex)
@@ -76,10 +78,12 @@ namespace StoreManagement.Controllers
             return View();
         }
 
-        public ActionResult MainMenu()
+        public async Task<ActionResult> MainMenu()
         {
-            var mainMenu = NavigationService.GetStoreActiveNavigationsAsync(Store.Id);
-            return View(mainMenu);
+            var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(this.MyStore.Id);
+            await Task.WhenAll(navigationsTask);
+            var navigations = navigationsTask.Result;
+            return View(navigations);
         }
 
         public ActionResult Test()

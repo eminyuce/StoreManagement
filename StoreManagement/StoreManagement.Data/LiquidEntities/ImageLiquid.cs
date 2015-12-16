@@ -21,8 +21,8 @@ namespace StoreManagement.Data.LiquidEntities
 
         public ImageLiquid(List<BaseFileEntity> baseFileEntities, int width, int height)
         {
-            this.BaseFileEntities = baseFileEntities;
-            this.FileManagers = baseFileEntities.Select(r => r.FileManager).ToList();
+            this.BaseFileEntities = baseFileEntities.Where(r => r.FileManager != null).ToList();
+            this.FileManagers = baseFileEntities.Where(r=> r.FileManager != null).Select(r => r.FileManager).ToList();
 
 
             this.ImageWidth = width == 0 ? 99 : width;
@@ -149,44 +149,15 @@ namespace StoreManagement.Data.LiquidEntities
 
         public String GetImageSource(String size, bool isImageSizeActive = true)
         {
-
-            try
+            var fileImage = FileManagers.FirstOrDefault(r => r.State && r.FileSize.Equals(size, StringComparison.InvariantCultureIgnoreCase));
+            if (fileImage != null)
             {
-
-
-                if (!ImageState)
-                {
-                    return "";
-                }
-                if (ImageHas)
-                {
-                    var fileImage = FileManagers.FirstOrDefault(r => r.State && r.FileSize.Equals(size, StringComparison.InvariantCultureIgnoreCase));
-                    if (fileImage != null)
-                    {
-
-                        return fileImage.WebContentLink;
-
-                        //if (fileImage.Width != null)
-                        //{
-                        //    if (fileImage.Height != null)
-                        //    {
-                        //        int w = isImageSizeActive ? fileImage.Width.Value : this.ImageWidth;
-                        //        int h = isImageSizeActive ? fileImage.Height.Value : this.ImageHeight;
-
-                        //    }
-
-                        //}
-                    }
-
-                }
-
+                return fileImage.WebContentLink;
             }
-            catch (Exception)
+            else
             {
-
-
-            }              
-            return "";
+                return "";
+            }
         }
 
 

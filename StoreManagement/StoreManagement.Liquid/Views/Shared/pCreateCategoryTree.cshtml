@@ -2,24 +2,35 @@
 @model List<StoreManagement.Data.Entities.ProductCategory>
 @{
     Layout = null;
+    int maxLevel = 2;
 }
   
-    @CategoryTree(Model, 0)
+    @CategoryTree(Model, 0,maxLevel)
   
  
 
-@helper CategoryTree(List<ProductCategory> nodes, int? parentId)
+@helper CategoryTree(List<ProductCategory> nodes, int? parentId, int maxLevel)
 {
-    
+    if (maxLevel == 0)
+    {
+        return;
+    }
+    else
+    {
+        maxLevel--;
+    }
+      
     if (nodes.Any(n => n.ParentId == parentId)) 
     { 
     <ul  @if (parentId == 0)
         {
-      @: id="nav"
+            @: id="nav"
+
         }else{
 	
              
 		}
+
 		>
         @foreach (var node in nodes.Where(n => n.ParentId == parentId))
         {
@@ -27,10 +38,8 @@
             <li
                   @if (children)
                   {
-                    
-
                       
-                       if (parentId == 0)
+        if (parentId == 0)
         {
             @:  
         }else{
@@ -44,15 +53,15 @@
                 @if (children)
                  {
                      <a href=@String.Format("/products/{0}",node.ApiCategoryId)>@node.Name </a>
-       
-
                      
                  }
                  else
                  {
                      <a  href=@String.Format("/products/{0}",node.ApiCategoryId)>@node.Name </a>
                  }
-                        @CategoryTree(nodes, node.Id)
+                
+
+                @CategoryTree(nodes, node.Id,maxLevel)
              
             </li>
         }

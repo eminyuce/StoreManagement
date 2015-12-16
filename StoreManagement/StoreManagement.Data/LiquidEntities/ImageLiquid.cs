@@ -16,15 +16,13 @@ namespace StoreManagement.Data.LiquidEntities
 
         private List<FileManager> FileManagers { get; set; }
         private List<BaseFileEntity> BaseFileEntities { get; set; }
-        //TODO: ImageState will manage visibility.
+        
         public bool ImageState { get; set; }
 
         public ImageLiquid(List<BaseFileEntity> baseFileEntities, int width, int height)
         {
             this.BaseFileEntities = baseFileEntities.Where(r => r.FileManager != null).ToList();
             this.FileManagers = baseFileEntities.Where(r=> r.FileManager != null).Select(r => r.FileManager).ToList();
-
-
             this.ImageWidth = width == 0 ? 99 : width;
             this.ImageHeight = height == 0 ? 99 : height;
 

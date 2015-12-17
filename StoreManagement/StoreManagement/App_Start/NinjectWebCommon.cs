@@ -3,6 +3,7 @@ using StoreManagement.Constants;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Filters;
+using StoreManagement.Helper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -355,6 +356,8 @@ namespace StoreManagement.App_Start
 
 
             kernel.Bind<IEmailSender>().To<EmailSender>();
+
+           
 
            
         }

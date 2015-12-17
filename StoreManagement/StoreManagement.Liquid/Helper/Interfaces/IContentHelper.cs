@@ -25,3 +25,4 @@ namespace StoreManagement.Liquid.Helper.Interfaces
         StoreLiquidResult GetContentsByContentType(List<Content> contents, List<Category> categories, PageDesign pageDesign, String type);
     }
 }
+

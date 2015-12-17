@@ -204,6 +204,7 @@
     <Compile Include="GeneralHelper\PredicateBuilder.cs" />
     <Compile Include="GeneralHelper\RegexUtilities.cs" />
     <Compile Include="GeneralHelper\RequestHelper.cs" />
+    <Compile Include="GeneralHelper\RssHelper.cs" />
     <Compile Include="GeneralHelper\SimpleAES.cs" />
     <Compile Include="GeneralHelper\SyndicationFeedExtensions.cs" />
     <Compile Include="GeneralHelper\UrlHelperExtensions.cs" />

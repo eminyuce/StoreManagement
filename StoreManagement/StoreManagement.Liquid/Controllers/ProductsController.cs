@@ -21,7 +21,11 @@ namespace StoreManagement.Liquid.Controllers
         private const String ProductDetailPage = "ProductDetailPage";
 
 
-        public async Task<ActionResult> Index(String search = "", String filters = "", String page = "", String id = "women")
+        public async Task<ActionResult> Index(
+            String search = "", 
+            String filters = "", 
+            String page = "", 
+            String id = "womens-clothes")
         {
             search = search.ToStr();
             String categoryApiId = id;

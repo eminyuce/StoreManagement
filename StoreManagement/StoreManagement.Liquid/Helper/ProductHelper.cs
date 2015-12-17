@@ -365,7 +365,7 @@ namespace StoreManagement.Liquid.Helper
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetRelatedProductsPartial");
+                Logger.Error(ex, "GetProductsRssFeed");
                 return null;
             }
         }
@@ -420,9 +420,9 @@ namespace StoreManagement.Liquid.Helper
                         SyndicationLink.CreateMediaEnclosureLink(new Uri(imageSrcHtml), "image/jpeg", 100);
                     si.Links.Add(imageLink);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-
+                    Logger.Error(ex, "GetSyndicationItem");
                 }
 
             }

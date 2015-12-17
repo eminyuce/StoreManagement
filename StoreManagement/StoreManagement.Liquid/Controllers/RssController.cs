@@ -53,9 +53,9 @@ namespace StoreManagement.Liquid.Controllers
             var categories = categoriesTask.Result;
 
             var feed = ContentHelper.GetContentsRssFeed(store, content, categories, description, StoreConstants.NewsType);
-            ProductHelper.ImageWidth = imageWidth;
-            ProductHelper.ImageHeight = imageHeight;
-            ProductHelper.StoreId = StoreId;
+            ContentHelper.ImageWidth = imageWidth;
+            ContentHelper.ImageHeight = imageHeight;
+            ContentHelper.StoreId = StoreId;
             var comment = new StringBuilder();
             comment.AppendLine("Take=Number of rss item; Default value is 10  ");
             comment.AppendLine("Description=The length of description text.Default value is 300  ");
@@ -75,9 +75,9 @@ namespace StoreManagement.Liquid.Controllers
 
 
             var feed = ContentHelper.GetContentsRssFeed(store, content, categories, description, StoreConstants.BlogsType);
-            ProductHelper.ImageWidth = imageWidth;
-            ProductHelper.ImageHeight = imageHeight;
-            ProductHelper.StoreId = StoreId;
+            ContentHelper.ImageWidth = imageWidth;
+            ContentHelper.ImageHeight = imageHeight;
+            ContentHelper.StoreId = StoreId;
             var comment = new StringBuilder();
             comment.AppendLine("Take=Number of rss item; Default value is 10  ");
             comment.AppendLine("Description=The length of description text.Default value is 300  ");

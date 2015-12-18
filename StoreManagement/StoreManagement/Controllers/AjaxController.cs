@@ -34,7 +34,7 @@ namespace StoreManagement.Controllers
             var returnModel = new ProductDetailViewModel();
             returnModel.Store = MyStore;
             returnModel.Category = ProductCategoryService.GetProductCategory(categoryId);
-            returnModel.RelatedProducts = ProductService.GetProductByTypeAndCategoryId(MyStore.Id, "product", categoryId).Take(5).ToList();
+            returnModel.RelatedProducts = ProductService.GetProductByTypeAndCategoryId(MyStore.Id, StoreConstants.ProductType, categoryId).Take(5).ToList();
             String partialViewName = @"pProducts\pRelatedProducts";
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);

@@ -82,6 +82,11 @@ namespace StoreManagement.Liquid
          );
 
 
+            routes.MapRoute(
+             name: "test",
+             url: "test/{action}",
+             defaults: new { controller = "test", action = "index4" }
+         );
 
             routes.MapRoute(
              name: "Rss",

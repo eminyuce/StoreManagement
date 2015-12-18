@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
+using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
@@ -19,9 +20,8 @@ namespace StoreManagement.Controllers
         {
             var newsContents = new ContentsViewModel();
             newsContents.Store = MyStore;
-            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, "blog", true, page, 24);
+            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.BlogsType, true, page, 24);
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            var blogsIndex = PageDesignService.GetPageDesignByName(MyStore.Id, "BlogsIndex");
 
             return View(newsContents);
         }
@@ -32,9 +32,7 @@ namespace StoreManagement.Controllers
             returnModel.Content = ContentService.GetContentsContentId(blogId);
             returnModel.Store = MyStore;
             returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, "blog", true);
-
-
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType, true);
 
             return View(returnModel);
         }

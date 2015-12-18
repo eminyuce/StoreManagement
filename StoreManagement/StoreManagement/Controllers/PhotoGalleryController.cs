@@ -10,7 +10,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
-    public class PhotosController : BaseController
+    public class PhotoGalleryController : BaseController
     {
          
 

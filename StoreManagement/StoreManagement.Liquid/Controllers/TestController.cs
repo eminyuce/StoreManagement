@@ -125,5 +125,13 @@ namespace StoreManagement.Liquid.Controllers
 
             return View(list.Result);
         }
+
+        public ActionResult Index4()
+        {
+
+
+            return View();
+        }
+
     }
 }

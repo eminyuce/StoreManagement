@@ -28,6 +28,7 @@ namespace StoreManagement.Liquid.Controllers
             String id = "womens-clothes")
         {
             search = search.ToStr();
+            id = String.IsNullOrEmpty(id) ? "womens-clothes" : id;
             String categoryApiId = id;
             RouteData.Values["id"] = id;
             String headerText = "";

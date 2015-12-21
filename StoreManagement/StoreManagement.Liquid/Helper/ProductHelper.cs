@@ -153,8 +153,15 @@ namespace StoreManagement.Liquid.Helper
                     items.Add(blog);
                 }
             }
+
             var selectedCategory = categories.FirstOrDefault(r => r.ApiCategoryId.Equals(categoryApiId,StringComparison.InvariantCultureIgnoreCase));
-            var selectedCategoryLiquid = new ProductCategoryLiquid(selectedCategory);
+            ProductCategoryLiquid selectedCategoryLiquid = null;
+            if (selectedCategory == null)
+            {
+                selectedCategory=categories.FirstOrDefault();
+            }
+            selectedCategoryLiquid = new ProductCategoryLiquid(selectedCategory);
+
 
             var categoryTree = controller.RenderPartialToStringCache(
                         "pCreateCategoryTree",
@@ -185,7 +192,14 @@ namespace StoreManagement.Liquid.Helper
             var result = new StoreLiquidResult();
             result.PageDesingName = pageDesign.Name;
             result.LiquidRenderedResult = dic;
-            result.PageTitle = selectedCategory.Name+" Products";
+            if (selectedCategory != null)
+            {
+                result.PageTitle = selectedCategory.Name + " Products";
+            }
+            else
+            {
+                result.PageTitle = "Products";
+            }
             return result;
         }
 

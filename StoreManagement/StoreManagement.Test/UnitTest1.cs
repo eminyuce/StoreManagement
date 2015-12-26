@@ -785,6 +785,45 @@ WHERE     (p.Id IS NULL)
             }
 
         }
+
+
+
+
+
+        [TestMethod]
+        public void DovizliAskerlik22()
+        {
+            var dt = new DateTime(2012, 8, 20);
+            var dt2 = new DateTime(2013, 3, 8);
+            var u = dt2.Subtract(dt).Days;
+            var dt3 = new DateTime(2013, 5, 14);
+            var dt4 = DateTime.Now;
+            var s = dt4.Subtract(dt3).Days;
+            Console.WriteLine("Intersoft:" + u);
+            Console.WriteLine("Maritime: " + s);
+
+            //Turkiye ablamin tatili
+            var hDt = new DateTime(2014, 9, 11);
+            var hDt2 = new DateTime(2014, 9, 28);
+            int bahamaHoliday = 1;
+            int holiday = hDt2.Subtract(hDt).Days;
+            holiday += bahamaHoliday;
+
+            //Aile ziyareti
+            hDt = new DateTime(2015, 11, 12);
+            hDt2 = new DateTime(2015, 11, 27);
+            holiday += hDt2.Subtract(hDt).Days;
+
+            Console.WriteLine("Holiday: " + holiday);
+
+            int total = (s + u) - holiday;
+            int left = (1095 - total);
+            Console.WriteLine("Grand  Total: " + (s + u));
+            Console.WriteLine("Total: " + total);
+            Console.WriteLine(String.Format("Left:{0} {1}  {2}", left, left / 30, dt4.AddDays(left).ToShortDateString()));
+
+        }
+
         [TestMethod]
         public void TestMethod4()
         {

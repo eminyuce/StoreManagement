@@ -80,15 +80,31 @@ namespace StoreManagement.Liquid.Controllers
             pagingDic.MyStore = this.MyStore;
 
 
-
+            pagingDic.DetailLink = "/products/" + categoryApiId;
             pagingDic.PageTitle = String.IsNullOrEmpty(headerText) ?  pagingDic.PageTitle  : headerText;
-
+            string mmm = 
+                GetFilter(productSearchResult.Filters, "category", 4) + " " +
+                GetFilter(productSearchResult.Filters, "brand", 20);
+            ViewData[StoreConstants.MetaTagKeywords] = pagingDic.PageTitle+", "+mmm;
+            ViewData[StoreConstants.MetaTagDescription] = GeneralHelper.TruncateAtWord(pagingDic.PageTitle + ", " + mmm, 155);
+            
             return View(pagingDic);
 
 
 
         }
 
+        private String GetFilter(List<Data.HelpersModel.Filter> list, string fieldName,int totalItem)
+        {
+            var listSp =
+                list.Where(r => r.FieldName.Equals(fieldName, StringComparison.InvariantCultureIgnoreCase))
+                    .OrderByDescending(r => r.Cnt)
+                    .Take(totalItem)
+                    .Select(r => r.Text);
+
+            return String.Join(", ", listSp);
+        }
+        
         public async Task<ActionResult> Index3(int page = 1, int catId = 0, String search = "", String filters = "")
         {
             try
@@ -114,6 +130,9 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesign = pageDesignTask.Result;
                 var categories = categoriesTask.Result;
 
+
+                
+
                 if (pageDesign == null)
                 {
                     throw new Exception("PageDesing is null:" + IndexPageDesingName);
@@ -136,6 +155,8 @@ namespace StoreManagement.Liquid.Controllers
                 pagingDic.StoreSettings = settings;
                 pagingDic.PageTitle = "Products";
                 pagingDic.MyStore = this.MyStore;
+
+
 
                 return View(pagingDic);
 
@@ -177,6 +198,10 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesign = productsPageDesignTask.Result;
                 var category = categoryTask.Result;
                 var settings = GetStoreSettings();
+
+                ViewData[StoreConstants.MetaTagKeywords] = product.Name;
+                ViewData[StoreConstants.MetaTagDescription] =GeneralHelper.TruncateAtWord(GeneralHelper.StripHtml(product.Name+", "+product.Description),155);
+
                 if (pageDesign == null)
                 {
                     throw new Exception("PageDesing is null:" + ProductDetailPage);

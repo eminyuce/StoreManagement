@@ -79,7 +79,8 @@ namespace StoreManagement.Liquid.Helper
               
 
                 String m = rv.ContainsKey("id") || rv.ContainsKey("filters")   ? "?" : "&";
-                return String.Format("/{2}/{0}{1}page=:num", ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName).ToLower();
+
+                return String.Format("/{2}/{0}{1}page=:num", ActionName.Equals("index",StringComparison.InvariantCultureIgnoreCase) ?"":ActionName, String.IsNullOrEmpty(queryString) ? "?" : queryString + m, ControllerName).ToLower();
             }
         }
 

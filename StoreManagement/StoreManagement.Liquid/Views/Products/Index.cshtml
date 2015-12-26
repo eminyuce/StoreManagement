@@ -4,6 +4,7 @@
 @{
     Dictionary<String, String> outputDic = Model.LiquidRenderedResult;
     ViewBag.Title = GeneralHelper.TruncateAtWord(Model.PageTitle, 60);
+    ViewData[StoreConstants.CanonicalUrl] = Model.GetCanonicalUrl(Request.RequestContext.HttpContext);
 }
 
   @Html.HiddenFor(r=>r.PageDesingName)

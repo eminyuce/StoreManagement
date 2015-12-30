@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace StoreManagement.Data.Entities
 {
 
-    public abstract class BaseEntity : IEntity
+    public abstract class BaseEntity : IEntity 
     {
 
         public int Id { get; set; }
@@ -33,6 +33,6 @@ namespace StoreManagement.Data.Entities
             return "id:" + this.Id + " StoreId:" + this.StoreId;
         }
 
-
+        
     }
 }

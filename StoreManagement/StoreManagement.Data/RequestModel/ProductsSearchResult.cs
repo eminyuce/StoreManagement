@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.HelpersModel;
+using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class ProductsSearchResult
+    public class ProductsSearchResult : BaseDrop
     {
         public RecordsStats Stats { get; set; }
-        List<Product> _products = new List<Product>();
+        private List<Product> _products = new List<Product>();
 
         public List<Product> Products
         {
@@ -19,7 +20,7 @@ namespace StoreManagement.Data.RequestModel
             set { _products = value; }
         }
 
-        List<ProductCategory> _productCategories = new List<ProductCategory>();
+        private List<ProductCategory> _productCategories = new List<ProductCategory>();
         public List<ProductCategory> ProductCategories
         {
             get { return _productCategories; }

@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MvcPaging;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class ContentsViewModel
+    public class ContentsViewModel : BaseDrop
     {
         public Store Store { get; set; }
         public PagedList<Content> Contents { get; set; }

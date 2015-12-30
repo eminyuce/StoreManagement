@@ -549,7 +549,10 @@
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Shared\pProducts\pProductCategories.cshtml" />
     <Content Include="Views\Home\PageDesignTest.cshtml" />
-    <None Include="Views\Test\Index.liquid" />
+    <None Include="Views\Shared\_Master.liquid" />
+    <Content Include="Views\Test\Index.liquid">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

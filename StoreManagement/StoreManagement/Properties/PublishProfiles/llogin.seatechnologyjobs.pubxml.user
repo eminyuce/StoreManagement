@@ -1173,8 +1173,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
+    <File Include="Views/Shared/_Master.liquid">
+      <publishTime>12/30/2015 16:33:34</publishTime>
+    </File>
     <File Include="Views/Test/Index.liquid">
-      <publishTime>12/30/2015 15:39:40</publishTime>
+      <publishTime>12/30/2015 16:33:57</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/30/2015 09:18:06</publishTime>

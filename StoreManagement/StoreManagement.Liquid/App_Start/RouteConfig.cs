@@ -37,7 +37,7 @@ namespace StoreManagement.Liquid
 
              routes.MapRoute(
                  name: "storeProductSitemap",
-                 url: "sitemaps/productssitemap.xml",
+                 url: "sitemaps/products.xml",
                          defaults: new { controller = "Sitemaps", action = "Products" }
               );
 

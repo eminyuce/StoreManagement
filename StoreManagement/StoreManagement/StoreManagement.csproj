@@ -247,11 +247,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BaseController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -272,6 +274,7 @@
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -556,6 +559,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Activities\" />
+    <Folder Include="Views\Brands\" />
+    <Folder Include="Views\Retailers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

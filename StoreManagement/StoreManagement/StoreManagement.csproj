@@ -466,6 +466,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\storeManagement.js" />
+    <Content Include="Views\Products\Index.liquid">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -522,7 +525,6 @@
     <Content Include="Views\Shared\DisplayTemplates\ProductThumbnail.cshtml" />
     <Content Include="Views\Products\Product.cshtml" />
     <Content Include="Views\Shared\pContents\pRelatedContents.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Pages\Index.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />

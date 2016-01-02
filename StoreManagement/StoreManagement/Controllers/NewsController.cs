@@ -12,6 +12,7 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Days")]
     public class NewsController : BaseController
     {
         

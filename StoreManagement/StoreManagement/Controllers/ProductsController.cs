@@ -22,7 +22,7 @@ namespace StoreManagement.Controllers
         public ActionResult Index()
         {
             var returnModel = new ProductsViewModel();
-          //  returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(Store.Id, StoreConstants.ProductType);
+            returnModel.Categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);
             returnModel.Store = MyStore;
             return View(returnModel);
         }

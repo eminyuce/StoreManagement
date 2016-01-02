@@ -35,7 +35,43 @@ namespace StoreManagement
             AuthConfig.RegisterAuth();
 
         }
-    
+        public override string GetVaryByCustomString(HttpContext context, string custom)
+        {
+            if ("User".Equals(custom, StringComparison.InvariantCultureIgnoreCase))
+            {
+                if (context.User.Identity.IsAuthenticated)
+                {
+                    return context.User.Identity.Name;
+                }
+                else
+                {
+                    return base.GetVaryByCustomString(context, custom);
+                }
+            }
+            return base.GetVaryByCustomString(context, custom);
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            Redirect301();
+        }
+        private void Redirect301()
+        {
+
+            if (Request.Url.Host.Contains("login.seatechnologyjobs.com"))
+            {
+                return;
+            }
+
+            if (!Request.Url.Host.StartsWith("www") && !Request.Url.IsLoopback)
+            {
+                UriBuilder builder = new UriBuilder(Request.Url);
+                builder.Host = "www." + Request.Url.Host;
+                Response.StatusCode = 301;
+                Response.AddHeader("Location", builder.ToString());
+                Response.End();
+            }
+        }
 
     }
 }

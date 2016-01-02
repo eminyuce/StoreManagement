@@ -17,6 +17,8 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Controllers
 {
+
+    [OutputCache(CacheProfile = "Cache1Days")]
     public class HomeController : BaseController
     {
 

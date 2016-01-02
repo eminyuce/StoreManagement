@@ -13,10 +13,10 @@ using StoreManagement.Service.Services;
 
 namespace StoreManagement.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Days")]
     public class ProductCategoriesController : BaseController
     {
         
-
         public ActionResult Index()
         {
             return View();

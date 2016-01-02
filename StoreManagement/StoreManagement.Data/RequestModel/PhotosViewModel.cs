@@ -13,5 +13,19 @@ namespace StoreManagement.Data.RequestModel
     {
         public Store Store { get; set; }
         public PagedList<FileManager> FileManagers { get; set; }
+
+        public StoreLiquid StoreLiquid
+        {
+            get
+            {
+                return new StoreLiquid(Store);
+            }
+        }
+
+        public List<FileManagerLiquid> FileManagerLiquids
+        {
+            get { return FileManagers.Select(r => new FileManagerLiquid(r)).ToList(); }
+        }
+
     }
 }

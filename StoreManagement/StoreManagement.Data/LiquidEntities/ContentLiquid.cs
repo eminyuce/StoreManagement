@@ -22,7 +22,7 @@ namespace StoreManagement.Data.LiquidEntities
 
 
 
-        public ContentLiquid(Content content, Category category, String type, int imageWidth, int imageHeight)
+        public ContentLiquid(Content content, Category category, String type, int imageWidth=0, int imageHeight=0)
         {
             this.Content = content;
             this.Category = category;

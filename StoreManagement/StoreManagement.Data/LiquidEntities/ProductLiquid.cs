@@ -21,7 +21,7 @@ namespace StoreManagement.Data.LiquidEntities
         public Brand Brand { get; set; }
 
 
-        public ProductLiquid(Product product, ProductCategory category, int imageWidth, int imageHeight)
+        public ProductLiquid(Product product, ProductCategory category, int imageWidth=0, int imageHeight=0)
         {
 
             this.Product = product;

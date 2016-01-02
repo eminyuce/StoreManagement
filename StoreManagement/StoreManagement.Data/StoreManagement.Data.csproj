@@ -234,6 +234,7 @@
     <Compile Include="LiquidEntities\NavigationLiquid.cs" />
     <Compile Include="LiquidEntities\ProductLiquid.cs" />
     <Compile Include="LiquidEntities\RetailerLiquid.cs" />
+    <Compile Include="LiquidEntities\StoreLiquid.cs" />
     <Compile Include="LiquidEntities\StoreLiquidResult.cs" />
     <Compile Include="LiquidFilters\TextFilter.cs" />
     <Compile Include="LogEntities\AppNames.cs" />

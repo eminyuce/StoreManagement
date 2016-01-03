@@ -248,7 +248,10 @@
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\AjaxContentsController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\AjaxGenericsController.cs" />
+    <Compile Include="Controllers\AjaxProductsController.cs" />
     <Compile Include="Controllers\BaseController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -562,6 +565,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Activities\" />
+    <Folder Include="Views\AjaxContents\" />
+    <Folder Include="Views\AjaxGenerics\" />
+    <Folder Include="Views\AjaxProducts\" />
     <Folder Include="Views\Brands\" />
     <Folder Include="Views\Retailers\" />
   </ItemGroup>

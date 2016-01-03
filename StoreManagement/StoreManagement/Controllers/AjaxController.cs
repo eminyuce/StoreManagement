@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Web;
 using System.Web.Mvc;
+using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -11,48 +13,35 @@ using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
-    public class AjaxController : BaseController
+    public abstract class AjaxController : BaseController
     {
-
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult GetRelatedContents(int categoryId, String contentType)
-        {
-            var returnModel = new ContentDetailViewModel();
-            returnModel.Store = MyStore;
-            returnModel.Category = CategoryService.GetCategory(categoryId);
-            returnModel.RelatedContents = ContentService.GetContentByTypeAndCategoryId(MyStore.Id, contentType, categoryId, "", true).Take(5).ToList();
-            String partialViewName = @"pContents\pRelatedContents";
-            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
-            return Json(html, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GetRelatedProducts(int categoryId)
-        {
-            var returnModel = new ProductDetailViewModel();
-            returnModel.Store = MyStore;
-            returnModel.Category = ProductCategoryService.GetProductCategory(categoryId);
-            returnModel.RelatedProducts = ProductService.GetProductByTypeAndCategoryId(MyStore.Id, StoreConstants.ProductType, categoryId).Take(5).ToList();
-            String partialViewName = @"pProducts\pRelatedProducts";
-            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
-            return Json(html, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GetProductCategories()
-        {
-            var categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);
-            String partialViewName = @"pProducts\pProductCategories";
-            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(categories));
-            return Json(html, JsonRequestBehavior.AllowGet);
-        }
 
         public ActionResult Refresh(String domain)
         {
-
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        public static Tuple<bool, String> GetCachingValue(String key)
+        {
+            var returnHtml = (String)MemoryCache.Default.Get(key);
+            return Tuple.Create(!String.IsNullOrEmpty(returnHtml), returnHtml);
+        }
+
+        public static void SetCachingValue(String key, String returnHtml, double dateTimeOffSetSeconds = 0)
+        {
+            if (dateTimeOffSetSeconds == 0)
+            {
+                dateTimeOffSetSeconds = ProjectAppSettings.CacheMediumSeconds;
+            }
+            CacheItemPolicy policy = null;
+            CacheEntryRemovedCallback callback = null;
+
+            policy = new CacheItemPolicy();
+            policy.Priority = CacheItemPriority.Default;
+            policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(dateTimeOffSetSeconds);
+
+            MemoryCache.Default.Set(key, returnHtml, policy);
+        }
 
     }
 }

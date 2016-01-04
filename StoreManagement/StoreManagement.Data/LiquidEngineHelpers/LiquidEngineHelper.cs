@@ -48,5 +48,37 @@ namespace StoreManagement.Data.LiquidEngineHelpers
 
             return renderHtml;
         }
+
+        public static String RenderPage(String templateCode, object anonymousObject)
+        {
+            String renderHtml = "";
+            try
+            {
+
+
+                Template.RegisterFilter(typeof(TextFilter));
+                Template template = Template.Parse(templateCode);
+
+                String renderPage = template.Render(Hash.FromAnonymousObject(anonymousObject));
+                if (template.Errors.Any())
+                {
+                    foreach (var e in template.Errors)
+                    {
+                        Logger.Error(" Template Rending Errors:" + e.StackTrace + " templateCode:" + templateCode);
+                        Logger.Error(e, "Template Rending Errors:" + e.StackTrace + " templateCode:" + templateCode, anonymousObject);
+                    }
+                }
+
+                renderHtml = renderPage;
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("RenderPage:" + ex.StackTrace + " templateCode:" + templateCode);
+                renderHtml = "ERROR";
+            }
+
+            return renderHtml;
+        }
     }
 }

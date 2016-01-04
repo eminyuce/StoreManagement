@@ -14,9 +14,9 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.LiquidHelpers;
+using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Liquid.Constants;
-using StoreManagement.Liquid.Helper;
-using StoreManagement.Liquid.Helper.Interfaces;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using NLog;
@@ -35,9 +35,7 @@ namespace StoreManagement.Liquid.Controllers
 
         [Inject]
         public ICommentHelper CommentHelper { set; get; }
-
-        [Inject]
-        public IStoreHelper StoreHelper { set; get; }
+ 
 
         [Inject]
         public IRetailerHelper RetailerHelper { set; get; }
@@ -181,10 +179,47 @@ namespace StoreManagement.Liquid.Controllers
 
             base.OnActionExecuting(filterContext);
         }
+         private static readonly TypedObjectCache<Store>
+            StoreCache = new TypedObjectCache<Store>("StoreHelper");
+
+        public Store GetStoreByDomain(HttpContextBase request)
+        {
+            String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
+            String domainName = "FUELTECHNOLOGYAGE.COM";
+            domainName = GeneralHelper.GetSiteDomain(request);
+            if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                String key = domainName;
+                Store storeObj = new Store();
+                storeObj = (Store) MemoryCache.Default.Get(key);
+                if (storeObj == null)
+                {
+                    storeObj = StoreService.GetStoreByDomain(domainName);
+
+                    CacheItemPolicy policy = null;
+
+                    policy = new CacheItemPolicy();
+                    policy.Priority = CacheItemPriority.Default;
+                    policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(ProjectAppSettings.CacheLongSeconds);
+
+                    MemoryCache.Default.Set(key, storeObj, policy);
+                }
+                return storeObj;
+
+            }
+            else
+            {
+                String defaultSiteDomain = ProjectAppSettings.GetWebConfigString("DefaultSiteDomain",
+                                                                                 "login.seatechnologyjobs.com");
+                BaseLogger.Trace("Default Site Domain is used." + defaultSiteDomain + " for " + domainName);
+                return StoreService.GetStoreByDomain(defaultSiteDomain);
+            }
+
+        }
 
         private void GetStoreByDomain(RequestContext requestContext)
         {
-            var storeObj = StoreHelper.GetStoreByDomain(StoreService, requestContext.HttpContext);
+            var storeObj = GetStoreByDomain(requestContext.HttpContext);
             this.StoreId = storeObj.Id;
             this.StoreName = storeObj.Name;
             this.MyStore = storeObj;

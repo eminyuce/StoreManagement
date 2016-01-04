@@ -11,6 +11,7 @@ using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Helper;
 using StoreManagement.Models;
 using StoreManagement.Service.DbContext;
@@ -24,6 +25,54 @@ namespace StoreManagement.Controllers
     public abstract class BaseController : Controller
     {
         protected static readonly Logger BaseLogger = LogManager.GetCurrentClassLogger();
+
+
+
+        [Inject]
+        public IActivityHelper ActivityHelper { set; get; }
+
+        [Inject]
+        public ICommentHelper CommentHelper { set; get; }
+
+
+        [Inject]
+        public IRetailerHelper RetailerHelper { set; get; }
+
+        [Inject]
+        public IContactHelper ContactHelper { set; get; }
+
+        [Inject]
+        public ILocationHelper LocationHelper { set; get; }
+
+        [Inject]
+        public IBrandHelper BrandHelper { set; get; }
+
+        [Inject]
+        public IContentHelper ContentHelper { set; get; }
+
+        [Inject]
+        public IProductHelper ProductHelper { set; get; }
+
+        [Inject]
+        public IPagingHelper PagingHelper { set; get; }
+
+        [Inject]
+        public ILabelHelper LabelHelper { set; get; }
+
+        [Inject]
+        public IPhotoGalleryHelper PhotoGalleryHelper { set; get; }
+
+        [Inject]
+        public IProductCategoryHelper ProductCategoryHelper { set; get; }
+
+        [Inject]
+        public ICategoryHelper CategoryHelper { set; get; }
+
+        [Inject]
+        public INavigationHelper NavigationHelper { set; get; }
+
+        [Inject]
+        public IHomePageHelper HomePageHelper { set; get; }
 
         [Inject]
         public IStoreService StoreService { set; get; }

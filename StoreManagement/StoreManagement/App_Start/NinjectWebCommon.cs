@@ -2,6 +2,8 @@ using System.Web.Mvc;
 using StoreManagement.Constants;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
+using StoreManagement.Data.LiquidHelpers;
+using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Filters;
 using StoreManagement.Helper;
 using StoreManagement.Service.DbContext;
@@ -356,7 +358,21 @@ namespace StoreManagement.App_Start
 
 
             kernel.Bind<IEmailSender>().To<EmailSender>();
-
+            kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();
+            kernel.Bind<IProductCategoryHelper>().To<ProductCategoryHelper>().InRequestScope();
+            kernel.Bind<IProductHelper>().To<ProductHelper>().InRequestScope();
+            kernel.Bind<IPhotoGalleryHelper>().To<PhotoGalleryHelper>().InRequestScope();
+            kernel.Bind<IBrandHelper>().To<BrandHelper>().InRequestScope();
+            kernel.Bind<IContentHelper>().To<ContentHelper>().InRequestScope();
+            kernel.Bind<IHomePageHelper>().To<HomePageHelper>().InRequestScope();
+            kernel.Bind<ILabelHelper>().To<LabelHelper>().InRequestScope();
+            kernel.Bind<INavigationHelper>().To<NavigationHelper>().InRequestScope();
+            kernel.Bind<IPagingHelper>().To<PagingHelper>().InRequestScope();
+            kernel.Bind<ILocationHelper>().To<LocationHelper>().InRequestScope();
+            kernel.Bind<IContactHelper>().To<ContactHelper>().InRequestScope();
+            kernel.Bind<IActivityHelper>().To<ActivityHelper>().InRequestScope();
+            kernel.Bind<ICommentHelper>().To<CommentHelper>().InRequestScope();
+            kernel.Bind<IRetailerHelper>().To<RetailerHelper>().InRequestScope();
            
 
            

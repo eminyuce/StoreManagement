@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Hosting;
 
 namespace StoreManagement.Data.GeneralHelper
@@ -32,6 +33,14 @@ namespace StoreManagement.Data.GeneralHelper
             string filePath = relName.StartsWith("~") ? HostingEnvironment.MapPath(relName) : relName;
 
             return filePath;
+        }
+
+        public static String ReadFile(HttpContext context,String partialLiquidPath)
+        {
+            string path = context.Server.MapPath(partialLiquidPath);
+            var myFile = new System.IO.StreamReader(path);
+            string myString = myFile.ReadToEnd();
+            return myString;
         }
     }
 }

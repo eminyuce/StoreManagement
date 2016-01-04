@@ -26,7 +26,6 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
 using StoreManagement.Liquid.Controllers;
-using StoreManagement.Liquid.Helper;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;

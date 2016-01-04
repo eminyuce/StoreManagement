@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
+using StoreManagement.Data.Attributes;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Controllers
 {
+    [OutputCache(CacheProfile = "Cache1Days")]
+    [Compress]
     public class AjaxContentsController : AjaxController
     {
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         //
         // GET: /AjaxContents/
         public ActionResult Index()

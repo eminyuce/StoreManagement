@@ -25,9 +25,7 @@ namespace StoreManagement.Data.LiquidEntities
 
         }
 
-
-
-
+         
         public string Link
         {
             get
@@ -35,5 +33,30 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetNavigationLink(this.Navigation);
             }
         }
+
+        public int Id
+        {
+            get { return Navigation.Id; }
+        }
+        public String Name
+        {
+            get { return Navigation.Name; }
+        }
+
+        public DateTime CreatedDate
+        {
+            get { return Navigation.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Navigation.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Navigation.State; }
+        }
+
+
+
     }
 }

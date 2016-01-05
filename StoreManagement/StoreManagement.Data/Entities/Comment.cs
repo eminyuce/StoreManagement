@@ -16,9 +16,9 @@ namespace StoreManagement.Data.Entities
        // [Required(ErrorMessage = "Please enter name")]
        // public int Name { set; get; }
         [Required(ErrorMessage = "Please enter email")]
-        public int Email { set; get; }
-        public int CommentType { set; get; }
+        public String Email { set; get; }
+        public String CommentType { set; get; }
         [Required(ErrorMessage = "Please enter comment")]
-        public int CommentText { set; get; }
+        public String CommentText { set; get; }
     }
 }

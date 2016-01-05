@@ -20,6 +20,26 @@ namespace StoreManagement.Data.LiquidEntities
             this.ImageHeight = imageHeight;
         }
 
-
+        public int Id
+        {
+            get { return Contact.Id; }
+        }
+        public String Name
+        {
+            get { return Contact.Name; }
+        }
+       
+        public DateTime CreatedDate
+        {
+            get { return Contact.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Contact.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Contact.State; }
+        }
     }
 }

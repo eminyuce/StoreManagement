@@ -31,6 +31,23 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
+        public String Name
+        {
+            get { return Retailer.Name; }
+        }
+        public int Id
+        {
+            get { return Retailer.Id; }
+        }
+         
+        public DateTime CreatedDate
+        {
+            get { return Retailer.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Retailer.UpdatedDate.Value; }
+        }
 
         public string Link
         {

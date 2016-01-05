@@ -36,5 +36,27 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
+        public int Id
+        {
+            get { return FileManager.Id; }
+        }
+        public String Name
+        {
+            get { return FileManager.Name; }
+        }
+
+        public DateTime CreatedDate
+        {
+            get { return FileManager.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return FileManager.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return FileManager.State; }
+        }
+
     }
 }

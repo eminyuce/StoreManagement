@@ -19,5 +19,14 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return this.Store.Name; }
         }
+        public String Description
+        {
+            get { return this.Store.Description; }
+        }
+        public String Domain
+        {
+            get { return this.Store.Domain; }
+        }
+
     }
 }

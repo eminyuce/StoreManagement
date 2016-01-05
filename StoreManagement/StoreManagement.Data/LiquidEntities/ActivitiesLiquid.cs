@@ -11,11 +11,36 @@ namespace StoreManagement.Data.LiquidEntities
     {
         public Activity Activity;
 
-        public ActivitiesLiquid(Activity item,  int imageWidth, int imageHeight)
+        public ActivitiesLiquid(Activity item, int imageWidth, int imageHeight)
         {
             this.Activity = item;
             this.ImageWidth = imageWidth;
             this.ImageHeight = imageHeight;
         }
+
+        public String Name
+        {
+            get { return Activity.Name; }
+        }
+        public int Id
+        {
+            get { return Activity.Id; }
+        }
+        public String Description
+        {
+            get { return Activity.Description; }
+        }
+
+        public DateTime BeginDate
+        {
+            get { return Activity.BeginDate; }
+        }
+        public DateTime FinishDate
+        {
+            get { return Activity.FinishDate; }
+        }
+       
+
+
     }
 }

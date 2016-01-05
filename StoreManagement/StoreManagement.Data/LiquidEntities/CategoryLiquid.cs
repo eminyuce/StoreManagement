@@ -12,7 +12,7 @@ namespace StoreManagement.Data.LiquidEntities
     {
 
         public Category  Category { get; set; }
-        private String Type { get; set; }
+        public String Type { get; set; }
 
         public CategoryLiquid(Category category, String type)
         {
@@ -29,5 +29,31 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
         public int Count { get; set; }
+
+        public int Id
+        {
+            get { return Category.Id; }
+        }
+        public String Name
+        {
+            get { return Category.Name; }
+        }
+        public String Description
+        {
+            get { return Category.Description; }
+        }
+        public DateTime CreatedDate
+        {
+            get { return Category.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Category.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Category.State; }
+        }
+
     }
 }

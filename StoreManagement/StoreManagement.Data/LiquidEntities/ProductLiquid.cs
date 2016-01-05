@@ -34,6 +34,7 @@ namespace StoreManagement.Data.LiquidEntities
             ImageHeight = imageHeight;
 
         }
+       
 
         public String DetailLink
         {
@@ -60,6 +61,44 @@ namespace StoreManagement.Data.LiquidEntities
                     return "";
                 }
             }
+        }
+
+
+        public int Id
+        {
+            get { return Product.Id; }
+        }
+        public String Name
+        {
+            get { return Product.Name; }
+        }
+        public int UnitsInStock
+        {
+            get { return Product.UnitsInStock; }
+        }
+        public double Price
+        {
+            get { return Product.Price; }
+        }
+        public String Description
+        {
+            get { return Product.Description; }
+        }
+        public String VideoUrl
+        {
+            get { return Product.VideoUrl; }
+        }
+        public DateTime CreatedDate
+        {
+            get { return Product.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Product.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Product.State; }
         }
     }
 }

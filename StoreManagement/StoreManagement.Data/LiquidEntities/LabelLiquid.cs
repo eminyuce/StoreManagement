@@ -23,5 +23,29 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return LinkHelper.GetLabelLink(this.Label); }
         }
+
+        public int Id
+        {
+            get { return Label.Id; }
+        }
+        public String Name
+        {
+            get { return Label.Name; }
+        }
+
+        public DateTime CreatedDate
+        {
+            get { return Label.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Label.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Label.State; }
+        }
+
+
     }
 }

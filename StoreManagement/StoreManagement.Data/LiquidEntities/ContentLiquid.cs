@@ -17,7 +17,7 @@ namespace StoreManagement.Data.LiquidEntities
         public Content Content { get; set; }
         public Category Category { get; set; }
         public ImageLiquid ImageLiquid { get; set; }
-        private String Type { get; set; }
+        public String Type { get; set; }
 
 
 
@@ -50,6 +50,27 @@ namespace StoreManagement.Data.LiquidEntities
         public String PlainDescription
         {
             get { return YuceConvert.StripHtml(this.Content.Description); }
+        }
+        public int Id
+        {
+            get { return Content.Id; }
+        }
+        public String Name
+        {
+            get { return Content.Name; }
+        }
+
+        public DateTime CreatedDate
+        {
+            get { return Content.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Content.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Content.State; }
         }
     }
 }

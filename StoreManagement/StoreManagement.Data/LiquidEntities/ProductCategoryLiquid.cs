@@ -30,5 +30,22 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
         public int Count { get; set; }
+
+        public int Id
+        {
+            get { return ProductCategory.Id; }
+        }
+        public String Name
+        {
+            get { return ProductCategory.Name; }
+        }
+        public DateTime CreatedDate
+        {
+            get { return ProductCategory.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return ProductCategory.UpdatedDate.Value; }
+        }
     }
 }

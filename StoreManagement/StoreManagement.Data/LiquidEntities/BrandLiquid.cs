@@ -67,5 +67,30 @@ namespace StoreManagement.Data.LiquidEntities
             }
         }
 
+        public int Id
+        {
+            get { return Brand.Id; }
+        }
+        public String Name
+        {
+            get { return Brand.Name; }
+        }
+        public String Description
+        {
+            get { return Brand.Description; }
+        }
+        public DateTime CreatedDate
+        {
+            get { return Brand.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Brand.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Brand.State; }
+        }
+
     }
 }

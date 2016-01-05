@@ -19,6 +19,28 @@ namespace StoreManagement.Data.LiquidEntities
             this.ImageHeight = imageHeight;
         }
 
+        public int Id
+        {
+            get { return Location.Id; }
+        }
+        public String Name
+        {
+            get { return Location.Name; }
+        }
+
+        public DateTime CreatedDate
+        {
+            get { return Location.CreatedDate.Value; }
+        }
+        public DateTime UpdatedDate
+        {
+            get { return Location.UpdatedDate.Value; }
+        }
+        public bool State
+        {
+            get { return Location.State; }
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿{% include "Master" %}
+﻿
+{% include "Master" %}
 
  <p>
  Test
@@ -7,8 +8,8 @@
                 {% for item in model.product_liquids %}
  
  <div>
-   	{{ item.detail_link }}
- </div>
+     <a href='{{ item.detail_link }}'> {{ item.name }} </a> 
+	 </div>
 
  
 	 

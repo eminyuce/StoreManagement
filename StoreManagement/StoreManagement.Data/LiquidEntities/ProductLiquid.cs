@@ -21,7 +21,7 @@ namespace StoreManagement.Data.LiquidEntities
         public Brand Brand { get; set; }
 
 
-        public ProductLiquid(Product product, ProductCategory category, int imageWidth=0, int imageHeight=0)
+        public ProductLiquid(Product product, ProductCategory category, int imageWidth = 0, int imageHeight = 0)
         {
 
             this.Product = product;
@@ -34,7 +34,7 @@ namespace StoreManagement.Data.LiquidEntities
             ImageHeight = imageHeight;
 
         }
-       
+
 
         public String DetailLink
         {
@@ -100,5 +100,27 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Product.State; }
         }
+        public int ProductCategoryId
+        {
+            get { return Product.ProductCategoryId; }
+        }
+        public double Discount
+        {
+            get { return Product.Discount; }
+        }
+        public int BrandId
+        {
+            get { return Product.BrandId; }
+        }
+        public String ProductCode
+        {
+            get { return Product.ProductCode; }
+        }
+        public int RetailerId
+        {
+            get { return Product.RetailerId; }
+        }
+
+
     }
 }

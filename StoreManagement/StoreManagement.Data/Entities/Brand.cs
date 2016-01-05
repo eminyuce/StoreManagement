@@ -15,7 +15,7 @@ namespace StoreManagement.Data.Entities
        // public string Name { get; set; }
         [AllowHtml]
         public string Description { get; set; }
-        private String BrandCode { get; set; }
+        public String BrandCode { get; set; }
         public virtual ICollection<Product> Products { get; set; }
 
         public override string ToString()

@@ -40,7 +40,33 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Location.State; }
         }
-
-
+        public string Address
+        {
+            get { return Location.Address; }
+        }
+        public string City
+        {
+            get { return Location.City; }
+        }
+        public string LocationState
+        {
+            get { return Location.LocationState; }
+        }
+        public string Postal
+        {
+            get { return Location.Postal; }
+        }
+        public string Country
+        {
+            get { return Location.Country; }
+        }
+        public double Latitude
+        {
+            get { return Location.Latitude; }
+        }
+        public double Longitude
+        {
+            get { return Location.Longitude; }
+        }
     }
 }

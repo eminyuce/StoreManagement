@@ -39,7 +39,6 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Retailer.Id; }
         }
-         
         public DateTime CreatedDate
         {
             get { return Retailer.CreatedDate.Value; }
@@ -48,10 +47,17 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Retailer.UpdatedDate.Value; }
         }
-
         public string Link
         {
             get { return LinkHelper.GetRetailerLink(this.Retailer); }
+        }
+        public String RetailerCode
+        {
+            get { return Retailer.RetailerCode; }
+        }
+        public String RetailerUrl
+        {
+            get { return Retailer.RetailerUrl; }
         }
 
         public int ImageHeightProduct { get; set; }

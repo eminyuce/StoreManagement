@@ -45,7 +45,10 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Label.State; }
         }
-
+        public int ParentId
+        {
+            get { return Label.ParentId; }
+        }
 
     }
 }

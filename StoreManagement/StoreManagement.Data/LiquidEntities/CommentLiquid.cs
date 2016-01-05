@@ -39,6 +39,18 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Comment.Email; }
         }
+        public int ParentId
+        {
+            get { return Comment.ParentId; }
+        }
+        public int ItemId
+        {
+            get { return Comment.ItemId; }
+        }
+        public String ItemType
+        {
+            get { return Comment.ItemType; }
+        }
         public DateTime CreatedDate
         {
             get { return Comment.CreatedDate.Value; }

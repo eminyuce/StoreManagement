@@ -91,6 +91,9 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Brand.State; }
         }
-
+        public String BrandCode
+        {
+            get { return Brand.BrandCode; }
+        }
     }
 }

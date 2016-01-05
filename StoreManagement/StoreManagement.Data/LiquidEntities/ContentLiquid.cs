@@ -35,9 +35,6 @@ namespace StoreManagement.Data.LiquidEntities
             this.Type = type;
         }
 
-
-
-
         public String DetailLink
         {
             get
@@ -45,8 +42,6 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetContentLink(this.Content, Category.Name, this.Type);
             }
         }
-
-
         public String PlainDescription
         {
             get { return YuceConvert.StripHtml(this.Content.Description); }
@@ -72,5 +67,15 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Content.State; }
         }
+
+        public int CategoryId
+        {
+            get { return Content.CategoryId; }
+        }
+        public String Author
+        {
+            get { return Content.Author; }
+        }
+
     }
 }

@@ -41,5 +41,25 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Contact.State; }
         }
+        public string Title
+        {
+            get { return Contact.Title; }
+        }
+        public string Email
+        {
+            get { return Contact.Email; }
+        }
+        public string PhoneWork
+        {
+            get { return Contact.PhoneWork; }
+        }
+        public string PhoneCell
+        {
+            get { return Contact.PhoneCell; }
+        }
+        public string Fax
+        {
+            get { return Contact.Fax; }
+        }
     }
 }

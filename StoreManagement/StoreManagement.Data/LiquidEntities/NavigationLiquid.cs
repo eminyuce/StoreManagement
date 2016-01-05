@@ -55,6 +55,30 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return Navigation.State; }
         }
+        public int ParentId
+        {
+            get { return Navigation.ParentId; }
+        }
+        public string ActionName
+        {
+            get { return Navigation.ActionName; }
+        }
+        public string ControllerName
+        {
+            get { return Navigation.ControllerName; }
+        }
+        public Boolean Static
+        {
+            get { return Navigation.Static; }
+        }
+        public string Modul
+        {
+            get { return Navigation.Modul; }
+        }
+        public Boolean LinkState
+        {
+            get { return Navigation.LinkState; }
+        }
 
 
 

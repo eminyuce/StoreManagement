@@ -294,6 +294,8 @@
     <Compile Include="RequestModel\VmDashboard.cs" />
     <Compile Include="SEO\ISitemapGenerator.cs" />
     <Compile Include="SEO\ISitemapItem.cs" />
+    <Compile Include="SEO\NewsSitemapItem.cs" />
+    <Compile Include="ActionResults\NewsSiteMapResult.cs" />
     <Compile Include="SEO\SitemapChangeFrequency.cs" />
     <Compile Include="SEO\SitemapGenerator.cs" />
     <Compile Include="SEO\SitemapItem.cs" />

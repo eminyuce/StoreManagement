@@ -566,9 +566,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Activities\" />
-    <Folder Include="Views\AjaxContents\" />
-    <Folder Include="Views\AjaxGenerics\" />
-    <Folder Include="Views\AjaxProducts\" />
     <Folder Include="Views\Brands\" />
     <Folder Include="Views\Retailers\" />
   </ItemGroup>

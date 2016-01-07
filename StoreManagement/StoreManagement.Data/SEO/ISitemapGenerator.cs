@@ -10,5 +10,6 @@ namespace StoreManagement.Data.SEO
     public interface ISitemapGenerator
     {
         XDocument GenerateSiteMap(IEnumerable<ISitemapItem> items);
+        XDocument GenerateNewsSiteMap(IEnumerable<ISitemapItem> items);
     }
 }

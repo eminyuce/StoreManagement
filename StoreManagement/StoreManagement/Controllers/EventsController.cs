@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Controllers
 {
     public class EventsController : BaseController
     {
-        
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public ActionResult Index()
         {
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
+using NLog;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -15,7 +16,7 @@ namespace StoreManagement.Controllers
     [OutputCache(CacheProfile = "Cache1Days")]
     public class NewsController : BaseController
     {
-        
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public ActionResult Index(int page=1)
         {

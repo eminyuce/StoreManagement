@@ -35,6 +35,22 @@ namespace StoreManagement.Data.LiquidEntities
 
         }
 
+        public ProductCategoryLiquid ProductCategoryLiquid
+        {
+            get
+            {
+                return new ProductCategoryLiquid(this.Category);
+            }
+        }
+
+        public BrandLiquid BrandLiquid
+        {
+            get
+            {
+                return new BrandLiquid(this.Brand, 0, 0);
+            }
+        }
+
 
         public String DetailLink
         {

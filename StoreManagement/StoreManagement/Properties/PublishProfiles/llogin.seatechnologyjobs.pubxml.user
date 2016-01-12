@@ -196,22 +196,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>01/05/2016 11:22:45</publishTime>
+      <publishTime>01/07/2016 15:28:52</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.pdb">
-      <publishTime>01/05/2016 11:22:45</publishTime>
+      <publishTime>01/07/2016 15:28:52</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>01/05/2016 11:22:52</publishTime>
+      <publishTime>01/07/2016 15:28:59</publishTime>
     </File>
     <File Include="bin/StoreManagement.pdb">
-      <publishTime>01/05/2016 11:22:52</publishTime>
+      <publishTime>01/07/2016 15:28:59</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>01/05/2016 11:22:48</publishTime>
+      <publishTime>01/07/2016 15:28:55</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.pdb">
-      <publishTime>01/05/2016 11:22:48</publishTime>
+      <publishTime>01/07/2016 15:28:55</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -1114,7 +1114,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/Products/Product.liquid">
-      <publishTime>01/05/2016 14:37:30</publishTime>
+      <publishTime>01/07/2016 15:28:04</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/BlogContentItem.cshtml">
       <publishTime>07/30/2015 09:18:06</publishTime>
@@ -1213,7 +1213,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/05/2016 11:22:55</publishTime>
+      <publishTime>01/07/2016 15:29:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

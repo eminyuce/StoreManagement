@@ -7,4 +7,21 @@
            {{ model.product_liquid.name }}
  </p>
 
+  <p>
  
+
+ <br>
+
+                {% for item in model.product_category_liquids %}
+ 
+ <div>
+     <a href='{{ item.detail_link }}'> {{ item.name }} </a> 
+	 </div>
+
+ 
+	 
+
+
+{% endfor %}
+
+ </p>

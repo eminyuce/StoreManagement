@@ -52,6 +52,38 @@ namespace StoreManagement.Test
         }
 
         [TestMethod]
+        public void GenerateLiquidView1()
+        {
+            GenerateLiquidView("ContentLiquid.cs");
+        }
+
+  
+        public void GenerateLiquidView(String fileName)
+        {
+
+            String path1 = String.Format(@"C:\Users\Yuce\Documents\GitHub\StoreManagement\StoreManagement\StoreManagement.Data\LiquidEntities\{0}", fileName);
+            var myFile = new System.IO.StreamReader(path1);
+            string myString = myFile.ReadToEnd();
+            using (StringReader reader = new StringReader(myString))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string url = line.Trim();
+                    if (url.StartsWith("public class"))
+                        continue;
+                    
+                    if (url.StartsWith("public"))
+                    {
+                        Console.WriteLine(url);
+                    }
+                }
+            }
+
+        }
+
+
+        [TestMethod]
         public void GetContentsCategoryIdAsyncSearch()
         {
 
@@ -214,10 +246,10 @@ WHERE     (p.Id IS NULL)
                                         }
                                         catch (Exception ex)
                                         {
-                                            String mm = ex.Message;  
-                                   
+                                            String mm = ex.Message;
+
                                         }
-                                      
+
 
                                     }
                                 }
@@ -234,7 +266,7 @@ WHERE     (p.Id IS NULL)
                     }
                     catch (Exception m)
                     {
-                        String mm = m.Message;  
+                        String mm = m.Message;
 
                     }
                 }
@@ -841,7 +873,7 @@ WHERE     (p.Id IS NULL)
             Console.WriteLine(GeneralHelper.UrlDencode(mm, false));
             Console.WriteLine(mm.UrlDecode());
         }
- 
+
         [TestMethod]
         public void TestMethod1()
         {

@@ -35,6 +35,11 @@ namespace StoreManagement.Data.LiquidEntities
             this.Type = type;
         }
 
+        public CategoryLiquid CategoryLiquid
+        {
+            get { return new CategoryLiquid(this.Category, Type); }
+        }
+
         public String DetailLink
         {
             get

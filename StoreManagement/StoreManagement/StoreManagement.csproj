@@ -473,6 +473,7 @@
     <Content Include="Views\Products\Index.liquid">
       <SubType>Code</SubType>
     </Content>
+    <None Include="Views\Shared\_base.liquid" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DotLiquid.NamingConventions;
 using NLog;
 using Ninject;
 using StoreManagement.Data;
@@ -33,6 +34,7 @@ namespace StoreManagement
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            DotLiquid.Template.NamingConvention = new CSharpNamingConvention();
 
         }
         public override string GetVaryByCustomString(HttpContext context, string custom)

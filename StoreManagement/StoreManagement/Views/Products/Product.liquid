@@ -1,27 +1,33 @@
-﻿{% include "Master" %}
+﻿{% extends "base" %}
 
- <p>
- Test
+
 
  
-           {{ model.product_liquid.name }}
- </p>
 
-  <p>
  
+ {% block title %}
+ My AMAZING Website              {{ model.ProductLiquid.Name }}
+ 
+ {% endblock %}  
 
- <br>
 
-                {% for item in model.product_category_liquids %}
+
+
+ {% block content %} 
+
+
+ 	 {% include 'Master' with model.ProductLiquid  %}
+       
+        {% for item in model.ProductCategoryLiquids %}
  
  <div>
-     <a href='{{ item.detail_link }}'> {{ item.name }} </a> 
+     <a href='{{ item.DetailLink }}'> {{ item.Name }} </a> 
 	 </div>
 
  
-	 
-
 
 {% endfor %}
 
- </p>
+{% endblock %}
+
+ 

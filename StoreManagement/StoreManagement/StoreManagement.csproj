@@ -474,6 +474,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\_pProduct.liquid" />
+    <Content Include="Views\Shared\_footer.liquid" />
+    <Content Include="Views\Shared\_footer2.liquid" />
     <None Include="Views\Shared\_base.liquid" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

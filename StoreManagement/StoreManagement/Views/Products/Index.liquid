@@ -1,6 +1,14 @@
-﻿
-{% include "Master" %}
+﻿{% extends "base" %}
 
+
+ 
+ {% block title %}
+ Products
+ 
+ {% endblock %}  
+ 
+
+ {% block content %} 
  <p>
  Test
 
@@ -15,3 +23,4 @@
 {% endfor %}
 
  </p>
+  {% endblock %}  

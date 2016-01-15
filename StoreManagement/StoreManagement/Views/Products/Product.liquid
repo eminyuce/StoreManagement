@@ -6,7 +6,7 @@
 
  
  {% block title %}
- My AMAZING Website              {{ model.ProductLiquid.Name }}
+ Test Title           {{ model.ProductLiquid.Name }}
  
  {% endblock %}  
 
@@ -30,4 +30,8 @@
 
 {% endblock %}
 
- 
+
+
+    {% block footer %}
+	   	   {% include "footer2" %}
+           {% endblock %} 

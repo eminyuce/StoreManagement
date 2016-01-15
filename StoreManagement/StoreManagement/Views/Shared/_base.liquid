@@ -25,7 +25,10 @@
 
     <link href="/Content/shop-cart/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
+	         {% comment  %} 
     <a href="/Content/shop-cart/assets/ico/favicon.ico">~/Content/shop-cart/assets/ico/favicon.ico</a>
+	         {% endcomment %} 
+
     <script src="/Scripts/storeManagement.js"></script>
 
 
@@ -41,7 +44,15 @@
          </ul>
          {% endblock %} 
       </div>
-       <div id="content"> {% block content %}
+       <div id="content"> 
+	     {% block content %}
            {% endblock %} </div>
+
+	   <div id="footer"> 
+	   {% block footer %}
+	   	   {% include "footer" %}
+           {% endblock %} 
+
+	   </div>
    </body>
 </html>

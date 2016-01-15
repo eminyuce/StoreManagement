@@ -1,4 +1,58 @@
-﻿
- <b>
-   Test  {{ model.Name }}
- </b>
+﻿<html>
+   <head>
+      <title>{% block title %}My Website{% endblock %}</title>
+
+	    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="/Content/css?v=tCkRx_WNozdpKoW_vuuuhxetRaarbBWBf90OGg12o6Q1" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=wBEWDufH_8Md-Pbioxomt90vm6tJN2Pyy9u9zHtWsPo1"></script>
+
+    <link href="/Content/bootstrap?v=mTBFkL-HpDvdGhXiBs5FjZShHy-eIdAsf3FOK-pT3Qk1" rel="stylesheet"/>
+
+
+    <script src="/bundles/jquery?v=gGGRI7xCOnEK-4qvkXXwhmbyGmA8S3tmz-Wto5bGsIc1"></script>
+
+    <script src="/bundles/jqueryui?v=EqKlUEwb5a6QnKK9APLpZeOKZkAYzlO2YiCGDkzKK6c1"></script>
+
+    <script src="/bundles/bootstrap?v=uDVFaQU3nC3-Ge524JHLENnSAsGoa5bK-qJedsVvf6I1"></script>
+
+    <script src="/bundles/jqueryui?v=EqKlUEwb5a6QnKK9APLpZeOKZkAYzlO2YiCGDkzKK6c1"></script>
+
+
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <link href="/Content/shop-cart/assets/css/bootstrap.css" rel="stylesheet" />
+
+    <link href="/Content/shop-cart/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+	         {% comment  %} 
+    <a href="/Content/shop-cart/assets/ico/favicon.ico">~/Content/shop-cart/assets/ico/favicon.ico</a>
+	         {% endcomment %} 
+
+    <script src="/Scripts/storeManagement.js"></script>
+
+
+    
+
+   </head>
+   <body>
+      <div id="sidebar">
+         {% block sidebar %} 
+         <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+         </ul>
+         {% endblock %} 
+      </div>
+       <div id="content"> 
+	     {% block content %}
+           {% endblock %} </div>
+
+	   <div id="footer"> 
+	   {% block footer %}
+	   	   {% include "footer" %}
+           {% endblock %} 
+
+	   </div>
+   </body>
+</html>

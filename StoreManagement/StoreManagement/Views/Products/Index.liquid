@@ -7,11 +7,8 @@
  
                 {% for item in model.ProductLiquids %}
  
- <div>
-     <a href='{{ item.DetailLink }}'> {{ item.Name }} </a> 
-	 </div>
-
- 
+ {% assign product = item %}
+ 	 {% include 'pProduct' with product  %}
 	 
 
 

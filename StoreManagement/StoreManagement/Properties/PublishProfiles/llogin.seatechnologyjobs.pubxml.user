@@ -1099,7 +1099,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/Products/Index.liquid">
-      <publishTime>01/13/2016 15:40:23</publishTime>
+      <publishTime>01/14/2016 11:34:07</publishTime>
     </File>
     <File Include="Views/Products/pProduct.cshtml">
       <publishTime>07/13/2015 13:37:06</publishTime>
@@ -1114,7 +1114,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/Products/Product.liquid">
-      <publishTime>01/13/2016 16:04:45</publishTime>
+      <publishTime>01/14/2016 11:09:39</publishTime>
+    </File>
+    <File Include="Views/Products/test.liquid">
+      <publishTime>01/14/2016 09:23:23</publishTime>
+    </File>
+    <File Include="Views/Products/_test.liquid">
+      <publishTime>01/14/2016 11:08:17</publishTime>
     </File>
     <File Include="Views/Shared/base.html">
       <publishTime>01/13/2016 15:50:04</publishTime>
@@ -1208,6 +1214,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Shared/_Master.liquid">
       <publishTime>12/30/2015 16:33:34</publishTime>
+    </File>
+    <File Include="Views/Shared/_pProduct.liquid">
+      <publishTime>01/14/2016 11:35:25</publishTime>
     </File>
     <File Include="Views/Test/Index.liquid">
       <publishTime>12/30/2015 16:33:57</publishTime>

@@ -15,8 +15,8 @@
 
  {% block content %} 
 
-
- 	 {% include 'Master' with model.ProductLiquid  %}
+ {% assign product = model.ProductLiquid %}
+ 	 {% include 'pProduct' with product  %}
        
         {% for item in model.ProductCategoryLiquids %}
  

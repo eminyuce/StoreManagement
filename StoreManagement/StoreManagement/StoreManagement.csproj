@@ -281,6 +281,7 @@
     <Compile Include="Controllers\RetailersController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\RssController.cs" />
+    <Compile Include="Controllers\SiteMapsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\ModulAuthorizeAttribute.cs" />
@@ -571,6 +572,7 @@
     <Folder Include="Views\Activities\" />
     <Folder Include="Views\Brands\" />
     <Folder Include="Views\Retailers\" />
+    <Folder Include="Views\SiteMaps\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

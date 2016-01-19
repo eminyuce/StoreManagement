@@ -24,11 +24,11 @@ namespace StoreManagement.Liquid.Controllers
         public async Task<ActionResult> Index(
             String search = "", 
             String filters = "", 
-            String page = "", 
-            String id = "womens-clothes")
+            String page = "",
+            String id = "clothes-shoes-and-jewelry")
         {
             search = search.ToStr();
-            id = String.IsNullOrEmpty(id) ? "womens-clothes" : id;
+            id = String.IsNullOrEmpty(id) ? "clothes-shoes-and-jewelry" : id;
             String categoryApiId = id;
             RouteData.Values["id"] = id;
             String headerText = "";

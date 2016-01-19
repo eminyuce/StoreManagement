@@ -1,36 +1,25 @@
-﻿@using StoreManagement.Data.GeneralHelper
-@model StoreManagement.Data.RequestModel.ContentDetailViewModel
-@{
-    ViewBag.Title = Model.Content.Name;
-    var blog = Model.Content;
-    var images = Model.Content.ContentFiles;
-    
-}
+﻿{% extends "Master" %}
 
 
-@foreach (var item in Model.Categories)
-{        
-    @Html.ActionLink(item.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
-}
+ 
+ {% block title %}
+ News  {{ model.StoreLiquid.Name }}
+ 
+ {% endblock %}  
+ 
 
-@{
-    
-    for (int i = 0; i < images.Count; i++)
-    {
-        var m = images.ToList()[i];
-
-    <div class="item @String.Format("{0}", (i == 0 ? "active" : ""))">
-        <a href="#">
-            <img src="@Url.Action("FetchImage", "Images", new { id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType })" style="width: 100px; height: 100px;" alt="">
-        </a>
-    </div>
-    }
-
-}
+ {% block content %} 
 
 
+                {% for item in model.CategoryLiquids %}
+ 
+  {{ item.Name }}
+	 
+	 <br>
 
-@blog.Name
+{% endfor %}
 
+ 
+ 
 
-@Html.Raw(blog.Description)
+ {% endblock %}  

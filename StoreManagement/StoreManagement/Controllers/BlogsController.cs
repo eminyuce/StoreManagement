@@ -16,15 +16,16 @@ namespace StoreManagement.Controllers
     [OutputCache(CacheProfile = "Cache1Days")]
     public class BlogsController : BaseController
     {
-
+        private const String ContentType = StoreConstants.BlogsType;
 
         public ActionResult Index(int page = 1)
         {
             var newsContents = new ContentsViewModel();
             newsContents.Store = MyStore;
-            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.BlogsType, true, page, 24);
+            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, ContentType, true, page, 24);
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-
+            newsContents.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
+            newsContents.Type = ContentType;
             return View(newsContents);
         }
         public ActionResult Blog(String id)
@@ -34,8 +35,8 @@ namespace StoreManagement.Controllers
             returnModel.Content = ContentService.GetContentsContentId(blogId);
             returnModel.Store = MyStore;
             returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType, true);
-
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
+            returnModel.Type = ContentType;
             return View(returnModel);
         }
     }

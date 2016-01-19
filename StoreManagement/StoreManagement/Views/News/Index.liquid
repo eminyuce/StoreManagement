@@ -15,7 +15,9 @@
  
                 {% for item in model.CategoryLiquids %}
  
-  {{ item.Name }}
+ <div>
+     <a href='{{ item.DetailLink }}'> {{ item.Name }} </a> 
+	 </div>
 	 
 	 <br>
 
@@ -24,7 +26,10 @@
 
  {% for item in model.ContentLiquids %}
  
-  {{ item.Name }}
+ <div>
+     <a href='{{ item.DetailLink }}'> {{ item.Name }} </a> 
+	 </div>
+	 
 	 	 <br>
 
 

@@ -17,23 +17,25 @@ namespace StoreManagement.Controllers
     public class NewsController : BaseController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private const String ContentType = StoreConstants.BlogsType;
 
         public ActionResult Index(int page = 1)
         {
-            if (!IsModulActive(StoreConstants.NewsType))
+            if (!IsModulActive(ContentType))
             {
                 return HttpNotFound("Not Found");
             }
             var newsContents = new ContentsViewModel();
             newsContents.Store = MyStore;
-            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.NewsType, true, page, 24);
+            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, ContentType, true, page, 24);
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            newsContents.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType, true);
+            newsContents.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
+            newsContents.Type = ContentType;
             return View(newsContents);
         }
         public ActionResult Detail(String id)
         {
-            if (!IsModulActive(StoreConstants.NewsType))
+            if (!IsModulActive(ContentType))
             {
                 return HttpNotFound("Not Found");
             }
@@ -45,10 +47,10 @@ namespace StoreManagement.Controllers
             {
                 return HttpNotFound("Not Found");
             }
-
+            returnModel.Type = ContentType;
             returnModel.Store = MyStore;
             returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType);
+            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType);
 
             return View(returnModel);
         }

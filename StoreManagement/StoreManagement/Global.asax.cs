@@ -34,7 +34,7 @@ namespace StoreManagement
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            DotLiquid.Template.NamingConvention = new CSharpNamingConvention();
+         //   DotLiquid.Template.NamingConvention = new CSharpNamingConvention();
 
         }
         public override string GetVaryByCustomString(HttpContext context, string custom)

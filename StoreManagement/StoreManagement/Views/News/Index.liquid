@@ -3,7 +3,7 @@
 
  
  {% block title %}
- News  {{ model.StoreLiquid.Name }}
+ News  {{ model.store_liquid.name }}
  
  {% endblock %}  
  
@@ -13,10 +13,10 @@
   
 
  
-                {% for item in model.CategoryLiquids %}
+                {% for item in model.category_liquids %}
  
  <div>
-     <a href='{{ item.DetailLink }}'> {{ item.Name }} </a> 
+     <a href='{{ item.detail_link }}'> {{ item.name }} </a> 
 	 </div>
 	 
 	 <br>
@@ -24,10 +24,10 @@
 {% endfor %}
 <div>
 
- {% for item in model.ContentLiquids %}
+ {% for item in model.category_liquids %}
  
  <div>
-     <a href='{{ item.DetailLink }}'> {{ item.Name }} </a> 
+     <a href='{{ item.detail_link }}'> {{ item.name }} </a> 
 	 </div>
 	 
 	 	 <br>

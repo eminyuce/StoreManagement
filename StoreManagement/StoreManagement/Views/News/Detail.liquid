@@ -3,17 +3,25 @@
 
  
  {% block title %}
- News  {{ model.StoreLiquid.Name }}
+ News  {{ model.store_liquid.Name }}
  
  {% endblock %}  
  
 
  {% block content %} 
+  <h1>
 
-
-                {% for item in model.CategoryLiquids %}
  
-  {{ item.Name }}
+
+   {{ model.content_liquid.name  | remove:'Korean'    | upcase  }}
+ 
+   </h1>
+
+     {{ model.content_liquid.description }}
+
+                {% for item in model.category_liquids %}
+ 
+  {{ item.name }}
 	 
 	 <br>
 

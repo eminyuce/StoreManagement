@@ -15,7 +15,7 @@ namespace StoreManagement.Helper
         public Store GetStoreByDomain(IStoreService storeService, HttpRequestBase request)
         {
             String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
-
+            Store result = null;
             if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
         
@@ -23,14 +23,16 @@ namespace StoreManagement.Helper
                 domainName = request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host +
                              (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
                 domainName = GeneralHelper.GetDomainPart(domainName);
-                return storeService.GetStore(domainName);
+                result = storeService.GetStore(domainName);
             }
-            else
+
+            if (result == null)
             {
                 String defaultSiteDomain = ProjectAppSettings.GetWebConfigString("DefaultSiteDomain", "login.seatechnologyjobs.com");
-                return storeService.GetStoreByDomain(defaultSiteDomain);
+                result = storeService.GetStoreByDomain(defaultSiteDomain);
             }
-           
+
+            return result;
         }
     }
 }

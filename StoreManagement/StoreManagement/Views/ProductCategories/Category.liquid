@@ -1,0 +1,92 @@
+﻿{% extends "Master" %}
+
+
+
+
+
+
+{% block title %}
+Test Title           {{ model.StoreLiquid.Name }}
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<h2>
+  
+    {{ model.ProductCategoryLiquid.Name }}
+</h2>
+<div class="row">
+    <div class="col-md-3">
+        <div class="well well-small">
+            <ul class="nav nav-list">
+ 
+                      {% for item in model.ProductCategoryLiquids %}
+           
+              <li>
+                        <span class="icon-chevron-right">
+                            {{ item.Name }}
+                        </span>
+                    </li>
+                
+        {% endfor %}
+
+
+            </ul>
+        </div>
+
+
+        <div class="well well-small">
+            <a href="#">
+                <img src="assets/img/paypal.jpg" alt="payment method paypal"></a>
+        </div>
+
+        <a class="shopBtn btn-block" href="#">Upcoming products
+            <br>
+            <small>Click to view</small></a>
+        <br>
+        <br>
+    </div>
+    <div class="col-md-9">
+        <!-- 
+New Products
+-->
+        <div class="well well-small">
+            <h3><strong>{{ model.CategoryLiquid.Name }}</strong> Products </h3>
+            <div class="row">
+                   {% for product in model.ProductLiquids %}
+ 
+           
+              <div class="col-md-3">
+
+						 {{ product.Name }}
+
+
+						</div>
+                  {% endfor %}
+
+                 
+                  
+                    <div class="pager">
+
+
+                 
+
+
+                    </div>
+
+  
+
+
+                     
+  
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

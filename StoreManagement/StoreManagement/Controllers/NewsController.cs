@@ -18,7 +18,7 @@ namespace StoreManagement.Controllers
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public ActionResult Index(int page=1)
+        public ActionResult Index(int page = 1)
         {
             if (!IsModulActive(StoreConstants.NewsType))
             {
@@ -28,6 +28,7 @@ namespace StoreManagement.Controllers
             newsContents.Store = MyStore;
             var m = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.NewsType, true, page, 24);
             newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+            newsContents.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType, true);
             return View(newsContents);
         }
         public ActionResult Detail(String id)
@@ -42,7 +43,7 @@ namespace StoreManagement.Controllers
 
             if (!CheckRequest(returnModel.Content))
             {
-                return HttpNotFound("Not Found"); 
+                return HttpNotFound("Not Found");
             }
 
             returnModel.Store = MyStore;
@@ -51,5 +52,5 @@ namespace StoreManagement.Controllers
 
             return View(returnModel);
         }
-	}
+    }
 }

@@ -471,12 +471,19 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\storeManagement.js" />
+    <None Include="Views\News\Detail.liquid">
+      <SubType>Code</SubType>
+    </None>
+    <None Include="Views\News\Index.liquid">
+      <SubType>Code</SubType>
+    </None>
     <Content Include="Views\Products\Index.liquid">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\_pProduct.liquid" />
     <Content Include="Views\Shared\_footer.liquid" />
     <Content Include="Views\Shared\_footer2.liquid" />
+    <None Include="Views\ProductCategories\Category.liquid" />
     <None Include="Views\Shared\_Master.liquid" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -534,7 +541,6 @@
     <Content Include="Views\Shared\DisplayTemplates\ProductThumbnail.cshtml" />
     <Content Include="Views\Shared\pContents\pRelatedContents.cshtml" />
     <Content Include="Views\Pages\Index.cshtml" />
-    <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
@@ -551,11 +557,9 @@
     <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Views\News\Detail.cshtml" />
     <Content Include="Views\Shared\pContents\pContent.cshtml" />
     <Content Include="Views\Shared\pProducts\pRelatedProducts.cshtml" />
     <Content Include="Views\Shared\pProducts\pProduct.cshtml" />
-    <Content Include="Views\ProductCategories\Category.cshtml" />
     <Content Include="Views\Home\Locations.cshtml" />
     <Content Include="Views\Home\TermsAndCondition.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />

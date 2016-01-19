@@ -31,7 +31,24 @@ namespace StoreManagement.Data.RequestModel
 
         public List<ContentLiquid> ContentLiquids
         {
-            get { return Contents.Select(r => new ContentLiquid(r, this.Categories.FirstOrDefault(r2 => r2.Id == r.CategoryId), Type)).ToList(); }
+            get
+            {
+                var contentLiquidList = new List<ContentLiquid>();
+                foreach (var c in Contents)
+                {
+                    var mm = this.Categories.FirstOrDefault(r2 => r2.Id == c.CategoryId);
+                    if (mm == null)
+                    {
+                                      contentLiquidList.Add( new ContentLiquid(c,Categories.First(), Type));
+                    }
+                    else
+                    {
+                                      contentLiquidList.Add( new ContentLiquid(c,mm, Type));
+                    }
+      
+                }
+                return contentLiquidList;
+            }
         }
 
 

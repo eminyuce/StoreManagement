@@ -43,6 +43,7 @@ namespace StoreManagement.Controllers
                 shp.SBlogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
                 shp.SBlogsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType, true);
                 shp.SNewsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType, true);
+                shp.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             }
             catch (Exception ex)
             {

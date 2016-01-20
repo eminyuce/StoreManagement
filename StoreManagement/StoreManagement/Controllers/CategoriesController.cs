@@ -49,7 +49,7 @@ namespace StoreManagement.Controllers
             returnModel.SCategories = task1.Result;
             returnModel.SStore = MyStore;
             returnModel.SCategory = task3.Result;
-
+            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             returnModel.SContents = new PagedList<Content>(task2.Result.items, task2.Result.page - 1, task2.Result.pageSize, task2.Result.totalItemCount);
 
             // Stop timing
@@ -80,7 +80,7 @@ namespace StoreManagement.Controllers
             returnModel.SCategories = task1;
             returnModel.SStore = MyStore;
             returnModel.SCategory = task3;
-
+            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             returnModel.SContents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);
 
             // Stop timing

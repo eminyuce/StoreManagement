@@ -27,6 +27,11 @@ namespace StoreManagement.Data.RequestModel
             get { return SSettings.Select(r => new SettingLiquid(r)).ToList(); }
         }
 
+        public List<Navigation> SNavigations { get; set; }
+        public List<NavigationLiquid> Navigations
+        {
+            get { return SNavigations.Select(r => new NavigationLiquid(r)).ToList(); }
+        }
 
     }
 }

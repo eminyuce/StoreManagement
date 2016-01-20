@@ -24,6 +24,7 @@ namespace StoreManagement.Controllers
             var returnModel = new ProductsViewModel();
             returnModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);
             returnModel.SStore = MyStore;
+            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             return View(returnModel);
         }
         //
@@ -36,6 +37,7 @@ namespace StoreManagement.Controllers
             returnModel.SStore = MyStore;
             returnModel.SCategory = ProductCategoryService.GetProductCategory(returnModel.Product.ProductCategoryId);
             returnModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id, StoreConstants.ProductType);
+            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             return View(returnModel);
         }
 	}

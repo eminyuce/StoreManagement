@@ -4,7 +4,17 @@
  News  {{ model.store_liquid.name }}
  
  {% endblock %}  
+   {% block sidebar %} .
+     {% for item in model.navigations %}
  
+ <div>
+     <a href='{{ item.link }}'> {{ item.name }} </a> 
+	 </div>
+	 
+	 
+
+{% endfor %}
+  {% endblock %} 
  {% block content %} 
 
 

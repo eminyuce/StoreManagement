@@ -31,6 +31,7 @@ namespace StoreManagement.Controllers
             newsContents.SContents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
             newsContents.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
             newsContents.Type = ContentType;
+            newsContents.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             return View(newsContents);
         }
         public ActionResult Detail(String id)
@@ -51,7 +52,7 @@ namespace StoreManagement.Controllers
             returnModel.SStore = MyStore;
             returnModel.SCategory = CategoryService.GetCategory(returnModel.Content.CategoryId);
             returnModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType);
-
+            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             return View(returnModel);
         }
     }

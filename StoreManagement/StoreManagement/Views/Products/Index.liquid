@@ -7,7 +7,19 @@
  
  {% endblock %}  
  
+  {% block sidebar %} .
+     {% for item in model.navigations %}
+ 
+ <div>
+     <a href='{{ item.link }}'> {{ item.name }} </a> 
+	 </div>
+	 
+	 
 
+{% endfor %}
+  {% endblock %}  
+ 
+ 
  {% block content %} 
  <p>
  Test

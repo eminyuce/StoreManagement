@@ -31,7 +31,7 @@ namespace StoreManagement.Controllers
             returnModel.SCategory = ProductCategoryService.GetProductCategory(categoryId);
             var m = ProductService.GetProductsCategoryId(MyStore.Id, categoryId, StoreConstants.ProductType, true, page, 24);
             returnModel.SProducts = new PagedList<Product>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-
+            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
             return View(returnModel);
 
         }

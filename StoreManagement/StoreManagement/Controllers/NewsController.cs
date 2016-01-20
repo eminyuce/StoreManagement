@@ -17,7 +17,7 @@ namespace StoreManagement.Controllers
     public class NewsController : BaseController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private const String ContentType = StoreConstants.BlogsType;
+        private const String ContentType = StoreConstants.NewsType;
 
         public ActionResult Index(int page = 1)
         {

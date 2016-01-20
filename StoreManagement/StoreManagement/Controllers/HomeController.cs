@@ -41,6 +41,8 @@ namespace StoreManagement.Controllers
                 shp.SNews = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
                 contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.BlogsType, true, page, 24);
                 shp.SBlogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+                shp.SBlogsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType, true);
+                shp.SNewsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType, true);
             }
             catch (Exception ex)
             {
@@ -93,7 +95,7 @@ namespace StoreManagement.Controllers
 
         public ActionResult PageDesignTest()
         {
-            
+
 
             return View();
         }

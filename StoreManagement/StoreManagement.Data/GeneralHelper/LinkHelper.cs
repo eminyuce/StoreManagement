@@ -38,7 +38,7 @@ namespace StoreManagement.Data.GeneralHelper
             }
             else if (type.Equals(StoreConstants.BlogsType))
             {
-                url = "/Blogs/Detail/";
+                url = "/Blogs/Blog/";
             }
             String detailLink = url + String.Format("{0}", GetContentLinkRouteValue(c, categoryName, type));
             return detailLink.ToLowerInvariant();

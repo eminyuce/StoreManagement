@@ -471,6 +471,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\storeManagement.js" />
+    <Content Include="Views\Blogs\Blog.liquid" />
+    <Content Include="Views\Blogs\Index.liquid" />
+    <None Include="Views\Home\Index.liquid" />
     <None Include="Views\News\Detail.liquid">
       <SubType>Code</SubType>
     </None>
@@ -520,7 +523,6 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -543,7 +545,6 @@
     <Content Include="Views\Pages\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Blogs\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
     <Content Include="Views\PhotoGallery\Index.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
@@ -555,7 +556,6 @@
     <Content Include="Views\Shared\DisplayTemplates\NewsContentItem.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BlogContentItem.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FileManager.cshtml" />
-    <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Shared\pContents\pContent.cshtml" />
     <Content Include="Views\Shared\pProducts\pRelatedProducts.cshtml" />

@@ -51,7 +51,7 @@ namespace StoreManagement.Data.RequestModel
 
         public List<ContentLiquid> Blogs
         {
-            get { return SBlogs.Select(r => new ContentLiquid(r, this.SNewsCategories.FirstOrDefault(r2 => r2.Id == r.CategoryId), StoreConstants.BlogsType)).ToList(); }
+            get { return SBlogs.Select(r => new ContentLiquid(r, this.SBlogsCategories.FirstOrDefault(r2 => r2.Id == r.CategoryId), StoreConstants.BlogsType)).ToList(); }
         }
 
       

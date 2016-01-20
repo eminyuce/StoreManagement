@@ -9,37 +9,30 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class ProductCategoryViewModel : BaseDrop
+    public class ProductCategoryViewModel : ViewModel
     {
-        public Store Store { get; set; }
-        public ProductCategory Category { get; set; }
-        public List<ProductCategory> Categories { get; set; }
-        public PagedList<Product> Products { get; set; }
+        public ProductCategory SCategory { get; set; }
+        public List<ProductCategory> SCategories { get; set; }
+        public PagedList<Product> SProducts { get; set; }
 
-        public ProductCategoryLiquid ProductCategoryLiquid
+        public ProductCategoryLiquid Category
         {
-            get { return new ProductCategoryLiquid(Category);  }
+            get { return new ProductCategoryLiquid(SCategory);  }
         }
 
-        public List<ProductCategoryLiquid> ProductCategoryLiquids
+        public List<ProductCategoryLiquid> Categories
         {
-            get { return Categories.Select(r => new ProductCategoryLiquid(r)).ToList(); }
+            get { return SCategories.Select(r => new ProductCategoryLiquid(r)).ToList(); }
         }
-        public List<ProductLiquid> ProductLiquids
+        public List<ProductLiquid> Products
         {
             get
             {
-                return Products.Select(product => new ProductLiquid(product, Categories.FirstOrDefault(r => r.Id == product.ProductCategoryId))).ToList();
+                return SProducts.Select(product => new ProductLiquid(product, SCategories.FirstOrDefault(r => r.Id == product.ProductCategoryId))).ToList();
             }
         }
 
-        public StoreLiquid StoreLiquid
-        {
-            get
-            {
-                return new StoreLiquid(Store);
-            }
-        }
+      
 
     }
 }

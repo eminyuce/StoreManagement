@@ -10,38 +10,31 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class CategoryViewModel : BaseDrop
+    public class CategoryViewModel : ViewModel
     {
-        public Store Store { get; set; }
-        public Category Category { get; set; }
-        public List<Category> Categories { get; set; }
-        public PagedList<Content> Contents { get; set; }
+        public Category SCategory { get; set; }
+        public List<Category> SCategories { get; set; }
+        public PagedList<Content> SContents { get; set; }
         public String Type { get; set; }
 
-        public CategoryLiquid CategoryLiquid
+        public CategoryLiquid Category
         {
             get
             {
-                return new CategoryLiquid(this.Category, Type);
+                return new CategoryLiquid(this.SCategory, Type);
             }
         }
-        public List<CategoryLiquid> CategoryLiquids
+        public List<CategoryLiquid> Categories
         {
-            get { return Categories.Select(r => new CategoryLiquid(r, Type)).ToList(); }
+            get { return SCategories.Select(r => new CategoryLiquid(r, Type)).ToList(); }
         }
 
-        public List<ContentLiquid> ContentLiquids
+        public List<ContentLiquid> Contents
         {
-            get { return Contents.Select(r => new ContentLiquid(r, this.Categories.FirstOrDefault(r2 => r2.Id == r.CategoryId), Type)).ToList(); }
+            get { return SContents.Select(r => new ContentLiquid(r, this.SCategories.FirstOrDefault(r2 => r2.Id == r.CategoryId), Type)).ToList(); }
         }
 
-        public StoreLiquid StoreLiquid
-        {
-            get
-            {
-                return new StoreLiquid(Store);
-            }
-        }
+      
 
     }
 }

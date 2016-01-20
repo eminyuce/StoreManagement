@@ -32,15 +32,15 @@ namespace StoreManagement.Controllers
             try
             {
 
-                shp.Store = MyStore;
-                shp.CarouselImages = FileManagerService.GetStoreCarousels(MyStore.Id);
-                shp.ProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id);
+                shp.SStore = MyStore;
+                shp.SCarouselImages = FileManagerService.GetStoreCarousels(MyStore.Id);
+                shp.SProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id);
                 var products = ProductService.GetProductsCategoryId(MyStore.Id, null, StoreConstants.ProductType, true, page, 24);
-                shp.Products = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
+                shp.SProducts = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
                 var contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.NewsType, true, page, 24);
-                shp.News = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+                shp.SNews = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
                 contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.BlogsType, true, page, 24);
-                shp.Blogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+                shp.SBlogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
             }
             catch (Exception ex)
             {

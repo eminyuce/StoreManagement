@@ -28,9 +28,9 @@ namespace StoreManagement.Controllers
         public ActionResult GetRelatedContents(int categoryId, String contentType)
         {
             var returnModel = new ContentDetailViewModel();
-            returnModel.Store = MyStore;
-            returnModel.Category = CategoryService.GetCategory(categoryId);
-            returnModel.RelatedContents = ContentService.GetContentByTypeAndCategoryId(MyStore.Id, contentType, categoryId, "", true).Take(5).ToList();
+            returnModel.SStore = MyStore;
+            returnModel.SCategory = CategoryService.GetCategory(categoryId);
+            returnModel.SRelatedContents = ContentService.GetContentByTypeAndCategoryId(MyStore.Id, contentType, categoryId, "", true).Take(5).ToList();
             String partialViewName = @"pContents\pRelatedContents";
             var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             return Json(html, JsonRequestBehavior.AllowGet);

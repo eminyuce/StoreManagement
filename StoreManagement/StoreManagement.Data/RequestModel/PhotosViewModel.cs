@@ -9,22 +9,13 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class PhotosViewModel : BaseDrop
+    public class PhotosViewModel : ViewModel
     {
-        public Store Store { get; set; }
-        public PagedList<FileManager> FileManagers { get; set; }
+        public PagedList<FileManager> SFileManagers { get; set; }
 
-        public StoreLiquid StoreLiquid
+        public List<FileManagerLiquid> FileManagers
         {
-            get
-            {
-                return new StoreLiquid(Store);
-            }
-        }
-
-        public List<FileManagerLiquid> FileManagerLiquids
-        {
-            get { return FileManagers.Select(r => new FileManagerLiquid(r)).ToList(); }
+            get { return SFileManagers.Select(r => new FileManagerLiquid(r)).ToList(); }
         }
 
     }

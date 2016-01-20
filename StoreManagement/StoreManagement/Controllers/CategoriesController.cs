@@ -46,11 +46,11 @@ namespace StoreManagement.Controllers
             var task3 = CategoryService.GetCategoryAsync(categoryId);
             await Task.WhenAll(task1, task2, task3);
 
-            returnModel.Categories = task1.Result;
-            returnModel.Store = MyStore;
-            returnModel.Category = task3.Result;
+            returnModel.SCategories = task1.Result;
+            returnModel.SStore = MyStore;
+            returnModel.SCategory = task3.Result;
 
-            returnModel.Contents = new PagedList<Content>(task2.Result.items, task2.Result.page - 1, task2.Result.pageSize, task2.Result.totalItemCount);
+            returnModel.SContents = new PagedList<Content>(task2.Result.items, task2.Result.page - 1, task2.Result.pageSize, task2.Result.totalItemCount);
 
             // Stop timing
             stopwatch.Stop();
@@ -77,11 +77,11 @@ namespace StoreManagement.Controllers
             var task3 = CategoryService.GetCategory(categoryId);
             //await Task.WhenAll(task1, task2, task3);
 
-            returnModel.Categories = task1;
-            returnModel.Store = MyStore;
-            returnModel.Category = task3;
+            returnModel.SCategories = task1;
+            returnModel.SStore = MyStore;
+            returnModel.SCategory = task3;
 
-            returnModel.Contents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);
+            returnModel.SContents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);
 
             // Stop timing
             stopwatch.Stop();

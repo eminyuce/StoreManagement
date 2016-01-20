@@ -9,43 +9,35 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class ContentsViewModel : BaseDrop
+    public class ContentsViewModel : ViewModel
     {
-        public Store Store { get; set; }
-        public PagedList<Content> Contents { get; set; }
-        public List<Category> Categories { get; set; }
+        public PagedList<Content> SContents { get; set; }
+        public List<Category> SCategories { get; set; }
         public String Type { get; set; }
 
-        public StoreLiquid StoreLiquid
+
+        public List<CategoryLiquid> Categories
         {
-            get
-            {
-                return new StoreLiquid(Store);
-            }
+            get { return SCategories.Select(r => new CategoryLiquid(r, Type)).ToList(); }
         }
 
-        public List<CategoryLiquid> CategoryLiquids
-        {
-            get { return Categories.Select(r => new CategoryLiquid(r, Type)).ToList(); }
-        }
-
-        public List<ContentLiquid> ContentLiquids
+        public List<ContentLiquid> Contents
         {
             get
             {
                 var contentLiquidList = new List<ContentLiquid>();
-                foreach (var c in Contents)
+                foreach (var c in SContents)
                 {
-                    var mm = this.Categories.FirstOrDefault(r2 => r2.Id == c.CategoryId);
+                    var mm = this.SCategories.FirstOrDefault(r2 => r2.Id == c.CategoryId);
                     if (mm == null)
                     {
-                                      contentLiquidList.Add( new ContentLiquid(c,Categories.First(), Type));
+                        contentLiquidList.Add(new ContentLiquid(c, SCategories.First(), Type));
                     }
                     else
                     {
-                                      contentLiquidList.Add( new ContentLiquid(c,mm, Type));
+                        contentLiquidList.Add(new ContentLiquid(c, mm, Type));
                     }
-      
+
                 }
                 return contentLiquidList;
             }

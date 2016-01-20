@@ -6,7 +6,7 @@
 
 
 {% block title %}
-Test Title           {{ model.StoreLiquid.Name }}
+Test Title           {{ model.store.Name }}
 
 {% endblock %}
 
@@ -16,14 +16,14 @@ Test Title           {{ model.StoreLiquid.Name }}
 {% block content %}
 <h2>
   
-    {{ model.category_liquid.Name }}
+    {{ model.category.name }}
 </h2>
 <div class="row">
     <div class="col-md-3">
         <div class="well well-small">
             <ul class="nav nav-list">
  
-                      {% for item in model.category_liquids %}
+                      {% for item in model.categories %}
            
               <li>
                         <span class="icon-chevron-right">
@@ -56,9 +56,9 @@ Test Title           {{ model.StoreLiquid.Name }}
 New Products
 -->
         <div class="well well-small">
-            <h3><strong>{{ model.category_liquids.Name }}</strong> Products </h3>
+            <h3><strong> </strong> Products </h3>
             <div class="row">
-                   {% for product in model.product_liquids %}
+                   {% for product in model.products %}
  
            
               <div class="col-md-3">

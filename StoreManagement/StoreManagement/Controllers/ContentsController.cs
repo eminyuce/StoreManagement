@@ -25,7 +25,7 @@ namespace StoreManagement.Controllers
         {
             int contentId = id.Split("-".ToCharArray()).Last().ToInt();
             var contentDetail = new ContentDetailViewModel();
-            contentDetail.Content = ContentService.GetContentWithFiles(contentId);
+            contentDetail.SContent = ContentService.GetContentWithFiles(contentId);
 
 
             return View(contentDetail);

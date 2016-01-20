@@ -234,6 +234,7 @@
     <Compile Include="LiquidEntities\NavigationLiquid.cs" />
     <Compile Include="LiquidEntities\ProductLiquid.cs" />
     <Compile Include="LiquidEntities\RetailerLiquid.cs" />
+    <Compile Include="LiquidEntities\SettingLiquid.cs" />
     <Compile Include="LiquidEntities\StoreLiquid.cs" />
     <Compile Include="LiquidEntities\StoreLiquidResult.cs" />
     <Compile Include="LiquidFilters\TextFilter.cs" />
@@ -291,6 +292,7 @@
     <Compile Include="RequestModel\ProductsSearchResult.cs" />
     <Compile Include="RequestModel\ProductsViewModel.cs" />
     <Compile Include="RequestModel\StoreHomePage.cs" />
+    <Compile Include="RequestModel\ViewModel.cs" />
     <Compile Include="RequestModel\VmDashboard.cs" />
     <Compile Include="SEO\ISitemapGenerator.cs" />
     <Compile Include="SEO\ISitemapItem.cs" />

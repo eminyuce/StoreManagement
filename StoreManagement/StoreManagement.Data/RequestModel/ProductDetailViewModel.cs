@@ -8,47 +8,40 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class ProductDetailViewModel : BaseDrop
+    public class ProductDetailViewModel : ViewModel
     {
-        public Store Store { get; set; }
-        public ProductCategory Category { get; set; }
-        public Product Product { get; set; }
-        public List<ProductCategory> Categories { get; set; }
-        public List<Product> RelatedProducts { get; set; }
+        public ProductCategory SCategory { get; set; }
+        public Product SProduct { get; set; }
+        public List<ProductCategory> SCategories { get; set; }
+        public List<Product> SRelatedProducts { get; set; }
 
         public ProductCategoryLiquid ProductCategoryLiquid
         {
             get
             {
-                return new ProductCategoryLiquid(this.Category);
+                return new ProductCategoryLiquid(this.SCategory);
             }
         }
 
-        public ProductLiquid ProductLiquid
+        public ProductLiquid Product
         {
             get
             {
-                return new ProductLiquid(this.Product, this.Category);
+                return new ProductLiquid(this.SProduct, this.SCategory);
             }
         }
 
-        public List<ProductCategoryLiquid> ProductCategoryLiquids
+        public List<ProductCategoryLiquid> Categories
         {
-            get { return Categories.Select(r => new ProductCategoryLiquid(r)).ToList(); }
+            get { return SCategories.Select(r => new ProductCategoryLiquid(r)).ToList(); }
         }
 
-        public List<ProductLiquid> ProductLiquids
+        public List<ProductLiquid> Products
         {
-            get { return RelatedProducts.Select(r => new ProductLiquid(r, this.Categories.FirstOrDefault(r2 => r2.Id == r.ProductCategoryId))).ToList(); }
+            get { return SRelatedProducts.Select(r => new ProductLiquid(r, this.SCategories.FirstOrDefault(r2 => r2.Id == r.ProductCategoryId))).ToList(); }
         }
 
-        public StoreLiquid StoreLiquid
-        {
-            get
-            {
-                return new StoreLiquid(Store);
-            }
-        }
+       
 
     }
 }

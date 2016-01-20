@@ -6,7 +6,7 @@
 
  
  {% block title %}
- Test Title           {{ model.product_liquid.Name }}
+ Test Title           {{ model.product.Name }}
  
  {% endblock %}  
 
@@ -15,12 +15,12 @@
 
  {% block content %} 
   
- {% assign product = model.product_liquid %}
+ {% assign product = model.product %}
  	<h1> {{ product.Name  }} </h1>
        {{  product.Description    }}
 
 
-        {% for item in model.product_category_liquids %}
+        {% for item in model.categories %}
  
  <div>
      <a href='{{ item.detail_link }}'> {{ item.name }} </a> 

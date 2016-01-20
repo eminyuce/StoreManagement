@@ -26,10 +26,10 @@ namespace StoreManagement.Controllers
                 return HttpNotFound("Not Found");
             }
             var newsContents = new ContentsViewModel();
-            newsContents.Store = MyStore;
+            newsContents.SStore = MyStore;
             var m = ContentService.GetContentsCategoryId(MyStore.Id, null, ContentType, true, page, 24);
-            newsContents.Contents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            newsContents.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
+            newsContents.SContents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+            newsContents.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
             newsContents.Type = ContentType;
             return View(newsContents);
         }
@@ -41,16 +41,16 @@ namespace StoreManagement.Controllers
             }
             var returnModel = new ContentDetailViewModel();
             int newsId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.Content = ContentService.GetContentsContentId(newsId);
+            returnModel.SContent = ContentService.GetContentsContentId(newsId);
 
-            if (!CheckRequest(returnModel.Content))
+            if (!CheckRequest(returnModel.SContent))
             {
                 return HttpNotFound("Not Found");
             }
             returnModel.Type = ContentType;
-            returnModel.Store = MyStore;
-            returnModel.Category = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.Categories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType);
+            returnModel.SStore = MyStore;
+            returnModel.SCategory = CategoryService.GetCategory(returnModel.Content.CategoryId);
+            returnModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType);
 
             return View(returnModel);
         }

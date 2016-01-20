@@ -8,48 +8,41 @@ using StoreManagement.Data.LiquidEntities;
 
 namespace StoreManagement.Data.RequestModel
 {
-    public class ContentDetailViewModel : BaseDrop
+    public class ContentDetailViewModel : ViewModel
     {
-        public Content Content { get; set; }
-        public Store Store { get; set; }
-        public List<Category> Categories { get; set; }
-        public Category Category { get; set; }
-        public List<Content> RelatedContents { get; set; }
+        public Content SContent { get; set; }
+        public List<Category> SCategories { get; set; }
+        public Category SCategory { get; set; }
+        public List<Content> SRelatedContents { get; set; }
         public String Type { get; set; }
 
-        public CategoryLiquid CategoryLiquid
+        public CategoryLiquid Category
         {
             get
             {
-                return new CategoryLiquid(this.Category, Type);
+                return new CategoryLiquid(this.SCategory, Type);
             }
         }
 
-        public ContentLiquid ContentLiquid
+        public ContentLiquid Content
         {
             get
             {
-                return new ContentLiquid(this.Content, this.Category, this.Type);
+                return new ContentLiquid(this.SContent, this.SCategory, this.Type);
             }
         }
 
-        public List<CategoryLiquid> CategoryLiquids
+        public List<CategoryLiquid> Categories
         {
-            get { return Categories.Select(r => new CategoryLiquid(r, Type)).ToList(); }
+            get { return SCategories.Select(r => new CategoryLiquid(r, Type)).ToList(); }
         }
 
-        public List<ContentLiquid> ContentLiquids
+        public List<ContentLiquid> Contents
         {
-            get { return RelatedContents.Select(r => new ContentLiquid(r, this.Categories.FirstOrDefault(r2 => r2.Id == r.CategoryId), Type)).ToList(); }
+            get { return SRelatedContents.Select(r => new ContentLiquid(r, this.SCategories.FirstOrDefault(r2 => r2.Id == r.CategoryId), Type)).ToList(); }
         }
 
 
-        public StoreLiquid StoreLiquid
-        {
-            get
-            {
-                return new StoreLiquid(Store);
-            }
-        }
+        
     }
 }

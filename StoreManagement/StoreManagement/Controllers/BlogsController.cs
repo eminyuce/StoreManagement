@@ -20,24 +20,26 @@ namespace StoreManagement.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var newsContents = new ContentsViewModel();
-            newsContents.SStore = MyStore;
+            var resultModel = new ContentsViewModel();
+            resultModel.SStore = MyStore;
             var m = ContentService.GetContentsCategoryId(MyStore.Id, null, ContentType, true, page, 24);
-            newsContents.SContents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            newsContents.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
-            newsContents.Type = ContentType;
-            return View(newsContents);
+            resultModel.SContents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+            resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
+            resultModel.Type = ContentType;
+            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            return View(resultModel);
         }
         public ActionResult Blog(String id)
         {
-            var returnModel = new ContentDetailViewModel();
+            var resultModel = new ContentDetailViewModel();
             int blogId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.SContent = ContentService.GetContentsContentId(blogId);
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
-            returnModel.Type = ContentType;
-            return View(returnModel);
+            resultModel.SContent = ContentService.GetContentsContentId(blogId);
+            resultModel.SStore = MyStore;
+            resultModel.SCategory = CategoryService.GetCategory(resultModel.Content.CategoryId);
+            resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
+            resultModel.Type = ContentType;
+            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            return View(resultModel);
         }
     }
 }

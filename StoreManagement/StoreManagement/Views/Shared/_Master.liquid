@@ -39,9 +39,17 @@
       <div id="sidebar">
          {% block sidebar %} 
          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog/">Blog</a></li>
+            {% for item in model.navigations %}
+ <li>
+     <a href='{{ item.link }}'> {{ item.name }} </a> 
+	 </li>
+
+{% endfor %}
+
          </ul>
+
+		
+
          {% endblock %} 
       </div>
        <div id="content"> 

@@ -14,10 +14,12 @@
 
 
  {% block content %} 
- test
+  
  {% assign product = model.product_liquid %}
- 	 {% include 'pProduct' with product  %}
-       
+ 	<h1> {{ product.Name  }} </h1>
+       {{  product.Description    }}
+
+
         {% for item in model.product_category_liquids %}
  
  <div>

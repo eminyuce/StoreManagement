@@ -16,18 +16,20 @@ Test Title           {{ model.StoreLiquid.Name }}
 {% block content %}
 <h2>
   
-    {{ model.ProductCategoryLiquid.Name }}
+    {{ model.category_liquid.Name }}
 </h2>
 <div class="row">
     <div class="col-md-3">
         <div class="well well-small">
             <ul class="nav nav-list">
  
-                      {% for item in model.ProductCategoryLiquids %}
+                      {% for item in model.category_liquids %}
            
               <li>
                         <span class="icon-chevron-right">
-                            {{ item.Name }}
+            <div>
+     <a href='{{ item.detail_link }}'> {{ item.name }} </a> 
+	 </div>
                         </span>
                     </li>
                 
@@ -54,15 +56,17 @@ Test Title           {{ model.StoreLiquid.Name }}
 New Products
 -->
         <div class="well well-small">
-            <h3><strong>{{ model.CategoryLiquid.Name }}</strong> Products </h3>
+            <h3><strong>{{ model.category_liquids.Name }}</strong> Products </h3>
             <div class="row">
-                   {% for product in model.ProductLiquids %}
+                   {% for product in model.product_liquids %}
  
            
               <div class="col-md-3">
 
-						 {{ product.Name }}
-
+ 
+ <div>
+     <a href='{{ product.detail_link }}'> {{ product.name }} </a> 
+	 </div>
 
 						</div>
                   {% endfor %}

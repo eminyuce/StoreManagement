@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DotLiquid;
+using NLog;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 
@@ -14,6 +15,9 @@ namespace StoreManagement.Data.LiquidEntities
 {
     public class ContentLiquid : BaseDrop
     {
+
+
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public Content Content { get; set; }
         public Category Category { get; set; }
         public ImageLiquid ImageLiquid { get; set; }
@@ -44,12 +48,23 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get
             {
-                return LinkHelper.GetContentLink(this.Content, Category.Name, this.Type);
+                String categoryName = this.Content.Id.ToStr() + "-NULL-" + this.Content.CategoryId;
+                if (Category != null)
+                {
+                    categoryName = Category.Name;
+                }
+
+                return LinkHelper.GetContentLink(this.Content, categoryName, this.Type);
+                
             }
         }
         public String PlainDescription
         {
             get { return YuceConvert.StripHtml(this.Content.Description); }
+        }
+        public String Description
+        {
+            get { return this.Content.Description; }
         }
         public int Id
         {

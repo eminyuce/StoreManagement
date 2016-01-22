@@ -27,6 +27,7 @@ namespace StoreManagement.Controllers
             resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
             resultModel.Type = ContentType;
             resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            resultModel.SSettings = this.GetStoreSettings();
             return View(resultModel);
         }
         public ActionResult Blog(String id)
@@ -39,6 +40,7 @@ namespace StoreManagement.Controllers
             resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
             resultModel.Type = ContentType;
             resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            resultModel.SSettings = this.GetStoreSettings();
             return View(resultModel);
         }
     }

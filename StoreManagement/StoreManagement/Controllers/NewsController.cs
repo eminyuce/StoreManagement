@@ -25,14 +25,15 @@ namespace StoreManagement.Controllers
             {
                 return HttpNotFound("Not Found");
             }
-            var newsContents = new ContentsViewModel();
-            newsContents.SStore = MyStore;
+            var resultModel = new ContentsViewModel();
+            resultModel.SStore = MyStore;
             var m = ContentService.GetContentsCategoryId(MyStore.Id, null, ContentType, true, page, 24);
-            newsContents.SContents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            newsContents.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
-            newsContents.Type = ContentType;
-            newsContents.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            return View(newsContents);
+            resultModel.SContents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+            resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
+            resultModel.Type = ContentType;
+            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            resultModel.SSettings = this.GetStoreSettings();
+            return View(resultModel);
         }
         public ActionResult Detail(String id)
         {
@@ -40,20 +41,21 @@ namespace StoreManagement.Controllers
             {
                 return HttpNotFound("Not Found");
             }
-            var returnModel = new ContentDetailViewModel();
+            var resultModel = new ContentDetailViewModel();
             int newsId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.SContent = ContentService.GetContentsContentId(newsId);
+            resultModel.SContent = ContentService.GetContentsContentId(newsId);
 
-            if (!CheckRequest(returnModel.SContent))
+            if (!CheckRequest(resultModel.SContent))
             {
                 return HttpNotFound("Not Found");
             }
-            returnModel.Type = ContentType;
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = CategoryService.GetCategory(returnModel.Content.CategoryId);
-            returnModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType);
-            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            return View(returnModel);
+            resultModel.Type = ContentType;
+            resultModel.SStore = MyStore;
+            resultModel.SCategory = CategoryService.GetCategory(resultModel.Content.CategoryId);
+            resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType);
+            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            resultModel.SSettings = this.GetStoreSettings();
+            return View(resultModel);
         }
     }
 }

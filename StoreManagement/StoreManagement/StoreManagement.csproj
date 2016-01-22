@@ -256,6 +256,7 @@
     <Compile Include="Controllers\BaseController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\BlogsCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs">
@@ -273,6 +274,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\NewsCategoriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
@@ -574,7 +576,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Activities\" />
+    <Folder Include="Views\BlogsCategories\" />
     <Folder Include="Views\Brands\" />
+    <Folder Include="Views\NewsCategories\" />
     <Folder Include="Views\Retailers\" />
     <Folder Include="Views\SiteMaps\" />
   </ItemGroup>

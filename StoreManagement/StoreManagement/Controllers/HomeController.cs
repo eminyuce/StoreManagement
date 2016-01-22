@@ -28,22 +28,23 @@ namespace StoreManagement.Controllers
         {
 
             int page = 1;
-            var shp = new StoreHomePage();
+            var resultModel = new StoreHomePage();
             try
             {
 
-                shp.SStore = MyStore;
-                shp.SCarouselImages = FileManagerService.GetStoreCarousels(MyStore.Id);
-                shp.SProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id);
+                resultModel.SStore = MyStore;
+                resultModel.SCarouselImages = FileManagerService.GetStoreCarousels(MyStore.Id);
+                resultModel.SProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id);
                 var products = ProductService.GetProductsCategoryId(MyStore.Id, null, StoreConstants.ProductType, true, page, 24);
-                shp.SProducts = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
+                resultModel.SProducts = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
                 var contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.NewsType, true, page, 24);
-                shp.SNews = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+                resultModel.SNews = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
                 contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.BlogsType, true, page, 24);
-                shp.SBlogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
-                shp.SBlogsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType, true);
-                shp.SNewsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType, true);
-                shp.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+                resultModel.SBlogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
+                resultModel.SBlogsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType, true);
+                resultModel.SNewsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType, true);
+                resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+                resultModel.SSettings = this.GetStoreSettings();
             }
             catch (Exception ex)
             {
@@ -51,7 +52,7 @@ namespace StoreManagement.Controllers
                 Logger.Error(ex,"Home page exception" + ex.StackTrace);
             }
 
-            return View(shp);
+            return View(resultModel);
         }
         public ActionResult About()
         {

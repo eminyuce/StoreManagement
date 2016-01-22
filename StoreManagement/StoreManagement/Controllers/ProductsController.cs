@@ -21,24 +21,26 @@ namespace StoreManagement.Controllers
 
         public ActionResult Index()
         {
-            var returnModel = new ProductsViewModel();
-            returnModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);
-            returnModel.SStore = MyStore;
-            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            return View(returnModel);
+            var resultModel = new ProductsViewModel();
+            resultModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);
+            resultModel.SStore = MyStore;
+            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            resultModel.SSettings = this.GetStoreSettings();
+            return View(resultModel);
         }
         //
         // GET: /Products/
         public ActionResult Product(String id)
         {
-            var returnModel = new ProductDetailViewModel();
+            var resultModel = new ProductDetailViewModel();
             int productId = id.Split("-".ToCharArray()).Last().ToInt();
-            returnModel.SProduct = ProductService.GetProductsById(productId);
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = ProductCategoryService.GetProductCategory(returnModel.Product.ProductCategoryId);
-            returnModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id, StoreConstants.ProductType);
-            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            return View(returnModel);
+            resultModel.SProduct = ProductService.GetProductsById(productId);
+            resultModel.SStore = MyStore;
+            resultModel.SCategory = ProductCategoryService.GetProductCategory(resultModel.Product.ProductCategoryId);
+            resultModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id, StoreConstants.ProductType);
+            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
+            resultModel.SSettings = this.GetStoreSettings();
+            return View(resultModel);
         }
 	}
 }

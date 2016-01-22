@@ -202,10 +202,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2016 17:13:48</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>01/20/2016 17:13:56</publishTime>
+      <publishTime>01/21/2016 14:23:45</publishTime>
     </File>
     <File Include="bin/StoreManagement.pdb">
-      <publishTime>01/20/2016 17:13:56</publishTime>
+      <publishTime>01/21/2016 14:23:45</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
       <publishTime>01/20/2016 17:13:51</publishTime>

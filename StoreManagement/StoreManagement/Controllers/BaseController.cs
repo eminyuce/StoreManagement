@@ -319,7 +319,6 @@ namespace StoreManagement.Controllers
             }
         }
         private readonly TypedObjectCache<List<Setting>> _settingStoreCache = new TypedObjectCache<List<Setting>>("SettingsCache");
-        private readonly TypedObjectCache<List<FileManager>> _imagesStoreCache = new TypedObjectCache<List<FileManager>>("FileManagersCache");
 
         protected List<Setting> GetStoreSettings()
         {

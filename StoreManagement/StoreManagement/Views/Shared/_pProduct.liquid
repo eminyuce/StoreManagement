@@ -1,7 +1,12 @@
 ﻿
   
 
-<div>
-  <a href='{{ product.detail_link }}'> {{ product.name }} {{ product.price }}</a>
-</div>
 
+
+<li>
+  <div>
+    <a href='{{ product.detail_link }}'> {{ product.name }} </a>
+  </div>
+  Only {{ product.price | format_as_money }}
+  <p>{{ product.description | prettyprint | truncate: 200  }}</p>
+</li>

@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using System.Xml;
 using GenericRepository.EntityFramework.Enums;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
@@ -55,6 +56,19 @@ namespace StoreManagement.Test
         public void GenerateLiquidView1()
         {
             GenerateLiquidView("ContentLiquid.cs");
+        }
+
+        [TestMethod]
+        public void TestXmlReader()
+        {
+
+            XmlReader xmlReader = XmlReader.Create(@"\\WEBDEVELOPERS15\Projects\GovOpportunity\FBOFullXML.xml");
+            while(xmlReader.Read())
+            {
+                Console.WriteLine(xmlReader.Name);
+            }
+            Console.ReadKey();
+        
         }
 
   

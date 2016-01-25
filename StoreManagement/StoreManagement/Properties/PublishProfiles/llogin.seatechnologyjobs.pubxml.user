@@ -1096,7 +1096,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:05</publishTime>
     </File>
     <File Include="Views/News/Detail.liquid">
-      <publishTime>01/19/2016 12:38:14</publishTime>
+      <publishTime>01/25/2016 13:00:34</publishTime>
     </File>
     <File Include="Views/News/Index.cshtml">
       <publishTime>07/30/2015 09:18:06</publishTime>
@@ -1243,7 +1243,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/Shared/_Master.liquid">
-      <publishTime>01/15/2016 13:41:33</publishTime>
+      <publishTime>01/25/2016 12:57:22</publishTime>
     </File>
     <File Include="Views/Shared/_pProduct.liquid">
       <publishTime>01/19/2016 16:01:53</publishTime>

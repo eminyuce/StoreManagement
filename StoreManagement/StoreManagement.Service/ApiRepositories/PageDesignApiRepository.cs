@@ -7,14 +7,14 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class PageDesignApiService : BaseApiService, IPageDesignService
+    public class PageDesignApiRepository : BaseApiRepository, IPageDesignService
     {
         protected override string ApiControllerName { get { return "PageDesigns"; } }
 
 
-        public PageDesignApiService(string webServiceAddress)
+        public PageDesignApiRepository(string webServiceAddress)
             : base(webServiceAddress)
         {
 

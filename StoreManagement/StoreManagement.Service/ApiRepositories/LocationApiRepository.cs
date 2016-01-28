@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class ActivityApiService : BaseApiService, IActivityService
+    public class LocationApiRepository : BaseApiRepository, ILocationService
     {
-        public ActivityApiService(string webServiceAddress) : base(webServiceAddress)
+
+        protected override string ApiControllerName { get { return "Locations"; } }
+
+
+        public LocationApiRepository(string webServiceAddress) : base(webServiceAddress)
         {
 
         }
 
-        protected override string ApiControllerName
-        {
-            get { return "Activities"; }
-        }
 
 
         protected override void SetCache()
@@ -27,21 +27,21 @@ namespace StoreManagement.Service.ApiServices
             HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
 
-        public Task<List<Activity>> GetActivitiesAsync(int storeId, int? take, bool? isActive)
+        public Task<List<Location>> GetLocationsAsync(int storeId, int? take, bool? isActive)
         {
             try
             {
                 SetCache();
-                string url = string.Format("http://{0}/api/{1}/GetActivitiesAsync?" +
+                string url = string.Format("http://{0}/api/{1}/GetLocationsAsync?" +
                                                  "storeId={2}" +
                                                  "&take={3}&isActive={4}",
                                                  WebServiceAddress,
                                                  ApiControllerName,
                                                  storeId,
-                                                 take,
+                                                 take, 
                                                  isActive);
 
-                return HttpRequestHelper.GetUrlResultsAsync<Activity>(url);
+                return HttpRequestHelper.GetUrlResultsAsync<Location>(url);
 
 
             }

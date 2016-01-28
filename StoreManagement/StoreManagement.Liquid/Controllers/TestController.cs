@@ -9,7 +9,6 @@ using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.LiquidEntities;
-using StoreManagement.Service.ApiServices;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -103,28 +102,7 @@ namespace StoreManagement.Liquid.Controllers
             return View(liquidResult);
         }
 
-        public async Task<ActionResult> Index2()
-        {
-            int? categoryId = null;
-
-
-            String ConnectionString = "Stores";
-            var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "localhost:8164");
-            IProductService rep = new ProductApiService(webServiceAddress);
-            IContentService rep2 = new ContentApiService(webServiceAddress);
-            IPageDesignService rep3 = new PageDesignApiService(webServiceAddress);
-
-
-            var list = rep.GetProductsByBrandAsync(StoreId, 5, 100, null);
-            var pageDesignTask = rep3.GetPageDesignByName(StoreId, "HomePage");
-            var blogsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, 5);
-            var newsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, 5);
-
-            await Task.WhenAll(list, pageDesignTask, blogsTask, newsTask);
-
-
-            return View(list.Result);
-        }
+ 
 
         public ActionResult Index4()
         {

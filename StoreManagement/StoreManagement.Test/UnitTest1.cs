@@ -28,7 +28,6 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Liquid.Controllers;
-using StoreManagement.Service.ApiServices;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
@@ -646,31 +645,7 @@ WHERE     (p.Id IS NULL)
             Assert.IsNotNull(m);
 
         }
-
-        [TestMethod]
-        public void TestApiCall2()
-        {
-            var s = new CategoryApiService("yuce.marinelink.org");
-            var m1 = s.GetCategoriesByStoreIdAsync(9, StoreConstants.NewsType, true);
-            Task.WaitAll(m1);
-            var m = m1.Result;
-            foreach (var q in m)
-            {
-                Console.WriteLine(q.Id);
-            }
-        }
-
-
-        [TestMethod]
-        public void TestApiCall()
-        {
-            var s = new NavigationApiService("yuce.marinelink.org");
-            var m = s.GetStoreNavigations(1);
-            foreach (var q in m)
-            {
-                Console.WriteLine(q.Id);
-            }
-        }
+  
         [TestMethod]
         public void TestJsonText()
         {
@@ -771,21 +746,7 @@ WHERE     (p.Id IS NULL)
             }
 
         }
-
-        [TestMethod]
-        public void TestContentService()
-        {
-            var rep = new ContentApiService("yuce.marinelink.org");
-            StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
-            //var p = m.PageCount2;
-            //foreach (var content in m)
-            //{
-            //    Console.WriteLine(content);
-            //}
-
-
-
-        }
+ 
 
         [TestMethod]
         public void TestEmailSender()

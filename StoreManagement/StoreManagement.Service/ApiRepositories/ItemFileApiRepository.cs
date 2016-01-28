@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StoreManagement.Data.Entities;
-using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class ContentFileApiService : BaseApiService, IContentFileService
+ 
+    public class ItemFileApiRepository : BaseApiRepository, IItemFileService
     {
-        protected override string ApiControllerName { get { return "ContentFiles"; } }
+
+        protected override string ApiControllerName { get { return "ItemFiles"; } }
 
 
-        public ContentFileApiService(string webServiceAddress) : base(webServiceAddress)
+        public ItemFileApiRepository(string webServiceAddress) : base(webServiceAddress)
         {
 
         }
+
+ 
 
         protected override void SetCache()
         {

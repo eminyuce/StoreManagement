@@ -7,15 +7,15 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class ProductCategoryApiService : BaseApiService, IProductCategoryService
+    public class ProductCategoryApiRepository : BaseApiRepository, IProductCategoryService
     {
 
         protected override string ApiControllerName { get { return "ProductCategories"; } }
 
 
-        public ProductCategoryApiService(string webServiceAddress)
+        public ProductCategoryApiRepository(string webServiceAddress)
             : base(webServiceAddress)
         {
         }

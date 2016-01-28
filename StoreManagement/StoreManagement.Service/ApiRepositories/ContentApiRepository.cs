@@ -9,14 +9,14 @@ using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class ContentApiService : BaseApiService, IContentService
+    public class ContentApiRepository : BaseApiRepository, IContentService
     {
 
         protected override string ApiControllerName { get { return "Contents"; } }
 
-        public ContentApiService(string webServiceAddress)
+        public ContentApiRepository(string webServiceAddress)
             : base(webServiceAddress)
         {
 

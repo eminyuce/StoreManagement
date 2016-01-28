@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class CommentApiService: BaseApiService, ICommentService
+    public class CommentApiRepository: BaseApiRepository, ICommentService
     {
 
         protected override string ApiControllerName { get { return "Comments"; } }
 
 
-        public CommentApiService(string webServiceAddress) : base(webServiceAddress)
+        public CommentApiRepository(string webServiceAddress) : base(webServiceAddress)
         {
 
         }

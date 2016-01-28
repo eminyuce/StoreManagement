@@ -9,15 +9,15 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class FileManagerApiService : BaseApiService, IFileManagerService
+    public class FileManagerApiRepository : BaseApiRepository, IFileManagerService
     {
 
 
         protected override string ApiControllerName { get { return "FileManagers"; } }
 
-        public FileManagerApiService(string webServiceAddress)
+        public FileManagerApiRepository(string webServiceAddress)
             : base(webServiceAddress)
         {
 

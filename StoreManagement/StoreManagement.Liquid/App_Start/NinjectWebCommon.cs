@@ -9,7 +9,7 @@ using StoreManagement.Liquid.ScheduledTasks;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
-using StoreManagement.Service.ApiServices;
+using StoreManagement.Service.ApiRepositories;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StoreManagement.Liquid.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StoreManagement.Liquid.App_Start.NinjectWebCommon), "Stop")]
@@ -85,7 +85,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ContentApiService(webServiceAddress);
+                    return new ContentApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new StoreApiService(webServiceAddress);
+                    return new StoreApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new SettingApiService(webServiceAddress);
+                    return new SettingApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -118,7 +118,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new FileManagerApiService(webServiceAddress);
+                    return new FileManagerApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -129,7 +129,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new CategoryApiService(webServiceAddress);
+                    return new CategoryApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -140,7 +140,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new PageDesignApiService(webServiceAddress);
+                    return new PageDesignApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -151,7 +151,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ContentFileApiService(webServiceAddress);
+                    return new ContentFileApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -162,7 +162,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new StoreUserApiService(webServiceAddress);
+                    return new StoreUserApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -173,7 +173,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new NavigationApiService(webServiceAddress);
+                    return new NavigationApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -184,7 +184,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ProductApiService(webServiceAddress);
+                    return new ProductApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -195,7 +195,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ProductFileApiService(webServiceAddress);
+                    return new ProductFileApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -206,7 +206,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ProductCategoryApiService(webServiceAddress);
+                    return new ProductCategoryApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -217,7 +217,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new LocationApiService(webServiceAddress);
+                    return new LocationApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -228,7 +228,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new BrandApiService(webServiceAddress);
+                    return new BrandApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -239,7 +239,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new StoreLanguageApiService(webServiceAddress);
+                    return new StoreLanguageApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -250,7 +250,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ItemFileApiService(webServiceAddress);
+                    return new ItemFileApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -261,7 +261,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new LabelApiService(webServiceAddress);
+                    return new LabelApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -272,7 +272,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ContactApiService(webServiceAddress);
+                    return new ContactApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -283,7 +283,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ActivityApiService(webServiceAddress);
+                    return new ActivityApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -295,7 +295,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new CommentApiService(webServiceAddress);
+                    return new CommentApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -307,7 +307,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new MessageApiService(webServiceAddress);
+                    return new MessageApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -322,7 +322,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ProductAttributeApiService(webServiceAddress);
+                    return new ProductAttributeApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -335,7 +335,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new ProductAttributeRelationApiService(webServiceAddress);
+                    return new ProductAttributeRelationApiRepository(webServiceAddress);
                 }
                 else
                 {
@@ -347,7 +347,7 @@ namespace StoreManagement.Liquid.App_Start
             {
                 if (isApiService)
                 {
-                    return new RetailerApiService(webServiceAddress);
+                    return new RetailerApiRepository(webServiceAddress);
                 }
                 else
                 {

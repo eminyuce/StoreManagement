@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class ContactApiService : BaseApiService, IContactService
+    public class ContactApiRepository : BaseApiRepository, IContactService
     {
-        public ContactApiService(string webServiceAddress) : base(webServiceAddress)
+        public ContactApiRepository(string webServiceAddress) : base(webServiceAddress)
         {
 
         }

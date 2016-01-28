@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class LabelApiService : BaseApiService, ILabelService
+    public class LabelApiRepository : BaseApiRepository, ILabelService
     {
 
         protected override string ApiControllerName { get { return "Labels"; } }
-        public LabelApiService(string webServiceAddress)
+        public LabelApiRepository(string webServiceAddress)
             : base(webServiceAddress)
         {
 

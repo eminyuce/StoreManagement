@@ -8,13 +8,13 @@ using StoreManagement.Data.Paging;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class ProductApiService : BaseApiService, IProductService
+    public class ProductApiRepository : BaseApiRepository, IProductService
     {
 
         protected override string ApiControllerName { get { return "Products"; } }
-        public ProductApiService(string webServiceAddress)
+        public ProductApiRepository(string webServiceAddress)
             : base(webServiceAddress)
         {
 

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.ApiServices
+namespace StoreManagement.Service.ApiRepositories
 {
-    public class RetailerApiService : BaseApiService, IRetailerService
+    public class RetailerApiRepository : BaseApiRepository, IRetailerService
     {
-        public RetailerApiService(string webServiceAddress) : base(webServiceAddress)
+        public RetailerApiRepository(string webServiceAddress) : base(webServiceAddress)
         {
         }
 

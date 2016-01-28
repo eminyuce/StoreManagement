@@ -31,10 +31,24 @@ namespace StoreManagement.Data.RequestModel
 
         public List<ContentLiquid> Contents
         {
-            get { return SContents.Select(r => new ContentLiquid(r, this.SCategories.FirstOrDefault(r2 => r2.Id == r.CategoryId), Type)).ToList(); }
+
+            get
+            {
+                var contentsResult = new List<ContentLiquid>();
+                foreach (var content in SContents)
+                {
+                    var cat = this.SCategories.FirstOrDefault(r2 => r2.Id == content.CategoryId);
+                    if (cat != null)
+                    {
+                        contentsResult.Add(new ContentLiquid(content, cat, Type));
+                    }
+                }
+                return contentsResult;
+
+            }
         }
 
-      
+
 
     }
 }

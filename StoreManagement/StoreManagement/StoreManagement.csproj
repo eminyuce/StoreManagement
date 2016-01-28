@@ -475,7 +475,9 @@
     <Content Include="Scripts\storeManagement.js" />
     <Content Include="Views\Blogs\Blog.liquid" />
     <Content Include="Views\Blogs\Index.liquid" />
+    <Content Include="Views\BlogsCategories\Category.liquid" />
     <None Include="Views\Home\Index.liquid" />
+    <Content Include="Views\NewsCategories\Category.liquid" />
     <None Include="Views\News\Detail.liquid">
       <SubType>Code</SubType>
     </None>
@@ -576,9 +578,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Activities\" />
-    <Folder Include="Views\BlogsCategories\" />
     <Folder Include="Views\Brands\" />
-    <Folder Include="Views\NewsCategories\" />
     <Folder Include="Views\Retailers\" />
     <Folder Include="Views\SiteMaps\" />
   </ItemGroup>

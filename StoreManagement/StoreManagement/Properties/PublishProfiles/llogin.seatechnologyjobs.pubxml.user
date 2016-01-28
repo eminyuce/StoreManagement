@@ -196,22 +196,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>01/20/2016 17:13:48</publishTime>
+      <publishTime>01/28/2016 10:05:21</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.pdb">
-      <publishTime>01/20/2016 17:13:48</publishTime>
+      <publishTime>01/28/2016 10:05:21</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>01/21/2016 14:23:45</publishTime>
+      <publishTime>01/28/2016 10:05:29</publishTime>
     </File>
     <File Include="bin/StoreManagement.pdb">
-      <publishTime>01/21/2016 14:23:45</publishTime>
+      <publishTime>01/28/2016 10:05:29</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>01/20/2016 17:13:51</publishTime>
+      <publishTime>01/28/2016 10:05:23</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.pdb">
-      <publishTime>01/20/2016 17:13:51</publishTime>
+      <publishTime>01/28/2016 10:05:23</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -1026,6 +1026,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Blogs/Index.liquid">
       <publishTime>01/20/2016 16:35:44</publishTime>
     </File>
+    <File Include="Views/BlogsCategories/Category.liquid">
+      <publishTime>01/28/2016 10:05:06</publishTime>
+    </File>
     <File Include="Views/Categories/Category.cshtml">
       <publishTime>07/30/2015 09:18:05</publishTime>
     </File>
@@ -1103,6 +1106,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/News/Index.liquid">
       <publishTime>01/19/2016 12:08:33</publishTime>
+    </File>
+    <File Include="Views/NewsCategories/Category.liquid">
+      <publishTime>01/28/2016 09:49:28</publishTime>
     </File>
     <File Include="Views/Pages/Index.cshtml">
       <publishTime>07/30/2015 09:18:06</publishTime>
@@ -1237,7 +1243,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/15/2015 13:52:09</publishTime>
+      <publishTime>01/25/2016 14:50:54</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>07/30/2015 09:18:06</publishTime>
@@ -1246,7 +1252,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/25/2016 12:57:22</publishTime>
     </File>
     <File Include="Views/Shared/_pProduct.liquid">
-      <publishTime>01/19/2016 16:01:53</publishTime>
+      <publishTime>01/23/2016 14:22:08</publishTime>
     </File>
     <File Include="Views/Test/Index.liquid">
       <publishTime>12/30/2015 16:33:57</publishTime>
@@ -1258,7 +1264,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/20/2016 17:14:00</publishTime>
+      <publishTime>01/28/2016 10:05:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

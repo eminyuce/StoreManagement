@@ -9,15 +9,15 @@ using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class CategoryService : BaseService, ICategoryService
+    public class CategoryApiService : BaseApiService, ICategoryService
     {
 
         protected override string ApiControllerName { get { return "Categories"; } }
 
 
-        public CategoryService(string webServiceAddress)
+        public CategoryApiService(string webServiceAddress)
             : base(webServiceAddress)
         {
 

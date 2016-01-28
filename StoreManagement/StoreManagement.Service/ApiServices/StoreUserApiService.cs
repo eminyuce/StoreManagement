@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class StoreUserService : BaseService, IStoreUserService
+    public class StoreUserApiService : BaseApiService, IStoreUserService
     {
 
         protected override string ApiControllerName { get { return "StoreUsers"; } }
 
-        public StoreUserService(string webServiceAddress) : base(webServiceAddress)
+        public StoreUserApiService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }

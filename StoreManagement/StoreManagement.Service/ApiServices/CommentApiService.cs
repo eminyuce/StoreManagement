@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class MessageService : BaseService, IMessageService
+    public class CommentApiService: BaseApiService, ICommentService
     {
-        public MessageService(string webServiceAddress) : base(webServiceAddress)
-        {
-        }
 
-        protected override string ApiControllerName
+        protected override string ApiControllerName { get { return "Comments"; } }
+
+
+        public CommentApiService(string webServiceAddress) : base(webServiceAddress)
         {
-            get { return "Messages"; }
+
         }
 
 
@@ -27,7 +27,7 @@ namespace StoreManagement.Service.Services
             HttpRequestHelper.IsCacheEnable = IsCacheEnable;
         }
 
-        public void SaveContactFormMessage(Message message)
+        public Task<List<Comment>> GetCommentsByItemIdAsync(int storeId, int itemId, string itemType, int page, int pageSize)
         {
             throw new NotImplementedException();
         }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class ActivityService : BaseService, IActivityService
+    public class ActivityApiService : BaseApiService, IActivityService
     {
-        public ActivityService(string webServiceAddress) : base(webServiceAddress)
+        public ActivityApiService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }

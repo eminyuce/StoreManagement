@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using NLog;
 using StoreManagement.Data.GeneralHelper;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public abstract class BaseService
+    public abstract class BaseApiService
     {
         protected abstract String ApiControllerName { get; }
 
@@ -30,7 +30,7 @@ namespace StoreManagement.Service.Services
             set { _cacheMinute = value; }
         }
 
-        protected BaseService(String webServiceAddress)
+        protected BaseApiService(String webServiceAddress)
         {
             WebServiceAddress = webServiceAddress;
             HttpRequestHelper = new RequestHelper();

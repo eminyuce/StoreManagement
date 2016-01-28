@@ -7,12 +7,12 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class BrandService : BaseService, IBrandService
+    public class BrandApiService : BaseApiService, IBrandService
     {
         protected override string ApiControllerName { get { return "Brands"; } }
-        public BrandService(string webServiceAddress)
+        public BrandApiService(string webServiceAddress)
             : base(webServiceAddress)
         {
 

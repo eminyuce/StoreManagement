@@ -165,33 +165,33 @@
     <Compile Include="Repositories\StorePageDesignRepository.cs" />
     <Compile Include="Repositories\StoreRepository.cs" />
     <Compile Include="Repositories\StoreUserRepository.cs" />
-    <Compile Include="Services\ActivityService.cs" />
-    <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\BrandService.cs" />
-    <Compile Include="Services\CategoryService.cs" />
-    <Compile Include="Services\CommentService.cs" />
-    <Compile Include="Services\ContactService.cs" />
-    <Compile Include="Services\ContentFileService.cs" />
-    <Compile Include="Services\ContentService.cs" />
-    <Compile Include="Services\EmailListService.cs" />
-    <Compile Include="Services\FileManagerService.cs" />
+    <Compile Include="ApiServices\ActivityApiService.cs" />
+    <Compile Include="ApiServices\BaseApiService.cs" />
+    <Compile Include="ApiServices\BrandApiService.cs" />
+    <Compile Include="ApiServices\CategoryApiService.cs" />
+    <Compile Include="ApiServices\CommentApiService.cs" />
+    <Compile Include="ApiServices\ContactApiService.cs" />
+    <Compile Include="ApiServices\ContentFileApiService.cs" />
+    <Compile Include="ApiServices\ContentApiService.cs" />
+    <Compile Include="ApiServices\EmailListApiService.cs" />
+    <Compile Include="ApiServices\FileManagerApiService.cs" />
     <Compile Include="Interfaces\IProductAttributeService.cs" />
-    <Compile Include="Services\ItemFileService.cs" />
-    <Compile Include="Services\LabelService.cs" />
-    <Compile Include="Services\LocationService.cs" />
-    <Compile Include="Services\MessageService.cs" />
-    <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\PageDesignService.cs" />
-    <Compile Include="Services\ProductAttributeRelationService.cs" />
-    <Compile Include="Services\ProductAttributeService.cs" />
-    <Compile Include="Services\ProductCategoryService.cs" />
-    <Compile Include="Services\ProductFileService.cs" />
-    <Compile Include="Services\ProductService.cs" />
-    <Compile Include="Services\RetailerService.cs" />
-    <Compile Include="Services\SettingService.cs" />
-    <Compile Include="Services\StoreLanguageService.cs" />
-    <Compile Include="Services\StoreService.cs" />
-    <Compile Include="Services\StoreUserService.cs" />
+    <Compile Include="ApiServices\ItemFileApiService.cs" />
+    <Compile Include="ApiServices\LabelApiService.cs" />
+    <Compile Include="ApiServices\LocationApiService.cs" />
+    <Compile Include="ApiServices\MessageApiService.cs" />
+    <Compile Include="ApiServices\NavigationApiService.cs" />
+    <Compile Include="ApiServices\PageDesignApiService.cs" />
+    <Compile Include="ApiServices\ProductAttributeRelationApiService.cs" />
+    <Compile Include="ApiServices\ProductAttributeApiService.cs" />
+    <Compile Include="ApiServices\ProductCategoryApiService.cs" />
+    <Compile Include="ApiServices\ProductFileApiService.cs" />
+    <Compile Include="ApiServices\ProductApiService.cs" />
+    <Compile Include="ApiServices\RetailerApiService.cs" />
+    <Compile Include="ApiServices\SettingApiService.cs" />
+    <Compile Include="ApiServices\StoreLanguageApiService.cs" />
+    <Compile Include="ApiServices\StoreApiService.cs" />
+    <Compile Include="ApiServices\StoreUserApiService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">
@@ -202,6 +202,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DbServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

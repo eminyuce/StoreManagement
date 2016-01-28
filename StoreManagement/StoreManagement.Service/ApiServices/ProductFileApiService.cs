@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class ProductFileService : BaseService, IProductFileService
+    public class ProductFileApiService : BaseApiService, IProductFileService
     {
 
         protected override string ApiControllerName { get { return "ProductFiles"; } }
 
 
-        public ProductFileService(string webServiceAddress)
+        public ProductFileApiService(string webServiceAddress)
             : base(webServiceAddress)
         {
 

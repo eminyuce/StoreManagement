@@ -7,14 +7,14 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class ContentFileService : BaseService, IContentFileService
+    public class ContentFileApiService : BaseApiService, IContentFileService
     {
         protected override string ApiControllerName { get { return "ContentFiles"; } }
 
 
-        public ContentFileService(string webServiceAddress) : base(webServiceAddress)
+        public ContentFileApiService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }

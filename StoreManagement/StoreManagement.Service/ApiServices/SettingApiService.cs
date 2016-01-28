@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
-using StoreManagement.Service.Services;
+using StoreManagement.Service.ApiServices;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class SettingService : BaseService, ISettingService
+    public class SettingApiService : BaseApiService, ISettingService
     {
 
         protected override string ApiControllerName { get { return "Settings"; } }
-        public SettingService(string webServiceAddress)
+        public SettingApiService(string webServiceAddress)
             : base(webServiceAddress)
         {
 

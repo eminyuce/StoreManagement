@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class LocationService : BaseService, ILocationService
+    public class LocationApiService : BaseApiService, ILocationService
     {
 
         protected override string ApiControllerName { get { return "Locations"; } }
 
 
-        public LocationService(string webServiceAddress) : base(webServiceAddress)
+        public LocationApiService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }

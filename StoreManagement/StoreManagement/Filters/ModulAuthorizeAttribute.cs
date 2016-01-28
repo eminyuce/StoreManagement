@@ -7,7 +7,6 @@ using Ninject;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Helper;
 using StoreManagement.Service.Interfaces;
-using StoreManagement.Service.Services;
 
 namespace StoreManagement.Filters
 {

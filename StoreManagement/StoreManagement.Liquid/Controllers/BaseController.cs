@@ -21,7 +21,6 @@ using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using NLog;
 using StoreManagement.Service.Repositories;
-using StoreManagement.Service.Services;
 
 namespace StoreManagement.Liquid.Controllers
 {

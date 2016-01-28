@@ -9,10 +9,10 @@ using NLog;
 using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.LiquidEntities;
+using StoreManagement.Service.ApiServices;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
-using StoreManagement.Service.Services;
 
 namespace StoreManagement.Liquid.Controllers
 {
@@ -110,9 +110,9 @@ namespace StoreManagement.Liquid.Controllers
 
             String ConnectionString = "Stores";
             var webServiceAddress = ProjectAppSettings.GetWebConfigString("WebServiceAddress", "localhost:8164");
-            IProductService rep = new ProductService(webServiceAddress);
-            IContentService rep2 = new ContentService(webServiceAddress);
-            IPageDesignService rep3 = new PageDesignService(webServiceAddress);
+            IProductService rep = new ProductApiService(webServiceAddress);
+            IContentService rep2 = new ContentApiService(webServiceAddress);
+            IPageDesignService rep3 = new PageDesignApiService(webServiceAddress);
 
 
             var list = rep.GetProductsByBrandAsync(StoreId, 5, 100, null);

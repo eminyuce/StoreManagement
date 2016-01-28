@@ -5,16 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class StoreLanguageService : BaseService, IStoreLanguageService
+    public class ProductAttributeRelationApiService : BaseApiService, IProductAttributeRelationService
     {
-        public StoreLanguageService(string webServiceAddress) : base(webServiceAddress)
+        public ProductAttributeRelationApiService(string webServiceAddress) : base(webServiceAddress)
         {
-
         }
 
-        protected override string ApiControllerName { get { return "StoreLanguages"; } }
+        protected override string ApiControllerName
+        {
+            get { return "ProductAttributeRelations"; }
+        }
 
         protected override void SetCache()
         {

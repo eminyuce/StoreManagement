@@ -28,12 +28,12 @@ using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Liquid.Controllers;
+using StoreManagement.Service.ApiServices;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
 using Newtonsoft.Json.Linq;
 using StoreManagement.Service.Repositories.Interfaces;
-using StoreManagement.Service.Services;
 using File = System.IO.File;
 
 namespace StoreManagement.Test
@@ -650,7 +650,7 @@ WHERE     (p.Id IS NULL)
         [TestMethod]
         public void TestApiCall2()
         {
-            var s = new CategoryService("yuce.marinelink.org");
+            var s = new CategoryApiService("yuce.marinelink.org");
             var m1 = s.GetCategoriesByStoreIdAsync(9, StoreConstants.NewsType, true);
             Task.WaitAll(m1);
             var m = m1.Result;
@@ -664,7 +664,7 @@ WHERE     (p.Id IS NULL)
         [TestMethod]
         public void TestApiCall()
         {
-            var s = new NavigationService("yuce.marinelink.org");
+            var s = new NavigationApiService("yuce.marinelink.org");
             var m = s.GetStoreNavigations(1);
             foreach (var q in m)
             {
@@ -775,7 +775,7 @@ WHERE     (p.Id IS NULL)
         [TestMethod]
         public void TestContentService()
         {
-            ContentService rep = new ContentService("yuce.marinelink.org");
+            var rep = new ContentApiService("yuce.marinelink.org");
             StorePagedList<Content> m = rep.GetContentsCategoryId(2, 1, "product", true, 1, 25);
             //var p = m.PageCount2;
             //foreach (var content in m)

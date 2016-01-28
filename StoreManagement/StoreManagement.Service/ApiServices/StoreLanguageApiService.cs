@@ -5,21 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
- 
-    public class ItemFileService : BaseService, IItemFileService
+    public class StoreLanguageApiService : BaseApiService, IStoreLanguageService
     {
-
-        protected override string ApiControllerName { get { return "ItemFiles"; } }
-
-
-        public ItemFileService(string webServiceAddress) : base(webServiceAddress)
+        public StoreLanguageApiService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }
 
- 
+        protected override string ApiControllerName { get { return "StoreLanguages"; } }
 
         protected override void SetCache()
         {

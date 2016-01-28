@@ -11,14 +11,14 @@ using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class NavigationService : BaseService, INavigationService
+    public class NavigationApiService : BaseApiService, INavigationService
     {
 
         protected override string ApiControllerName { get { return "Navigations"; } }
 
-        public NavigationService(string webServiceAddress)
+        public NavigationApiService(string webServiceAddress)
             : base(webServiceAddress)
         {
 

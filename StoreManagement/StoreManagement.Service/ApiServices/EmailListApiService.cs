@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class EmailListService : BaseService, IEmailListService
+    public class EmailListApiService : BaseApiService, IEmailListService
     {
 
         protected override string ApiControllerName { get { return "EmailLists"; } }
 
 
-        public EmailListService(string webServiceAddress) : base(webServiceAddress)
+        public EmailListApiService(string webServiceAddress) : base(webServiceAddress)
         {
 
         }

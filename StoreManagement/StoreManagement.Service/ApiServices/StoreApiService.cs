@@ -8,12 +8,12 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.Interfaces;
 
-namespace StoreManagement.Service.Services
+namespace StoreManagement.Service.ApiServices
 {
-    public class StoreService : BaseService, IStoreService
+    public class StoreApiService : BaseApiService, IStoreService
     {
         protected override string ApiControllerName { get { return "Stores"; } }
-        public StoreService(string webServiceAddress)
+        public StoreApiService(string webServiceAddress)
             : base(webServiceAddress)
         {
 

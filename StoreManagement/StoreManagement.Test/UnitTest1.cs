@@ -29,7 +29,6 @@ using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Liquid.Controllers;
 using StoreManagement.Service.DbContext;
-using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
 using Newtonsoft.Json.Linq;
 using StoreManagement.Service.Repositories.Interfaces;
@@ -96,28 +95,7 @@ namespace StoreManagement.Test
         }
 
 
-        [TestMethod]
-        public void GetContentsCategoryIdAsyncSearch()
-        {
-
-            int? categoryId = null;
-            int StoreId = 9;
-            IContentService rep2 = new ContentRepository(new StoreContext(ConnectionString));
-
-            // (int storeId, int? catId, string type, int page, int pageSize, bool ? isActive, string contentType);
-            var blogsTask = rep2.GetContentsByContentKeywordAsync(
-                StoreId,
-                categoryId,
-                StoreConstants.BlogsType,
-                1,
-                50,
-                true,
-                "main");
-
-            Task.WhenAll(blogsTask).Wait();
-
-            Console.Write(blogsTask.Result.Count);
-        }
+     
 
         [TestMethod]
         public void DeleteBrandsWithoutProducts()
@@ -144,31 +122,7 @@ namespace StoreManagement.Test
             //}
         }
 
-        [TestMethod]
-        public void Test33335555()
-        {
-
-            int? categoryId = null;
-            int StoreId = 9;
-            IProductService rep = new ProductRepository(new StoreContext(ConnectionString));
-            IContentService rep2 = new ContentRepository(new StoreContext(ConnectionString));
-            IPageDesignService rep3 = new PageDesignRepository(new StoreContext(ConnectionString));
-
-
-            var list = rep.GetProductsByBrandAsync(StoreId, 5, 100, null);
-            var pageDesignTask = rep3.GetPageDesignByName(StoreId, "HomePage");
-            var blogsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.BlogsType, 5);
-            var newsTask = rep2.GetMainPageContentsAsync(StoreId, categoryId, StoreConstants.NewsType, 5);
-
-            Task.WhenAll(list, pageDesignTask, blogsTask, newsTask).Wait();
-
-            Console.WriteLine(list.Result.Count);
-            Console.WriteLine(pageDesignTask.Result.Id);
-            Console.WriteLine(blogsTask.Result.Count);
-            Console.WriteLine(newsTask.Result.Count);
-
-        }
-
+       
 
         [TestMethod]
         public void Test333344466()
@@ -209,130 +163,11 @@ namespace StoreManagement.Test
             Console.WriteLine(productsTask.Result.totalItemCount);
 
         }
-        /*
-         
-         
-         
-SELECT  COunt(Products.Id)
-FROM         ProductFiles AS p RIGHT OUTER JOIN
-                      Products ON p.ProductId = Products.Id
-WHERE     (p.Id IS NULL)
-         * 
-         */
-        [TestMethod]
-        public void FileManagerProductImages()
-        {
-            var db = dbContext = new StoreContext(ConnectionString);
-            IFileManagerService rep3 = new FileManagerRepository(db);
-            var files = rep3.GetFilesByStoreId(53);
-            IProductService rep = new ProductRepository(db);
-            IProductFileRepository rep2 = new ProductFileRepository(db);
-            IProductCategoryService repCategory = new ProductCategoryRepository(new StoreContext(ConnectionString));
-            var categoriesTask = repCategory.GetProductCategoriesByStoreId(53);
-            foreach (var c in categoriesTask)
-            {
-                var products = rep.GetProductByTypeAndCategoryId(53, "product", c.Id);
-                foreach (var p in products)
-                {
-                    try
-                    {
-                        var productList = p.ProductFiles;
-                        if (productList != null && !productList.Any())
-                        {
-                            try
-                            {
-                                Product p1 = p;
-                                if (!String.IsNullOrEmpty(p1.Name))
-                                {
-                                    var productFile = files.Where(r => !String.IsNullOrEmpty(r.OriginalFilename) && r.OriginalFilename.Contains(p1.Name));
-                                    foreach (var pf in productFile)
-                                    {
-                                        try
-                                        {
-                                            var item = new ProductFile();
-                                            item.FileManagerId = pf.Id;
-                                            item.ProductId = p.Id;
-                                            item.IsMainImage = true;
-                                            rep2.Add(item);
-                                            rep2.Save();
-
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            String mm = ex.Message;
-
-                                        }
+        
 
 
-                                    }
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                String mm = e.Message;
-
-                            }
-
-
-                        }
-
-                    }
-                    catch (Exception m)
-                    {
-                        String mm = m.Message;
-
-                    }
-                }
-            }
-        }
-
-
-
-
-
-        [TestMethod]
-        public void TestProductRepository2()
-        {
-            IFileManagerService rep3 = new FileManagerRepository(new StoreContext(ConnectionString));
-            var fileManagerTask = rep3.GetImagesByStoreIdAsync(9, true);
-            IProductCategoryService rep2 = new ProductCategoryRepository(new StoreContext(ConnectionString));
-            var categoriesTask = rep2.GetProductCategoriesByStoreIdAsync(9, "products", true);
-            IProductService rep = new ProductRepository(new StoreContext(ConnectionString));
-            var m = rep.GetMainPageProductsAsync(9, 5);
-            Task.WaitAll(m, categoriesTask, fileManagerTask);
-
-            Console.WriteLine(m.Result.Count);
-            Console.WriteLine(categoriesTask.Result.Count);
-            Console.WriteLine(fileManagerTask.Result.Count);
-        }
-
-        [TestMethod]
-        public void TestProductRepository()
-        {
-            var db = dbContext = new StoreContext(ConnectionString);
-            IFileManagerService rep3 = new FileManagerRepository(db);
-            var fileManagerTask = rep3.GetImagesByStoreIdAsync(9, true);
-            IProductCategoryService rep2 = new ProductCategoryRepository(db);
-            var categoriesTask = rep2.GetProductCategoriesByStoreIdAsync(9, "products", true);
-            IProductService rep = new ProductRepository(db);
-            var m = rep.GetMainPageProductsAsync(9, 5);
-            Task.WaitAll(m, categoriesTask, fileManagerTask);
-
-            Console.WriteLine(m.Result.Count);
-            Console.WriteLine(categoriesTask.Result.Count);
-            Console.WriteLine(fileManagerTask.Result.Count);
-        }
-
-        [TestMethod]
-        public void TestNavigationRepositorys()
-        {
-            INavigationService rep = new NavigationRepository(new StoreContext(ConnectionString));
-            var m = rep.GetStoreActiveNavigationsAsync(9);
-            Task.WaitAll(m);
-
-            Console.Write(m.Result.Count);
-
-        }
+ 
+ 
         [TestMethod]
         public void RemoveNewLines()
         {

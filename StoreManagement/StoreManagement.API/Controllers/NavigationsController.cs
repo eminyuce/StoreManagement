@@ -11,13 +11,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
     [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
-    public class NavigationsController : BaseApiController<Navigation>, INavigationService
+    public class NavigationsController : BaseApiController<Navigation>, INavigationGeneralRepository
     {
 
         // GET api/Navigations

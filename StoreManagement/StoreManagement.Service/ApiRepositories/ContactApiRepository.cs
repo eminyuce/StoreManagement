@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class ContactApiRepository : BaseApiRepository, IContactService
+    public class ContactApiRepository : BaseApiRepository, IContactGeneralRepository
     {
         public ContactApiRepository(string webServiceAddress) : base(webServiceAddress)
         {

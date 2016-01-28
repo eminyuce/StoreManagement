@@ -8,5 +8,6 @@ namespace StoreManagement.Service.Services.IServices
 {
     public interface IBaseService
     {
+
     }
 }

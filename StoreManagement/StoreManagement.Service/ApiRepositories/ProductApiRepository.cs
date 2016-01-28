@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Data.RequestModel;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class ProductApiRepository : BaseApiRepository, IProductService
+    public class ProductApiRepository : BaseApiRepository, IProductGeneralRepository
     {
 
         protected override string ApiControllerName { get { return "Products"; } }

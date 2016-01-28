@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IProductAttributeRelationRepository : IBaseRepository<ProductAttributeRelation, int>, IProductAttributeRelationService, IDisposable 
+    public interface IProductAttributeRelationRepository : IBaseRepository<ProductAttributeRelation, int>, IProductAttributeRelationGeneralRepository, IDisposable 
     {
 
     }

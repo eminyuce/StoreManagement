@@ -10,13 +10,13 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Data.RequestModel;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
     [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
-    public class ProductsController : BaseApiController<Product>, IProductService
+    public class ProductsController : BaseApiController<Product>, IProductGeneralRepository
     {
         public override IEnumerable<Product> GetAll()
         {

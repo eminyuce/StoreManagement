@@ -8,7 +8,7 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
-using StoreManagement.Service.Interfaces;
+
 
 namespace StoreManagement.Controllers
 {

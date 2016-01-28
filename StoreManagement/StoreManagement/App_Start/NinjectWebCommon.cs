@@ -7,7 +7,7 @@ using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Filters;
 using StoreManagement.Helper;
 using StoreManagement.Service.DbContext;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Service.ApiRepositories;
@@ -84,7 +84,7 @@ namespace StoreManagement.App_Start
 
 
 
-            kernel.Bind<IContentService>().ToMethod(ctx =>
+            kernel.Bind<IContentGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -95,7 +95,7 @@ namespace StoreManagement.App_Start
                     return new ContentRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IStoreService>().ToMethod(ctx =>
+            kernel.Bind<IStoreGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -106,7 +106,7 @@ namespace StoreManagement.App_Start
                     return new StoreRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<ISettingService>().ToMethod(ctx =>
+            kernel.Bind<ISettingGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -117,7 +117,7 @@ namespace StoreManagement.App_Start
                     return new SettingRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IFileManagerService>().ToMethod(ctx =>
+            kernel.Bind<IFileManagerGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -128,7 +128,7 @@ namespace StoreManagement.App_Start
                     return new FileManagerRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<ICategoryService>().ToMethod(ctx =>
+            kernel.Bind<ICategoryGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -139,7 +139,7 @@ namespace StoreManagement.App_Start
                     return new CategoryRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IPageDesignService>().ToMethod(ctx =>
+            kernel.Bind<IPageDesignGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -150,7 +150,7 @@ namespace StoreManagement.App_Start
                     return new PageDesignRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IContentFileService>().ToMethod(ctx =>
+            kernel.Bind<IContentFileGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -161,7 +161,7 @@ namespace StoreManagement.App_Start
                     return new ContentFileRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IStoreUserService>().ToMethod(ctx =>
+            kernel.Bind<IStoreUserGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -172,7 +172,7 @@ namespace StoreManagement.App_Start
                     return new StoreUserRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<INavigationService>().ToMethod(ctx =>
+            kernel.Bind<INavigationGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -183,7 +183,7 @@ namespace StoreManagement.App_Start
                     return new NavigationRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IProductService>().ToMethod(ctx =>
+            kernel.Bind<IProductGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -194,7 +194,7 @@ namespace StoreManagement.App_Start
                     return new ProductRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IProductFileService>().ToMethod(ctx =>
+            kernel.Bind<IProductFileGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -205,7 +205,7 @@ namespace StoreManagement.App_Start
                     return new ProductFileRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IProductCategoryService>().ToMethod(ctx =>
+            kernel.Bind<IProductCategoryGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -216,7 +216,7 @@ namespace StoreManagement.App_Start
                     return new ProductCategoryRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<ILocationService>().ToMethod(ctx =>
+            kernel.Bind<ILocationGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -227,7 +227,7 @@ namespace StoreManagement.App_Start
                     return new LocationRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IBrandService>().ToMethod(ctx =>
+            kernel.Bind<IBrandGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -238,7 +238,7 @@ namespace StoreManagement.App_Start
                     return new BrandRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IStoreLanguageService>().ToMethod(ctx =>
+            kernel.Bind<IStoreLanguageGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -249,7 +249,7 @@ namespace StoreManagement.App_Start
                     return new StoreLanguageRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IItemFileService>().ToMethod(ctx =>
+            kernel.Bind<IItemFileGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -260,7 +260,7 @@ namespace StoreManagement.App_Start
                     return new ItemFileRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<ILabelService>().ToMethod(ctx =>
+            kernel.Bind<ILabelGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -271,7 +271,7 @@ namespace StoreManagement.App_Start
                     return new LabelRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IContactService>().ToMethod(ctx =>
+            kernel.Bind<IContactGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -282,7 +282,7 @@ namespace StoreManagement.App_Start
                     return new ContactRepository(new StoreContext(AppConstants.ConnectionStringName));
                 }
             }).InRequestScope();
-            kernel.Bind<IActivityService>().ToMethod(ctx =>
+            kernel.Bind<IActivityGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -294,7 +294,7 @@ namespace StoreManagement.App_Start
                 }
             }).InRequestScope();
 
-            kernel.Bind<ICommentService>().ToMethod(ctx =>
+            kernel.Bind<ICommentGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -306,7 +306,7 @@ namespace StoreManagement.App_Start
                 }
             }).InRequestScope();
 
-            kernel.Bind<IMessageService>().ToMethod(ctx =>
+            kernel.Bind<IMessageGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -321,7 +321,7 @@ namespace StoreManagement.App_Start
 
 
 
-            kernel.Bind<IProductAttributeService>().ToMethod(ctx =>
+            kernel.Bind<IProductAttributeGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -334,7 +334,7 @@ namespace StoreManagement.App_Start
             }).InRequestScope();
 
 
-            kernel.Bind<IProductAttributeRelationService>().ToMethod(ctx =>
+            kernel.Bind<IProductAttributeRelationGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {
@@ -346,7 +346,7 @@ namespace StoreManagement.App_Start
                 }
             }).InRequestScope();
 
-            kernel.Bind<IRetailerService>().ToMethod(ctx =>
+            kernel.Bind<IRetailerGeneralRepository>().ToMethod(ctx =>
             {
                 if (isApiService)
                 {

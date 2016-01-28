@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.ApiRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class SettingApiRepository : BaseApiRepository, ISettingService
+    public class SettingApiRepository : BaseApiRepository, ISettingGeneralRepository
     {
 
         protected override string ApiControllerName { get { return "Settings"; } }

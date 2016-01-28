@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class PageDesignApiRepository : BaseApiRepository, IPageDesignService
+    public class PageDesignApiRepository : BaseApiRepository, IPageDesignGeneralRepository
     {
         protected override string ApiControllerName { get { return "PageDesigns"; } }
 

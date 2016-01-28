@@ -10,13 +10,13 @@ using System.Net.Http;
 using System.Web.Http;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
     [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
-    public class ProductCategoriesController : BaseApiController<ProductCategory>, IProductCategoryService
+    public class ProductCategoriesController : BaseApiController<ProductCategory>, IProductCategoryGeneralRepository
     {
         // GET api/Default1
         public IEnumerable<ProductCategory> GetProductCategories(int storeId)

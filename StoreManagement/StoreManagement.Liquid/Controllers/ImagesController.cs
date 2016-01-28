@@ -6,7 +6,6 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using NLog;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {

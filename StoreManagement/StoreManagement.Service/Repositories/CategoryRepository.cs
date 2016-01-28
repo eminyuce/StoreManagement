@@ -15,7 +15,6 @@ using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.GenericRepositories;
-using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data;
 

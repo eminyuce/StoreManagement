@@ -12,13 +12,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
    
-    public class PageDesignsController : BaseApiController<PageDesign>, IPageDesignService
+    public class PageDesignsController : BaseApiController<PageDesign>, IPageDesignGeneralRepository
     {
 
         // GET api/PageDesigns/5

@@ -8,7 +8,6 @@ using StoreManagement.Data.Entities;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.DbContext;
-using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 

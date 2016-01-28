@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Web;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface IStoreRepository : IBaseRepository<Store, int>, IStoreService, IDisposable 
+    public interface IStoreRepository : IBaseRepository<Store, int>, IStoreGeneralRepository, IDisposable 
     {
         void DeleteStore(int storeId);
         List<Store> GetAllStores();

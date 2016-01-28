@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository;
 using GenericRepository.EntityFramework;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {

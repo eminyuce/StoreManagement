@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class StoreLanguageApiRepository : BaseApiRepository, IStoreLanguageService
+    public class StoreLanguageApiRepository : BaseApiRepository, IStoreLanguageGeneralRepository
     {
         public StoreLanguageApiRepository(string webServiceAddress) : base(webServiceAddress)
         {

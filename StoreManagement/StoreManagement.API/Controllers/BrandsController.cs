@@ -8,13 +8,13 @@ using System.Web.Http;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
     [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
-    public class BrandsController : BaseApiController<Brand>, IBrandService
+    public class BrandsController : BaseApiController<Brand>, IBrandGeneralRepository
     {
         public override IEnumerable<Brand> GetAll()
         {

@@ -7,11 +7,11 @@ using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.Paging;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class ContentApiRepository : BaseApiRepository, IContentService
+    public class ContentApiRepository : BaseApiRepository, IContentGeneralRepository
     {
 
         protected override string ApiControllerName { get { return "Contents"; } }

@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.API.Controllers
 {
-    public class ProductAttributeServicesController : BaseApiController<ProductAttribute>, IProductAttributeService
+    public class ProductAttributeServicesController : BaseApiController<ProductAttribute>, IProductAttributeGeneralRepository
     {
         public override IEnumerable<ProductAttribute> GetAll()
         {

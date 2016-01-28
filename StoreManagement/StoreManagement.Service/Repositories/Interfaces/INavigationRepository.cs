@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericRepository.EntityFramework;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.Repositories.Interfaces
 {
-    public interface INavigationRepository : IBaseRepository<Navigation, int>, INavigationService, IDisposable 
+    public interface INavigationRepository : IBaseRepository<Navigation, int>, INavigationGeneralRepository, IDisposable 
     {
         List<Navigation> GetNavigationsByStoreId(int storeId, string searchKey);
     }

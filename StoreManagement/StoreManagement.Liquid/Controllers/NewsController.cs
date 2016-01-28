@@ -8,8 +8,6 @@ using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 
-using StoreManagement.Service.Interfaces;
-
 namespace StoreManagement.Liquid.Controllers
 {
     public class NewsController : ContentsController

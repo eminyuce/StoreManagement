@@ -6,19 +6,19 @@ using System.Web.Mvc;
 using Ninject;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Helper;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Filters
 {
     public class ModulAuthorizeAttribute : FilterAttribute, IAuthorizationFilter
     {
 
-        public IStoreService StoreService { set; get; }
+        public IStoreGeneralRepository StoreService { set; get; }
 
 
-        public INavigationService NavigationService { set; get; }
+        public INavigationGeneralRepository NavigationService { set; get; }
 
-        public ModulAuthorizeAttribute(IStoreService storeService, INavigationService navigationService)
+        public ModulAuthorizeAttribute(IStoreGeneralRepository storeService, INavigationGeneralRepository navigationService)
         {
             this.StoreService = storeService;
             this.NavigationService = navigationService;

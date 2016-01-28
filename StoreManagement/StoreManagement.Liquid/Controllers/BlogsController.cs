@@ -13,8 +13,6 @@ using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Data.Paging;
 using StoreManagement.Data.RequestModel;
 
-using StoreManagement.Service.Interfaces;
-
 namespace StoreManagement.Liquid.Controllers
 {
     public class BlogsController : ContentsController

@@ -8,7 +8,6 @@ using NLog;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.GeneralHelper;
 
-using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.Controllers
 {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class ProductAttributeApiRepository: BaseApiRepository, IProductAttributeService
+    public class ProductAttributeApiRepository : BaseApiRepository, IProductAttributeGeneralRepository
     {
         protected override string ApiControllerName { get { return "ProductAttributeServices"; } }
         public ProductAttributeApiRepository(string webServiceAddress)

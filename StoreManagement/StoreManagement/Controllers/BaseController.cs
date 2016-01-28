@@ -15,10 +15,11 @@ using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Helper;
 using StoreManagement.Models;
 using StoreManagement.Service.DbContext;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Data;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Service.Services.IServices;
 
 namespace StoreManagement.Controllers
 {
@@ -74,76 +75,84 @@ namespace StoreManagement.Controllers
         [Inject]
         public IHomePageHelper HomePageHelper { set; get; }
 
-        [Inject]
-        public IStoreService StoreService { set; get; }
+
 
         [Inject]
-        public IItemFileService ItemFileService { set; get; }
+        public IMessageGeneralRepository MessageService { set; get; }
+
 
         [Inject]
-        public ISettingService SettingService { set; get; }
+        public IStoreGeneralRepository StoreService { set; get; }
 
         [Inject]
-        public IFileManagerService FileManagerService { get; set; }
+        public IItemFileGeneralRepository ItemFileService { set; get; }
 
         [Inject]
-        public IContentFileService ContentFileService { set; get; }
+        public ISettingGeneralRepository SettingService { set; get; }
 
         [Inject]
-        public ICommentService CommentService { set; get; }
+        public IFileManagerGeneralRepository FileManagerService { get; set; }
 
         [Inject]
-        public IContentService ContentService { set; get; }
+        public IContentFileGeneralRepository ContentFileService { set; get; }
 
         [Inject]
-        public ICategoryService CategoryService { set; get; }
+        public ICommentGeneralRepository CommentService { set; get; }
 
         [Inject]
-        public INavigationService NavigationService { set; get; }
+        public IContentGeneralRepository ContentService { set; get; }
 
         [Inject]
-        public IPageDesignService PageDesignService { set; get; }
+        public ICategoryGeneralRepository CategoryService { set; get; }
 
         [Inject]
-        public IStoreUserService StoreUserService { set; get; }
+        public INavigationGeneralRepository NavigationService { set; get; }
+
+        [Inject]
+        public IPageDesignGeneralRepository PageDesignService { set; get; }
+
+        [Inject]
+        public IStoreUserGeneralRepository StoreUserService { set; get; }
 
         [Inject]
         public IEmailSender EmailSender { set; get; }
 
 
         [Inject]
-        public IActivityService ActivityService { set; get; }
+        public IActivityGeneralRepository ActivityService { set; get; }
 
         [Inject]
-        public IRetailerService RetailerService { set; get; }
+        public IRetailerGeneralRepository RetailerService { set; get; }
 
         [Inject]
-        public IProductService ProductService { set; get; }
+        public IProductGeneralRepository ProductService { set; get; }
 
         [Inject]
-        public IProductAttributeService ProductAttributeService { set; get; }
+        public IProductAttributeGeneralRepository ProductAttributeService { set; get; }
 
         [Inject]
-        public IProductAttributeRelationService ProductAttributeRelationService { set; get; }
+        public IProductAttributeRelationGeneralRepository ProductAttributeRelationService { set; get; }
 
         [Inject]
-        public IProductFileService ProductFileService { set; get; }
+        public IProductFileGeneralRepository ProductFileService { set; get; }
 
         [Inject]
-        public IProductCategoryService ProductCategoryService { set; get; }
+        public IProductCategoryGeneralRepository ProductCategoryService { set; get; }
 
         [Inject]
-        public IBrandService BrandService { set; get; }
+        public IBrandGeneralRepository BrandService { set; get; }
 
         [Inject]
-        public ILocationService LocationService { set; get; }
+        public ILocationGeneralRepository LocationService { set; get; }
 
         [Inject]
-        public IContactService ContactService { set; get; }
+        public IContactGeneralRepository ContactService { set; get; }
 
 
         [Inject]
-        public ILabelService LabelService { set; get; }
+        public ILabelGeneralRepository LabelService { set; get; }
+
+
 
 
         protected Store MyStore { set; get; }

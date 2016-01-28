@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.Paging;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class BrandApiRepository : BaseApiRepository, IBrandService
+    public class BrandApiRepository : BaseApiRepository, IBrandGeneralRepository
     {
         protected override string ApiControllerName { get { return "Brands"; } }
         public BrandApiRepository(string webServiceAddress)

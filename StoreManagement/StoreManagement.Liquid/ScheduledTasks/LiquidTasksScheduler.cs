@@ -6,7 +6,7 @@ using NLog;
 using Ninject;
 using Quartz;
 using StoreManagement.Liquid.ScheduledTasks.Jobs;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Liquid.ScheduledTasks
@@ -18,7 +18,7 @@ namespace StoreManagement.Liquid.ScheduledTasks
 
 
         [Inject]
-        public IStoreService StoreService { set; get; }
+        public IStoreGeneralRepository  StoreService { set; get; }
 
 
         [Inject]

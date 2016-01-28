@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class EmailListApiRepository : BaseApiRepository, IEmailListService
+    public class EmailListApiRepository : BaseApiRepository, IEmailListGeneralRepository
     {
 
         protected override string ApiControllerName { get { return "EmailLists"; } }

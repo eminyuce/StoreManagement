@@ -7,11 +7,11 @@ using MvcPaging;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.Paging;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class FileManagerApiRepository : BaseApiRepository, IFileManagerService
+    public class FileManagerApiRepository : BaseApiRepository, IFileManagerGeneralRepository
     {
 
 

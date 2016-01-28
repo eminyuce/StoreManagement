@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Web;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class StoreApiRepository : BaseApiRepository, IStoreService
+    public class StoreApiRepository : BaseApiRepository, IStoreGeneralRepository
     {
         protected override string ApiControllerName { get { return "Stores"; } }
         public StoreApiRepository(string webServiceAddress)

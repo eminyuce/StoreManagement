@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 using StoreManagement.Data;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class NavigationApiRepository : BaseApiRepository, INavigationService
+    public class NavigationApiRepository : BaseApiRepository, INavigationGeneralRepository
     {
 
         protected override string ApiControllerName { get { return "Navigations"; } }

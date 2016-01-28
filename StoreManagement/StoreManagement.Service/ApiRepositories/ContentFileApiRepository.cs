@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class ContentFileApiRepository : BaseApiRepository, IContentFileService
+    public class ContentFileApiRepository : BaseApiRepository, IContentFileGeneralRepository
     {
         protected override string ApiControllerName { get { return "ContentFiles"; } }
 

@@ -17,7 +17,6 @@ using StoreManagement.Data.Paging;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
 using StoreManagement.Service.GenericRepositories;
-using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories

@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.API.Controllers
 {
-    public class RetailersController : BaseApiController<Retailer>, IRetailerService
+    public class RetailersController : BaseApiController<Retailer>, IRetailerGeneralRepository
     {
         public override IEnumerable<Retailer> GetAll()
         {

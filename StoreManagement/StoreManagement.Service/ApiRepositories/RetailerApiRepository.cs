@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Service.ApiRepositories
 {
-    public class RetailerApiRepository : BaseApiRepository, IRetailerService
+    public class RetailerApiRepository : BaseApiRepository, IRetailerGeneralRepository
     {
         public RetailerApiRepository(string webServiceAddress) : base(webServiceAddress)
         {

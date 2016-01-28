@@ -6,13 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 using WebApi.OutputCache.V2;
 
 namespace StoreManagement.API.Controllers
 {
     [CacheOutput(ClientTimeSpan = StoreConstants.CacheClientTimeSpanSeconds, ServerTimeSpan = StoreConstants.CacheServerTimeSpanSeconds)]
-    public class EmailListsController : BaseApiController<EmailList>, IEmailListService
+    public class EmailListsController : BaseApiController<EmailList>, IEmailListGeneralRepository
     {
         public override IEnumerable<EmailList> GetAll()
         {

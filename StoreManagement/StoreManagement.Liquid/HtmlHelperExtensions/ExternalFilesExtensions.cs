@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
 
 namespace StoreManagement.Liquid.HtmlHelperExtensions
 {

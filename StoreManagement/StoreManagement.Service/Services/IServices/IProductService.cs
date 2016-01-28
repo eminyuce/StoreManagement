@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StoreManagement.Service.Services.IServices
 {
-    public interface IProductService
+    public interface IProductService : IBaseService
     {
 
     }

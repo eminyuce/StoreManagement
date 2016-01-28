@@ -6,13 +6,13 @@ using System.Web.Routing;
 using StoreManagement.Data;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Service.Interfaces;
+using StoreManagement.Service.IGeneralRepositories;
 
 namespace StoreManagement.Helper
 {
     public class StoreHelper
     {
-        public Store GetStoreByDomain(IStoreService storeService, HttpRequestBase request)
+        public Store GetStoreByDomain(IStoreGeneralRepository storeService, HttpRequestBase request)
         {
             String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
             Store result = null;

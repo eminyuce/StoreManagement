@@ -10,7 +10,6 @@ using StoreManagement.Data;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.LiquidEntities;
 using StoreManagement.Service.DbContext;
-using StoreManagement.Service.Interfaces;
 using StoreManagement.Service.Repositories;
 
 namespace StoreManagement.Liquid.Controllers
@@ -29,9 +28,9 @@ namespace StoreManagement.Liquid.Controllers
 
             String ConnectionString = "Stores";
 
-            IProductService rep = new ProductRepository(new StoreContext(ConnectionString));
-            IContentService rep2 = new ContentRepository(new StoreContext(ConnectionString));
-            IPageDesignService rep3 = new PageDesignRepository(new StoreContext(ConnectionString));
+            var rep = new ProductRepository(new StoreContext(ConnectionString));
+            var rep2 = new ContentRepository(new StoreContext(ConnectionString));
+            var rep3 = new PageDesignRepository(new StoreContext(ConnectionString));
 
 
             var list = rep.GetProductsByBrandAsync(StoreId, 5, 100, null);
@@ -53,12 +52,12 @@ namespace StoreManagement.Liquid.Controllers
 
             String ConnectionString = "Stores";
 
-            IProductService rep = new ProductRepository(new StoreContext(ConnectionString));
-            IContentService rep2 = new ContentRepository(new StoreContext(ConnectionString));
-            IPageDesignService rep3 = new PageDesignRepository(new StoreContext(ConnectionString));
-            IProductCategoryService rep4 = new ProductCategoryRepository(new StoreContext(ConnectionString));
-            ICategoryService rep5 = new CategoryRepository(new StoreContext(ConnectionString));
-            IFileManagerService rep6 = new FileManagerRepository(new StoreContext(ConnectionString));
+            var rep = new ProductRepository(new StoreContext(ConnectionString));
+            var rep2 = new ContentRepository(new StoreContext(ConnectionString));
+            var rep3 = new PageDesignRepository(new StoreContext(ConnectionString));
+            var rep4 = new ProductCategoryRepository(new StoreContext(ConnectionString));
+            var rep5 = new CategoryRepository(new StoreContext(ConnectionString));
+            var rep6 = new FileManagerRepository(new StoreContext(ConnectionString));
 
 
 

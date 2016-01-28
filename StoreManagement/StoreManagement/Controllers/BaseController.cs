@@ -77,6 +77,9 @@ namespace StoreManagement.Controllers
 
 
 
+       // [Inject]
+       // public IProductService ProductService { set; get; }
+
         [Inject]
         public IMessageGeneralRepository MessageService { set; get; }
 
@@ -123,6 +126,9 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public IRetailerGeneralRepository RetailerService { set; get; }
+
+        [Inject]
+        public IProductService ProductService2 { set; get; }
 
         [Inject]
         public IProductGeneralRepository ProductService { set; get; }
@@ -179,11 +185,19 @@ namespace StoreManagement.Controllers
             this.MyStore = store;
             this.StoreId = store.Id;
             this.StoreName = store.Name;
+            SetServiceStore(store);
 
             if (store == null)
             {
                 throw new Exception("Store cannot be NULL");
             }
+        }
+
+        private void SetServiceStore(Store store)
+        {
+            ProductService2.MyStore = store;
+            ProductService2.StoreId = store.Id;
+            ProductService2.StoreName = store.Name;
         }
 
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
@@ -222,56 +236,56 @@ namespace StoreManagement.Controllers
                 BaseLogger.Trace("StoreService is null");
                 return;
             }
-            var isCacheEnable = StoreService.GetStoreCacheStatus(StoreId);
-            this.IsCacheEnable = isCacheEnable;
-            // Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
-            SettingService.IsCacheEnable = isCacheEnable;
-            SettingService.CacheMinute = GetSettingValueInt("SettingService_CacheMinute", 200);
+            //var isCacheEnable = StoreService.GetStoreCacheStatus(StoreId);
+            //this.IsCacheEnable = isCacheEnable;
+            //// Logger.Trace("StoreId =" + StoreId + " " + isCacheEnable);
+            //SettingService.IsCacheEnable = isCacheEnable;
+            //SettingService.CacheMinute = GetSettingValueInt("SettingService_CacheMinute", 200);
 
 
-            NavigationService.IsCacheEnable = isCacheEnable;
-            NavigationService.CacheMinute = GetSettingValueInt("NavigationService_CacheMinute", 200);
+            //NavigationService.IsCacheEnable = isCacheEnable;
+            //NavigationService.CacheMinute = GetSettingValueInt("NavigationService_CacheMinute", 200);
 
-            ProductCategoryService.IsCacheEnable = isCacheEnable;
-            ProductCategoryService.CacheMinute = GetSettingValueInt("ProductCategoryService_CacheMinute", 200);
+            //ProductCategoryService.IsCacheEnable = isCacheEnable;
+            //ProductCategoryService.CacheMinute = GetSettingValueInt("ProductCategoryService_CacheMinute", 200);
 
-            ProductFileService.IsCacheEnable = isCacheEnable;
-            ProductFileService.CacheMinute = GetSettingValueInt("ProductFileService_CacheMinute", 200);
+            //ProductFileService.IsCacheEnable = isCacheEnable;
+            //ProductFileService.CacheMinute = GetSettingValueInt("ProductFileService_CacheMinute", 200);
 
-            ProductService.IsCacheEnable = isCacheEnable;
-            ProductService.CacheMinute = GetSettingValueInt("ProductService_CacheMinute", 200);
-
-
-            StoreUserService.IsCacheEnable = isCacheEnable;
-            StoreUserService.CacheMinute = GetSettingValueInt("StoreUserService_CacheMinute", 200);
-
-            PageDesignService.IsCacheEnable = isCacheEnable;
-            PageDesignService.CacheMinute = GetSettingValueInt("PageDesignService_CacheMinute", 200);
-
-            CategoryService.IsCacheEnable = isCacheEnable;
-            CategoryService.CacheMinute = GetSettingValueInt("CategoryService_CacheMinute", 200);
-
-            ContentService.IsCacheEnable = isCacheEnable;
-            ContentService.CacheMinute = GetSettingValueInt("ContentService_CacheMinute", 200);
-
-            ContentFileService.IsCacheEnable = isCacheEnable;
-            ContentFileService.CacheMinute = GetSettingValueInt("ContentFileService_CacheMinute", 200);
-
-            FileManagerService.IsCacheEnable = isCacheEnable;
-            FileManagerService.CacheMinute = GetSettingValueInt("FileManagerService_CacheMinute", 200);
+            //ProductService.IsCacheEnable = isCacheEnable;
+            //ProductService.CacheMinute = GetSettingValueInt("ProductService_CacheMinute", 200);
 
 
-            BrandService.IsCacheEnable = isCacheEnable;
-            BrandService.CacheMinute = GetSettingValueInt("BrandService_CacheMinute", 200);
+            //StoreUserService.IsCacheEnable = isCacheEnable;
+            //StoreUserService.CacheMinute = GetSettingValueInt("StoreUserService_CacheMinute", 200);
 
-            LocationService.IsCacheEnable = isCacheEnable;
-            LocationService.CacheMinute = GetSettingValueInt("LocationService_CacheMinute", 200);
+            //PageDesignService.IsCacheEnable = isCacheEnable;
+            //PageDesignService.CacheMinute = GetSettingValueInt("PageDesignService_CacheMinute", 200);
 
-            ContactService.IsCacheEnable = isCacheEnable;
-            ContactService.CacheMinute = GetSettingValueInt("ContactService_CacheMinute", 200);
+            //CategoryService.IsCacheEnable = isCacheEnable;
+            //CategoryService.CacheMinute = GetSettingValueInt("CategoryService_CacheMinute", 200);
 
-            StoreService.IsCacheEnable = isCacheEnable;
-            StoreService.CacheMinute = GetSettingValueInt("StoreService_CacheMinute", 200);
+            //ContentService.IsCacheEnable = isCacheEnable;
+            //ContentService.CacheMinute = GetSettingValueInt("ContentService_CacheMinute", 200);
+
+            //ContentFileService.IsCacheEnable = isCacheEnable;
+            //ContentFileService.CacheMinute = GetSettingValueInt("ContentFileService_CacheMinute", 200);
+
+            //FileManagerService.IsCacheEnable = isCacheEnable;
+            //FileManagerService.CacheMinute = GetSettingValueInt("FileManagerService_CacheMinute", 200);
+
+
+            //BrandService.IsCacheEnable = isCacheEnable;
+            //BrandService.CacheMinute = GetSettingValueInt("BrandService_CacheMinute", 200);
+
+            //LocationService.IsCacheEnable = isCacheEnable;
+            //LocationService.CacheMinute = GetSettingValueInt("LocationService_CacheMinute", 200);
+
+            //ContactService.IsCacheEnable = isCacheEnable;
+            //ContactService.CacheMinute = GetSettingValueInt("ContactService_CacheMinute", 200);
+
+            //StoreService.IsCacheEnable = isCacheEnable;
+            //StoreService.CacheMinute = GetSettingValueInt("StoreService_CacheMinute", 200);
         }
       
 

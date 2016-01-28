@@ -11,6 +11,8 @@ using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.Repositories.Interfaces;
 using StoreManagement.Service.ApiRepositories;
+using StoreManagement.Service.Services;
+using StoreManagement.Service.Services.IServices;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StoreManagement.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StoreManagement.App_Start.NinjectWebCommon), "Stop")]
@@ -358,6 +360,7 @@ namespace StoreManagement.App_Start
                 }
             }).InRequestScope();
 
+            kernel.Bind<IProductService>().To<ProductService>();
 
             kernel.Bind<IEmailSender>().To<EmailSender>();
             kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();

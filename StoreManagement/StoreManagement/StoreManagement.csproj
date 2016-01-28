@@ -284,7 +284,6 @@
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\SiteMapsController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\ModulAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">

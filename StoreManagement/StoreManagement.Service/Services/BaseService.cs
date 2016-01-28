@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
+using StoreManagement.Data;
+using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.EmailHelper;
+using StoreManagement.Data.Entities;
 using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Services.IServices;
 
@@ -88,5 +91,27 @@ namespace StoreManagement.Service.Services
         public ILabelGeneralRepository LabelRepository { set; get; }
 
 
+        public Store MyStore { get; set; }
+        public int StoreId { get; set; }
+        public string StoreName { get; set; }
+
+        private readonly TypedObjectCache<List<Setting>> _settingStoreCache = new TypedObjectCache<List<Setting>>("SettingsCache");
+        protected List<Setting> GetStoreSettings()
+        {
+            String key = String.Format("GetStoreSettingsFromCacheAsync-{0}", StoreId);
+            _settingStoreCache.IsCacheEnable = true;
+            List<Setting> items = null;
+            _settingStoreCache.TryGet(key, out items);
+            if (items == null)
+            {
+                var itemsAsyn = SettingRepository.GetStoreSettingsFromCache(StoreId);
+
+                items = itemsAsyn;
+                _settingStoreCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("Setting_CacheAbsoluteExpiration_Minute", 10)));
+
+            }
+            return items;
+
+        }
     }
 }

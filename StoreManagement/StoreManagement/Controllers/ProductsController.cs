@@ -31,14 +31,8 @@ namespace StoreManagement.Controllers
         // GET: /Products/
         public ActionResult Product(String id)
         {
-            var resultModel = new ProductDetailViewModel();
-            int productId = id.Split("-".ToCharArray()).Last().ToInt();
-            resultModel.SProduct = ProductService.GetProductsById(productId);
-            resultModel.SStore = MyStore;
-            resultModel.SCategory = ProductCategoryService.GetProductCategory(resultModel.Product.ProductCategoryId);
-            resultModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id, StoreConstants.ProductType);
-            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            resultModel.SSettings = this.GetStoreSettings();
+            
+            ProductDetailViewModel resultModel = ProductService2.GetProductDetailPage(id);
             return View(resultModel);
         }
 	}

@@ -116,31 +116,9 @@ namespace StoreManagement.Controllers
             }
             return new SitemapResult(sitemapItems);
         }
-        public async Task<ActionResult> Retailers()
+        public ActionResult Retailers()
         {
-            var sitemapItems = new List<SitemapItem>();
-
-            String key = String.Format("RetailersSiteMap-{0}", StoreId);
-
-            ProductSitemapItemCache.TryGet(key, out sitemapItems);
-
-            if (sitemapItems == null)
-            {
-                sitemapItems = new List<SitemapItem>();
-                var retailersTask = RetailerService.GetRetailersAsync(StoreId, null, true);
-                await Task.WhenAll(retailersTask);
-                var retailers = retailersTask.Result;
-                foreach (var retailer in retailers)
-                {
-                    var retailerDetailLink = LinkHelper.GetRetailerIdRouteValue(retailer);
-                    var siteMap = new SitemapItem(Url.AbsoluteAction("detail", "retailers", new { id = retailerDetailLink }),
-                                         changeFrequency: SitemapChangeFrequency.Monthly, priority: 1.0);
-                    sitemapItems.Add(siteMap);
-
-                }
-                ProductSitemapItemCache.Set(key, sitemapItems, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.CacheLongSeconds));
-            }
-            return new SitemapResult(sitemapItems);
+            return RetailerService2.RetailersSitemapResult(this);
         }
     }
 }

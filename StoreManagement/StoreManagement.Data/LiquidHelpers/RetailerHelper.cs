@@ -12,8 +12,7 @@ namespace StoreManagement.Data.LiquidHelpers
 {
     public class RetailerHelper : BaseLiquidHelper, IRetailerHelper
     {
-        public StoreLiquidResult GetRetailers(List<Retailer> labels,
-                                       PageDesign pageDesign)
+        public StoreLiquidResult GetRetailers(List<Retailer> labels,PageDesign pageDesign)
         {
 
 

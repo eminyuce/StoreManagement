@@ -135,7 +135,22 @@ namespace StoreManagement.Service.GenericRepositories
                 Logger.Error(exception, "DeleteBaseEntity :" + String.Join(",", values));
             }
         }
+        public static List<T> GetActiveBaseEnities<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T : BaseEntity
+        {
+            try
+            {
+                Expression<Func<T, bool>> match = r2 => r2.StoreId == storeId && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+                Expression<Func<T, int>> keySelector = t => t.Ordering;
+                var items = repository.FindAll(match, keySelector, OrderByType.Descending, take, null);
 
+                return items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return null;
+            }
+        }
         public static async Task<List<T>> GetActiveBaseEnitiesAsync<T>(IBaseRepository<T, int> repository, int storeId, int? take, bool? isActive) where T : BaseEntity
         {
             try

@@ -11,5 +11,6 @@ namespace StoreManagement.Service.IGeneralRepositories
     {
         Task<List<Retailer>> GetRetailersAsync(int storeId, int ? take, bool isActive);
         Task<Retailer> GetRetailerAsync(int retailerId);
+        List<Retailer> GetRetailers(int storeId, int? take, bool isActive);
     }
 }

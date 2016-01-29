@@ -59,5 +59,22 @@ namespace StoreManagement.Service.ApiRepositories
 
             }
         }
+
+        public List<Retailer> GetRetailers(int storeId, int? take, bool isActive)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetRetailers?storeId={2}&take={3}&isActive={4}",
+                    WebServiceAddress, ApiControllerName, storeId, take, isActive);
+                return HttpRequestHelper.GetUrlResults<Retailer>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return null;
+
+            }
+        }
     }
 }

@@ -37,5 +37,10 @@ namespace StoreManagement.Service.Repositories
         {
             return this.GetSingleAsync(retailerId);
         }
+
+        public List<Retailer> GetRetailers(int storeId, int? take, bool isActive)
+        {
+            return BaseEntityRepository.GetActiveBaseEnities(this, storeId, take, isActive);
+        }
     }
 }

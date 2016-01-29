@@ -69,6 +69,10 @@
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -196,6 +200,10 @@
     <Compile Include="ApiRepositories\StoreApiRepository.cs" />
     <Compile Include="ApiRepositories\StoreUserApiRepository.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\BrandService.cs" />
+    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\IServices\IActivityService.cs" />
     <Compile Include="Services\IServices\IBaseService.cs" />
     <Compile Include="Services\IServices\IBrandService.cs" />
@@ -220,7 +228,11 @@
     <Compile Include="Services\IServices\ISettingService.cs" />
     <Compile Include="Services\IServices\IStoreService.cs" />
     <Compile Include="Services\IServices\IStoreUserService.cs" />
+    <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\RetailerService.cs" />
+    <Compile Include="Services\StoreService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreManagement.Data\StoreManagement.Data.csproj">

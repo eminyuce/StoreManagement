@@ -46,5 +46,10 @@ namespace StoreManagement.API.Controllers
         {
             return await RetailerRepository.GetRetailerAsync(retailerId);
         }
+
+        public List<Retailer> GetRetailers(int storeId, int? take, bool isActive)
+        {
+            return RetailerRepository.GetRetailers(storeId, take, isActive);
+        }
     }
 }

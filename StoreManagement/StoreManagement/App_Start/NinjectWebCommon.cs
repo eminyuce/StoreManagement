@@ -361,6 +361,14 @@ namespace StoreManagement.App_Start
             }).InRequestScope();
 
             kernel.Bind<IProductService>().To<ProductService>();
+            kernel.Bind<ILocationService>().To<LocationService>();
+            kernel.Bind<IBrandService>().To<BrandService>(); 
+            kernel.Bind<IRetailerService>().To<RetailerService>();
+            kernel.Bind<IContentService>().To<ContentService>();
+            kernel.Bind<IContactService>().To<ContactService>();
+            kernel.Bind<INavigationService>().To<NavigationService>();
+            kernel.Bind<IStoreService>().To<StoreService>();
+            kernel.Bind<ICategoryService>().To<CategoryService>();
 
             kernel.Bind<IEmailSender>().To<EmailSender>();
             kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();
@@ -383,4 +391,6 @@ namespace StoreManagement.App_Start
            
         }
     }
+
+     
 }

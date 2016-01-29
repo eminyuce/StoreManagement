@@ -77,8 +77,8 @@ namespace StoreManagement.Controllers
 
 
 
-       // [Inject]
-       // public IProductService ProductService { set; get; }
+        // [Inject]
+        // public IProductService ProductService { set; get; }
 
         [Inject]
         public IMessageGeneralRepository MessageService { set; get; }
@@ -124,8 +124,32 @@ namespace StoreManagement.Controllers
         [Inject]
         public IActivityGeneralRepository ActivityService { set; get; }
 
+
         [Inject]
-        public IRetailerGeneralRepository RetailerService { set; get; }
+        public ILocationService LocationService2 { set; get; }
+
+        [Inject]
+        public IBrandService BrandService2 { set; get; }
+
+        [Inject]
+        public IContentService ContentService2 { set; get; }
+
+        [Inject]
+        public IContactService ContactService2 { set; get; }
+
+        [Inject]
+        public INavigationService NavigationService2 { set; get; }
+
+        [Inject]
+        public IStoreService StoreService2 { set; get; }
+
+        [Inject]
+        public ICategoryService CategoryService2 { set; get; }
+
+        [Inject]
+        public IRetailerService RetailerService2 { set; get; }
+
+      
 
         [Inject]
         public IProductService ProductService2 { set; get; }
@@ -164,7 +188,7 @@ namespace StoreManagement.Controllers
         protected Store MyStore { set; get; }
         protected int StoreId { get; set; }
         protected String StoreName { get; set; }
- 
+
 
 
         protected override void Initialize(RequestContext requestContext)
@@ -225,7 +249,7 @@ namespace StoreManagement.Controllers
 
             SetStoreCache();
 
-            
+
             base.OnActionExecuting(filterContext);
         }
         protected bool IsCacheEnable { get; set; }
@@ -287,7 +311,7 @@ namespace StoreManagement.Controllers
             //StoreService.IsCacheEnable = isCacheEnable;
             //StoreService.CacheMinute = GetSettingValueInt("StoreService_CacheMinute", 200);
         }
-      
+
 
         protected bool GetSettingValueBool(String key, bool defaultValue)
         {

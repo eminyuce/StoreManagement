@@ -18,13 +18,10 @@ namespace StoreManagement.Controllers
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public ActionResult Index()
+        public ActionResult Index(String search="", String page="1")
         {
-            var resultModel = new ProductsViewModel();
-            resultModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);
-            resultModel.SStore = MyStore;
-            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            resultModel.SSettings = this.GetStoreSettings();
+           
+            ProductsViewModel resultModel = ProductService2.GetProductIndexPage(search, page);
             return View(resultModel);
         }
         //

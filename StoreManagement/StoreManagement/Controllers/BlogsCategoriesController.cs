@@ -15,34 +15,15 @@ namespace StoreManagement.Controllers
 {
    
     [OutputCache(CacheProfile = "Cache1Days")]
-    public class BlogsCategoriesController : BaseController
+    public class BlogsCategoriesController : CategoriesController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private const String ContentType = StoreConstants.BlogsType;
         //
         // GET: /BlogsCategories/
-        public ActionResult Index()
+
+        public BlogsCategoriesController() : base(ContentType)
         {
-            return View();
         }
-        public ActionResult Category(String id, int page = 1)
-        {
-
-            var returnModel = new CategoryViewModel();
-            int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-
-            StorePagedList<Content> task2 = ContentService.GetContentsCategoryId(MyStore.Id, categoryId, ContentType, true, page, 600);
-
-
-            returnModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = CategoryService.GetCategory(categoryId);
-            returnModel.Type = ContentType;
-            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            returnModel.SContents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);
-
-            return View(returnModel);
-
-        }
-	}
+    }
 }

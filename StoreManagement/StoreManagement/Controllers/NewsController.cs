@@ -25,14 +25,8 @@ namespace StoreManagement.Controllers
             {
                 return HttpNotFound("Not Found");
             }
-            var resultModel = new ContentsViewModel();
-            resultModel.SStore = MyStore;
-            var m = ContentService.GetContentsCategoryId(MyStore.Id, null, ContentType, true, page, 24);
-            resultModel.SContents = new PagedList<Content>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
-            resultModel.Type = ContentType;
-            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            resultModel.SSettings = this.GetStoreSettings();
+
+            ContentsViewModel resultModel = ContentService2.GetContentIndexPage(page, ContentType);
             return View(resultModel);
         }
         public ActionResult Detail(String id)
@@ -41,20 +35,8 @@ namespace StoreManagement.Controllers
             {
                 return HttpNotFound("Not Found");
             }
-            var resultModel = new ContentDetailViewModel();
-            int newsId = id.Split("-".ToCharArray()).Last().ToInt();
-            resultModel.SContent = ContentService.GetContentsContentId(newsId);
 
-            if (!CheckRequest(resultModel.SContent))
-            {
-                return HttpNotFound("Not Found");
-            }
-            resultModel.Type = ContentType;
-            resultModel.SStore = MyStore;
-            resultModel.SCategory = CategoryService.GetCategory(resultModel.Content.CategoryId);
-            resultModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType);
-            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            resultModel.SSettings = this.GetStoreSettings();
+            ContentDetailViewModel resultModel = ContentService2.GetContentDetail(id, ContentType);
             return View(resultModel);
         }
     }

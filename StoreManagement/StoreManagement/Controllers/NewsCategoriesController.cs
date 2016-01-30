@@ -15,24 +15,16 @@ using StoreManagement.Data.RequestModel;
 namespace StoreManagement.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Days")]
-    public class NewsCategoriesController : BaseController
+    public class NewsCategoriesController : CategoriesController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private const String ContentType = StoreConstants.NewsType;
         //
         // GET: /NewsCategories/
-        public ActionResult Index(int page = 1)
-        {
-            var pageSize = GetSettingValueInt(ContentType + "Categories_PageSize", StoreConstants.DefaultPageSize);
-            var categoriesTask = CategoryService.GetCategoriesByStoreIdWithPagingAsync(StoreId, ContentType, true, page, pageSize);
-            var settings = GetStoreSettings();
-            return View();
-        }
-        public ActionResult Category(String id, int page = 1)
-        {
-            var returnModel = CategoryService2.GetCategory(id, page, ContentType);
-            return View(returnModel);
 
+        public NewsCategoriesController()
+            : base(ContentType)
+        {
         }
     }
 }

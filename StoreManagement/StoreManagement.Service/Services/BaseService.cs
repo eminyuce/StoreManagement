@@ -113,5 +113,10 @@ namespace StoreManagement.Service.Services
             return items;
 
         }
+
+        protected bool CheckRequest(BaseEntity entity)
+        {
+            return entity.StoreId == MyStore.Id;
+        }
     }
 }

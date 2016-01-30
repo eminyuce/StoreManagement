@@ -19,75 +19,35 @@ using StoreManagement.Service.Repositories.Interfaces;
 namespace StoreManagement.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Days")]
-    public class CategoriesController : BaseController
+    public abstract class CategoriesController : BaseController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private String ContentType { get; set; }
 
-        public ActionResult Index()
+        protected CategoriesController(String contentType)
         {
-            return View();
+            this.ContentType = contentType;
         }
-        public async Task<ActionResult> Category(String id, int page = 1)
+        
+        public ActionResult Index(int page = 1)
         {
-            // Create new stopwatch
-            Stopwatch stopwatch = new Stopwatch();
+            if (!IsModulActive(ContentType))
+            {
+                return HttpNotFound("Not Found");
+            }
 
-            // Begin timing
-            stopwatch.Start();
-
-           
-    
-
-            var returnModel = new CategoryViewModel();
-            int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-
-            Task<List<Category>> task1 = CategoryService.GetCategoriesByStoreIdAsync(MyStore.Id, StoreConstants.BlogsType,null);
-            var task2 = ContentService.GetContentsCategoryIdAsync(MyStore.Id, categoryId, StoreConstants.BlogsType, true, page, 600,"");
-            var task3 = CategoryService.GetCategoryAsync(categoryId);
-            await Task.WhenAll(task1, task2, task3);
-
-            returnModel.SCategories = task1.Result;
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = task3.Result;
-            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            returnModel.SContents = new PagedList<Content>(task2.Result.items, task2.Result.page - 1, task2.Result.pageSize, task2.Result.totalItemCount);
-
-            // Stop timing
-            stopwatch.Stop();
-            Logger.Info("Async Time elapsed 3: {0}", stopwatch.ElapsedMilliseconds);
-            return View(returnModel);
-
+            ContentsViewModel resultModel = ContentService2.GetContentIndexPage(page, ContentType);
+            return View(resultModel);
         }
-        public ActionResult Category2(String id, int page = 1)
+        public ActionResult Detail(String id)
         {
-            // Create new stopwatch
-            Stopwatch stopwatch = new Stopwatch();
+            if (!IsModulActive(ContentType))
+            {
+                return HttpNotFound("Not Found");
+            }
 
-            // Begin timing
-            stopwatch.Start();
-
-
-
-
-            var returnModel = new CategoryViewModel();
-            int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-
-            var task1 = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType);
-            var task2 = ContentService.GetContentsCategoryId(MyStore.Id, categoryId, StoreConstants.BlogsType, true, page, 600);
-            var task3 = CategoryService.GetCategory(categoryId);
-            //await Task.WhenAll(task1, task2, task3);
-
-            returnModel.SCategories = task1;
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = task3;
-            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            returnModel.SContents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);
-
-            // Stop timing
-            stopwatch.Stop();
-            Logger.Info("Sync Time elapsed 3: {0}", stopwatch.ElapsedMilliseconds);
-            return View("Category",returnModel);
-
+            ContentDetailViewModel resultModel = ContentService2.GetContentDetail(id, ContentType);
+            return View(resultModel);
         }
     }
 }

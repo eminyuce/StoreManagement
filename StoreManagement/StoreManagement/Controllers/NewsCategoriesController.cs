@@ -30,20 +30,7 @@ namespace StoreManagement.Controllers
         }
         public ActionResult Category(String id, int page = 1)
         {
-
-            var returnModel = new CategoryViewModel();
-            int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-
-            StorePagedList<Content> task2 = ContentService.GetContentsCategoryId(MyStore.Id, categoryId, ContentType, true, page, 600);
-
-
-            returnModel.SCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, ContentType, true);
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = CategoryService.GetCategory(categoryId);
-            returnModel.Type = ContentType;
-            returnModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            returnModel.SContents = new PagedList<Content>(task2.items, task2.page - 1, task2.pageSize, task2.totalItemCount);
-
+            var returnModel = CategoryService2.GetCategory(id, page, ContentType);
             return View(returnModel);
 
         }

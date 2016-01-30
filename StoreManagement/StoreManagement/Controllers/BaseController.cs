@@ -229,7 +229,7 @@ namespace StoreManagement.Controllers
             NavigationService2.MyStore = store;
             StoreService2.MyStore = store;
             CategoryService2.MyStore = store;
-
+            ProductCategoryService2.MyStore = store;
         }
 
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)

@@ -29,14 +29,14 @@ namespace StoreManagement.Controllers
             this.ContentType = contentType;
         }
        
-        public virtual ActionResult Category(String id)
+        public virtual ActionResult Category(String id, int page=1)
         {
             if (!IsModulActive(ContentType))
             {
                 return HttpNotFound("Not Found");
             }
 
-            CategoryViewModel resultModel = CategoryService2.GetCategory(id, 24, ContentType);
+            CategoryViewModel resultModel = CategoryService2.GetCategory(id, page, ContentType);
             return View(resultModel);
         }
     }

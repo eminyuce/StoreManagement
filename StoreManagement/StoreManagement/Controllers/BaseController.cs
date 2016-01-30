@@ -220,8 +220,15 @@ namespace StoreManagement.Controllers
         private void SetServiceStore(Store store)
         {
             ProductService2.MyStore = store;
-            ProductService2.StoreId = store.Id;
-            ProductService2.StoreName = store.Name;
+            ContentService2.MyStore = store;
+            LocationService2.MyStore = store;
+            BrandService2.MyStore = store;
+            RetailerService2.MyStore = store;
+            ContactService2.MyStore = store;
+            NavigationService2.MyStore = store;
+            StoreService2.MyStore = store;
+            CategoryService2.MyStore = store;
+
         }
 
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)

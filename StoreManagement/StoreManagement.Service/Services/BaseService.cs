@@ -92,8 +92,7 @@ namespace StoreManagement.Service.Services
 
 
         public Store MyStore { get; set; }
-        public int StoreId { get; set; }
-        public string StoreName { get; set; }
+        public int StoreId { get { return MyStore.Id; } }
 
         private readonly TypedObjectCache<List<Setting>> _settingStoreCache = new TypedObjectCache<List<Setting>>("SettingsCache");
         protected List<Setting> GetStoreSettings()

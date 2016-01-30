@@ -10,7 +10,5 @@ namespace StoreManagement.Service.Services.IServices
     public interface IBaseService
     {
         Store MyStore { set; get; }
-        int StoreId { get; set; }
-        String StoreName { get; set; }
     }
 }

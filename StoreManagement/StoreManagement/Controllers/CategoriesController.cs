@@ -39,7 +39,7 @@ namespace StoreManagement.Controllers
             ContentsViewModel resultModel = ContentService2.GetContentIndexPage(page, ContentType);
             return View(resultModel);
         }
-        public virtual ActionResult Detail(String id)
+        public virtual ActionResult Category(String id)
         {
             if (!IsModulActive(ContentType))
             {

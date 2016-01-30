@@ -28,8 +28,8 @@ namespace StoreManagement.Controllers
         {
             this.ContentType = contentType;
         }
-        
-        public ActionResult Index(int page = 1)
+
+        public virtual ActionResult Index(int page = 1)
         {
             if (!IsModulActive(ContentType))
             {
@@ -39,7 +39,7 @@ namespace StoreManagement.Controllers
             ContentsViewModel resultModel = ContentService2.GetContentIndexPage(page, ContentType);
             return View(resultModel);
         }
-        public ActionResult Detail(String id)
+        public virtual ActionResult Detail(String id)
         {
             if (!IsModulActive(ContentType))
             {

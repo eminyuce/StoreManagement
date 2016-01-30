@@ -44,5 +44,15 @@ namespace StoreManagement.Controllers
             ContentDetailViewModel resultModel = ContentService2.GetContentDetail(id, ContentType);
             return View(resultModel);
         }
+        public virtual ActionResult Blog(String id)
+        {
+            if (!IsModulActive(ContentType))
+            {
+                return HttpNotFound("Not Found");
+            }
+
+            ContentDetailViewModel resultModel = ContentService2.GetContentDetail(id, ContentType);
+            return View(resultModel);
+        }
 	}
 }

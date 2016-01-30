@@ -20,7 +20,7 @@ namespace StoreManagement.Controllers
         private const String ContentType = StoreConstants.NewsType;
 
 
-        public NewsController(string contentType)
+        public NewsController()
             : base(ContentType)
         {
 

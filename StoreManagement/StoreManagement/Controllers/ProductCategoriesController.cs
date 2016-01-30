@@ -23,15 +23,8 @@ namespace StoreManagement.Controllers
         }
         public ActionResult Category(String id, int page = 1)
         {
-            var resultModel = new ProductCategoryViewModel();
-            int categoryId = id.Split("-".ToCharArray()).Last().ToInt();
-            resultModel.SCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id, StoreConstants.ProductType);
-            resultModel.SStore = MyStore;
-            resultModel.SCategory = ProductCategoryService.GetProductCategory(categoryId);
-            var m = ProductService.GetProductsCategoryId(MyStore.Id, categoryId, StoreConstants.ProductType, true, page, 24);
-            resultModel.SProducts = new PagedList<Product>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-            resultModel.SSettings = this.GetStoreSettings();
+            
+            ProductCategoryViewModel resultModel = ProductCategoryService2.GetProductCategory(id, page);
             return View(resultModel);
 
         }

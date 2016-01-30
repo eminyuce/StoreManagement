@@ -265,9 +265,6 @@
     <Compile Include="Controllers\ContentsController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\CssController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs">

@@ -29,7 +29,7 @@ namespace StoreManagement.Service.Services
         public ISettingGeneralRepository SettingRepository { set; get; }
 
         [Inject]
-        public IFileManagerGeneralRepository FileManagerService { get; set; }
+        public IFileManagerGeneralRepository FileManagerRepository { get; set; }
 
         [Inject]
         public IContentFileGeneralRepository ContentFileRepository { set; get; }

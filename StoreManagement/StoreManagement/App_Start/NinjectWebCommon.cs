@@ -369,6 +369,8 @@ namespace StoreManagement.App_Start
             kernel.Bind<INavigationService>().To<NavigationService>();
             kernel.Bind<IStoreService>().To<StoreService>();
             kernel.Bind<ICategoryService>().To<CategoryService>();
+            kernel.Bind<IProductCategoryService>().To<ProductCategoryService>();
+
 
             kernel.Bind<IEmailSender>().To<EmailSender>();
             kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();

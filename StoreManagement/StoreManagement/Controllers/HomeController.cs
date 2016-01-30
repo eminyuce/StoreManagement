@@ -26,32 +26,7 @@ namespace StoreManagement.Controllers
 
         public ActionResult Index()
         {
-
-            int page = 1;
-            var resultModel = new StoreHomePage();
-            try
-            {
-
-                resultModel.SStore = MyStore;
-                resultModel.SCarouselImages = FileManagerService.GetStoreCarousels(MyStore.Id);
-                resultModel.SProductCategories = ProductCategoryService.GetProductCategoriesByStoreId(MyStore.Id);
-                var products = ProductService.GetProductsCategoryId(MyStore.Id, null, StoreConstants.ProductType, true, page, 24);
-                resultModel.SProducts = new PagedList<Product>(products.items, products.page - 1, products.pageSize, products.totalItemCount);
-                var contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.NewsType, true, page, 24);
-                resultModel.SNews = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
-                contents = ContentService.GetContentsCategoryId(MyStore.Id, null, StoreConstants.BlogsType, true, page, 24);
-                resultModel.SBlogs = new PagedList<Content>(contents.items, contents.page - 1, contents.pageSize, contents.totalItemCount);
-                resultModel.SBlogsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.BlogsType, true);
-                resultModel.SNewsCategories = CategoryService.GetCategoriesByStoreId(MyStore.Id, StoreConstants.NewsType, true);
-                resultModel.SNavigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-                resultModel.SSettings = this.GetStoreSettings();
-            }
-            catch (Exception ex)
-            {
-
-                Logger.Error(ex,"Home page exception" + ex.StackTrace);
-            }
-
+            StoreHomePage resultModel = ProductService2.GetHomePage();
             return View(resultModel);
         }
         public ActionResult About()

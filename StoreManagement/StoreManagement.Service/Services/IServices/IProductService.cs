@@ -13,5 +13,7 @@ namespace StoreManagement.Service.Services.IServices
         ProductDetailViewModel GetProductDetailPage(string id);
 
         ProductsViewModel GetProductIndexPage(string search, string page);
+
+        StoreHomePage GetHomePage();
     }
 }

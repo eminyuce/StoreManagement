@@ -149,7 +149,8 @@ namespace StoreManagement.Controllers
         [Inject]
         public IRetailerService RetailerService2 { set; get; }
 
-      
+        [Inject]
+        public IProductCategoryService ProductCategoryService2 { set; get; }
 
         [Inject]
         public IProductService ProductService2 { set; get; }

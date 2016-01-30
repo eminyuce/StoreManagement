@@ -14,22 +14,6 @@ namespace StoreManagement.Controllers
         {
             var content = "User-agent: *" + Environment.NewLine;
             String siteStatus = ProjectAppSettings.GetWebConfigString("SiteStatus", "dev");
-
-
-            ////  if (string.Equals(siteStatus, "live", StringComparison.InvariantCultureIgnoreCase))
-            //if (siteStatus.IndexOf("live", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            //{
-            //    content += "Disallow: " + Environment.NewLine;
-
-            //}
-            //else
-            //{
-               
-            //    //content += "Disallow: /" + Environment.NewLine;
-
-            //}
-
-            // content += siteStatus;
             content += "Disallow: /" + Environment.NewLine;
             return File(Encoding.UTF8.GetBytes(content), "text/plain");
         }

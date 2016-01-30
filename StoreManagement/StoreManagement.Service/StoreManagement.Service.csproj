@@ -230,6 +230,7 @@
     <Compile Include="Services\IServices\IStoreUserService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\ProductCategoryService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\RetailerService.cs" />
     <Compile Include="Services\StoreService.cs" />

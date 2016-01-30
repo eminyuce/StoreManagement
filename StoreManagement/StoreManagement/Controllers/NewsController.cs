@@ -14,30 +14,16 @@ using StoreManagement.Data.RequestModel;
 namespace StoreManagement.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Days")]
-    public class NewsController : BaseController
+    public class NewsController : ContentsController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private const String ContentType = StoreConstants.NewsType;
 
-        public ActionResult Index(int page = 1)
-        {
-            if (!IsModulActive(ContentType))
-            {
-                return HttpNotFound("Not Found");
-            }
 
-            ContentsViewModel resultModel = ContentService2.GetContentIndexPage(page, ContentType);
-            return View(resultModel);
-        }
-        public ActionResult Detail(String id)
+        public NewsController(string contentType)
+            : base(ContentType)
         {
-            if (!IsModulActive(ContentType))
-            {
-                return HttpNotFound("Not Found");
-            }
 
-            ContentDetailViewModel resultModel = ContentService2.GetContentDetail(id, ContentType);
-            return View(resultModel);
         }
     }
 }

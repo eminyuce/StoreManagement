@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ninject;
+using NLog;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.DbContext;
@@ -13,22 +14,35 @@ using StoreManagement.Service.Repositories.Interfaces;
 namespace StoreManagement.Controllers
 {
     [OutputCache(CacheProfile = "Cache1Days")]
-    public class ContentsController : BaseController
+    public abstract class ContentsController : BaseController
     {
-         
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private String ContentType { get; set; }
 
-        public ActionResult Index()
+        protected ContentsController(String contentType)
         {
-            return View();
+            this.ContentType = contentType;
         }
-        public ActionResult Detail(String id)
+
+        public virtual ActionResult Index(int page = 1)
         {
-            int contentId = id.Split("-".ToCharArray()).Last().ToInt();
-            var contentDetail = new ContentDetailViewModel();
-            contentDetail.SContent = ContentService.GetContentWithFiles(contentId);
+            if (!IsModulActive(ContentType))
+            {
+                return HttpNotFound("Not Found");
+            }
 
+            ContentsViewModel resultModel = ContentService2.GetContentIndexPage(page, ContentType);
+            return View(resultModel);
+        }
+        public virtual ActionResult Detail(String id)
+        {
+            if (!IsModulActive(ContentType))
+            {
+                return HttpNotFound("Not Found");
+            }
 
-            return View(contentDetail);
+            ContentDetailViewModel resultModel = ContentService2.GetContentDetail(id, ContentType);
+            return View(resultModel);
         }
 	}
 }

@@ -28,17 +28,7 @@ namespace StoreManagement.Controllers
         {
             this.ContentType = contentType;
         }
-
-        public virtual ActionResult Index(int page = 1)
-        {
-            if (!IsModulActive(ContentType))
-            {
-                return HttpNotFound("Not Found");
-            }
-
-            ContentsViewModel resultModel = ContentService2.GetContentIndexPage(page, ContentType);
-            return View(resultModel);
-        }
+       
         public virtual ActionResult Category(String id)
         {
             if (!IsModulActive(ContentType))
@@ -46,7 +36,7 @@ namespace StoreManagement.Controllers
                 return HttpNotFound("Not Found");
             }
 
-            ContentDetailViewModel resultModel = ContentService2.GetContentDetail(id, ContentType);
+            CategoryViewModel resultModel = CategoryService2.GetCategory(id, 24, ContentType);
             return View(resultModel);
         }
     }

@@ -183,7 +183,7 @@ namespace StoreManagement.Liquid.Controllers
                 return Json("No Desing Name is defined.", JsonRequestBehavior.AllowGet);
             }
             String returnHtml = "";
-            String key = String.Format("GetProductsByProductType-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}",
+            String key = String.Format("GetProductsByProductTypeAsync-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}",
                 StoreId, page, designName, categoryId, brandId, pageSize, imageHeight, imageWidth, productType, excludedProductId);
             try
             {
@@ -193,7 +193,7 @@ namespace StoreManagement.Liquid.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "GetProductsByProductType:" + ex.StackTrace, page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
+                Logger.Error(ex, "GetProductsByProductTypeAsync:" + ex.StackTrace, page, designName, categoryId, brandId, pageSize, imageWidth, imageHeight, productType, excludedProductId);
 
             }
 
@@ -280,7 +280,7 @@ namespace StoreManagement.Liquid.Controllers
                                                 : imageHeight;
             }
 
-            productsTask = ProductService.GetProductsByProductType(StoreId, catId, bId, retId, StoreConstants.ProductType, page,
+            productsTask = ProductService.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, page,
                                                                  pageSize, true, productType, eProductId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,

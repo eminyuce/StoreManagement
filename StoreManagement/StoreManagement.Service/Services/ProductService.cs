@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MvcPaging;
 using NLog;
 using Ninject;
+using StoreManagement.Data.ActionResults;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -64,5 +65,25 @@ namespace StoreManagement.Service.Services
 
             return resultModel;
         }
+
+        public FeedResult GetProductRss(int take, int description, int imageHeight, int imageWidth, int isDetailLink)
+        {
+            var products = ProductRepository.GetProductsByProductType(StoreId, null, null, null, StoreConstants.ProductType, 1,
+                                                             take, true, "random", null);
+            var productCategories = ProductCategoryRepository.GetProductCategoriesByStoreId(StoreId, StoreConstants.ProductType, true);
+ 
+            var rssHelper = new RssHelper();
+            var feed = rssHelper.GetProductsRssFeed(MyStore, products, productCategories, description, isDetailLink);
+            rssHelper.ImageWidth = imageWidth;
+            rssHelper.ImageHeight = imageHeight;
+
+            var comment = new StringBuilder();
+            comment.AppendLine("Take=Number of rss item; Default value is 10  ");
+            comment.AppendLine("Description=The length of description text.Default value is 300  ");
+            return new FeedResult(feed, comment);
+
+        }
     }
+
+   
 }

@@ -72,7 +72,7 @@ namespace StoreManagement.Liquid
             routes.MapRoute(
              name: "AjaxProducts",
              url: "AjaxProducts/{action}",
-             defaults: new { controller = "AjaxProducts", action = "GetProductsByProductType" }
+             defaults: new { controller = "AjaxProducts", action = "GetProductsByProductTypeAsync" }
          );
 
             routes.MapRoute(

@@ -23,6 +23,7 @@ namespace StoreManagement.Service.IGeneralRepositories
         Task<List<Content>> GetContentByTypeAndCategoryIdAsync(int storeId, String typeName, int categoryId, int take, int? excludedContentId);
         Task<List<Content>> GetMainPageContentsAsync(int storeId, int? categoryId, string type, int? take);
         Task<List<Content>> GetContentByTypeAsync(int storeId, int? take, bool? isActive, String typeName);
+         List<Content> GetContentByType(int storeId, int? take, bool? isActive, String typeName);
         Task<List<Content>> GetContentsByContentKeywordAsync(int storeId, int? catId, string type, int page, int pageSize, bool ? isActive, string contentType);
     }
 }

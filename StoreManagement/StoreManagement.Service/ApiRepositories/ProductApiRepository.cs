@@ -273,13 +273,19 @@ namespace StoreManagement.Service.ApiRepositories
             }
         }
 
-        public Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive,
+        public List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page,
+                                             int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive,
             string functionType, int? excludedProductId)
         {
             try
             {
                 SetCache();
-                string url = string.Format("http://{0}/api/{1}/GetProductsByProductType?" +
+                string url = string.Format("http://{0}/api/{1}/GetProductsByProductTypeAsync?" +
                                                     "storeId={2}&categoryId={3}&brandId={4}&productType={5}" +
                                                     "&page={6}&pageSize={7}&isActive={8}&functionType={9}&excludedProductId={10}&retailerId={11}",
                                                     WebServiceAddress,

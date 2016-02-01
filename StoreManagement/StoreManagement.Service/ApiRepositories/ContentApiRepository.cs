@@ -158,6 +158,21 @@ namespace StoreManagement.Service.ApiRepositories
             }
         }
 
+        public List<Content> GetContentByType(int storeId, int? take, bool? isActive, string typeName)
+        {
+            try
+            {
+                SetCache();
+                string url = string.Format("http://{0}/api/{1}/GetContentByType?storeId={2}&take={3}&isActive={4}&typeName={5}", WebServiceAddress, ApiControllerName, storeId, take, isActive, typeName);
+                return HttpRequestHelper.GetUrlResults<Content>(url);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+                return null;
+            }
+        }
+
         public Task<List<Content>> GetContentsByContentKeywordAsync(int storeId, int? catId, string type, int page, int pageSize, bool? isActive,
                                                      string contentType)
         {

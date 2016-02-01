@@ -65,7 +65,7 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, RetailerDetailPageDesignName);
                 var retailerTask = RetailerService.GetRetailerAsync(retailerId);
                 var take = GetSettingValueInt("RetailerProducts_ItemNumber", 20);
-                var productsTask = ProductService.GetProductsByProductType(StoreId, null, null, retailerId, StoreConstants.ProductType, 1,
+                var productsTask = ProductService.GetProductsByProductTypeAsync(StoreId, null, null, retailerId, StoreConstants.ProductType, 1,
                                                                  take, true, "normal", null);
                 var productCategoriesTask = ProductCategoryService.GetCategoriesByRetailerIdAsync(StoreId, retailerId);
 

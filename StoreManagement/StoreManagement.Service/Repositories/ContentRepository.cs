@@ -244,6 +244,26 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
+        public List<Content> GetContentByType(int storeId, int? take, bool? isActive, string typeName)
+        {
+         try
+            {
+                Expression<Func<Content, bool>> match = r2 => r2.StoreId == storeId && r2.Type.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
+                    && r2.State == (isActive.HasValue ? isActive.Value : r2.State);
+                Expression<Func<Content, object>> includeProperties = r => r.ContentFiles.Select(r1 => r1.FileManager);
+
+                var items = this.FindAllIncluding(match, take, null, r => r.Ordering, OrderByType.Descending, includeProperties);
+
+                return items;
+
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception);
+                return new List<Content>();
+            }
+        }
+
         public async Task<List<Content>> GetContentsByContentKeywordAsync(int storeId, int? catId, string type, int page, int pageSize, bool? isActive,
                                                      string contentType)
         {

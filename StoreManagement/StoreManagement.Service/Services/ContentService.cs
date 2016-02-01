@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MvcPaging;
 using NLog;
+using StoreManagement.Data.ActionResults;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Data.RequestModel;
@@ -49,6 +50,23 @@ namespace StoreManagement.Service.Services
             resultModel.SSettings = this.GetStoreSettings();
 
             return resultModel;
+        }
+
+        public FeedResult GetContentRss(int take, int description, int imageHeight, int imageWidth, string contentType)
+        {
+            var contents = ContentRepository.GetContentByType(StoreId, take, true, contentType);
+            var categories = CategoryRepository.GetCategoriesByStoreId(StoreId, contentType, true);
+
+
+            var rssHelper = new RssHelper();
+            var feed = rssHelper.GetContentsRssFeed(MyStore, contents, categories, description, contentType);
+            rssHelper.ImageWidth = imageWidth;
+            rssHelper.ImageHeight = imageHeight;
+
+            var comment = new StringBuilder();
+            comment.AppendLine("Take=Number of rss item; Default value is 10  ");
+            comment.AppendLine("Description=The length of description text.Default value is 300  ");
+            return new FeedResult(feed, comment);
         }
     }
 }

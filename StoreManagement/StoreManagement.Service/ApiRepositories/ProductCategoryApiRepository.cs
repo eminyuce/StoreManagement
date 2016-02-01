@@ -46,6 +46,11 @@ namespace StoreManagement.Service.ApiRepositories
             throw new NotImplementedException();
         }
 
+        public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, bool? isActive)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)
         {
             SetCache();

@@ -19,70 +19,22 @@ namespace StoreManagement.Controllers
 
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public async Task<ActionResult> Products(int take = 1, int description = 300, int imageHeight = 50, int imageWidth = 50, int isDetailLink = 0)
+        public ActionResult Products(int take = 1, int description = 300, int imageHeight = 50, int imageWidth = 50, int isDetailLink = 0)
         {
-            // var productsTask = ProductService.GetProductsAsync(StoreId, take, true);
-            var productsTask = ProductService.GetProductsByProductType(StoreId, null, null, null, StoreConstants.ProductType, 1,
-                                                             take, true, "random", null);
-            var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
-            var storeTask = StoreService.GetStoreAsync(StoreId);
-
-            await Task.WhenAll(storeTask, productsTask, productCategoriesTask);
-            var store = storeTask.Result;
-            var products = productsTask.Result;
-            var productCategories = productCategoriesTask.Result;
-            var rssHelper = new RssHelper();
-            var feed = rssHelper.GetProductsRssFeed(store, products, productCategories, description, isDetailLink);
-            rssHelper.ImageWidth = imageWidth;
-            rssHelper.ImageHeight = imageHeight;
-    
-            var comment = new StringBuilder();
-            comment.AppendLine("Take=Number of rss item; Default value is 10  ");
-            comment.AppendLine("Description=The length of description text.Default value is 300  ");
-            return new FeedResult(feed, comment);
+         
+            return ProductService2.GetProductRss(take, description, imageHeight, imageWidth, isDetailLink);
         }
 
-        public async Task<ActionResult> News(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
+        public ActionResult News(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
         {
-            var contentsTask = ContentService.GetContentByTypeAsync(StoreId, take, true, StoreConstants.NewsType);
-            var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.NewsType, true);
-            var storeTask = StoreService.GetStoreAsync(StoreId);
-
-            await Task.WhenAll(storeTask, contentsTask, categoriesTask);
-            var store = storeTask.Result;
-            var content = contentsTask.Result;
-            var categories = categoriesTask.Result;
-            var rssHelper = new RssHelper();
-            var feed = rssHelper.GetContentsRssFeed(store, content, categories, description, StoreConstants.NewsType);
-            rssHelper.ImageWidth = imageWidth;
-            rssHelper.ImageHeight = imageHeight;
- 
-            var comment = new StringBuilder();
-            comment.AppendLine("Take=Number of rss item; Default value is 10  ");
-            comment.AppendLine("Description=The length of description text.Default value is 300  ");
-            return new FeedResult(feed, comment);
+             
+            return ContentService2.GetContentRss(take, description, imageHeight, imageWidth, StoreConstants.NewsType);
         }
 
-        public async Task<ActionResult> Blogs(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
+        public ActionResult Blogs(int take = 15, int description = 250, int imageHeight = 50, int imageWidth = 50)
         {
-            var contentsTask = ContentService.GetContentByTypeAsync(StoreId, take, true, StoreConstants.BlogsType);
-            var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, StoreConstants.BlogsType, true);
-            var storeTask = StoreService.GetStoreAsync(StoreId);
-
-            await Task.WhenAll(storeTask, contentsTask, categoriesTask);
-            var store = storeTask.Result;
-            var content = contentsTask.Result;
-            var categories = categoriesTask.Result;
-
-            var rssHelper = new RssHelper();
-            var feed = rssHelper.GetContentsRssFeed(store, content, categories, description, StoreConstants.BlogsType);
-            rssHelper.ImageWidth = imageWidth;
-            rssHelper.ImageHeight = imageHeight;
- 
-            var comment = new StringBuilder();
-            comment.AppendLine("Take=Number of rss item; Default value is 10  ");
-            comment.AppendLine("Description=The length of description text.Default value is 300  ");
-            return new FeedResult(feed, comment);
+            
+            return ContentService2.GetContentRss(take, description, imageHeight, imageWidth, StoreConstants.BlogsType);
         }
 	}
 }

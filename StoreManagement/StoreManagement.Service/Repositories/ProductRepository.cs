@@ -277,7 +277,79 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public async Task<List<Product>> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        public List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page,
+                                             int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        {
+            try
+            {
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId
+                    && r2.State == (isActive ?? r2.State)
+                    && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId)
+                    && r2.BrandId == (brandId ?? r2.BrandId)
+                 && r2.RetailerId == (retailerId ?? r2.RetailerId)
+                    && r2.Id != excludedProductId
+                &&
+                r2.ProductFiles.Any();
+
+                Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
+
+
+                var predicate = PredicateBuilder.Create<Product>(match);
+                Expression<Func<Product, int>> keySelector = t => t.Id;
+
+                if (functionType.Equals("mainrandom", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
+                    predicate = predicate.And(r => r.MainPage);
+                    var itemsRandom = this.FindAllIncluding(predicate,
+                        page, pageSize,
+                        keySelector2,
+                        OrderByType.Descending, includeProperties);
+                    return itemsRandom;
+                }
+                else if (functionType.Equals("random", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
+                    var itemsRandom = this.FindAllIncluding(predicate, page, pageSize, keySelector2, OrderByType.Descending, includeProperties);
+                    return itemsRandom;
+                }
+                else if (functionType.Equals("normal", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.Ordering;
+                }
+                else if (functionType.Equals("popular", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.TotalRating;
+                }
+                else if (functionType.Equals("recent", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.Id;
+                }
+                else if (functionType.Equals("main", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    keySelector = t => t.Ordering;
+                    predicate = predicate.And(r => r.MainPage);
+                }
+                else if (functionType.Equals("discount", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    predicate = predicate.And(r => r.Discount > 0);
+
+                    var items2 = this.FindAllIncluding(predicate, page, pageSize, t => t.Discount, OrderByType.Descending, includeProperties);
+                    return items2;
+                }
+
+                var items = this.FindAllIncluding(predicate, page, pageSize, keySelector, OrderByType.Descending, includeProperties);
+                return items;
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, exception.StackTrace, storeId, categoryId, brandId, productType,
+                                                    page, pageSize, isActive, functionType);
+                return null;
+            }
+        }
+
+        public async Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
         {
             try
             {

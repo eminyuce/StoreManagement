@@ -13,10 +13,12 @@ namespace StoreManagement.Service.IGeneralRepositories
         List<ProductCategory> GetProductCategoriesByStoreIdWithContent(int storeId);
         List<ProductCategory> GetProductCategoriesByStoreId(int storeId, String type);
         List<ProductCategory> GetProductCategoriesByStoreId(int storeId, String type,String search);
+        List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, bool? isActive);
         List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, String type);
         ProductCategory GetProductCategory(int id);
         StorePagedList<ProductCategory> GetProductCategoryWithContents(int categoryId, int page, int pageSize = 25);
         Task<List<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool ? isActive);
+
         Task<StorePagedList<ProductCategory>> GetProductCategoriesByStoreIdAsync(int storeId, string type, bool? isActive, int page, int pageSize = 25);
         Task<ProductCategory> GetProductCategoryAsync(int storeId,int productId);
         Task<ProductCategory> GetProductCategoryAsync(int categoryId);

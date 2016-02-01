@@ -46,7 +46,7 @@ namespace StoreManagement.Controllers
             if (sitemapItems == null)
             {
                 sitemapItems = new List<SitemapItem>();
-                var products = ProductService.GetProductByTypeAndCategoryIdFromCache(StoreId, StoreConstants.ProductType, -1);
+                var products = ProductRepository.GetProductByTypeAndCategoryIdFromCache(StoreId, StoreConstants.ProductType, -1);
                 var categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(StoreId,
                                                                                                StoreConstants.ProductType);
                 foreach (var product in products)

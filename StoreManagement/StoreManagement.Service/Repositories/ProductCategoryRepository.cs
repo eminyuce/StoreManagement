@@ -58,6 +58,11 @@ namespace StoreManagement.Service.Repositories
             return BaseCategoryRepository.GetBaseCategoriesSearchList(this, storeId, search, type);
         }
 
+        public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, bool? isActive)
+        {
+            return BaseCategoryRepository.GetCategoriesByStoreId(this, storeId, type, isActive);
+        }
+
         public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)
         {
             String key = String.Format("GetProductCategoriesByStoreIdFromCache-{0}-{1}", storeId, type);

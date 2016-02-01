@@ -130,6 +130,11 @@ namespace StoreManagement.API.Controllers
             throw new NotImplementedException();
         }
 
+        public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, bool? isActive)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)
         {
             return ProductCategoryRepository.GetProductCategoriesByStoreIdFromCache(storeId, type);

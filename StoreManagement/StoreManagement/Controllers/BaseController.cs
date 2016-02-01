@@ -77,8 +77,8 @@ namespace StoreManagement.Controllers
 
 
 
-        // [Inject]
-        // public IProductService ProductService { set; get; }
+        [Inject]
+        public IProductService ProductService { set; get; }
 
         [Inject]
         public IMessageGeneralRepository MessageService { set; get; }
@@ -117,12 +117,14 @@ namespace StoreManagement.Controllers
         [Inject]
         public IStoreUserGeneralRepository StoreUserService { set; get; }
 
-        [Inject]
-        public IEmailSender EmailSender { set; get; }
-
 
         [Inject]
         public IActivityGeneralRepository ActivityService { set; get; }
+
+
+        [Inject]
+        public IEmailSender EmailSender { set; get; }
+
 
 
         [Inject]
@@ -156,7 +158,7 @@ namespace StoreManagement.Controllers
         public IProductService ProductService2 { set; get; }
 
         [Inject]
-        public IProductGeneralRepository ProductService { set; get; }
+        public IProductGeneralRepository ProductRepository  { set; get; }
 
         [Inject]
         public IProductAttributeGeneralRepository ProductAttributeService { set; get; }

@@ -20,7 +20,7 @@ namespace StoreManagement.Liquid.Controllers
         public async Task<ActionResult> Products(int take = 1, int description = 300, int imageHeight = 50, int imageWidth = 50, int isDetailLink=0)
         {
            // var productsTask = ProductService.GetProductsAsync(StoreId, take, true);
-            var  productsTask = ProductService.GetProductsByProductType(StoreId, null, null, null, StoreConstants.ProductType, 1,
+            var  productsTask = ProductService.GetProductsByProductTypeAsync(StoreId, null, null, null, StoreConstants.ProductType, 1,
                                                              take, true, "random", null);
             var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
             var storeTask = StoreService.GetStoreAsync(StoreId);

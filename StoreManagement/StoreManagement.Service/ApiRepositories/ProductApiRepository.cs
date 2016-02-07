@@ -279,7 +279,7 @@ namespace StoreManagement.Service.ApiRepositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive,
+        public Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int skip, bool? isActive,
             string functionType, int? excludedProductId)
         {
             try
@@ -291,7 +291,7 @@ namespace StoreManagement.Service.ApiRepositories
                                                     WebServiceAddress,
                                                     ApiControllerName,
                                                     storeId, categoryId, brandId, productType,
-                                                    page, pageSize, isActive, functionType, excludedProductId, retailerId);
+                                                    page, skip, isActive, functionType, excludedProductId, retailerId);
 
                 return HttpRequestHelper.GetUrlResultsAsync<Product>(url);
 

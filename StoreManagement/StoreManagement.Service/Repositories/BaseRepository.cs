@@ -49,6 +49,7 @@ namespace StoreManagement.Service.Repositories
         {
             DbContext = dbContext;
             StoreDbContext.Configuration.LazyLoadingEnabled = false;
+            StoreDbContext.Database.Log = s => Logger.Trace(s);
         }
         private bool disposed = false;
 

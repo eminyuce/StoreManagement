@@ -14,7 +14,10 @@ namespace StoreManagement.Data.LiquidEntities
         {
             this.Store = store;
         }
-
+        public int Id
+        {
+            get { return this.Store.Id; }
+        }
         public String Name
         {
             get { return this.Store.Name; }

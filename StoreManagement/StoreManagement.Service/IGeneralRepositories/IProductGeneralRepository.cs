@@ -26,10 +26,10 @@ namespace StoreManagement.Service.IGeneralRepositories
         Task<List<Product>> GetProductByTypeAndCategoryIdAsync(int storeId, int categoryId, int? take, int? excludedProductId);
         Task<List<Product>> GetProductsByBrandAsync(int storeId, int brandId, int? take, int? excludedProductId);
         Task<List<Product>> GetProductsByRetailerAsync(int storeId, int retailerId, int? take, int? excludedProductId);
-         List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, String functionType, int? excludedProductId);
+         List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int take, int skip, bool? isActive, String functionType, int? excludedProductId);
 
 
-        Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int ? retailerId, string productType, int page, int pageSize, bool? isActive, String functionType, int? excludedProductId);
+         Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int take, int skip, bool? isActive, String functionType, int? excludedProductId);
 
         Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, String filters,
                                                                         int top, int skip, bool isAdmin,String categoryApiId);

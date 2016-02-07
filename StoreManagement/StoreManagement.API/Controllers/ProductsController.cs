@@ -116,20 +116,20 @@ namespace StoreManagement.API.Controllers
             return await ProductRepository.GetProductsByBrandAsync(storeId, retailerId, take, excludedProductId);
         }
 
-        public List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page,
-                                             int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        public List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int take,
+                                             int skip, bool? isActive, string functionType, int? excludedProductId)
         {
-            throw new NotImplementedException();
+            return  ProductRepository.GetProductsByProductType(storeId, categoryId, brandId, retailerId, productType, take, skip, isActive, functionType, excludedProductId);
         }
 
-        public async Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        public async Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int take, int skip, bool? isActive, string functionType, int? excludedProductId)
         {
-            return await ProductRepository.GetProductsByProductTypeAsync(storeId, categoryId, brandId, retailerId, productType, page, pageSize, isActive, functionType, excludedProductId);
+            return await ProductRepository.GetProductsByProductTypeAsync(storeId, categoryId, brandId, retailerId, productType, take, skip, isActive, functionType, excludedProductId);
         }
 
-        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int top, int skip, bool isAdmin, string categoryApiId)
+        public async Task<ProductsSearchResult> GetProductsSearchResult(int storeId, string search, string filters, int take, int skip, bool isAdmin, string categoryApiId)
         {
-            return await ProductRepository.GetProductsSearchResult(storeId, search, filters, top, skip, isAdmin, categoryApiId);
+            return await ProductRepository.GetProductsSearchResult(storeId, search, filters, take, skip, isAdmin, categoryApiId);
         }
     }
 }

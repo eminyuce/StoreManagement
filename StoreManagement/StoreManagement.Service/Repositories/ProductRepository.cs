@@ -277,20 +277,23 @@ namespace StoreManagement.Service.Repositories
             }
         }
 
-        public List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page,
-                                             int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        public List<Product> GetProductsByProductType(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int take,
+                                             int skip, bool? isActive, string functionType, int? excludedProductId)
         {
             try
             {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId
-                    && r2.State == (isActive ?? r2.State)
-                    && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId)
-                    && r2.BrandId == (brandId ?? r2.BrandId)
-                 && r2.RetailerId == (retailerId ?? r2.RetailerId)
-                    && r2.Id != excludedProductId
-                &&
-                r2.ProductFiles.Any();
+                Expression<Func<Product, bool>> match =       r2 => r2.StoreId == storeId
+                                                             && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
+                                                             && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId)
+                                                             && r2.BrandId == (brandId.HasValue ? brandId.Value : r2.BrandId)
+                                                             && r2.RetailerId == (retailerId.HasValue ? retailerId.Value : r2.RetailerId)
+                                                             && r2.Id != (excludedProductId.HasValue ? excludedProductId.Value : r2.Id);
 
+
+
+
+
+          
                 Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
 
 
@@ -302,7 +305,7 @@ namespace StoreManagement.Service.Repositories
                     Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
                     predicate = predicate.And(r => r.MainPage);
                     var itemsRandom = this.FindAllIncluding(predicate,
-                        page, pageSize,
+                        take, skip,
                         keySelector2,
                         OrderByType.Descending, includeProperties);
                     return itemsRandom;
@@ -310,7 +313,7 @@ namespace StoreManagement.Service.Repositories
                 else if (functionType.Equals("random", StringComparison.InvariantCultureIgnoreCase))
                 {
                     Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
-                    var itemsRandom = this.FindAllIncluding(predicate, page, pageSize, keySelector2, OrderByType.Descending, includeProperties);
+                    var itemsRandom = this.FindAllIncluding(predicate, take, skip, keySelector2, OrderByType.Descending, includeProperties);
                     return itemsRandom;
                 }
                 else if (functionType.Equals("normal", StringComparison.InvariantCultureIgnoreCase))
@@ -334,22 +337,22 @@ namespace StoreManagement.Service.Repositories
                 {
                     predicate = predicate.And(r => r.Discount > 0);
 
-                    var items2 = this.FindAllIncluding(predicate, page, pageSize, t => t.Discount, OrderByType.Descending, includeProperties);
+                    var items2 = this.FindAllIncluding(predicate, take, skip, t => t.Discount, OrderByType.Descending, includeProperties);
                     return items2;
                 }
 
-                var items = this.FindAllIncluding(predicate, page, pageSize, keySelector, OrderByType.Descending, includeProperties);
+                var items = this.FindAllIncluding(predicate, take, skip, keySelector, OrderByType.Descending, includeProperties);
                 return items;
             }
             catch (Exception exception)
             {
                 Logger.Error(exception, exception.StackTrace, storeId, categoryId, brandId, productType,
-                                                    page, pageSize, isActive, functionType);
+                                                    take, skip, isActive, functionType);
                 return null;
             }
         }
 
-        public async Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int page, int pageSize, bool? isActive, string functionType, int? excludedProductId)
+        public async Task<List<Product>> GetProductsByProductTypeAsync(int storeId, int? categoryId, int? brandId, int? retailerId, string productType, int take, int skip, bool? isActive, string functionType, int? excludedProductId)
         {
             try
             {
@@ -373,7 +376,7 @@ namespace StoreManagement.Service.Repositories
                     Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
                     predicate = predicate.And(r => r.MainPage);
                     var itemsRandom = this.FindAllIncludingAsync(predicate,
-                        page, pageSize,
+                        take, skip,
                         keySelector2,
                         OrderByType.Descending, includeProperties);
                     return await itemsRandom;
@@ -381,7 +384,7 @@ namespace StoreManagement.Service.Repositories
                 else if (functionType.Equals("random", StringComparison.InvariantCultureIgnoreCase))
                 {
                     Expression<Func<Product, Guid>> keySelector2 = t => Guid.NewGuid();
-                    var itemsRandom = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector2, OrderByType.Descending, includeProperties);
+                    var itemsRandom = this.FindAllIncludingAsync(predicate, take, skip, keySelector2, OrderByType.Descending, includeProperties);
                     return await itemsRandom;
                 }
                 else if (functionType.Equals("normal", StringComparison.InvariantCultureIgnoreCase))
@@ -405,17 +408,17 @@ namespace StoreManagement.Service.Repositories
                 {
                     predicate = predicate.And(r => r.Discount > 0);
 
-                    var items2 = this.FindAllIncludingAsync(predicate, page, pageSize, t => t.Discount, OrderByType.Descending, includeProperties);
+                    var items2 = this.FindAllIncludingAsync(predicate, take, skip, t => t.Discount, OrderByType.Descending, includeProperties);
                     return await items2;
                 }
 
-                var items = this.FindAllIncludingAsync(predicate, page, pageSize, keySelector, OrderByType.Descending, includeProperties);
+                var items = this.FindAllIncludingAsync(predicate, take, skip, keySelector, OrderByType.Descending, includeProperties);
                 return await items;
             }
             catch (Exception exception)
             {
                 Logger.Error(exception, exception.StackTrace, storeId, categoryId, brandId, productType,
-                                                    page, pageSize, isActive, functionType);
+                                                    take, skip, isActive, functionType);
                 return null;
             }
         }
@@ -470,7 +473,7 @@ namespace StoreManagement.Service.Repositories
            List<Filter> filters,
            int top,
            int skip,
-           Boolean isAdmin = false, string categoryApiId="women")
+           Boolean isAdmin = false, string categoryApiId = "women")
         {
             var searchResult = new ProductsSearchResult();
 

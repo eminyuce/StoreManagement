@@ -306,9 +306,10 @@ namespace StoreManagement.Controllers
                                                 ? GetSettingValueInt("DiscountProducts_ImageHeight", 99)
                                                 : imageHeight;
             }
-
-            productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, page,
-                                                                 pageSize, true, productType, eProductId);
+            int take = pageSize;
+            int skip = (page - 1) * pageSize;
+            productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
+                                                                 skip, true, productType, eProductId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
                                                                                                   StoreConstants
@@ -318,7 +319,7 @@ namespace StoreManagement.Controllers
             var products = productsTask.Result;
             var pageDesign = pageDesignTask.Result;
             var productCategories = productCategoriesTask.Result;
-
+            Logger.Trace("Products:" + products.Count + " productCategories:" + productCategories.Count);
             ProductHelper.StoreSettings = GetStoreSettings();
 
 

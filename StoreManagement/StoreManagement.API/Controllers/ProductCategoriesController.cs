@@ -127,12 +127,12 @@ namespace StoreManagement.API.Controllers
 
         public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, string search)
         {
-            throw new NotImplementedException();
+            return ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, type, search);
         }
 
         public List<ProductCategory> GetProductCategoriesByStoreId(int storeId, string type, bool? isActive)
         {
-            throw new NotImplementedException();
+            return ProductCategoryRepository.GetProductCategoriesByStoreId(storeId, type, isActive);
         }
 
         public List<ProductCategory> GetProductCategoriesByStoreIdFromCache(int storeId, string type)

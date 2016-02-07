@@ -6,7 +6,7 @@
 
  
  {% block title %}
- Test Title           {{ model.product.Name }}
+ Test Title     {{ model.store.id }}      {{ model.product.Name }}
  
  {% endblock %}  
 
@@ -26,9 +26,27 @@
      <a href='{{ item.detail_link }}'> {{ item.name }} </a> 
 	 </div>
 
+
+	 
  
 
 {% endfor %}
+
+
+
+ 
+ <span data-products-by-product-type
+data-page=1  
+data-template-design-name='HomePageProductsPartial' 
+data-product-category-id={{ model.product.product_category_id }}
+data-brand-id=0
+data-retailer-id=0
+data-image-width=10
+data-image-height=10
+data-page-size=50
+data-excluded-product-id={{ model.product.id }}
+data-product-type='normal'></span>
+
 
 {% endblock %}
 

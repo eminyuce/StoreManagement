@@ -19,6 +19,7 @@ using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcPaging;
+using NLog;
 using Newtonsoft.Json;
 using RazorEngine;
 using StoreManagement.Data.Constants;
@@ -42,12 +43,34 @@ namespace StoreManagement.Test
     {
         private const String ConnectionString = "Stores";
         private StoreContext dbContext;
+
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         [TestInitialize]
         public void MyTestInitialize()
         {
             var x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
             //  dbContext = new StoreContext(ConnectionString);
 
+        }  
+        
+        [TestMethod]
+        public void GetProductsByProductTypeAsync()
+        {
+            Logger.Info("GetProductsByProductTypeAsync");
+            IProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
+            var productsTask = rep.GetProductsByProductType(52, 7388, null, null, StoreConstants.ProductType,10000,
+                                                        0, true, "normal", 67333);
+
+            //var productsTask = rep.GetProductsByProductType(52, 7388, -1, -1, StoreConstants.ProductType, 1,
+            //                                                 50, true, "normal", 67333);
+
+           // Task.WaitAll(productsTask);
+            var products = productsTask;
+            foreach (var p in products)
+            {
+                Console.WriteLine(p.Name);
+            }
         }
 
         [TestMethod]

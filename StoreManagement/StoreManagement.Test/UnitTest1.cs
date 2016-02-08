@@ -58,10 +58,11 @@ namespace StoreManagement.Test
         public void GetProductsByProductTypeAsync()
         {
             Logger.Info("GetProductsByProductTypeAsync");
-            IProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
-            var productsTask = rep.GetProductsByProductType(52, 7388, null, null, StoreConstants.ProductType,10000,
-                                                        0, true, "normal", 67333);
 
+            IProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
+            var productsTask = rep.GetProductsByProductType(53, null, null, null, StoreConstants.ProductType,10000,
+                                                        0, true, "recent", -1);
+            //?storeId=53&categoryId=6468&brandId=&retailerId=&productType=product&take=1000&skip=0&isActive=true&functionType=recent&excludedProductId=
             //var productsTask = rep.GetProductsByProductType(52, 7388, -1, -1, StoreConstants.ProductType, 1,
             //                                                 50, true, "normal", 67333);
 

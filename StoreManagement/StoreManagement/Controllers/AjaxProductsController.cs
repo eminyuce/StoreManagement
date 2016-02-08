@@ -308,15 +308,18 @@ namespace StoreManagement.Controllers
             }
             int take = pageSize;
             int skip = (page - 1) * pageSize;
-            productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
-                                                                 skip, true, productType, eProductId);
+            //productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
+            //                                                     skip, true, productType, eProductId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
                                                                                                   StoreConstants
                                                                                                       .ProductType, true);
 
-            await Task.WhenAll(pageDesignTask, productsTask, productCategoriesTask);
-            var products = productsTask.Result;
+            await Task.WhenAll(pageDesignTask, productCategoriesTask);
+           // var products = productsTask.Result;
+
+            var products = ProductRepository.GetProductsByProductType(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
+                                                                 skip, true, productType, eProductId);
             var pageDesign = pageDesignTask.Result;
             var productCategories = productCategoriesTask.Result;
             Logger.Trace("Products:" + products.Count + " productCategories:" + productCategories.Count);

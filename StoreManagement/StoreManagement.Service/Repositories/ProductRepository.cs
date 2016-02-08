@@ -282,12 +282,7 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<Product, bool>> match =       r2 => r2.StoreId == storeId
-                                                             && r2.State == (isActive.HasValue ? isActive.Value : r2.State)
-                                                             && r2.ProductCategoryId == (categoryId.HasValue ? categoryId.Value : r2.ProductCategoryId)
-                                                             && r2.BrandId == (brandId.HasValue ? brandId.Value : r2.BrandId)
-                                                             && r2.RetailerId == (retailerId.HasValue ? retailerId.Value : r2.RetailerId)
-                                                             && r2.Id != (excludedProductId.HasValue ? excludedProductId.Value : r2.Id);
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId;
 
 
 
@@ -298,6 +293,28 @@ namespace StoreManagement.Service.Repositories
 
 
                 var predicate = PredicateBuilder.Create<Product>(match);
+                if (isActive.HasValue)
+                {
+                    predicate = predicate.And(r => r.State);
+                }
+
+                if (categoryId.HasValue)
+                {
+                    predicate = predicate.And(r => r.ProductCategoryId == categoryId.Value);
+                }
+                if (brandId.HasValue)
+                {
+                    predicate = predicate.And(r => r.BrandId == brandId.Value);
+                }
+                if (retailerId.HasValue)
+                {
+                    predicate = predicate.And(r => r.RetailerId == retailerId.Value);
+                }
+                if (excludedProductId.HasValue)
+                {
+                    predicate = predicate.And(r => r.Id != excludedProductId.Value);
+                }
+
                 Expression<Func<Product, int>> keySelector = t => t.Id;
 
                 if (functionType.Equals("mainrandom", StringComparison.InvariantCultureIgnoreCase))
@@ -356,19 +373,36 @@ namespace StoreManagement.Service.Repositories
         {
             try
             {
-                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId
-                    && r2.State == (isActive ?? r2.State)
-                    && r2.ProductCategoryId == (categoryId ?? r2.ProductCategoryId)
-                    && r2.BrandId == (brandId ?? r2.BrandId)
-                 && r2.RetailerId == (retailerId ?? r2.RetailerId)
-                    && r2.Id != excludedProductId
-                &&
-                r2.ProductFiles.Any();
+                Expression<Func<Product, bool>> match = r2 => r2.StoreId == storeId;
+
+
 
                 Expression<Func<Product, object>> includeProperties = r => r.ProductFiles.Select(r1 => r1.FileManager);
 
 
                 var predicate = PredicateBuilder.Create<Product>(match);
+                if (isActive.HasValue)
+                {
+                    predicate = predicate.And(r => r.State);
+                }
+
+                if (categoryId.HasValue)
+                {
+                    predicate = predicate.And(r => r.ProductCategoryId == categoryId.Value);
+                }
+                if (brandId.HasValue)
+                {
+                    predicate = predicate.And(r => r.BrandId == brandId.Value);
+                }
+                if (retailerId.HasValue)
+                {
+                    predicate = predicate.And(r => r.RetailerId == retailerId.Value);
+                }
+                if (excludedProductId.HasValue)
+                {
+                    predicate = predicate.And(r => r.Id != excludedProductId.Value);
+                }
+
                 Expression<Func<Product, int>> keySelector = t => t.Id;
 
                 if (functionType.Equals("mainrandom", StringComparison.InvariantCultureIgnoreCase))

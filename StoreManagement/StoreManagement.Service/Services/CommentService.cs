@@ -8,7 +8,6 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
-using StoreManagement.Data.LiquidHelpers;
 using StoreManagement.Service.Services.IServices;
 
 namespace StoreManagement.Service.Services

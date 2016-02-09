@@ -14,8 +14,6 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
-using StoreManagement.Data.LiquidHelpers;
-using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Liquid.Constants;
 using StoreManagement.Service.DbContext;
 using NLog;

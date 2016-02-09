@@ -2,8 +2,6 @@ using System.Web.Mvc;
 using Quartz;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
-using StoreManagement.Data.LiquidHelpers;
-using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Liquid.Constants;
 using StoreManagement.Liquid.ScheduledTasks;
 using StoreManagement.Service.DbContext;

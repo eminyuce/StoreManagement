@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.Routing;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEntities;
-using StoreManagement.Data.LiquidHelpers.Interfaces;
 
 namespace StoreManagement.Service.Services.IServices
 {

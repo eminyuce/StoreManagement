@@ -7,7 +7,7 @@ using System.Web;
 using StoreManagement.Data.HelpersModel;
 using StoreManagement.Data.LiquidEntities;
 
-namespace StoreManagement.Data.LiquidHelpers
+namespace StoreManagement.Data.LiquidEngineHelpers
 {
     public class LiquidAnonymousObject
     {

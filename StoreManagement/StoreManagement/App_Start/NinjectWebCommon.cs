@@ -2,8 +2,6 @@ using System.Web.Mvc;
 using StoreManagement.Constants;
 using StoreManagement.Data;
 using StoreManagement.Data.EmailHelper;
-using StoreManagement.Data.LiquidHelpers;
-using StoreManagement.Data.LiquidHelpers.Interfaces;
 using StoreManagement.Filters;
 using StoreManagement.Helper;
 using StoreManagement.Service.DbContext;

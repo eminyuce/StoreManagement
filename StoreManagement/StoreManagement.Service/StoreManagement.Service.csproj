@@ -205,6 +205,7 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\ContentService.cs" />
+    <Compile Include="Services\FileManagerService.cs" />
     <Compile Include="Services\IServices\IActivityService.cs" />
     <Compile Include="Services\IServices\IBaseService.cs" />
     <Compile Include="Services\IServices\IBrandService.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Services\IServices\IProductService.cs" />
     <Compile Include="Services\IServices\IRetailerService.cs" />
     <Compile Include="Services\IServices\ISettingService.cs" />
+    <Compile Include="Services\IServices\ISiteMapService.cs" />
     <Compile Include="Services\IServices\IStoreService.cs" />
     <Compile Include="Services\IServices\IStoreUserService.cs" />
     <Compile Include="Services\LocationService.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Services\ProductCategoryService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\RetailerService.cs" />
+    <Compile Include="Services\SiteMapService.cs" />
     <Compile Include="Services\StoreService.cs" />
   </ItemGroup>
   <ItemGroup>

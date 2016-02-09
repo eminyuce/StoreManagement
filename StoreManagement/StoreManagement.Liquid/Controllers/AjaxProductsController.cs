@@ -279,9 +279,10 @@ namespace StoreManagement.Liquid.Controllers
                                                 ? GetSettingValueInt("DiscountProducts_ImageHeight", 99)
                                                 : imageHeight;
             }
-
-            productsTask = ProductService.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, page,
-                                                                 pageSize, true, productType, eProductId);
+            int take = pageSize;
+            int skip = (page - 1) * pageSize;
+            productsTask = ProductService.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
+                                                                 skip, true, productType, eProductId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
                                                                                                   StoreConstants

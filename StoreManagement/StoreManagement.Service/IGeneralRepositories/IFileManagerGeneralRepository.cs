@@ -10,7 +10,7 @@ namespace StoreManagement.Service.IGeneralRepositories
 {
     public interface IFileManagerGeneralRepository : IGeneralRepository
     {
-        List<FileManager> GetFilesByStoreIdFromCache(int storeId);
+ 
         List<FileManager> GetFilesByStoreId(int storeId);
 
         FileManager GetFilesByGoogleImageId(String googleImageId);

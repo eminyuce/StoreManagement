@@ -75,7 +75,8 @@ namespace StoreManagement.Controllers
         [Inject]
         public IHomePageHelper HomePageHelper { set; get; }
 
-
+        [Inject]
+        public ISiteMapService SiteMapService { set; get; }
 
         [Inject]
         public IProductService ProductService { set; get; }
@@ -88,14 +89,11 @@ namespace StoreManagement.Controllers
         public IStoreGeneralRepository StoreService { set; get; }
 
         [Inject]
-        public IItemFileGeneralRepository ItemFileService { set; get; }
-
+        public IFileManagerService FileManagerService { set; get; }
+        
         [Inject]
         public ISettingGeneralRepository SettingService { set; get; }
-
-        [Inject]
-        public IFileManagerGeneralRepository FileManagerService { get; set; }
-
+        
         [Inject]
         public IContentFileGeneralRepository ContentFileService { set; get; }
 
@@ -108,24 +106,50 @@ namespace StoreManagement.Controllers
         [Inject]
         public ICategoryGeneralRepository CategoryService { set; get; }
 
-        [Inject]
-        public INavigationGeneralRepository NavigationService { set; get; }
-
+      
         [Inject]
         public IPageDesignGeneralRepository PageDesignService { set; get; }
-
-        [Inject]
-        public IStoreUserGeneralRepository StoreUserService { set; get; }
-
+ 
 
         [Inject]
         public IActivityGeneralRepository ActivityService { set; get; }
 
+        [Inject]
+        public IProductGeneralRepository ProductRepository { set; get; }
+
+        [Inject]
+        public IProductAttributeGeneralRepository ProductAttributeService { set; get; }
+
+        [Inject]
+        public IProductAttributeRelationGeneralRepository ProductAttributeRelationService { set; get; }
+
+        [Inject]
+        public IProductFileGeneralRepository ProductFileService { set; get; }
+
+        [Inject]
+        public IProductCategoryGeneralRepository ProductCategoryService { set; get; }
+
+        [Inject]
+        public IBrandGeneralRepository BrandService { set; get; }
+
+        [Inject]
+        public ILocationGeneralRepository LocationService { set; get; }
+
+        [Inject]
+        public IContactGeneralRepository ContactService { set; get; }
+
+
+        [Inject]
+        public ILabelGeneralRepository LabelService { set; get; }
+
+
+        [Inject]
+        public INavigationService NavigationService { set; get; }
+
+
 
         [Inject]
         public IEmailSender EmailSender { set; get; }
-
-
 
         [Inject]
         public ILocationService LocationService2 { set; get; }
@@ -157,35 +181,7 @@ namespace StoreManagement.Controllers
         [Inject]
         public IProductService ProductService2 { set; get; }
 
-        [Inject]
-        public IProductGeneralRepository ProductRepository  { set; get; }
-
-        [Inject]
-        public IProductAttributeGeneralRepository ProductAttributeService { set; get; }
-
-        [Inject]
-        public IProductAttributeRelationGeneralRepository ProductAttributeRelationService { set; get; }
-
-        [Inject]
-        public IProductFileGeneralRepository ProductFileService { set; get; }
-
-        [Inject]
-        public IProductCategoryGeneralRepository ProductCategoryService { set; get; }
-
-        [Inject]
-        public IBrandGeneralRepository BrandService { set; get; }
-
-        [Inject]
-        public ILocationGeneralRepository LocationService { set; get; }
-
-        [Inject]
-        public IContactGeneralRepository ContactService { set; get; }
-
-
-        [Inject]
-        public ILabelGeneralRepository LabelService { set; get; }
-
-
+    
 
 
         protected Store MyStore { set; get; }
@@ -240,9 +236,7 @@ namespace StoreManagement.Controllers
         }
         protected bool IsModulActive(String controllerName)
         {
-            var navigations = NavigationService.GetStoreActiveNavigations(MyStore.Id);
-            var item = navigations.Any(r => r.ControllerName.ToLower().StartsWith(controllerName.ToLower()));
-            return item;
+            return NavigationService.IsModulActive(controllerName);
         }
         protected bool CheckRequest(BaseEntity entity)
         {

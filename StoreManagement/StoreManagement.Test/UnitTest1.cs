@@ -60,14 +60,13 @@ namespace StoreManagement.Test
             Logger.Info("GetProductsByProductTypeAsync");
 
             IProductRepository rep = new ProductRepository(new StoreContext(ConnectionString));
-            var productsTask = rep.GetProductsByProductType(53, null, null, null, StoreConstants.ProductType,10000,
-                                                        0, true, "recent", -1);
+            var productsTask = rep.GetProductsByProductTypeAsync(53, null, null, null, StoreConstants.ProductType,10000,0, true, "recent", -1);
             //?storeId=53&categoryId=6468&brandId=&retailerId=&productType=product&take=1000&skip=0&isActive=true&functionType=recent&excludedProductId=
             //var productsTask = rep.GetProductsByProductType(52, 7388, -1, -1, StoreConstants.ProductType, 1,
             //                                                 50, true, "normal", 67333);
 
-           // Task.WaitAll(productsTask);
-            var products = productsTask;
+            Task.WaitAll(productsTask);
+            var products = productsTask.Result;
             foreach (var p in products)
             {
                 Console.WriteLine(p.Name);

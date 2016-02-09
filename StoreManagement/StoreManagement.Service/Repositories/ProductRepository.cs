@@ -447,7 +447,7 @@ namespace StoreManagement.Service.Repositories
                 }
 
                 var items = this.FindAllIncludingAsync(predicate, take, skip, keySelector, OrderByType.Descending, includeProperties);
-                return await items;
+                return  await items;
             }
             catch (Exception exception)
             {

@@ -22,15 +22,7 @@ namespace StoreManagement.Service.ApiRepositories
         {
 
         }
-
-        public List<FileManager> GetFilesByStoreIdFromCache(int storeId)
-        {
-            SetCache();
-            string url = string.Format("http://{0}/api/{1}/GetFilesByStoreIdFromCache?storeId={2}", WebServiceAddress, ApiControllerName, storeId);
-            return HttpRequestHelper.GetUrlResults<FileManager>(url);
-
-        }
-
+ 
         public List<FileManager> GetFilesByStoreId(int storeId)
         {
             SetCache();

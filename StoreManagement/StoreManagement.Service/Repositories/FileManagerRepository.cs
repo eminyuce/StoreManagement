@@ -31,20 +31,10 @@ namespace StoreManagement.Service.Repositories
         public FileManagerRepository(IStoreContext dbContext)
             : base(dbContext)
         {
+        
         }
 
-        public List<FileManager> GetFilesByStoreIdFromCache(int storeId)
-        {
-            String key = String.Format("StoreFileManager-{0}", storeId);
-            List<FileManager> items = null;
-            StoreFileManagerCache.TryGet(key, out items);
-            if (items == null)
-            {
-                items = GetFilesByStoreId(storeId);
-                StoreFileManagerCache.Set(key, items, MemoryCacheHelper.CacheAbsoluteExpirationPolicy(ProjectAppSettings.GetWebConfigInt("FileManager_CacheAbsoluteExpiration_Minute", 10)));
-            }
-            return items;
-        }
+    
 
         public List<FileManager> GetFilesByStoreId(int storeId)
         {

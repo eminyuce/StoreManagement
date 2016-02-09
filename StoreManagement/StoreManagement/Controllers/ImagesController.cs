@@ -70,7 +70,7 @@ namespace StoreManagement.Controllers
         {
             var dic = new Dictionary<String, String>();
             // Loading photos’ info from database for specific image...
-            var file = FileManagerService.GetFilesByStoreIdFromCache(storeId).FirstOrDefault(r => r.Id == id);
+            var file = FileManagerService.GetFilesByStoreId(storeId).FirstOrDefault(r => r.Id == id);
             String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);
             byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
 
@@ -81,62 +81,7 @@ namespace StoreManagement.Controllers
 
 
         }
-        /// <summary>
-        /// Reference this in HTML as <img src="/Photo/WatermarkedImage/{ID}" />
-        /// Simplistic example supporting only jpeg images.
-        /// </summary>
-        /// <param name="ID">Photo ID</param>
-        public ActionResult WatermarkedImage(int id)
-        {
-            // Attempt to fetch the photo record from the database using Entity Framework 4.2.
-            var file = FileManagerService.GetFilesById(id);
-
-            if (file != null) // Found the indicated photo record.
-            {
-                var dic = new Dictionary<String, String>();
-                // Create WebImage from photo data.
-                // Should have 'using System.Web.Helpers' but just to make it clear...
-                String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);
-                byte[] imageData = GeneralHelper.GetImageFromUrl(url, dic);
-                var wi = new System.Web.Helpers.WebImage(imageData);
-
-                // Apply the watermark.
-                wi.AddTextWatermark("EMIN YUCE");
-
-                // Extract byte array.
-                var image = wi.GetBytes("image/jpeg");
-
-                // Return byte array as jpeg.
-                return File(image, "image/jpeg");
-            }
-            else // Did not find a record with passed ID.
-            {
-                return null; // 'Missing image' icon will display on browser.
-            }
-        }
-        public void SelectPicture()
-        {
-            WebImage img = new WebImage("~/images/Image1.jpg");
-            img.Resize(200, 200);
-            img.FileName = "Image1.jpg";
-            img.Write();
-        }
-        public void SelectPicture1()
-        {
-            WebImage img = new WebImage("~/images/Image2.jpg");
-            img.Resize(250, 250);
-            img.FileName = "Image2.jpg";
-            img.Write();
-        }
-        public void SelectPicture2()
-        {
-            WebImage img = new WebImage("~/images/Desert.jpg");
-            img.Resize(200, 200);
-            img.FileName = "Desert.jpg";
-            img.RotateLeft();
-            img.Write();
-        }
-
+   
 
         //controller function to generate image
         //returns image file (through url.action in img src attribute)

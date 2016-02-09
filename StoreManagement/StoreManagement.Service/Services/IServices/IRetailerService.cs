@@ -10,6 +10,6 @@ namespace StoreManagement.Service.Services.IServices
 {
     public interface IRetailerService : IBaseService
     {
-        SitemapResult RetailersSitemapResult(Controller sitemapsController);
+
     }
 }

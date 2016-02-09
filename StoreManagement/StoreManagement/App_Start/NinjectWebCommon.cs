@@ -360,6 +360,8 @@ namespace StoreManagement.App_Start
                 }
             }).InRequestScope();
 
+            kernel.Bind<ISiteMapService>().To<SiteMapService>();
+            kernel.Bind<IFileManagerService>().To<FileManagerService>();
             kernel.Bind<IProductService>().To<ProductService>();
             kernel.Bind<ILocationService>().To<LocationService>();
             kernel.Bind<IBrandService>().To<BrandService>(); 

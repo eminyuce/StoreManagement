@@ -15,8 +15,6 @@ using StoreManagement.Data.RequestModel;
 namespace StoreManagement.Controllers
 { 
 
-    [OutputCache(CacheProfile = "Cache1Days")]
-    [Compress]
     public class AjaxProductsController : AjaxController
     {
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -248,78 +246,18 @@ namespace StoreManagement.Controllers
                          brandId + " pageSize:" + pageSize + " page:" +
                          page + " imageWidth:" + imageWidth + " imageHeight:" + imageHeight + " productType:" + productType);
 
-            if (productType.Equals("random"))
-            {
-                pageSize = pageSize == 0
-                               ? GetSettingValueInt("RandomProducts_PageSize", StoreConstants.DefaultPageSize)
-                               : pageSize;
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RandomProducts_ImageWidth", 99) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0
-                                                ? GetSettingValueInt("RandomProducts_ImageHeight", 99)
-                                                : imageHeight;
-            }
-            else if (productType.Equals("normal"))
-            {
-                pageSize = pageSize == 0
-                               ? GetSettingValueInt("NormalProducts_PageSize", StoreConstants.DefaultPageSize)
-                               : pageSize;
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("NormalProducts_ImageWidth", 99) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0
-                                                ? GetSettingValueInt("NormalProducts_ImageHeight", 99)
-                                                : imageHeight;
-            }
-            else if (productType.Equals("popular"))
-            {
-                pageSize = pageSize == 0
-                               ? GetSettingValueInt("PopularProducts_PageSize", StoreConstants.DefaultPageSize)
-                               : pageSize;
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularProducts_ImageWidth", 99) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0
-                                                ? GetSettingValueInt("PopularProducts_ImageHeight", 99)
-                                                : imageHeight;
-            }
-            else if (productType.Equals("recent"))
-            {
-                pageSize = pageSize == 0
-                               ? GetSettingValueInt("RecentProducts_PageSize", StoreConstants.DefaultPageSize)
-                               : pageSize;
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RecentProducts_ImageWidth", 99) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0
-                                                ? GetSettingValueInt("RecentProducts_ImageHeight", 99)
-                                                : imageHeight;
-            }
-            else if (productType.Equals("main"))
-            {
-                pageSize = pageSize == 0
-                               ? GetSettingValueInt("MainProducts_PageSize", StoreConstants.DefaultPageSize)
-                               : pageSize;
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("MainProducts_ImageWidth", 99) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("MainProducts_ImageHeight", 99) : imageHeight;
-            }
-            else if (productType.Equals("discount"))
-            {
-                pageSize = pageSize == 0
-                               ? GetSettingValueInt("DiscountProducts_PageSize", StoreConstants.DefaultPageSize)
-                               : pageSize;
-                ProductHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("DiscountProducts_ImageWidth", 99) : imageWidth;
-                ProductHelper.ImageHeight = imageHeight == 0
-                                                ? GetSettingValueInt("DiscountProducts_ImageHeight", 99)
-                                                : imageHeight;
-            }
+            
             int take = pageSize;
             int skip = (page - 1) * pageSize;
-            //productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
-            //                                                     skip, true, productType, eProductId);
+            productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
+                                                               skip, true, productType, eProductId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
                                                                                                   StoreConstants
                                                                                                       .ProductType, true);
 
-            await Task.WhenAll(pageDesignTask, productCategoriesTask);
-           // var products = productsTask.Result;
-
-            var products = ProductRepository.GetProductsByProductType(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
-                                                                 skip, true, productType, eProductId);
+            await Task.WhenAll(pageDesignTask,productsTask, productCategoriesTask);
+            var products = productsTask.Result;
             var pageDesign = pageDesignTask.Result;
             var productCategories = productCategoriesTask.Result;
             Logger.Trace("Products:" + products.Count + " productCategories:" + productCategories.Count);

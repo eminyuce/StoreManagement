@@ -55,5 +55,10 @@ namespace StoreManagement.API.Controllers
         {
             return await BrandRepository.GetBrandsByStoreIdWithPagingAsync(storeId, isActive, page, pageSize);
         }
+
+        public List<Brand> GetBrands(int storeId, int? take, bool? isActive)
+        {
+            return BrandRepository.GetBrands(storeId, take, isActive);
+        }
     }
 }

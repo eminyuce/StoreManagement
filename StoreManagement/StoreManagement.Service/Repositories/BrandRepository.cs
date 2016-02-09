@@ -54,6 +54,11 @@ namespace StoreManagement.Service.Repositories
             return result;
         }
 
+        public List<Brand> GetBrands(int storeId, int? take, bool? isActive)
+        {
+            return BaseEntityRepository.GetActiveBaseEnities(this, storeId, take, isActive);
+        }
+
         public void Dispose()
         {
             Dispose(true);

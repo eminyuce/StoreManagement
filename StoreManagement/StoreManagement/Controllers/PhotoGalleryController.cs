@@ -18,10 +18,8 @@ namespace StoreManagement.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var photos = new PhotosViewModel();
-            photos.SStore = this.MyStore;
-            var m = FileManagerService.GetImagesByStoreId(MyStore.Id, page, 24);
-            photos.SFileManagers = new PagedList<FileManager>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+
+            var photos = FileManagerService.GetPhotos(page);
             return View(photos);
         }
 	}

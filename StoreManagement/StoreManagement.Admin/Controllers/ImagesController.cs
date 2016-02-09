@@ -76,7 +76,7 @@ namespace StoreManagement.Admin.Controllers
         {
             var dic = new Dictionary<String, String>();
             // Loading photos’ info from database for specific image...
-            var file = FileManagerRepository.GetFilesByStoreIdFromCache(storeId).FirstOrDefault(r => r.Id == id);
+            var file = FileManagerRepository.GetFilesByStoreId(storeId).FirstOrDefault(r => r.Id == id);
 
 
             String url = String.Format("https://docs.google.com/uc?id={0}", file.GoogleImageId);

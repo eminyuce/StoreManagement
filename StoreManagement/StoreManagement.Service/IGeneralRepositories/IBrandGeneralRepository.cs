@@ -14,5 +14,6 @@ namespace StoreManagement.Service.IGeneralRepositories
         Task<List<Brand>> GetBrandsAsync(int storeId, int? take, bool? isActive);
         Task<Brand> GetBrandAsync(int brandId);
         Task<StorePagedList<Brand>> GetBrandsByStoreIdWithPagingAsync(int storeId, bool? isActive, int page = 1, int pageSize = 25);
+        List<Brand> GetBrands(int storeId, int? take, bool? isActive);
     }
 }

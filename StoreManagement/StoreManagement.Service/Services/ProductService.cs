@@ -68,8 +68,8 @@ namespace StoreManagement.Service.Services
 
         public FeedResult GetProductRss(int take, int description, int imageHeight, int imageWidth, int isDetailLink)
         {
-            var products = ProductRepository.GetProductsByProductType(StoreId, null, null, null, StoreConstants.ProductType, 1,
-                                                             take, true, "random", null);
+            var products = ProductRepository.GetProductsByProductType(StoreId, null, null, null, StoreConstants.ProductType, take,
+                                                             1, true, "random", null);
             var productCategories = ProductCategoryRepository.GetProductCategoriesByStoreId(StoreId, StoreConstants.ProductType, true);
  
             var rssHelper = new RssHelper();

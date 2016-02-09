@@ -60,5 +60,6 @@ namespace StoreManagement.Data.LiquidHelpers
             result.PageDesingName = pageDesign.Name;
             return result;
         }
+
     }
 }

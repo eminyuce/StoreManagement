@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using Ninject;
 using StoreManagement.Data;
 using StoreManagement.Data.CacheHelper;
 using StoreManagement.Data.EmailHelper;
 using StoreManagement.Data.Entities;
+using StoreManagement.Data.GeneralHelper;
 using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Services.IServices;
 
@@ -15,6 +17,9 @@ namespace StoreManagement.Service.Services
 {
     public abstract class BaseService : IBaseService
     {
+
+        protected static readonly Logger BaseLogger = LogManager.GetCurrentClassLogger();
+
         [Inject]
         public IMessageGeneralRepository MessageRepository { set; get; }
 
@@ -112,10 +117,55 @@ namespace StoreManagement.Service.Services
             return items;
 
         }
+        protected bool GetSettingValueBool(String key, bool defaultValue)
+        {
+            String d = defaultValue ? bool.TrueString : bool.FalseString;
+            return GetSettingValue(key, d).ToBool();
+        }
+        protected int GetSettingValueInt(String key, int defaultValue)
+        {
+            String d = defaultValue + "";
+            return GetSettingValue(key, d).ToInt();
+        }
+        protected String GetSettingValue(String key, String defaultValue)
+        {
+            var value = GetSettingValue(key);
+            if (String.IsNullOrEmpty(value))
+            {
+                BaseLogger.Trace("Store Default Setting= " + StoreId + " Key=" + key + " defaultValue=" + defaultValue);
+                return ProjectAppSettings.GetWebConfigString(key, defaultValue);
+            }
+            else
+            {
+                return value;
+            }
+        }
+        protected String GetSettingValue(String key)
+        {
+            try
+            {
+                if (StoreId == 0)
+                {
+                    return "";
+                }
 
+                var item = GetStoreSettings().FirstOrDefault(r => r.SettingKey.RemoveTabNewLines().Equals(key.RemoveTabNewLines(), StringComparison.InvariantCultureIgnoreCase));
+
+                return item != null ? item.SettingValue : "";
+            }
+            catch (Exception ex)
+            {
+
+                BaseLogger.Error(ex, "Store= " + StoreId + " Key=" + key, key);
+                return "";
+            }
+        }
         protected bool CheckRequest(BaseEntity entity)
         {
             return entity.StoreId == MyStore.Id;
         }
+
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
     }
 }

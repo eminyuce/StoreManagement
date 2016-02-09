@@ -9,6 +9,7 @@ using StoreManagement.Data.Attributes;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.LiquidHelpers;
 using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Controllers
@@ -81,31 +82,23 @@ namespace StoreManagement.Controllers
                 excludedContentId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
-            ContentHelper.StoreSettings = GetStoreSettings();
+
 
 
             if (contentType.Equals(StoreConstants.NewsType))
             {
-                ContentHelper.ImageWidth = imageWidth == 0
-                    ? GetSettingValueInt("RelatedNewsPartial_ImageWidth", 50)
-                    : imageWidth;
-                ContentHelper.ImageHeight = imageHeight == 0
-                    ? GetSettingValueInt("RelatedNewsPartial_ImageHeight", 50)
-                    : imageHeight;
+                ContentService2.ImageWidth = imageWidth;
+                ContentService2.ImageHeight = imageHeight;
             }
             else if (contentType.Equals(StoreConstants.BlogsType))
             {
-                ContentHelper.ImageWidth = imageWidth == 0
-                    ? GetSettingValueInt("RelatedBlogsPartial_ImageWidth", 50)
-                    : imageWidth;
-                ContentHelper.ImageHeight = imageHeight == 0
-                    ? GetSettingValueInt("RelatedBlogsPartial_ImageHeight", 50)
-                    : imageHeight;
+                ContentService2.ImageWidth = imageWidth;
+                ContentService2.ImageHeight = imageHeight;
             }
             else
             {
-                ContentHelper.ImageWidth = 0;
-                ContentHelper.ImageHeight = 0;
+                ContentService2.ImageWidth = 0;
+                ContentService2.ImageHeight = 0;
                 Logger.Trace("No ContentType is defined like that " + contentType);
             }
 
@@ -114,7 +107,7 @@ namespace StoreManagement.Controllers
             var pageDesign = pageDesignTask.Result;
             var category = categoryTask.Result;
 
-            var pageOutput = ContentHelper.GetRelatedContentsPartial(category, contents, pageDesign, contentType);
+            var pageOutput = ContentService2.GetRelatedContentsPartial(category, contents, pageDesign, contentType);
             returnHtml = pageOutput.PageOutputText;
 
             return returnHtml;
@@ -152,54 +145,8 @@ namespace StoreManagement.Controllers
 
             string returnHtml;
             var catId = categoryId == 0 ? (int?)null : categoryId;
-            if (contentType.Equals("random"))
-            {
-                pageSize = pageSize == 0
-                    ? GetSettingValueInt("RandomContents_PageSize", StoreConstants.DefaultPageSize)
-                    : pageSize;
-                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
-                ContentHelper.ImageHeight = imageHeight == 0
-                    ? GetSettingValueInt("PopularContents_ImageHeight", 99)
-                    : imageHeight;
-            }
-            else if (contentType.Equals("normal"))
-            {
-                pageSize = pageSize == 0
-                    ? GetSettingValueInt("NormalContents_PageSize", StoreConstants.DefaultPageSize)
-                    : pageSize;
-                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
-                ContentHelper.ImageHeight = imageHeight == 0
-                    ? GetSettingValueInt("PopularContents_ImageHeight", 99)
-                    : imageHeight;
-            }
-            else if (contentType.Equals("popular"))
-            {
-                pageSize = pageSize == 0
-                    ? GetSettingValueInt("PopularContents_PageSize", StoreConstants.DefaultPageSize)
-                    : pageSize;
-                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("PopularContents_ImageWidth", 99) : imageWidth;
-                ContentHelper.ImageHeight = imageHeight == 0
-                    ? GetSettingValueInt("PopularContents_ImageHeight", 99)
-                    : imageHeight;
-            }
-            else if (contentType.Equals("recent"))
-            {
-                pageSize = pageSize == 0
-                    ? GetSettingValueInt("RecentContents_PageSize", StoreConstants.DefaultPageSize)
-                    : pageSize;
-                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("RecentContents_ImageWidth", 99) : imageWidth;
-                ContentHelper.ImageHeight = imageHeight == 0
-                    ? GetSettingValueInt("RecentContents_ImageHeight", 99)
-                    : imageHeight;
-            }
-            else if (contentType.Equals("main"))
-            {
-                pageSize = pageSize == 0
-                    ? GetSettingValueInt("MainContents_PageSize", StoreConstants.DefaultPageSize)
-                    : pageSize;
-                ContentHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("MainContents_ImageWidth", 99) : imageWidth;
-                ContentHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("MainContents_ImageHeight", 99) : imageHeight;
-            }
+            ContentService2.ImageWidth = imageWidth;
+            ContentService2.ImageHeight = imageHeight;
             Task<List<Content>> contentsTask = ContentService.GetContentsByContentKeywordAsync(StoreId, catId, type, page,
                 pageSize, true, contentType);
 
@@ -212,14 +159,11 @@ namespace StoreManagement.Controllers
             var pageDesign = pageDesignTask.Result;
             var categories = categoriesTask.Result;
 
-            ContentHelper.StoreSettings = GetStoreSettings();
-
-
-            var pageOuput = ContentHelper.GetContentsByContentType(contents, categories, pageDesign, type);
+            var pageOuput = ContentService2.GetContentsByContentType(contents, categories, pageDesign, type);
             returnHtml = pageOuput.PageOutputText;
 
             return returnHtml;
         }
 
-	}
+    }
 }

@@ -360,36 +360,22 @@ namespace StoreManagement.App_Start
                 }
             }).InRequestScope();
 
-            kernel.Bind<ISiteMapService>().To<SiteMapService>();
-            kernel.Bind<IFileManagerService>().To<FileManagerService>();
-            kernel.Bind<IProductService>().To<ProductService>();
-            kernel.Bind<ILocationService>().To<LocationService>();
-            kernel.Bind<IBrandService>().To<BrandService>(); 
-            kernel.Bind<IRetailerService>().To<RetailerService>();
-            kernel.Bind<IContentService>().To<ContentService>();
-            kernel.Bind<IContactService>().To<ContactService>();
-            kernel.Bind<INavigationService>().To<NavigationService>();
-            kernel.Bind<IStoreService>().To<StoreService>();
-            kernel.Bind<ICategoryService>().To<CategoryService>();
-            kernel.Bind<IProductCategoryService>().To<ProductCategoryService>();
-
+            kernel.Bind<ISiteMapService>().To<SiteMapService>().InRequestScope();
+            kernel.Bind<IFileManagerService>().To<FileManagerService>().InRequestScope();
+            kernel.Bind<IProductService>().To<ProductService>().InRequestScope();
+            kernel.Bind<ILocationService>().To<LocationService>().InRequestScope();
+            kernel.Bind<IBrandService>().To<BrandService>().InRequestScope();
+            kernel.Bind<IRetailerService>().To<RetailerService>().InRequestScope();
+            kernel.Bind<IContentService>().To<ContentService>().InRequestScope();
+            kernel.Bind<IContactService>().To<ContactService>().InRequestScope();
+            kernel.Bind<INavigationService>().To<NavigationService>().InRequestScope();
+            kernel.Bind<IStoreService>().To<StoreService>().InRequestScope();
+            kernel.Bind<ICategoryService>().To<CategoryService>().InRequestScope();
+            kernel.Bind<IProductCategoryService>().To<ProductCategoryService>().InRequestScope();
+            kernel.Bind<ILabelService>().To<LabelService>().InRequestScope();
 
             kernel.Bind<IEmailSender>().To<EmailSender>();
-            kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();
-            kernel.Bind<IProductCategoryHelper>().To<ProductCategoryHelper>().InRequestScope();
-            kernel.Bind<IProductHelper>().To<ProductHelper>().InRequestScope();
-            kernel.Bind<IPhotoGalleryHelper>().To<PhotoGalleryHelper>().InRequestScope();
-            kernel.Bind<IBrandHelper>().To<BrandHelper>().InRequestScope();
-            kernel.Bind<IContentHelper>().To<ContentHelper>().InRequestScope();
-            kernel.Bind<IHomePageHelper>().To<HomePageHelper>().InRequestScope();
-            kernel.Bind<ILabelHelper>().To<LabelHelper>().InRequestScope();
-            kernel.Bind<INavigationHelper>().To<NavigationHelper>().InRequestScope();
-            kernel.Bind<IPagingHelper>().To<PagingHelper>().InRequestScope();
-            kernel.Bind<ILocationHelper>().To<LocationHelper>().InRequestScope();
-            kernel.Bind<IContactHelper>().To<ContactHelper>().InRequestScope();
-            kernel.Bind<IActivityHelper>().To<ActivityHelper>().InRequestScope();
-            kernel.Bind<ICommentHelper>().To<CommentHelper>().InRequestScope();
-            kernel.Bind<IRetailerHelper>().To<RetailerHelper>().InRequestScope();
+             
            
 
            

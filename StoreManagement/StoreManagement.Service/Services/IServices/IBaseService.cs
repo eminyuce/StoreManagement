@@ -10,5 +10,7 @@ namespace StoreManagement.Service.Services.IServices
     public interface IBaseService
     {
         Store MyStore { set; get; }
+        int ImageWidth { get; set; }
+        int ImageHeight { get; set; }
     }
 }

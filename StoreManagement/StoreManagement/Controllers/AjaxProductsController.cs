@@ -10,6 +10,7 @@ using StoreManagement.Data.Attributes;
 using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
+using StoreManagement.Data.LiquidHelpers;
 using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Controllers
@@ -25,19 +26,19 @@ namespace StoreManagement.Controllers
         {
             return View();
         }
-        public ActionResult GetRelatedProducts(int categoryId)
-        {
-            var returnModel = new ProductDetailViewModel();
-            returnModel.SStore = MyStore;
-            returnModel.SCategory = ProductCategoryService.GetProductCategory(categoryId);
-            returnModel.SRelatedProducts = ProductRepository.GetProductByTypeAndCategoryId(MyStore.Id, StoreConstants.ProductType, categoryId).Take(5).ToList();
-            String partialViewName = @"pProducts\pRelatedProducts";
-            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
+        //public ActionResult GetRelatedProducts(int categoryId)
+        //{
+        //    var returnModel = new ProductDetailViewModel();
+        //    returnModel.SStore = MyStore;
+        //    returnModel.SCategory = ProductCategoryService.GetProductCategory(categoryId);
+        //    returnModel.SRelatedProducts = ProductRepository.GetProductByTypeAndCategoryId(MyStore.Id, StoreConstants.ProductType, categoryId).Take(5).ToList();
+        //    String partialViewName = @"pProducts\pRelatedProducts";
+        //    var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
             
             
 
-            return Json(html, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(html, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult GetProductCategories()
         {
             var categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);
@@ -78,19 +79,14 @@ namespace StoreManagement.Controllers
                                                                                            true);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
-            ProductCategoryHelper.StoreSettings = GetStoreSettings();
-            ProductCategoryHelper.ImageWidth = imageWidth == 0
-                                                   ? GetSettingValueInt("ProductCategoriesPartial_ImageWidth", 50)
-                                                   : imageWidth;
-            ProductCategoryHelper.ImageHeight = imageHeight == 0
-                                                    ? GetSettingValueInt("ProductCategoriesPartial_ImageHeight", 50)
-                                                    : imageHeight;
+            ProductCategoryService2.ImageWidth = imageWidth;
+            ProductCategoryService2.ImageHeight = imageHeight;
 
             await Task.WhenAll(categoriesTask, pageDesignTask);
             var categories = categoriesTask.Result;
             var pageDesign = pageDesignTask.Result;
 
-            var pageOuput = ProductCategoryHelper.GetProductCategoriesPartial(categories, pageDesign);
+            var pageOuput = ProductCategoryService2.GetProductCategoriesPartial(categories, pageDesign);
             returnHtml = pageOuput.PageOutputText;
 
             return returnHtml;
@@ -130,9 +126,9 @@ namespace StoreManagement.Controllers
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var brandsTask = BrandService.GetBrandsAsync(StoreId, take, true);
 
-            BrandHelper.StoreSettings = GetStoreSettings();
-            BrandHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("BrandsPartial_ImageWidth", 50) : imageWidth;
-            BrandHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("BrandsPartial_ImageHeight", 50) : imageHeight;
+
+            BrandService2.ImageWidth =  imageWidth;
+            BrandService2.ImageHeight =  imageHeight;
 
             await Task.WhenAll(pageDesignTask, brandsTask);
             var pageDesign = pageDesignTask.Result;
@@ -143,7 +139,7 @@ namespace StoreManagement.Controllers
             }
 
 
-            var pageOuput = BrandHelper.GetBrandsPartial(brands, pageDesign);
+            var pageOuput = BrandService2.GetBrandsPartial(brands, pageDesign);
             returnHtml = pageOuput.PageOutputText;
 
             return returnHtml;
@@ -177,9 +173,8 @@ namespace StoreManagement.Controllers
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var labelsTask = LabelService.GetLabelsByItemTypeId(StoreId, id, StoreConstants.ProductType);
 
-            LabelHelper.StoreSettings = GetStoreSettings();
-            LabelHelper.ImageWidth = imageWidth == 0 ? GetSettingValueInt("ProductLabels_ImageWidth", 50) : imageWidth;
-            LabelHelper.ImageHeight = imageHeight == 0 ? GetSettingValueInt("ProductLabels_ImageHeight", 50) : imageHeight;
+            LabelService2.ImageWidth = imageWidth;
+            LabelService2.ImageHeight = imageHeight;
 
 
             await Task.WhenAll(pageDesignTask, labelsTask);
@@ -192,7 +187,7 @@ namespace StoreManagement.Controllers
             }
 
 
-            var pageOuput = LabelHelper.GetProductLabels(labels, pageDesign);
+            var pageOuput = LabelService2.GetProductLabels(labels, pageDesign);
             returnHtml = pageOuput.PageOutputText;
 
             return returnHtml;
@@ -249,8 +244,7 @@ namespace StoreManagement.Controllers
             
             int take = pageSize;
             int skip = (page - 1) * pageSize;
-            productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,
-                                                               skip, true, productType, eProductId);
+            productsTask = ProductRepository.GetProductsByProductTypeAsync(StoreId, catId, bId, retId, StoreConstants.ProductType, take,skip, true, productType, eProductId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
             var productCategoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId,
                                                                                                   StoreConstants
@@ -261,10 +255,8 @@ namespace StoreManagement.Controllers
             var pageDesign = pageDesignTask.Result;
             var productCategories = productCategoriesTask.Result;
             Logger.Trace("Products:" + products.Count + " productCategories:" + productCategories.Count);
-            ProductHelper.StoreSettings = GetStoreSettings();
 
-
-            var pageOuput = ProductHelper.GetPopularProducts(products, productCategories, pageDesign);
+            var pageOuput = ProductService2.GetPopularProducts(products, productCategories, pageDesign);
             returnHtml = pageOuput.PageOutputText;
 
             return returnHtml;

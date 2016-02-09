@@ -27,53 +27,7 @@ namespace StoreManagement.Controllers
     {
         protected static readonly Logger BaseLogger = LogManager.GetCurrentClassLogger();
 
-
-
-        [Inject]
-        public IActivityHelper ActivityHelper { set; get; }
-
-        [Inject]
-        public ICommentHelper CommentHelper { set; get; }
-
-
-        [Inject]
-        public IRetailerHelper RetailerHelper { set; get; }
-
-        [Inject]
-        public IContactHelper ContactHelper { set; get; }
-
-        [Inject]
-        public ILocationHelper LocationHelper { set; get; }
-
-        [Inject]
-        public IBrandHelper BrandHelper { set; get; }
-
-        [Inject]
-        public IContentHelper ContentHelper { set; get; }
-
-        [Inject]
-        public IProductHelper ProductHelper { set; get; }
-
-        [Inject]
-        public IPagingHelper PagingHelper { set; get; }
-
-        [Inject]
-        public ILabelHelper LabelHelper { set; get; }
-
-        [Inject]
-        public IPhotoGalleryHelper PhotoGalleryHelper { set; get; }
-
-        [Inject]
-        public IProductCategoryHelper ProductCategoryHelper { set; get; }
-
-        [Inject]
-        public ICategoryHelper CategoryHelper { set; get; }
-
-        [Inject]
-        public INavigationHelper NavigationHelper { set; get; }
-
-        [Inject]
-        public IHomePageHelper HomePageHelper { set; get; }
+        
 
         [Inject]
         public ISiteMapService SiteMapService { set; get; }
@@ -117,28 +71,14 @@ namespace StoreManagement.Controllers
         [Inject]
         public IProductGeneralRepository ProductRepository { set; get; }
 
-        [Inject]
-        public IProductAttributeGeneralRepository ProductAttributeService { set; get; }
-
-        [Inject]
-        public IProductAttributeRelationGeneralRepository ProductAttributeRelationService { set; get; }
-
-        [Inject]
-        public IProductFileGeneralRepository ProductFileService { set; get; }
-
+         
+       
         [Inject]
         public IProductCategoryGeneralRepository ProductCategoryService { set; get; }
 
         [Inject]
         public IBrandGeneralRepository BrandService { set; get; }
-
-        [Inject]
-        public ILocationGeneralRepository LocationService { set; get; }
-
-        [Inject]
-        public IContactGeneralRepository ContactService { set; get; }
-
-
+ 
         [Inject]
         public ILabelGeneralRepository LabelService { set; get; }
 
@@ -170,7 +110,10 @@ namespace StoreManagement.Controllers
         public IStoreService StoreService2 { set; get; }
 
         [Inject]
-        public ICategoryService CategoryService2 { set; get; }
+        public ICategoryService CategoryService2 { set; get; }      
+ 
+        [Inject]
+        public ILabelService LabelService2 { set; get; }
 
         [Inject]
         public IRetailerService RetailerService2 { set; get; }

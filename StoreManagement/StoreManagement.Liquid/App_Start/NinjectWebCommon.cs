@@ -10,6 +10,8 @@ using StoreManagement.Service.DbContext;
 using StoreManagement.Service.IGeneralRepositories;
 using StoreManagement.Service.Repositories;
 using StoreManagement.Service.ApiRepositories;
+using StoreManagement.Service.Services;
+using StoreManagement.Service.Services.IServices;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StoreManagement.Liquid.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(StoreManagement.Liquid.App_Start.NinjectWebCommon), "Stop")]
@@ -356,22 +358,26 @@ namespace StoreManagement.Liquid.App_Start
 
 
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope();
-            kernel.Bind<ICategoryHelper>().To<CategoryHelper>().InRequestScope();
 
-            kernel.Bind<IProductCategoryHelper>().To<ProductCategoryHelper>().InRequestScope();
-            kernel.Bind<IProductHelper>().To<ProductHelper>().InRequestScope();
-            kernel.Bind<IPhotoGalleryHelper>().To<PhotoGalleryHelper>().InRequestScope();
-            kernel.Bind<IBrandHelper>().To<BrandHelper>().InRequestScope();
-            kernel.Bind<IContentHelper>().To<ContentHelper>().InRequestScope();
-            kernel.Bind<IHomePageHelper>().To<HomePageHelper>().InRequestScope();
-            kernel.Bind<ILabelHelper>().To<LabelHelper>().InRequestScope();
-            kernel.Bind<INavigationHelper>().To<NavigationHelper>().InRequestScope();
-            kernel.Bind<IPagingHelper>().To<PagingHelper>().InRequestScope(); 
-            kernel.Bind<ILocationHelper>().To<LocationHelper>().InRequestScope();
-            kernel.Bind<IContactHelper>().To<ContactHelper>().InRequestScope();
-            kernel.Bind<IActivityHelper>().To<ActivityHelper>().InRequestScope();
-            kernel.Bind<ICommentHelper>().To<CommentHelper>().InRequestScope();
-            kernel.Bind<IRetailerHelper>().To<RetailerHelper>().InRequestScope();
+            kernel.Bind<IActivityService>().To<ActivityService>().InRequestScope();
+            kernel.Bind<IPagingService>().To<PagingService>().InRequestScope();
+            kernel.Bind<ICommentService>().To<CommentService>().InRequestScope();
+
+            kernel.Bind<ISiteMapService>().To<SiteMapService>().InRequestScope();
+            kernel.Bind<IFileManagerService>().To<FileManagerService>().InRequestScope();
+            kernel.Bind<IProductService>().To<ProductService>().InRequestScope();
+            kernel.Bind<ILocationService>().To<LocationService>().InRequestScope();
+            kernel.Bind<IBrandService>().To<BrandService>().InRequestScope();
+            kernel.Bind<IRetailerService>().To<RetailerService>().InRequestScope();
+            kernel.Bind<IContentService>().To<ContentService>().InRequestScope();
+            kernel.Bind<IContactService>().To<ContactService>().InRequestScope();
+            kernel.Bind<INavigationService>().To<NavigationService>().InRequestScope();
+            kernel.Bind<IStoreService>().To<StoreService>().InRequestScope();
+            kernel.Bind<ICategoryService>().To<CategoryService>().InRequestScope();
+            kernel.Bind<IProductCategoryService>().To<ProductCategoryService>().InRequestScope();
+            kernel.Bind<ILabelService>().To<LabelService>().InRequestScope();
+
+
             kernel.Bind<IHttpContextFactory>().To<HttpContextFactory>().InRequestScope();
 
             kernel.Bind<HttpContext>().ToMethod(ctx => HttpContext.Current).InTransientScope();

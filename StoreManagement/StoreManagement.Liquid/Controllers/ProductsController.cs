@@ -61,19 +61,16 @@ namespace StoreManagement.Liquid.Controllers
             }
 
             var settings = GetStoreSettings();
-            ProductHelper.StoreSettings = settings;
-            var pageOutput = ProductHelper.GetProductsSearchPage(this, productSearchResult, pageDesign, categories, search, filters, headerText, categoryApiId);
+            var pageOutput = ProductService2.GetProductsSearchPage(this, productSearchResult, pageDesign, categories, search, filters, headerText, categoryApiId);
 
             var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
-            PagingHelper.StoreSettings = settings;
-            PagingHelper.StoreId = StoreId;
-            PagingHelper.PageOutput = pageOutput;
-            PagingHelper.HttpRequestBase = this.Request;
-            PagingHelper.RouteData = this.RouteData;
-            PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToStr();
-            PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToStr();
+            PagingService2.PageOutput = pageOutput;
+            PagingService2.HttpRequestBase = this.Request;
+            PagingService2.RouteData = this.RouteData;
+            PagingService2.ActionName = this.ControllerContext.RouteData.Values["action"].ToStr();
+            PagingService2.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToStr();
             await Task.WhenAll(pagingPageDesignTask);
-            var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
+            var pagingDic = PagingService2.GetPaging(pagingPageDesignTask.Result);
             pagingDic.StoreSettings = settings;
             pagingDic.PageTitle = pageOutput.PageTitle;
             pagingDic.MyStore = this.MyStore;
@@ -93,7 +90,7 @@ namespace StoreManagement.Liquid.Controllers
 
         }
 
-        private String GetFilter(List<Data.HelpersModel.Filter> list, string fieldName,int totalItem)
+        private String GetFilter(List<Data.HelpersModel.Filter> list, string fieldName, int totalItem)
         {
             var listSp =
                 list.Where(r => r.FieldName.Equals(fieldName, StringComparison.InvariantCultureIgnoreCase))
@@ -119,9 +116,8 @@ namespace StoreManagement.Liquid.Controllers
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true);
 
                 var settings = GetStoreSettings();
-                ProductHelper.StoreSettings = settings;
-                ProductHelper.ImageWidth = GetSettingValueInt("ProductsIndex_ImageWidth", 50);
-                ProductHelper.ImageHeight = GetSettingValueInt("ProductsIndex_ImageHeight", 50);
+                ProductService2.ImageWidth = GetSettingValueInt("ProductsIndex_ImageWidth", 50);
+                ProductService2.ImageHeight = GetSettingValueInt("ProductsIndex_ImageHeight", 50);
 
 
                 await Task.WhenAll(pageDesignTask, productsTask, categoriesTask);
@@ -138,19 +134,17 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                var pageOutput = ProductHelper.GetProductsIndexPage(products, pageDesign, categories);
+                var pageOutput = ProductService2.GetProductsIndexPage(products, pageDesign, categories);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
-                PagingHelper.StoreSettings = settings;
-                PagingHelper.StoreId = StoreId;
-                PagingHelper.PageOutput = pageOutput;
-                PagingHelper.HttpRequestBase = this.Request;
-                PagingHelper.RouteData = this.RouteData;
-                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
-                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                PagingService2.PageOutput = pageOutput;
+                PagingService2.HttpRequestBase = this.Request;
+                PagingService2.RouteData = this.RouteData;
+                PagingService2.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingService2.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
+                var pagingDic = PagingService2.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = settings;
                 pagingDic.PageTitle = "Products";
                 pagingDic.MyStore = this.MyStore;
@@ -199,7 +193,7 @@ namespace StoreManagement.Liquid.Controllers
                 var settings = GetStoreSettings();
 
                 ViewData[StoreConstants.MetaTagKeywords] = product.Name;
-                ViewData[StoreConstants.MetaTagDescription] =GeneralHelper.TruncateAtWord(GeneralHelper.StripHtml(product.Name+", "+product.Description),155);
+                ViewData[StoreConstants.MetaTagDescription] = GeneralHelper.TruncateAtWord(GeneralHelper.StripHtml(product.Name + ", " + product.Description), 155);
 
                 if (pageDesign == null)
                 {
@@ -216,11 +210,9 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                ProductHelper.StoreSettings = settings;
-                ProductHelper.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
-                ProductHelper.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
-                ProductHelper.StoreSettings = GetStoreSettings();
-                var dic = ProductHelper.GetProductsDetailPage(product, pageDesign, category);
+                ProductService2.ImageWidth = GetSettingValueInt("ProductsDetail_ImageWidth", 50);
+                ProductService2.ImageHeight = GetSettingValueInt("ProductsDetail_ImageHeight", 50);
+                var dic = ProductService2.GetProductsDetailPage(product, pageDesign, category);
                 dic.MyStore = this.MyStore;
                 dic.StoreSettings = settings;
                 dic.PageTitle = product.Name;

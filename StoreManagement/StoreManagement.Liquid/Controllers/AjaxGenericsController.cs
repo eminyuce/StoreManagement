@@ -44,13 +44,12 @@ namespace StoreManagement.Liquid.Controllers
             var navigationsTask = NavigationService.GetStoreActiveNavigationsAsync(StoreId);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
-            NavigationHelper.StoreSettings = GetStoreSettings();
 
             await Task.WhenAll(pageDesignTask, navigationsTask);
             var navigations = navigationsTask.Result;
             var pageDesign = pageDesignTask.Result;
 
-            var pageOutput = NavigationHelper.GetMainLayoutLink(navigations, pageDesign);
+            var pageOutput = NavigationService2.GetMainLayoutLink(navigations, pageDesign);
             returnHtml = pageOutput.PageOutputText;
 
             return returnHtml;
@@ -86,7 +85,7 @@ namespace StoreManagement.Liquid.Controllers
             var navigations = navigationsTask.Result;
             var pageDesign = pageDesignTask.Result;
 
-            var pageOutput = NavigationHelper.GetMainLayoutFooterLink(navigations, pageDesign);
+            var pageOutput = NavigationService2.GetMainLayoutFooterLink(navigations, pageDesign);
             returnHtml = pageOutput.PageOutputText;
 
             return returnHtml;
@@ -119,13 +118,12 @@ namespace StoreManagement.Liquid.Controllers
             var commentsTask = CommentService.GetCommentsByItemIdAsync(StoreId, itemId, itemType, page, pageSize);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
-            CommentHelper.StoreSettings = GetStoreSettings();
 
             await Task.WhenAll(pageDesignTask, commentsTask);
             var pageDesign = pageDesignTask.Result;
             var comments = commentsTask.Result;
 
-            var pageOuput = CommentHelper.GetCommentsPartial(comments, pageDesign);
+            var pageOuput = CommentService2.GetCommentsPartial(comments, pageDesign);
             returnHtml = pageOuput.PageOutputText;
 
             return returnHtml;
@@ -168,7 +166,6 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
-                CommentHelper.StoreSettings = GetStoreSettings();
 
                 await Task.WhenAll(pageDesignTask);
                 var pageDesign = pageDesignTask.Result;

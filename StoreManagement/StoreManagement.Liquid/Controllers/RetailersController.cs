@@ -29,9 +29,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 var retailersTask = RetailerService.GetRetailersAsync(StoreId, null, true);
                 var settings = GetStoreSettings();
-                RetailerHelper.StoreSettings = settings;
-                RetailerHelper.ImageWidth = GetSettingValueInt("RetailersIndex_ImageWidth", 50);
-                RetailerHelper.ImageHeight = GetSettingValueInt("RetailersIndex_ImageHeight", 50);
+                RetailerService2.ImageWidth = GetSettingValueInt("RetailersIndex_ImageWidth", 50);
+                RetailerService2.ImageHeight = GetSettingValueInt("RetailersIndex_ImageHeight", 50);
 
                 await Task.WhenAll(pageDesignTask, retailersTask);
                 var pageDesign = pageDesignTask.Result;
@@ -43,7 +42,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                var pageOutput = RetailerHelper.GetRetailers(retailers, pageDesign);
+                var pageOutput = RetailerService2.GetRetailers(retailers, pageDesign);
                 pageOutput.StoreSettings = settings;
                 pageOutput.PageTitle = "Retailers";
                 pageOutput.MyStore = this.MyStore;
@@ -70,9 +69,8 @@ namespace StoreManagement.Liquid.Controllers
                 var productCategoriesTask = ProductCategoryService.GetCategoriesByRetailerIdAsync(StoreId, retailerId);
 
                 var settings = GetStoreSettings();
-                RetailerHelper.StoreSettings = settings;
-                RetailerHelper.ImageWidth = GetSettingValueInt("RetailerDetail_ImageWidth", 50);
-                RetailerHelper.ImageHeight = GetSettingValueInt("RetailerDetail_ImageHeight", 50);
+                RetailerService2.ImageWidth = GetSettingValueInt("RetailerDetail_ImageWidth", 50);
+                RetailerService2.ImageHeight = GetSettingValueInt("RetailerDetail_ImageHeight", 50);
 
                 await Task.WhenAll(retailerTask, pageDesignTask,productsTask, productCategoriesTask);
                 var pageDesign = pageDesignTask.Result;
@@ -85,7 +83,7 @@ namespace StoreManagement.Liquid.Controllers
                     throw new Exception("PageDesing is null:" + RetailerDetailPageDesignName);
                 }
 
-                var dic = RetailerHelper.GetRetailerDetailPage(retailer, products, pageDesign, productCategories);
+                var dic = RetailerService2.GetRetailerDetailPage(retailer, products, pageDesign, productCategories);
                 dic.StoreSettings = settings;
                 dic.MyStore = this.MyStore;
                 dic.PageTitle = retailer.Name;

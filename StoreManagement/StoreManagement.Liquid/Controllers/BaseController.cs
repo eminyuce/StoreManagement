@@ -31,51 +31,62 @@ namespace StoreManagement.Liquid.Controllers
 
         protected static readonly Logger BaseLogger = LogManager.GetCurrentClassLogger();
 
-        [Inject]
-        public IActivityHelper ActivityHelper { set; get; }
 
         [Inject]
-        public ICommentHelper CommentHelper { set; get; }
- 
+        public IActivityService ActivityService2 { set; get; }
 
         [Inject]
-        public IRetailerHelper RetailerHelper { set; get; }
+        public IPagingService PagingService2 { set; get; }
 
         [Inject]
-        public IContactHelper ContactHelper { set; get; }
+        public ICommentService CommentService2 { set; get; }
+
+        /// <summary>
+        /// /////////////////
+        /// </summary>
 
         [Inject]
-        public ILocationHelper LocationHelper { set; get; }
+        public ISiteMapService SiteMapService { set; get; }
+
+      
 
         [Inject]
-        public IBrandHelper BrandHelper { set; get; }
+        public IProductService ProductService2 { set; get; }
 
         [Inject]
-        public IContentHelper ContentHelper { set; get; }
+        public IFileManagerService FileManagerService2 { set; get; }
 
         [Inject]
-        public IProductHelper ProductHelper { set; get; }
+        public ILocationService LocationService2 { set; get; }
 
         [Inject]
-        public IPagingHelper PagingHelper { set; get; }
+        public IBrandService BrandService2 { set; get; }
 
         [Inject]
-        public ILabelHelper LabelHelper { set; get; }
+        public IRetailerService RetailerService2 { set; get; }
 
         [Inject]
-        public IPhotoGalleryHelper PhotoGalleryHelper { set; get; }
+        public IContentService ContentService2 { set; get; }
 
         [Inject]
-        public IProductCategoryHelper ProductCategoryHelper { set; get; }
+        public IContactService ContactService2 { set; get; }
 
         [Inject]
-        public ICategoryHelper CategoryHelper { set; get; }
+        public INavigationService NavigationService2 { set; get; }
 
         [Inject]
-        public INavigationHelper NavigationHelper { set; get; }
+        public IStoreService StoreService2 { set; get; }
 
         [Inject]
-        public IHomePageHelper HomePageHelper { set; get; }
+        public ICategoryService CategoryService2 { set; get; }
+
+        [Inject]
+        public ILabelService LabelService2 { set; get; }
+
+        [Inject]
+        public IProductCategoryService ProductCategoryService2 { set; get; }
+
+
 
 
         [Inject]
@@ -180,8 +191,8 @@ namespace StoreManagement.Liquid.Controllers
 
             base.OnActionExecuting(filterContext);
         }
-         private static readonly TypedObjectCache<Store>
-            StoreCache = new TypedObjectCache<Store>("StoreHelper");
+        private static readonly TypedObjectCache<Store>
+           StoreCache = new TypedObjectCache<Store>("StoreHelper");
 
         public Store GetStoreByDomain(HttpContextBase request)
         {
@@ -192,7 +203,7 @@ namespace StoreManagement.Liquid.Controllers
             {
                 String key = domainName;
                 Store storeObj = new Store();
-                storeObj = (Store) MemoryCache.Default.Get(key);
+                storeObj = (Store)MemoryCache.Default.Get(key);
                 if (storeObj == null)
                 {
                     storeObj = StoreService.GetStoreByDomain(domainName);

@@ -22,6 +22,14 @@ namespace StoreManagement.Service.Services.IServices
 
         StoreHomePage GetHomePage();
 
+        StoreLiquidResult GetHomePageDesign(PageDesign pageDesing, List<FileManager> sliderImages,
+                                           List<Product> products, List<Content> blogs, List<Content> news,
+                                           List<Category> categories, List<ProductCategory> productCategories);
+
+
+        StoreLiquidResult GetHomePageDesign(PageDesign pageDesing, List<FileManager> sliderImages);
+
+
         FeedResult GetProductRss(int take, int description, int imageHeight, int imageWidth, int isDetailLink);
 
 

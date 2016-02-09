@@ -30,10 +30,9 @@ namespace StoreManagement.Liquid.Controllers
             var products = productsTask.Result;
             var productCategories = productCategoriesTask.Result;
 
-            var feed = ProductHelper.GetProductsRssFeed(store, products, productCategories, description, isDetailLink);
-            ProductHelper.ImageWidth = imageWidth;
-            ProductHelper.ImageHeight = imageHeight;
-            ProductHelper.StoreId = StoreId;
+            var feed = ProductService2.GetProductsRssFeed(store, products, productCategories, description, isDetailLink);
+            ProductService2.ImageWidth = imageWidth;
+            ProductService2.ImageHeight = imageHeight;
             var comment = new StringBuilder();
             comment.AppendLine("Take=Number of rss item; Default value is 10  ");
             comment.AppendLine("Description=The length of description text.Default value is 300  ");
@@ -51,10 +50,9 @@ namespace StoreManagement.Liquid.Controllers
             var content = contentsTask.Result;
             var categories = categoriesTask.Result;
 
-            var feed = ContentHelper.GetContentsRssFeed(store, content, categories, description, StoreConstants.NewsType);
-            ContentHelper.ImageWidth = imageWidth;
-            ContentHelper.ImageHeight = imageHeight;
-            ContentHelper.StoreId = StoreId;
+            var feed = ContentService2.GetContentsRssFeed(store, content, categories, description, StoreConstants.NewsType);
+            ContentService2.ImageWidth = imageWidth;
+            ContentService2.ImageHeight = imageHeight;
             var comment = new StringBuilder();
             comment.AppendLine("Take=Number of rss item; Default value is 10  ");
             comment.AppendLine("Description=The length of description text.Default value is 300  ");
@@ -73,10 +71,9 @@ namespace StoreManagement.Liquid.Controllers
             var categories = categoriesTask.Result;
 
 
-            var feed = ContentHelper.GetContentsRssFeed(store, content, categories, description, StoreConstants.BlogsType);
-            ContentHelper.ImageWidth = imageWidth;
-            ContentHelper.ImageHeight = imageHeight;
-            ContentHelper.StoreId = StoreId;
+            var feed = ContentService2.GetContentsRssFeed(store, content, categories, description, StoreConstants.BlogsType);
+            ContentService2.ImageWidth = imageWidth;
+            ContentService2.ImageHeight = imageHeight;
             var comment = new StringBuilder();
             comment.AppendLine("Take=Number of rss item; Default value is 10  ");
             comment.AppendLine("Description=The length of description text.Default value is 300  ");

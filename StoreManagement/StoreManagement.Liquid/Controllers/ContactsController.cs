@@ -19,9 +19,8 @@ namespace StoreManagement.Liquid.Controllers
 
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "ContactsIndexPage");
 
-                ContactHelper.StoreSettings = GetStoreSettings();
-                ContactHelper.ImageWidth = GetSettingValueInt("ContactsIndex_ImageWidth", 50);
-                ContactHelper.ImageHeight = GetSettingValueInt("ContactsIndex_ImageHeight", 50);
+                ContactService2.ImageWidth = GetSettingValueInt("ContactsIndex_ImageWidth", 50);
+                ContactService2.ImageHeight = GetSettingValueInt("ContactsIndex_ImageHeight", 50);
                 var contactsTask = ContactService.GetContactsByStoreIdAsync(StoreId, null, true);
 
                 await Task.WhenAll(pageDesignTask, contactsTask);
@@ -34,7 +33,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                var pageOutput = ContactHelper.GetContactIndexPage(pageDesign, contacts);
+                var pageOutput = ContactService2.GetContactIndexPage(pageDesign, contacts);
 
 
                 return View(pageOutput);

@@ -41,9 +41,8 @@ namespace StoreManagement.Liquid.Controllers
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdAsync(StoreId, Type, true);
 
                 var settings = GetStoreSettings();
-                ContentHelper.StoreSettings = settings;
-                ContentHelper.ImageWidth = GetSettingValueInt(Type + "Index_ImageWidth", 50);
-                ContentHelper.ImageHeight = GetSettingValueInt(Type + "Index_ImageHeight", 50);
+                ContentService2.ImageWidth = GetSettingValueInt(Type + "Index_ImageWidth", 50);
+                ContentService2.ImageHeight = GetSettingValueInt(Type + "Index_ImageHeight", 50);
 
                 await Task.WhenAll(newsPageDesignTask, contentsTask, categoriesTask);
                 var contents = contentsTask.Result;
@@ -57,20 +56,18 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                var pageOutput = ContentHelper.GetContentsIndexPage(contents, pageDesign, categories, Type);
+                var pageOutput = ContentService2.GetContentsIndexPage(contents, pageDesign, categories, Type);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
 
-                PagingHelper.StoreSettings = GetStoreSettings();
-                PagingHelper.StoreId = StoreId;
-                PagingHelper.PageOutput = pageOutput;
-                PagingHelper.HttpRequestBase = this.Request;
-                PagingHelper.RouteData = this.RouteData;
-                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
-                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                PagingService2.PageOutput = pageOutput;
+                PagingService2.HttpRequestBase = this.Request;
+                PagingService2.RouteData = this.RouteData;
+                PagingService2.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingService2.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
+                var pagingDic = PagingService2.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = settings;
                 pageOutput.MyStore = this.MyStore;
                 pageOutput.PageTitle = this.PageTitle;
@@ -100,11 +97,9 @@ namespace StoreManagement.Liquid.Controllers
                 var categoryTask = CategoryService.GetCategoryByContentIdAsync(StoreId, newsId);
 
 
-                ContentHelper.StoreId = this.StoreId;
                 var settings = GetStoreSettings();
-                ContentHelper.StoreSettings = settings;
-                ContentHelper.ImageWidth = GetSettingValueInt(Type + "Detail_ImageWidth", 50);
-                ContentHelper.ImageHeight = GetSettingValueInt(Type + "Detail_ImageHeight", 50);
+                ContentService2.ImageWidth = GetSettingValueInt(Type + "Detail_ImageWidth", 50);
+                ContentService2.ImageHeight = GetSettingValueInt(Type + "Detail_ImageHeight", 50);
 
 
                 await Task.WhenAll(pageDesignTask, contentTask, categoryTask);
@@ -118,7 +113,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                var dic = ContentHelper.GetContentDetailPage(content, pageDesign, category, Type);
+                var dic = ContentService2.GetContentDetailPage(content, pageDesign, category, Type);
                 dic.StoreSettings = settings;
                 dic.MyStore = this.MyStore;
                 dic.PageTitle = content.Name;

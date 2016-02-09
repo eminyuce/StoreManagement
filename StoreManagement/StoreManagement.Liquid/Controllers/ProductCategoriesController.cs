@@ -34,8 +34,6 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, IndexPageDesingName);
                 var pageSize = GetSettingValueInt("ProductCategories_PageSize", StoreConstants.DefaultPageSize);
                 var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType, true, page, pageSize);
-                var settings = GetStoreSettings();
-                ProductCategoryHelper.StoreSettings = settings;
 
                 await Task.WhenAll(pageDesignTask, categoriesTask);
                 var pageDesign = pageDesignTask.Result;
@@ -47,20 +45,17 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                var pageOutput = ProductCategoryHelper.GetCategoriesIndexPage(pageDesign, categories);
+                var pageOutput = ProductCategoryService2.GetCategoriesIndexPage(pageDesign, categories);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
-                PagingHelper.StoreSettings = GetStoreSettings();
-                PagingHelper.StoreId = StoreId;
-                PagingHelper.PageOutput = pageOutput;
-                PagingHelper.HttpRequestBase = this.Request;
-                PagingHelper.RouteData = this.RouteData;
-                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
-                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                PagingService2.PageOutput = pageOutput;
+                PagingService2.HttpRequestBase = this.Request;
+                PagingService2.RouteData = this.RouteData;
+                PagingService2.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingService2.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
-                pagingDic.StoreSettings = settings;
+                var pagingDic = PagingService2.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.MyStore = this.MyStore;
                 pageOutput.PageTitle = "Product Categories";
                 return View(pagingDic);
@@ -92,9 +87,8 @@ namespace StoreManagement.Liquid.Controllers
                 var categoryTask = ProductCategoryService.GetProductCategoryAsync(categoryId);
 
                 var settings = GetStoreSettings();
-                ProductCategoryHelper.StoreSettings = settings;
-                ProductCategoryHelper.ImageWidth = GetSettingValueInt("ProductCategoryPage_ImageWidth", 50);
-                ProductCategoryHelper.ImageHeight = GetSettingValueInt("ProductCategoryPage_ImageHeight", 50);
+                ProductCategoryService2.ImageWidth = GetSettingValueInt("ProductCategoryPage_ImageWidth", 50);
+                ProductCategoryService2.ImageHeight = GetSettingValueInt("ProductCategoryPage_ImageHeight", 50);
 
 
                 await Task.WhenAll(pageDesignTask, categoryTask);
@@ -107,7 +101,7 @@ namespace StoreManagement.Liquid.Controllers
                 }
 
 
-                var pageOutput = ProductCategoryHelper.GetCategoryPage(pageDesign, category);
+                var pageOutput = ProductCategoryService2.GetCategoryPage(pageDesign, category);
                 pageOutput.StoreSettings = settings;
                 pageOutput.MyStore = this.MyStore;
                 pageOutput.PageTitle = category.Name;

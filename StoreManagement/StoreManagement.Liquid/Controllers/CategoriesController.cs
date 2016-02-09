@@ -34,7 +34,6 @@ namespace StoreManagement.Liquid.Controllers
                 var pageSize = GetSettingValueInt(Type + "Categories_PageSize", StoreConstants.DefaultPageSize);
                 var categoriesTask = CategoryService.GetCategoriesByStoreIdWithPagingAsync(StoreId, Type, true, page, pageSize);
                 var settings = GetStoreSettings();
-                CategoryHelper.StoreSettings = settings;
 
                 await Task.WhenAll(pageDesignTask, categoriesTask);
                 var pageDesign = pageDesignTask.Result;
@@ -44,19 +43,17 @@ namespace StoreManagement.Liquid.Controllers
                     Logger.Error("PageDesing is null:" + PageDesingIndexPageName);
                     throw new Exception("PageDesing is null:" + PageDesingIndexPageName);
                 }
-                var pageOutput = CategoryHelper.GetCategoriesIndexPage(pageDesign, categories, Type);
+                var pageOutput = CategoryService2.GetCategoriesIndexPage(pageDesign, categories, Type);
                 var pagingPageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "Paging");
 
 
-                PagingHelper.StoreSettings = GetStoreSettings();
-                PagingHelper.StoreId = StoreId;
-                PagingHelper.PageOutput = pageOutput;
-                PagingHelper.HttpRequestBase = this.Request;
-                PagingHelper.RouteData = this.RouteData;
-                PagingHelper.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
-                PagingHelper.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                PagingService2.PageOutput = pageOutput;
+                PagingService2.HttpRequestBase = this.Request;
+                PagingService2.RouteData = this.RouteData;
+                PagingService2.ActionName = this.ControllerContext.RouteData.Values["action"].ToString();
+                PagingService2.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 await Task.WhenAll(pagingPageDesignTask);
-                var pagingDic = PagingHelper.GetPaging(pagingPageDesignTask.Result);
+                var pagingDic = PagingService2.GetPaging(pagingPageDesignTask.Result);
                 pagingDic.StoreSettings = settings;
                 pagingDic.MyStore = this.MyStore;
                 pagingDic.PageTitle = this.PageTitle;
@@ -87,9 +84,8 @@ namespace StoreManagement.Liquid.Controllers
                 var categoryTask = CategoryService.GetCategoryAsync(categoryId);
 
                 var settings = GetStoreSettings();
-                CategoryHelper.StoreSettings = settings;
-                CategoryHelper.ImageWidth = GetSettingValueInt(Type + "CategoryPage_ImageWidth", 50);
-                CategoryHelper.ImageHeight = GetSettingValueInt(Type + "CategoryPage_ImageHeight", 50);
+                CategoryService2.ImageWidth = GetSettingValueInt(Type + "CategoryPage_ImageWidth", 50);
+                CategoryService2.ImageHeight = GetSettingValueInt(Type + "CategoryPage_ImageHeight", 50);
 
 
                 await Task.WhenAll(pageDesignTask, categoryTask);
@@ -100,7 +96,7 @@ namespace StoreManagement.Liquid.Controllers
                     Logger.Error("PageDesing is null:" + PageDesingCategoryPageName);
                     throw new Exception("PageDesing is null:" + PageDesingIndexPageName);
                 }
-                var pageOutput = CategoryHelper.GetCategoryPage(pageDesign, category,  Type);
+                var pageOutput = CategoryService2.GetCategoryPage(pageDesign, category,  Type);
                 pageOutput.StoreSettings = settings;
                 pageOutput.MyStore = this.MyStore;
                 pageOutput.PageTitle = category.Name;

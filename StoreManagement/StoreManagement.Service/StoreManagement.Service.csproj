@@ -200,6 +200,7 @@
     <Compile Include="ApiRepositories\StoreLanguageApiRepository.cs" />
     <Compile Include="ApiRepositories\StoreApiRepository.cs" />
     <Compile Include="ApiRepositories\StoreUserApiRepository.cs" />
+    <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />

@@ -23,16 +23,16 @@ namespace StoreManagement.Liquid.Controllers
                 var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, "LocationsIndexPage");
                 var locationsTask = LocationService.GetLocationsAsync(StoreId, null, true);
                 var settings = GetStoreSettings();
-                LocationHelper.StoreSettings = settings;
-                LocationHelper.ImageWidth = GetSettingValueInt("LocationsIndex_ImageWidth", 50);
-                LocationHelper.ImageHeight = GetSettingValueInt("LocationsIndex_ImageHeight", 50);
+
+                LocationService2.ImageWidth = GetSettingValueInt("LocationsIndex_ImageWidth", 50);
+                LocationService2.ImageHeight = GetSettingValueInt("LocationsIndex_ImageHeight", 50);
 
 
                 await Task.WhenAll(pageDesignTask, locationsTask);
                 var pageDesign = pageDesignTask.Result;
                 var locations = locationsTask.Result;
 
-                var pageOutput = LocationHelper.GetLocationIndexPage(pageDesign, locations);
+                var pageOutput = LocationService2.GetLocationIndexPage(pageDesign, locations);
                 pageOutput.StoreSettings = settings;
                 pageOutput.MyStore = this.MyStore;
                 return View(pageOutput);

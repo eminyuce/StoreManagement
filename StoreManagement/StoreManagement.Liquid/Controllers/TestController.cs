@@ -82,8 +82,7 @@ namespace StoreManagement.Liquid.Controllers
             await Task.WhenAll(productsTask, blogsTask, newsTask, pageDesignTask, sliderTask, categoriesTask,
                      productCategoriesTask);
 
-            HomePageHelper.StoreId = this.StoreId;
-            HomePageHelper.StoreSettings = GetStoreSettings();
+        
 
             var products = productsTask.Result;
             var blogs = blogsTask.Result;
@@ -93,7 +92,7 @@ namespace StoreManagement.Liquid.Controllers
             var categories = categoriesTask.Result;
             var productCategories = productCategoriesTask.Result;
 
-            StoreLiquidResult liquidResult = HomePageHelper.GetHomePageDesign(pageDesing, sliderImages, products, blogs,
+            StoreLiquidResult liquidResult = ProductService2.GetHomePageDesign(pageDesing, sliderImages, products, blogs,
                                                                               news, categories, productCategories);
             liquidResult.MyStore = this.MyStore;
 

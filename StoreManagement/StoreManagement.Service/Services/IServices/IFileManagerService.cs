@@ -8,7 +8,7 @@ using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Service.Services.IServices
 {
-    public interface IFileManagerService
+    public interface IFileManagerService : IBaseService
     {
 
        PhotosViewModel GetPhotos(int page);

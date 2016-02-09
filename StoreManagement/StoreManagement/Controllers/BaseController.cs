@@ -26,21 +26,12 @@ namespace StoreManagement.Controllers
 
         
 
-        [Inject]
-        public ISiteMapService SiteMapService { set; get; }
-
-        [Inject]
-        public IProductService ProductService { set; get; }
-
+ 
         [Inject]
         public IMessageGeneralRepository MessageService { set; get; }
 
-
         [Inject]
         public IStoreGeneralRepository StoreService { set; get; }
-
-        [Inject]
-        public IFileManagerService FileManagerService { set; get; }
         
         [Inject]
         public ISettingGeneralRepository SettingService { set; get; }
@@ -56,19 +47,15 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public ICategoryGeneralRepository CategoryService { set; get; }
-
       
         [Inject]
         public IPageDesignGeneralRepository PageDesignService { set; get; }
- 
 
         [Inject]
         public IActivityGeneralRepository ActivityService { set; get; }
 
         [Inject]
         public IProductGeneralRepository ProductRepository { set; get; }
-
-         
        
         [Inject]
         public IProductCategoryGeneralRepository ProductCategoryService { set; get; }
@@ -80,8 +67,6 @@ namespace StoreManagement.Controllers
         public ILabelGeneralRepository LabelService { set; get; }
 
 
-        [Inject]
-        public INavigationService NavigationService { set; get; }
 
 
 
@@ -120,6 +105,12 @@ namespace StoreManagement.Controllers
 
         [Inject]
         public IProductService ProductService2 { set; get; }
+
+        [Inject]
+        public ISiteMapService SiteMapService { set; get; }
+
+        [Inject]
+        public IFileManagerService FileManagerService { set; get; }
 
     
 
@@ -168,6 +159,8 @@ namespace StoreManagement.Controllers
             StoreService2.MyStore = store;
             CategoryService2.MyStore = store;
             ProductCategoryService2.MyStore = store;
+            SiteMapService.MyStore = store;
+            FileManagerService.MyStore = store;
         }
 
         protected new HttpNotFoundResult HttpNotFound(string statusDescription = null)
@@ -176,7 +169,7 @@ namespace StoreManagement.Controllers
         }
         protected bool IsModulActive(String controllerName)
         {
-            return NavigationService.IsModulActive(controllerName);
+            return NavigationService2.IsModulActive(controllerName);
         }
         protected bool CheckRequest(BaseEntity entity)
         {

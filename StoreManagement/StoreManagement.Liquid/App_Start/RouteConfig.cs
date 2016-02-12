@@ -53,6 +53,11 @@ namespace StoreManagement.Liquid
                      defaults: new { controller = "Robots", action = "RobotsText" }
           );
 
+            routes.MapRoute(
+              name: "productcategories",
+              url: "productcategories/{action}/{id}",
+              defaults: new { controller = "productcategories", action = "category", id = UrlParameter.Optional }
+          );
 
 
             routes.MapRoute(

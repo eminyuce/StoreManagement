@@ -15,6 +15,11 @@ namespace StoreManagement.Controllers
 
         public ActionResult FetchImage(String id = "", string size = "", string contentType = "")
         {
+
+            if (String.IsNullOrEmpty(id))
+            {
+                return new EmptyResult();
+            }
             var dic = new Dictionary<String, String>();
             String url = "";
             url = String.Format("https://docs.google.com/uc?id={0}", id);

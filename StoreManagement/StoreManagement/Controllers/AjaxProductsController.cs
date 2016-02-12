@@ -74,8 +74,7 @@ namespace StoreManagement.Controllers
         private async Task<String> GetProductCategoriesHtml(string designName, int imageWidth, int imageHeight)
         {
             string returnHtml;
-            var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType,
-                                                                                           true);
+            var categoriesTask = ProductCategoryService.GetProductCategoriesByStoreIdAsync(StoreId, StoreConstants.ProductType,true);
             var pageDesignTask = PageDesignService.GetPageDesignByName(StoreId, designName);
 
             ProductCategoryService2.ImageWidth = imageWidth;

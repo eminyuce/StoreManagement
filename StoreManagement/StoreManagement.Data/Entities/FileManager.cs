@@ -20,28 +20,20 @@ namespace StoreManagement.Data.Entities
         public string FileStatus { get; set; }
         public string FileSize { get; set; }
 
-         [JsonIgnore]
         public string ThumbnailLink { get; set; }
         
-         [JsonIgnore]
         public string OriginalFilename { get; set; }
         
-         [JsonIgnore]
         public DateTime? ModifiedDate { get; set; }
         
-         [JsonIgnore]
         public string IconLink { get; set; }
         
-         [JsonIgnore]
         public int ContentLength { get; set; }
         
-         [JsonIgnore]
         public bool IsCarousel { get; set; }
 
-         [JsonIgnore]
         public int ? Width { get; set; }
         
-         [JsonIgnore]
         public int ?  Height { get; set; }
 
          public string ImageSourceType { get; set; }

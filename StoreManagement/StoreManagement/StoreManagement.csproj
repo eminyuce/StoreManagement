@@ -486,6 +486,7 @@
     <Content Include="Views\Shared\_pProduct.liquid" />
     <Content Include="Views\Shared\_footer.liquid" />
     <Content Include="Views\Shared\_footer2.liquid" />
+    <Content Include="Views\PhotoGallery\Index.liquid" />
     <None Include="Views\ProductCategories\Category.liquid" />
     <None Include="Views\Shared\_Master.liquid" />
     <Content Include="Web.config" />
@@ -546,7 +547,6 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
-    <Content Include="Views\PhotoGallery\Index.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
     <Content Include="Views\Error\InternalServerError.cshtml" />

@@ -35,16 +35,42 @@ namespace StoreManagement.Data.LiquidEntities
                 return LinkHelper.GetImageLink("Thumbnail", this.FileManager, this.ImageWidth, this.ImageHeight);
             }
         }
-
+        public String WebContentLink
+        {
+            get { return FileManager.WebContentLink; }
+        }
+        public String OriginalFilename
+        {
+            get { return FileManager.OriginalFilename; }
+        }
         public int Id
         {
             get { return FileManager.Id; }
+        }
+        public String Title
+        {
+            get { return FileManager.Title; }
         }
         public String Name
         {
             get { return FileManager.Name; }
         }
-
+        public String ContentType
+        {
+            get { return FileManager.ContentType; }
+        }
+        public String FileSize
+        {
+            get { return FileManager.FileSize; }
+        }
+        public String GoogleImageId
+        {
+            get { return FileManager.GoogleImageId; }
+        }
+        public bool IsCarousel
+        {
+            get { return FileManager.IsCarousel; }
+        }
         public DateTime CreatedDate
         {
             get { return FileManager.CreatedDate.Value; }
@@ -57,6 +83,9 @@ namespace StoreManagement.Data.LiquidEntities
         {
             get { return FileManager.State; }
         }
-
+        public string FileStatus
+        {
+            get { return FileManager.FileStatus; }
+        }
     }
 }

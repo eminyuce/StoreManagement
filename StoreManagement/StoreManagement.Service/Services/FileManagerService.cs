@@ -23,11 +23,13 @@ namespace StoreManagement.Service.Services
 
         public PhotosViewModel GetPhotos(int page)
         {
-            var photos = new PhotosViewModel();
-            photos.SStore = this.MyStore;
+            var resultModel = new PhotosViewModel();
+            resultModel.SStore = this.MyStore;
             var m = FileManagerRepository.GetImagesByStoreId(MyStore.Id, page, 24);
-            photos.SFileManagers = new PagedList<FileManager>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
-            return photos;
+            resultModel.SFileManagers = new PagedList<FileManager>(m.items, m.page - 1, m.pageSize, m.totalItemCount);
+            resultModel.SNavigations = NavigationRepository.GetStoreActiveNavigations(this.MyStore.Id);
+            resultModel.SSettings = this.GetStoreSettings();
+            return resultModel;
         }
 
         public List<FileManager> GetFilesByStoreId(int storeId)

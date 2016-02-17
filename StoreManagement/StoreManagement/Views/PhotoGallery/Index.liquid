@@ -1,0 +1,28 @@
+﻿{% extends "Master" %}
+
+
+ 
+ {% block title %}
+ News  {{ model.store.name }}
+ 
+ {% endblock %}  
+ 
+
+ {% block content %} 
+ <p>
+  
+
+ 
+                {% for item in model.file_managers %}
+ 
+ <div>
+     <img src='{{ item.image_source }}'/> {{ item.name }}  
+	 </div>
+	 
+	 <br>
+
+{% endfor %}
+ 
+
+ </p>
+  {% endblock %}  

@@ -9,6 +9,33 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\ProjectsEY\Thinktecture.IdentityServer.v2\WebSites\login.seatechnologyjobs.com</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_Data/Stores.mdf">
+      <publishTime>07/30/2015 09:18:02</publishTime>
+    </File>
+    <File Include="App_Data/Stores_log.ldf">
+      <publishTime>07/30/2015 09:18:02</publishTime>
+    </File>
+    <File Include="App_Start/AuthConfig.cs">
+      <publishTime>07/30/2015 09:18:02</publishTime>
+    </File>
+    <File Include="App_Start/BundleConfig.cs">
+      <publishTime>07/30/2015 09:18:02</publishTime>
+    </File>
+    <File Include="App_Start/DotLiquidViewEngineStart.cs">
+      <publishTime>07/30/2015 09:18:02</publishTime>
+    </File>
+    <File Include="App_Start/FilterConfig.cs">
+      <publishTime>07/30/2015 09:18:03</publishTime>
+    </File>
+    <File Include="App_Start/NinjectWebCommon.cs">
+      <publishTime>02/09/2016 14:17:10</publishTime>
+    </File>
+    <File Include="App_Start/RouteConfig.cs">
+      <publishTime>01/19/2016 11:42:49</publishTime>
+    </File>
+    <File Include="App_Start/WebApiConfig.cs">
+      <publishTime>07/30/2015 09:18:03</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>10/08/2015 12:50:44</publishTime>
     </File>
@@ -33,13 +60,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/DotNetOpenAuth.AspNet.dll">
       <publishTime>10/08/2015 12:50:46</publishTime>
     </File>
+    <File Include="bin/DotNetOpenAuth.AspNet.xml">
+      <publishTime>10/08/2015 12:50:46</publishTime>
+    </File>
     <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>10/08/2015 12:50:47</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.xml">
       <publishTime>10/08/2015 12:50:47</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
       <publishTime>10/08/2015 12:50:48</publishTime>
     </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.xml">
+      <publishTime>10/08/2015 12:50:48</publishTime>
+    </File>
     <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>10/08/2015 12:50:49</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.xml">
       <publishTime>10/08/2015 12:50:49</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OpenId.dll">
@@ -48,10 +87,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
       <publishTime>10/08/2015 12:50:53</publishTime>
     </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.xml">
+      <publishTime>10/08/2015 12:50:53</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.xml">
+      <publishTime>10/08/2015 12:50:51</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/08/2015 12:50:19</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/08/2015 12:50:19</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.xml">
+      <publishTime>10/08/2015 12:50:19</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.xml">
       <publishTime>10/08/2015 12:50:19</publishTime>
     </File>
     <File Include="bin/es/Microsoft.Data.Edm.resources.dll">
@@ -81,7 +132,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/GenericRepository.EntityFramework.pdb">
       <publishTime>02/08/2016 12:00:13</publishTime>
     </File>
+    <File Include="bin/GenericRepository.EntityFramework.xml">
+      <publishTime>02/08/2016 12:00:13</publishTime>
+    </File>
     <File Include="bin/GenericRepository.pdb">
+      <publishTime>02/08/2016 12:00:12</publishTime>
+    </File>
+    <File Include="bin/GenericRepository.xml">
       <publishTime>02/08/2016 12:00:12</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
@@ -91,6 +148,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2015 12:52:22</publishTime>
     </File>
     <File Include="bin/HtmlAgilityPack.pdb">
+      <publishTime>10/08/2015 12:52:22</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.xml">
       <publishTime>10/08/2015 12:52:22</publishTime>
     </File>
     <File Include="bin/ICSharpCode.SharpZipLib.dll">
@@ -138,7 +198,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
       <publishTime>10/08/2015 12:51:13</publishTime>
     </File>
+    <File Include="bin/Microsoft.Web.WebPages.OAuth.xml">
+      <publishTime>10/08/2015 12:51:13</publishTime>
+    </File>
     <File Include="bin/Mono.Math.dll">
+      <publishTime>10/08/2015 12:50:51</publishTime>
+    </File>
+    <File Include="bin/Mono.Math.xml">
       <publishTime>10/08/2015 12:50:51</publishTime>
     </File>
     <File Include="bin/MvcPaging.dll">
@@ -147,19 +213,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>10/08/2015 12:50:31</publishTime>
     </File>
+    <File Include="bin/Newtonsoft.Json.xml">
+      <publishTime>10/08/2015 12:50:31</publishTime>
+    </File>
     <File Include="bin/Ninject.dll">
       <publishTime>10/08/2015 12:50:38</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.dll">
       <publishTime>10/08/2015 12:50:39</publishTime>
     </File>
+    <File Include="bin/Ninject.Web.Common.xml">
+      <publishTime>10/08/2015 12:50:39</publishTime>
+    </File>
     <File Include="bin/Ninject.Web.Mvc.dll">
       <publishTime>10/08/2015 12:50:39</publishTime>
+    </File>
+    <File Include="bin/Ninject.Web.Mvc.xml">
+      <publishTime>10/08/2015 12:50:39</publishTime>
+    </File>
+    <File Include="bin/Ninject.xml">
+      <publishTime>10/08/2015 12:50:38</publishTime>
     </File>
     <File Include="bin/NLog.config">
       <publishTime>02/08/2016 12:04:37</publishTime>
     </File>
     <File Include="bin/NLog.dll">
+      <publishTime>10/08/2015 12:50:41</publishTime>
+    </File>
+    <File Include="bin/NLog.xml">
       <publishTime>10/08/2015 12:50:41</publishTime>
     </File>
     <File Include="bin/NPOI.dll">
@@ -168,19 +249,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/NPOI.OOXML.dll">
       <publishTime>10/14/2015 17:21:29</publishTime>
     </File>
+    <File Include="bin/NPOI.OOXML.xml">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
     <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.xml">
       <publishTime>10/14/2015 17:21:29</publishTime>
     </File>
     <File Include="bin/NPOI.OpenXmlFormats.dll">
       <publishTime>10/14/2015 17:21:29</publishTime>
     </File>
+    <File Include="bin/NPOI.xml">
+      <publishTime>10/14/2015 17:21:29</publishTime>
+    </File>
     <File Include="bin/Org.Mentalis.Security.Cryptography.dll">
+      <publishTime>10/08/2015 12:50:51</publishTime>
+    </File>
+    <File Include="bin/Org.Mentalis.Security.Cryptography.xml">
       <publishTime>10/08/2015 12:50:51</publishTime>
     </File>
     <File Include="bin/RazorEngine.dll">
       <publishTime>06/26/2015 11:33:45</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
+      <publishTime>10/08/2015 12:52:26</publishTime>
+    </File>
+    <File Include="bin/RestSharp.xml">
       <publishTime>10/08/2015 12:52:26</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
@@ -196,22 +292,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>02/12/2016 14:41:05</publishTime>
+      <publishTime>02/25/2016 12:01:25</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.pdb">
-      <publishTime>02/12/2016 14:41:05</publishTime>
+      <publishTime>02/25/2016 12:01:25</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>02/12/2016 14:59:11</publishTime>
+      <publishTime>02/25/2016 12:01:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.pdb">
-      <publishTime>02/12/2016 14:59:11</publishTime>
+      <publishTime>02/25/2016 12:01:33</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>02/12/2016 14:41:08</publishTime>
+      <publishTime>02/25/2016 12:01:29</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.pdb">
-      <publishTime>02/12/2016 14:41:08</publishTime>
+      <publishTime>02/25/2016 12:01:29</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -220,6 +316,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2012 04:16:08</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>10/08/2015 12:52:12</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.xml">
       <publishTime>10/08/2015 12:52:12</publishTime>
     </File>
     <File Include="bin/System.Net.Http.WebRequest.dll">
@@ -231,6 +330,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>10/08/2015 12:50:29</publishTime>
     </File>
+    <File Include="bin/System.Web.Helpers.xml">
+      <publishTime>10/08/2015 12:50:29</publishTime>
+    </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>05/04/2015 09:17:12</publishTime>
     </File>
@@ -240,22 +342,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.Http.WebHost.dll">
       <publishTime>05/07/2013 13:09:18</publishTime>
     </File>
+    <File Include="bin/System.Web.Http.WebHost.xml">
+      <publishTime>02/19/2013 13:36:08</publishTime>
+    </File>
     <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/08/2015 12:50:27</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.xml">
       <publishTime>10/08/2015 12:50:27</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
       <publishTime>10/08/2015 12:50:58</publishTime>
     </File>
+    <File Include="bin/System.Web.Optimization.xml">
+      <publishTime>10/08/2015 12:50:58</publishTime>
+    </File>
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>10/08/2015 12:50:28</publishTime>
     </File>
+    <File Include="bin/System.Web.Razor.xml">
+      <publishTime>10/08/2015 12:50:28</publishTime>
+    </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/08/2015 12:50:29</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.xml">
       <publishTime>10/08/2015 12:50:29</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
       <publishTime>10/08/2015 12:50:29</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/08/2015 12:50:29</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.xml">
+      <publishTime>10/08/2015 12:50:29</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.xml">
       <publishTime>10/08/2015 12:50:29</publishTime>
     </File>
     <File Include="bin/WebActivator.dll">
@@ -270,7 +393,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/WebMatrix.Data.dll">
       <publishTime>10/08/2015 12:51:10</publishTime>
     </File>
+    <File Include="bin/WebMatrix.Data.xml">
+      <publishTime>10/08/2015 12:51:10</publishTime>
+    </File>
     <File Include="bin/WebMatrix.WebData.dll">
+      <publishTime>10/08/2015 12:51:17</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.WebData.xml">
       <publishTime>10/08/2015 12:51:17</publishTime>
     </File>
     <File Include="bin/zh-Hans/Microsoft.Data.Edm.resources.dll">
@@ -290,6 +419,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/zh-Hant/System.Spatial.resources.dll">
       <publishTime>05/04/2015 09:17:20</publishTime>
+    </File>
+    <File Include="Constants/AppConstants.cs">
+      <publishTime>07/30/2015 09:18:03</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
       <publishTime>07/30/2015 09:18:03</publishTime>
@@ -837,17 +969,104 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/themes/base/tooltip.css">
       <publishTime>07/30/2015 09:18:04</publishTime>
     </File>
-    <File Include="Controllers/NewsController.cs">
+    <File Include="Controllers/AccountController.cs">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Controllers/ActivitiesController.cs">
+      <publishTime>01/01/2016 16:18:59</publishTime>
+    </File>
+    <File Include="Controllers/AjaxContentsController.cs">
+      <publishTime>02/09/2016 14:17:18</publishTime>
+    </File>
+    <File Include="Controllers/AjaxController.cs">
+      <publishTime>01/28/2016 14:01:41</publishTime>
+    </File>
+    <File Include="Controllers/AjaxGenericsController.cs">
+      <publishTime>01/03/2016 18:47:39</publishTime>
+    </File>
+    <File Include="Controllers/AjaxProductsController.cs">
+      <publishTime>02/12/2016 16:28:48</publishTime>
+    </File>
+    <File Include="Controllers/BaseController.cs">
+      <publishTime>02/09/2016 14:32:50</publishTime>
+    </File>
+    <File Include="Controllers/BlogsCategoriesController.cs">
+      <publishTime>01/30/2016 13:25:18</publishTime>
+    </File>
+    <File Include="Controllers/BlogsController.cs">
+      <publishTime>01/30/2016 14:05:22</publishTime>
+    </File>
+    <File Include="Controllers/BrandsController.cs">
       <publishTime>01/07/2016 15:09:14</publishTime>
+    </File>
+    <File Include="Controllers/CategoriesController.cs">
+      <publishTime>01/30/2016 14:20:42</publishTime>
+    </File>
+    <File Include="Controllers/ContentsController.cs">
+      <publishTime>01/30/2016 14:24:07</publishTime>
+    </File>
+    <File Include="Controllers/ErrorController.cs">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Controllers/EventsController.cs">
+      <publishTime>01/28/2016 14:01:41</publishTime>
+    </File>
+    <File Include="Controllers/HomeController.cs">
+      <publishTime>02/08/2016 13:23:29</publishTime>
+    </File>
+    <File Include="Controllers/ImagesController.cs">
+      <publishTime>02/11/2016 15:33:44</publishTime>
+    </File>
+    <File Include="Controllers/NewsCategoriesController.cs">
+      <publishTime>01/30/2016 13:25:18</publishTime>
+    </File>
+    <File Include="Controllers/NewsController.cs">
+      <publishTime>01/30/2016 14:09:27</publishTime>
+    </File>
+    <File Include="Controllers/PagesController.cs">
+      <publishTime>01/28/2016 14:01:41</publishTime>
+    </File>
+    <File Include="Controllers/PhotoGalleryController.cs">
+      <publishTime>02/08/2016 13:11:56</publishTime>
+    </File>
+    <File Include="Controllers/ProductCategoriesController.cs">
+      <publishTime>01/30/2016 15:40:17</publishTime>
+    </File>
+    <File Include="Controllers/ProductsController.cs">
+      <publishTime>01/29/2016 09:11:24</publishTime>
+    </File>
+    <File Include="Controllers/RetailersController.cs">
+      <publishTime>01/07/2016 15:09:14</publishTime>
+    </File>
+    <File Include="Controllers/RobotsController.cs">
+      <publishTime>01/30/2016 15:40:17</publishTime>
+    </File>
+    <File Include="Controllers/RssController.cs">
+      <publishTime>02/01/2016 16:03:17</publishTime>
+    </File>
+    <File Include="Controllers/SiteMapsController.cs">
+      <publishTime>02/08/2016 13:37:26</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
+    <File Include="Filters/InitializeSimpleMembershipAttribute.cs">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Filters/ModulAuthorizeAttribute.cs">
+      <publishTime>01/28/2016 13:59:28</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>07/30/2015 09:18:04</publishTime>
     </File>
+    <File Include="Global.asax.cs">
+      <publishTime>01/19/2016 15:52:58</publishTime>
+    </File>
     <File Include="Grid.mvc.readme">
       <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Helper/StoreHelper.cs">
+      <publishTime>01/28/2016 14:03:09</publishTime>
     </File>
     <File Include="Icon.png">
       <publishTime>07/30/2015 09:18:04</publishTime>
@@ -909,11 +1128,47 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Images/orderedList9.png">
       <publishTime>07/30/2015 09:18:04</publishTime>
     </File>
+    <File Include="Models/AccountModels.cs">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Models/StoreHelper.cs">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
     <File Include="NLog.config">
       <publishTime>02/08/2016 12:04:37</publishTime>
     </File>
+    <File Include="NLog.xsd">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
     <File Include="packages.config">
       <publishTime>08/24/2015 12:05:00</publishTime>
+    </File>
+    <File Include="Properties/AssemblyInfo.cs">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/llogin.seatechnologyjobs.pubxml">
+      <publishTime>01/04/2016 11:29:22</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/llogin.seatechnologyjobs.pubxml.user">
+      <publishTime>02/25/2016 12:00:38</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/login.maritimejobs.mobi.pubxml">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/login.maritimejobs.mobi.pubxml.user">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/yucetest.pubxml">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="Properties/PublishProfiles/yucetest.pubxml.user">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="razormachine.readme.txt">
+      <publishTime>07/30/2015 09:18:06</publishTime>
+    </File>
+    <File Include="RecaptchaNet.Readme.txt">
+      <publishTime>07/30/2015 09:18:04</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/30/2015 09:18:04</publishTime>
@@ -930,6 +1185,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/gridmvc.min.js">
       <publishTime>07/30/2015 09:18:04</publishTime>
     </File>
+    <File Include="Scripts/jquery-1.9.1.intellisense.js">
+      <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
     <File Include="Scripts/jquery-1.9.1.js">
       <publishTime>06/07/2015 10:44:51</publishTime>
     </File>
@@ -938,6 +1196,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-1.9.1.min.map">
       <publishTime>06/07/2015 10:44:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.1.4-vsdoc.js">
+      <publishTime>07/30/2015 09:18:05</publishTime>
     </File>
     <File Include="Scripts/jquery-2.1.4.js">
       <publishTime>07/30/2015 09:18:05</publishTime>
@@ -959,6 +1220,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-ui-1.8.24.min.js">
       <publishTime>06/07/2015 10:44:51</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate-vsdoc.js">
+      <publishTime>07/30/2015 09:18:05</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>07/30/2015 09:18:05</publishTime>
@@ -983,6 +1247,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>07/30/2015 09:18:04</publishTime>
+    </File>
+    <File Include="StoreManagement.csproj">
+      <publishTime>02/25/2016 12:01:14</publishTime>
+    </File>
+    <File Include="StoreManagement.csproj.user">
+      <publishTime>02/25/2016 12:01:14</publishTime>
     </File>
     <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
       <publishTime>07/30/2015 09:18:05</publishTime>
@@ -1072,7 +1342,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/17/2015 14:00:03</publishTime>
     </File>
     <File Include="Views/Home/Index.liquid">
-      <publishTime>01/20/2016 16:27:40</publishTime>
+      <publishTime>01/20/2016 17:04:42</publishTime>
     </File>
     <File Include="Views/Home/Locations.cshtml">
       <publishTime>07/30/2015 09:18:05</publishTime>
@@ -1105,7 +1375,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/News/Index.liquid">
-      <publishTime>01/19/2016 12:08:33</publishTime>
+      <publishTime>01/25/2016 13:00:22</publishTime>
     </File>
     <File Include="Views/NewsCategories/Category.liquid">
       <publishTime>01/28/2016 09:49:28</publishTime>
@@ -1126,7 +1396,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Views/ProductCategories/Category.liquid">
-      <publishTime>01/19/2016 11:53:15</publishTime>
+      <publishTime>01/20/2016 14:07:47</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
       <publishTime>07/30/2015 09:18:06</publishTime>
@@ -1267,7 +1537,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/12/2016 15:05:35</publishTime>
+      <publishTime>02/25/2016 12:01:38</publishTime>
+    </File>
+    <File Include="Web.Debug.config">
+      <publishTime>02/12/2016 15:00:39</publishTime>
+    </File>
+    <File Include="Web.Release.config">
+      <publishTime>01/02/2016 11:45:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

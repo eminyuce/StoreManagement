@@ -1,0 +1,139 @@
+﻿@using StoreManagement.Data.GeneralHelper
+@model StoreManagement.Data.RequestModel.ProductDetailViewModel
+
+@{
+    ViewBag.Title = "Product";
+    var product = Model.SProduct;
+    var images = Model.SProduct.ProductFiles;
+
+    
+}
+
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="well well-small">
+            <ul class="nav nav-list">
+                @{
+                    foreach (var item in Model.SCategories)
+                    {        
+                    <li>
+                        <span class="icon-chevron-right">
+                            @Html.ActionLink(item.Name, "Category", "ProductCategories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                        </span>
+                    </li>
+                    }
+                }
+
+
+            </ul>
+        </div>
+
+
+        <div class="well well-small">
+            <a href="#">
+                <img src="assets/img/paypal.jpg" alt="payment method paypal"></a>
+        </div>
+
+        <a class="shopBtn btn-block" href="#">Upcoming products
+            <br>
+            <small>Click to view</small></a>
+        <br>
+        <br>
+    </div>
+    <div class="col-md-9">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+            <li><a href="products.html">Items</a> <span class="divider">/</span></li>
+            <li class="active">Preview</li>
+        </ul>
+        <div class="well well-small">
+            <div class="row-fluid">
+                <div class="col-md-5">
+                     @if (images != null && images.Any())
+                            {
+                                <div id="myCarousel" class="carousel slide cntr">
+                                    <div class="carousel-inner">
+                                        @for (int i=0;  i< images.Count; i++)
+                                        {
+                                            var m = images.ToList()[i];
+
+                                            <div class="item @String.Format("{0}",(i==0 ? "active" : ""))">
+                                                <a href="#">
+                                                    <img src="@Url.Action("FetchImage", "Images", new {id = m.FileManager.GoogleImageId, size = "", contentType = m.FileManager.ContentType })" style="width: 100px; height: 100px;" alt="">
+                                                </a>
+                                            </div>
+                                        }
+
+
+                                    </div>
+                                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                                    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                                </div>
+                         
+                            }
+                </div>
+                <div class="col-md-7">
+                    <input type="hidden" id="ProductCategoryId" value="@product.ProductCategoryId"/>
+                    <h3>@product.Name</h3>
+                    <hr class="soft" />
+
+                    <form class="form-horizontal qtyFrm">
+                   
+                        <p>
+                        @Html.Raw(product.Description)
+                        <p>
+                        <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span>Add to cart</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="softn clr" />
+
+
+            <ul id="productDetail" class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
+                <li class=""><a href="#profile" data-toggle="tab">Related Products </a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acceseries <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#cat1" data-toggle="tab">Category one</a></li>
+                        <li><a href="#cat2" data-toggle="tab">Category two</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="myTabProduct" class="tab-content tabWrapper">
+                <div class="tab-pane fade active in" id="home">
+                    
+                    <p>
+                        @Html.Raw(product.Description)
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="profile">
+                      <div id="RelatedProducts"></div>
+                </div>
+                 
+                 
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            GetRelatedProducts($("#ProductCategoryId").val());
+            GetProductCategories();
+        });
+
+
+    </script>
+    
+
+    
+}

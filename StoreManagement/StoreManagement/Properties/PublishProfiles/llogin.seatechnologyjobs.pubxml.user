@@ -292,22 +292,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>02/25/2016 12:01:25</publishTime>
+      <publishTime>03/01/2016 11:18:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.pdb">
-      <publishTime>02/25/2016 12:01:25</publishTime>
+      <publishTime>03/01/2016 11:18:15</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>02/25/2016 12:01:33</publishTime>
+      <publishTime>03/01/2016 11:18:23</publishTime>
     </File>
     <File Include="bin/StoreManagement.pdb">
-      <publishTime>02/25/2016 12:01:33</publishTime>
+      <publishTime>03/01/2016 11:18:23</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>02/25/2016 12:01:29</publishTime>
+      <publishTime>03/01/2016 11:18:19</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.pdb">
-      <publishTime>02/25/2016 12:01:29</publishTime>
+      <publishTime>03/01/2016 11:18:18</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -1393,13 +1393,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/05/2015 10:10:19</publishTime>
     </File>
     <File Include="Views/ProductCategories/Category.cshtml">
-      <publishTime>07/30/2015 09:18:06</publishTime>
+      <publishTime>03/01/2016 11:18:10</publishTime>
     </File>
     <File Include="Views/ProductCategories/Category.liquid">
       <publishTime>01/20/2016 14:07:47</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>07/30/2015 09:18:06</publishTime>
+      <publishTime>03/01/2016 11:12:07</publishTime>
     </File>
     <File Include="Views/Products/Index.liquid">
       <publishTime>01/20/2016 17:11:16</publishTime>
@@ -1414,7 +1414,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:25</publishTime>
     </File>
     <File Include="Views/Products/Product.cshtml">
-      <publishTime>07/30/2015 09:18:06</publishTime>
+      <publishTime>03/01/2016 11:12:41</publishTime>
     </File>
     <File Include="Views/Products/Product.liquid">
       <publishTime>02/05/2016 11:14:08</publishTime>
@@ -1537,7 +1537,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/25/2016 12:01:38</publishTime>
+      <publishTime>03/01/2016 11:18:26</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>02/12/2016 15:00:39</publishTime>

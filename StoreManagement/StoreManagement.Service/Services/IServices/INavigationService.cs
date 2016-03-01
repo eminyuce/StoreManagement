@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEntities;
+using StoreManagement.Data.RequestModel;
 
 namespace StoreManagement.Service.Services.IServices
 {
@@ -12,11 +13,10 @@ namespace StoreManagement.Service.Services.IServices
     {
         bool IsModulActive(string controllerName);
 
-        StoreLiquidResult GetMainLayoutLink(
-       List<Navigation> navigations,
-       PageDesign pageDesign);
+        StoreLiquidResult GetMainLayoutLink(List<Navigation> navigations,PageDesign pageDesign);
 
-        StoreLiquidResult GetMainLayoutFooterLink(List<Navigation> navigations,
-                                                  PageDesign pageDesign);
+        StoreLiquidResult GetMainLayoutFooterLink(List<Navigation> navigations,PageDesign pageDesign);
+
+        NavigationViewModel GetStoreActiveNavigations();
     }
 }

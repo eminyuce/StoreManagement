@@ -8,6 +8,7 @@ using StoreManagement.Data.Constants;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.LiquidEngineHelpers;
 using StoreManagement.Data.LiquidEntities;
+using StoreManagement.Data.RequestModel;
 using StoreManagement.Service.Services.IServices;
 
 namespace StoreManagement.Service.Services
@@ -101,5 +102,11 @@ namespace StoreManagement.Service.Services
             return result;
         }
 
+        public NavigationViewModel GetStoreActiveNavigations()
+        {
+            var r = new NavigationViewModel();
+            r.Navigations = NavigationRepository.GetStoreActiveNavigations(MyStore.Id);
+            return r;
+        }
     }
 }

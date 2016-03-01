@@ -253,6 +253,7 @@
     <Compile Include="RequestModel\ContentDetailViewModel.cs" />
     <Compile Include="RequestModel\ContentsAdminViewModel.cs" />
     <Compile Include="RequestModel\ContentsViewModel.cs" />
+    <Compile Include="RequestModel\NavigationViewModel.cs" />
     <Compile Include="RequestModel\PhotosViewModel.cs" />
     <Compile Include="RequestModel\ProductCategoryViewModel.cs" />
     <Compile Include="RequestModel\ProductDetailViewModel.cs" />

@@ -4,6 +4,9 @@
 @using StoreManagement.Data.GeneralHelper
 @{
     ViewBag.Title = "Category";
+    var categories = Model.SCategories;
+    var category = Model.SCategory;
+    var products = Model.SProducts;
 }
 
 
@@ -14,7 +17,7 @@
         <div class="well well-small">
             <ul class="nav nav-list">
                 @{
-                    foreach (var item in Model.SCategories)
+                    foreach (var item in categories)
                     {        
                     <li>
                         <span class="icon-chevron-right">
@@ -45,12 +48,12 @@
 New Products
 -->
         <div class="well well-small">
-            <h3><strong>@Model.Category.Name</strong> Products </h3>
+            <h3><strong>@category.Name</strong> Products </h3>
             <div class="row">
 
-                @if (Model.Products.Any())
+                @if (products.Any())
                 {
-                    foreach (var product in Model.Products)
+                    foreach (var product in products)
                     {
                     <div class="col-md-3">
 
@@ -62,12 +65,12 @@ New Products
                     </div>
                     }
 
-                    @Model.Products.TotalItemCount
+                    @products.TotalItemCount
                   
                     <div class="pager">
 
 
-                        @Html.Pager(Model.Products.PageSize, Model.Products.PageNumber, Model.Products.TotalItemCount).Options(o => o
+                        @Html.Pager(products.PageSize, products.PageNumber, products.TotalItemCount).Options(o => o
             .DisplayTemplate("BootstrapPagination")
             .MaxNrOfPages(7)
             .AlwaysAddFirstPageNumber()

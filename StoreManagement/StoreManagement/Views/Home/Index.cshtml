@@ -2,8 +2,15 @@
 @using StoreManagement.Data.Entities
 @using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.RequestModel.StoreHomePage
+
 @{
     ViewBag.Title = "Home Page";
+    var homePageNews = Model.SNews;
+    var homePageProductCategories = Model.SProductCategories;
+    var homePageProducts = Model.SProducts;
+    var imageCarusel = Model.SCarouselImages;
+    var homePageBlogs = Model.SBlogs;
+    
 }
 
 
@@ -18,7 +25,7 @@
             <ul class="nav nav-list">
 
                 @{
-                    foreach (var item in Model.ProductCategories)
+                    foreach (var item in homePageProductCategories)
                     {        
                     <li>
                         <span class="icon-chevron-right">
@@ -76,7 +83,7 @@
     </div>
     <div class="col-md-9">
         <div class="well np">
-            @Html.Partial("pStoreCarouselImages", Model.CarouselImages)
+            @Html.Partial("pStoreCarouselImages", imageCarusel)
         </div>
         <div class="well well-small">
             <h3>Products </h3>
@@ -84,12 +91,12 @@
             <div class="well well-small">
                 <div class="row">
 
-                    @if (Model.Products.Any())
+                    @if (homePageProducts.Any())
                     {
-                        foreach (var product in Model.Products.Take(8))
+                        foreach (var product in homePageProducts.Take(8))
                         {
 
-                            var cat = Model.ProductCategories.FirstOrDefault(r => r.Id == product.ProductCategoryId);
+                            var cat = homePageProductCategories.FirstOrDefault(r => r.Id == product.ProductCategoryId);
                              if (cat != null)
                              {
                                 <div class="col-md-3">
@@ -116,9 +123,9 @@
             <hr class="soften" />
             <div class="well well-small">
                 <div class="row">
-                    @if (Model.News.Any())
+                    @if (homePageNews.Any())
                     {
-                        foreach (var news in Model.News.Take(4))
+                        foreach (var news in homePageNews.Take(4))
                         {
                         <div class="col-md-12">
                             @Html.DisplayFor(model => news, "NewsContentItem")
@@ -133,9 +140,9 @@
             <hr class="soften" />
             <div class="well well-small">
                 <div class="row">
-                    @if (Model.Blogs.Any())
+                    @if (homePageBlogs.Any())
                     {
-                        foreach (var blog in Model.Blogs.Take(3))
+                        foreach (var blog in homePageBlogs.Take(3))
                         {
                         <div class="col-md-4">
                             @Html.DisplayFor(model => blog, "BlogContentItem")

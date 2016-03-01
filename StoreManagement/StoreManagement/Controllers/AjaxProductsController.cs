@@ -25,19 +25,19 @@ namespace StoreManagement.Controllers
         {
             return View();
         }
-        //public ActionResult GetRelatedProducts(int categoryId)
-        //{
-        //    var returnModel = new ProductDetailViewModel();
-        //    returnModel.SStore = MyStore;
-        //    returnModel.SCategory = ProductCategoryService.GetProductCategory(categoryId);
-        //    returnModel.SRelatedProducts = ProductRepository.GetProductByTypeAndCategoryId(MyStore.Id, StoreConstants.ProductType, categoryId).Take(5).ToList();
-        //    String partialViewName = @"pProducts\pRelatedProducts";
-        //    var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
-            
-            
+        public ActionResult GetRelatedProducts(int categoryId)
+        {
+            var returnModel = new ProductDetailViewModel();
+            returnModel.SStore = MyStore;
+            returnModel.SCategory = ProductCategoryService.GetProductCategory(categoryId);
+            returnModel.SRelatedProducts = ProductRepository.GetProductByTypeAndCategoryId(MyStore.Id, StoreConstants.ProductType, categoryId).Take(5).ToList();
+            String partialViewName = @"pProducts\pRelatedProducts";
+            var html = this.RenderPartialToString(partialViewName, new ViewDataDictionary(returnModel));
 
-        //    return Json(html, JsonRequestBehavior.AllowGet);
-        //}
+
+
+            return Json(html, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetProductCategories()
         {
             var categories = ProductCategoryService.GetProductCategoriesByStoreIdFromCache(MyStore.Id, StoreConstants.ProductType);

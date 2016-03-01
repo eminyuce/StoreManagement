@@ -1,11 +1,11 @@
 ﻿@using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.RequestModel.ProductDetailViewModel
 @{
-    var relatedProducts = Model.RelatedProducts;
+    var relatedProducts = Model.SRelatedProducts;
 }
 
 @foreach (var e in relatedProducts)
 {
      @Html.Partial("DisplayTemplates/ProductThumbnail", e, new ViewDataDictionary(ViewData){
-                                {"ProductCategoryName",Model.Category.Name}})
+                                {"ProductCategoryName",Model.SCategory.Name}})
 }

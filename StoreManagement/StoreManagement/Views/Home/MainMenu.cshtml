@@ -1,7 +1,7 @@
-﻿@model  List<StoreManagement.Data.Entities.Navigation>
+﻿@model  StoreManagement.Data.RequestModel.NavigationViewModel
 @{
     Layout = null;
-    var menus = Model;
+    var menus = Model.Navigations;
 }
 @foreach (var m in menus)
 {

@@ -105,7 +105,9 @@ Navigation Bar Section
                     </a>
                     <div class="nav-collapse">
                         <ul class="nav">
-                       
+                        <ul id="menu">
+                        @Html.Action("MainMenu", "Home")
+                    </ul>
                         </ul>
                         <form action="#" class="navbar-search pull-left">
                             <input type="text" placeholder="Search" class="search-query span2">

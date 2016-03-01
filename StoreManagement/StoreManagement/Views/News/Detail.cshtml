@@ -2,13 +2,14 @@
 @model StoreManagement.Data.RequestModel.ContentDetailViewModel
 @{
     ViewBag.Title = Model.Content.Name;
-    var blog = Model.Content;
-    var images = Model.Content.ContentFiles;
+    var news = Model.SContent;
+    var images = Model.SContent.ContentFiles;
+    var categories = Model.SCategories;
     
 }
 
 
-@foreach (var item in Model.Categories)
+@foreach (var item in categories)
 {        
     @Html.ActionLink(item.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
 }
@@ -30,7 +31,7 @@
 
 
 
-@blog.Name
+@news.Name
 
 
-@Html.Raw(blog.Description)
+@Html.Raw(news.Description)

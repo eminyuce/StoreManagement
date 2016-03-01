@@ -525,7 +525,6 @@
     <Content Include="Views\Shared\DisplayTemplates\ContentItem.cshtml" />
     <Content Include="Views\Categories\Category.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Content.cshtml" />
-    <Content Include="Views\Contents\Detail.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shared\pStoreCarousel.cshtml" />
     <Content Include="Views\Shared\pStoreCarouselImages.cshtml" />

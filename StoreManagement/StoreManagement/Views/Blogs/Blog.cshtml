@@ -2,8 +2,9 @@
 @model StoreManagement.Data.RequestModel.ContentDetailViewModel
 @{
     ViewBag.Title = "Blog";
-    var blog = Model.Content;
-    var images = Model.Content.ContentFiles;
+    var blog = Model.SContent;
+    var images = Model.SContent.ContentFiles;
+    var categories = Model.SCategories;
     
 }
 
@@ -14,7 +15,7 @@
         <div class="well well-small">
             <ul class="nav nav-list">
                 @{
-                    foreach (var item in Model.Categories)
+                    foreach (var item in categories)
                     {        
                     <li>
                         <span class="icon-chevron-right">

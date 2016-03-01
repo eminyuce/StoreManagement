@@ -59,11 +59,11 @@ namespace StoreManagement.Controllers
             return View();
         }
 
-        //public ActionResult MainMenu()
-        //{
-        //    var navigations = NavigationService.GetStoreActiveNavigations(this.MyStore.Id);
-        //    return View(navigations);
-        //}
+        public ActionResult MainMenu()
+        {
+            var navigations = NavigationService2.GetStoreActiveNavigations();
+            return View(navigations);
+        }
 
         public ActionResult Test()
         {

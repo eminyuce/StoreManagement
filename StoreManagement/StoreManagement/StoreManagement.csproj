@@ -557,6 +557,7 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

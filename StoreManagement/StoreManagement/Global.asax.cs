@@ -10,6 +10,7 @@ using System.Web.Routing;
 using DotLiquid.NamingConventions;
 using NLog;
 using Ninject;
+using StoreManagement.Controllers;
 using StoreManagement.Data;
 using StoreManagement.Data.Entities;
 using StoreManagement.Data.GeneralHelper;
@@ -24,7 +25,7 @@ namespace StoreManagement
 
     public class MvcApplication : System.Web.HttpApplication
     {
-
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -73,6 +74,116 @@ namespace StoreManagement
                 Response.AddHeader("Location", builder.ToString());
                 Response.End();
             }
+        }
+
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            var httpContext = ((MvcApplication)sender).Context;
+            var currentController = " ";
+            var currentAction = " ";
+            var currentRouteData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
+
+            if (currentRouteData != null)
+            {
+                if (currentRouteData.Values["controller"] != null && !String.IsNullOrEmpty(currentRouteData.Values["controller"].ToString()))
+                {
+                    currentController = currentRouteData.Values["controller"].ToString();
+                }
+
+                if (currentRouteData.Values["action"] != null && !String.IsNullOrEmpty(currentRouteData.Values["action"].ToString()))
+                {
+                    currentAction = currentRouteData.Values["action"].ToString();
+                }
+            }
+
+            Exception exception = Server.GetLastError();
+
+            var requestUrl = httpContext.Request.Url.ToStr();
+
+            String requestUrlReferrer = "";
+            if (httpContext.Request.UrlReferrer != null)
+            {
+                requestUrlReferrer = httpContext.Request.UrlReferrer.ToStr();
+            }
+
+            //We check if we have an AJAX request and return JSON in this case
+            if (IsAjaxRequest())
+            {
+                Logger.Error("requestUrlReferrer: " + requestUrlReferrer + " requestUrl: " + requestUrl + " Controller:" + currentController + " currentAction:" + currentAction + " Ajax Request Error:" + exception.StackTrace, exception);
+            }
+            else
+            {
+                Logger.Error("requestUrlReferrer: " + requestUrlReferrer + " requestUrl: " + requestUrl + "  Controller:" + currentController + " Action:" + currentAction + " Application Error:" + exception.StackTrace, exception);
+
+                var controller = new ErrorController();
+                var routeData = new RouteData();
+                var action = "Index";
+
+
+                httpContext.ClearError();
+                httpContext.Response.Clear();
+                httpContext.Response.StatusCode = exception is HttpException ? ((HttpException)exception).GetHttpCode() : 500;
+                httpContext.Response.TrySkipIisCustomErrors = true;
+
+                routeData.Values["controller"] = "Error";
+                routeData.Values["action"] = action;
+
+                controller.ViewData.Model = new HandleErrorInfo(exception, currentController, currentAction);
+                ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
+            }
+
+        }
+
+        //This method checks if we have an AJAX request or not
+        private bool IsAjaxRequest()
+        {
+            //The easy way
+            bool isAjaxRequest = (Request["X-Requested-With"] == "XMLHttpRequest")
+            || ((Request.Headers != null)
+            && (Request.Headers["X-Requested-With"] == "XMLHttpRequest"));
+
+            //If we are not sure that we have an AJAX request or that we have to return JSON 
+            //we fall back to Reflection
+            if (!isAjaxRequest)
+            {
+                try
+                {
+                    //The controller and action
+                    string controllerName = Request.RequestContext.
+                                            RouteData.Values["controller"].ToString();
+                    string actionName = Request.RequestContext.
+                                        RouteData.Values["action"].ToString();
+
+                    //We create a controller instance
+                    DefaultControllerFactory controllerFactory = new DefaultControllerFactory();
+                    Controller controller = controllerFactory.CreateController(
+                    Request.RequestContext, controllerName) as Controller;
+
+                    //We get the controller actions
+                    ReflectedControllerDescriptor controllerDescriptor =
+                    new ReflectedControllerDescriptor(controller.GetType());
+                    ActionDescriptor[] controllerActions =
+                    controllerDescriptor.GetCanonicalActions();
+
+                    //We search for our action
+                    foreach (ReflectedActionDescriptor actionDescriptor in controllerActions)
+                    {
+                        if (actionDescriptor.ActionName.ToUpper().Equals(actionName.ToUpper()))
+                        {
+                            //If the action returns JsonResult then we have an AJAX request
+                            if (actionDescriptor.MethodInfo.ReturnType == typeof(JsonResult))
+                                return true;
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+
+            return isAjaxRequest;
         }
 
     }

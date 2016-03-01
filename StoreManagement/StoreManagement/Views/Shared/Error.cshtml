@@ -1,26 +1,75 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
+@using StoreManagement.Data
+@using StoreManagement.Data.GeneralHelper
 
 @{
     ViewBag.Title = "Error";
-}
+    var exception = Model.Exception;
+    var errorCode = 0;
+    if (exception is HttpException)
+    {
+        var httpEx = exception as HttpException;
 
-<hgroup class="title">
-    <h1 class="error">Error.</h1>
-    <h2 class="error">An error occurred while processing your request.</h2>
-    
-    
-    <div>
-        <h2>
-            <b>
-            
-                @Model.Exception.Message
-            </b>
-        </h2>
-    </div>
-    <div>
-        @Model.Exception.StackTrace
-    </div>
-    
-</hgroup>
+        errorCode = httpEx.GetHttpCode();
+    }
+  
+
+    var body = string.Empty;
+
+    body += string.Format("Page: {0} \n", Request.Url.AbsoluteUri);
+
+    if (Request.UrlReferrer != null)
+    {
+        body += string.Format("Referal: {0} \n", Request.UrlReferrer.AbsoluteUri);
+    }
+
+    body += string.Format("Error: {0} \n", Model.Exception.Message);
+
+    body += string.Format("Time: {0} \n", DateTime.Now.ToLongTimeString());
+    if (User.Identity.IsAuthenticated)
+    {
+        body += string.Format("User: {0} \n", User.Identity.Name);
+    }
+     body = GeneralHelper.EncodeForEmailLink(body);
+     var subject = ProjectAppSettings.SiteName + "-" + errorCode;
+     // subject = GeneralHelper.EncodeForEmailLink(subject);
+    var link = String.Format("mailto:eminyuce@gmail.com?subject={0}&body={1}",subject, body);
+
+    }
 
 
+<h1 class="error">We're sorry something went wrong.</h1>
+
+
+<p>
+
+    @Model.Exception.Message
+
+
+
+</p>
+
+<p>
+    <span>To inform us of this error click
+        
+        
+        
+     
+        <a id="hlInform"  href="@link">here</a>
+
+    </span>
+
+
+</p>
+
+
+ 
+
+
+<p>
+
+    @Model.Exception.StackTrace
+
+
+
+</p>

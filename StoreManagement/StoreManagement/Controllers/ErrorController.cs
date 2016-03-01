@@ -17,6 +17,11 @@ namespace StoreManagement.Controllers
     {
         #region Public Methods
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Returns a HTTP 400 Bad Request error view. Returns a partial view if the request is an AJAX call.
         /// </summary>

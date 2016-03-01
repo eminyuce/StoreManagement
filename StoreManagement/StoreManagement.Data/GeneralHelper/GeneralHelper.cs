@@ -23,7 +23,14 @@ namespace StoreManagement.Data.GeneralHelper
 {
     public class GeneralHelper
     {
-         
+        public static string EncodeForEmailLink(string text)
+        {
+            text = text.Replace(" ", "%20");
+            text = text.Replace((char)10 + "", "%0d");
+            text = text.Replace((char)13 + "", "%0a");
+            return text;
+        }
+
         public static T DataContractSerialization<T>(T obj)
         {
             DataContractSerializer dcSer = new DataContractSerializer(obj.GetType());

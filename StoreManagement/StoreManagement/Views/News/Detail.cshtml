@@ -1,11 +1,17 @@
 ﻿@using StoreManagement.Data.GeneralHelper
 @model StoreManagement.Data.RequestModel.ContentDetailViewModel
 @{
-    ViewBag.Title = Model.Content.Name;
+    var store = Model.SStore;
+    String title = GeneralHelper.Capitalize(GeneralHelper.TruncateAtWord(Model.Content.Name, 55));
+    if (title.Length + store.Name.Length + 3 < 55)
+    {
+        title = string.Format("{0} - {1}", title, store.Name);
+    }
+    ViewBag.Title = title;
     var news = Model.SContent;
     var images = Model.SContent.ContentFiles;
     var categories = Model.SCategories;
-    
+    ViewBag.Description = string.Format("{0} ", GeneralHelper.GetDescription(news.Description,150).TruncateAtSentence(150));
 }
 
 

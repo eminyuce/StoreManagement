@@ -566,7 +566,10 @@ namespace StoreManagement.Data.GeneralHelper
             HashAlgorithm algorithm = MD5.Create();  // SHA1.Create()
             return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
         }
-
+        public static string Capitalize(string value)
+        {
+            return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
+        }
         public static string GetHashString(string inputString)
         {
             StringBuilder sb = new StringBuilder();

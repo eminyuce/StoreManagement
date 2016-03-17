@@ -100,10 +100,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2015 12:51:35</publishTime>
     </File>
     <File Include="bin/GenericRepository.dll">
-      <publishTime>09/18/2015 09:52:02</publishTime>
+      <publishTime>02/08/2016 12:00:12</publishTime>
     </File>
     <File Include="bin/GenericRepository.EntityFramework.dll">
-      <publishTime>09/18/2015 09:52:05</publishTime>
+      <publishTime>02/08/2016 12:00:13</publishTime>
     </File>
     <File Include="bin/Google.Apis.Auth.dll">
       <publishTime>10/08/2015 12:51:43</publishTime>
@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2015 12:51:42</publishTime>
     </File>
     <File Include="bin/GoogleDriveUploader.dll">
-      <publishTime>01/12/2016 15:22:37</publishTime>
+      <publishTime>03/17/2016 10:19:23</publishTime>
     </File>
     <File Include="bin/GridMvc.dll">
       <publishTime>10/08/2015 12:50:53</publishTime>
@@ -253,10 +253,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Admin.dll">
-      <publishTime>01/12/2016 15:26:04</publishTime>
+      <publishTime>03/17/2016 10:19:32</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>01/12/2016 15:22:37</publishTime>
+      <publishTime>03/17/2016 10:19:24</publishTime>
     </File>
     <File Include="bin/StoreManagement.Helpers.dll">
       <publishTime>05/01/2015 16:39:34</publishTime>
@@ -265,7 +265,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/20/2015 09:28:27</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>01/12/2016 15:22:40</publishTime>
+      <publishTime>03/17/2016 10:19:27</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>10/08/2015 12:52:02</publishTime>
@@ -5008,7 +5008,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/21/2015 15:43:23</publishTime>
     </File>
     <File Include="Views/Logs/Index.cshtml">
-      <publishTime>08/27/2015 14:25:46</publishTime>
+      <publishTime>03/17/2016 10:18:54</publishTime>
     </File>
     <File Include="Views/Logs/LogDetail.cshtml">
       <publishTime>09/21/2015 15:38:37</publishTime>
@@ -5146,7 +5146,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2015 12:16:45</publishTime>
     </File>
     <File Include="Views/Products/SaveOrEdit.cshtml">
-      <publishTime>09/11/2015 12:08:41</publishTime>
+      <publishTime>01/15/2016 14:19:06</publishTime>
     </File>
     <File Include="Views/ProductsLabels/Delete.cshtml">
       <publishTime>06/26/2015 11:33:21</publishTime>
@@ -5521,7 +5521,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:17:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/12/2016 15:22:59</publishTime>
+      <publishTime>03/17/2016 10:19:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

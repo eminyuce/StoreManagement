@@ -14,5 +14,7 @@ namespace StoreManagement.Data.LogEntities
 
         public DateTime LastError { get; set; }
 
+
+        public int TotalRecords { get; set; }
     }
 }

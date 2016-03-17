@@ -147,6 +147,7 @@ namespace StoreManagement.Service.Repositories
                                 appNames.Log_application = dr["Log_application"].ToStr();
                                 appNames.LastActivity = dr["LastActivity"].ToDateTime();
                                 appNames.LastError = dr["LastError"].ToDateTime();
+                                appNames.TotalRecords = dr["TotalRecords"].ToInt();
                                 result.Add(appNames);
                             }
                         }

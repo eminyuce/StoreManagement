@@ -24,6 +24,8 @@
     <tr>
         <th>Application Name 
         </th>
+         <th>TotalRecords
+        </th>
         <th>Last Activity 
         </th>
         <th>Last Error 
@@ -39,6 +41,11 @@
             <td>
                 <strong>
                     @Html.DisplayFor(modelItem => item.Log_application)
+                </strong>  
+            </td>
+             <td>
+                <strong>
+                    @Html.DisplayFor(modelItem => item.TotalRecords)
                 </strong>  
             </td>
             <td>

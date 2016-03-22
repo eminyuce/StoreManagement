@@ -41,6 +41,27 @@
                 @Html.ActionLink("Delete Logs", "DeleteLogs", "Logs", 
                 new { id = Model.ApplicationName }, new { @class = "btn btn-warning" })
                 <br />
+                
+                   <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Delete
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li>
+             
+                            @Html.ActionLink("Delete Trace Logs", "RemoveLogs", "Logs", new { id = Model.ApplicationName, logLevel=(int)LogLevels.Trace }, new { @class="dropdown-item", onclick = "return confirm('Are you sure you wish to delete these trace logs?');" })
+ 
+                        </li>
+                        <li>
+                            @Html.ActionLink("Delete Info Logs", "RemoveLogs", "Logs", new { id = Model.ApplicationName, logLevel=(int)LogLevels.Info  }, new { @class="dropdown-item", onclick = "return confirm('Are you sure you wish to delete these info logs?');" })
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("Delete Error Logs", "RemoveLogs", "Logs", new { id = Model.ApplicationName, logLevel=(int)LogLevels.Error }, new { @class="dropdown-item", onclick = "return confirm('Are you sure you wish to delete these error logs?');" })
+
+                        </li>
+                    </ul>
+                </div>
+                
 
                 @using (Html.BeginForm("AppLogDetail", "Logs", FormMethod.Get))
                 {

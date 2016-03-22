@@ -59,7 +59,7 @@ namespace StoreManagement.Admin.Controllers
             String logLevel2 = logLevel.ToInt() > 0 ? ((LogLevels)logLevel.ToInt()).ToString() : logLevel;
             LogRepository.DeleteLogs(application, logLevel2);
             Logger.Trace(String.Format("ApplicationName {0} Log Level {1}", id, logLevel));
-            return RedirectToAction("DeleteLogs", new { id = id });
+            return RedirectToAction("AppLogDetail", new { appName = application, logLevel=LogLevels.Info.ToString() });
         }
 
         public ActionResult TotalSpace(string id = "")

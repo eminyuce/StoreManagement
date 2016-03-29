@@ -292,22 +292,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 11:33:46</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.dll">
-      <publishTime>03/16/2016 17:02:52</publishTime>
+      <publishTime>03/29/2016 15:54:07</publishTime>
     </File>
     <File Include="bin/StoreManagement.Data.pdb">
-      <publishTime>03/16/2016 17:02:52</publishTime>
+      <publishTime>03/29/2016 15:54:07</publishTime>
     </File>
     <File Include="bin/StoreManagement.dll">
-      <publishTime>03/16/2016 17:02:59</publishTime>
+      <publishTime>03/29/2016 16:06:52</publishTime>
     </File>
     <File Include="bin/StoreManagement.pdb">
-      <publishTime>03/16/2016 17:02:59</publishTime>
+      <publishTime>03/29/2016 16:06:52</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.dll">
-      <publishTime>03/16/2016 17:02:55</publishTime>
+      <publishTime>03/29/2016 16:03:44</publishTime>
     </File>
     <File Include="bin/StoreManagement.Service.pdb">
-      <publishTime>03/16/2016 17:02:55</publishTime>
+      <publishTime>03/29/2016 16:03:44</publishTime>
     </File>
     <File Include="bin/System.EnterpriseServices.dll">
       <publishTime>09/26/2012 04:16:08</publishTime>
@@ -1540,7 +1540,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/30/2015 09:18:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/16/2016 17:03:06</publishTime>
+      <publishTime>03/29/2016 16:07:21</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>02/12/2016 15:00:39</publishTime>

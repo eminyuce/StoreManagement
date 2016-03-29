@@ -14,15 +14,15 @@ using StoreManagement.Service.Repositories.Interfaces;
 
 namespace StoreManagement.Service.Repositories
 {
-    
+
     public class LogRepository : BaseRepository<system_logging, int>, ILogRepository
     {
 
- 
+
         public LogRepository(IStoreContext dbContext)
             : base(dbContext)
         {
- 
+
         }
 
 
@@ -81,6 +81,8 @@ namespace StoreManagement.Service.Repositories
                             foreach (DataRow dr in dt.Rows)
                             {
                                 var systemLogging = new system_logging();
+                                systemLogging.Id = dr["Id"].ToInt();
+                                systemLogging.system_logging_guid = Guid.Parse(dr["system_logging_guid"].ToStr());
                                 systemLogging.entered_date = dr["entered_date"].ToDateTime();
                                 systemLogging.log_application = dr["log_application"].ToStr();
                                 systemLogging.log_date = dr["log_date"].ToStr();
@@ -160,7 +162,7 @@ namespace StoreManagement.Service.Repositories
         }
 
 
-        public void DeleteLogs(string application = "", String logLevel="")
+        public void DeleteLogs(string application = "", String logLevel = "")
         {
             StoreDbContext.Database.Connection.Open();
             // Create a SQL command to execute the sproc 
@@ -207,7 +209,7 @@ namespace StoreManagement.Service.Repositories
                     using (DataSet dataset = new DataSet())
                     {
                         adapter.Fill(dataset);
-                        
+
                         using (DataTable dt = dataset.Tables[0])
                         {
                             result.Add(dt);
@@ -218,6 +220,18 @@ namespace StoreManagement.Service.Repositories
             }//command
 
             return result;
+        }
+
+        public void DeleteSearchResultLogs(string application, string search)
+        {
+            var logItems = GetApplicationLogs(application, LogLevels.Trace.ToString(), int.MaxValue, 0, search);
+            //  var items = this.FindBy(r => logItems.SystemLoggingList.Select(t=>t.Id).Contains(r.Id)).ToList();
+            foreach (var systemLogging in logItems.SystemLoggingList)
+            {
+                var m = this.GetSingle(systemLogging.Id);
+                this.Delete(m);
+            }
+            this.Save();
         }
 
         public void Dispose()

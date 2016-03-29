@@ -67,5 +67,12 @@ namespace StoreManagement.Admin.Controllers
             var list = LogRepository.GetTotalTablesSpace();
             return View(list);
         }
+
+        public ActionResult DeleteSearchResultLogs(string id, string search)
+        {
+            var application = id;
+            LogRepository.DeleteSearchResultLogs(application, search);
+            return RedirectToAction("AppLogDetail", new { appName = application, logLevel = LogLevels.Info });
+        }
     }
 }

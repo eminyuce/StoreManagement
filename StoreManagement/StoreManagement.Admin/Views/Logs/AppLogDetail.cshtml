@@ -59,6 +59,10 @@
                             @Html.ActionLink("Delete Error Logs", "RemoveLogs", "Logs", new { id = Model.ApplicationName, logLevel=(int)LogLevels.Error }, new { @class="dropdown-item", onclick = "return confirm('Are you sure you wish to delete these error logs?');" })
 
                         </li>
+                          <li>
+                         @Html.ActionLink("Delete Search Result Logs", "DeleteSearchResultLogs", "Logs", new { id = Model.ApplicationName, search=search }, new { @class="dropdown-item", onclick = "return confirm('Are you sure you wish to delete search result logs?');" })
+
+                              </li>
                     </ul>
                 </div>
                 

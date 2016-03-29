@@ -16,5 +16,7 @@ namespace StoreManagement.Service.Repositories.Interfaces
         List<AppNames> GetApplicationNames();
         void DeleteLogs(string application = "", String logLevel="");
         List<DataTable> GetTotalTablesSpace();
+
+        void DeleteSearchResultLogs(string application, string search);
     }
 }

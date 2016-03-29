@@ -106,15 +106,20 @@ namespace StoreManagement
             {
                 requestUrlReferrer = httpContext.Request.UrlReferrer.ToStr();
             }
-
+            var logMessage = (String.IsNullOrEmpty(requestUrlReferrer)
+                                  ? ""
+                                  : "requestUrlReferrer:" + requestUrlReferrer) + " requestUrl: " + requestUrl +
+                             "  Controller:" +
+                             currentController + " Action:" + currentAction + " error:" + exception.Message;
+            Logger.Error(exception,logMessage);
+            
             //We check if we have an AJAX request and return JSON in this case
             if (IsAjaxRequest())
             {
-                Logger.Error("requestUrlReferrer: " + requestUrlReferrer + " requestUrl: " + requestUrl + " Controller:" + currentController + " currentAction:" + currentAction + " Ajax Request Error:" + exception.StackTrace, exception);
+
             }
             else
             {
-                Logger.Error("requestUrlReferrer: " + requestUrlReferrer + " requestUrl: " + requestUrl + "  Controller:" + currentController + " Action:" + currentAction + " Application Error:" + exception.StackTrace, exception);
 
                 var controller = new ErrorController();
                 var routeData = new RouteData();

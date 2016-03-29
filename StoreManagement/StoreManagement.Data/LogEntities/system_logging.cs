@@ -9,6 +9,7 @@ namespace StoreManagement.Data.LogEntities
 {
     public class system_logging : IEntity
     {
+        public Guid system_logging_guid { get; set; }
         public int Id { get; set; }
         public DateTime entered_date { get; set; }
         public string log_application { get; set; }

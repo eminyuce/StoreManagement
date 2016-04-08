@@ -7,7 +7,7 @@
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurencesGroupingIndex/@EntryValue">11</s:Int64>
 	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=8BCF2351A397433F8CA3C145D6FAB722/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=8BCF2351A397433F8CA3C145D6FAB722/Name/@EntryValue">TestLogRepositoryGetSingle</s:String>
-	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=8BCF2351A397433F8CA3C145D6FAB722/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements /&gt;&lt;/Session&gt;</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=8BCF2351A397433F8CA3C145D6FAB722/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:StoreManagement.Test.UnitTest1" type="MsTestTestClassElement" TypeName="StoreManagement.Test.UnitTest1" Project="6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8" /&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:StoreManagement.Test.UnitTest1.FindUnDownloadFilesAndDownloadThem" ParentId="MsTest:StoreManagement.Test.UnitTest1" type="MsTestTestMethodElement" MethodName="FindUnDownloadFilesAndDownloadThem" TypeName="StoreManagement.Test.UnitTest1" Project="6CE6B1BE-89BB-428C-8AFE-C75E5AB1E5C8" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String>
 	
 	
 	

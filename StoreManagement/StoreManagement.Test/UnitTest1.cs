@@ -718,5 +718,71 @@ namespace StoreManagement.Test
             }
 
         }
+                [TestMethod]
+        public void FindUnDownloadFilesAndDownloadThem()
+        {
+
+            //\\WEBDEVELOPERS15\Projects\BpaNewsLetter\201501-201506\MaritimeProfessional
+            // DownloadMaritimeReporter("MaritimeGlobalNews");
+            String folderName = "MaritimeJobs";
+            String path1 = String.Format(@"\\WEBDEVELOPERS15\Projects\BpaNewsLetter\201501-201506\{0}",
+                                        folderName);
+            String path = String.Format(@"{1}\{0}.txt", folderName, path1);
+            String[] files = Directory.GetFiles(path1, @"*.pdf", SearchOption.TopDirectoryOnly);
+            var files2 =
+                files.Select(
+                    r => r.Replace(path1, "").Replace("MTRE-News-Delivery-", "").Replace("\\", "").Replace(".pdf", "")).ToList();
+            var list2 = new List<String>();
+            var list = new List<String>();
+            var myFile = new System.IO.StreamReader(path);
+            string myString = myFile.ReadToEnd();
+            using (StringReader reader = new StringReader(myString))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string url = line;
+
+                    url =
+                        url.Replace(
+                            "http://pdf.marinetechnologynews.com/Home/GetPdf?url=http://subscribeadmin.marinelink.org/public/newslettermessagereport?date=",
+                            "");
+                    url = url.Replace("&ens=TVRSIEUtTmV3cw==", "");
+                    //  Console.WriteLine(url);
+                    if (!files2.Any(r => r.Contains(url)))
+                    {
+                        list.Add(url);
+                        list2.Add(line);
+                    }
+
+
+                }
+            }
+            Console.WriteLine(list.Count);
+
+            Console.WriteLine(String.Join(",", list));
+
+            foreach (String line in list2)
+            {
+                var dictionary = new Dictionary<String, String>();
+                var pdfFile = RequestHelper.GetImageFromUrl(line, dictionary);
+                String fileName = "";
+                if (dictionary.ContainsKey("Content-Disposition"))
+                {
+                    fileName = dictionary["Content-Disposition"].ToStr().Split(";".ToCharArray())[1].Replace("filename=", "");
+
+                }
+                if (
+                    !File.Exists(String.Format(
+                        @"\\WEBDEVELOPERS15\Projects\BpaNewsLetter\201501-201506\{1}\{0}", fileName, folderName)))
+                {
+                    File.WriteAllBytes(
+                        String.Format(@"\\WEBDEVELOPERS15\Projects\BpaNewsLetter\201501-201506\{1}\{0}",
+                                      fileName, folderName), pdfFile);
+                }
+            }
+
+        }
+
     }
 }

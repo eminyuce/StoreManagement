@@ -185,6 +185,7 @@
     <Compile Include="Entities\StoreUser.cs" />
     <Compile Include="Enums\ImageOrientation.cs" />
     <Compile Include="GeneralHelper\CaptchaHelper.cs" />
+    <Compile Include="GeneralHelper\DataTableHelper.cs" />
     <Compile Include="GeneralHelper\DictionaryExtensions.cs" />
     <Compile Include="GeneralHelper\EnumHelper.cs" />
     <Compile Include="GeneralHelper\ExcelHelper.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="GeneralHelper\JsonSerialization.cs" />
     <Compile Include="GeneralHelper\LatitudeAndLongitudeParser.cs" />
     <Compile Include="GeneralHelper\LinkHelper.cs" />
+    <Compile Include="GeneralHelper\LinqExtensionHelper.cs" />
     <Compile Include="GeneralHelper\MapToListHelper.cs" />
     <Compile Include="GeneralHelper\PartialViewToString.cs" />
     <Compile Include="GeneralHelper\PredicateBuilder.cs" />

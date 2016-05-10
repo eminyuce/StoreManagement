@@ -558,12 +558,12 @@
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Activities\" />
     <Folder Include="Views\BlogsCategories\" />
-    <Folder Include="Views\Brands\" />
     <Folder Include="Views\NewsCategories\" />
     <Folder Include="Views\PhotoGallery\" />
     <Folder Include="Views\Retailers\" />

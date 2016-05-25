@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using DotLiquid;
 using GenericRepository;
 using Newtonsoft.Json;
+using StoreManagement.Data.GeneralHelper;
 
 namespace StoreManagement.Data.Entities
 {
@@ -33,6 +34,9 @@ namespace StoreManagement.Data.Entities
             return "id:" + this.Id + " StoreId:" + this.StoreId;
         }
 
-        
+        public String GetSeoUrl()
+        {
+            return String.Format("{0}-{1}", GeneralHelper.GeneralHelper.GetUrlSeoString(Name), Id);
+        }
     }
 }

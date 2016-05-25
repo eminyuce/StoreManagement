@@ -19,7 +19,7 @@
                     {        
                     <li>
                         <span class="icon-chevron-right">
-                            @Html.ActionLink(item.Name, "Category", "Categories", new { id = String.Format("{0}-{1}", GeneralHelper.GetUrlSeoString(item.Name), item.Id) }, new { @class = "btn btn-lg btn-link" })
+                            @Html.ActionLink(item.Name, "Category", "Categories", new { id = item.GetSeoUrl() }, new { @class = "btn btn-lg btn-link" })
                         </span>
                     </li>
                     }
